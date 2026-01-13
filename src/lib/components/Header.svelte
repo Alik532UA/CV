@@ -17,11 +17,12 @@
     export let toggleTheme: () => void;
     export let backgroundType: 0 | 1 | 2 | 3 = 1;
     export let setBackgroundType: (type: 0 | 1 | 2 | 3) => void = () => {};
+    export let changeLanguage: (lang: Language) => void;
 
     let isBgDropdownOpen = false;
 
     function setLanguage(lang: Language) {
-        language.set(lang);
+        changeLanguage(lang);
     }
 
     function toggleBgDropdown() {

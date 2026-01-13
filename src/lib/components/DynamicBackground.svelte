@@ -2,15 +2,34 @@
     import Particles from "./backgrounds/Particles.svelte";
     import Waves from "./backgrounds/Waves.svelte";
     import FloatingShapes from "./backgrounds/FloatingShapes.svelte";
+    import { fade } from "svelte/transition";
 
     export let backgroundType: 0 | 1 | 2 | 3 = 1;
     export let theme: string = "dark";
 </script>
 
 {#if backgroundType === 1}
-    <Particles {theme} />
+    <div class="bg-transition" transition:fade={{ duration: 800 }}>
+        <Particles {theme} />
+    </div>
 {:else if backgroundType === 2}
-    <Waves {theme} />
+    <div class="bg-transition" transition:fade={{ duration: 800 }}>
+        <Waves {theme} />
+    </div>
 {:else if backgroundType === 3}
-    <FloatingShapes {theme} />
+    <div class="bg-transition" transition:fade={{ duration: 800 }}>
+        <FloatingShapes {theme} />
+    </div>
 {/if}
+
+<style>
+    .bg-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
+</style>
