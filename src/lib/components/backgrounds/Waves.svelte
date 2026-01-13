@@ -76,12 +76,18 @@
     }
 
     function handleResize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        if (canvas) {
-            canvas.width = width;
-            canvas.height = height;
-        }
+        if (!canvas) return;
+
+        const newWidth = canvas.clientWidth;
+        const newHeight = canvas.clientHeight;
+
+        // Ignore resize if dimensions haven't changed (fixes mobile scroll jump)
+        if (canvas.width === newWidth && canvas.height === newHeight) return;
+
+        width = newWidth;
+        height = newHeight;
+        canvas.width = width;
+        canvas.height = height;
     }
 
     function handleScroll() {
@@ -90,7 +96,12 @@
 
     onMount(() => {
         ctx = canvas.getContext("2d");
-        handleResize();
+        // Initial setup
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        canvas.width = width;
+        canvas.height = height;
+
         draw();
         window.addEventListener("resize", handleResize);
         window.addEventListener("scroll", handleScroll);

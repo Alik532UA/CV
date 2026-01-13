@@ -119,12 +119,18 @@
     }
 
     function handleResize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        if (canvas) {
-            canvas.width = width;
-            canvas.height = height;
-        }
+        if (!canvas) return;
+
+        const newWidth = canvas.clientWidth;
+        const newHeight = canvas.clientHeight;
+
+        if (canvas.width === newWidth && canvas.height === newHeight) return;
+
+        width = newWidth;
+        height = newHeight;
+        canvas.width = width;
+        canvas.height = height;
+
         init();
     }
 
@@ -134,7 +140,16 @@
 
     onMount(() => {
         ctx = canvas.getContext("2d");
-        handleResize();
+
+        // Initial init
+        if (canvas) {
+            width = canvas.clientWidth;
+            height = canvas.clientHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        init();
+
         draw();
         window.addEventListener("resize", handleResize);
         window.addEventListener("scroll", handleScroll);

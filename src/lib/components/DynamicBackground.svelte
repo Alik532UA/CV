@@ -28,7 +28,8 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
+        height: 100lvh; /* Stable height on mobile ignoring URL bar */
         z-index: -1;
         pointer-events: none;
     }
