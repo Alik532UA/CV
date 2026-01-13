@@ -10,6 +10,7 @@
     let width = 0;
     let height = 0;
     let waveTime = 0;
+    let lastWidth = 0;
 
     // Configurable parameters
     export let waveBaseHeight = 0.9; // 0.25 = 25% from top (Higher start)
@@ -81,9 +82,11 @@
         const newWidth = canvas.clientWidth;
         const newHeight = canvas.clientHeight;
 
-        // Ignore resize if dimensions haven't changed (fixes mobile scroll jump)
-        if (canvas.width === newWidth && canvas.height === newHeight) return;
+        // Strict check: if width hasn't changed, ignore vertical resize.
+        // This prevents mobile address bar from resetting animations.
+        if (newWidth === lastWidth) return;
 
+        lastWidth = newWidth;
         width = newWidth;
         height = newHeight;
         canvas.width = width;
@@ -96,11 +99,13 @@
 
     onMount(() => {
         ctx = canvas.getContext("2d");
+
         // Initial setup
         width = canvas.clientWidth;
         height = canvas.clientHeight;
         canvas.width = width;
         canvas.height = height;
+        lastWidth = width; // Initialize lastWidth
 
         draw();
         window.addEventListener("resize", handleResize);

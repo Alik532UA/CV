@@ -9,6 +9,7 @@
     let scrollY = 0;
     let width = 0;
     let height = 0;
+    let lastWidth = 0;
 
     interface FloatingShape {
         x: number;
@@ -124,12 +125,12 @@
         if (!canvas) return;
 
         const newWidth = canvas.clientWidth;
-        const newHeight = canvas.clientHeight; // Stable 100lvh
 
-        if (canvas.width === newWidth && canvas.height === newHeight) return;
+        if (newWidth === lastWidth) return;
 
+        lastWidth = newWidth;
         width = newWidth;
-        height = newHeight;
+        height = canvas.clientHeight;
         canvas.width = width;
         canvas.height = height;
 
@@ -147,6 +148,7 @@
         if (canvas) {
             width = canvas.clientWidth;
             height = canvas.clientHeight;
+            lastWidth = width;
             canvas.width = width;
             canvas.height = height;
         }
