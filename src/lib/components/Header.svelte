@@ -116,10 +116,10 @@
     }
 
     .toggle-group button.active {
-        background: var(--accent-primary);
-        color: white;
+        background: rgba(var(--accent-primary-rgb), 0.3);
+        color: var(--accent-primary);
         opacity: 1;
-        box-shadow: 0 2px 8px rgba(0, 242, 255, 0.3);
+        box-shadow: none;
     }
 
     .divider {

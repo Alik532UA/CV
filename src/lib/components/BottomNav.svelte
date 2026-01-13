@@ -37,16 +37,18 @@
     .bottom-nav {
         display: none;
         position: fixed;
-        bottom: 20px;
-        left: 20px;
-        right: 20px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         height: 64px;
         z-index: 1000;
         justify-content: space-around;
         align-items: center;
-        border-radius: 32px;
+        border-radius: 0;
         padding: 0 10px;
         background: var(--header-bg);
+        border: none;
+        border-top: 1px solid var(--border-color);
     }
 
     a {
@@ -65,8 +67,7 @@
     a.active {
         color: var(--accent-primary);
         background: var(--card-bg);
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2);
+        box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
     }
 
     @media (max-width: 768px) {
