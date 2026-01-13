@@ -11,7 +11,7 @@
 	function toggleTheme() {
 		theme = theme === "dark" ? "light" : "dark";
 		document.documentElement.setAttribute("data-theme", theme);
-		document.documentElement.style.colorScheme = theme;
+		document.documentElement.style.colorScheme = "dark";
 		localStorage.setItem("theme", theme);
 	}
 
@@ -19,7 +19,7 @@
 		const savedTheme = localStorage.getItem("theme") || "dark";
 		theme = savedTheme;
 		document.documentElement.setAttribute("data-theme", theme);
-		document.documentElement.style.colorScheme = theme;
+		document.documentElement.style.colorScheme = "dark";
 
 		const observer = new IntersectionObserver(
 			(entries) => {

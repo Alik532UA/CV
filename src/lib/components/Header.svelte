@@ -116,7 +116,7 @@
     }
 
     .toggle-group button.active {
-        background: rgba(var(--accent-primary-rgb), 0.3);
+        background: rgba(var(--accent-primary-rgb), 0.1);
         color: var(--accent-primary);
         opacity: 1;
         box-shadow: none;
