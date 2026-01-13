@@ -3,10 +3,12 @@
 	import Sidebar from "$lib/components/Sidebar.svelte";
 	import BottomNav from "$lib/components/BottomNav.svelte";
 	import Header from "$lib/components/Header.svelte";
+	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import { onMount } from "svelte";
 
 	let activeSection = "hero";
 	let theme = "dark";
+	let backgroundType: 0 | 1 | 2 | 3 = 1;
 
 	function toggleTheme() {
 		theme = theme === "dark" ? "light" : "dark";
@@ -15,11 +17,21 @@
 		localStorage.setItem("theme", theme);
 	}
 
+	function setBackgroundType(type: 0 | 1 | 2 | 3) {
+		backgroundType = type;
+		localStorage.setItem("backgroundType", type.toString());
+	}
+
 	onMount(() => {
 		const savedTheme = localStorage.getItem("theme") || "dark";
 		theme = savedTheme;
 		document.documentElement.setAttribute("data-theme", theme);
 		document.documentElement.style.colorScheme = "dark";
+
+		const savedBgType = localStorage.getItem("backgroundType");
+		if (savedBgType && ["0", "1", "2", "3"].includes(savedBgType)) {
+			backgroundType = parseInt(savedBgType) as 0 | 1 | 2 | 3;
+		}
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -38,8 +50,12 @@
 	});
 </script>
 
+{#if backgroundType !== 0}
+	<DynamicBackground {backgroundType} {theme} />
+{/if}
+
 <div class="app-layout">
-	<Header {theme} {toggleTheme} />
+	<Header {theme} {toggleTheme} {backgroundType} {setBackgroundType} />
 	<Sidebar {activeSection} />
 	<BottomNav {activeSection} />
 
