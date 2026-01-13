@@ -36,6 +36,7 @@
         Puzzle,
         Bot,
         Skull,
+        ExternalLink,
     } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
@@ -328,15 +329,13 @@
                 <div class="project-content">
                     <h3>{t.projects.mindstep.title}</h3>
                     <p>{t.projects.mindstep.description}</p>
-                    <div class="project-fact glass">
-                        <Lightbulb size={16} />
-                        {t.projects.mindstep.fact}
-                    </div>
                     <a
                         href="https://alik532ua.github.io/MindStep/"
                         target="_blank"
-                        class="project-link">Try Game →</a
+                        class="btn-primary project-btn"
                     >
+                        Try Game <ExternalLink size={16} />
+                    </a>
                 </div>
             </div>
 
@@ -347,15 +346,13 @@
                 <div class="project-content">
                     <h3>{t.projects.cv3d.title}</h3>
                     <p>{t.projects.cv3d.description}</p>
-                    <div class="project-fact glass">
-                        <Gamepad2 size={16} />
-                        {t.projects.cv3d.fact}
-                    </div>
                     <a
                         href="https://alik532ua.itch.io/alik-cv-interactive-3d-experience"
                         target="_blank"
-                        class="project-link">Explore 3D →</a
+                        class="btn-primary project-btn"
                     >
+                        Explore 3D <ExternalLink size={16} />
+                    </a>
                 </div>
             </div>
         </div>
@@ -664,11 +661,6 @@
         gap: 30px;
     }
 
-    .project-fact {
-        padding: 0;
-        overflow: hidden;
-    }
-
     .project-img {
         height: 220px;
         overflow: hidden;
@@ -687,10 +679,10 @@
         gap: 12px;
     }
 
-    .project-link {
-        color: var(--accent-primary);
-        text-decoration: none;
-        font-weight: 700;
+    .project-btn {
+        margin-top: auto;
+        justify-content: center;
+        font-size: 0.95rem;
     }
 
     /* Additional Section */
