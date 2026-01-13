@@ -407,11 +407,19 @@
                 </h3>
                 <ul>
                     <li>
-                        <FlagUK width="16" height="12" class="inline-icon" />
+                        <FlagUK
+                            width="16"
+                            height="12"
+                            class="inline-icon flag-icon"
+                        />
                         {t.other.languages.uk}
                     </li>
                     <li>
-                        <FlagEN width="16" height="12" class="inline-icon" />
+                        <FlagEN
+                            width="16"
+                            height="12"
+                            class="inline-icon flag-icon"
+                        />
                         {t.other.languages.en}
                     </li>
                     <li>
@@ -714,6 +722,11 @@
 
     ul li {
         margin-bottom: 10px;
+    }
+
+    :global(.flag-icon) {
+        border-radius: 2px;
+        overflow: hidden;
     }
 
     @media (max-width: 1024px) {

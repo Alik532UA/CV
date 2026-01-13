@@ -22,7 +22,7 @@
                     class:active={$language === "en"}
                     title="English"
                 >
-                    <FlagEN width="20" height="15" />
+                    <FlagEN width="20" height="15" class="flag-icon" />
                 </button>
                 <div class="divider"></div>
                 <button
@@ -30,7 +30,7 @@
                     class:active={$language === "uk"}
                     title="Українська"
                 >
-                    <FlagUK width="20" height="15" />
+                    <FlagUK width="20" height="15" class="flag-icon" />
                 </button>
             </div>
 
@@ -116,10 +116,20 @@
     }
 
     .toggle-group button.active {
-        background: rgba(var(--accent-primary-rgb), 0.1);
+        background: rgba(var(--accent-primary-rgb), 0.3);
         color: var(--accent-primary);
         opacity: 1;
         box-shadow: none;
+    }
+
+    :global(.flag-icon) {
+        border-radius: 2px;
+        overflow: hidden;
+    }
+
+    /* Також цільово для SVG всередині для надійності скруглення */
+    :global(.flag-icon svg) {
+        border-radius: 2px;
     }
 
     .divider {
