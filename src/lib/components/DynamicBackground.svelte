@@ -12,16 +12,22 @@
     let lastWidth = 0;
 
     onMount(() => {
+        // Function to calculate height with buffer for mobile
+        const updateHeight = () => {
+            const isMobile = window.innerWidth <= 1024; // Covers tablets/mobiles
+            const buffer = isMobile ? 300 : 0; // Extra space for hiding URL bars
+            fixedHeight = window.innerHeight + buffer + "px";
+            lastWidth = window.innerWidth;
+        };
+
         // Initial set
-        fixedHeight = window.innerHeight + "px";
-        lastWidth = window.innerWidth;
+        updateHeight();
 
         const handleResize = () => {
-            // Ignore vertical resize (mobile scroll)
+            // Ignore vertical resize (mobile scroll) if width is stable
             if (window.innerWidth === lastWidth) return;
 
-            lastWidth = window.innerWidth;
-            fixedHeight = window.innerHeight + "px";
+            updateHeight();
         };
 
         window.addEventListener("resize", handleResize);
