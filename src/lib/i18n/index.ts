@@ -6,8 +6,8 @@ export const language: Writable<Language> = writable('en');
 
 export const translations = {
     en: {
-        lastUpdate: "Last update: 13 January 2026",
-        title: "AQA Engineer | AI Explorer | Game Maker",
+        title: ["AQA Engineer", "AI Explorer", "Game Maker"],
+        title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
         nav: {
             about: "About Me",
             experience: "Experience",
@@ -146,7 +146,8 @@ export const translations = {
     },
     uk: {
         lastUpdate: "Останнє оновлення: 13 січня 2026",
-        title: "AQA Engineer | AI Explorer | Game Maker",
+        title: ["AQA Engineer", "AI Explorer", "Game Maker"],
+        title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
         nav: {
             about: "Про мене",
             experience: "Досвід",

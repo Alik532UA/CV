@@ -44,6 +44,17 @@
 
     let showNonIT = false;
     let showMoreSkills = false;
+    let isMobile: boolean;
+
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+        const mediaQuery = window.matchMedia('(max-width: 768px)');
+        isMobile = mediaQuery.matches;
+        mediaQuery.addEventListener('change', (e) => {
+            isMobile = e.matches;
+        });
+    });
 
     const skillsData = {
         it: [
@@ -78,7 +89,15 @@
     <section id="about" class="about-section">
         <div class="intro-header">
             <h1 class="glow-text">{t.hero.greeting}</h1>
-            <p class="tagline">{t.title}</p>
+            {#if isMobile}
+                <p class="tagline">{t.title_mobile}</p>
+            {:else}
+                <div class="tagline-tags">
+                    {#each t.title as tag}
+                        <span class="hobby-tag glass">{tag}</span>
+                    {/each}
+                </div>
+            {/if}
         </div>
 
         <div class="about-grid">
@@ -480,6 +499,15 @@
         margin-bottom: 25px;
         letter-spacing: 2px;
         text-transform: uppercase;
+        white-space: pre-line;
+    }
+
+    .tagline-tags {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
     }
 
     .location {
@@ -546,6 +574,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 12px;
+        flex-shrink: 0;
     }
 
     .platform-text {
