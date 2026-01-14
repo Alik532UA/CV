@@ -143,6 +143,11 @@ export const translations = {
                 description: "Interactive 3D resume in Godot 4. Explore, interact, and find the turtle!",
                 fact: "Physics & GDScript."
             }
+        },
+        pdf_modal: {
+            title: "Select PDF Version",
+            dark: "Dark Theme",
+            light: "Light Theme"
         }
     },
     uk: {
@@ -283,6 +288,11 @@ export const translations = {
                 description: "Інтерактивне резюме на Godot 4. Досліджуйте, взаємодійте, знайдіть черепаху!",
                 fact: "Фізика та GDScript."
             }
+        },
+        pdf_modal: {
+            title: "Виберіть версію PDF",
+            dark: "Темна тема",
+            light: "Світла тема"
         }
     }
 };
