@@ -730,6 +730,18 @@
         gap: 12px;
     }
 
+    .skill-info,
+    .skill-head {
+        margin-bottom: 6px;
+    }
+
+    .skill-info span,
+    .skill-head span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
     .progress-bar {
         height: 8px;
         background: rgba(255, 255, 255, 0.05);
