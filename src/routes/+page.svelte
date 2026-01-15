@@ -468,6 +468,12 @@
         <div
             class="modal-backdrop"
             on:click|self={() => (showPdfModal = false)}
+            on:keydown={(e) =>
+                (e.key === "Escape" || e.key === "Enter") &&
+                (showPdfModal = false)}
+            role="button"
+            tabindex="0"
+            aria-label="Close modal"
             transition:fade={{ duration: 200 }}
         >
             <div
@@ -483,7 +489,7 @@
                 <h3>{t.pdf_modal?.title || "Choose PDF Version"}</h3>
                 <div class="pdf-options">
                     <a
-                        href="https://drive.google.com/file/d/1ZDCkCZ1Pq2hcQTNiktRBSlSKNZSRCnIq/view?usp=drive_link"
+                        href="https://drive.google.com/file/d/1bLHvxMdrrv9velRAjtmmOVY6SiX2VJsS/view"
                         target="_blank"
                         class="pdf-option"
                         on:click={() => (showPdfModal = false)}
@@ -497,7 +503,7 @@
                         <span>{t.pdf_modal?.dark || "Dark Theme"}</span>
                     </a>
                     <a
-                        href="https://drive.google.com/file/d/1vceDpgDnS2yE-nNNJh4MM6KRPQKI1bPZ/view?usp=drive_link"
+                        href="https://drive.google.com/file/d/1NIsAlT-kVZSw3CBDR-n7JqP4Y5X2yf3p/view"
                         target="_blank"
                         class="pdf-option"
                         on:click={() => (showPdfModal = false)}
