@@ -6,7 +6,7 @@ export const language: Writable<Language> = writable('en');
 
 export const translations = {
     en: {
-        lastUpdate: "Last update: January 14, 2026",
+        lastUpdate: "Last update: February 10, 2026",
         title: ["AQA Engineer", "AI Explorer", "Game Maker"],
         title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
         nav: {
@@ -133,15 +133,20 @@ export const translations = {
             hobbies: ["AI", "Video games", "Design", "Scripts", "Board games", "Mafia game", "3D printing"]
         },
         projects: {
+            slovko: {
+                title: "Slovko",
+                description: "A comprehensive language learning platform with personal statistics, accounts, and friend competitions. Create custom word lists and master new languages on any device without hurdles.",
+                button: "Start learning"
+            },
             mindstep: {
                 title: "MindStep",
-                description: "Strategic brain-training game for memory and spatial imagination. Move like a queen, manage blocked cells, or challenge yourself in 'Powerful' blind mode.",
-                fact: "Process over result."
+                description: "Strategic brain-training game for memory and spatial imagination. Move like a queen, avoid blocked cells, or dive into blind mode!",
+                button: "Try Game"
             },
             cv3d: {
                 title: "3D CV Experience",
                 description: "Interactive 3D resume in Godot 4. Explore, interact, and find the turtle!",
-                fact: "Physics & GDScript."
+                button: "Explore 3D"
             }
         },
         pdf_modal: {
@@ -151,7 +156,7 @@ export const translations = {
         }
     },
     uk: {
-        lastUpdate: "Останнє оновлення: 14 січня 2026",
+        lastUpdate: "Останнє оновлення: 10 лютого 2026",
         title: ["AQA Engineer", "AI Explorer", "Game Maker"],
         title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
         nav: {
@@ -278,15 +283,20 @@ export const translations = {
             hobbies: ["AI", "Відеоігри", "Дизайн", "Скрипти", "Настільні ігри", "Мафія", "3D друк"]
         },
         projects: {
+            slovko: {
+                title: "Slovko",
+                description: "Повноцінна платформа для вивчення мов із персональною статистикою, системою акаунтів та змаганнями з друзями. Створюйте власні списки слів та опановуйте нові мови на будь-якому пристрої без зайвих перешкод.",
+                button: "Почати вчити"
+            },
             mindstep: {
                 title: "MindStep",
-                description: "Стратегічний тренажер для пам'яті та просторової уяви. Ходіть як ферзь, керуйте заблокованими клітинками або киньте виклик собі у режимі гри наосліп.",
-                fact: "Процес важливіший за результат."
+                description: "Стратегічний тренажер для пам'яті та просторової уяви. Ходіть як ферзь, оминайте заблоковані клітинки або пориньте в режим гри наосліп!",
+                button: "Спробувати гру"
             },
             cv3d: {
                 title: "3D CV Інтерактив",
                 description: "Інтерактивне резюме на Godot 4. Досліджуйте, взаємодійте, знайдіть черепаху!",
-                fact: "Фізика та GDScript."
+                button: "Дослідити 3D"
             }
         },
         pdf_modal: {

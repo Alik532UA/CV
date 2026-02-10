@@ -344,6 +344,24 @@
         <div class="projects-grid">
             <div class="project-card glass card">
                 <div class="project-img">
+                    <img src="{base}/images/slovko.jpg" alt="Slovko" />
+                </div>
+                <div class="project-content">
+                    <h3>{t.projects.slovko.title}</h3>
+                    <p>{t.projects.slovko.description}</p>
+                    <a
+                        href="https://alik532ua.github.io/Slovko/"
+                        target="_blank"
+                        class="btn-primary project-btn"
+                    >
+                        {t.projects.slovko.button}
+                        <ExternalLink size={16} />
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card glass card">
+                <div class="project-img">
                     <img src="{base}/images/mindstep.jpg" alt="MindStep" />
                 </div>
                 <div class="project-content">
@@ -354,7 +372,8 @@
                         target="_blank"
                         class="btn-primary project-btn"
                     >
-                        Try Game <ExternalLink size={16} />
+                        {t.projects.mindstep.button}
+                        <ExternalLink size={16} />
                     </a>
                 </div>
             </div>
@@ -371,7 +390,8 @@
                         target="_blank"
                         class="btn-primary project-btn"
                     >
-                        Explore 3D <ExternalLink size={16} />
+                        {t.projects.cv3d.button}
+                        <ExternalLink size={16} />
                     </a>
                 </div>
             </div>
