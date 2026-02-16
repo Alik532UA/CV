@@ -1,56 +1,10 @@
 <script lang="ts">
-    import {
-        Monitor,
-        Globe,
-        Smartphone,
-        ChevronDown,
-        Bot,
-        Zap,
-        Coffee,
-        Drama,
-        Palette,
-        Printer,
-        Box,
-        Gamepad2,
-        Film,
-        Brush,
-        Mic,
-        Sparkles,
-        BarChart,
-        Folder,
-        Flame,
-    } from "lucide-svelte";
+    import { ChevronDown, Monitor, Globe, Smartphone } from "lucide-svelte";
     import { slide } from "svelte/transition";
+    import { skillsData } from "$lib/data/skills";
 
     let { t } = $props<{ t: any }>();
     let showMoreSkills = $state(false);
-
-    const skillsData = {
-        it: [
-            { name: "AI", level: 95, icon: Bot },
-            { name: "C#", level: 85, icon: Zap },
-            { name: "Java", level: 75, icon: Coffee },
-            { name: "Playwright", level: 80, icon: Drama },
-        ],
-        design3d: [
-            { name: "Blender", level: 60, icon: Palette },
-            { name: "Cura / Creality Slicer", level: 85, icon: Printer },
-            { name: "3D Printing", level: 90, icon: Box },
-            { name: "Godot (GDScript)", level: 75, icon: Gamepad2 },
-        ],
-        video: [
-            { name: "Premiere Pro", level: 95, icon: Film },
-            { name: "Photoshop", level: 85, icon: Brush },
-            { name: "Topaz AI", level: 80, icon: Sparkles },
-            { name: "vMix", level: 85, icon: Mic },
-        ],
-        tools: [
-            { name: "Jira / Confluence", level: 95, icon: BarChart },
-            { name: "Git", level: 85, icon: Folder },
-            { name: "Figma", level: 80, icon: Palette },
-            { name: "Firebase", level: 65, icon: Flame },
-        ],
-    };
 </script>
 
 <section id="skills">
@@ -84,12 +38,12 @@
         <div class="skill-group glass card">
             <h3>{t.skills.categories.it}</h3>
             <div class="skills-grid">
-                {#each skillsData.it as skill}
+                {#each skillsData.it as skill (skill.id)}
                     <div class="skill-item">
                         <div class="skill-info">
                             <span>
                                 <skill.icon size={16} />
-                                {skill.name}
+                                {t.skills.items[skill.id]}
                             </span>
                         </div>
                         <div class="progress-bar">
@@ -101,17 +55,17 @@
         </div>
 
         {#if showMoreSkills}
-            <div class="extra-skills" transition:slide>
+            <div class="extra-skills" transition:slide id="extra-skills-content">
                 <div class="skills-categories-sub">
                     <div class="skill-group glass card">
                         <h3>{t.skills.categories.design3d}</h3>
                         <div class="skills-grid">
-                            {#each skillsData.design3d as skill}
+                            {#each skillsData.design3d as skill (skill.id)}
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
                                             <skill.icon size={16} />
-                                            {skill.name}
+                                            {t.skills.items[skill.id]}
                                         </span>
                                     </div>
                                     <div class="progress-bar">
@@ -125,12 +79,12 @@
                     <div class="skill-group glass card">
                         <h3>{t.skills.categories.video}</h3>
                         <div class="skills-grid">
-                            {#each skillsData.video as skill}
+                            {#each skillsData.video as skill (skill.id)}
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
                                             <skill.icon size={16} />
-                                            {skill.name}
+                                            {t.skills.items[skill.id]}
                                         </span>
                                     </div>
                                     <div class="progress-bar">
@@ -144,12 +98,12 @@
                     <div class="skill-group glass card">
                         <h3>{t.skills.categories.tools}</h3>
                         <div class="skills-grid">
-                            {#each skillsData.tools as skill}
+                            {#each skillsData.tools as skill (skill.id)}
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
                                             <skill.icon size={16} />
-                                            {skill.name}
+                                            {t.skills.items[skill.id]}
                                         </span>
                                     </div>
                                     <div class="progress-bar">
@@ -176,6 +130,7 @@
 </section>
 
 <style>
+    /* ... (стилі залишаються незмінними) ... */
     section {
         padding: 60px 0;
     }
