@@ -12,6 +12,7 @@
     
     // UI
     import PdfModal from "$lib/components/ui/PdfModal.svelte";
+    import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte"; // Import the new component
 
     // Runes (Svelte 5)
     let t = $derived(translations[language.current]);
@@ -32,17 +33,47 @@
 </script>
 
 <div class="container">
-    <HeroSection {t} {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
+    <svelte:boundary>
+        <HeroSection {t} {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Hero" />
+        {/snippet}
+    </svelte:boundary>
     
-    <ExperienceSection {t} />
+    <svelte:boundary>
+        <ExperienceSection {t} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Досвід" />
+        {/snippet}
+    </svelte:boundary>
     
-    <SkillsSection {t} />
+    <svelte:boundary>
+        <SkillsSection {t} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Навички" />
+        {/snippet}
+    </svelte:boundary>
     
-    <ProjectsSection {t} />
+    <svelte:boundary>
+        <ProjectsSection {t} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Проєкти" />
+        {/snippet}
+    </svelte:boundary>
     
-    <EducationSection {t} />
+    <svelte:boundary>
+        <EducationSection {t} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Освіта" />
+        {/snippet}
+    </svelte:boundary>
     
-    <OtherSection {t} />
+    <svelte:boundary>
+        <OtherSection {t} />
+        {#snippet fallback()}
+            <ErrorFallback sectionName="Додатково" />
+        {/snippet}
+    </svelte:boundary>
 
     <PdfModal bind:show={showPdfModal} {t} />
 </div>
