@@ -6,46 +6,29 @@
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
-	import { language, type Language } from "$lib/i18n";
+	import { replaceState, afterNavigate } from "$app/navigation";
+	import { language, type Language } from "$lib/i18n/index.svelte";
+	import { theme, background } from "$lib/states/ui.svelte";
 
 	let { children } = $props();
 
 	// Runes (Svelte 5)
 	let activeSection = $state("about");
-	let theme = $state("dark");
-	let backgroundType = $state<0 | 1 | 2 | 3>(1);
-	let isChangingTheme = $state(false);
-
-	async function toggleTheme() {
-		isChangingTheme = true;
-		await new Promise((r) => setTimeout(r, 50));
-
-		setTimeout(() => {
-			theme = theme === "dark" ? "light" : "dark";
-			document.documentElement.setAttribute("data-theme", theme);
-			document.documentElement.style.colorScheme = "dark";
-			localStorage.setItem("theme", theme);
-
-			setTimeout(() => {
-				isChangingTheme = false;
-			}, 300);
-		}, 200);
-	}
-
-	function setBackgroundType(type: 0 | 1 | 2 | 3) {
-		backgroundType = type;
-		localStorage.setItem("backgroundType", type.toString());
-	}
+	let isRouterReady = $state(false);
 
 	// URL Sync Effect
 	$effect(() => {
-		if (browser && language.current) {
+		if (isRouterReady && browser && language.current) {
 			const url = new URL(window.location.href);
 			if (url.searchParams.get('lang') !== language.current) {
 				url.searchParams.set('lang', language.current);
-				window.history.replaceState({}, '', url.toString());
+				replaceState(url.toString(), {});
 			}
 		}
+	});
+
+	afterNavigate(() => {
+		isRouterReady = true;
 	});
 
 	onMount(() => {
@@ -53,17 +36,6 @@
 		const langParam = new URLSearchParams(window.location.search).get('lang') as Language;
 		if (langParam && (langParam === 'en' || langParam === 'uk')) {
 			language.current = langParam;
-		}
-
-		// Theme & BG from LocalStorage
-		const savedTheme = localStorage.getItem("theme") || "dark";
-		theme = savedTheme;
-		document.documentElement.setAttribute("data-theme", theme);
-		document.documentElement.style.colorScheme = "dark";
-
-		const savedBgType = localStorage.getItem("backgroundType");
-		if (savedBgType && ["0", "1", "2", "3"].includes(savedBgType)) {
-			backgroundType = parseInt(savedBgType) as 0 | 1 | 2 | 3;
 		}
 
 		const observer = new IntersectionObserver(
@@ -85,17 +57,12 @@
 	});
 </script>
 
-<DynamicBackground {backgroundType} {theme} />
+<DynamicBackground backgroundType={background.type} theme={theme.current} />
 
-<div class="theme-transition-overlay" class:active={isChangingTheme}></div>
+<div class="theme-transition-overlay" class:active={theme.isChanging}></div>
 
 <div class="app-layout" class:language-changing={language.isChanging}>
-	<Header
-		{theme}
-		{toggleTheme}
-		{backgroundType}
-		{setBackgroundType}
-	/>
+	<Header />
 	<Sidebar {activeSection} />
 	<BottomNav {activeSection} />
 

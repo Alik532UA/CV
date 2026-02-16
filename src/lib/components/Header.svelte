@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { language, type Language } from "$lib/i18n";
+    import { language, type Language } from "$lib/i18n/index.svelte";
+    import { theme, background } from "$lib/states/ui.svelte";
     import {
         Sun,
         Moon,
@@ -12,18 +13,6 @@
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { onMount, onDestroy } from "svelte";
 
-    let { 
-        theme, 
-        toggleTheme, 
-        backgroundType = 1, 
-        setBackgroundType = () => {} 
-    } = $props<{
-        theme: string;
-        toggleTheme: () => void;
-        backgroundType: 0 | 1 | 2 | 3;
-        setBackgroundType: (type: 0 | 1 | 2 | 3) => void;
-    }>();
-
     let isBgDropdownOpen = $state(false);
 
     function setLanguage(lang: Language) {
@@ -35,7 +24,7 @@
     }
 
     function selectBackground(type: 0 | 1 | 2 | 3) {
-        setBackgroundType(type);
+        background.set(type);
         isBgDropdownOpen = false;
     }
 
@@ -60,7 +49,7 @@
     });
 
     // Helper to get icon for active mobile bg
-    let ActiveBgIcon = $derived([CircleOff, Sparkles, Waves, Shapes][backgroundType]);
+    let ActiveBgIcon = $derived([CircleOff, Sparkles, Waves, Shapes][background.type]);
 </script>
 
 <header class="header glass">
@@ -70,38 +59,52 @@
             <div
                 class="toggle-group glass desktop-only"
                 data-testid="bg-switcher"
+                role="radiogroup"
+                aria-label="Background effect"
             >
                 <button
-                    onclick={() => setBackgroundType(0)}
-                    class:active={backgroundType === 0}
-                    title="Off"
+                    onclick={() => background.set(0)}
+                    class:active={background.type === 0}
+                    title="Background Off"
+                    aria-label="Disable background effects"
+                    aria-checked={background.type === 0}
+                    role="radio"
                     data-testid="bg-off"
                 >
                     <CircleOff size={18} />
                 </button>
-                <div class="divider"></div>
+                <div class="divider" role="separator"></div>
                 <button
-                    onclick={() => setBackgroundType(1)}
-                    class:active={backgroundType === 1}
-                    title="Particles"
+                    onclick={() => background.set(1)}
+                    class:active={background.type === 1}
+                    title="Particles Effect"
+                    aria-label="Enable particles background"
+                    aria-checked={background.type === 1}
+                    role="radio"
                     data-testid="bg-particles"
                 >
                     <Sparkles size={18} />
                 </button>
-                <div class="divider"></div>
+                <div class="divider" role="separator"></div>
                 <button
-                    onclick={() => setBackgroundType(2)}
-                    class:active={backgroundType === 2}
-                    title="Waves"
+                    onclick={() => background.set(2)}
+                    class:active={background.type === 2}
+                    title="Waves Effect"
+                    aria-label="Enable waves background"
+                    aria-checked={background.type === 2}
+                    role="radio"
                     data-testid="bg-waves"
                 >
                     <Waves size={18} />
                 </button>
-                <div class="divider"></div>
+                <div class="divider" role="separator"></div>
                 <button
-                    onclick={() => setBackgroundType(3)}
-                    class:active={backgroundType === 3}
-                    title="Shapes"
+                    onclick={() => background.set(3)}
+                    class:active={background.type === 3}
+                    title="Shapes Effect"
+                    aria-label="Enable shapes background"
+                    aria-checked={background.type === 3}
+                    role="radio"
                     data-testid="bg-shapes"
                 >
                     <Shapes size={18} />
@@ -116,33 +119,44 @@
                 <button
                     class="glass-icon-btn"
                     onclick={(e) => { e.stopPropagation(); toggleBgDropdown(); }}
+                    aria-label="Select background effect"
+                    aria-haspopup="true"
+                    aria-expanded={isBgDropdownOpen}
                 >
                     <ActiveBgIcon size={20} />
                 </button>
 
                 {#if isBgDropdownOpen}
-                    <div class="bg-dropdown glass">
+                    <div class="bg-dropdown glass" role="menu">
                         <button
                             onclick={() => selectBackground(0)}
-                            class:active={backgroundType === 0}
+                            class:active={background.type === 0}
+                            role="menuitemradio"
+                            aria-checked={background.type === 0}
                         >
                             <CircleOff size={16} /> <span>Off</span>
                         </button>
                         <button
                             onclick={() => selectBackground(1)}
-                            class:active={backgroundType === 1}
+                            class:active={background.type === 1}
+                            role="menuitemradio"
+                            aria-checked={background.type === 1}
                         >
                             <Sparkles size={16} /> <span>Particles</span>
                         </button>
                         <button
                             onclick={() => selectBackground(2)}
-                            class:active={backgroundType === 2}
+                            class:active={background.type === 2}
+                            role="menuitemradio"
+                            aria-checked={background.type === 2}
                         >
                             <Waves size={16} /> <span>Waves</span>
                         </button>
                         <button
                             onclick={() => selectBackground(3)}
-                            class:active={backgroundType === 3}
+                            class:active={background.type === 3}
+                            role="menuitemradio"
+                            aria-checked={background.type === 3}
                         >
                             <Shapes size={16} /> <span>Shapes</span>
                         </button>
@@ -151,41 +165,49 @@
             </div>
 
             <!-- Language Switcher -->
-            <div class="toggle-group glass" data-testid="lang-switcher">
+            <div class="toggle-group glass" data-testid="lang-switcher" role="group" aria-label="Language selection">
                 <button
                     onclick={() => setLanguage("en")}
                     class:active={language.current === "en"}
                     title="English"
+                    aria-label="Switch to English"
+                    aria-pressed={language.current === "en"}
                     data-testid="lang-en"
                 >
                     <FlagEN width="20" height="15" class="flag-icon" />
                 </button>
-                <div class="divider"></div>
+                <div class="divider" role="separator"></div>
                 <button
                     onclick={() => setLanguage("uk")}
                     class:active={language.current === "uk"}
                     title="Українська"
+                    aria-label="Switch to Ukrainian"
+                    aria-pressed={language.current === "uk"}
                     data-testid="lang-uk"
                 >
                     <FlagUK width="20" height="15" class="flag-icon" />
                 </button>
             </div>
 
-            <!-- Theme Toggle (Now with same style as Language Switcher) -->
-            <div class="toggle-group glass" data-testid="theme-switcher">
+            <!-- Theme Toggle -->
+            <div class="toggle-group glass" data-testid="theme-switcher" role="group" aria-label="Theme selection">
                 <button
-                    onclick={() => theme !== "light" && toggleTheme()}
-                    class:active={theme === "light"}
+                    onclick={() => theme.current !== "light" && theme.toggle()}
+                    class:active={theme.current === "light"}
                     title="Light Theme"
+                    aria-label="Enable light theme"
+                    aria-pressed={theme.current === "light"}
                     data-testid="theme-light"
                 >
                     <Sun size={18} />
                 </button>
-                <div class="divider"></div>
+                <div class="divider" role="separator"></div>
                 <button
-                    onclick={() => theme !== "dark" && toggleTheme()}
-                    class:active={theme === "dark"}
+                    onclick={() => theme.current !== "dark" && theme.toggle()}
+                    class:active={theme.current === "dark"}
                     title="Dark Theme"
+                    aria-label="Enable dark theme"
+                    aria-pressed={theme.current === "dark"}
                     data-testid="theme-dark"
                 >
                     <Moon size={18} />

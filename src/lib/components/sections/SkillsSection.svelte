@@ -163,7 +163,12 @@
             </div>
         {/if}
 
-        <button class="btn-toggle-exp" onclick={() => (showMoreSkills = !showMoreSkills)}>
+        <button 
+            class="btn-toggle-exp" 
+            onclick={() => (showMoreSkills = !showMoreSkills)}
+            aria-expanded={showMoreSkills}
+            aria-controls="extra-skills-content"
+        >
             {showMoreSkills ? t.skills.hideMore : t.skills.showMore}
             <ChevronDown size={18} class={showMoreSkills ? "rotated" : ""} />
         </button>

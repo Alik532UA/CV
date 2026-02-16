@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { language, translations } from "$lib/i18n";
+    import { language, translations } from "$lib/i18n/index.svelte";
     import {
         User,
         Briefcase,

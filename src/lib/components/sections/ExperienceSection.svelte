@@ -18,13 +18,18 @@
             </div>
         {/each}
 
-        <button class="btn-toggle-exp" onclick={() => (showNonIT = !showNonIT)}>
+        <button 
+            class="btn-toggle-exp" 
+            onclick={() => (showNonIT = !showNonIT)}
+            aria-expanded={showNonIT}
+            aria-controls="non-it-experience-list"
+        >
             {showNonIT ? t.experience.hideNonIT : t.experience.showNonIT}
             <ChevronDown size={18} class={showNonIT ? "rotated" : ""} />
         </button>
 
         {#if showNonIT}
-            <div class="non-it-list" transition:slide>
+            <div class="non-it-list" transition:slide id="non-it-experience-list">
                 {#each t.experience.nonIT as exp}
                     <div class="exp-card glass card non-it">
                         <span class="date">{exp.date}</span>
