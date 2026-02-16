@@ -20,6 +20,8 @@
                 <img
                     src="{base}/pdf-preview/Alik-Zapolnov-CV-dark.jpg"
                     alt="Dark Theme CV Preview"
+                    loading="lazy"
+                    decoding="async"
                 />
             </div>
             <span>{t.pdf_modal?.dark || "Dark Theme"}</span>
@@ -34,6 +36,8 @@
                 <img
                     src="{base}/pdf-preview/Alik-Zapolnov-CV-light.jpg"
                     alt="Light Theme CV Preview"
+                    loading="lazy"
+                    decoding="async"
                 />
             </div>
             <span>{t.pdf_modal?.light || "Light Theme"}</span>

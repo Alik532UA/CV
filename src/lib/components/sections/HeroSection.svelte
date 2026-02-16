@@ -69,6 +69,8 @@
                     src="{base}/images/profile.jpg"
                     alt="Profile"
                     class="profile-img"
+                    fetchpriority="high"
+                    decoding="async"
                 />
             </div>
         </div>
