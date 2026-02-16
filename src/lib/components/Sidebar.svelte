@@ -1,8 +1,5 @@
 <script lang="ts">
-    import { language, translations, type Language } from "$lib/i18n";
-
-    export let activeSection = "hero";
-
+    import { language, translations } from "$lib/i18n";
     import {
         User,
         Briefcase,
@@ -11,16 +8,19 @@
         GraduationCap,
         Sparkles,
     } from "lucide-svelte";
-    $: t = translations[$language];
 
-    $: navItems = [
+    let { activeSection = "hero" } = $props<{ activeSection?: string }>();
+    
+    let t = $derived(translations[language.current]);
+
+    let navItems = $derived([
         { id: "about", icon: User, label: t.nav.about },
         { id: "experience", icon: Briefcase, label: t.nav.experience },
         { id: "skills", icon: Laptop, label: t.nav.skills },
         { id: "projects", icon: Rocket, label: t.nav.projects },
         { id: "education", icon: GraduationCap, label: t.nav.education },
         { id: "other", icon: Sparkles, label: t.nav.additional },
-    ];
+    ]);
 </script>
 
 <aside class="sidebar glass">
@@ -35,7 +35,7 @@
                 <li class:active={activeSection === item.id}>
                     <a href="#{item.id}">
                         <span class="icon">
-                            <svelte:component this={item.icon} size={20} />
+                            <item.icon size={20} />
                         </span>
                         <span class="label">{item.label}</span>
                     </a>

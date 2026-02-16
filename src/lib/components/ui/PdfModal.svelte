@@ -11,27 +11,36 @@
     function close() {
         show = false;
     }
+
+    function handleKeydown(e: KeyboardEvent) {
+        if (e.key === "Escape") {
+            close();
+        }
+    }
 </script>
 
 {#if show}
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
         class="modal-backdrop"
         onclick={close}
-        onkeydown={(e) => (e.key === "Escape" || e.key === "Enter") && close()}
-        role="button"
-        tabindex="0"
-        aria-label="Close modal"
+        onkeydown={handleKeydown}
+        role="presentation"
         transition:fade={{ duration: 200 }}
     >
         <div
             class="modal-content glass card"
             onclick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modal-title"
             transition:scale={{ duration: 200, start: 0.9 }}
         >
-            <button class="close-btn" onclick={close}>
+            <button class="close-btn" onclick={close} aria-label="Close modal">
                 <X size={24} />
             </button>
-            <h3>{t.pdf_modal?.title || "Choose PDF Version"}</h3>
+            <h3 id="modal-title">{t.pdf_modal?.title || "Choose PDF Version"}</h3>
             <div class="pdf-options">
                 <a
                     href="https://drive.google.com/file/d/1bLHvxMdrrv9velRAjtmmOVY6SiX2VJsS/view"
@@ -42,7 +51,7 @@
                     <div class="pdf-preview">
                         <img
                             src="{base}/pdf-preview/Alik-Zapolnov-CV-dark.jpg"
-                            alt="Dark Theme CV"
+                            alt="Dark Theme CV Preview"
                         />
                     </div>
                     <span>{t.pdf_modal?.dark || "Dark Theme"}</span>
@@ -56,7 +65,7 @@
                     <div class="pdf-preview">
                         <img
                             src="{base}/pdf-preview/Alik-Zapolnov-CV-light.jpg"
-                            alt="Light Theme CV"
+                            alt="Light Theme CV Preview"
                         />
                     </div>
                     <span>{t.pdf_modal?.light || "Light Theme"}</span>

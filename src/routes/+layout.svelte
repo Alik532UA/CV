@@ -5,14 +5,16 @@
 	import Header from "$lib/components/Header.svelte";
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import { onMount } from "svelte";
+	import { browser } from "$app/environment";
 	import { language, type Language } from "$lib/i18n";
-	import { fade } from "svelte/transition";
 
-	let activeSection = "hero";
-	let theme = "dark";
-	let backgroundType: 0 | 1 | 2 | 3 = 1;
-	let isChangingTheme = false;
-	let isChangingLanguage = false;
+	let { children } = $props();
+
+	// Runes (Svelte 5)
+	let activeSection = $state("about");
+	let theme = $state("dark");
+	let backgroundType = $state<0 | 1 | 2 | 3>(1);
+	let isChangingTheme = $state(false);
 
 	async function toggleTheme() {
 		isChangingTheme = true;
@@ -30,25 +32,30 @@
 		}, 200);
 	}
 
-	function changeLanguage(lang: Language) {
-		if ($language === lang) return;
-
-		isChangingLanguage = true;
-
-		setTimeout(() => {
-			language.set(lang);
-			setTimeout(() => {
-				isChangingLanguage = false;
-			}, 50); // Short delay to render new text while blurred
-		}, 200); // Animation duration for blur-in
-	}
-
 	function setBackgroundType(type: 0 | 1 | 2 | 3) {
 		backgroundType = type;
 		localStorage.setItem("backgroundType", type.toString());
 	}
 
+	// URL Sync Effect
+	$effect(() => {
+		if (browser && language.current) {
+			const url = new URL(window.location.href);
+			if (url.searchParams.get('lang') !== language.current) {
+				url.searchParams.set('lang', language.current);
+				window.history.replaceState({}, '', url.toString());
+			}
+		}
+	});
+
 	onMount(() => {
+		// Sync Language from URL on Load
+		const langParam = new URLSearchParams(window.location.search).get('lang') as Language;
+		if (langParam && (langParam === 'en' || langParam === 'uk')) {
+			language.current = langParam;
+		}
+
+		// Theme & BG from LocalStorage
 		const savedTheme = localStorage.getItem("theme") || "dark";
 		theme = savedTheme;
 		document.documentElement.setAttribute("data-theme", theme);
@@ -73,6 +80,8 @@
 		document.querySelectorAll("section[id]").forEach((section) => {
 			observer.observe(section);
 		});
+		
+		return () => observer.disconnect();
 	});
 </script>
 
@@ -80,19 +89,18 @@
 
 <div class="theme-transition-overlay" class:active={isChangingTheme}></div>
 
-<div class="app-layout" class:language-changing={isChangingLanguage}>
+<div class="app-layout" class:language-changing={language.isChanging}>
 	<Header
 		{theme}
 		{toggleTheme}
 		{backgroundType}
 		{setBackgroundType}
-		{changeLanguage}
 	/>
 	<Sidebar {activeSection} />
 	<BottomNav {activeSection} />
 
 	<main>
-		<slot />
+		{@render children()}
 	</main>
 </div>
 
@@ -118,10 +126,9 @@
 		filter: blur(8px);
 	}
 
-	/* Ensure components have transition for filter */
 	:global(.sidebar),
 	:global(.bottom-nav) {
-		transition: filter 0.2s ease-in-out !important; /* Force transition if overriden */
+		transition: filter 0.2s ease-in-out !important;
 	}
 
 	@media (max-width: 768px) {

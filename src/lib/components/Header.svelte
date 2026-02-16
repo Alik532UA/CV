@@ -7,18 +7,24 @@
         Waves,
         CircleOff,
         Shapes,
-        MoreHorizontal, // Using MoreHorizontal for the dropdown trigger
     } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { onMount, onDestroy } from "svelte";
 
-    export let theme: string;
-    export let toggleTheme: () => void;
-    export let backgroundType: 0 | 1 | 2 | 3 = 1;
-    export let setBackgroundType: (type: 0 | 1 | 2 | 3) => void = () => {};
+    let { 
+        theme, 
+        toggleTheme, 
+        backgroundType = 1, 
+        setBackgroundType = () => {} 
+    } = $props<{
+        theme: string;
+        toggleTheme: () => void;
+        backgroundType: 0 | 1 | 2 | 3;
+        setBackgroundType: (type: 0 | 1 | 2 | 3) => void;
+    }>();
 
-    let isBgDropdownOpen = false;
+    let isBgDropdownOpen = $state(false);
 
     function setLanguage(lang: Language) {
         language.set(lang);
@@ -66,7 +72,7 @@
                 data-testid="bg-switcher"
             >
                 <button
-                    on:click={() => setBackgroundType(0)}
+                    onclick={() => setBackgroundType(0)}
                     class:active={backgroundType === 0}
                     title="Off"
                     data-testid="bg-off"
@@ -75,7 +81,7 @@
                 </button>
                 <div class="divider"></div>
                 <button
-                    on:click={() => setBackgroundType(1)}
+                    onclick={() => setBackgroundType(1)}
                     class:active={backgroundType === 1}
                     title="Particles"
                     data-testid="bg-particles"
@@ -84,7 +90,7 @@
                 </button>
                 <div class="divider"></div>
                 <button
-                    on:click={() => setBackgroundType(2)}
+                    onclick={() => setBackgroundType(2)}
                     class:active={backgroundType === 2}
                     title="Waves"
                     data-testid="bg-waves"
@@ -93,7 +99,7 @@
                 </button>
                 <div class="divider"></div>
                 <button
-                    on:click={() => setBackgroundType(3)}
+                    onclick={() => setBackgroundType(3)}
                     class:active={backgroundType === 3}
                     title="Shapes"
                     data-testid="bg-shapes"
@@ -109,33 +115,33 @@
             >
                 <button
                     class="glass-icon-btn"
-                    on:click|stopPropagation={toggleBgDropdown}
+                    onclick={(e) => { e.stopPropagation(); toggleBgDropdown(); }}
                 >
-                    <svelte:component this={ActiveBgIcon} size={20} />
+                    <ActiveBgIcon size={20} />
                 </button>
 
                 {#if isBgDropdownOpen}
                     <div class="bg-dropdown glass">
                         <button
-                            on:click={() => selectBackground(0)}
+                            onclick={() => selectBackground(0)}
                             class:active={backgroundType === 0}
                         >
                             <CircleOff size={16} /> <span>Off</span>
                         </button>
                         <button
-                            on:click={() => selectBackground(1)}
+                            onclick={() => selectBackground(1)}
                             class:active={backgroundType === 1}
                         >
                             <Sparkles size={16} /> <span>Particles</span>
                         </button>
                         <button
-                            on:click={() => selectBackground(2)}
+                            onclick={() => selectBackground(2)}
                             class:active={backgroundType === 2}
                         >
                             <Waves size={16} /> <span>Waves</span>
                         </button>
                         <button
-                            on:click={() => selectBackground(3)}
+                            onclick={() => selectBackground(3)}
                             class:active={backgroundType === 3}
                         >
                             <Shapes size={16} /> <span>Shapes</span>
@@ -147,7 +153,7 @@
             <!-- Language Switcher -->
             <div class="toggle-group glass" data-testid="lang-switcher">
                 <button
-                    on:click={() => setLanguage("en")}
+                    onclick={() => setLanguage("en")}
                     class:active={language.current === "en"}
                     title="English"
                     data-testid="lang-en"
@@ -156,7 +162,7 @@
                 </button>
                 <div class="divider"></div>
                 <button
-                    on:click={() => setLanguage("uk")}
+                    onclick={() => setLanguage("uk")}
                     class:active={language.current === "uk"}
                     title="Українська"
                     data-testid="lang-uk"
@@ -168,7 +174,7 @@
             <!-- Theme Toggle (Now with same style as Language Switcher) -->
             <div class="toggle-group glass" data-testid="theme-switcher">
                 <button
-                    on:click={() => theme !== "light" && toggleTheme()}
+                    onclick={() => theme !== "light" && toggleTheme()}
                     class:active={theme === "light"}
                     title="Light Theme"
                     data-testid="theme-light"
@@ -177,7 +183,7 @@
                 </button>
                 <div class="divider"></div>
                 <button
-                    on:click={() => theme !== "dark" && toggleTheme()}
+                    onclick={() => theme !== "dark" && toggleTheme()}
                     class:active={theme === "dark"}
                     title="Dark Theme"
                     data-testid="theme-dark"
@@ -260,7 +266,6 @@
         overflow: hidden;
     }
 
-    /* Також цільово для SVG всередині для надійності скруглення */
     :global(.flag-icon svg) {
         border-radius: 2px;
     }
@@ -272,7 +277,6 @@
         margin: 0 2px;
     }
 
-    /* Mobile handling */
     .mobile-only {
         display: none;
     }
@@ -290,9 +294,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(
-            --accent-primary
-        ); /* Always colored as it shows active state */
+        color: var(--accent-primary);
         cursor: pointer;
         backdrop-filter: var(--glass-blur);
         transition: var(--transition);
@@ -300,9 +302,8 @@
 
     .bg-dropdown {
         position: absolute;
-        top: 60px; /* Below header */
-        right: 0; /* Align right relative to container if relative, but likely needs fixed/absolute adjustments based on layout */
-        /* Since .controls is flex, relative pos would be better on .mobile-bg-switcher */
+        top: 60px;
+        right: 0;
         background: rgba(0, 0, 0, 0.9);
         border: 1px solid var(--border-color);
         border-radius: 12px;
@@ -363,14 +364,13 @@
             display: block;
         }
 
-        /* Adjust controls spacing for mobile */
         .controls {
             gap: 10px;
-            width: 100%; /* Take full width to allow spacing */
+            width: 100%;
         }
 
         .mobile-bg-switcher {
-            margin-right: auto; /* Push other items to right */
+            margin-right: auto;
         }
 
         .bg-dropdown {
