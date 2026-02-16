@@ -2,14 +2,13 @@
     import { ChevronDown, Monitor, Globe, Smartphone } from "lucide-svelte";
     import { slide } from "svelte/transition";
     import { skillsData } from "$lib/data/skills";
+    import Section from "../ui/Section.svelte";
 
     let { t } = $props<{ t: any }>();
     let showMoreSkills = $state(false);
 </script>
 
-<section id="skills">
-    <h2 class="section-title">{t.skills.title}</h2>
-
+<Section id="skills" title={t.skills.title}>
     <div class="platforms-grid">
         <div class="platform-item glass card">
             <div class="platform-icon"><Monitor size={24} /></div>
@@ -127,14 +126,9 @@
             <ChevronDown size={18} class={showMoreSkills ? "rotated" : ""} />
         </button>
     </div>
-</section>
+</Section>
 
 <style>
-    /* ... (стилі залишаються незмінними) ... */
-    section {
-        padding: 60px 0;
-    }
-
     /* Platforms Grid */
     .platforms-grid {
         display: grid;

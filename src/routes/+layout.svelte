@@ -18,10 +18,23 @@
 
 	// URL Sync Effect
 	$effect(() => {
-		if (isRouterReady && browser && language.current) {
+		if (isRouterReady && browser) {
 			const url = new URL(window.location.href);
-			if (url.searchParams.get('lang') !== language.current) {
+			let changed = false;
+
+			// Sync Language
+			if (language.current && url.searchParams.get('lang') !== language.current) {
 				url.searchParams.set('lang', language.current);
+				changed = true;
+			}
+
+			// Sync Section Hash
+			if (activeSection && url.hash !== `#${activeSection}`) {
+				url.hash = activeSection;
+				changed = true;
+			}
+
+			if (changed) {
 				replaceState(url.toString(), {});
 			}
 		}
@@ -29,6 +42,15 @@
 
 	afterNavigate(() => {
 		isRouterReady = true;
+		
+		// Handle initial scroll if hash exists
+		if (browser && window.location.hash) {
+			const id = window.location.hash.slice(1);
+			const el = document.getElementById(id);
+			if (el) {
+				setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
+			}
+		}
 	});
 
 	onMount(() => {
@@ -41,12 +63,15 @@
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
+					if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
 						activeSection = entry.target.id;
 					}
 				});
 			},
-			{ threshold: 0.3 },
+			{ 
+				threshold: [0.3],
+				rootMargin: '-70px 0px -20% 0px' 
+			},
 		);
 
 		document.querySelectorAll("section[id]").forEach((section) => {

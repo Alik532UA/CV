@@ -1,12 +1,12 @@
 <script lang="ts">
     import { ExternalLink } from "lucide-svelte";
     import { base } from "$app/paths";
+    import Section from "../ui/Section.svelte";
 
     let { t } = $props<{ t: any }>();
 </script>
 
-<section id="projects">
-    <h2 class="section-title">{t.nav.projects}</h2>
+<Section id="projects" title={t.nav.projects}>
     <div class="projects-grid">
         <div class="project-card glass card">
             <div class="project-img">
@@ -62,13 +62,9 @@
             </div>
         </div>
     </div>
-</section>
+</Section>
 
 <style>
-    section {
-        padding: 60px 0;
-    }
-
     .projects-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));

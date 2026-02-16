@@ -1,9 +1,9 @@
 <script lang="ts">
+    import Section from "../ui/Section.svelte";
     let { t } = $props<{ t: any }>();
 </script>
 
-<section id="education">
-    <h2 class="section-title">{t.education.title}</h2>
+<Section id="education" title={t.education.title}>
     <div class="education-grid">
         {#each t.education.items as edu}
             <div class="edu-card glass card">
@@ -13,13 +13,9 @@
             </div>
         {/each}
     </div>
-</section>
+</Section>
 
 <style>
-    section {
-        padding: 60px 0;
-    }
-
     .education-grid {
         display: flex;
         flex-direction: column;

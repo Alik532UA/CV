@@ -2,12 +2,12 @@
     import { Trophy, Lightbulb, Award, Car, Languages, Skull, Puzzle } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
+    import Section from "../ui/Section.svelte";
 
     let { t } = $props<{ t: any }>();
 </script>
 
-<section id="other">
-    <h2 class="section-title">{t.other.title}</h2>
+<Section id="other" title={t.other.title}>
     <div class="other-grid">
         <div class="success-card glass card">
             <h3><Trophy size={20} class="inline-icon" /> Highlights</h3>
@@ -60,13 +60,9 @@
             </div>
         </div>
     </div>
-</section>
+</Section>
 
 <style>
-    section {
-        padding: 60px 0;
-    }
-
     .other-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));

@@ -1,13 +1,13 @@
 <script lang="ts">
     import { ChevronDown } from "lucide-svelte";
     import { slide } from "svelte/transition";
+    import Section from "../ui/Section.svelte";
 
     let { t } = $props<{ t: any }>();
     let showNonIT = $state(false);
 </script>
 
-<section id="experience">
-    <h2 class="section-title">{t.experience.title}</h2>
+<Section id="experience" title={t.experience.title}>
     <div class="timeline">
         {#each t.experience.it as exp}
             <div class="exp-card glass card">
@@ -41,13 +41,9 @@
             </div>
         {/if}
     </div>
-</section>
+</Section>
 
 <style>
-    section {
-        padding: 60px 0;
-    }
-
     .timeline {
         display: flex;
         flex-direction: column;
@@ -102,3 +98,4 @@
         transform: rotate(180deg);
     }
 </style>
+
