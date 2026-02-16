@@ -5,10 +5,12 @@
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
 
-    export let backgroundType: 0 | 1 | 2 | 3 = 1;
-    export let theme: string = "dark";
+    let { backgroundType = 1, theme = "dark" } = $props<{
+        backgroundType?: 0 | 1 | 2 | 3;
+        theme?: string;
+    }>();
 
-    let fixedHeight = "100vh";
+    let fixedHeight = $state("100vh");
     let lastWidth = 0;
 
     onMount(() => {
