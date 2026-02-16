@@ -1,8 +1,14 @@
-import { writable, type Writable } from 'svelte/store';
-
 export type Language = 'en' | 'uk';
 
-export const language: Writable<Language> = writable('en');
+class LanguageState {
+    current = $state<Language>('en');
+    
+    set(lang: Language) {
+        this.current = lang;
+    }
+}
+
+export const language = new LanguageState();
 
 export const translations = {
     en: {

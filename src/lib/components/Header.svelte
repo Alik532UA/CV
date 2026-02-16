@@ -17,12 +17,11 @@
     export let toggleTheme: () => void;
     export let backgroundType: 0 | 1 | 2 | 3 = 1;
     export let setBackgroundType: (type: 0 | 1 | 2 | 3) => void = () => {};
-    export let changeLanguage: (lang: Language) => void;
 
     let isBgDropdownOpen = false;
 
     function setLanguage(lang: Language) {
-        changeLanguage(lang);
+        language.set(lang);
     }
 
     function toggleBgDropdown() {
@@ -55,7 +54,7 @@
     });
 
     // Helper to get icon for active mobile bg
-    $: ActiveBgIcon = [CircleOff, Sparkles, Waves, Shapes][backgroundType];
+    let ActiveBgIcon = $derived([CircleOff, Sparkles, Waves, Shapes][backgroundType]);
 </script>
 
 <header class="header glass">
@@ -149,7 +148,7 @@
             <div class="toggle-group glass" data-testid="lang-switcher">
                 <button
                     on:click={() => setLanguage("en")}
-                    class:active={$language === "en"}
+                    class:active={language.current === "en"}
                     title="English"
                     data-testid="lang-en"
                 >
@@ -158,7 +157,7 @@
                 <div class="divider"></div>
                 <button
                     on:click={() => setLanguage("uk")}
-                    class:active={$language === "uk"}
+                    class:active={language.current === "uk"}
                     title="Українська"
                     data-testid="lang-uk"
                 >
