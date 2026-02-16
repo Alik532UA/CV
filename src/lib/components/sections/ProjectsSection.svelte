@@ -1,11 +1,15 @@
 <script lang="ts">
-    import { ExternalLink } from "lucide-svelte";
+    import { ExternalLink, Code } from "lucide-svelte";
     import { base } from "$app/paths";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/i18n/index.svelte";
 </script>
 
 <Section id="projects" title={t.nav.projects}>
+    {#snippet icon()}
+        <Code size={22} />
+    {/snippet}
+
     <div class="projects-grid">
         <div class="project-card glass card">
             <div class="project-img">

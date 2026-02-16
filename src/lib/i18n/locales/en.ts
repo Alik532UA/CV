@@ -30,73 +30,37 @@ export const en: Translations = {
         showNonIT: "Show non-IT experience",
         hideNonIT: "Hide non-IT experience",
         present: "for now",
-        it: [
-            {
-                date: "12/2021 - Present",
-                company: "Intellias (Digitally Inspired Ltd)",
-                role: "Manual & Automation QA Engineer",
-                desc: "Testing Web, Desktop, and Mobile apps. Automation testing (C#, Selenium, WinAppDriver)."
-            },
-            {
-                date: "06/2021 - 12/2021",
-                company: "AB Soft",
-                role: "Manual QA Engineer",
-                desc: "Device and mobile app testing."
-            },
-            {
-                date: "08/2017 – 09/2017",
-                company: "Singree (IT Company)",
-                role: "SEO Analyst",
-                desc: "Search engine analysis."
-            }
-        ],
-        nonIT: [
-            {
-                date: "07/2019 – 06/2021",
-                company: "UNICORN MEDIA",
-                role: "Video Editor",
-                desc: "Editing for YouTube."
-            },
-            {
-                date: "06/2014 – 03/2020",
-                company: "LEADERS 'NUT DUET'",
-                role: "Video Editor & SDE",
-                desc: "Event and performance editing."
-            },
-            {
-                date: "11/2017 – 07/2019",
-                company: "Channel 7 Odesa",
-                role: "Video Editor",
-                desc: "News editing."
-            },
-            {
-                date: "09/2017 – 11/2017",
-                company: "Channel 'KRUG' Odesa",
-                role: "Video Editor",
-                desc: "News editing."
-            },
-            {
-                date: "02/2012 – 09/2015",
-                company: "CHILDREN'S THEATER SCHOOL",
-                role: "Technical Support",
-                desc: "Technically supported over hundreds of performances. Responsible for sound, lighting, set up and programming of digital remote control, filming and editing video."
-            }
-        ]
+        roles: {
+            intellias_role: "Manual & Automation QA Engineer",
+            absoft_role: "Manual QA Engineer",
+            singree_role: "SEO Analyst",
+            unicorn_role: "Video Editor",
+            nutduet_role: "Video Editor & SDE",
+            channel7_role: "Video Editor",
+            krug_role: "Video Editor",
+            theater_role: "Technical Support"
+        },
+        descriptions: {
+            intellias_desc: "Testing Web, Desktop, and Mobile apps. Automation testing (C#, Selenium, WinAppDriver).",
+            absoft_desc: "Device and mobile app testing.",
+            singree_desc: "Search engine analysis.",
+            unicorn_desc: "Editing for YouTube.",
+            nutduet_desc: "Event and performance editing.",
+            channel7_desc: "News editing.",
+            krug_desc: "News editing.",
+            theater_desc: "Technically supported over hundreds of performances. Responsible for sound, lighting, set up and programming of digital remote control, filming and editing video."
+        }
     },
     education: {
         title: "Education",
-        items: [
-            {
-                institution: "ODESA NATIONAL POLYTECHNIC UNIVERSITY",
-                date: "2012 – 2017",
-                desc: "Master's (Specialist) degree in Computer Systems and Networks, Institute of Computer Systems"
-            },
-            {
-                institution: "CHILDREN'S THEATER SCHOOL",
-                date: "2006 – 2013",
-                desc: "Theater department (2006-2012) // Music department (2009-2013)"
-            }
-        ]
+        institutions: {
+            polytech_name: "ODESA NATIONAL POLYTECHNIC UNIVERSITY",
+            theater_school_name: "CHILDREN'S THEATER SCHOOL"
+        },
+        descriptions: {
+            polytech_desc: "Master's (Specialist) degree in Computer Systems and Networks, Institute of Computer Systems",
+            theater_school_desc: "Theater department (2006-2012) // Music department (2009-2013)"
+        }
     },
     skills: {
         title: "Skills",

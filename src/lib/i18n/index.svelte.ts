@@ -86,26 +86,13 @@ const TranslationSchema = z.object({
         showNonIT: z.string(),
         hideNonIT: z.string(),
         present: z.string(),
-        it: z.array(z.object({
-            date: z.string(),
-            company: z.string(),
-            role: z.string(),
-            desc: z.string()
-        })),
-        nonIT: z.array(z.object({
-            date: z.string(),
-            company: z.string(),
-            role: z.string(),
-            desc: z.string()
-        }))
+        roles: z.record(z.string(), z.string()),
+        descriptions: z.record(z.string(), z.string())
     }),
     education: z.object({
         title: z.string(),
-        items: z.array(z.object({
-            institution: z.string(),
-            date: z.string(),
-            desc: z.string()
-        }))
+        institutions: z.record(z.string(), z.string()),
+        descriptions: z.record(z.string(), z.string())
     }),
     skills: z.object({
         title: z.string(),

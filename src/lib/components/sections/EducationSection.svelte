@@ -1,15 +1,21 @@
 <script lang="ts">
+    import { GraduationCap } from "lucide-svelte";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/i18n/index.svelte";
+    import { educationData } from "$lib/data/education";
 </script>
 
 <Section id="education" title={t.education.title}>
+    {#snippet icon()}
+        <GraduationCap size={22} />
+    {/snippet}
+
     <div class="education-grid">
-        {#each t.education.items as edu}
+        {#each educationData as edu (edu.id)}
             <div class="edu-card glass card">
-                <h3>{edu.institution}</h3>
+                <h3>{t.education.institutions[edu.institutionKey]}</h3>
                 <span class="date">{edu.date}</span>
-                <p>{edu.desc}</p>
+                <p>{t.education.descriptions[edu.descKey]}</p>
             </div>
         {/each}
     </div>

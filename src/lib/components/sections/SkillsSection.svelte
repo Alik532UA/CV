@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { ChevronDown, Monitor, Globe, Smartphone } from "lucide-svelte";
+    import { ChevronDown, Monitor, Globe, Smartphone, Zap } from "lucide-svelte";
     import { slide } from "svelte/transition";
     import { skillsData } from "$lib/data/skills";
     import Section from "../ui/Section.svelte";
@@ -9,6 +9,10 @@
 </script>
 
 <Section id="skills" title={t.skills.title}>
+    {#snippet icon()}
+        <Zap size={22} />
+    {/snippet}
+
     <div class="platforms-grid">
         <div class="platform-item glass card">
             <div class="platform-icon"><Monitor size={24} /></div>

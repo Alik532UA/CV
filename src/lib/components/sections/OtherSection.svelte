@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Trophy, Lightbulb, Award, Car, Languages, Skull, Puzzle } from "lucide-svelte";
+    import { Trophy, Lightbulb, Award, Car, Languages, Skull, Puzzle, Star } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import Section from "../ui/Section.svelte";
@@ -7,6 +7,10 @@
 </script>
 
 <Section id="other" title={t.other.title}>
+    {#snippet icon()}
+        <Star size={22} />
+    {/snippet}
+
     <div class="other-grid">
         <div class="success-card glass card">
             <h3><Trophy size={20} class="inline-icon" /> Highlights</h3>

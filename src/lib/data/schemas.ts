@@ -2,12 +2,32 @@ import { z } from 'zod';
 
 /**
  * Schema for a single Skill.
- * Icon is expected to be a Svelte component (Lucide icon).
  */
 export const SkillSchema = z.object({
     id: z.string(),
     level: z.number().min(0).max(100),
-    icon: z.any() // Icons are components, hard to validate strictly with Zod
+    icon: z.any() 
+});
+
+/**
+ * Schema for a single Experience item.
+ */
+export const ExperienceItemSchema = z.object({
+    id: z.string(),
+    date: z.string(),
+    company: z.string(),
+    roleKey: z.string(), // Key for translations
+    descKey: z.string()  // Key for translations
+});
+
+/**
+ * Schema for a single Education item.
+ */
+export const EducationItemSchema = z.object({
+    id: z.string(),
+    institutionKey: z.string(),
+    date: z.string(),
+    descKey: z.string()
 });
 
 /**
@@ -20,5 +40,16 @@ export const SkillsDataSchema = z.object({
     tools: z.array(SkillSchema)
 });
 
+/**
+ * Schema for the entire Experience Data object.
+ */
+export const ExperienceDataSchema = z.object({
+    it: z.array(ExperienceItemSchema),
+    nonIT: z.array(ExperienceItemSchema)
+});
+
 export type Skill = z.infer<typeof SkillSchema>;
 export type SkillsData = z.infer<typeof SkillsDataSchema>;
+export type ExperienceItem = z.infer<typeof ExperienceItemSchema>;
+export type ExperienceData = z.infer<typeof ExperienceDataSchema>;
+export type EducationItem = z.infer<typeof EducationItemSchema>;

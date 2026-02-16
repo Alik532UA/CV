@@ -1,20 +1,25 @@
 <script lang="ts">
-    import { ChevronDown } from "lucide-svelte";
+    import { ChevronDown, Briefcase } from "lucide-svelte";
     import { slide } from "svelte/transition";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/i18n/index.svelte";
+    import { experienceData } from "$lib/data/experience";
 
     let showNonIT = $state(false);
 </script>
 
 <Section id="experience" title={t.experience.title}>
+    {#snippet icon()}
+        <Briefcase size={22} />
+    {/snippet}
+    
     <div class="timeline">
-        {#each t.experience.it as exp}
+        {#each experienceData.it as exp (exp.id)}
             <div class="exp-card glass card">
                 <span class="date">{exp.date}</span>
                 <h3>{exp.company}</h3>
-                <p class="role">{exp.role}</p>
-                <p class="desc">{exp.desc}</p>
+                <p class="role">{t.experience.roles[exp.roleKey]}</p>
+                <p class="desc">{t.experience.descriptions[exp.descKey]}</p>
             </div>
         {/each}
 
@@ -30,12 +35,12 @@
 
         {#if showNonIT}
             <div class="non-it-list" transition:slide id="non-it-experience-list">
-                {#each t.experience.nonIT as exp}
+                {#each experienceData.nonIT as exp (exp.id)}
                     <div class="exp-card glass card non-it">
                         <span class="date">{exp.date}</span>
                         <h3>{exp.company}</h3>
-                        <p class="role">{exp.role}</p>
-                        <p class="desc">{exp.desc}</p>
+                        <p class="role">{t.experience.roles[exp.roleKey]}</p>
+                        <p class="desc">{t.experience.descriptions[exp.descKey]}</p>
                     </div>
                 {/each}
             </div>
