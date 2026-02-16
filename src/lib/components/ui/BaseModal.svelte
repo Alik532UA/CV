@@ -91,6 +91,7 @@
             role="dialog"
             aria-modal="true"
             aria-labelledby={title ? "modal-title" : undefined}
+            tabindex="-1"
             transition:scale={{ duration: 200, start: 0.95 }}
         >
             <button class="close-btn" onclick={close} aria-label="Close modal">
