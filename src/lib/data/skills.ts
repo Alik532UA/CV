@@ -15,19 +15,9 @@ import {
     Folder,
     Flame
 } from "lucide-svelte";
+import { SkillsDataSchema, type SkillsData } from "./schemas";
 
-export interface Skill {
-    id: string;
-    level: number;
-    icon: any;
-}
-
-export interface SkillCategory {
-    id: keyof typeof skillsData;
-    skills: Skill[];
-}
-
-export const skillsData = {
+const rawData = {
     it: [
         { id: "ai", level: 95, icon: Bot },
         { id: "csharp", level: 85, icon: Zap },
@@ -53,3 +43,9 @@ export const skillsData = {
         { id: "firebase", level: 65, icon: Flame },
     ],
 };
+
+/**
+ * Validated skills data.
+ * Throws an error during development if the structure is invalid.
+ */
+export const skillsData: SkillsData = SkillsDataSchema.parse(rawData);
