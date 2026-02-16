@@ -35,7 +35,7 @@
                 <li class:active={activeSection === item.id}>
                     <a href="#{item.id}">
                         <span class="icon">
-                            <item.icon size={20} />
+                            <item.icon size={20} aria-hidden="true" />
                         </span>
                         <span class="label">{item.label}</span>
                     </a>

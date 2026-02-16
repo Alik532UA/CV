@@ -10,26 +10,26 @@
 
 <Section id="skills" title={t.skills.title}>
     {#snippet icon()}
-        <Zap size={22} />
+        <Zap size={22} aria-hidden="true" />
     {/snippet}
 
     <div class="platforms-grid">
         <div class="platform-item glass card">
-            <div class="platform-icon"><Monitor size={24} /></div>
+            <div class="platform-icon"><Monitor size={24} aria-hidden="true" /></div>
             <div class="platform-text">
                 <strong>Desktop app</strong>
                 <span>{t.skills.platforms.desktop.split(": ")[1]}</span>
             </div>
         </div>
         <div class="platform-item glass card">
-            <div class="platform-icon"><Globe size={24} /></div>
+            <div class="platform-icon"><Globe size={24} aria-hidden="true" /></div>
             <div class="platform-text">
                 <strong>Web</strong>
                 <span>{t.skills.platforms.web.split(": ")[1]}</span>
             </div>
         </div>
         <div class="platform-item glass card">
-            <div class="platform-icon"><Smartphone size={24} /></div>
+            <div class="platform-icon"><Smartphone size={24} aria-hidden="true" /></div>
             <div class="platform-text">
                 <strong>Mobile app</strong>
                 <span>{t.skills.platforms.mobile.split(": ")[1]}</span>
@@ -45,7 +45,7 @@
                     <div class="skill-item">
                         <div class="skill-info">
                             <span>
-                                <skill.icon size={16} />
+                                <skill.icon size={16} aria-hidden="true" />
                                 {t.skills.items[skill.id]}
                             </span>
                         </div>
@@ -67,7 +67,7 @@
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
-                                            <skill.icon size={16} />
+                                            <skill.icon size={16} aria-hidden="true" />
                                             {t.skills.items[skill.id]}
                                         </span>
                                     </div>
@@ -86,7 +86,7 @@
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
-                                            <skill.icon size={16} />
+                                            <skill.icon size={16} aria-hidden="true" />
                                             {t.skills.items[skill.id]}
                                         </span>
                                     </div>
@@ -105,7 +105,7 @@
                                 <div class="skill-item">
                                     <div class="skill-head">
                                         <span>
-                                            <skill.icon size={16} />
+                                            <skill.icon size={16} aria-hidden="true" />
                                             {t.skills.items[skill.id]}
                                         </span>
                                     </div>

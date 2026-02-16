@@ -10,7 +10,9 @@ class LanguageState {
     current = $state<Language>('en');
     isChanging = $state(false);
 
-    constructor() {
+    constructor() {}
+
+    init() {
         if (browser) {
             const params = new URLSearchParams(window.location.search);
             const lang = params.get('lang') as Language;
@@ -23,14 +25,21 @@ class LanguageState {
                 }
             }
             
+            // Sync HTML lang attribute
+            document.documentElement.lang = this.current;
+
             // Sync to URL reactively using native history API
             $effect.root(() => {
                 $effect(() => {
                     const lang = this.current;
                     const url = new URL(window.location.href);
+                    
+                    // Sync HTML lang attribute reactively
+                    document.documentElement.lang = lang;
+
                     if (url.searchParams.get('lang') !== lang) {
                         url.searchParams.set('lang', lang);
-                        window.history.replaceState({}, '', url.toString());
+                        replaceState(url.toString(), {});
                     }
                 });
             });
@@ -46,6 +55,7 @@ class LanguageState {
             this.current = lang;
             if (browser) {
                 localStorage.setItem('lang', lang);
+                document.documentElement.lang = lang;
             }
             setTimeout(() => {
                 this.isChanging = false;

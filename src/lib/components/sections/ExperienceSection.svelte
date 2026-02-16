@@ -10,7 +10,7 @@
 
 <Section id="experience" title={t.experience.title}>
     {#snippet icon()}
-        <Briefcase size={22} />
+        <Briefcase size={22} aria-hidden="true" />
     {/snippet}
     
     <div class="timeline">

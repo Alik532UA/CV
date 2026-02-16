@@ -4,6 +4,7 @@
 	import BottomNav from "$lib/components/BottomNav.svelte";
 	import Header from "$lib/components/Header.svelte";
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
+	import SEO from "$lib/components/SEO.svelte";
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import { replaceState, afterNavigate } from "$app/navigation";
@@ -43,6 +44,11 @@
 	});
 
 	onMount(() => {
+		// Initialize global states
+		theme.init();
+		background.init();
+		language.init();
+
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
@@ -65,6 +71,10 @@
 	});
 </script>
 
+<SEO />
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <DynamicBackground backgroundType={background.type} theme={theme.current} />
 
 <div class="theme-transition-overlay" class:active={theme.isChanging}></div>
@@ -74,12 +84,27 @@
 	<Sidebar {activeSection} />
 	<BottomNav {activeSection} />
 
-	<main>
+	<main id="main-content">
 		{@render children()}
 	</main>
 </div>
 
 <style>
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 0;
+		background: var(--accent-primary);
+		color: #fff;
+		padding: 8px;
+		z-index: 9999;
+		transition: top 0.3s;
+	}
+
+	.skip-link:focus {
+		top: 0;
+	}
+
 	.app-layout {
 		display: flex;
 		min-height: 100vh;

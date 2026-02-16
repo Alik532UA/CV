@@ -5,7 +5,9 @@ class ThemeState {
     current = $state("dark");
     isChanging = $state(false);
 
-    constructor() {
+    constructor() {}
+
+    init() {
         if (browser) {
             const params = new URLSearchParams(window.location.search);
             const theme = params.get('theme');
@@ -19,7 +21,7 @@ class ThemeState {
                     const url = new URL(window.location.href);
                     if (url.searchParams.get('theme') !== theme) {
                         url.searchParams.set('theme', theme);
-                        window.history.replaceState({}, '', url.toString());
+                        replaceState(url.toString(), {});
                     }
                 });
             });
@@ -53,7 +55,9 @@ class ThemeState {
 class BackgroundState {
     type = $state<0 | 1 | 2 | 3>(1);
 
-    constructor() {
+    constructor() {}
+
+    init() {
         if (browser) {
             const saved = localStorage.getItem("backgroundType");
             if (saved && ["0", "1", "2", "3"].includes(saved)) {

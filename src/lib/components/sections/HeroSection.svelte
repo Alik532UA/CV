@@ -27,7 +27,7 @@
         <div class="about-main">
             <div class="bio glass card">
                 <p class="location">
-                    <MapPin size={18} class="inline-icon" />
+                    <MapPin size={18} class="inline-icon" aria-hidden="true" />
                     {t.about.location}
                 </p>
                 <p class="bio-text">{t.about.content}</p>
@@ -38,26 +38,27 @@
                         target="_blank"
                         class="btn-secondary"
                     >
-                        <span><Linkedin size={18} /></span> LinkedIn
+                        <span><Linkedin size={18} aria-hidden="true" /></span> LinkedIn
                     </a>
                     <a
                         href="https://t.me/alik532"
                         target="_blank"
                         class="btn-secondary"
                     >
-                        <span><Send size={18} /></span> Telegram
+                        <span><Send size={18} aria-hidden="true" /></span> Telegram
                     </a>
                     <a
                         href="mailto:alikzapolnov@gmail.com"
                         class="btn-secondary"
                     >
-                        <span><Mail size={18} /></span> Email
+                        <span><Mail size={18} aria-hidden="true" /></span> Email
                     </a>
                     <button
                         class="btn-secondary nowrap-btn"
                         onclick={onOpenPdfModal}
                     >
-                        <span><FileText size={18} /></span> PDF version
+                        <span><FileText size={18} aria-hidden="true" /></span> PDF
+                        version
                     </button>
                 </div>
             </div>
