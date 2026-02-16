@@ -35,42 +35,42 @@
 <div class="container">
     <svelte:boundary>
         <HeroSection {t} {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Hero" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
         <ExperienceSection {t} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Досвід" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
         <SkillsSection {t} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Навички" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
         <ProjectsSection {t} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Проєкти" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
         <EducationSection {t} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Освіта" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
         <OtherSection {t} />
-        {#snippet fallback()}
+        {#snippet failed()}
             <ErrorFallback sectionName="Додатково" />
         {/snippet}
     </svelte:boundary>
