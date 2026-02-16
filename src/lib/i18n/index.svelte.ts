@@ -1,12 +1,41 @@
 import { z } from 'zod';
 import { en } from './locales/en';
 import { uk } from './locales/uk';
+import { browser } from '$app/environment';
+import { replaceState } from '$app/navigation';
 
 export type Language = 'en' | 'uk';
 
 class LanguageState {
     current = $state<Language>('en');
     isChanging = $state(false);
+
+    constructor() {
+        if (browser) {
+            const params = new URLSearchParams(window.location.search);
+            const lang = params.get('lang') as Language;
+            if (lang === 'en' || lang === 'uk') {
+                this.current = lang;
+            } else {
+                const saved = localStorage.getItem('lang') as Language;
+                if (saved === 'en' || saved === 'uk') {
+                    this.current = saved;
+                }
+            }
+            
+            // Sync to URL reactively using native history API
+            $effect.root(() => {
+                $effect(() => {
+                    const lang = this.current;
+                    const url = new URL(window.location.href);
+                    if (url.searchParams.get('lang') !== lang) {
+                        url.searchParams.set('lang', lang);
+                        window.history.replaceState({}, '', url.toString());
+                    }
+                });
+            });
+        }
+    }
     
     set(lang: Language) {
         if (this.current === lang) return;
@@ -15,6 +44,9 @@ class LanguageState {
         
         setTimeout(() => {
             this.current = lang;
+            if (browser) {
+                localStorage.setItem('lang', lang);
+            }
             setTimeout(() => {
                 this.isChanging = false;
             }, 50);
@@ -132,3 +164,22 @@ const TranslationSchema = z.object({
 export type Translations = z.infer<typeof TranslationSchema>;
 
 export const translations: Record<Language, Translations> = { en, uk };
+
+/**
+ * Global reactive translations object.
+ * Uses getters to maintain reactivity across components.
+ */
+export const t = {
+    get lastUpdate() { return translations[language.current].lastUpdate; },
+    get title() { return translations[language.current].title; },
+    get title_mobile() { return translations[language.current].title_mobile; },
+    get nav() { return translations[language.current].nav; },
+    get hero() { return translations[language.current].hero; },
+    get about() { return translations[language.current].about; },
+    get experience() { return translations[language.current].experience; },
+    get education() { return translations[language.current].education; },
+    get skills() { return translations[language.current].skills; },
+    get other() { return translations[language.current].other; },
+    get projects() { return translations[language.current].projects; },
+    get pdf_modal() { return translations[language.current].pdf_modal; }
+};

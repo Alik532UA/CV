@@ -1,4 +1,5 @@
 import { browser } from "$app/environment";
+import { replaceState } from "$app/navigation";
 
 class ThemeState {
     current = $state("dark");
@@ -6,14 +7,27 @@ class ThemeState {
 
     constructor() {
         if (browser) {
-            const saved = localStorage.getItem("theme") || "dark";
+            const params = new URLSearchParams(window.location.search);
+            const theme = params.get('theme');
+            const saved = theme || localStorage.getItem("theme") || "dark";
             this.set(saved);
+
+            // Sync to URL reactively using native history API
+            $effect.root(() => {
+                $effect(() => {
+                    const theme = this.current;
+                    const url = new URL(window.location.href);
+                    if (url.searchParams.get('theme') !== theme) {
+                        url.searchParams.set('theme', theme);
+                        window.history.replaceState({}, '', url.toString());
+                    }
+                });
+            });
         }
     }
 
     async toggle() {
         this.isChanging = true;
-        // Small delay for initial blur
         await new Promise((r) => setTimeout(r, 50));
 
         setTimeout(() => {

@@ -3,8 +3,7 @@
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import Section from "../ui/Section.svelte";
-
-    let { t } = $props<{ t: any }>();
+    import { t } from "$lib/i18n/index.svelte";
 </script>
 
 <Section id="other" title={t.other.title}>

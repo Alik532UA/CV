@@ -1,10 +1,10 @@
 <script lang="ts">
     import BaseModal from "./BaseModal.svelte";
     import { base } from "$app/paths";
+    import { t } from "$lib/i18n/index.svelte";
 
-    let { show = $bindable(), t } = $props<{
+    let { show = $bindable() } = $props<{
         show: boolean;
-        t: any;
     }>();
 </script>
 

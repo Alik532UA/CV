@@ -1,9 +1,9 @@
 <script lang="ts">
     import { MapPin, Linkedin, Send, Mail, FileText } from "lucide-svelte";
     import { base } from "$app/paths";
+    import { t } from "$lib/i18n/index.svelte";
 
-    let { t, isMobile, onOpenPdfModal } = $props<{
-        t: any;
+    let { isMobile, onOpenPdfModal } = $props<{
         isMobile: boolean;
         onOpenPdfModal: () => void;
     }>();

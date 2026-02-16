@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { language, translations } from "$lib/i18n/index.svelte";
+    import { t } from "$lib/i18n/index.svelte";
     import { onMount } from "svelte";
     
     // Sections
@@ -12,10 +12,9 @@
     
     // UI
     import PdfModal from "$lib/components/ui/PdfModal.svelte";
-    import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte"; // Import the new component
+    import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
     // Runes (Svelte 5)
-    let t = $derived(translations[language.current]);
     let isMobile = $state(false);
     let showPdfModal = $state(false);
 
@@ -34,48 +33,52 @@
 
 <div class="container">
     <svelte:boundary>
-        <HeroSection {t} {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
+        <HeroSection {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
         {#snippet failed()}
             <ErrorFallback sectionName="Hero" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <ExperienceSection {t} />
+        <ExperienceSection />
         {#snippet failed()}
             <ErrorFallback sectionName="Досвід" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <SkillsSection {t} />
+        <SkillsSection />
         {#snippet failed()}
             <ErrorFallback sectionName="Навички" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <ProjectsSection {t} />
+        <ProjectsSection />
         {#snippet failed()}
             <ErrorFallback sectionName="Проєкти" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <EducationSection {t} />
+        <EducationSection />
         {#snippet failed()}
             <ErrorFallback sectionName="Освіта" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <OtherSection {t} />
+        <OtherSection />
         {#snippet failed()}
             <ErrorFallback sectionName="Додатково" />
         {/snippet}
     </svelte:boundary>
 
-    <PdfModal bind:show={showPdfModal} {t} />
+    {#if showPdfModal}
+        {#await import("$lib/components/ui/PdfModal.svelte") then { default: PdfModal }}
+            <PdfModal bind:show={showPdfModal} />
+        {/await}
+    {/if}
 </div>
 
 <style>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import Section from "../ui/Section.svelte";
-    let { t } = $props<{ t: any }>();
+    import { t } from "$lib/i18n/index.svelte";
 </script>
 
 <Section id="education" title={t.education.title}>

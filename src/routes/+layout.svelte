@@ -16,25 +16,14 @@
 	let activeSection = $state("about");
 	let isRouterReady = $state(false);
 
-	// URL Sync Effect
+	// URL Sync Effect for Sections
 	$effect(() => {
 		if (isRouterReady && browser) {
 			const url = new URL(window.location.href);
-			let changed = false;
-
-			// Sync Language
-			if (language.current && url.searchParams.get('lang') !== language.current) {
-				url.searchParams.set('lang', language.current);
-				changed = true;
-			}
-
-			// Sync Section Hash
+			
+			// Only sync Section Hash here
 			if (activeSection && url.hash !== `#${activeSection}`) {
 				url.hash = activeSection;
-				changed = true;
-			}
-
-			if (changed) {
 				replaceState(url.toString(), {});
 			}
 		}
@@ -54,12 +43,6 @@
 	});
 
 	onMount(() => {
-		// Sync Language from URL on Load
-		const langParam = new URLSearchParams(window.location.search).get('lang') as Language;
-		if (langParam && (langParam === 'en' || langParam === 'uk')) {
-			language.current = langParam;
-		}
-
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {

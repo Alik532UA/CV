@@ -2,8 +2,8 @@
     import { ChevronDown } from "lucide-svelte";
     import { slide } from "svelte/transition";
     import Section from "../ui/Section.svelte";
+    import { t } from "$lib/i18n/index.svelte";
 
-    let { t } = $props<{ t: any }>();
     let showNonIT = $state(false);
 </script>
 

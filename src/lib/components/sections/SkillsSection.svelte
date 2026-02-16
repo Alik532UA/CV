@@ -3,8 +3,8 @@
     import { slide } from "svelte/transition";
     import { skillsData } from "$lib/data/skills";
     import Section from "../ui/Section.svelte";
+    import { t } from "$lib/i18n/index.svelte";
 
-    let { t } = $props<{ t: any }>();
     let showMoreSkills = $state(false);
 </script>
 
