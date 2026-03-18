@@ -11,7 +11,6 @@
     import OtherSection from "$lib/components/sections/OtherSection.svelte";
     
     // UI
-    import PdfModal from "$lib/components/ui/PdfModal.svelte";
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
     // Runes (Svelte 5)
