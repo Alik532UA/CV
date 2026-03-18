@@ -11,7 +11,7 @@
 <BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"}>
     <div class="pdf-options">
         <a
-            href="https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
+            href="https://drive.google.com/file/d/1Znm2vqgBaUOaIGr8SQnSkEGDQgvfpr3p/view"
             target="_blank"
             class="pdf-option"
             onclick={() => (show = false)}
@@ -27,7 +27,7 @@
             <span>{t.pdf_modal?.ats || "ATS / RMS"}</span>
         </a>
         <a
-            href="https://drive.google.com/file/d/1bLHvxMdrrv9velRAjtmmOVY6SiX2VJsS/view"
+            href="https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
             target="_blank"
             class="pdf-option"
             onclick={() => (show = false)}
@@ -43,7 +43,7 @@
             <span>{t.pdf_modal?.dark || "Dark Theme"}</span>
         </a>
         <a
-            href="https://drive.google.com/file/d/1NIsAlT-kVZSw3CBDR-n7JqP4Y5X2yf3p/view"
+            href="https://drive.google.com/file/d/1bNX2y5uD99DrQ1-jjjbFyYQJbeWeeCLB/view"
             target="_blank"
             class="pdf-option"
             onclick={() => (show = false)}
