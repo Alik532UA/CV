@@ -21,7 +21,7 @@ class ThemeState {
                     const url = new URL(window.location.href);
                     if (url.searchParams.get('theme') !== theme) {
                         url.searchParams.set('theme', theme);
-                        replaceState(url.toString(), {});
+                        window.history.replaceState(null, '', url.toString());
                     }
                 });
             });

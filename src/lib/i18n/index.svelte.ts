@@ -39,7 +39,7 @@ class LanguageState {
 
                     if (url.searchParams.get('lang') !== lang) {
                         url.searchParams.set('lang', lang);
-                        replaceState(url.toString(), {});
+                        window.history.replaceState(null, '', url.toString());
                     }
                 });
             });
@@ -153,6 +153,7 @@ const TranslationSchema = z.object({
     }),
     pdf_modal: z.object({
         title: z.string(),
+        ats: z.string(),
         dark: z.string(),
         light: z.string()
     })

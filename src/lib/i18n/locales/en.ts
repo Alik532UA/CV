@@ -128,6 +128,7 @@ export const en: Translations = {
     },
     pdf_modal: {
         title: "Select PDF Version",
+        ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
     }

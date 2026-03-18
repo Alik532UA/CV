@@ -11,6 +11,22 @@
 <BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"}>
     <div class="pdf-options">
         <a
+            href="https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
+            target="_blank"
+            class="pdf-option"
+            onclick={() => (show = false)}
+        >
+            <div class="pdf-preview">
+                <img
+                    src="{base}/pdf-preview/Alik-Zapolnov-CV-ATS-RMS-EN.jpg"
+                    alt="ATS / RMS CV Preview"
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
+            <span>{t.pdf_modal?.ats || "ATS / RMS"}</span>
+        </a>
+        <a
             href="https://drive.google.com/file/d/1bLHvxMdrrv9velRAjtmmOVY6SiX2VJsS/view"
             target="_blank"
             class="pdf-option"
@@ -48,8 +64,9 @@
 <style>
     .pdf-options {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
+        width: 100%;
     }
 
     .pdf-option {
@@ -64,6 +81,7 @@
         border: 1px solid transparent;
         transition: var(--transition);
         text-align: center;
+        min-width: 0;
     }
 
     .pdf-option:hover {
@@ -90,19 +108,48 @@
     .pdf-option span {
         font-weight: 600;
         font-size: 1.1rem;
+        white-space: nowrap;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
         .pdf-options {
             gap: 10px;
         }
 
         .pdf-option {
             padding: 10px;
+            border-radius: 12px;
         }
 
         .pdf-option span {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .pdf-options {
+            grid-template-columns: 1fr;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .pdf-option {
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            gap: 15px;
+        }
+
+        .pdf-preview {
+            width: 60px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .pdf-option span {
+            font-size: 1.1rem;
+            white-space: normal;
         }
     }
 </style>

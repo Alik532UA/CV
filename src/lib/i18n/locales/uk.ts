@@ -128,6 +128,7 @@ export const uk: Translations = {
     },
     pdf_modal: {
         title: "Виберіть версію PDF",
+        ats: "ATS / RMS",
         dark: "Темна тема",
         light: "Світла тема"
     }
