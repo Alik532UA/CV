@@ -3,6 +3,7 @@ import { en } from './locales/en';
 import { uk } from './locales/uk';
 import { browser } from '$app/environment';
 import { replaceState } from '$app/navigation';
+import { getStorageKey } from '$lib/config/storage';
 
 export type Language = 'en' | 'uk';
 
@@ -19,7 +20,7 @@ class LanguageState {
             if (lang === 'en' || lang === 'uk') {
                 this.current = lang;
             } else {
-                const saved = localStorage.getItem('lang') as Language;
+                const saved = localStorage.getItem(getStorageKey('lang')) as Language;
                 if (saved === 'en' || saved === 'uk') {
                     this.current = saved;
                 }
@@ -54,7 +55,7 @@ class LanguageState {
         setTimeout(() => {
             this.current = lang;
             if (browser) {
-                localStorage.setItem('lang', lang);
+                localStorage.setItem(getStorageKey('lang'), lang);
                 document.documentElement.lang = lang;
             }
             setTimeout(() => {

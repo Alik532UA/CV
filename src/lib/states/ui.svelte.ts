@@ -1,5 +1,6 @@
 import { browser } from "$app/environment";
 import { replaceState } from "$app/navigation";
+import { getStorageKey } from "$lib/config/storage";
 
 class ThemeState {
     current = $state("dark");
@@ -11,7 +12,7 @@ class ThemeState {
         if (browser) {
             const params = new URLSearchParams(window.location.search);
             const theme = params.get('theme');
-            const saved = theme || localStorage.getItem("theme") || "dark";
+            const saved = theme || localStorage.getItem(getStorageKey("theme")) || "dark";
             this.set(saved);
 
             // Sync to URL reactively using native history API
@@ -47,7 +48,7 @@ class ThemeState {
         if (browser) {
             document.documentElement.setAttribute("data-theme", theme);
             document.documentElement.style.colorScheme = theme;
-            localStorage.setItem("theme", theme);
+            localStorage.setItem(getStorageKey("theme"), theme);
         }
     }
 }
@@ -59,7 +60,7 @@ class BackgroundState {
 
     init() {
         if (browser) {
-            const saved = localStorage.getItem("backgroundType");
+            const saved = localStorage.getItem(getStorageKey("backgroundType"));
             if (saved && ["0", "1", "2", "3"].includes(saved)) {
                 this.type = parseInt(saved) as 0 | 1 | 2 | 3;
             }
@@ -69,7 +70,7 @@ class BackgroundState {
     set(type: 0 | 1 | 2 | 3) {
         this.type = type;
         if (browser) {
-            localStorage.setItem("backgroundType", type.toString());
+            localStorage.setItem(getStorageKey("backgroundType"), type.toString());
         }
     }
 }

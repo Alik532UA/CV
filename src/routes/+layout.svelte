@@ -10,6 +10,7 @@
 	import { replaceState, afterNavigate } from "$app/navigation";
 	import { language, type Language } from "$lib/i18n/index.svelte";
 	import { theme, background } from "$lib/states/ui.svelte";
+	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 
 	let { children } = $props();
 
@@ -44,6 +45,9 @@
 	});
 
 	onMount(() => {
+		// Migrate storage keys before initialization
+		migrateStorageKeys();
+
 		// Initialize global states
 		theme.init();
 		background.init();
