@@ -1,5 +1,6 @@
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
+import { logService } from "$lib/services/logService.svelte";
 
 class ThemeState {
 	current = $state("dark");
@@ -12,6 +13,7 @@ class ThemeState {
 			const params = new URLSearchParams(window.location.search);
 			const theme = params.get("theme");
 			const saved = theme || storage.get("theme") || "dark";
+			logService.info("ui", `Initializing theme: ${saved} (source: ${theme ? "URL" : "storage"})`);
 			this.set(saved);
 
 			// Sync to URL reactively using native history API
@@ -22,6 +24,7 @@ class ThemeState {
 					if (url.searchParams.get("theme") !== theme) {
 						url.searchParams.set("theme", theme);
 						window.history.replaceState(null, "", url.toString());
+						logService.info("ui", `Theme synced to URL: ${theme}`);
 					}
 				});
 			});
@@ -30,6 +33,7 @@ class ThemeState {
 
 	async toggle() {
 		this.isChanging = true;
+		logService.info("ui", "Toggling theme...");
 		await new Promise((r) => setTimeout(r, 50));
 
 		setTimeout(() => {
@@ -62,6 +66,7 @@ class BackgroundState {
 			const saved = storage.get("backgroundType");
 			if (saved && ["0", "1", "2", "3"].includes(saved)) {
 				this.type = parseInt(saved) as 0 | 1 | 2 | 3;
+				logService.info("ui", `Initializing background type: ${this.type}`);
 			}
 		}
 	}
@@ -70,6 +75,7 @@ class BackgroundState {
 		this.type = type;
 		if (browser) {
 			storage.set("backgroundType", type.toString());
+			logService.info("ui", `Background type changed: ${type}`);
 		}
 	}
 }

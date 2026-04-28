@@ -3,6 +3,7 @@ import { en } from "../i18n/locales/en";
 import { uk } from "../i18n/locales/uk";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
+import { logService } from "$lib/services/logService.svelte";
 
 export type Language = "en" | "uk";
 
@@ -18,10 +19,12 @@ class LanguageState {
 			const lang = params.get("lang") as Language;
 			if (lang === "en" || lang === "uk") {
 				this.current = lang;
+				logService.info("i18n", `Initializing language from URL: ${lang}`);
 			} else {
 				const saved = storage.get("lang") as Language;
 				if (saved === "en" || saved === "uk") {
 					this.current = saved;
+					logService.info("i18n", `Initializing language from storage: ${saved}`);
 				}
 			}
 
@@ -40,6 +43,7 @@ class LanguageState {
 					if (url.searchParams.get("lang") !== lang) {
 						url.searchParams.set("lang", lang);
 						window.history.replaceState(null, "", url.toString());
+						logService.info("i18n", `Language synced to URL: ${lang}`);
 					}
 				});
 			});
@@ -50,6 +54,7 @@ class LanguageState {
 		if (this.current === lang) return;
 
 		this.isChanging = true;
+		logService.info("i18n", `Changing language to: ${lang}...`);
 
 		setTimeout(() => {
 			this.current = lang;

@@ -11,6 +11,7 @@
 	import { language, type Language } from "$lib/controllers/I18nState.svelte";
 	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
+	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 
 	let { children } = $props();
 
@@ -87,7 +88,7 @@
 	<Header />
 	<Sidebar {activeSection} />
 	<BottomNav {activeSection} />
-
+	<LogCopyButton />
 	<main id="main-content">
 		{@render children()}
 	</main>
