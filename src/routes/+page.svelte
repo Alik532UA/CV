@@ -31,43 +31,48 @@
 </script>
 
 <div class="container">
-    <svelte:boundary>
-        <HeroSection {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
-        {#snippet failed()}
-            <ErrorFallback sectionName="Hero" />
-        {/snippet}
-    </svelte:boundary>
+    <HeroSection {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
     
     <svelte:boundary>
-        <ExperienceSection />
+        {#await import("$lib/components/sections/ExperienceSection.svelte") then { default: ExperienceSection }}
+            <ExperienceSection />
+        {/await}
         {#snippet failed()}
             <ErrorFallback sectionName="Досвід" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <SkillsSection />
+        {#await import("$lib/components/sections/SkillsSection.svelte") then { default: SkillsSection }}
+            <SkillsSection />
+        {/await}
         {#snippet failed()}
             <ErrorFallback sectionName="Навички" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <ProjectsSection />
+        {#await import("$lib/components/sections/ProjectsSection.svelte") then { default: ProjectsSection }}
+            <ProjectsSection />
+        {/await}
         {#snippet failed()}
             <ErrorFallback sectionName="Проєкти" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <EducationSection />
+        {#await import("$lib/components/sections/EducationSection.svelte") then { default: EducationSection }}
+            <EducationSection />
+        {/await}
         {#snippet failed()}
             <ErrorFallback sectionName="Освіта" />
         {/snippet}
     </svelte:boundary>
     
     <svelte:boundary>
-        <OtherSection />
+        {#await import("$lib/components/sections/OtherSection.svelte") then { default: OtherSection }}
+            <OtherSection />
+        {/await}
         {#snippet failed()}
             <ErrorFallback sectionName="Додатково" />
         {/snippet}

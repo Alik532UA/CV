@@ -37,8 +37,8 @@ export abstract class CanvasEngine {
 			this.init();
 			this.startLoop();
 
-			window.addEventListener("resize", this.handleResizeBound);
-			window.addEventListener("scroll", this.handleScrollBound);
+			window.addEventListener("resize", this.throttledResize);
+			window.addEventListener("scroll", this.throttledScroll);
 		}
 	}
 
@@ -46,8 +46,8 @@ export abstract class CanvasEngine {
 		logService.info("engine", "Unmounting canvas engine");
 		this.stopLoop();
 		if (browser) {
-			window.removeEventListener("resize", this.handleResizeBound);
-			window.removeEventListener("scroll", this.handleScrollBound);
+			window.removeEventListener("resize", this.throttledResize);
+			window.removeEventListener("scroll", this.throttledScroll);
 		}
 		this.canvas = null;
 		this.ctx = null;
@@ -73,8 +73,20 @@ export abstract class CanvasEngine {
 		}
 	}
 
-	private handleResizeBound = () => this.handleResize();
-	private handleScrollBound = () => this.handleScroll();
+	// Throttle helper to limit execution frequency
+	private throttle(func: Function, limit: number) {
+		let inThrottle: boolean;
+		return (...args: any[]) => {
+			if (!inThrottle) {
+				func.apply(this, args);
+				inThrottle = true;
+				setTimeout(() => (inThrottle = false), limit);
+			}
+		};
+	}
+
+	private throttledResize = this.throttle(() => this.handleResize(), 200);
+	private throttledScroll = this.throttle(() => this.handleScroll(), 100);
 
 	private handleResize() {
 		if (!this.canvas) return;

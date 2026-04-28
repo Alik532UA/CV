@@ -13,7 +13,7 @@
     <div class="projects-grid">
         <div class="project-card glass card">
             <div class="project-img">
-                <img src="{base}/images/slovko.jpg" alt="Slovko" loading="lazy" decoding="async" />
+                <img src="{base}/images/slovko.jpg" alt="Slovko" loading="lazy" decoding="async" width="400" height="220" />
             </div>
             <div class="project-content">
                 <h3>{t.projects.slovko.title}</h3>
@@ -31,7 +31,7 @@
 
         <div class="project-card glass card">
             <div class="project-img">
-                <img src="{base}/images/mindstep.jpg" alt="MindStep" loading="lazy" decoding="async" />
+                <img src="{base}/images/mindstep.jpg" alt="MindStep" loading="lazy" decoding="async" width="400" height="220" />
             </div>
             <div class="project-content">
                 <h3>{t.projects.mindstep.title}</h3>
@@ -49,7 +49,7 @@
 
         <div class="project-card glass card">
             <div class="project-img">
-                <img src="{base}/images/cv_3d.jpg" alt="3D CV" loading="lazy" decoding="async" />
+                <img src="{base}/images/cv_3d.jpg" alt="3D CV" loading="lazy" decoding="async" width="400" height="220" />
             </div>
             <div class="project-content">
                 <h3>{t.projects.cv3d.title}</h3>

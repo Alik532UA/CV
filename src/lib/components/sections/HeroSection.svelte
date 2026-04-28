@@ -72,6 +72,8 @@
                     class="profile-img"
                     fetchpriority="high"
                     decoding="async"
+                    width="280"
+                    height="280"
                 />
             </div>
         </div>
