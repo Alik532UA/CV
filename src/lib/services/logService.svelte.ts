@@ -90,6 +90,7 @@ class LogService {
 	getReport(): string {
 		const header = [
 			"--- LOG REPORT ---",
+			`VERSION: ${__APP_VERSION__}`,
 			`DATE: ${new Date().toLocaleString()}`,
 			`URL: ${browser ? window.location.href : "SSR"}`,
 			`USER_AGENT: ${browser ? navigator.userAgent : "SSR"}`,

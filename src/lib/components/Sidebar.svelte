@@ -46,6 +46,7 @@
 
     <div class="footer-info">
         <p>{t.lastUpdate}</p>
+        <p class="version">v{__APP_VERSION__}</p>
     </div>
 </aside>
 
