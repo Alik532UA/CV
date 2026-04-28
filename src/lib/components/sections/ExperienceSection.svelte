@@ -2,7 +2,7 @@
     import { ChevronDown, Briefcase } from "lucide-svelte";
     import { slide } from "svelte/transition";
     import Section from "../ui/Section.svelte";
-    import { t } from "$lib/i18n/index.svelte";
+    import { t } from "$lib/controllers/I18nState.svelte";
     import { experienceData } from "$lib/data/experience";
 
     let showNonIT = $state(false);

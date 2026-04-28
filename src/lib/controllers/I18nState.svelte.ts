@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { en } from './locales/en';
-import { uk } from './locales/uk';
+import { en } from '../i18n/locales/en';
+import { uk } from '../i18n/locales/uk';
 import { browser } from '$app/environment';
 import { replaceState } from '$app/navigation';
 import { getStorageKey } from '$lib/config/storage';

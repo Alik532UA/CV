@@ -8,8 +8,8 @@
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import { replaceState, afterNavigate } from "$app/navigation";
-	import { language, type Language } from "$lib/i18n/index.svelte";
-	import { theme, background } from "$lib/states/ui.svelte";
+	import { language, type Language } from "$lib/controllers/I18nState.svelte";
+	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 
 	let { children } = $props();

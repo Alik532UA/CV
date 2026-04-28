@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { t } from "$lib/i18n/index.svelte";
+    import { t } from "$lib/controllers/I18nState.svelte";
     import { onMount } from "svelte";
     
     // Sections

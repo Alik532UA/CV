@@ -1,4 +1,4 @@
-import { CanvasEngine } from "./CanvasEngine";
+import { CanvasEngine } from "./canvasEngine";
 
 interface Particle {
     x: number;

@@ -1,7 +1,7 @@
-import type { Translations } from "../index.svelte";
+import type { Translations } from "../../controllers/I18nState.svelte";
 
 export const en: Translations = {
-    lastUpdate: "Last update: February 10, 2026",
+    lastUpdate: "Last update: April 28, 2026",
     title: ["AQA Engineer", "AI Explorer", "Game Maker"],
     title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
     nav: {

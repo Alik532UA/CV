@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { language, type Language } from "$lib/i18n/index.svelte";
-    import { theme, background } from "$lib/states/ui.svelte";
+    import { language, type Language } from "$lib/controllers/I18nState.svelte";
+    import { theme, background } from "$lib/controllers/UiState.svelte";
     import {
         Sun,
         Moon,
