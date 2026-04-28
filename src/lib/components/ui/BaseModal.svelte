@@ -3,17 +3,22 @@
     import { fade, scale } from "svelte/transition";
     import { onMount, tick } from "svelte";
 
-    let { 
-        show = $bindable(), 
-        title,
-        children,
-        onclose
-    } = $props<{
+    import type { HTMLAttributes } from "svelte/elements";
+
+    interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
         show: boolean;
         title?: string;
         children: import('svelte').Snippet;
         onclose?: () => void;
-    }>();
+    }
+
+    let { 
+        show = $bindable(), 
+        title,
+        children,
+        onclose,
+        ...restProps
+    }: Props = $props();
 
     let modalRef: HTMLDivElement | undefined = $state();
     let previouslyFocused: HTMLElement | null = null;
@@ -93,6 +98,7 @@
             aria-labelledby={title ? "modal-title" : undefined}
             tabindex="-1"
             transition:scale={{ duration: 200, start: 0.95 }}
+            {...restProps}
         >
             <button class="close-btn" onclick={close} aria-label="Close modal">
                 <X size={24} />

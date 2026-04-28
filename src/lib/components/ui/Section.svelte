@@ -1,20 +1,24 @@
 <script lang="ts">
     import type { Snippet } from "svelte";
+    import type { HTMLAttributes } from "svelte/elements";
+
+    interface Props extends HTMLAttributes<HTMLElement> {
+        id: string;
+        title: string;
+        icon?: Snippet;
+        children: Snippet;
+    }
 
     let { 
         id, 
         title, 
         icon,
-        children 
-    } = $props<{
-        id: string;
-        title: string;
-        icon?: Snippet;
-        children: Snippet;
-    }>();
+        children,
+        ...restProps
+    }: Props = $props();
 </script>
 
-<section {id}>
+<section {id} {...restProps}>
     <div class="section-header">
         {#if icon}
             <div class="title-icon">

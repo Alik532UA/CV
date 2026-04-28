@@ -15,7 +15,11 @@ const config = {
 		csp: {
 			mode: 'hash',
 			directives: {
-				'script-src': ['self', 'https://fonts.googleapis.com'],
+				'script-src': [
+					'self', 
+					'https://fonts.googleapis.com',
+					'sha256-5kCri4c6Kc63HNipVm8tK0VilaNPrqM9D8fdBdzcuVI='
+				],
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],
 				'font-src': ['self', 'https://fonts.gstatic.com'],

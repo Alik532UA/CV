@@ -1,8 +1,14 @@
 <script lang="ts">
-    let { sectionName } = $props<{ sectionName: string }>();
+    import type { HTMLAttributes } from "svelte/elements";
+
+    interface Props extends HTMLAttributes<HTMLDivElement> {
+        sectionName: string;
+    }
+
+    let { sectionName, ...restProps }: Props = $props();
 </script>
 
-<div class="error-fallback">
+<div class="error-fallback" {...restProps}>
     <h3>Помилка завантаження секції "{sectionName}"</h3>
     <p>Спробуйте оновити сторінку або перевірте підключення до мережі.</p>
 </div>

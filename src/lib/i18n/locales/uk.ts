@@ -11,7 +11,8 @@ export const uk: Translations = {
         skills: "Навички",
         projects: "Проєкти",
         additional: "Додатково",
-        contact: "Контакти"
+        contact: "Контакти",
+        bottom_nav_label: "Нижня навігація"
     },
     hero: {
         greeting: "Привіт! Я Алік",

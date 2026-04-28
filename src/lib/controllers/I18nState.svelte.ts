@@ -104,7 +104,8 @@ const TranslationSchema = z.object({
 		skills: z.string(),
 		projects: z.string(),
 		additional: z.string(),
-		contact: z.string()
+		contact: z.string(),
+		bottom_nav_label: z.string()
 	}),
 	hero: z.object({
 		greeting: z.string(),

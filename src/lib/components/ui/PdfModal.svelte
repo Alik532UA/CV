@@ -2,13 +2,16 @@
     import BaseModal from "./BaseModal.svelte";
     import { base } from "$app/paths";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import type { HTMLAttributes } from "svelte/elements";
 
-    let { show = $bindable() } = $props<{
+    interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
         show: boolean;
-    }>();
+    }
+
+    let { show = $bindable(), ...restProps }: Props = $props();
 </script>
 
-<BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"}>
+<BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"} {...restProps}>
     <div class="pdf-options">
         <a
             href="https://drive.google.com/file/d/1Znm2vqgBaUOaIGr8SQnSkEGDQgvfpr3p/view"

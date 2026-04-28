@@ -11,7 +11,8 @@ export const en: Translations = {
         skills: "Skills",
         projects: "Projects",
         additional: "Additional",
-        contact: "Contact"
+        contact: "Contact",
+        bottom_nav_label: "Bottom navigation"
     },
     hero: {
         greeting: "Hi! I'm Alik",

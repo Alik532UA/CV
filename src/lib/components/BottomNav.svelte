@@ -13,21 +13,26 @@
     
     let t = $derived(translations[language.current]);
 
-    const navItems = [
-        { id: "about", icon: User },
-        { id: "experience", icon: Briefcase },
-        { id: "skills", icon: Laptop },
-        { id: "projects", icon: Rocket },
-        { id: "education", icon: GraduationCap },
-        { id: "other", icon: Sparkles },
-    ];
+    const navItems = $derived([
+        { id: "about", icon: User, label: t.nav.about },
+        { id: "experience", icon: Briefcase, label: t.nav.experience },
+        { id: "skills", icon: Laptop, label: t.nav.skills },
+        { id: "projects", icon: Rocket, label: t.nav.projects },
+        { id: "education", icon: GraduationCap, label: t.nav.education },
+        { id: "other", icon: Sparkles, label: t.nav.additional },
+    ]);
 </script>
 
-<nav class="bottom-nav glass">
+<nav class="bottom-nav glass" aria-label={t.nav.bottom_nav_label || "Bottom navigation"}>
     {#each navItems as item}
-        <a href="#{item.id}" class:active={activeSection === item.id}>
+        <a 
+            href="#{item.id}" 
+            class:active={activeSection === item.id}
+            aria-label={item.label}
+            title={item.label}
+        >
             <span class="icon">
-                <item.icon size={24} />
+                <item.icon size={24} aria-hidden="true" />
             </span>
         </a>
     {/each}
