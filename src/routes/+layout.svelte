@@ -12,8 +12,14 @@
 	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
+	import { setContext } from "svelte";
 
 	let { children } = $props();
+
+	// Inject controllers via Context API for architectural consistency
+	setContext("theme", theme);
+	setContext("background", background);
+	setContext("language", language);
 
 	// Runes (Svelte 5)
 	let activeSection = $state("about");

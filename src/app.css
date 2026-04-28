@@ -12,9 +12,16 @@
     --accent-primary-rgb: 0, 242, 255;
     --accent-secondary: #7000ff;
     --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    --glass-blur: blur(12px);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-blur: blur(12px);
+}
+
+:root[data-theme='dark'] {
     color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+    color-scheme: light;
 }
 
 [data-theme='light'] {

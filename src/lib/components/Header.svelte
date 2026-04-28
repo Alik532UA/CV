@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { language, type Language } from "$lib/controllers/I18nState.svelte";
-    import { theme, background } from "$lib/controllers/UiState.svelte";
+    import { getContext } from "svelte";
+    import type { Language } from "$lib/controllers/I18nState.svelte";
     import {
         Sun,
         Moon,
@@ -12,6 +12,10 @@
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { onMount, onDestroy } from "svelte";
+
+    const language = getContext<any>("language");
+    const theme = getContext<any>("theme");
+    const background = getContext<any>("background");
 
     let isBgDropdownOpen = $state(false);
 

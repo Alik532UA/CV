@@ -71,6 +71,28 @@ class LanguageState {
 
 export const language = new LanguageState();
 
+/**
+ * Pluralization helper for Slavic and Germanic languages.
+ * @param n Number to pluralize
+ * @param forms [one, few, many] for UK, [one, other] for EN
+ */
+export function plural(n: number, forms: string[]): string {
+	const lang = language.current;
+	const abs = Math.abs(n);
+
+	if (lang === "uk") {
+		const mod100 = abs % 100;
+		const mod10 = abs % 10;
+		if (mod100 > 10 && mod100 < 20) return forms[2]; // 11-19: років
+		if (mod10 > 1 && mod10 < 5) return forms[1]; // 2-4: роки
+		if (mod10 === 1) return forms[0]; // 1: рік
+		return forms[2]; // 0, 5-9: років
+	}
+
+	// Default to English-style (Germanic)
+	return abs === 1 ? forms[0] : forms[1];
+}
+
 const TranslationSchema = z.object({
 	lastUpdate: z.string(),
 	title: z.array(z.string()),

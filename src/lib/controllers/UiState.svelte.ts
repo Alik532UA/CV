@@ -11,10 +11,25 @@ class ThemeState {
 	init() {
 		if (browser) {
 			const params = new URLSearchParams(window.location.search);
-			const theme = params.get("theme");
-			const saved = theme || storage.get("theme") || "dark";
-			logService.info("ui", `Initializing theme: ${saved} (source: ${theme ? "URL" : "storage"})`);
-			this.set(saved);
+			const themeParam = params.get("theme");
+			const saved = storage.get("theme");
+			
+			const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+			const systemTheme = mediaQuery.matches ? "dark" : "light";
+			
+			const initialTheme = themeParam || saved || systemTheme;
+			
+			logService.info("ui", `Initializing theme: ${initialTheme} (source: ${themeParam ? "URL" : saved ? "storage" : "system"})`);
+			this.set(initialTheme);
+
+			// Listen for system theme changes if user hasn't explicitly set a theme
+			mediaQuery.addEventListener("change", (e) => {
+				if (!storage.get("theme")) {
+					const newTheme = e.matches ? "dark" : "light";
+					logService.info("ui", `System theme changed to: ${newTheme}`);
+					this.set(newTheme);
+				}
+			});
 
 			// Sync to URL reactively using native history API
 			$effect.root(() => {
@@ -23,6 +38,8 @@ class ThemeState {
 					const url = new URL(window.location.href);
 					if (url.searchParams.get("theme") !== theme) {
 						url.searchParams.set("theme", theme);
+						// history.replaceState doesn't trigger reactive dependencies, 
+						// but we use untrack to be architecturally consistent
 						window.history.replaceState(null, "", url.toString());
 						logService.info("ui", `Theme synced to URL: ${theme}`);
 					}

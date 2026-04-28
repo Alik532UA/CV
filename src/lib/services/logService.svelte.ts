@@ -20,7 +20,7 @@ const LOG_CONFIG: Record<string, boolean> = {
 
 class LogService {
 	logs = $state<LogEntry[]>([]);
-	errorCount = $state(0);
+	errorCount = $derived(this.logs.filter((l) => l.level === "error").length);
 
 	constructor() {
 		if (browser) {
@@ -28,7 +28,6 @@ class LogService {
 			if (saved) {
 				try {
 					this.logs = JSON.parse(saved);
-					this.errorCount = this.logs.filter((l) => l.level === "error").length;
 				} catch {
 					// Silent fail for logs
 				}
@@ -47,10 +46,6 @@ class LogService {
 		this.logs.push(entry);
 		if (this.logs.length > LOG_LIMIT) {
 			this.logs.shift();
-		}
-
-		if (level === "error") {
-			this.errorCount++;
 		}
 
 		if (browser) {
@@ -81,7 +76,6 @@ class LogService {
 
 	clear() {
 		this.logs = [];
-		this.errorCount = 0;
 		if (browser) {
 			sessionStorage.removeItem("cv-svelte_logs");
 		}
