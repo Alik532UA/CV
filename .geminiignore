@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+.svelte-kit/
+.private/
+*.lock
+package-lock.json
+.git/
+.vscode/
+.read_for_AI/
+tests-results/
+playwright-report/
+blob-report/

@@ -2,16 +2,23 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'master'
+    branches: ["master"] # Поки що master, до перейменування гілки
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build_site:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,11 +26,20 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: 22
+          cache: "npm"
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Static Analysis
+        run: npm run check
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Unit Tests
+        run: npm run test:unit
 
       - name: Build
         run: npm run build
@@ -31,16 +47,8 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          # this should match the `pages` option in your adapter-static config
-          path: 'build/'
+          path: "build"
 
-  deploy:
-    needs: build_site
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
