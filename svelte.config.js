@@ -11,6 +11,18 @@ const config = {
 		}),
 		paths: {
 			base: '/CV'
+		},
+		csp: {
+			mode: 'hash',
+			directives: {
+				'script-src': ['self', 'https://fonts.googleapis.com'],
+				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
+				'img-src': ['self', 'data:', 'https:'],
+				'font-src': ['self', 'https://fonts.gstatic.com'],
+				'object-src': ['none'],
+				'base-uri': ['self'],
+				'frame-ancestors': ['none']
+			}
 		}
 	}
 };

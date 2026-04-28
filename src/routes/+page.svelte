@@ -13,6 +13,8 @@
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
+    let { data } = $props<{ data: any }>();
+
     // Runes (Svelte 5)
     let isMobile = $state(false);
     let showPdfModal = $state(false);
