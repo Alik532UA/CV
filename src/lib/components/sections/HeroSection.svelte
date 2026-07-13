@@ -7,6 +7,20 @@
         isMobile: boolean;
         onOpenPdfModal: () => void;
     }>();
+
+    let showEmailTooltip = $state(false);
+    let tooltipTimeout: ReturnType<typeof setTimeout>;
+
+    function handleEmailCopy(e: MouseEvent) {
+        e.preventDefault();
+        navigator.clipboard.writeText("alikzapolnov@gmail.com").then(() => {
+            showEmailTooltip = true;
+            clearTimeout(tooltipTimeout);
+            tooltipTimeout = setTimeout(() => {
+                showEmailTooltip = false;
+            }, 5000);
+        });
+    }
 </script>
 
 <section id="about" class="about-section">
@@ -47,12 +61,26 @@
                     >
                         <span><Send size={18} aria-hidden="true" /></span> Telegram
                     </a>
-                    <a
-                        href="mailto:alikzapolnov@gmail.com"
-                        class="btn-secondary"
-                    >
-                        <span><Mail size={18} aria-hidden="true" /></span> Email
-                    </a>
+                    <div class="email-wrapper" style="position: relative;">
+                        <button
+                            class="btn-secondary"
+                            onclick={handleEmailCopy}
+                            style="width: 100%"
+                        >
+                            <span><Mail size={18} aria-hidden="true" /></span> Email
+                        </button>
+                        {#if showEmailTooltip}
+                            <div class="email-tooltip">
+                                <div class="tooltip-content">
+                                    <span class="success-text">✔ {t.hero.emailCopied}</span>
+                                    <a href="mailto:alikzapolnov@gmail.com" class="open-mail-client" onclick={(e) => e.stopPropagation()}>
+                                        {t.hero.openMailClient}
+                                    </a>
+                                </div>
+                                <div class="tooltip-progress"></div>
+                            </div>
+                        {/if}
+                    </div>
                     <button
                         class="btn-secondary nowrap-btn"
                         onclick={onOpenPdfModal}
@@ -137,6 +165,78 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 12px;
+    }
+
+    .email-tooltip {
+        position: absolute;
+        bottom: calc(100% + 10px);
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 16px;
+        border-radius: 12px;
+        z-index: 100;
+        min-width: 200px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        animation: tooltip-fade-in 0.2s ease-out forwards;
+        overflow: hidden;
+    }
+
+    .tooltip-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .success-text {
+        font-weight: 600;
+        color: var(--accent-primary, #4caf50);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .open-mail-client {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color 0.2s;
+    }
+
+    .open-mail-client:hover {
+        color: var(--text-primary);
+    }
+
+    @keyframes tooltip-fade-in {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 10px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .tooltip-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background: var(--gradient);
+        animation: progress-shrink 5s linear forwards;
+    }
+
+    @keyframes progress-shrink {
+        from {
+            width: 100%;
+        }
+        to {
+            width: 0%;
+        }
     }
 
     .nowrap-btn {

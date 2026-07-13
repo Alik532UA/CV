@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount, onDestroy } from "svelte";
-    import { ParticlesEngine } from "./engine/particlesEngine";
+    import { ParticlesEngine } from "./engine/ParticlesEngine";
 
     let { theme = "dark" } = $props<{ theme?: string }>();
 

@@ -18,7 +18,9 @@ export const en: Translations = {
         greeting: "Hi! I'm Alik",
         description: "An AQA Engineer who is not just about testing, but about creating. I leverage AI to build games and interactive experiences, bridging the gap between quality and creativity.",
         contactMe: "Get in touch",
-        downloadCV: "Download CV"
+        downloadCV: "Download CV",
+        emailCopied: "Email copied!",
+        openMailClient: "Open mail client"
     },
     about: {
         title: "About Me",

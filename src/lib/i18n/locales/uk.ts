@@ -18,7 +18,9 @@ export const uk: Translations = {
         greeting: "Привіт! Я Алік",
         description: "AQA інженер, який не просто тестує, а створює. Я використовую AI для розробки ігор та інтерактивного досвіду, поєднуючи якість та креативність.",
         contactMe: "Зв'язатися",
-        downloadCV: "Завантажити CV"
+        downloadCV: "Завантажити CV",
+        emailCopied: "Email скопійовано!",
+        openMailClient: "Відкрити поштовий клієнт"
     },
     about: {
         title: "Про мене",

@@ -1,4 +1,4 @@
-import { CanvasEngine } from "./canvasEngine";
+import { CanvasEngine } from "./CanvasEngine";
 
 export class WavesEngine extends CanvasEngine {
     private waveTime = 0;

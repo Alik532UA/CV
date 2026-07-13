@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { FloatingShapesEngine } from "./engine/floatingShapesEngine";
+    import { FloatingShapesEngine } from "./engine/FloatingShapesEngine";
 
     let { theme = "dark" } = $props<{ theme?: string }>();
 

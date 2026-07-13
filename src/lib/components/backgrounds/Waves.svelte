@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { WavesEngine } from "./engine/wavesEngine";
+    import { WavesEngine } from "./engine/WavesEngine";
 
     let { theme = "dark" } = $props<{ theme?: string }>();
 

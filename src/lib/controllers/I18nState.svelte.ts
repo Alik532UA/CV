@@ -111,7 +111,9 @@ const TranslationSchema = z.object({
 		greeting: z.string(),
 		description: z.string(),
 		contactMe: z.string(),
-		downloadCV: z.string()
+		downloadCV: z.string(),
+		emailCopied: z.string(),
+		openMailClient: z.string()
 	}),
 	about: z.object({
 		title: z.string(),
