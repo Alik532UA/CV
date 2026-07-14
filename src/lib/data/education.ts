@@ -1,4 +1,4 @@
-import { EducationItemSchema, type EducationItem } from "./schemas";
+import { EducationItemSchema } from "./schemas";
 import { z } from "zod";
 
 const EducationDataSchema = z.array(EducationItemSchema);

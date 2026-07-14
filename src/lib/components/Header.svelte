@@ -13,8 +13,11 @@
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { onMount, onDestroy } from "svelte";
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const language = getContext<any>("language");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const theme = getContext<any>("theme");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const background = getContext<any>("background");
 
     let isBgDropdownOpen = $state(false);

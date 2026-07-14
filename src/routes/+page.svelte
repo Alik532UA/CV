@@ -1,18 +1,15 @@
 <script lang="ts">
-    import { t } from "$lib/controllers/I18nState.svelte";
+
     import { onMount } from "svelte";
     
     // Sections
     import HeroSection from "$lib/components/sections/HeroSection.svelte";
-    import ExperienceSection from "$lib/components/sections/ExperienceSection.svelte";
-    import SkillsSection from "$lib/components/sections/SkillsSection.svelte";
-    import ProjectsSection from "$lib/components/sections/ProjectsSection.svelte";
-    import EducationSection from "$lib/components/sections/EducationSection.svelte";
-    import OtherSection from "$lib/components/sections/OtherSection.svelte";
+
     
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
     let { data } = $props<{ data: any }>();
 
     // Runes (Svelte 5)

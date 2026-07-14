@@ -93,6 +93,7 @@ export function plural(n: number, forms: string[]): string {
 	return abs === 1 ? forms[0] : forms[1];
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TranslationSchema = z.object({
 	lastUpdate: z.string(),
 	title: z.array(z.string()),

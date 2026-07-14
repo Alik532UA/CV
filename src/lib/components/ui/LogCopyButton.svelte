@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { dev } from "$app/environment";
 	import { logService } from "$lib/services/logService.svelte";
-	import { Check, ClipboardCopy } from "lucide-svelte";
+	import { Check } from "lucide-svelte";
 	import { fade, scale } from "svelte/transition";
 
 	let copied = $state(false);

@@ -74,9 +74,9 @@ export abstract class CanvasEngine {
 	}
 
 	// Throttle helper to limit execution frequency
-	private throttle(func: Function, limit: number) {
+	private throttle(func: (...args: unknown[]) => void, limit: number) {
 		let inThrottle: boolean;
-		return (...args: any[]) => {
+		return (...args: unknown[]) => {
 			if (!inThrottle) {
 				func.apply(this, args);
 				inThrottle = true;

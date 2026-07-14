@@ -8,7 +8,7 @@
 	import { onMount } from "svelte";
 	import { browser } from "$app/environment";
 	import { replaceState, afterNavigate } from "$app/navigation";
-	import { language, type Language } from "$lib/controllers/I18nState.svelte";
+	import { language } from "$lib/controllers/I18nState.svelte";
 	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
@@ -28,11 +28,13 @@
 	// URL Sync Effect for Sections
 	$effect(() => {
 		if (isRouterReady && browser) {
+			// eslint-disable-next-line svelte/prefer-svelte-reactivity
 			const url = new URL(window.location.href);
 			
 			// Only sync Section Hash here
 			if (activeSection && url.hash !== `#${activeSection}`) {
 				url.hash = activeSection;
+				// eslint-disable-next-line svelte/no-navigation-without-resolve
 				replaceState(url.toString(), {});
 			}
 		}
