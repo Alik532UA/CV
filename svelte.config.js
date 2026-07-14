@@ -6,6 +6,9 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		prerender: {
+			handleMissingId: 'ignore'
+		},
 		adapter: adapter({
 			fallback: '404.html'
 		}),
