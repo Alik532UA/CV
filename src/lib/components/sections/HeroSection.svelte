@@ -30,7 +30,7 @@
             <p class="tagline">{t.title_mobile}</p>
         {:else}
             <div class="tagline-tags">
-                {#each t.title as tag}
+                {#each t.title as tag (tag)}
                     <span class="hobby-tag glass">{tag}</span>
                 {/each}
             </div>

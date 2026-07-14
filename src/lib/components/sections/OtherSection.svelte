@@ -57,7 +57,7 @@
                 {t.about.hobbiesTitle}
             </h3>
             <div class="hobbies-tags">
-                {#each t.other.hobbies as hobby}
+                {#each t.other.hobbies as hobby (hobby)}
                     <span class="hobby-tag glass">{hobby}</span>
                 {/each}
             </div>

@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [".svelte-kit/", "build/", "dist/"]
+    ignores: [".svelte-kit/", "build/", "dist/", ".temp/"]
   },
   ...tseslint.configs.recommended,
   ...svelte.configs["flat/recommended"],
@@ -17,7 +17,7 @@ export default tseslint.config(
     }
   },
   {
-    files: ["**/*.svelte"],
+    files: ["**/*.svelte", "**/*.svelte.ts"],
     languageOptions: {
       parserOptions: {
         parser: tseslint.parser

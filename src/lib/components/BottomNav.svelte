@@ -24,7 +24,7 @@
 </script>
 
 <nav class="bottom-nav glass" aria-label={t.nav.bottom_nav_label || "Bottom navigation"}>
-    {#each navItems as item}
+    {#each navItems as item (item.id)}
         <a 
             href="#{item.id}" 
             class:active={activeSection === item.id}

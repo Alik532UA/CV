@@ -31,7 +31,7 @@
 
     <nav>
         <ul>
-            {#each navItems as item}
+            {#each navItems as item (item.id)}
                 <li class:active={activeSection === item.id}>
                     <a href="#{item.id}">
                         <span class="icon">
