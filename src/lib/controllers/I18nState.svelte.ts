@@ -120,7 +120,9 @@ const TranslationSchema = z.object({
 		title: z.string(),
 		location: z.string(),
 		content: z.string(),
-		hobbiesTitle: z.string()
+		hobbiesTitle: z.string(),
+		philosophyTitle: z.string().optional(),
+		philosophyItems: z.record(z.string(), z.string()).optional()
 	}),
 	experience: z.object({
 		title: z.string(),
@@ -144,12 +146,7 @@ const TranslationSchema = z.object({
 			web: z.string(),
 			mobile: z.string()
 		}),
-		categories: z.object({
-			it: z.string(),
-			design3d: z.string(),
-			video: z.string(),
-			tools: z.string()
-		}),
+		categories: z.record(z.string(), z.string()),
 		items: z.record(z.string(), z.string())
 	}),
 	other: z.object({
@@ -165,23 +162,7 @@ const TranslationSchema = z.object({
 		}),
 		hobbies: z.array(z.string())
 	}),
-	projects: z.object({
-		slovko: z.object({
-			title: z.string(),
-			description: z.string(),
-			button: z.string()
-		}),
-		mindstep: z.object({
-			title: z.string(),
-			description: z.string(),
-			button: z.string()
-		}),
-		cv3d: z.object({
-			title: z.string(),
-			description: z.string(),
-			button: z.string()
-		})
-	}),
+	projects: z.record(z.string(), z.any()),
 	pdf_modal: z.object({
 		title: z.string(),
 		ats: z.string(),

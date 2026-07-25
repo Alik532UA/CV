@@ -38,6 +38,27 @@
     </div>
 
     <div class="skills-categories">
+        {#if skillsData.ai}
+            <div class="skill-group glass card featured-skill-group">
+                <h3 class="featured-skill-title">{t.skills.categories.ai}</h3>
+                <div class="skills-grid ai-skills-grid">
+                    {#each skillsData.ai as skill (skill.id)}
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>
+                                    <skill.icon size={16} aria-hidden="true" />
+                                    {t.skills.items[skill.id]}
+                                </span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="fill ai-fill" style="width: {skill.level}%"></div>
+                            </div>
+                        </div>
+                    {/each}
+                </div>
+            </div>
+        {/if}
+
         <div class="skill-group glass card">
             <h3>{t.skills.categories.it}</h3>
             <div class="skills-grid">

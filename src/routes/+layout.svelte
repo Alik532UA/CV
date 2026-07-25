@@ -63,25 +63,45 @@
 		background.init();
 		language.init();
 
+		const observedElements = new Set<Element>();
+
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+					if (entry.isIntersecting) {
 						activeSection = entry.target.id;
 					}
 				});
 			},
 			{ 
-				threshold: [0.3],
-				rootMargin: '-70px 0px -20% 0px' 
+				threshold: 0.2,
+				rootMargin: '-70px 0px -30% 0px' 
 			},
 		);
 
-		document.querySelectorAll("section[id]").forEach((section) => {
-			observer.observe(section);
+		const attachObservers = () => {
+			document.querySelectorAll("section[id]").forEach((section) => {
+				if (!observedElements.has(section)) {
+					observedElements.add(section);
+					observer.observe(section);
+				}
+			});
+		};
+
+		attachObservers();
+
+		const mutationObserver = new MutationObserver(() => {
+			attachObservers();
 		});
+
+		if (document.body) {
+			mutationObserver.observe(document.body, { childList: true, subtree: true });
+		}
 		
-		return () => observer.disconnect();
+		return () => {
+			observer.disconnect();
+			mutationObserver.disconnect();
+		};
 	});
 </script>
 

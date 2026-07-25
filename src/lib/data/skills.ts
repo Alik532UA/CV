@@ -18,6 +18,14 @@ import {
 import { SkillsDataSchema, type SkillsData } from "./schemas";
 
 const rawData = {
+    ai: [
+        { id: "claudeCode", level: 95, icon: Bot },
+        { id: "geminiCli", level: 95, icon: Sparkles },
+        { id: "antigravityIde", level: 95, icon: Zap },
+        { id: "cursor", level: 90, icon: Flame },
+        { id: "copilot", level: 90, icon: Coffee },
+        { id: "midjourney", level: 85, icon: Palette },
+    ],
     it: [
         { id: "ai", level: 95, icon: Bot },
         { id: "csharp", level: 85, icon: Zap },

@@ -1,7 +1,7 @@
 import type { Translations } from "../../controllers/I18nState.svelte";
 
 export const uk: Translations = {
-    lastUpdate: "Останнє оновлення: 28 квітня 2026",
+    lastUpdate: "Останнє оновлення: 25 липня 2026",
     title: ["AQA Engineer", "AI Explorer", "Game Maker"],
     title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
     nav: {
@@ -16,7 +16,7 @@ export const uk: Translations = {
     },
     hero: {
         greeting: "Привіт! Я Алік",
-        description: "AQA інженер, який не просто тестує, а створює. Я використовую AI для розробки ігор та інтерактивного досвіду, поєднуючи якість та креативність.",
+        description: "Automation QA Engineer та AI Integrator. Створюю масштабовані тестові фреймворки, розробляю ігри та інтегрую нейромережі (LLM, STT, TTS, autonomous agents).",
         contactMe: "Зв'язатися",
         downloadCV: "Завантажити CV",
         emailCopied: "Email скопійовано!",
@@ -25,8 +25,14 @@ export const uk: Translations = {
     about: {
         title: "Про мене",
         location: "Одеса, Україна",
-        content: "Я інженер із забезпечення якості з досвідом створення автоматизованих тестів для Desktop, Web та Mobile платформ. Окрім QA, я активний розробник, який втілив у життя стратегічну гру MindStep та інтерактивне 3D CV. Використовую AI-інструменти для прискорення розробки та написання високоякісного коду на різних технологічних стеках.",
-        hobbiesTitle: "Хобі"
+        content: "Я інженер із забезпечення якості з 4+ роками досвіду (з них 2+ у AQA). Автоматизую Web, Desktop (C#/WinAppDriver) та Mobile (Java/Appium/Playwright). Як розробник, я створив продуктову екосистему з 9 проєктів, включно зі стратегічною грою MindStep (з 23 E2E тестами на Playwright) та масштабним AI-модом для Valheim. Активно використовую AI CLI та агентні інструменти (Claude Code, Gemini CLI, Antigravity IDE) для прискорення розробки та автоматизації.",
+        hobbiesTitle: "Хобі",
+        philosophyTitle: "Ключові інженерні принципи",
+        philosophyItems: {
+            greenfield: "Greenfield & Solo QA Лідерство: Практичний досвід побудови QA-процесів та автоматизації з нуля за відсутності початкової інфраструктури.",
+            dynamicTests: "Динамічне автотестування: Написання складних автотестів з динамічним вибором даних.",
+            aiWorkflows: "AI-продуктивність: Інтеграція AI-інструментів (Claude Code, Gemini CLI, Antigravity IDE) для прискорення розробки автотестів."
+        }
     },
     experience: {
         title: "Досвід роботи",
@@ -44,8 +50,8 @@ export const uk: Translations = {
             theater_role: "Технічна підтримка"
         },
         descriptions: {
-            intellias_desc: "Тестування Web, Desktop та Mobile додатків. Автоматизація (C#, Selenium, WinAppDriver).",
-            absoft_desc: "Тестування пристроїв та мобільних додатків.",
+            intellias_desc: "Тестування Web, Desktop та Mobile додатків. Автоматизація (C#, Selenium, WinAppDriver, Appium). Дослідження витоків пам'яті та race conditions.",
+            absoft_desc: "Тестування пристроїв та мобільних додатків для військового відеореєстратора на C.",
             singree_desc: "Аналіз пошукових систем.",
             unicorn_desc: "Монтаж відео для YouTube.",
             nutduet_desc: "Монтаж заходів та виступів.",
@@ -66,22 +72,29 @@ export const uk: Translations = {
         }
     },
     skills: {
-        title: "Навички",
+        title: "Навички та Технології",
         showMore: "Показати спеціалізовані навички",
         hideMore: "Приховати спеціалізовані навички",
         platforms: {
             desktop: "Desktop app: C#, Selenium, WinAppDriver",
-            web: "Web: C#, Selenium",
+            web: "Web: C#, Selenium, Playwright",
             mobile: "Mobile app: Java, IntelliJ IDEA, Selenium, Appium Inspector, Appium Server"
         },
         categories: {
+            ai: "AI & Agentic Workflows",
             it: "IT та автоматизація",
             design3d: "3D та дизайн",
             video: "Відео та медіа",
             tools: "Софт та інструменти"
         },
         items: {
-            ai: "AI",
+            claudeCode: "Claude Code & CLI",
+            geminiCli: "Gemini CLI & Studio",
+            antigravityIde: "Antigravity IDE & CLI",
+            cursor: "Cursor IDE",
+            copilot: "GitHub Copilot",
+            midjourney: "Midjourney",
+            ai: "AI / LLM Integration",
             csharp: "C#",
             java: "Java",
             playwright: "Playwright",
@@ -107,26 +120,112 @@ export const uk: Translations = {
         languages: {
             title: "Мови",
             uk: "Українська — рідна",
-            en: "Англійська — A2",
+            en: "Англійська — A2 (Technical / AI Assisted)",
             ru: "російська — вільно"
         },
         hobbies: ["AI", "Відеоігри", "Дизайн", "Скрипти", "Настільні ігри", "Гра Мафія", "3D-друк"]
     },
     projects: {
-        slovko: {
-            title: "Slovko",
-            description: "Платформа для вивчення мов з персональною статистикою та змаганнями. Створюйте власні списки слів та вчіть мови на будь-якому пристрої.",
-            button: "Почати вчитися"
+        title: "Проєкти та Портфоліо",
+        featuredBadge: "Featured AI Showcase",
+        categories: {
+            all: "Усі проєкти",
+            games: "Ігри",
+            apps: "Застосунки",
+            websites: "Вебсайти"
         },
-        mindstep: {
-            title: "MindStep",
-            description: "Стратегічна гра для тренування пам'яті та уяви. Ходіть як королева, уникайте пасток або спробуйте 'сліпий' режим!",
-            button: "Спробувати гру"
-        },
-        cv3d: {
-            title: "3D CV Experience",
-            description: "Інтерактивне 3D резюме на Godot 4. Досліджуйте, взаємодійте та знайдіть черепашку!",
-            button: "Відкрити 3D"
+        items: {
+            and_dvergr: {
+                id: "and_dvergr",
+                title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
+                description: "Масштабна AI-модифікація для Valheim. Інтегрує LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS та автономних NPC-агентів (фермери, збирачі, ремонтники, кур'єри).",
+                button: "Відеоогляд",
+                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
+                category: "games",
+                image: "AndDvergrShallSpeakAI.jpg",
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
+                featured: true
+            },
+            mindstep: {
+                id: "mindstep",
+                title: "MindStep",
+                description: "Стратегічна гра для тренування пам'яті та уяви. Повністю покрита 23 E2E автотестами на Playwright для забезпечення стабільності та якості.",
+                button: "Спробувати гру",
+                url: "https://alik532ua.github.io/MindStep/",
+                category: "games",
+                image: "mindstep.jpg",
+                tech: "Svelte 5, TypeScript, Playwright, Tailwind"
+            },
+            slovko: {
+                id: "slovko",
+                title: "Slovko",
+                description: "Кросплатформовий додаток для вивчення слів та гра-головоломка з персональною статистикою, акаунтами, дошкою лідерів та 7 мовами (i18n).",
+                button: "Почати вчитися",
+                url: "https://alik532ua.github.io/Slovko/",
+                category: "apps",
+                image: "slovko.jpg",
+                tech: "Svelte 5, TypeScript, Firebase, i18n"
+            },
+            digitalworkshop: {
+                id: "digitalworkshop",
+                title: "DigitalWorkshop",
+                description: "Морський інтерактивний портал-шоукейс, що об'єднує всі мої вебдодатки, ігри та інструменти в єдиному адаптивному інтерфейсі.",
+                button: "Відкрити Портал",
+                url: "https://alik532ua.github.io/DigitalWorkshop/",
+                category: "websites",
+                image: "DigitalWorkshop.jpg",
+                tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
+            },
+            cv3d: {
+                id: "cv3d",
+                title: "3D CV Experience",
+                description: "Інтерактивне 3D резюме, створене з нуля на Godot 4. Досліджуйте світ, взаємодійте з об'єктами та знайдіть великодки!",
+                button: "Відкрити 3D",
+                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
+                category: "games",
+                image: "cv_3d.jpg",
+                tech: "Godot Engine, GDScript, 3D Graphics"
+            },
+            cv_web: {
+                id: "cv_web",
+                title: "Alik CV Web",
+                description: "Інтерактивний вебсайт-портфоліо на Svelte з підтримкою тост-сповіщень, збереженням стану та повноцінним i18n.",
+                button: "Переглянути CV",
+                url: "https://alik532ua.github.io/CV/",
+                category: "websites",
+                image: "cv_web.jpg",
+                tech: "Svelte 5, TypeScript, Toast System, i18n"
+            },
+            teatralo4ka: {
+                id: "teatralo4ka",
+                title: "Teatralo4ka.odesa.ua",
+                description: "Офіційний сайт та адмін-портал Одеської театральної школи з інтерактивними віджетами, темною океанською темою та галереями.",
+                button: "Відвідати сайт",
+                url: "https://teatralo4ka.odesa.ua/",
+                category: "websites",
+                image: "teatralo4ka.jpg",
+                tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
+            },
+            as5: {
+                id: "as5",
+                title: "Мистецька школа №5",
+                description: "Офіційний сайт Мистецької школи №5 м. Одеси з підтримкою мультимовності, новин та адаптивного дизайну.",
+                button: "Відвідати сайт",
+                url: "https://as5.odesa.ua/",
+                category: "websites",
+                image: "as5_odesa_ua.jpg",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
+            vetcrew: {
+                id: "vetcrew",
+                title: "VetCrewGames",
+                description: "Інтерактивний ігровий проєкт, присвячений підтримці зоозахисних ініціатив та порятунку тварин.",
+                button: "Відкрити проєкт",
+                url: "https://alik532ua.github.io/VetCrewGames",
+                category: "games",
+                image: "VetCrewGames.jpg",
+                tech: "Svelte 5, Web Games, CSS"
+            }
         }
     },
     pdf_modal: {

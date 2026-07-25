@@ -64,6 +64,17 @@
                 </p>
                 <p class="bio-text">{t.about.content}</p>
 
+                {#if t.about.philosophyTitle && t.about.philosophyItems}
+                    <div class="philosophy-block">
+                        <h4 class="philosophy-title">{t.about.philosophyTitle}</h4>
+                        <ul class="philosophy-list">
+                            {#if t.about.philosophyItems.greenfield}<li>{t.about.philosophyItems.greenfield}</li>{/if}
+                            {#if t.about.philosophyItems.dynamicTests}<li>{t.about.philosophyItems.dynamicTests}</li>{/if}
+                            {#if t.about.philosophyItems.aiWorkflows}<li>{t.about.philosophyItems.aiWorkflows}</li>{/if}
+                        </ul>
+                    </div>
+                {/if}
+
                 <div class="contacts-grid">
                     <a
                         href="https://linkedin.com/in/alik-qa-engineer"
@@ -164,7 +175,36 @@
     .bio-text {
         font-size: 1.1rem;
         line-height: 1.7;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+    }
+
+    .philosophy-block {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 18px 22px;
+        margin-bottom: 25px;
+    }
+
+    .philosophy-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--accent-primary, #00f2ff);
+        margin-bottom: 12px;
+    }
+
+    .philosophy-list {
+        padding-left: 18px;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .philosophy-list li {
+        font-size: 0.92rem;
+        color: var(--text-secondary, rgba(255, 255, 255, 0.8));
+        line-height: 1.5;
     }
 
     .contacts-grid {

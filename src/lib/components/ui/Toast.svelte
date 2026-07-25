@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { toast, type ToastMessage } from "$lib/controllers/toast.svelte";
 	import { t } from "$lib/controllers/I18nState.svelte";
-	import { CheckCircle2, AlertCircle, AlertTriangle, Info, X } from "lucide-svelte";
+	import { CopyCheck, AlertCircle, AlertTriangle, Info, X } from "lucide-svelte";
 	import { fly, fade } from "svelte/transition";
 	import { MediaQuery } from "svelte/reactivity";
 
@@ -79,7 +79,7 @@
 		onfocusout={() => toast.resume(msg.id)}
 	>
 		<div class="toast-icon" data-testid={`toast-icon-${msg.type}`}>
-			{#if msg.type === "success"}<CheckCircle2 size={20} aria-hidden="true" />
+			{#if msg.type === "success"}<CopyCheck size={20} aria-hidden="true" />
 			{:else if msg.type === "error"}<AlertCircle size={20} aria-hidden="true" />
 			{:else if msg.type === "warn"}<AlertTriangle size={20} aria-hidden="true" />
 			{:else}<Info size={20} aria-hidden="true" />{/if}
@@ -163,10 +163,12 @@
 		align-items: flex-start;
 		gap: 1rem;
 		padding: 1rem 1.25rem;
-		border-radius: 12px;
-		background: var(--bg-color);
-		border: 1px solid var(--border-color);
-		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+		border-radius: 14px;
+		background: rgba(10, 18, 30, 0.85);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(0, 242, 255, 0.2);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 255, 0.08);
 		min-width: 300px;
 		max-width: 420px;
 		color: var(--text-primary);
@@ -261,14 +263,42 @@
 		height: 44px;
 		margin: -0.5rem -0.5rem 0 0;
 		cursor: pointer;
-		background: none;
+		background: transparent;
 		border: none;
-		color: inherit;
-		opacity: 0.7;
-		transition: opacity 0.2s;
+		border-radius: 50%;
+		color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+		opacity: 0.75;
+		transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		            background-color 0.25s ease,
+		            color 0.25s ease,
+		            opacity 0.25s ease;
+		-webkit-tap-highlight-color: transparent;
 	}
+
 	.toast-close:hover {
 		opacity: 1;
+		background: rgba(255, 255, 255, 0.12);
+		color: var(--text-primary, #ffffff);
+		transform: rotate(90deg) scale(1.08);
+	}
+
+	.toast-close:active {
+		transform: rotate(90deg) scale(0.92);
+		background: rgba(255, 255, 255, 0.18);
+	}
+
+	.toast-close:focus-visible {
+		outline: 2px solid var(--accent-primary, #00f2ff);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.toast-close,
+		.toast-close:hover,
+		.toast-close:active {
+			transition: none;
+			transform: none;
+		}
 	}
 
 	@media (max-width: 600px) {

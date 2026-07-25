@@ -34,6 +34,7 @@ export const EducationItemSchema = z.object({
  * Schema for the entire Skills Data object.
  */
 export const SkillsDataSchema = z.object({
+    ai: z.array(SkillSchema).optional(),
     it: z.array(SkillSchema),
     design3d: z.array(SkillSchema),
     video: z.array(SkillSchema),
