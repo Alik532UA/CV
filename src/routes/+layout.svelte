@@ -12,6 +12,7 @@
 	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
+	import Toast from "$lib/components/ui/Toast.svelte";
 	import { setContext } from "svelte";
 
 	let { children } = $props();
@@ -101,6 +102,8 @@
 		{@render children()}
 	</main>
 </div>
+
+<Toast />
 
 <style>
 	.skip-link {

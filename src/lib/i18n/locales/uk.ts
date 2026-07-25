@@ -134,5 +134,8 @@ export const uk: Translations = {
         ats: "ATS / RMS",
         dark: "Темна тема",
         light: "Світла тема"
+    },
+    common: {
+        close: "Закрити"
     }
 };

@@ -39,3 +39,8 @@ gitignore/
 .private/
 .read_for_AI
 .temp
+
+# Тести (Playwright)
+/test-results/
+/playwright-report/
+/playwright/.cache/

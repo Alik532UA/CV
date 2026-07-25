@@ -187,6 +187,9 @@ const TranslationSchema = z.object({
 		ats: z.string(),
 		dark: z.string(),
 		light: z.string()
+	}),
+	common: z.object({
+		close: z.string()
 	})
 });
 
@@ -234,5 +237,8 @@ export const t = {
 	},
 	get pdf_modal() {
 		return translations[language.current].pdf_modal;
+	},
+	get common() {
+		return translations[language.current].common;
 	}
 };

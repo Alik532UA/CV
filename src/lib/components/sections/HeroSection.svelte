@@ -1,25 +1,43 @@
 <script lang="ts">
-    import { MapPin, Linkedin, Send, Mail, FileText, CheckCircle2 } from "lucide-svelte";
+    import { MapPin, Linkedin, Send, Mail, FileText } from "lucide-svelte";
     import { base } from "$app/paths";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import { toast } from "$lib/controllers/toast.svelte";
+    import { EMAIL } from "$lib/config/contacts";
 
     let { isMobile, onOpenPdfModal } = $props<{
         isMobile: boolean;
         onOpenPdfModal: () => void;
     }>();
 
-    let showEmailTooltip = $state(false);
-    let tooltipTimeout: ReturnType<typeof setTimeout>;
-
     function handleEmailCopy(e: MouseEvent) {
         e.preventDefault();
-        navigator.clipboard.writeText("alikzapolnov@gmail.com").then(() => {
-            showEmailTooltip = true;
-            clearTimeout(tooltipTimeout);
-            tooltipTimeout = setTimeout(() => {
-                showEmailTooltip = false;
-            }, 5000);
-        });
+        // Capture synchronously: e.currentTarget is null by the time the async
+        // clipboard promise resolves. The toast anchors to this button.
+        const anchor = e.currentTarget as HTMLElement;
+        const openMail = () => {
+            window.location.href = `mailto:${EMAIL}`;
+        };
+
+        // Guard: clipboard is absent outside a secure context / in old browsers.
+        if (!navigator.clipboard?.writeText) {
+            openMail();
+            return;
+        }
+
+        navigator.clipboard.writeText(EMAIL).then(
+            () =>
+                toast.success(
+                    t.hero.emailCopied,
+                    6000,
+                    {
+                        label: t.hero.openMailClient,
+                        onAction: openMail
+                    },
+                    anchor // anchored: toast appears next to the button, not in the corner
+                ),
+            openMail // clipboard rejected → fall back to mailto
+        );
     }
 </script>
 
@@ -61,28 +79,14 @@
                     >
                         <span><Send size={18} aria-hidden="true" /></span> Telegram
                     </a>
-                    <div class="email-wrapper" style="position: relative;">
-                        <button
-                            class="btn-secondary"
-                            onclick={handleEmailCopy}
-                            style="width: 100%"
-                        >
-                            <span><Mail size={18} aria-hidden="true" /></span> Email
-                        </button>
-                        {#if showEmailTooltip}
-                            <div class="email-tooltip">
-                                <div class="tooltip-content">
-                                    <span class="success-text"><CheckCircle2 size={16} /> {t.hero.emailCopied}</span>
-                                    <a href="mailto:alikzapolnov@gmail.com" class="open-mail-client" onclick={(e) => e.stopPropagation()}>
-                                        {t.hero.openMailClient}
-                                    </a>
-                                </div>
-                                <div class="progress-container">
-                                    <div class="tooltip-progress"></div>
-                                </div>
-                            </div>
-                        {/if}
-                    </div>
+                    <a
+                        href="mailto:{EMAIL}"
+                        class="btn-secondary"
+                        onclick={handleEmailCopy}
+                        data-testid="hero-email-link"
+                    >
+                        <span><Mail size={18} aria-hidden="true" /></span> Email
+                    </a>
                     <button
                         class="btn-secondary nowrap-btn"
                         onclick={onOpenPdfModal}
@@ -167,115 +171,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
         gap: 12px;
-    }
-
-    .email-tooltip {
-        position: absolute;
-        bottom: calc(100% + 14px);
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 16px;
-        border-radius: 12px;
-        z-index: 100;
-        min-width: 220px;
-        background: var(--bg-color);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        animation: tooltip-fade-in 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    }
-
-    .email-tooltip::before,
-    .email-tooltip::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        border-style: solid;
-    }
-
-    .email-tooltip::before {
-        bottom: -7px;
-        border-width: 7px 7px 0;
-        border-color: var(--border-color) transparent transparent transparent;
-    }
-
-    .email-tooltip::after {
-        bottom: -6px;
-        border-width: 6px 6px 0;
-        border-color: var(--bg-color) transparent transparent transparent;
-    }
-
-    .tooltip-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .success-text {
-        font-weight: 600;
-        color: var(--accent-primary, #4caf50);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .open-mail-client {
-        font-size: 0.8rem;
-        color: var(--text-primary);
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.2s;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid var(--border-color);
-        padding: 6px 12px;
-        border-radius: 8px;
-        display: inline-block;
-        width: 100%;
-        text-align: center;
-    }
-
-    .open-mail-client:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: var(--accent-primary);
-        color: var(--accent-primary);
-    }
-
-    @keyframes tooltip-fade-in {
-        from {
-            opacity: 0;
-            transform: translate(-50%, 10px);
-        }
-        to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
-    }
-
-    .progress-container {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        overflow: hidden;
-        border-radius: 0 0 11px 11px;
-    }
-
-    .tooltip-progress {
-        width: 100%;
-        height: 100%;
-        background: var(--gradient);
-        animation: progress-shrink 5s linear forwards;
-    }
-
-    @keyframes progress-shrink {
-        from {
-            width: 100%;
-        }
-        to {
-            width: 0%;
-        }
     }
 
     .nowrap-btn {

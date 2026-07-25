@@ -134,5 +134,8 @@ export const en: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    common: {
+        close: "Close"
     }
 };
