@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { Trophy, Lightbulb, Award, Car, Languages, Skull, Puzzle, Star } from "lucide-svelte";
+    import { Trophy, Lightbulb, Award, Car, Languages, Puzzle, Star } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
+    import FlagRVC from "$lib/components/flags/FlagRVC.svelte";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
 </script>
@@ -45,7 +46,7 @@
                     {t.other.languages.en}
                 </li>
                 <li>
-                    <Skull size={16} class="inline-icon" />
+                    <FlagRVC width="16" height="12" class="inline-icon flag-icon" />
                     {t.other.languages.ru}
                 </li>
             </ul>
