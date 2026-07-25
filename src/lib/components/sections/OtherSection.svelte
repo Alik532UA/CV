@@ -100,5 +100,7 @@
     :global(.flag-icon) {
         border-radius: 2px;
         overflow: hidden;
+        display: inline-block;
+        vertical-align: middle;
     }
 </style>

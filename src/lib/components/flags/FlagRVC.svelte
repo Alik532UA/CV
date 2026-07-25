@@ -10,7 +10,7 @@
 	{width}
 	{height}
 	class={className}
-	preserveAspectRatio="xMidYMid meet"
+	preserveAspectRatio="xMidYMid slice"
 	aria-hidden="true"
 >
 	<g>
