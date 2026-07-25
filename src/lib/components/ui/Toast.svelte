@@ -164,11 +164,11 @@
 		gap: 1rem;
 		padding: 1rem 1.25rem;
 		border-radius: 14px;
-		background: rgba(10, 18, 30, 0.85);
+		background: var(--toast-bg, rgba(15, 23, 42, 0.88));
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
-		border: 1px solid rgba(0, 242, 255, 0.2);
-		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 255, 0.08);
+		border: 1px solid var(--border-color);
+		box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 0 20px rgba(var(--accent-primary-rgb), 0.1);
 		min-width: 300px;
 		max-width: 420px;
 		color: var(--text-primary);
@@ -244,14 +244,16 @@
 		padding: 6px 14px;
 		cursor: pointer;
 		color: var(--text-primary);
-		background: rgba(255, 255, 255, 0.05);
+		background: var(--toast-action-bg, rgba(255, 255, 255, 0.08));
 		border: 1px solid var(--border-color);
 		border-radius: 8px;
+		font-weight: 500;
 		transition: all 0.2s;
 	}
 	.toast-action:hover {
 		border-color: var(--accent-primary);
 		color: var(--accent-primary);
+		background: var(--toast-hover-bg, rgba(255, 255, 255, 0.14));
 	}
 
 	.toast-close {
@@ -266,7 +268,7 @@
 		background: transparent;
 		border: none;
 		border-radius: 50%;
-		color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+		color: var(--text-secondary);
 		opacity: 0.75;
 		transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
 		            background-color 0.25s ease,
@@ -277,14 +279,14 @@
 
 	.toast-close:hover {
 		opacity: 1;
-		background: rgba(255, 255, 255, 0.12);
-		color: var(--text-primary, #ffffff);
+		background: var(--toast-hover-bg, rgba(255, 255, 255, 0.12));
+		color: var(--text-primary);
 		transform: rotate(90deg) scale(1.08);
 	}
 
 	.toast-close:active {
 		transform: rotate(90deg) scale(0.92);
-		background: rgba(255, 255, 255, 0.18);
+		background: var(--toast-hover-bg, rgba(255, 255, 255, 0.18));
 	}
 
 	.toast-close:focus-visible {
