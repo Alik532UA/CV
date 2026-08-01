@@ -3,12 +3,13 @@
     import { fade, scale } from "svelte/transition";
     import { onMount, tick } from "svelte";
 
+    import type { Snippet } from "svelte";
     import type { HTMLAttributes } from "svelte/elements";
 
     interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
         show: boolean;
         title?: string;
-        children: import('svelte').Snippet;
+        children: Snippet;
         onclose?: () => void;
     }
 

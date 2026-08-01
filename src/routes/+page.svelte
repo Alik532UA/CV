@@ -1,16 +1,15 @@
 <script lang="ts">
-
     import { onMount } from "svelte";
+    import type { PageProps } from "./$types";
     
     // Sections
     import HeroSection from "$lib/components/sections/HeroSection.svelte";
-
     
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-    let { data } = $props<{ data: any }>();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    let { data }: PageProps = $props();
 
     // Runes (Svelte 5)
     let isMobile = $state(false);
