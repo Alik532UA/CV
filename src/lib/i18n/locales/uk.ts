@@ -25,7 +25,7 @@ export const uk: Translations = {
     about: {
         title: "Про мене",
         location: "Одеса, Україна",
-        content: "Я інженер із забезпечення якості з 4+ роками досвіду (з них 2+ у AQA). Автоматизую Web, Desktop (C#/WinAppDriver) та Mobile (Java/Appium/Playwright). Як розробник, я створив продуктову екосистему з 9 проєктів, включно зі стратегічною грою MindStep (з 23 E2E тестами на Playwright) та масштабним AI-модом для Valheim. Активно використовую AI CLI та агентні інструменти (Claude Code, Gemini CLI, Antigravity IDE) для прискорення розробки та автоматизації.",
+        content: "Я інженер із забезпечення якості з 5+ роками досвіду (з них 2+ у AQA). Автоматизую Web, Desktop (C#/WinAppDriver) та Mobile (Java/Appium/Playwright). Як розробник, я створив продуктову екосистему з 9 проєктів, включно зі стратегічною грою MindStep (з 23 E2E тестами на Playwright) та масштабним AI-модом для Valheim. Активно використовую AI CLI та агентні інструменти (Claude Code, Gemini CLI, Antigravity IDE) для прискорення розробки та автоматизації.",
         hobbiesTitle: "Хобі",
         philosophyTitle: "Ключові інженерні принципи",
         philosophyItems: {
