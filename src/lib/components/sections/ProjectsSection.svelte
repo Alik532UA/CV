@@ -1,6 +1,6 @@
 <script lang="ts">
     import { ExternalLink, Code, Sparkles, Filter } from "lucide-svelte";
-    import { base } from "$app/paths";
+    import { base, resolve } from "$app/paths";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
 
@@ -101,7 +101,7 @@
                     {/if}
 
                     <a
-                        href={project.url}
+                        href={resolve(project.url as Parameters<typeof resolve>[0])}
                         target="_blank"
                         rel="noopener noreferrer"
                         class="btn-primary project-btn {project.featured ? 'featured-btn' : ''}"

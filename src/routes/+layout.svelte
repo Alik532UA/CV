@@ -6,6 +6,7 @@
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import SEO from "$lib/components/SEO.svelte";
 	import { onMount } from "svelte";
+	import { SvelteSet } from "svelte/reactivity";
 	import { browser } from "$app/environment";
 	import { replaceState, afterNavigate } from "$app/navigation";
 	import { language } from "$lib/controllers/I18nState.svelte";
@@ -63,7 +64,7 @@
 		background.init();
 		language.init();
 
-		const observedElements = new Set<Element>();
+		const observedElements = new SvelteSet<Element>();
 
 		const observer = new IntersectionObserver(
 			(entries) => {

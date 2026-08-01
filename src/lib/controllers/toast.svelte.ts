@@ -1,3 +1,5 @@
+import { SvelteMap } from "svelte/reactivity";
+
 export type ToastType = "success" | "error" | "warn" | "info";
 
 export interface ToastAction {
@@ -41,7 +43,7 @@ const MAX_TOASTS = 4;
 export class ToastState {
 	messages = $state<ToastMessage[]>([]);
 	private nextId = 0;
-	private timers = new Map<number, TimerInfo>();
+	private timers = new SvelteMap<number, TimerInfo>();
 
 	private _arm(info: TimerInfo) {
 		const remaining = Math.max(0, info.duration - info.elapsed);
