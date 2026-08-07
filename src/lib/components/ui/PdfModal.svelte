@@ -1,6 +1,7 @@
 <script lang="ts">
     import BaseModal from "./BaseModal.svelte";
     import { base } from "$app/paths";
+    import { FileText, FileCode } from "lucide-svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
     import type { HTMLAttributes } from "svelte/elements";
 
@@ -9,30 +10,71 @@
     }
 
     let { show = $bindable(), ...restProps }: Props = $props();
+
+    const atsFiles = [
+        {
+            id: "en-pdf",
+            label: "EN · PDF",
+            format: "pdf",
+            name: "AlikZapolnov-ATS-RMS-EN.pdf",
+            url: "https://drive.google.com/file/d/1xieP4ItkVvk6_ly1r9sayGYGRZ9MRf06/view?usp=drive_link"
+        },
+        {
+            id: "en-md",
+            label: "EN · MD",
+            format: "md",
+            name: "AlikZapolnov-ATS-RMS-EN.md",
+            url: "https://drive.google.com/file/d/1SQdR3vb2JNlVTiRH-vI-Hn2R-0E2MT_k/view?usp=drive_link"
+        },
+        {
+            id: "ua-pdf",
+            label: "UA · PDF",
+            format: "pdf",
+            name: "AlikZapolnov-ATS-RMS-UA.pdf",
+            url: "https://drive.google.com/file/d/1vOJysOCzkn_bxVEugr3c2w5HPVfsT1nf/view?usp=drive_link"
+        },
+        {
+            id: "ua-md",
+            label: "UA · MD",
+            format: "md",
+            name: "AlikZapolnov-ATS-RMS-UA.md",
+            url: "https://drive.google.com/file/d/1HF6J92xqrLjAdFPHwJTBthzF1Te8B-zA/view?usp=drive_link"
+        }
+    ];
 </script>
 
 <BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"} {...restProps}>
     <div class="pdf-options">
-        <a
-            href="https://drive.google.com/file/d/1Znm2vqgBaUOaIGr8SQnSkEGDQgvfpr3p/view"
-            target="_blank"
-            class="pdf-option"
-            onclick={() => (show = false)}
-        >
-            <div class="pdf-preview">
-                <img
-                    src="{base}/pdf-preview/Alik-Zapolnov-CV-ATS-RMS-EN.jpg"
-                    alt="ATS / RMS CV Preview"
-                    loading="lazy"
-                    decoding="async"
-                />
+        <div class="pdf-option pdf-option-group" data-testid="pdf-option-ats">
+            <div class="pdf-file-list">
+                {#each atsFiles as file (file.id)}
+                    <!-- Absolute Google Drive URL, not an app route -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={file.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="pdf-file-btn"
+                        title={file.name}
+                        data-testid="pdf-file-{file.id}"
+                        onclick={() => (show = false)}
+                    >
+                        {#if file.format === "pdf"}
+                            <FileText size={16} />
+                        {:else}
+                            <FileCode size={16} />
+                        {/if}
+                        <span class="pdf-file-label">{file.label}</span>
+                    </a>
+                {/each}
             </div>
             <span>{t.pdf_modal?.ats || "ATS / RMS"}</span>
-        </a>
+        </div>
         <a
             href="https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
             target="_blank"
+            rel="noopener noreferrer"
             class="pdf-option"
+            data-testid="pdf-option-dark"
             onclick={() => (show = false)}
         >
             <div class="pdf-preview">
@@ -48,7 +90,9 @@
         <a
             href="https://drive.google.com/file/d/1bNX2y5uD99DrQ1-jjjbFyYQJbeWeeCLB/view"
             target="_blank"
+            rel="noopener noreferrer"
             class="pdf-option"
+            data-testid="pdf-option-light"
             onclick={() => (show = false)}
         >
             <div class="pdf-preview">
@@ -87,7 +131,7 @@
         min-width: 0;
     }
 
-    .pdf-option:hover {
+    a.pdf-option:hover {
         background: rgba(var(--accent-primary-rgb), 0.1);
         border-color: var(--accent-primary);
         transform: translateY(-3px);
@@ -114,6 +158,45 @@
         white-space: nowrap;
     }
 
+    /* ATS / RMS column: four file links in place of a single preview */
+    .pdf-file-list {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        min-height: 0;
+    }
+
+    .pdf-file-btn {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 42px;
+        max-height: 72px;
+        padding: 0 10px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+    .pdf-file-btn:hover {
+        background: rgba(var(--accent-primary-rgb), 0.15);
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
+    }
+
+    .pdf-file-label {
+        font-weight: 600;
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
     @media (max-width: 640px) {
         .pdf-options {
             gap: 10px;
@@ -125,6 +208,19 @@
         }
 
         .pdf-option span {
+            font-size: 0.85rem;
+        }
+
+        .pdf-file-list {
+            gap: 8px;
+        }
+
+        .pdf-file-btn {
+            gap: 6px;
+            padding: 0 6px;
+        }
+
+        .pdf-file-label {
             font-size: 0.85rem;
         }
     }
@@ -153,6 +249,28 @@
         .pdf-option span {
             font-size: 1.1rem;
             white-space: normal;
+        }
+
+        /* Keep the ATS column stacked, with its caption acting as a heading */
+        .pdf-option-group {
+            flex-direction: column;
+            align-items: stretch;
+            text-align: center;
+            gap: 12px;
+        }
+
+        .pdf-option-group > span {
+            order: -1;
+        }
+
+        .pdf-file-btn {
+            flex: none;
+            max-height: none;
+            min-height: 44px;
+        }
+
+        .pdf-file-label {
+            font-size: 1rem;
         }
     }
 </style>
