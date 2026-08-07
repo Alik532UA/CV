@@ -11,6 +11,7 @@
     } from "lucide-svelte";
     import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
+    import FlagJA from "$lib/components/flags/FlagJA.svelte";
     import { onMount, onDestroy } from "svelte";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -193,6 +194,17 @@
                     data-testid="lang-uk"
                 >
                     <FlagUK width="20" height="15" class="flag-icon" />
+                </button>
+                <div class="divider" role="separator"></div>
+                <button
+                    onclick={() => setLanguage("ja")}
+                    class:active={language.current === "ja"}
+                    title="日本語"
+                    aria-label="Switch to Japanese"
+                    aria-pressed={language.current === "ja"}
+                    data-testid="lang-ja"
+                >
+                    <FlagJA width="20" height="15" class="flag-icon" />
                 </button>
             </div>
 

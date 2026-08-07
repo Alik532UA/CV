@@ -1,11 +1,12 @@
 import { z } from "zod";
 import { en } from "../i18n/locales/en";
 import { uk } from "../i18n/locales/uk";
+import { ja } from "../i18n/locales/ja";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
-export type Language = "en" | "uk";
+export type Language = "en" | "uk" | "ja";
 
 class LanguageState {
 	current = $state<Language>("en");
@@ -17,12 +18,12 @@ class LanguageState {
 		if (browser) {
 			const params = new URLSearchParams(window.location.search);
 			const lang = params.get("lang") as Language;
-			if (lang === "en" || lang === "uk") {
+			if (lang === "en" || lang === "uk" || lang === "ja") {
 				this.current = lang;
 				logService.info("i18n", `Initializing language from URL: ${lang}`);
 			} else {
 				const saved = storage.get("lang") as Language;
-				if (saved === "en" || saved === "uk") {
+				if (saved === "en" || saved === "uk" || saved === "ja") {
 					this.current = saved;
 					logService.info("i18n", `Initializing language from storage: ${saved}`);
 				}
@@ -176,7 +177,7 @@ const TranslationSchema = z.object({
 
 export type Translations = z.infer<typeof TranslationSchema>;
 
-export const translations: Record<Language, Translations> = { en, uk };
+export const translations: Record<Language, Translations> = { en, uk, ja };
 
 /**
  * Global reactive translations object.

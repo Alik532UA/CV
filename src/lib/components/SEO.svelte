@@ -18,7 +18,7 @@
     <meta property="og:url" content={page.url.href} />
     <meta property="og:title" content="{title} | CV" />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content={language.current === 'uk' ? 'uk_UA' : 'en_US'} />
+    <meta property="og:locale" content={language.current === 'uk' ? 'uk_UA' : (language.current === 'ja' ? 'ja_JP' : 'en_US')} />
     <meta property="og:image" content="{page.url.origin}{base}/images/profile.jpg" />
 
     <!-- Twitter -->
