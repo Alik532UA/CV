@@ -1,6 +1,6 @@
 <script lang="ts">
     import { ExternalLink, Code, Sparkles, Filter } from "lucide-svelte";
-    import { base, resolve } from "$app/paths";
+    import { base } from "$app/paths";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
 
@@ -100,8 +100,11 @@
                         </div>
                     {/if}
 
-                    <a
-                        href={resolve(project.url as Parameters<typeof resolve>[0])}
+                    <!-- project.url is always an absolute external URL, never an app route.
+                         resolve() must not be used here: it strips the leading character
+                         and collapses "//", turning https://… into /CV/ttps:/… -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         class="btn-primary project-btn {project.featured ? 'featured-btn' : ''}"
