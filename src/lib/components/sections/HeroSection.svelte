@@ -225,6 +225,12 @@
 
     .profile-img {
         width: 100%;
+        /* Without this the height="280" attribute survives as a presentational
+           hint: the image keeps a fixed 280px height while width follows the
+           container, so it stretches wherever .about-side is narrower than 300px. */
+        height: auto;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
         border-radius: 20px;
         display: block;
     }
