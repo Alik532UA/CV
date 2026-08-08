@@ -34,6 +34,7 @@ import FlagCRH from "$lib/components/flags/FlagCRH.svelte";
 import FlagTR from "$lib/components/flags/FlagTR.svelte";
 import FlagKA from "$lib/components/flags/FlagKA.svelte";
 import FlagHE from "$lib/components/flags/FlagHE.svelte";
+import FlagMT from "$lib/components/flags/FlagMT.svelte";
 import FlagCHK from "$lib/components/flags/FlagCHK.svelte";
 import FlagPON from "$lib/components/flags/FlagPON.svelte";
 import FlagKOS from "$lib/components/flags/FlagKOS.svelte";
@@ -124,6 +125,7 @@ export const LANGUAGE_META = [
     { code: "ko" as Language, label: "한국어", flag: FlagKO, group: "east_asian" as LanguageGroup },
     // Semitic
     { code: "he" as Language, label: "עברית", flag: FlagHE, group: "semitic" as LanguageGroup },
+    { code: "mt" as Language, label: "Malti", flag: FlagMT, group: "semitic" as LanguageGroup },
     // Micronesian (best-effort machine translation — needs native review)
     { code: "chk" as Language, label: "Chuuk *", flag: FlagCHK, group: "micronesian" as LanguageGroup },
     { code: "pon" as Language, label: "Pohnpei *", flag: FlagPON, group: "micronesian" as LanguageGroup },
