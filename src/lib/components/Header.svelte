@@ -240,26 +240,28 @@
                             autofocus
                         />
                         <div class="lang-groups">
-                            {#each visibleGroups as { group, items } (group)}
-                                <div class="lang-group">
-                                    <span class="lang-group-label">{LANGUAGE_GROUP_LABELS[group]}</span>
-                                    {#each items as { code, label, flag: Flag } (code)}
-                                        <button
-                                            onclick={() => selectLanguage(code)}
-                                            class:active={language.current === code}
-                                            role="menuitemradio"
-                                            aria-checked={language.current === code}
-                                            data-testid="lang-{code}"
-                                            title={label.endsWith("*") ? "Machine-translated draft — pending native speaker review" : undefined}
-                                        >
-                                            <Flag width="20" height="15" class="flag-icon" />
-                                            <span>{label}</span>
-                                        </button>
-                                    {/each}
-                                </div>
-                            {:else}
-                                <p class="lang-empty">No languages found</p>
-                            {/each}
+                            <div class="lang-columns">
+                                {#each visibleGroups as { group, items } (group)}
+                                    <div class="lang-group">
+                                        <span class="lang-group-label">{LANGUAGE_GROUP_LABELS[group]}</span>
+                                        {#each items as { code, label, flag: Flag } (code)}
+                                            <button
+                                                onclick={() => selectLanguage(code)}
+                                                class:active={language.current === code}
+                                                role="menuitemradio"
+                                                aria-checked={language.current === code}
+                                                data-testid="lang-{code}"
+                                                title={label.endsWith("*") ? "Machine-translated draft — pending native speaker review" : undefined}
+                                            >
+                                                <Flag width="20" height="15" class="flag-icon" />
+                                                <span>{label}</span>
+                                            </button>
+                                        {/each}
+                                    </div>
+                                {:else}
+                                    <p class="lang-empty">No languages found</p>
+                                {/each}
+                            </div>
                         </div>
                     </div>
                 {/if}
@@ -429,8 +431,8 @@
     }
 
     .lang-dropdown {
-        width: min(92vw, 460px);
-        max-height: 70vh;
+        width: min(92vw, 820px);
+        max-height: 78vh;
     }
 
     .lang-search {
@@ -448,23 +450,31 @@
         border-color: var(--accent-primary);
     }
 
+    /* Scroll container only — the multi-column element inside must keep an
+       auto height, or CSS multicol spills sideways instead of scrolling. */
     .lang-groups {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
         overflow-y: auto;
     }
 
-    /* Buttons within a group flow into as many columns as fit — with 30+
-       languages a single column would turn this into a very long scroll. */
+    /* Newspaper-style columns rather than one full-width grid row per group:
+       with 12 groups of wildly different sizes, a per-group grid left the
+       one-language groups (Uralic, Caucasus, Semitic) reserving a whole row
+       and wasting most of it. Here each group is a compact vertical stack
+       that packs in underneath the previous one. */
+    .lang-columns {
+        columns: 150px;
+        column-gap: 14px;
+    }
+
     .lang-group {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 2px 8px;
+        /* Keep a group's heading welded to its languages across a column break. */
+        break-inside: avoid;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 10px;
     }
 
     .lang-group-label {
-        grid-column: 1 / -1;
         padding: 4px 12px 2px;
         font-size: 0.68rem;
         font-weight: 700;
