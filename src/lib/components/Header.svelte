@@ -22,6 +22,13 @@
     const background = getContext<any>("background");
 
     let isBgDropdownOpen = $state(false);
+    let isLangDropdownOpen = $state(false);
+
+    const LANGUAGES = [
+        { code: "en" as Language, label: "English", flag: FlagEN },
+        { code: "uk" as Language, label: "Українська", flag: FlagUK },
+        { code: "ja" as Language, label: "日本語", flag: FlagJA }
+    ];
 
     function setLanguage(lang: Language) {
         language.set(lang);
@@ -29,6 +36,12 @@
 
     function toggleBgDropdown() {
         isBgDropdownOpen = !isBgDropdownOpen;
+        if (isBgDropdownOpen) isLangDropdownOpen = false;
+    }
+
+    function toggleLangDropdown() {
+        isLangDropdownOpen = !isLangDropdownOpen;
+        if (isLangDropdownOpen) isBgDropdownOpen = false;
     }
 
     function selectBackground(type: 0 | 1 | 2 | 3) {
@@ -36,11 +49,19 @@
         isBgDropdownOpen = false;
     }
 
+    function selectLanguage(lang: Language) {
+        language.set(lang);
+        isLangDropdownOpen = false;
+    }
+
     // Close dropdown when clicking outside
     function handleClickOutside(event: MouseEvent) {
         const target = event.target as HTMLElement;
         if (isBgDropdownOpen && !target.closest(".mobile-bg-switcher")) {
             isBgDropdownOpen = false;
+        }
+        if (isLangDropdownOpen && !target.closest(".mobile-lang-switcher")) {
+            isLangDropdownOpen = false;
         }
     }
 
@@ -58,6 +79,11 @@
 
     // Helper to get icon for active mobile bg
     let ActiveBgIcon = $derived([CircleOff, Sparkles, Waves, Shapes][background.type]);
+
+    // Helper to get the flag shown on the collapsed mobile language button
+    let ActiveFlag = $derived(
+        LANGUAGES.find((l) => l.code === language.current)?.flag ?? FlagEN
+    );
 </script>
 
 <header class="header glass">
@@ -172,8 +198,8 @@
                 {/if}
             </div>
 
-            <!-- Language Switcher -->
-            <div class="toggle-group glass" data-testid="lang-switcher" role="group" aria-label="Language selection">
+            <!-- Language Switcher (Desktop) -->
+            <div class="toggle-group glass desktop-only" data-testid="lang-switcher" role="group" aria-label="Language selection">
                 <button
                     onclick={() => setLanguage("en")}
                     class:active={language.current === "en"}
@@ -206,6 +232,39 @@
                 >
                     <FlagJA width="20" height="15" class="flag-icon" />
                 </button>
+            </div>
+
+            <!-- Language Switcher (Mobile) -->
+            <div
+                class="mobile-lang-switcher mobile-only"
+                data-testid="lang-switcher-mobile"
+            >
+                <button
+                    class="glass-icon-btn"
+                    onclick={(e) => { e.stopPropagation(); toggleLangDropdown(); }}
+                    aria-label="Select language"
+                    aria-haspopup="true"
+                    aria-expanded={isLangDropdownOpen}
+                >
+                    <ActiveFlag width="24" height="18" class="flag-icon" />
+                </button>
+
+                {#if isLangDropdownOpen}
+                    <div class="lang-dropdown glass" role="menu">
+                        {#each LANGUAGES as { code, label, flag: Flag } (code)}
+                            <button
+                                onclick={() => selectLanguage(code)}
+                                class:active={language.current === code}
+                                role="menuitemradio"
+                                aria-checked={language.current === code}
+                                data-testid="lang-{code}-mobile"
+                            >
+                                <Flag width="20" height="15" class="flag-icon" />
+                                <span>{label}</span>
+                            </button>
+                        {/each}
+                    </div>
+                {/if}
             </div>
 
             <!-- Theme Toggle -->
@@ -341,7 +400,8 @@
         transition: var(--transition);
     }
 
-    .bg-dropdown {
+    .bg-dropdown,
+    .lang-dropdown {
         position: absolute;
         top: 60px;
         right: 0;
@@ -358,11 +418,13 @@
         z-index: 1001;
     }
 
-    .mobile-bg-switcher {
+    .mobile-bg-switcher,
+    .mobile-lang-switcher {
         position: relative;
     }
 
-    .bg-dropdown button {
+    .bg-dropdown button,
+    .lang-dropdown button {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -377,11 +439,13 @@
         transition: var(--transition);
     }
 
-    .bg-dropdown button:hover {
+    .bg-dropdown button:hover,
+    .lang-dropdown button:hover {
         background: rgba(255, 255, 255, 0.05);
     }
 
-    .bg-dropdown button.active {
+    .bg-dropdown button.active,
+    .lang-dropdown button.active {
         background: rgba(var(--accent-primary-rgb), 0.2);
         color: var(--accent-primary);
     }
