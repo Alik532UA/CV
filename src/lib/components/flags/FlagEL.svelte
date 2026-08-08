@@ -1,17 +1,11 @@
+<!-- Flag of Greece — the nine stripes and the canton cross. -->
 <svg
     width="32"
     height="24"
-    viewBox="0 0 32 24"
-    preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 27 18"
+    preserveAspectRatio="xMidYMid meet"
     {...$$restProps}
 >
-    <rect width="32" height="24" fill="#0D5EAF" />
-    <rect y="0" width="32" height="2.67" fill="#fff" />
-    <rect y="5.33" width="32" height="2.67" fill="#fff" />
-    <rect y="10.67" width="32" height="2.67" fill="#fff" />
-    <rect y="16" width="32" height="2.67" fill="#fff" />
-    <rect y="21.33" width="32" height="2.67" fill="#fff" />
-    <rect x="0" y="0" width="13.33" height="13.33" fill="#0D5EAF" />
-    <rect x="4.93" y="0" width="3.47" height="13.33" fill="#fff" />
-    <rect x="0" y="4.93" width="13.33" height="3.47" fill="#fff" />
+    <rect fill="#0D5EAF" width="27" height="18"/>
+    <path fill="none" stroke-width="2" stroke="#FFF" d="M5,0V11 M0,5H10 M10,3H27 M10,7H27 M0,11H27 M0,15H27"/>
 </svg>

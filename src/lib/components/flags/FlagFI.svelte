@@ -1,11 +1,11 @@
+<!-- Flag of Finland — the Nordic cross. -->
 <svg
     width="32"
     height="24"
-    viewBox="0 0 32 24"
-    preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 18 11"
+    preserveAspectRatio="xMidYMid meet"
     {...$$restProps}
 >
-    <rect width="32" height="24" fill="#fff" />
-    <rect x="10" y="0" width="4" height="24" fill="#002F6C" />
-    <rect x="0" y="10" width="32" height="4" fill="#002F6C" />
+    <rect width="18" height="11" fill="#fff"/>
+    <path d="M0,5.5h18M6.5,0v11" stroke="#002F6C" stroke-width="3"/>
 </svg>

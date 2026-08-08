@@ -1,18 +1,21 @@
-<!-- Five-cross flag simplified: the four small Bolnur-Katskhuri crosses become
-     plain squares at this size, since their crenellated arms don't survive
-     the scale-down anyway. -->
+<!-- Flag of Georgia — the five-cross flag. -->
 <svg
     width="32"
     height="24"
-    viewBox="0 0 32 24"
-    preserveAspectRatio="xMidYMid slice"
+    viewBox="0 0 30 20"
+    preserveAspectRatio="xMidYMid meet"
     {...$$restProps}
 >
-    <rect width="32" height="24" fill="#fff" />
-    <rect x="13.5" y="0" width="5" height="24" fill="#FF0000" />
-    <rect x="0" y="9.5" width="32" height="5" fill="#FF0000" />
-    <rect x="6" y="4" width="3.4" height="3.4" fill="#FF0000" />
-    <rect x="22.6" y="4" width="3.4" height="3.4" fill="#FF0000" />
-    <rect x="6" y="16.6" width="3.4" height="3.4" fill="#FF0000" />
-    <rect x="22.6" y="16.6" width="3.4" height="3.4" fill="#FF0000" />
+    <g fill="#f00">
+        <path fill="#fff" d="m0 0h30v20H0z"/>
+        <path d="m13 0h4v20h-4zM0 8h30v4H0z"/>
+        <g id="ka-c">
+        <g id="ka-b">
+        <path id="ka-a" d="m5.7968 1.954a5.4 5.4 0 0 0 1.4064 0 10.4 10.4 0 0 0 0 4.092 5.4 5.4 0 0 0-1.4064 0 10.4 10.4 0 0 0 0-4.092z"/>
+        <use transform="rotate(90,6.5,4)" href="#ka-a"/>
+        </g>
+        <use x="17" href="#ka-b"/>
+        </g>
+        <use y="12" href="#ka-c"/>
+    </g>
 </svg>
