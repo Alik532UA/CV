@@ -1,16 +1,14 @@
+<!-- Flag of North Macedonia — the "new sun of liberty". -->
 <svg
     width="32"
     height="24"
-    viewBox="0 0 32 24"
-    preserveAspectRatio="xMidYMid slice"
+    viewBox="-140 -70 280 140"
+    preserveAspectRatio="xMidYMid meet"
     {...$$restProps}
 >
-    <rect width="32" height="24" fill="#D20000" />
-    <g fill="#FFE600">
-        <rect x="14.5" y="0" width="3" height="24" transform="rotate(0 16 12)" />
-        <rect x="14.5" y="0" width="3" height="24" transform="rotate(45 16 12)" />
-        <rect x="14.5" y="0" width="3" height="24" transform="rotate(90 16 12)" />
-        <rect x="14.5" y="0" width="3" height="24" transform="rotate(135 16 12)" />
+    <g fill="#f8e92e">
+        <path fill="#d82126" d="m-140-70h280V70h-280z"/>
+        <path d="m-140 14v-28l280 28v-28zm126-84h28L0-15zM14 70h-28L0 15zM-140-70h42L12.86 7.72zm0 140h42L12.86-7.72zM140-70H98L-12.86 7.72zm0 140H98L-12.86-7.72z"/>
+        <circle r="22.5" stroke="#d82126" stroke-width="5"/>
     </g>
-    <circle cx="16" cy="12" r="4.5" fill="#FFE600" />
 </svg>

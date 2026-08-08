@@ -1,14 +1,10 @@
-<!-- Taegeukgi simplified: the S-curved swirl and the four black trigrams are
-     dropped in favor of a plain two-tone circle, since neither survives
-     legibly at icon size. -->
+<!-- Flag of South Korea — the taegeuk and the four trigrams. -->
 <svg
     width="32"
     height="24"
-    viewBox="0 0 32 24"
-    preserveAspectRatio="xMidYMid slice"
+    viewBox="-72 -48 144 96"
+    preserveAspectRatio="xMidYMid meet"
     {...$$restProps}
 >
-    <rect width="32" height="24" fill="#fff" />
-    <circle cx="16" cy="12" r="6" fill="#003478" />
-    <path d="M10,12 A6,6 0 0,1 22,12 Z" fill="#C60C30" />
+    <path fill="#fff" d="M-72-48v96H72v-96z"/><g stroke="#000" stroke-width="4"><path transform="rotate(33.69006752598)" d="M-50-12v24m6 0v-24m6 0v24m76 0V1m0-2v-11m6 0v11m0 2v11m6 0V1m0-2v-11"/><path transform="rotate(-33.69006752598)" d="M-50-12v24m6 0V1m0-2v-11m6 0v24m76 0V1m0-2v-11m6 0v24m6 0V1m0-2v-11"/></g><g transform="rotate(33.69006752598)"><path fill="#cd2e3a" d="M12 0a18 18 0 11-36 0 24 24 0 1148 0"/><path fill="#0047a0" d="M-24 0a24 24 0 1048 0A12 12 0 100 0a12 12 0 11-24 0"/></g>
 </svg>
