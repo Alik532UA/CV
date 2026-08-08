@@ -7,11 +7,35 @@
         Rocket,
         GraduationCap,
         Sparkles,
+        Mail,
+        FileText,
     } from "lucide-svelte";
+    import IconLinkedIn from "$lib/components/icons/IconLinkedIn.svelte";
+    import IconWhatsApp from "$lib/components/icons/IconWhatsApp.svelte";
+    import IconTelegram from "$lib/components/icons/IconTelegram.svelte";
+    import IconViber from "$lib/components/icons/IconViber.svelte";
+    import { pdfModal } from "$lib/controllers/PdfModalState.svelte";
+    import { CONTACTS } from "$lib/config/contacts";
+    import { handleEmailCopy } from "$lib/utils/emailCopy";
 
     let { activeSection = "hero" } = $props<{ activeSection?: string }>();
-    
+
     let t = $derived(translations[language.current]);
+
+    const contactLinks = [
+        { label: "LinkedIn", href: CONTACTS.linkedin, icon: IconLinkedIn, external: true },
+        { label: "WhatsApp", href: CONTACTS.whatsapp, icon: IconWhatsApp, external: true },
+        { label: "Telegram", href: CONTACTS.telegram, icon: IconTelegram, external: true },
+        { label: "Viber", href: CONTACTS.viber, icon: IconViber, external: true },
+        {
+            label: "Email",
+            href: `mailto:${CONTACTS.email}`,
+            icon: Mail,
+            external: false,
+            testid: "sidebar-email-link",
+            onclick: handleEmailCopy
+        }
+    ];
 
     let navItems = $derived([
         { id: "about", icon: User, label: t.nav.about },
@@ -44,6 +68,34 @@
         </ul>
     </nav>
 
+    <!-- Desktop only: the sidebar is hidden under 768px, where the hero keeps
+         its own copy of these. Icons carry no visible label here — the row has
+         to stay on one line inside a 280px panel. -->
+    <div class="sidebar-contacts">
+        <div class="contact-icons">
+            {#each contactLinks as link (link.label)}
+                <!-- Absolute external URLs and mailto:/viber: schemes, never app
+                     routes — resolve() would mangle them. -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    class="contact-icon"
+                    aria-label={link.label}
+                    title={link.label}
+                    data-testid={link.testid}
+                    onclick={link.onclick}
+                >
+                    <link.icon size={20} aria-hidden="true" />
+                </a>
+            {/each}
+        </div>
+        <button class="pdf-button" onclick={() => pdfModal.open()}>
+            <FileText size={18} aria-hidden="true" />
+            <span>PDF version</span>
+        </button>
+    </div>
+
     <div class="footer-info">
         <p>{t.lastUpdate}</p>
         <!-- <p class="version">v{__APP_VERSION__}</p> -->
@@ -51,6 +103,59 @@
 </aside>
 
 <style>
+    /* nav already has flex: 1, so this sits at the bottom without margin tricks */
+    .sidebar-contacts {
+        padding: 0 20px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-icons {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+    }
+
+    .contact-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+    }
+
+    .contact-icon:hover {
+        color: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
+    .pdf-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        background: transparent;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        font-family: inherit;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .pdf-button:hover {
+        color: var(--accent-primary);
+        border-color: var(--accent-primary);
+    }
+
     .sidebar {
         width: 280px;
         height: 100vh;

@@ -4,6 +4,7 @@
     
     // Sections
     import HeroSection from "$lib/components/sections/HeroSection.svelte";
+    import { pdfModal } from "$lib/controllers/PdfModalState.svelte";
     
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
@@ -13,7 +14,8 @@
 
     // Runes (Svelte 5)
     let isMobile = $state(false);
-    let showPdfModal = $state(false);
+    // Shared rather than local: the sidebar in +layout.svelte opens this too,
+    // and it cannot reach state declared here.
 
     onMount(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -29,7 +31,7 @@
 </script>
 
 <div class="container">
-    <HeroSection {isMobile} onOpenPdfModal={() => (showPdfModal = true)} />
+    <HeroSection {isMobile} onOpenPdfModal={() => pdfModal.open()} />
     
     <svelte:boundary>
         {#await import("$lib/components/sections/ExperienceSection.svelte") then { default: ExperienceSection }}
@@ -76,9 +78,9 @@
         {/snippet}
     </svelte:boundary>
 
-    {#if showPdfModal}
+    {#if pdfModal.isOpen}
         {#await import("$lib/components/ui/PdfModal.svelte") then { default: PdfModal }}
-            <PdfModal bind:show={showPdfModal} />
+            <PdfModal bind:show={pdfModal.isOpen} />
         {/await}
     {/if}
 </div>

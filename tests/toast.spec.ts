@@ -20,10 +20,21 @@ async function primeClipboard(page: Page) {
  * hydrated. A click before hydration just follows the mailto: link (a no-op
  * in headless), so no toast appears and the retry fires again.
  */
+/**
+ * The email link renders twice and only one is visible at a time: in the
+ * sidebar on desktop, and in the hero section under 768px where the sidebar is
+ * hidden. Tests should not have to know which viewport they are running at.
+ */
+function emailLink(page: Page) {
+	return page
+		.locator('[data-testid="sidebar-email-link"]:visible, [data-testid="hero-email-link"]:visible')
+		.first();
+}
+
 async function copyEmail(page: Page) {
 	const toast = page.getByTestId("toast-message-success");
 	await expect(async () => {
-		await page.getByTestId("hero-email-link").click();
+		await emailLink(page).click();
 		await expect(toast).toBeVisible({ timeout: 1000 });
 	}).toPass({ timeout: 15000 });
 	return toast;
@@ -40,7 +51,7 @@ test.describe("Email toast", () => {
 		test.beforeEach(async ({ page }) => {
 			await page.goto("/");
 			await waitForHydration(page);
-			await page.getByTestId("hero-email-link").waitFor({ state: "visible" });
+			await emailLink(page).waitFor({ state: "visible" });
 			await primeClipboard(page);
 		});
 
@@ -65,7 +76,12 @@ test.describe("Email toast", () => {
 
 			// Measure both rects in viewport space (matches positionAnchored's getBoundingClientRect).
 			const m = await page.evaluate(() => {
-				const b = document.querySelector('[data-testid="hero-email-link"]')!.getBoundingClientRect();
+				const candidates = [
+					...document.querySelectorAll('[data-testid="sidebar-email-link"], [data-testid="hero-email-link"]')
+				];
+				const b = candidates
+					.find((el) => el.getBoundingClientRect().width > 0)!
+					.getBoundingClientRect();
 				const w = document.querySelector('[data-testid="toast-anchored-wrapper"]')!.getBoundingClientRect();
 				return {
 					btn: { top: b.top, bottom: b.bottom, cx: b.left + b.width / 2, cy: b.top + b.height / 2 },
@@ -123,7 +139,7 @@ test.describe("Email toast", () => {
 		await page.setViewportSize({ width: 375, height: 812 });
 		await page.goto("/");
 		await waitForHydration(page);
-		await page.getByTestId("hero-email-link").waitFor({ state: "visible" });
+		await emailLink(page).waitFor({ state: "visible" });
 		await primeClipboard(page);
 
 		await copyEmail(page);
@@ -137,12 +153,12 @@ test.describe("Email toast", () => {
 	test("falls back to a mailto link when clipboard is unavailable", async ({ page }) => {
 		await page.goto("/");
 		await waitForHydration(page);
-		await page.getByTestId("hero-email-link").waitFor({ state: "visible" });
+		await emailLink(page).waitFor({ state: "visible" });
 		await page.evaluate(() => {
 			Object.defineProperty(navigator, "clipboard", { configurable: true, get: () => undefined });
 		});
 
-		const link = page.getByTestId("hero-email-link");
+		const link = emailLink(page);
 		await expect(link).toHaveAttribute("href", /^mailto:/);
 
 		await link.click();

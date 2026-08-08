@@ -1,44 +1,19 @@
 <script lang="ts">
-    import { MapPin, Linkedin, Send, Mail, FileText } from "lucide-svelte";
+    import { MapPin, Mail, FileText } from "lucide-svelte";
     import { base } from "$app/paths";
     import { t } from "$lib/controllers/I18nState.svelte";
-    import { toast } from "$lib/controllers/toast.svelte";
-    import { EMAIL } from "$lib/config/contacts";
+    import { EMAIL, CONTACTS } from "$lib/config/contacts";
+    import { handleEmailCopy } from "$lib/utils/emailCopy";
+    import IconLinkedIn from "$lib/components/icons/IconLinkedIn.svelte";
+    import IconWhatsApp from "$lib/components/icons/IconWhatsApp.svelte";
+    import IconTelegram from "$lib/components/icons/IconTelegram.svelte";
+    import IconViber from "$lib/components/icons/IconViber.svelte";
 
     let { isMobile, onOpenPdfModal } = $props<{
         isMobile: boolean;
         onOpenPdfModal: () => void;
     }>();
 
-    function handleEmailCopy(e: MouseEvent) {
-        e.preventDefault();
-        // Capture synchronously: e.currentTarget is null by the time the async
-        // clipboard promise resolves. The toast anchors to this button.
-        const anchor = e.currentTarget as HTMLElement;
-        const openMail = () => {
-            window.location.href = `mailto:${EMAIL}`;
-        };
-
-        // Guard: clipboard is absent outside a secure context / in old browsers.
-        if (!navigator.clipboard?.writeText) {
-            openMail();
-            return;
-        }
-
-        navigator.clipboard.writeText(EMAIL).then(
-            () =>
-                toast.success(
-                    t.hero.emailCopied,
-                    6000,
-                    {
-                        label: t.hero.openMailClient,
-                        onAction: openMail
-                    },
-                    anchor // anchored: toast appears next to the button, not in the corner
-                ),
-            openMail // clipboard rejected → fall back to mailto
-        );
-    }
 </script>
 
 <section id="about" class="about-section">
@@ -75,31 +50,68 @@
                     </div>
                 {/if}
 
+                <!-- Mobile only: on desktop these live in the sidebar, which is
+                     hidden under 768px. Icons carry no visible label — five of
+                     them plus the PDF button do not fit a phone row otherwise.
+                     PDF keeps its label because it is the one action a recruiter
+                     is actually looking for. -->
                 <div class="contacts-grid">
-                    <a
-                        href="https://linkedin.com/in/alik-qa-engineer"
+                    <!-- Absolute external URL or app scheme, never a route -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={CONTACTS.linkedin}
                         target="_blank"
-                        class="btn-secondary"
+                        rel="noopener noreferrer"
+                        class="btn-secondary icon-only"
+                        aria-label="LinkedIn"
+                        title="LinkedIn"
                     >
-                        <span><Linkedin size={18} aria-hidden="true" /></span> LinkedIn
+                        <IconLinkedIn size={20} />
                     </a>
-                    <a
-                        href="https://t.me/alik532"
+                    <!-- Absolute external URL or app scheme, never a route -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={CONTACTS.whatsapp}
                         target="_blank"
-                        class="btn-secondary"
+                        rel="noopener noreferrer"
+                        class="btn-secondary icon-only"
+                        aria-label="WhatsApp"
+                        title="WhatsApp"
                     >
-                        <span><Send size={18} aria-hidden="true" /></span> Telegram
+                        <IconWhatsApp size={20} />
+                    </a>
+                    <!-- Absolute external URL or app scheme, never a route -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={CONTACTS.telegram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-secondary icon-only"
+                        aria-label="Telegram"
+                        title="Telegram"
+                    >
+                        <IconTelegram size={20} />
+                    </a>
+                    <!-- Absolute external URL or app scheme, never a route -->
+                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                    <a href={CONTACTS.viber}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-secondary icon-only"
+                        aria-label="Viber"
+                        title="Viber"
+                    >
+                        <IconViber size={20} />
                     </a>
                     <a
                         href="mailto:{EMAIL}"
-                        class="btn-secondary"
+                        class="btn-secondary icon-only"
                         onclick={handleEmailCopy}
                         data-testid="hero-email-link"
+                        aria-label="Email"
+                        title="Email"
                     >
-                        <span><Mail size={18} aria-hidden="true" /></span> Email
+                        <Mail size={20} aria-hidden="true" />
                     </a>
                     <button
-                        class="btn-secondary nowrap-btn"
+                        class="btn-secondary nowrap-btn pdf-btn"
                         onclick={onOpenPdfModal}
                     >
                         <span><FileText size={18} aria-hidden="true" /></span> PDF
@@ -207,10 +219,31 @@
         line-height: 1.5;
     }
 
+    /* Hidden on desktop: the sidebar carries these there. It only appears once
+       the sidebar is gone, under 768px. */
     .contacts-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 12px;
+        display: none;
+    }
+
+    .icon-only {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        min-width: 0;
+    }
+
+    .pdf-btn {
+        /* The one labelled action, so it takes the full row under the icons. */
+        grid-column: 1 / -1;
+    }
+
+    @media (max-width: 768px) {
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 8px;
+        }
     }
 
     .nowrap-btn {
