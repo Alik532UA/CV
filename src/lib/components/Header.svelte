@@ -250,6 +250,7 @@
                                             role="menuitemradio"
                                             aria-checked={language.current === code}
                                             data-testid="lang-{code}"
+                                            title={label.endsWith("*") ? "Machine-translated draft — pending native speaker review" : undefined}
                                         >
                                             <Flag width="20" height="15" class="flag-icon" />
                                             <span>{label}</span>

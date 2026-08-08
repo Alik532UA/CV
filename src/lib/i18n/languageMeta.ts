@@ -21,6 +21,23 @@ import FlagNO from "$lib/components/flags/FlagNO.svelte";
 import FlagDA from "$lib/components/flags/FlagDA.svelte";
 import FlagIS from "$lib/components/flags/FlagIS.svelte";
 import FlagJA from "$lib/components/flags/FlagJA.svelte";
+import FlagKO from "$lib/components/flags/FlagKO.svelte";
+import FlagFI from "$lib/components/flags/FlagFI.svelte";
+import FlagEL from "$lib/components/flags/FlagEL.svelte";
+import FlagSQ from "$lib/components/flags/FlagSQ.svelte";
+import FlagGA from "$lib/components/flags/FlagGA.svelte";
+import FlagCY from "$lib/components/flags/FlagCY.svelte";
+import FlagET from "$lib/components/flags/FlagET.svelte";
+import FlagLV from "$lib/components/flags/FlagLV.svelte";
+import FlagLT from "$lib/components/flags/FlagLT.svelte";
+import FlagCRH from "$lib/components/flags/FlagCRH.svelte";
+import FlagTR from "$lib/components/flags/FlagTR.svelte";
+import FlagKA from "$lib/components/flags/FlagKA.svelte";
+import FlagHE from "$lib/components/flags/FlagHE.svelte";
+import FlagCHK from "$lib/components/flags/FlagCHK.svelte";
+import FlagPON from "$lib/components/flags/FlagPON.svelte";
+import FlagKOS from "$lib/components/flags/FlagKOS.svelte";
+import FlagYAP from "$lib/components/flags/FlagYAP.svelte";
 
 // Fixed display order for language groups. New locales only need to pick one
 // of these — the switcher renders whichever groups end up non-empty, in this
@@ -39,6 +56,7 @@ export const LANGUAGE_GROUP_ORDER = [
     "turkic",
     "caucasus",
     "east_asian",
+    "semitic",
     "micronesian"
 ] as const;
 
@@ -55,6 +73,7 @@ export const LANGUAGE_GROUP_LABELS: Record<LanguageGroup, string> = {
     turkic: "Turkic",
     caucasus: "Caucasus",
     east_asian: "East Asian",
+    semitic: "Semitic",
     micronesian: "Micronesian"
 };
 
@@ -83,6 +102,31 @@ export const LANGUAGE_META = [
     { code: "no" as Language, label: "Norsk", flag: FlagNO, group: "germanic" as LanguageGroup },
     { code: "da" as Language, label: "Dansk", flag: FlagDA, group: "germanic" as LanguageGroup },
     { code: "is" as Language, label: "Íslenska", flag: FlagIS, group: "germanic" as LanguageGroup },
+    // Celtic
+    { code: "ga" as Language, label: "Gaeilge", flag: FlagGA, group: "celtic" as LanguageGroup },
+    { code: "cy" as Language, label: "Cymraeg", flag: FlagCY, group: "celtic" as LanguageGroup },
+    // Baltic
+    { code: "et" as Language, label: "Eesti", flag: FlagET, group: "baltic" as LanguageGroup },
+    { code: "lv" as Language, label: "Latviešu", flag: FlagLV, group: "baltic" as LanguageGroup },
+    { code: "lt" as Language, label: "Lietuvių", flag: FlagLT, group: "baltic" as LanguageGroup },
+    // Uralic
+    { code: "fi" as Language, label: "Suomi", flag: FlagFI, group: "uralic" as LanguageGroup },
+    // Balkan
+    { code: "el" as Language, label: "Ελληνικά", flag: FlagEL, group: "balkan" as LanguageGroup },
+    { code: "sq" as Language, label: "Shqip", flag: FlagSQ, group: "balkan" as LanguageGroup },
+    // Turkic
+    { code: "crh" as Language, label: "Qırımtatarca", flag: FlagCRH, group: "turkic" as LanguageGroup },
+    { code: "tr" as Language, label: "Türkçe", flag: FlagTR, group: "turkic" as LanguageGroup },
+    // Caucasus
+    { code: "ka" as Language, label: "ქართული", flag: FlagKA, group: "caucasus" as LanguageGroup },
     // East Asian
-    { code: "ja" as Language, label: "日本語", flag: FlagJA, group: "east_asian" as LanguageGroup }
+    { code: "ja" as Language, label: "日本語", flag: FlagJA, group: "east_asian" as LanguageGroup },
+    { code: "ko" as Language, label: "한국어", flag: FlagKO, group: "east_asian" as LanguageGroup },
+    // Semitic
+    { code: "he" as Language, label: "עברית", flag: FlagHE, group: "semitic" as LanguageGroup },
+    // Micronesian (best-effort machine translation — needs native review)
+    { code: "chk" as Language, label: "Chuuk *", flag: FlagCHK, group: "micronesian" as LanguageGroup },
+    { code: "pon" as Language, label: "Pohnpei *", flag: FlagPON, group: "micronesian" as LanguageGroup },
+    { code: "kos" as Language, label: "Kosrae *", flag: FlagKOS, group: "micronesian" as LanguageGroup },
+    { code: "yap" as Language, label: "Yap *", flag: FlagYAP, group: "micronesian" as LanguageGroup }
 ];

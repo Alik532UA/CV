@@ -21,17 +21,38 @@ import { sv } from "../i18n/locales/sv";
 import { no } from "../i18n/locales/no";
 import { da } from "../i18n/locales/da";
 import { is } from "../i18n/locales/is";
+import { fi } from "../i18n/locales/fi";
+import { el } from "../i18n/locales/el";
+import { ga } from "../i18n/locales/ga";
+import { cy } from "../i18n/locales/cy";
+import { et } from "../i18n/locales/et";
+import { lv } from "../i18n/locales/lv";
+import { lt } from "../i18n/locales/lt";
+import { crh } from "../i18n/locales/crh";
+import { ka } from "../i18n/locales/ka";
+import { sq } from "../i18n/locales/sq";
+import { ko } from "../i18n/locales/ko";
+import { tr } from "../i18n/locales/tr";
+import { he } from "../i18n/locales/he";
+import { chk } from "../i18n/locales/chk";
+import { pon } from "../i18n/locales/pon";
+import { kos } from "../i18n/locales/kos";
+import { yap } from "../i18n/locales/yap";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
 export type Language =
 	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
-	| "pl" | "cs" | "sk" | "bg" | "hr" | "sl" | "mk" | "ro" | "sv" | "no" | "da" | "is";
+	| "pl" | "cs" | "sk" | "bg" | "hr" | "sl" | "mk" | "ro" | "sv" | "no" | "da" | "is"
+	| "fi" | "el" | "ga" | "cy" | "et" | "lv" | "lt" | "crh" | "ka" | "sq" | "ko" | "tr" | "he"
+	| "chk" | "pon" | "kos" | "yap";
 
 const SUPPORTED_LANGUAGES: readonly Language[] = [
 	"en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
-	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is"
+	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is",
+	"fi", "el", "ga", "cy", "et", "lv", "lt", "crh", "ka", "sq", "ko", "tr", "he",
+	"chk", "pon", "kos", "yap"
 ];
 
 function isLanguage(value: string | null): value is Language {
@@ -209,7 +230,9 @@ export type Translations = z.infer<typeof TranslationSchema>;
 
 export const translations: Record<Language, Translations> = {
 	en, uk, ja, es, fr, pt, it, de, nl, be,
-	pl, cs, sk, bg, hr, sl, mk, ro, sv, no, da, is
+	pl, cs, sk, bg, hr, sl, mk, ro, sv, no, da, is,
+	fi, el, ga, cy, et, lv, lt, crh, ka, sq, ko, tr, he,
+	chk, pon, kos, yap
 };
 
 /**
