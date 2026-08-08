@@ -183,9 +183,20 @@
         .modal-content {
             padding: 30px 20px;
         }
-        
+
+        /* Tucked into the corner, and the title starts below it. The title is
+           centred, so at this width a long one ran under the button. Keeping
+           the button inside the card rather than above it: the modal is close
+           to full height here, and anything sitting above the card would be
+           pushed off the top of the screen. */
+        .close-btn {
+            top: 10px;
+            right: 10px;
+        }
+
         h3 {
             font-size: 1.4rem;
+            margin-top: 22px;
             margin-bottom: 20px;
         }
     }
