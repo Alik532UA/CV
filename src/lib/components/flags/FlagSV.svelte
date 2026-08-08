@@ -1,0 +1,11 @@
+<svg
+    width="32"
+    height="24"
+    viewBox="0 0 32 24"
+    preserveAspectRatio="xMidYMid slice"
+    {...$$restProps}
+>
+    <rect width="32" height="24" fill="#006AA7" />
+    <rect x="10" y="0" width="4" height="24" fill="#FECC02" />
+    <rect x="0" y="10" width="32" height="4" fill="#FECC02" />
+</svg>

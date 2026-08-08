@@ -9,13 +9,30 @@ import { it } from "../i18n/locales/it";
 import { de } from "../i18n/locales/de";
 import { nl } from "../i18n/locales/nl";
 import { be } from "../i18n/locales/be";
+import { pl } from "../i18n/locales/pl";
+import { cs } from "../i18n/locales/cs";
+import { sk } from "../i18n/locales/sk";
+import { bg } from "../i18n/locales/bg";
+import { hr } from "../i18n/locales/hr";
+import { sl } from "../i18n/locales/sl";
+import { mk } from "../i18n/locales/mk";
+import { ro } from "../i18n/locales/ro";
+import { sv } from "../i18n/locales/sv";
+import { no } from "../i18n/locales/no";
+import { da } from "../i18n/locales/da";
+import { is } from "../i18n/locales/is";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
-export type Language = "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be";
+export type Language =
+	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
+	| "pl" | "cs" | "sk" | "bg" | "hr" | "sl" | "mk" | "ro" | "sv" | "no" | "da" | "is";
 
-const SUPPORTED_LANGUAGES: readonly Language[] = ["en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be"];
+const SUPPORTED_LANGUAGES: readonly Language[] = [
+	"en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
+	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is"
+];
 
 function isLanguage(value: string | null): value is Language {
 	return !!value && (SUPPORTED_LANGUAGES as readonly string[]).includes(value);
@@ -190,7 +207,10 @@ const TranslationSchema = z.object({
 
 export type Translations = z.infer<typeof TranslationSchema>;
 
-export const translations: Record<Language, Translations> = { en, uk, ja, es, fr, pt, it, de, nl, be };
+export const translations: Record<Language, Translations> = {
+	en, uk, ja, es, fr, pt, it, de, nl, be,
+	pl, cs, sk, bg, hr, sl, mk, ro, sv, no, da, is
+};
 
 /**
  * Global reactive translations object.

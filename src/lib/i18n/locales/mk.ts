@@ -1,0 +1,240 @@
+import type { Translations } from "../../controllers/I18nState.svelte";
+
+export const mk: Translations = {
+    lastUpdate: "Последно ажурирање: 8 август 2026",
+    title: ["AQA Инженер", "AI Истражувач", "Креатор на Игри"],
+    title_mobile: "AQA Инженер\nAI Истражувач\nКреатор на Игри",
+    nav: {
+        about: "За мене",
+        experience: "Искуство",
+        education: "Образование",
+        skills: "Вештини",
+        projects: "Проекти",
+        additional: "Дополнително",
+        contact: "Контакт",
+        bottom_nav_label: "Долна навигација"
+    },
+    hero: {
+        greeting: "Здраво! Јас сум Алик",
+        description: "Automation QA инженер и AI интегратор. Градам скалабилни тест-рамки, изработувам веб-апликации и игри и интегрирам AI системи (LLM, STT, TTS, автономни агенти).",
+        contactMe: "Контактирај ме",
+        downloadCV: "Преземи CV",
+        emailCopied: "Е-поштата е копирана!",
+        openMailClient: "Отвори клиент за е-пошта"
+    },
+    about: {
+        title: "За мене",
+        location: "Одеса, Украина",
+        content: "QA Automation инженер со над 5 години вкупно искуство во QA (од кои над 2 години во AQA). Автоматизирам Web, Desktop (C#/WinAppDriver) и Mobile (Java/Appium/Playwright). Како развивач, изградив екосистем од 9 производи, вклучувајќи MindStep (со 23 E2E тестови во Playwright) и голем AI мод за Valheim. Активно користам агентни AI алатки (Claude Code, Gemini CLI, Antigravity IDE) за да го забрзам развојот и изработката на автотестови.",
+        hobbiesTitle: "Хобија",
+        philosophyTitle: "Клучни инженерски принципи",
+        philosophyItems: {
+            greenfield: "Соло QA лидерство од нула: Практично искуство во градење целосни QA процеси и автоматизација на тестирање од нула, без претходна инфраструктура.",
+            dynamicTests: "Сложени динамични автотестови: Пишување напредни автоматизирани тестови со динамичен избор на податоци.",
+            aiWorkflows: "Продуктивност водена од AI: Интеграција на AI алатки (Claude Code, Gemini CLI, Antigravity IDE) за забрзување на изработката на тестови."
+        }
+    },
+    experience: {
+        title: "Искуство",
+        showNonIT: "Прикажи искуство надвор од IT",
+        hideNonIT: "Сокриј искуство надвор од IT",
+        present: "Сега",
+        roles: {
+            intellias_role: "Manual & Automation QA Engineer",
+            absoft_role: "Manual QA Engineer",
+            singree_role: "SEO Analyst",
+            unicorn_role: "Video Editor",
+            nutduet_role: "Video Editor & SDE",
+            channel7_role: "Video Editor",
+            krug_role: "Video Editor",
+            theater_role: "Техничка поддршка"
+        },
+        descriptions: {
+            intellias_desc: "Тестирање на Web, Desktop и Mobile апликации. Автоматизација на тестирање (C#, Selenium, WinAppDriver, Appium). Истражување на протекување на меморија и race conditions.",
+            absoft_desc: "Тестирање на уреди и мобилни апликации за воен видео-рекордер на C.",
+            singree_desc: "Оптимизација и анализа за пребарувачи.",
+            unicorn_desc: "Видео монтажа за YouTube канали.",
+            nutduet_desc: "Монтажа на настани и сценски настапи.",
+            channel7_desc: "Монтажа на информативни емисии.",
+            krug_desc: "Монтажа на информативни емисии.",
+            theater_desc: "Техничка поддршка на над 100 театарски претстави. Звук, осветлување, програмирање пултови, снимање и монтажа на видео."
+        }
+    },
+    education: {
+        title: "Образование",
+        institutions: {
+            polytech_name: "Одески национален политехнички универзитет",
+            theater_school_name: "Детско театарско училиште"
+        },
+        descriptions: {
+            polytech_desc: "Магистер по компјутерски системи и мрежи, Институт за компјутерски системи",
+            theater_school_desc: "Театарски оддел (2006-2012) // Музички оддел (2009-2013)"
+        }
+    },
+    skills: {
+        title: "Вештини и технологии",
+        showMore: "Прикажи специјализирани вештини",
+        hideMore: "Сокриј специјализирани вештини",
+        platforms: {
+            desktop: "Desktop апликација: C#, Selenium, WinAppDriver",
+            web: "Web: C#, Selenium, Playwright",
+            mobile: "Mobile апликација: Java, IntelliJ IDEA, Selenium, Appium Inspector, Appium Server"
+        },
+        categories: {
+            ai: "AI и агентни работни текови",
+            it: "IT и автоматизација",
+            design3d: "3D и дизајн",
+            video: "Видео и медиуми",
+            tools: "Софтвер и алатки"
+        },
+        items: {
+            claudeCode: "Claude Code & CLI",
+            geminiCli: "Gemini CLI & Studio",
+            antigravityIde: "Antigravity IDE & CLI",
+            cursor: "Cursor IDE",
+            copilot: "GitHub Copilot",
+            midjourney: "Midjourney",
+            ai: "AI / LLM интеграција",
+            csharp: "C#",
+            java: "Java",
+            playwright: "Playwright",
+            blender: "Blender",
+            slicer: "Cura / Creality Slicer",
+            printing: "3D печатење",
+            godot: "Godot (GDScript)",
+            premiere: "Premiere Pro",
+            photoshop: "Photoshop",
+            topaz: "Topaz AI",
+            vmix: "vMix",
+            jira: "Jira / Confluence",
+            git: "Git",
+            figma: "Figma",
+            firebase: "Firebase"
+        }
+    },
+    other: {
+        title: "Дополнителни информации",
+        iq: "125 (над просек)",
+        olympics: "3-то место - 2016, Сеукраинска олимпијада по дијагностика на компјутерски системи",
+        driver: "Возачка дозвола (од 2015 година)",
+        languages: {
+            title: "Јазици",
+            uk: "Украински — Мајчин",
+            en: "Англиски — A2 (Технички / Со помош на AI)",
+            ru: "Руски — Течно"
+        },
+        hobbies: ["AI", "Видео игри", "Дизајн", "Скриптирање", "Друштвени игри", "Игра Мафија", "3D печатење"]
+    },
+    projects: {
+        title: "Проекти и портфолио",
+        featuredBadge: "Издвоена AI витрина",
+        categories: {
+            all: "Сите проекти",
+            games: "Игри",
+            apps: "Апликации",
+            websites: "Веб-страници"
+        },
+        items: {
+            and_dvergr: {
+                id: "and_dvergr",
+                title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
+                description: "Напредна AI модификација за Valheim. Интегрира LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS и автономни NPC агенти (земјоделци, собирачи, поправувачи, гаврани-курири).",
+                button: "Гледај видео",
+                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
+                category: "games",
+                image: "AndDvergrShallSpeakAI.jpg",
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
+                featured: true
+            },
+            mindstep: {
+                id: "mindstep",
+                title: "MindStep",
+                description: "Стратешка веб-игра за тренирање на мозокот. Целосно покриена со 23 E2E тестови во Playwright за да се обезбеди стабилност, квалитет на регресија и перформанси.",
+                button: "Играј",
+                url: "https://alik532ua.github.io/MindStep/",
+                category: "games",
+                image: "mindstep.jpg",
+                tech: "Svelte 5, TypeScript, Playwright, Tailwind"
+            },
+            slovko: {
+                id: "slovko",
+                title: "Slovko",
+                description: "Мултиплатформска апликација за учење зборови и загатка во стил Wordle со лична статистика, кориснички сметки, натпреварувачка табела и поддршка за i18n на 7 јазици.",
+                button: "Почни да учиш",
+                url: "https://alik532ua.github.io/Slovko/",
+                category: "apps",
+                image: "slovko.jpg",
+                tech: "Svelte 5, TypeScript, Firebase, i18n"
+            },
+            digitalworkshop: {
+                id: "digitalworkshop",
+                title: "DigitalWorkshop",
+                description: "Интерактивен витрински портал со морска тематика што ги обединува сите веб-апликации, игри и алатки во единствен одзивен интерфејс.",
+                button: "Отвори портал",
+                url: "https://alik532ua.github.io/DigitalWorkshop/",
+                category: "websites",
+                image: "DigitalWorkshop.jpg",
+                tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
+            },
+            cv3d: {
+                id: "cv3d",
+                title: "3D CV Experience",
+                description: "Интерактивна 3D CV игра изградена од нула во Godot 4. Истражувај го светот, комуницирај со објекти и пронајди easter eggs!",
+                button: "Стартувај 3D CV",
+                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
+                category: "games",
+                image: "cv_3d.jpg",
+                tech: "Godot Engine, GDScript, 3D графика"
+            },
+            cv_web: {
+                id: "cv_web",
+                title: "Alik CV Web",
+                description: "Интерактивна веб-страница-портфолио изградена со Svelte 5, со toast известувања, зачувување на состојбата и целосна поддршка за i18n.",
+                button: "Погледни портфолио",
+                url: "https://alik532ua.github.io/CV/",
+                category: "websites",
+                image: "cv_web.jpg",
+                tech: "Svelte 5, TypeScript, Toast System, i18n"
+            },
+            teatralo4ka: {
+                id: "teatralo4ka",
+                title: "Teatralo4ka.odesa.ua",
+                description: "Официјална веб-страница и административен портал на Одеското театарско училиште со интерактивни виџети, темна океанска тема и фото галерии.",
+                button: "Посети ја страницата",
+                url: "https://teatralo4ka.odesa.ua/",
+                category: "websites",
+                image: "teatralo4ka.jpg",
+                tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
+            },
+            as5: {
+                id: "as5",
+                title: "Уметничко училиште №5",
+                description: "Официјална веб-страница на Одеското уметничко училиште №5 со поддршка за повеќе јазици, вести и одзивен дизајн.",
+                button: "Посети ја страницата",
+                url: "https://as5.odesa.ua/",
+                category: "websites",
+                image: "as5_odesa_ua.jpg",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
+            vetcrew: {
+                id: "vetcrew",
+                title: "VetCrewGames",
+                description: "Интерактивен проект со игри во поддршка на иницијативи за спасување животни и подигнување свест за заштита на животните.",
+                button: "Отвори проект",
+                url: "https://alik532ua.github.io/VetCrewGames",
+                category: "games",
+                image: "VetCrewGames.jpg",
+                tech: "Svelte 5, Web Games, CSS"
+            }
+        }
+    },
+    pdf_modal: {
+        title: "Избери верзија на PDF",
+        ats: "ATS / RMS",
+        dark: "Темна тема",
+        light: "Светла тема"
+    },
+    common: {
+        close: "Затвори"
+    }
+};
