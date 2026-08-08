@@ -428,7 +428,7 @@
     }
 
     .lang-dropdown {
-        min-width: 220px;
+        width: min(92vw, 460px);
         max-height: 70vh;
     }
 
@@ -454,13 +454,16 @@
         overflow-y: auto;
     }
 
+    /* Buttons within a group flow into as many columns as fit — with 30+
+       languages a single column would turn this into a very long scroll. */
     .lang-group {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 2px 8px;
     }
 
     .lang-group-label {
+        grid-column: 1 / -1;
         padding: 4px 12px 2px;
         font-size: 0.68rem;
         font-weight: 700;
