@@ -1,0 +1,11 @@
+<!-- Senyera, the flag of Catalonia. -->
+<svg
+    width="32"
+    height="24"
+    viewBox="0 0 810 540"
+    preserveAspectRatio="xMidYMid meet"
+    {...$$restProps}
+>
+    <rect width="810" height="540" fill="#FCDD09"/>
+    <path stroke="#DA121A" stroke-width="60" d="M0,90H810m0,120H0m0,120H810m0,120H0"/>
+</svg>

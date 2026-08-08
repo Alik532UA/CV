@@ -3,6 +3,7 @@ import { en } from "../i18n/locales/en";
 import { uk } from "../i18n/locales/uk";
 import { ja } from "../i18n/locales/ja";
 import { es } from "../i18n/locales/es";
+import { ca } from "../i18n/locales/ca";
 import { fr } from "../i18n/locales/fr";
 import { pt } from "../i18n/locales/pt";
 import { it } from "../i18n/locales/it";
@@ -46,13 +47,13 @@ import { logService } from "$lib/services/logService.svelte";
 export type Language =
 	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
 	| "pl" | "cs" | "sk" | "bg" | "hr" | "sl" | "mk" | "ro" | "sv" | "no" | "da" | "is"
-	| "fi" | "el" | "ga" | "cy" | "et" | "lv" | "lt" | "crh" | "ka" | "sq" | "ko" | "tr" | "he" | "mt"
+	| "ca" | "fi" | "el" | "ga" | "cy" | "et" | "lv" | "lt" | "crh" | "ka" | "sq" | "ko" | "tr" | "he" | "mt"
 	| "chk" | "pon" | "kos" | "yap";
 
 const SUPPORTED_LANGUAGES: readonly Language[] = [
 	"en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
 	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is",
-	"fi", "el", "ga", "cy", "et", "lv", "lt", "crh", "ka", "sq", "ko", "tr", "he", "mt",
+	"ca", "fi", "el", "ga", "cy", "et", "lv", "lt", "crh", "ka", "sq", "ko", "tr", "he", "mt",
 	"chk", "pon", "kos", "yap"
 ];
 
@@ -232,7 +233,7 @@ export type Translations = z.infer<typeof TranslationSchema>;
 export const translations: Record<Language, Translations> = {
 	en, uk, ja, es, fr, pt, it, de, nl, be,
 	pl, cs, sk, bg, hr, sl, mk, ro, sv, no, da, is,
-	fi, el, ga, cy, et, lv, lt, crh, ka, sq, ko, tr, he, mt,
+	ca, fi, el, ga, cy, et, lv, lt, crh, ka, sq, ko, tr, he, mt,
 	chk, pon, kos, yap
 };
 

@@ -9,6 +9,7 @@ import FlagHR from "$lib/components/flags/FlagHR.svelte";
 import FlagSL from "$lib/components/flags/FlagSL.svelte";
 import FlagMK from "$lib/components/flags/FlagMK.svelte";
 import FlagES from "$lib/components/flags/FlagES.svelte";
+import FlagCA from "$lib/components/flags/FlagCA.svelte";
 import FlagFR from "$lib/components/flags/FlagFR.svelte";
 import FlagPT from "$lib/components/flags/FlagPT.svelte";
 import FlagIT from "$lib/components/flags/FlagIT.svelte";
@@ -91,6 +92,7 @@ export const LANGUAGE_META = [
     { code: "mk" as Language, label: "Македонски", flag: FlagMK, group: "slavic" as LanguageGroup },
     // Romance
     { code: "es" as Language, label: "Español", flag: FlagES, group: "romance" as LanguageGroup },
+    { code: "ca" as Language, label: "Català", flag: FlagCA, group: "romance" as LanguageGroup },
     { code: "fr" as Language, label: "Français", flag: FlagFR, group: "romance" as LanguageGroup },
     { code: "pt" as Language, label: "Português", flag: FlagPT, group: "romance" as LanguageGroup },
     { code: "it" as Language, label: "Italiano", flag: FlagIT, group: "romance" as LanguageGroup },
