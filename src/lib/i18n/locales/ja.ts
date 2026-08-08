@@ -1,7 +1,7 @@
 import type { Translations } from "../../controllers/I18nState.svelte";
 
 export const ja: Translations = {
-    lastUpdate: "最終更新日: 2026年7月25日",
+    lastUpdate: "最終更新日: 2026年8月8日",
     title: ["AQAエンジニア", "AIエクスプローラー", "ゲームクリエイター"],
     title_mobile: "AQAエンジニア\nAIエクスプローラー\nゲームクリエイター",
     nav: {
