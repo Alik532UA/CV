@@ -555,5 +555,21 @@
             left: 0;
             right: auto;
         }
+
+        /* Pin the panel to the viewport instead of the trigger. The language
+           button is not the rightmost control — the theme toggle sits after it,
+           about 94px wide — so a panel this wide anchored to the button's right
+           edge is pushed off the left side of the screen. Same fix as the sea
+           page switcher in DigitalWorkshop. */
+        .lang-dropdown {
+            position: fixed;
+            top: 66px;
+            left: 15px;
+            right: 15px;
+            width: auto;
+            /* Clear the 60px header above and the 64px bottom nav below. */
+            max-height: calc(100vh - 140px);
+            max-height: calc(100dvh - 140px);
+        }
     }
 </style>
