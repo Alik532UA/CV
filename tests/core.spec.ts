@@ -12,20 +12,35 @@ test.describe('Core Functionality', () => {
 	test('language switching works', async ({ page }) => {
 		// Default should be English or based on browser/storage, checking for EN default
 		// Adjust this if logic depends on locale
-		
+
 		const langSwitcher = page.getByTestId('lang-switcher');
 		await expect(langSwitcher).toBeVisible();
 
+		// The switcher is a single trigger + searchable panel (scales past a
+		// handful of languages), so each option needs the panel open first.
+		const openLangPanel = () => langSwitcher.getByRole('button').first().click();
+
 		// Switch to Ukrainian
+		await openLangPanel();
 		await page.getByTestId('lang-uk').click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'uk');
 		await expect(page).toHaveURL(/lang=uk/);
-		
-		// Verify some UK text if possible, e.g., Hero greeting
-		// await expect(page.locator('h1')).toHaveText(/Привіт/); 
 
-		// Switch back to English
-		await page.getByTestId('lang-en').click();
+		// Verify some UK text if possible, e.g., Hero greeting
+		// await expect(page.locator('h1')).toHaveText(/Привіт/);
+
+		// Switch to Spanish
+		await openLangPanel();
+		await page.getByTestId('lang-es').click();
+		await expect(page.locator('html')).toHaveAttribute('lang', 'es');
+		await expect(page).toHaveURL(/lang=es/);
+
+		// The search box filters the list down to a single match
+		await openLangPanel();
+		await langSwitcher.getByPlaceholder('Search language...').fill('English');
+		const results = langSwitcher.getByRole('menuitemradio');
+		await expect(results).toHaveCount(1);
+		await results.first().click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 		await expect(page).toHaveURL(/lang=en/);
 	});

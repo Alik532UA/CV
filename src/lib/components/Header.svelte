@@ -9,9 +9,8 @@
         CircleOff,
         Shapes,
     } from "lucide-svelte";
-    import FlagUK from "$lib/components/flags/FlagUK.svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
-    import FlagJA from "$lib/components/flags/FlagJA.svelte";
+    import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS } from "$lib/i18n/languageMeta";
     import { onMount, onDestroy } from "svelte";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -23,16 +22,24 @@
 
     let isBgDropdownOpen = $state(false);
     let isLangDropdownOpen = $state(false);
+    let langQuery = $state("");
 
-    const LANGUAGES = [
-        { code: "en" as Language, label: "English", flag: FlagEN },
-        { code: "uk" as Language, label: "Українська", flag: FlagUK },
-        { code: "ja" as Language, label: "日本語", flag: FlagJA }
-    ];
+    const filteredLanguageMeta = $derived(
+        LANGUAGE_META.filter((l) => {
+            const q = langQuery.trim().toLowerCase();
+            if (!q) return true;
+            return l.label.toLowerCase().includes(q) || l.code.includes(q);
+        })
+    );
 
-    function setLanguage(lang: Language) {
-        language.set(lang);
-    }
+    // Groups render in a fixed order and only when they have a match, so the
+    // list stays tidy however many languages end up sharing a group.
+    const visibleGroups = $derived(
+        LANGUAGE_GROUP_ORDER.map((group) => ({
+            group,
+            items: filteredLanguageMeta.filter((l) => l.group === group)
+        })).filter((g) => g.items.length > 0)
+    );
 
     function toggleBgDropdown() {
         isBgDropdownOpen = !isBgDropdownOpen;
@@ -41,7 +48,10 @@
 
     function toggleLangDropdown() {
         isLangDropdownOpen = !isLangDropdownOpen;
-        if (isLangDropdownOpen) isBgDropdownOpen = false;
+        if (isLangDropdownOpen) {
+            isBgDropdownOpen = false;
+            langQuery = "";
+        }
     }
 
     function selectBackground(type: 0 | 1 | 2 | 3) {
@@ -60,7 +70,7 @@
         if (isBgDropdownOpen && !target.closest(".mobile-bg-switcher")) {
             isBgDropdownOpen = false;
         }
-        if (isLangDropdownOpen && !target.closest(".mobile-lang-switcher")) {
+        if (isLangDropdownOpen && !target.closest(".lang-switcher-wrapper")) {
             isLangDropdownOpen = false;
         }
     }
@@ -80,9 +90,9 @@
     // Helper to get icon for active mobile bg
     let ActiveBgIcon = $derived([CircleOff, Sparkles, Waves, Shapes][background.type]);
 
-    // Helper to get the flag shown on the collapsed mobile language button
+    // Helper to get the flag shown on the collapsed language trigger button
     let ActiveFlag = $derived(
-        LANGUAGES.find((l) => l.code === language.current)?.flag ?? FlagEN
+        LANGUAGE_META.find((l) => l.code === language.current)?.flag ?? FlagEN
     );
 </script>
 
@@ -198,71 +208,58 @@
                 {/if}
             </div>
 
-            <!-- Language Switcher (Desktop) -->
-            <div class="toggle-group glass desktop-only" data-testid="lang-switcher" role="group" aria-label="Language selection">
-                <button
-                    onclick={() => setLanguage("en")}
-                    class:active={language.current === "en"}
-                    title="English"
-                    aria-label="Switch to English"
-                    aria-pressed={language.current === "en"}
-                    data-testid="lang-en"
-                >
-                    <FlagEN width="20" height="15" class="flag-icon" />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => setLanguage("uk")}
-                    class:active={language.current === "uk"}
-                    title="Українська"
-                    aria-label="Switch to Ukrainian"
-                    aria-pressed={language.current === "uk"}
-                    data-testid="lang-uk"
-                >
-                    <FlagUK width="20" height="15" class="flag-icon" />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => setLanguage("ja")}
-                    class:active={language.current === "ja"}
-                    title="日本語"
-                    aria-label="Switch to Japanese"
-                    aria-pressed={language.current === "ja"}
-                    data-testid="lang-ja"
-                >
-                    <FlagJA width="20" height="15" class="flag-icon" />
-                </button>
-            </div>
-
-            <!-- Language Switcher (Mobile) -->
+            <!-- Language Switcher: one trigger for every viewport, since an
+                 inline row (the old desktop layout) stops scaling well past a
+                 handful of languages. The panel adds a search box and groups
+                 once the list grows; with 4 languages it is sparse but the
+                 structure is what needs to hold up as more are added. -->
             <div
-                class="mobile-lang-switcher mobile-only"
-                data-testid="lang-switcher-mobile"
+                class="lang-switcher-wrapper"
+                data-testid="lang-switcher"
             >
                 <button
-                    class="glass-icon-btn"
+                    class="glass-icon-btn lang-trigger"
                     onclick={(e) => { e.stopPropagation(); toggleLangDropdown(); }}
                     aria-label="Select language"
                     aria-haspopup="true"
                     aria-expanded={isLangDropdownOpen}
                 >
-                    <ActiveFlag width="24" height="18" class="flag-icon" />
+                    <ActiveFlag width="20" height="15" class="flag-icon" />
+                    <span class="lang-code">{language.current.toUpperCase()}</span>
                 </button>
 
                 {#if isLangDropdownOpen}
                     <div class="lang-dropdown glass" role="menu">
-                        {#each LANGUAGES as { code, label, flag: Flag } (code)}
-                            <button
-                                onclick={() => selectLanguage(code)}
-                                class:active={language.current === code}
-                                role="menuitemradio"
-                                aria-checked={language.current === code}
-                                data-testid="lang-{code}-mobile"
-                            >
-                                <Flag width="20" height="15" class="flag-icon" />
-                                <span>{label}</span>
-                            </button>
-                        {/each}
+                        <!-- svelte-ignore a11y_autofocus -->
+                        <input
+                            type="text"
+                            class="lang-search"
+                            placeholder="Search language..."
+                            bind:value={langQuery}
+                            onclick={(e) => e.stopPropagation()}
+                            autofocus
+                        />
+                        <div class="lang-groups">
+                            {#each visibleGroups as { group, items } (group)}
+                                <div class="lang-group">
+                                    <span class="lang-group-label">{LANGUAGE_GROUP_LABELS[group]}</span>
+                                    {#each items as { code, label, flag: Flag } (code)}
+                                        <button
+                                            onclick={() => selectLanguage(code)}
+                                            class:active={language.current === code}
+                                            role="menuitemradio"
+                                            aria-checked={language.current === code}
+                                            data-testid="lang-{code}"
+                                        >
+                                            <Flag width="20" height="15" class="flag-icon" />
+                                            <span>{label}</span>
+                                        </button>
+                                    {/each}
+                                </div>
+                            {:else}
+                                <p class="lang-empty">No languages found</p>
+                            {/each}
+                        </div>
                     </div>
                 {/if}
             </div>
@@ -400,6 +397,18 @@
         transition: var(--transition);
     }
 
+    .lang-trigger {
+        width: auto;
+        padding: 0 10px;
+        gap: 6px;
+    }
+
+    .lang-code {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
     .bg-dropdown,
     .lang-dropdown {
         position: absolute;
@@ -418,8 +427,58 @@
         z-index: 1001;
     }
 
+    .lang-dropdown {
+        min-width: 220px;
+        max-height: 70vh;
+    }
+
+    .lang-search {
+        flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 8px 10px;
+        color: var(--text-primary, #fff);
+        font-size: 0.85rem;
+    }
+
+    .lang-search:focus {
+        outline: none;
+        border-color: var(--accent-primary);
+    }
+
+    .lang-groups {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        overflow-y: auto;
+    }
+
+    .lang-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .lang-group-label {
+        padding: 4px 12px 2px;
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary);
+        opacity: 0.6;
+    }
+
+    .lang-empty {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+        text-align: center;
+    }
+
     .mobile-bg-switcher,
-    .mobile-lang-switcher {
+    .lang-switcher-wrapper {
         position: relative;
     }
 

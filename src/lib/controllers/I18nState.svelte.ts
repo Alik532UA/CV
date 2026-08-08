@@ -2,11 +2,24 @@ import { z } from "zod";
 import { en } from "../i18n/locales/en";
 import { uk } from "../i18n/locales/uk";
 import { ja } from "../i18n/locales/ja";
+import { es } from "../i18n/locales/es";
+import { fr } from "../i18n/locales/fr";
+import { pt } from "../i18n/locales/pt";
+import { it } from "../i18n/locales/it";
+import { de } from "../i18n/locales/de";
+import { nl } from "../i18n/locales/nl";
+import { be } from "../i18n/locales/be";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
-export type Language = "en" | "uk" | "ja";
+export type Language = "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be";
+
+const SUPPORTED_LANGUAGES: readonly Language[] = ["en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be"];
+
+function isLanguage(value: string | null): value is Language {
+	return !!value && (SUPPORTED_LANGUAGES as readonly string[]).includes(value);
+}
 
 class LanguageState {
 	current = $state<Language>("en");
@@ -17,13 +30,13 @@ class LanguageState {
 	init() {
 		if (browser) {
 			const params = new URLSearchParams(window.location.search);
-			const lang = params.get("lang") as Language;
-			if (lang === "en" || lang === "uk" || lang === "ja") {
+			const lang = params.get("lang");
+			if (isLanguage(lang)) {
 				this.current = lang;
 				logService.info("i18n", `Initializing language from URL: ${lang}`);
 			} else {
-				const saved = storage.get("lang") as Language;
-				if (saved === "en" || saved === "uk" || saved === "ja") {
+				const saved = storage.get("lang");
+				if (isLanguage(saved)) {
 					this.current = saved;
 					logService.info("i18n", `Initializing language from storage: ${saved}`);
 				}
@@ -177,7 +190,7 @@ const TranslationSchema = z.object({
 
 export type Translations = z.infer<typeof TranslationSchema>;
 
-export const translations: Record<Language, Translations> = { en, uk, ja };
+export const translations: Record<Language, Translations> = { en, uk, ja, es, fr, pt, it, de, nl, be };
 
 /**
  * Global reactive translations object.
