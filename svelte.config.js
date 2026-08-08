@@ -19,8 +19,11 @@ const config = {
 			mode: 'hash',
 			directives: {
 				'script-src': [
-					'self', 
+					'self',
 					'https://fonts.googleapis.com',
+					// gtag.js is injected at runtime by the analytics service; without
+					// this the browser blocks it and analytics silently never starts.
+					'https://www.googletagmanager.com',
 					'sha256-5kCri4c6Kc63HNipVm8tK0VilaNPrqM9D8fdBdzcuVI='
 				],
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
@@ -29,6 +32,9 @@ const config = {
 				'object-src': ['none'],
 				'base-uri': ['self'],
 				'frame-ancestors': ['none']
+				// Note: there is deliberately no connect-src here. Adding one would
+				// need to allow https://*.google-analytics.com and
+				// https://*.analytics.google.com, or the analytics beacons break.
 			}
 		}
 	}
