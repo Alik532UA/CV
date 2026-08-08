@@ -1,13 +1,14 @@
 <script lang="ts">
 	import "../app.css";
-	import Sidebar from "$lib/components/Sidebar.svelte";
+	import Sidebar from "$lib/components/SidebarNav.svelte";
 	import BottomNav from "$lib/components/BottomNav.svelte";
-	import Header from "$lib/components/Header.svelte";
+	import Header from "$lib/components/HeaderSection.svelte";
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import SEO from "$lib/components/SEO.svelte";
 	import { onMount } from "svelte";
 	import { SvelteSet } from "svelte/reactivity";
 	import { browser } from "$app/environment";
+	import { page } from "$app/state";
 	import { replaceState, afterNavigate } from "$app/navigation";
 	import { language } from "$lib/controllers/I18nState.svelte";
 	import { theme, background } from "$lib/controllers/UiState.svelte";
@@ -18,6 +19,19 @@
 	import { setContext } from "svelte";
 
 	let { children } = $props();
+
+	// Set here rather than in the page component: SEO.svelte lives in this
+	// layout and renders before the page does, and `language` is a module
+	// singleton. Assigning it further down meant that while prerendering, the
+	// head of each page was still built from the previous page's language —
+	// /uk/ shipped English tags, /ja/ shipped Ukrainian, and so on down the list.
+	language.current = page.data.language ?? "en";
+
+	// Effects do not run while prerendering, so the assignment above covers that;
+	// this keeps the singleton in step with the browser back and forward buttons.
+	$effect(() => {
+		language.current = page.data.language ?? "en";
+	});
 
 	// Inject controllers via Context API for architectural consistency
 	setContext("theme", theme);
@@ -67,7 +81,9 @@
 		// Initialize global states
 		theme.init();
 		background.init();
-		language.init();
+		// The route segment decides the language; init falls back to the saved
+		// choice only at the bare path, where none was named.
+		language.init(page.data.routeLanguage);
 		initAnalytics();
 
 		const observedElements = new SvelteSet<Element>();

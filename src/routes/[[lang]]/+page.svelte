@@ -9,6 +9,8 @@
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
+    // Consumed by child sections through their own props; the language now
+    // comes from the layout, so nothing is read from it directly here.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let { data }: PageProps = $props();
 

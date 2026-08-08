@@ -44,6 +44,8 @@ import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 import { track } from "$lib/services/analytics";
+import { goto } from "$app/navigation";
+import { langPath } from "$lib/i18n/routing";
 
 export type Language =
 	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
@@ -51,14 +53,14 @@ export type Language =
 	| "ca" | "fi" | "el" | "ga" | "cy" | "et" | "lv" | "lt" | "crh" | "ka" | "sq" | "ko" | "tr" | "he" | "mt"
 	| "chk" | "pon" | "kos" | "yap";
 
-const SUPPORTED_LANGUAGES: readonly Language[] = [
+export const SUPPORTED_LANGUAGES: readonly Language[] = [
 	"en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
 	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is",
 	"ca", "fi", "el", "ga", "cy", "et", "lv", "lt", "crh", "ka", "sq", "ko", "tr", "he", "mt",
 	"chk", "pon", "kos", "yap"
 ];
 
-function isLanguage(value: string | null): value is Language {
+export function isLanguage(value: string | null | undefined): value is Language {
 	return !!value && (SUPPORTED_LANGUAGES as readonly string[]).includes(value);
 }
 
@@ -68,41 +70,41 @@ class LanguageState {
 
 	constructor() {}
 
-	init() {
-		if (browser) {
-			const params = new URLSearchParams(window.location.search);
-			const lang = params.get("lang");
-			if (isLanguage(lang)) {
-				this.current = lang;
-				logService.info("i18n", `Initializing language from URL: ${lang}`);
+	/**
+	 * @param routeLanguage the /[[lang]]/ segment, or undefined at the bare path.
+	 *
+	 * Priority is explicit: an address that names a language wins, then the
+	 * saved choice, then English. The bare path deliberately counts as "no
+	 * choice made", so a returning visitor still lands in their own language;
+	 * /en/ is an explicit request for English and overrides the saved one.
+	 */
+	init(routeLanguage?: Language) {
+		if (!browser) return;
+
+		if (routeLanguage) {
+			this.current = routeLanguage;
+			logService.info("i18n", `Initializing language from route: ${routeLanguage}`);
+		} else {
+			// ?lang= links are already out in the world from before the move to
+			// paths, so honour them once and rewrite the address.
+			const legacy = new URLSearchParams(window.location.search).get("lang");
+			if (isLanguage(legacy)) {
+				this.current = legacy;
+				logService.info("i18n", `Migrating legacy ?lang=${legacy} to a path`);
+				// eslint-disable-next-line svelte/no-navigation-without-resolve
+				goto(langPath(legacy), { replaceState: true, noScroll: true, keepFocus: true });
 			} else {
 				const saved = storage.get("lang");
 				if (isLanguage(saved)) {
 					this.current = saved;
 					logService.info("i18n", `Initializing language from storage: ${saved}`);
+					// eslint-disable-next-line svelte/no-navigation-without-resolve
+					goto(langPath(saved), { replaceState: true, noScroll: true, keepFocus: true });
 				}
 			}
-
-			// Sync HTML lang attribute
-			document.documentElement.lang = this.current;
-
-			// Sync to URL reactively using native history API
-			$effect.root(() => {
-				$effect(() => {
-					const lang = this.current;
-					const url = new URL(window.location.href);
-
-					// Sync HTML lang attribute reactively
-					document.documentElement.lang = lang;
-
-					if (url.searchParams.get("lang") !== lang) {
-						url.searchParams.set("lang", lang);
-						window.history.replaceState(null, "", url.toString());
-						logService.info("i18n", `Language synced to URL: ${lang}`);
-					}
-				});
-			});
 		}
+
+		document.documentElement.lang = this.current;
 	}
 
 	set(lang: Language) {
@@ -121,6 +123,11 @@ class LanguageState {
 				storage.set("lang", lang);
 				document.documentElement.lang = lang;
 			}
+			// Same route id (/[[lang]]) with only the parameter changing, so
+			// SvelteKit updates in place instead of remounting — the switch stays
+			// as seamless as it was with ?lang=.
+			// eslint-disable-next-line svelte/no-navigation-without-resolve
+			goto(langPath(lang), { noScroll: true, keepFocus: true });
 			setTimeout(() => {
 				this.isChanging = false;
 			}, 50);

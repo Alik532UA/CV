@@ -1,6 +1,6 @@
 <script lang="ts">
     import { language, translations } from "$lib/controllers/I18nState.svelte";
-    import { page } from "$app/state";
+    import { INDEXED_LANGUAGES, isIndexed, langUrl } from "$lib/i18n/routing";
     
     // Hardcoded rather than taken from page.url.origin: these tags are read out
     // of the prerendered HTML, and during prerendering SvelteKit reports a
@@ -18,10 +18,16 @@
     let description = $derived(t.hero.description);
     let imageUrl = $derived(`${SITE_ORIGIN}${SITE_BASE}/images/profile.jpg`);
 
-    // The active language rides in ?lang=, so every one of the supported
-    // languages looks to a crawler like a separate page with duplicate content.
-    // The canonical drops the query and points them all at the one real page.
-    let canonical = $derived(`${SITE_ORIGIN}${page.url.pathname}`);
+    // Each language has its own address now. English resolves at both /CV/
+    // and /CV/en/, and langUrl returns the bare path for it, so the explicit
+    // one points its canonical at the bare one instead of competing with it.
+    let canonical = $derived(langUrl(SITE_ORIGIN, language.current));
+
+    // Only the reviewed languages are offered to search engines. The rest are
+    // unreviewed machine translation: fully usable, addressable and shareable,
+    // but kept out of the index rather than risking the domain being judged on
+    // forty pages nobody has read.
+    let indexable = $derived(isIndexed(language.current));
 
     // Structured data: lets search engines read this as a person rather than
     // guessing from prose, which is what drives the knowledge-panel style
@@ -70,6 +76,16 @@
     <meta name="description" content={description} />
     <meta name="author" content="Alik Zapolnov" />
     <link rel="canonical" href={canonical} />
+    {#if !indexable}
+        <meta name="robots" content="noindex, follow" />
+    {/if}
+
+    <!-- Alternates for the reviewed languages only, so search engines are not
+         pointed at pages this site asks them not to index. -->
+    {#each INDEXED_LANGUAGES as alt (alt)}
+        <link rel="alternate" hreflang={alt} href={langUrl(SITE_ORIGIN, alt)} />
+    {/each}
+    <link rel="alternate" hreflang="x-default" href={langUrl(SITE_ORIGIN, "en")} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

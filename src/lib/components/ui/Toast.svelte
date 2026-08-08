@@ -94,7 +94,7 @@
 						msg.action?.onAction();
 						toast.remove(msg.id);
 					}}
-					data-testid="toast-action-button"
+					data-testid="toast-action-btn"
 				>
 					{msg.action.label}
 				</button>
@@ -105,7 +105,7 @@
 			class="toast-close"
 			onclick={() => toast.remove(msg.id)}
 			aria-label={t.common.close}
-			data-testid="toast-close-button"
+			data-testid="toast-close-btn"
 		>
 			<X size={16} aria-hidden="true" />
 		</button>

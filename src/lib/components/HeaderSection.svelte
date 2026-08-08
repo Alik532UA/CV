@@ -102,7 +102,7 @@
             <!-- Background Switcher (Desktop) -->
             <div
                 class="toggle-group glass desktop-only"
-                data-testid="bg-switcher"
+                data-testid="bg-toggle-group"
                 role="radiogroup"
                 aria-label="Background effect"
             >
@@ -113,7 +113,7 @@
                     aria-label="Disable background effects"
                     aria-checked={background.type === 0}
                     role="radio"
-                    data-testid="bg-off"
+                    data-testid="bg-off-btn"
                 >
                     <CircleOff size={18} />
                 </button>
@@ -125,7 +125,7 @@
                     aria-label="Enable particles background"
                     aria-checked={background.type === 1}
                     role="radio"
-                    data-testid="bg-particles"
+                    data-testid="bg-particles-btn"
                 >
                     <Sparkles size={18} />
                 </button>
@@ -137,7 +137,7 @@
                     aria-label="Enable waves background"
                     aria-checked={background.type === 2}
                     role="radio"
-                    data-testid="bg-waves"
+                    data-testid="bg-waves-btn"
                 >
                     <Waves size={18} />
                 </button>
@@ -149,7 +149,7 @@
                     aria-label="Enable shapes background"
                     aria-checked={background.type === 3}
                     role="radio"
-                    data-testid="bg-shapes"
+                    data-testid="bg-shapes-btn"
                 >
                     <Shapes size={18} />
                 </button>
@@ -158,7 +158,7 @@
             <!-- Background Switcher (Mobile) -->
             <div
                 class="mobile-bg-switcher mobile-only"
-                data-testid="bg-switcher-mobile"
+                data-testid="bg-toggle-group-mobile"
             >
                 <button
                     class="glass-icon-btn"
@@ -215,7 +215,7 @@
                  structure is what needs to hold up as more are added. -->
             <div
                 class="lang-switcher-wrapper"
-                data-testid="lang-switcher"
+                data-testid="lang-select"
             >
                 <button
                     class="glass-icon-btn lang-trigger"
@@ -250,7 +250,7 @@
                                                 class:active={language.current === code}
                                                 role="menuitemradio"
                                                 aria-checked={language.current === code}
-                                                data-testid="lang-{code}"
+                                                data-testid="lang-{code}-btn"
                                                 title={label.endsWith("*") ? "Machine-translated draft — pending native speaker review" : undefined}
                                             >
                                                 <Flag width="20" height="15" class="flag-icon" />
@@ -268,14 +268,14 @@
             </div>
 
             <!-- Theme Toggle -->
-            <div class="toggle-group glass" data-testid="theme-switcher" role="group" aria-label="Theme selection">
+            <div class="toggle-group glass" data-testid="theme-toggle-group" role="group" aria-label="Theme selection">
                 <button
                     onclick={() => theme.current !== "light" && theme.toggle()}
                     class:active={theme.current === "light"}
                     title="Light Theme"
                     aria-label="Enable light theme"
                     aria-pressed={theme.current === "light"}
-                    data-testid="theme-light"
+                    data-testid="theme-light-btn"
                 >
                     <Sun size={18} />
                 </button>
@@ -286,7 +286,7 @@
                     title="Dark Theme"
                     aria-label="Enable dark theme"
                     aria-pressed={theme.current === "dark"}
-                    data-testid="theme-dark"
+                    data-testid="theme-dark-btn"
                 >
                     <Moon size={18} />
                 </button>
