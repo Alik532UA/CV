@@ -8,11 +8,11 @@ import { browser, dev } from "$app/environment";
  * that uses GA — so hiding it would buy nothing while forcing the value through
  * the GitHub Actions build for the static adapter.
  *
- * Paste the real ID below to switch analytics on. Until then every export in
- * this file is a no-op: no script is loaded and nothing is sent, so a
- * half-finished setup cannot report into the wrong property.
+ * Replacing the ID with a placeholder turns every export here into a no-op —
+ * no script is loaded and nothing is sent — so the file can be carried into a
+ * new project without it reporting into this property.
  */
-const GA_ID = "G-XXXXXXXXXX";
+const GA_ID = "G-0G0N13KZG6";
 
 const isConfigured = /^G-[A-Z0-9]{6,}$/.test(GA_ID) && !GA_ID.includes("XXXX");
 
