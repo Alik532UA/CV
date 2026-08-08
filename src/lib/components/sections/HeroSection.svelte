@@ -32,93 +32,82 @@
 
     <div class="about-grid">
         <div class="about-main">
+            <!-- Mobile only: on desktop these live in the sidebar, which is
+                 hidden under 768px. Icons carry no visible label — five of
+                 them plus the PDF button do not fit a phone row otherwise.
+                 PDF keeps its label because it is the one action a recruiter
+                 is actually looking for. -->
+            <div class="contacts-grid">
+                <!-- Absolute external URL or app scheme, never a route -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={CONTACTS.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-secondary icon-only"
+                    aria-label="LinkedIn"
+                    title="LinkedIn"
+                >
+                    <IconLinkedIn size={20} />
+                </a>
+                <!-- Absolute external URL or app scheme, never a route -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={CONTACTS.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-secondary icon-only"
+                    aria-label="WhatsApp"
+                    title="WhatsApp"
+                >
+                    <IconWhatsApp size={20} />
+                </a>
+                <!-- Absolute external URL or app scheme, never a route -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={CONTACTS.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-secondary icon-only"
+                    aria-label="Telegram"
+                    title="Telegram"
+                >
+                    <IconTelegram size={20} />
+                </a>
+                <!-- Absolute external URL or app scheme, never a route -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={CONTACTS.viber}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-secondary icon-only"
+                    aria-label="Viber"
+                    title="Viber"
+                >
+                    <IconViber size={20} />
+                </a>
+                <a
+                    href="mailto:{EMAIL}"
+                    class="btn-secondary icon-only"
+                    onclick={handleEmailCopy}
+                    data-testid="hero-email-link"
+                    aria-label="Email"
+                    title="Email"
+                >
+                    <Mail size={20} aria-hidden="true" />
+                </a>
+                <button
+                    class="btn-secondary nowrap-btn pdf-btn"
+                    onclick={onOpenPdfModal}
+                >
+                    <span><FileText size={18} aria-hidden="true" /></span> PDF
+                    version
+                </button>
+            </div>
+
             <div class="bio glass card">
                 <p class="location">
                     <MapPin size={18} class="inline-icon" aria-hidden="true" />
                     {t.about.location}
                 </p>
                 <p class="bio-text">{t.about.content}</p>
-
-                <!-- Mobile only: on desktop these live in the sidebar, which is
-                     hidden under 768px. Icons carry no visible label — five of
-                     them plus the PDF button do not fit a phone row otherwise.
-                     PDF keeps its label because it is the one action a recruiter
-                     is actually looking for. -->
-                <div class="contacts-grid">
-                    <!-- Absolute external URL or app scheme, never a route -->
-                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                    <a href={CONTACTS.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-secondary icon-only"
-                        aria-label="LinkedIn"
-                        title="LinkedIn"
-                    >
-                        <IconLinkedIn size={20} />
-                    </a>
-                    <!-- Absolute external URL or app scheme, never a route -->
-                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                    <a href={CONTACTS.whatsapp}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-secondary icon-only"
-                        aria-label="WhatsApp"
-                        title="WhatsApp"
-                    >
-                        <IconWhatsApp size={20} />
-                    </a>
-                    <!-- Absolute external URL or app scheme, never a route -->
-                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                    <a href={CONTACTS.telegram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-secondary icon-only"
-                        aria-label="Telegram"
-                        title="Telegram"
-                    >
-                        <IconTelegram size={20} />
-                    </a>
-                    <!-- Absolute external URL or app scheme, never a route -->
-                    <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                    <a href={CONTACTS.viber}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-secondary icon-only"
-                        aria-label="Viber"
-                        title="Viber"
-                    >
-                        <IconViber size={20} />
-                    </a>
-                    <a
-                        href="mailto:{EMAIL}"
-                        class="btn-secondary icon-only"
-                        onclick={handleEmailCopy}
-                        data-testid="hero-email-link"
-                        aria-label="Email"
-                        title="Email"
-                    >
-                        <Mail size={20} aria-hidden="true" />
-                    </a>
-                    <button
-                        class="btn-secondary nowrap-btn pdf-btn"
-                        onclick={onOpenPdfModal}
-                    >
-                        <span><FileText size={18} aria-hidden="true" /></span> PDF
-                        version
-                    </button>
-                </div>
             </div>
-
-            {#if t.about.philosophyTitle && t.about.philosophyItems}
-                <div class="philosophy-block">
-                    <h4 class="philosophy-title">{t.about.philosophyTitle}</h4>
-                    <ul class="philosophy-list">
-                        {#if t.about.philosophyItems.greenfield}<li>{t.about.philosophyItems.greenfield}</li>{/if}
-                        {#if t.about.philosophyItems.dynamicTests}<li>{t.about.philosophyItems.dynamicTests}</li>{/if}
-                        {#if t.about.philosophyItems.aiWorkflows}<li>{t.about.philosophyItems.aiWorkflows}</li>{/if}
-                    </ul>
-                </div>
-            {/if}
         </div>
 
         <div class="about-side">
@@ -134,6 +123,17 @@
                 />
             </div>
         </div>
+
+        {#if t.about.philosophyTitle && t.about.philosophyItems}
+            <div class="philosophy-block">
+                <h4 class="philosophy-title">{t.about.philosophyTitle}</h4>
+                <ul class="philosophy-list">
+                    {#if t.about.philosophyItems.greenfield}<li>{t.about.philosophyItems.greenfield}</li>{/if}
+                    {#if t.about.philosophyItems.dynamicTests}<li>{t.about.philosophyItems.dynamicTests}</li>{/if}
+                    {#if t.about.philosophyItems.aiWorkflows}<li>{t.about.philosophyItems.aiWorkflows}</li>{/if}
+                </ul>
+            </div>
+        {/if}
     </div>
 </section>
 
@@ -187,13 +187,15 @@
     .bio-text {
         font-size: 1.1rem;
         line-height: 1.7;
-        margin-bottom: 20px;
+        margin-bottom: 0;
     }
 
-    /* Sits below the bio card rather than inside it, so it needs the gap above
-       instead of below, and the same blur the glass cards use — without it the
-       panel reads as flat next to them. */
+    /* A direct child of .about-grid rather than of the text column, so it runs
+       the full width instead of stopping short of the photo. Needs the gap
+       above rather than below now that it sits under the bio card, and the same
+       blur the glass cards use — flat, it read as unfinished next to them. */
     .philosophy-block {
+        grid-column: 1 / -1;
         background: var(--card-bg);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
@@ -248,6 +250,8 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 8px;
+            /* It sits above the bio card now, so the gap goes below it. */
+            margin-bottom: 25px;
         }
     }
 
