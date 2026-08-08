@@ -164,7 +164,7 @@
 		gap: 1rem;
 		padding: 1rem 1.25rem;
 		border-radius: 14px;
-		background: var(--toast-bg, rgba(15, 23, 42, 0.88));
+		background: var(--toast-bg, rgba(18, 18, 18, 0.88));
 		backdrop-filter: blur(16px);
 		-webkit-backdrop-filter: blur(16px);
 		border: 1px solid var(--border-color);

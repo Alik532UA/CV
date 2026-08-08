@@ -14,7 +14,11 @@
     --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --glass-blur: blur(12px);
-    --toast-bg: rgba(15, 23, 42, 0.88);
+    /* Neutral, not slate: rgba(15, 23, 42, …) is blue-tinted and read as a
+       coloured panel next to the grey glass cards. Kept opaque rather than
+       reusing --card-bg, which is nearly transparent and only works under a
+       modal's scrim — a toast floats over live content with nothing behind it. */
+    --toast-bg: rgba(18, 18, 18, 0.88);
     --toast-action-bg: rgba(255, 255, 255, 0.08);
     --toast-hover-bg: rgba(255, 255, 255, 0.14);
 }

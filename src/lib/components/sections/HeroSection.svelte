@@ -39,17 +39,6 @@
                 </p>
                 <p class="bio-text">{t.about.content}</p>
 
-                {#if t.about.philosophyTitle && t.about.philosophyItems}
-                    <div class="philosophy-block">
-                        <h4 class="philosophy-title">{t.about.philosophyTitle}</h4>
-                        <ul class="philosophy-list">
-                            {#if t.about.philosophyItems.greenfield}<li>{t.about.philosophyItems.greenfield}</li>{/if}
-                            {#if t.about.philosophyItems.dynamicTests}<li>{t.about.philosophyItems.dynamicTests}</li>{/if}
-                            {#if t.about.philosophyItems.aiWorkflows}<li>{t.about.philosophyItems.aiWorkflows}</li>{/if}
-                        </ul>
-                    </div>
-                {/if}
-
                 <!-- Mobile only: on desktop these live in the sidebar, which is
                      hidden under 768px. Icons carry no visible label — five of
                      them plus the PDF button do not fit a phone row otherwise.
@@ -119,6 +108,17 @@
                     </button>
                 </div>
             </div>
+
+            {#if t.about.philosophyTitle && t.about.philosophyItems}
+                <div class="philosophy-block">
+                    <h4 class="philosophy-title">{t.about.philosophyTitle}</h4>
+                    <ul class="philosophy-list">
+                        {#if t.about.philosophyItems.greenfield}<li>{t.about.philosophyItems.greenfield}</li>{/if}
+                        {#if t.about.philosophyItems.dynamicTests}<li>{t.about.philosophyItems.dynamicTests}</li>{/if}
+                        {#if t.about.philosophyItems.aiWorkflows}<li>{t.about.philosophyItems.aiWorkflows}</li>{/if}
+                    </ul>
+                </div>
+            {/if}
         </div>
 
         <div class="about-side">
@@ -190,12 +190,17 @@
         margin-bottom: 20px;
     }
 
+    /* Sits below the bio card rather than inside it, so it needs the gap above
+       instead of below, and the same blur the glass cards use — without it the
+       panel reads as flat next to them. */
     .philosophy-block {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--card-bg);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
+        border: 1px solid var(--border-color);
         border-radius: 12px;
         padding: 18px 22px;
-        margin-bottom: 25px;
+        margin-top: 25px;
     }
 
     .philosophy-title {
