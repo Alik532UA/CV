@@ -43,6 +43,7 @@ import { yap } from "../i18n/locales/yap";
 import { browser } from "$app/environment";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
+import { track } from "$lib/services/analytics";
 
 export type Language =
 	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
@@ -106,6 +107,10 @@ class LanguageState {
 
 	set(lang: Language) {
 		if (this.current === lang) return;
+
+		// Deliberate switches only — init() assigns this.current directly, so
+		// restoring a saved language does not count as a choice.
+		track("language_change", { language: lang });
 
 		this.isChanging = true;
 		logService.info("i18n", `Changing language to: ${lang}...`);

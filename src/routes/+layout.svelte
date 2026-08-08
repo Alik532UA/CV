@@ -12,6 +12,7 @@
 	import { language } from "$lib/controllers/I18nState.svelte";
 	import { theme, background } from "$lib/controllers/UiState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
+	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
 	import { setContext } from "svelte";
@@ -44,7 +45,11 @@
 
 	afterNavigate(() => {
 		isRouterReady = true;
-		
+
+		// Fires on the initial load too, so this covers both the first view and
+		// any later client-side navigation.
+		trackPageView();
+
 		// Handle initial scroll if hash exists
 		if (browser && window.location.hash) {
 			const id = window.location.hash.slice(1);
@@ -63,14 +68,24 @@
 		theme.init();
 		background.init();
 		language.init();
+		initAnalytics();
 
 		const observedElements = new SvelteSet<Element>();
+		// This is a single page, so without per-section events the report would
+		// show one page view and nothing about how far anyone actually read.
+		const reportedSections = new SvelteSet<string>();
 
 		const observer = new IntersectionObserver(
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						activeSection = entry.target.id;
+						// Once per load: the observer re-fires every time a
+						// section scrolls back into view.
+						if (!reportedSections.has(entry.target.id)) {
+							reportedSections.add(entry.target.id);
+							track("section_view", { section: entry.target.id });
+						}
 					}
 				});
 			},

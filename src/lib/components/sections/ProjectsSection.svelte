@@ -3,6 +3,7 @@
     import { base } from "$app/paths";
     import Section from "../ui/Section.svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import { track } from "$lib/services/analytics";
 
     type ProjectCategory = "all" | "games" | "apps" | "websites";
     let activeFilter = $state<ProjectCategory>("all");
@@ -109,6 +110,7 @@
                         rel="noopener noreferrer"
                         class="btn-primary project-btn {project.featured ? 'featured-btn' : ''}"
                         data-testid="project-btn-{project.id}"
+                        onclick={() => track("project_click", { project: project.id })}
                     >
                         {project.button}
                         <ExternalLink size={16} />

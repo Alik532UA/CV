@@ -3,6 +3,7 @@
     import { base } from "$app/paths";
     import { FileText, FileCode } from "lucide-svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import { track } from "$lib/services/analytics";
     import type { HTMLAttributes } from "svelte/elements";
 
     interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
@@ -56,7 +57,10 @@
                         class="pdf-file-btn"
                         title={file.name}
                         data-testid="pdf-file-{file.id}"
-                        onclick={() => (show = false)}
+                        onclick={() => {
+                            track("cv_download", { variant: `ats-${file.id}` });
+                            show = false;
+                        }}
                     >
                         {#if file.format === "pdf"}
                             <FileText size={16} />
@@ -75,7 +79,10 @@
             rel="noopener noreferrer"
             class="pdf-option"
             data-testid="pdf-option-dark"
-            onclick={() => (show = false)}
+            onclick={() => {
+                track("cv_download", { variant: "dark" });
+                show = false;
+            }}
         >
             <div class="pdf-preview">
                 <img
@@ -93,7 +100,10 @@
             rel="noopener noreferrer"
             class="pdf-option"
             data-testid="pdf-option-light"
-            onclick={() => (show = false)}
+            onclick={() => {
+                track("cv_download", { variant: "light" });
+                show = false;
+            }}
         >
             <div class="pdf-preview">
                 <img
