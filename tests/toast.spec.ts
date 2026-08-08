@@ -59,14 +59,14 @@ test.describe("Email toast", () => {
 			const toast = await copyEmail(page);
 
 			await expect(toast).toBeVisible();
-			await expect(page.getByTestId("toast-action-button")).toBeVisible();
+			await expect(page.getByTestId("toast-action-btn")).toBeVisible();
 			await expect(page.getByTestId("toast-progress-bar")).toBeVisible();
 		});
 
 		test("anchors the toast to the button and flips to stay on-screen", async ({ page }) => {
 			await copyEmail(page);
 
-			const wrapper = page.getByTestId("toast-anchored-wrapper");
+			const wrapper = page.getByTestId("toast-anchored-container");
 			await expect(wrapper).toBeVisible();
 
 			// On desktop the email toast is anchored, not in the global corner stack.
@@ -82,7 +82,7 @@ test.describe("Email toast", () => {
 				const b = candidates
 					.find((el) => el.getBoundingClientRect().width > 0)!
 					.getBoundingClientRect();
-				const w = document.querySelector('[data-testid="toast-anchored-wrapper"]')!.getBoundingClientRect();
+				const w = document.querySelector('[data-testid="toast-anchored-container"]')!.getBoundingClientRect();
 				return {
 					btn: { top: b.top, bottom: b.bottom, cx: b.left + b.width / 2, cy: b.top + b.height / 2 },
 					toast: { top: w.top, bottom: w.bottom, left: w.left, right: w.right, cx: w.left + w.width / 2 },
@@ -122,7 +122,7 @@ test.describe("Email toast", () => {
 		test("pauses on keyboard focus of the action button", async ({ page }) => {
 			const toast = await copyEmail(page);
 
-			await page.getByTestId("toast-action-button").focus();
+			await page.getByTestId("toast-action-btn").focus();
 			await expect(page.getByTestId("toast-progress-bar")).toHaveCSS("animation-play-state", "paused");
 			await expect(toast).toBeVisible();
 		});
@@ -130,7 +130,7 @@ test.describe("Email toast", () => {
 		test("the action button dismisses the toast", async ({ page }) => {
 			const toast = await copyEmail(page);
 
-			await page.getByTestId("toast-action-button").click();
+			await page.getByTestId("toast-action-btn").click();
 			await expect(toast).toBeHidden();
 		});
 	});
@@ -144,7 +144,7 @@ test.describe("Email toast", () => {
 
 		await copyEmail(page);
 
-		await expect(page.getByTestId("toast-anchored-wrapper")).toHaveCount(0);
+		await expect(page.getByTestId("toast-anchored-container")).toHaveCount(0);
 		await expect(
 			page.getByTestId("toast-notifications-container").getByTestId("toast-message-success")
 		).toBeVisible();
