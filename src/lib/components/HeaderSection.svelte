@@ -102,7 +102,7 @@
             <!-- Background Switcher (Desktop) -->
             <div
                 class="toggle-group glass desktop-only"
-                data-testid="bg-toggle-group"
+                data-testid="bg-toggle-toolbar"
                 role="radiogroup"
                 aria-label="Background effect"
             >
@@ -158,7 +158,7 @@
             <!-- Background Switcher (Mobile) -->
             <div
                 class="mobile-bg-switcher mobile-only"
-                data-testid="bg-toggle-group-mobile"
+                data-testid="bg-toggle-mobile-toolbar"
             >
                 <button
                     class="glass-icon-btn"
@@ -268,7 +268,7 @@
             </div>
 
             <!-- Theme Toggle -->
-            <div class="toggle-group glass" data-testid="theme-toggle-group" role="group" aria-label="Theme selection">
+            <div class="toggle-group glass" data-testid="theme-toggle-toolbar" role="group" aria-label="Theme selection">
                 <button
                     onclick={() => theme.current !== "light" && theme.toggle()}
                     class:active={theme.current === "light"}

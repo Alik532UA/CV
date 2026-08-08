@@ -128,7 +128,7 @@
 
 <!-- Anchored toasts (next to the trigger, flipped above/below) — §5. -->
 {#each anchoredMsgs as msg (msg.id)}
-	<div class="toast-anchored" use:positionAnchored={msg.anchor!} data-testid="toast-anchored-wrapper">
+	<div class="toast-anchored" use:positionAnchored={msg.anchor!} data-testid="toast-anchored-container">
 		{@render toastCard(msg)}
 	</div>
 {/each}

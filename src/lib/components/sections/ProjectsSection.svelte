@@ -37,7 +37,7 @@
     {/snippet}
 
     <!-- Filter Buttons -->
-    <div class="filter-bar" data-testid="project-filter-bar">
+    <div class="filter-bar" data-testid="project-filter-toolbar">
         <div class="filter-icon-label" aria-hidden="true" title="Filter projects">
             <Filter size={18} />
         </div>

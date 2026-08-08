@@ -56,7 +56,7 @@
                         rel="noopener noreferrer"
                         class="pdf-file-btn"
                         title={file.name}
-                        data-testid="pdf-file-{file.id}"
+                        data-testid="pdf-file-link-{file.id}"
                         onclick={() => {
                             track("cv_download", { variant: `ats-${file.id}` });
                             show = false;
