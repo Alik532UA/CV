@@ -23,37 +23,36 @@ export class WavesEngine extends CanvasEngine {
         const scrollInfluence = this.currentScrollY * 0.002;
         this.ctx.clearRect(0, 0, this.width, this.height);
 
-        for (let layer = 0; layer < this.waveLayers; layer++) {
+        const layers = Math.max(1, Math.min(10, this.waveLayers));
+        const heightSpan = this.height * 0.38;
+        const startBaseY = this.height - heightSpan;
+        const layerStep = layers > 1 ? heightSpan / (layers - 1) : 0;
+
+        for (let layer = 0; layer < layers; layer++) {
             this.ctx.beginPath();
             this.ctx.moveTo(0, this.height);
 
-            for (let x = 0; x <= this.width; x += 5) {
-                const wave1 =
-                    Math.sin(x * 0.003 + this.waveTime + layer + scrollInfluence) *
-                    50;
-                const wave2 =
-                    Math.sin(x * 0.005 - this.waveTime * 0.7 + layer * 2) * 30;
-                const wave3 =
-                    Math.cos(x * 0.002 + this.waveTime * 0.5 + scrollInfluence) * 40;
+            const baseY = layers > 1 ? startBaseY + layer * layerStep : startBaseY + heightSpan * 0.5;
+            const freq1 = 0.002 + layer * 0.0006;
+            const freq2 = 0.004 + layer * 0.0008;
+            const amp1 = 35 + (layers - layer) * 3;
+            const amp2 = 20 + Math.sin(layer) * 8;
+            const speedFactor = 0.6 + layer * 0.15;
 
-                // Use variables for height and scroll speed
-                const y =
-                    this.height * this.waveBaseHeight +
-                    wave1 +
-                    wave2 +
-                    wave3 +
-                    layer * 60 -
-                    this.currentScrollY * this.waveScrollSpeed;
+            for (let x = 0; x <= this.width; x += 6) {
+                const wave1 = Math.sin(x * freq1 + this.waveTime * speedFactor + layer + scrollInfluence) * amp1;
+                const wave2 = Math.cos(x * freq2 - this.waveTime * (speedFactor * 0.8) + layer * 1.5) * amp2;
+                const y = baseY + wave1 + wave2 - this.currentScrollY * (0.1 + layer * 0.02);
                 this.ctx.lineTo(x, y);
             }
 
             this.ctx.lineTo(this.width, this.height);
             this.ctx.closePath();
 
-            const gradient = this.ctx.createLinearGradient(0, 0, this.width, this.height);
-            const alpha = 0.08 - layer * 0.02;
+            const gradient = this.ctx.createLinearGradient(0, baseY - 40, this.width, this.height);
+            const alpha = Math.max(0.015, 0.11 * Math.pow(0.82, layer));
             gradient.addColorStop(0, colors.primary + alpha + ")");
-            gradient.addColorStop(0.5, colors.secondary + alpha + ")");
+            gradient.addColorStop(0.5, colors.secondary + alpha * 0.85 + ")");
             gradient.addColorStop(1, colors.primary + alpha + ")");
             this.ctx.fillStyle = gradient;
             this.ctx.fill();
