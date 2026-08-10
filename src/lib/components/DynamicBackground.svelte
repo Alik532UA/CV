@@ -46,7 +46,8 @@
     <div
         class="bg-transition"
         style="height: {fixedHeight}"
-        transition:fade={{ duration: 800 }}
+        in:fade={{ duration: 800 }}
+        out:fade={{ duration: 800 }}
     >
         <Particles {theme} />
     </div>
@@ -54,7 +55,8 @@
     <div
         class="bg-transition"
         style="height: {fixedHeight}"
-        transition:fade={{ duration: 800 }}
+        in:fade={{ duration: 800 }}
+        out:fade={{ duration: 800 }}
     >
         <Waves {theme} />
     </div>
@@ -62,7 +64,8 @@
     <div
         class="bg-transition"
         style="height: {fixedHeight}"
-        transition:fade={{ duration: 800 }}
+        in:fade={{ duration: 800 }}
+        out:fade={{ duration: 800 }}
     >
         <FloatingShapes {theme} />
     </div>
@@ -77,15 +80,5 @@
         /* Height is set via inline style for mobile stability */
         z-index: -1;
         pointer-events: none;
-        animation: fadeInBg 0.8s ease-in-out forwards;
-    }
-
-    @keyframes fadeInBg {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
     }
 </style>
