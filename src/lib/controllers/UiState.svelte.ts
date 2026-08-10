@@ -96,9 +96,9 @@ function getSavedNumber(key: string, fallback: number): number {
 
 class BackgroundState {
 	type = $state<0 | 1 | 2 | 3>(getInitialBackgroundType());
-	particlesCount = $state<number>(getSavedNumber("bgParticlesCount", 80));
-	wavesCount = $state<number>(getSavedNumber("bgWavesCount", 3));
-	shapesLineWidth = $state<number>(getSavedNumber("bgShapesLineWidth", 300));
+	particlesCount = $state<number>(getSavedNumber("bgParticlesCount", 128));
+	wavesCount = $state<number>(getSavedNumber("bgWavesCount", 4));
+	shapesLineWidth = $state<number>(getSavedNumber("bgShapesLineWidth", 256));
 
 	constructor() {}
 
@@ -109,9 +109,9 @@ class BackgroundState {
 				this.type = parseInt(saved) as 0 | 1 | 2 | 3;
 				logService.info("ui", `Initializing background type: ${this.type}`);
 			}
-			this.particlesCount = getSavedNumber("bgParticlesCount", 80);
-			this.wavesCount = getSavedNumber("bgWavesCount", 3);
-			this.shapesLineWidth = getSavedNumber("bgShapesLineWidth", 300);
+			this.particlesCount = getSavedNumber("bgParticlesCount", 128);
+			this.wavesCount = getSavedNumber("bgWavesCount", 4);
+			this.shapesLineWidth = getSavedNumber("bgShapesLineWidth", 256);
 		}
 	}
 

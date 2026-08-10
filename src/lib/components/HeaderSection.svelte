@@ -283,9 +283,9 @@
                                 </div>
                                 <input
                                     type="range"
-                                    min="10"
-                                    max="1000"
-                                    step="10"
+                                    min="8"
+                                    max="1024"
+                                    step="8"
                                     value={background.particlesCount}
                                     oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                     class="volume-slider"
@@ -299,7 +299,7 @@
                                 <input
                                     type="range"
                                     min="1"
-                                    max="10"
+                                    max="8"
                                     step="1"
                                     value={background.wavesCount}
                                     oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
@@ -314,7 +314,7 @@
                                 <input
                                     type="range"
                                     min="1"
-                                    max="500"
+                                    max="512"
                                     step="1"
                                     value={background.shapesLineWidth}
                                     oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}
@@ -387,9 +387,9 @@
                                     </div>
                                     <input
                                         type="range"
-                                        min="10"
-                                        max="1000"
-                                        step="10"
+                                        min="8"
+                                        max="1024"
+                                        step="8"
                                         value={background.particlesCount}
                                         oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                         class="volume-slider"
@@ -402,7 +402,7 @@
                                     <input
                                         type="range"
                                         min="1"
-                                        max="10"
+                                        max="8"
                                         step="1"
                                         value={background.wavesCount}
                                         oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
@@ -416,7 +416,7 @@
                                     <input
                                         type="range"
                                         min="1"
-                                        max="500"
+                                        max="512"
                                         step="1"
                                         value={background.shapesLineWidth}
                                         oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}

@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { WavesEngine } from "./engine/WavesEngine";
 
-    let { theme = "dark", layers = 3 } = $props<{ theme?: string; layers?: number }>();
+    let { theme = "dark", layers = 4 } = $props<{ theme?: string; layers?: number }>();
 
     let canvas: HTMLCanvasElement;
     let engine = $state<WavesEngine>();

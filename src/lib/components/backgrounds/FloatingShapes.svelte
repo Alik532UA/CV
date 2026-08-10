@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { FloatingShapesEngine } from "./engine/FloatingShapesEngine";
 
-    let { theme = "dark", lineWidth = 300 } = $props<{ theme?: string; lineWidth?: number }>();
+    let { theme = "dark", lineWidth = 256 } = $props<{ theme?: string; lineWidth?: number }>();
 
     let canvas: HTMLCanvasElement;
     let engine = $state<FloatingShapesEngine>();

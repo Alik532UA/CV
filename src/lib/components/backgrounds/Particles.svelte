@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { ParticlesEngine } from "./engine/ParticlesEngine";
 
-    let { theme = "dark", count = 80 } = $props<{ theme?: string; count?: number }>();
+    let { theme = "dark", count = 128 } = $props<{ theme?: string; count?: number }>();
 
     let canvas: HTMLCanvasElement;
     let engine = $state<ParticlesEngine>();

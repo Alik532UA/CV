@@ -8,9 +8,9 @@
     let {
         backgroundType = 1,
         theme = "dark",
-        particlesCount = 80,
-        wavesCount = 3,
-        shapesLineWidth = 300,
+        particlesCount = 128,
+        wavesCount = 4,
+        shapesLineWidth = 256,
     } = $props<{
         backgroundType?: 0 | 1 | 2 | 3;
         theme?: string;
