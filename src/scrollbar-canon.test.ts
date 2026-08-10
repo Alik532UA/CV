@@ -116,6 +116,13 @@ describe("scrollbar canon § 9.10 / § 9.11 — the minimap must not fight its o
 		expect(stripRules).not.toMatch(/display:\s*none/);
 	});
 
+	it("marks the clone inert, not merely tabindex-stripped", () => {
+		// removeAttribute('tabindex') only unmakes what tabindex made focusable.
+		// <button> and <a href> are focusable natively, and this page's clone holds
+		// fifty of them — Tab would walk into an invisible copy of the whole site.
+		expect(MINIMAP).toMatch(/setAttribute\("inert"/);
+	});
+
 	it("changes only the background on hover", () => {
 		// The strip is the full height of the viewport, so any edge treatment on it is
 		// a bright line down the whole screen rather than the highlight it looks like.

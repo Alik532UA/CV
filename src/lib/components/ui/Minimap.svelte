@@ -30,6 +30,8 @@
 
     let scrollY = $state(0);
     let viewportHeight = $state(0);
+    /** Bottom edge of the fixed header, or 0 where there is none. */
+    let headerOffset = $state(0);
     let pageHeight = $state(1);
     let windowWidth = $state(0);
     let mouseX = $state(Number.POSITIVE_INFINITY);
@@ -72,10 +74,23 @@
     const cloneHeight = $derived(pageHeight * scale);
 
     /**
+     * The strip starts below the header rather than at the top of the window.
+     *
+     * A scrollbar belongs at the very top — that is where the native one is, and the
+     * custom overlay keeps that. A minimap is a panel, and this one is wide enough
+     * (180px in the visual mode) to cover the controls in the header's right corner.
+     *
+     * Measured rather than written as 70px: the height already appears in
+     * HeaderSection and in the layout's `main` margin, and a third copy would be one
+     * more thing to update. `bottom` covers both the height and any offset above it.
+     */
+    const availableHeight = $derived(Math.max(viewportHeight - headerOffset, 0));
+
+    /**
      * The strip is only as tall as what it shows. Left at full height, a press below
      * the clone would look like "the end of the page" and lead to the middle.
      */
-    const mapHeight = $derived(isFull ? Math.min(cloneHeight, viewportHeight) : viewportHeight);
+    const mapHeight = $derived(isFull ? Math.min(cloneHeight, availableHeight) : availableHeight);
 
     /**
      * NOT sprung, unlike the custom bar's thumb.
@@ -104,9 +119,16 @@
         return (scrollY / maxScroll) * Math.max(mapHeight - markerHeight, 0);
     });
 
-    /** How far the clone has to ride up to show the current place. */
+    /**
+     * How far the clone has to ride up to show the current place.
+     *
+     * Against `mapHeight`, not the viewport height: those were the same thing while
+     * the strip ran the full window, and stopped being so once it started below the
+     * header. Measured against the viewport, the clone would come up short by the
+     * header's height at the bottom of the page.
+     */
     const cloneShiftY = $derived.by(() => {
-        const overflow = cloneHeight - viewportHeight;
+        const overflow = cloneHeight - mapHeight;
         if (overflow <= 0) return 0;
         return -(scrollY / Math.max(pageHeight - viewportHeight, 1)) * overflow;
     });
@@ -148,6 +170,10 @@
         pageHeight = Math.max(document.documentElement.scrollHeight, 1);
         viewportHeight = window.innerHeight;
         scrollY = window.scrollY;
+        // Re-read on every measure, so the 70px/60px breakpoint in HeaderSection needs
+        // no counterpart here. A page without a fixed header simply gets 0.
+        const header = document.querySelector("header");
+        headerOffset = header ? Math.max(header.getBoundingClientRect().bottom, 0) : 0;
     }
 
     /**
@@ -244,10 +270,19 @@
         for (const el of clone.querySelectorAll("*")) {
             el.removeAttribute("id");
             el.removeAttribute("data-testid");
-            // The clone controls nothing — strip what makes it reachable by keyboard
-            // and by screen readers.
             el.removeAttribute("tabindex");
         }
+
+        // `inert`, not just the tabindex strip above and aria-hidden.
+        //
+        // Dropping tabindex only unmakes elements that tabindex made focusable —
+        // <button> and <a href> are focusable in their own right, and this page's
+        // clone holds fifty of them. Without inert, Tab walks the visitor into an
+        // invisible copy of the whole site, and they are focusable elements inside
+        // aria-hidden, which is a violation on its own. inert takes the subtree out
+        // of the tab order, out of the accessibility tree and out of hit testing in
+        // one attribute; aria-hidden stays for browsers that predate it.
+        clone.setAttribute("inert", "");
         clone.setAttribute("aria-hidden", "true");
 
         // eslint-disable-next-line svelte/no-dom-manipulating
@@ -405,7 +440,7 @@
         class:minimap--full={isFull}
         class:dragging
         class:holding={hold.holding}
-        style="width: {fullWidth}px; height: {mapHeight}px;
+        style="top: {headerOffset}px; width: {fullWidth}px; height: {mapHeight}px;
             transform: translateX({hiddenPart}px);"
         aria-label={t.scrollbar.title}
         data-testid="minimap-container"
@@ -452,9 +487,9 @@
     .minimap {
         position: fixed;
         right: 0;
-        top: 0;
-        /* Height comes from the script: it equals the height of what is shown. */
-        /* Same band as the custom bar — over the header, under the modal. */
+        /* `top` and height both come from the script: the strip begins below the
+           header and fills what is left. */
+        /* Same band as the custom bar — over the page, under the modal. */
         z-index: 1500;
         background: var(--panel-bg);
         border-left: 1px solid var(--border-color);
