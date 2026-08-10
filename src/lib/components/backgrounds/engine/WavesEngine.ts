@@ -15,8 +15,7 @@ export class WavesEngine extends CanvasEngine {
         if (!this.ctx) return;
         const colors = this.getColors();
         this.waveTime += 0.005;
-        const scrollInfluence = this.scrollY * 0.002;
-
+        const scrollInfluence = this.currentScrollY * 0.002;
         this.ctx.clearRect(0, 0, this.width, this.height);
 
         for (let layer = 0; layer < 3; layer++) {
@@ -39,7 +38,7 @@ export class WavesEngine extends CanvasEngine {
                     wave2 +
                     wave3 +
                     layer * 60 -
-                    this.scrollY * this.waveScrollSpeed;
+                    this.currentScrollY * this.waveScrollSpeed;
                 this.ctx.lineTo(x, y);
             }
 

@@ -7,6 +7,7 @@ export abstract class CanvasEngine {
 	protected width = 0;
 	protected height = 0;
 	protected scrollY = 0;
+	protected currentScrollY = 0;
 	protected theme: string = "dark";
 
 	private animationId: number = 0;
@@ -33,6 +34,8 @@ export abstract class CanvasEngine {
 			this.canvas.width = this.width;
 			this.canvas.height = this.height;
 			this.lastWidth = this.width;
+			this.scrollY = window.scrollY;
+			this.currentScrollY = window.scrollY;
 
 			this.init();
 			this.startLoop();
@@ -44,7 +47,7 @@ export abstract class CanvasEngine {
 			});
 
 			window.addEventListener("resize", this.throttledResize);
-			window.addEventListener("scroll", this.throttledScroll);
+			window.addEventListener("scroll", this.handleScroll, { passive: true });
 		}
 	}
 
@@ -56,7 +59,7 @@ export abstract class CanvasEngine {
 		this.stopLoop();
 		if (browser) {
 			window.removeEventListener("resize", this.throttledResize);
-			window.removeEventListener("scroll", this.throttledScroll);
+			window.removeEventListener("scroll", this.handleScroll);
 		}
 		this.canvas = null;
 		this.ctx = null;
@@ -69,6 +72,7 @@ export abstract class CanvasEngine {
 	private startLoop() {
 		const loop = () => {
 			if (!this.canvas || !this.ctx) return;
+			this.currentScrollY += (this.scrollY - this.currentScrollY) * 0.08;
 			this.draw();
 			this.animationId = requestAnimationFrame(loop);
 		};
@@ -95,7 +99,12 @@ export abstract class CanvasEngine {
 	}
 
 	private throttledResize = this.throttle(() => this.handleResize(), 200);
-	private throttledScroll = this.throttle(() => this.handleScroll(), 100);
+
+	private handleScroll = () => {
+		if (browser) {
+			this.scrollY = window.scrollY;
+		}
+	};
 
 	private handleResize() {
 		if (!this.canvas) return;

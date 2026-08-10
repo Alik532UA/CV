@@ -43,7 +43,7 @@ export class FloatingShapesEngine extends CanvasEngine {
         if (!this.ctx) return;
         const colors = this.getColors();
         const time = Date.now() * 0.001;
-        const scrollRotation = this.scrollY * 0.001;
+        const scrollRotation = this.currentScrollY * 0.001;
 
         this.ctx.clearRect(0, 0, this.width, this.height);
 
