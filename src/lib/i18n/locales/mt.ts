@@ -241,8 +241,8 @@ export const mt: Translations = {
     scrollbar: {
         title: "Barra tal-iskrolljar",
         standard: "Standard",
-        custom: "Personalizzata",
-        minimap: "Minimappa",
-        minimapFull: "Minimappa viżwali"
+        custom: "Tal-awtur",
+        minimap: "Minimap minima",
+        minimapFull: "Minimap"
     }
 };

@@ -241,8 +241,8 @@ export const sq: Translations = {
     scrollbar: {
         title: "Shiriti i rrëshqitjes",
         standard: "Standard",
-        custom: "I përshtatur",
-        minimap: "Minimapë",
-        minimapFull: "Minimapë vizuale"
+        custom: "E autorit",
+        minimap: "Minimapa minimale",
+        minimapFull: "Minimapa"
     }
 };

@@ -241,8 +241,8 @@ export const is: Translations = {
     scrollbar: {
         title: "Skrunustika",
         standard: "Sjálfgefin",
-        custom: "Sérsniðin",
-        minimap: "Yfirlitskort",
-        minimapFull: "Sjónrænt yfirlitskort"
+        custom: "Höfundar",
+        minimap: "Lágmarks minimap",
+        minimapFull: "Minimap"
     }
 };

@@ -241,8 +241,8 @@ export const cy: Translations = {
     scrollbar: {
         title: "Bar sgrolio",
         standard: "Safonol",
-        custom: "Addasedig",
-        minimap: "Minimap",
-        minimapFull: "Minimap gweledol"
+        custom: "Awdur",
+        minimap: "Minimap lleiaf",
+        minimapFull: "Minimap"
     }
 };

@@ -241,8 +241,8 @@ export const ga: Translations = {
     scrollbar: {
         title: "Barra scrollaithe",
         standard: "Caighdeánach",
-        custom: "Saincheaptha",
-        minimap: "Minimhapa",
-        minimapFull: "Minimhapa amhairc"
+        custom: "Údair",
+        minimap: "Minimap íosta",
+        minimapFull: "Minimap"
     }
 };

@@ -241,8 +241,8 @@ export const lt: Translations = {
     scrollbar: {
         title: "Slankjuostė",
         standard: "Standartinė",
-        custom: "Pasirinktinė",
-        minimap: "Minižemėlapis",
-        minimapFull: "Vaizdinis minižemėlapis"
+        custom: "Autoriaus",
+        minimap: "Minimalus minimap",
+        minimapFull: "Minimap"
     }
 };

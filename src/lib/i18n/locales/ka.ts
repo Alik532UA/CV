@@ -241,8 +241,8 @@ export const ka: Translations = {
     scrollbar: {
         title: "გადახვევის ზოლი",
         standard: "სტანდარტული",
-        custom: "მორგებული",
-        minimap: "მინირუკა",
-        minimapFull: "ვიზუალური მინირუკა"
+        custom: "ავტორის",
+        minimap: "მინიმალური მინირუკა",
+        minimapFull: "მინირუკა"
     }
 };

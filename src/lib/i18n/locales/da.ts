@@ -241,8 +241,8 @@ export const da: Translations = {
     scrollbar: {
         title: "Rullepanel",
         standard: "Standard",
-        custom: "Tilpasset",
-        minimap: "Minikort",
-        minimapFull: "Visuelt minikort"
+        custom: "Forfatterens",
+        minimap: "Minimal minimap",
+        minimapFull: "Minimap"
     }
 };

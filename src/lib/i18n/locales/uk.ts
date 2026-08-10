@@ -241,8 +241,8 @@ export const uk: Translations = {
     scrollbar: {
         title: "Смуга прокрутки",
         standard: "Стандартна",
-        custom: "Власна",
-        minimap: "Мінімапа",
-        minimapFull: "Візуальна мінімапа"
+        custom: "Авторська",
+        minimap: "Мінімапа мінімальна",
+        minimapFull: "Мінімапа"
     }
 };

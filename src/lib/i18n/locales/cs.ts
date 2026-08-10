@@ -241,8 +241,8 @@ export const cs: Translations = {
     scrollbar: {
         title: "Posuvník",
         standard: "Standardní",
-        custom: "Vlastní",
-        minimap: "Minimapa",
-        minimapFull: "Vizuální minimapa"
+        custom: "Autorská",
+        minimap: "Minimapa minimální",
+        minimapFull: "Minimapa"
     }
 };

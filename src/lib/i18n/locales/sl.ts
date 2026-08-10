@@ -241,8 +241,8 @@ export const sl: Translations = {
     scrollbar: {
         title: "Drsnik",
         standard: "Standardni",
-        custom: "Prilagojeni",
-        minimap: "Minimapa",
-        minimapFull: "Vizualna minimapa"
+        custom: "Avtorska",
+        minimap: "Minimapa minimalna",
+        minimapFull: "Minimapa"
     }
 };

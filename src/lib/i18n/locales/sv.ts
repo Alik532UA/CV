@@ -241,8 +241,8 @@ export const sv: Translations = {
     scrollbar: {
         title: "Rullningslist",
         standard: "Standard",
-        custom: "Anpassad",
-        minimap: "Minikarta",
-        minimapFull: "Visuell minikarta"
+        custom: "Författarens",
+        minimap: "Minimal minimap",
+        minimapFull: "Minimap"
     }
 };

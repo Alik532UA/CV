@@ -244,8 +244,8 @@ export const he: Translations = {
     scrollbar: {
         title: "פס גלילה",
         standard: "רגיל",
-        custom: "מותאם",
-        minimap: "מיני-מפה",
-        minimapFull: "מיני-מפה חזותית"
+        custom: "של המחבר",
+        minimap: "מינימפה מינימלית",
+        minimapFull: "מינימפה"
     }
 };

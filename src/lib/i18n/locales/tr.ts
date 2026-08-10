@@ -242,7 +242,7 @@ export const tr: Translations = {
         title: "Kaydırma çubuğu",
         standard: "Standart",
         custom: "Özel",
-        minimap: "Mini harita",
-        minimapFull: "Görsel mini harita"
+        minimap: "Minimal minimap",
+        minimapFull: "Minimap"
     }
 };

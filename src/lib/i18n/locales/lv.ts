@@ -241,8 +241,8 @@ export const lv: Translations = {
     scrollbar: {
         title: "Ritjosla",
         standard: "Standarta",
-        custom: "Pielāgota",
-        minimap: "Minikarte",
-        minimapFull: "Vizuāla minikarte"
+        custom: "Autora",
+        minimap: "Minimāls minimap",
+        minimapFull: "Minimap"
     }
 };

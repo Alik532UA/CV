@@ -241,8 +241,8 @@ export const nl: Translations = {
     scrollbar: {
         title: "Schuifbalk",
         standard: "Standaard",
-        custom: "Aangepast",
-        minimap: "Minimap",
-        minimapFull: "Visuele minimap"
+        custom: "Van auteur",
+        minimap: "Minimale minimap",
+        minimapFull: "Minimap"
     }
 };

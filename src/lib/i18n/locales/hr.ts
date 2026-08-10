@@ -241,8 +241,8 @@ export const hr: Translations = {
     scrollbar: {
         title: "Klizač",
         standard: "Standardni",
-        custom: "Prilagođeni",
-        minimap: "Minimapa",
-        minimapFull: "Vizualna minimapa"
+        custom: "Autorska",
+        minimap: "Minimapa minimalna",
+        minimapFull: "Minimapa"
     }
 };

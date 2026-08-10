@@ -241,8 +241,8 @@ export const no: Translations = {
     scrollbar: {
         title: "Rullefelt",
         standard: "Standard",
-        custom: "Tilpasset",
-        minimap: "Minikart",
-        minimapFull: "Visuelt minikart"
+        custom: "Forfatterens",
+        minimap: "Minimal minimap",
+        minimapFull: "Minimap"
     }
 };

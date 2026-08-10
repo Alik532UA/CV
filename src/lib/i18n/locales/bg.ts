@@ -241,8 +241,8 @@ export const bg: Translations = {
     scrollbar: {
         title: "Скролбар",
         standard: "Стандартен",
-        custom: "Персонализиран",
-        minimap: "Миникарта",
-        minimapFull: "Визуална миникарта"
+        custom: "Авторска",
+        minimap: "Минимална минимапа",
+        minimapFull: "Минимапа"
     }
 };

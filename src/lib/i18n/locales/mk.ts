@@ -241,8 +241,8 @@ export const mk: Translations = {
     scrollbar: {
         title: "Лизгач",
         standard: "Стандарден",
-        custom: "Прилагоден",
-        minimap: "Миникарта",
-        minimapFull: "Визуелна миникарта"
+        custom: "Авторска",
+        minimap: "Минимапа минимална",
+        minimapFull: "Минимапа"
     }
 };

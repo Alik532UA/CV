@@ -241,8 +241,8 @@ export const sk: Translations = {
     scrollbar: {
         title: "Posúvník",
         standard: "Štandardný",
-        custom: "Vlastný",
-        minimap: "Minimapa",
-        minimapFull: "Vizuálna minimapa"
+        custom: "Autorská",
+        minimap: "Minimapa minimálna",
+        minimapFull: "Minimapa"
     }
 };

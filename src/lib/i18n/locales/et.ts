@@ -241,8 +241,8 @@ export const et: Translations = {
     scrollbar: {
         title: "Kerimisriba",
         standard: "Standardne",
-        custom: "Kohandatud",
-        minimap: "Minikaart",
-        minimapFull: "Visuaalne minikaart"
+        custom: "Autor",
+        minimap: "Minimaalne minimap",
+        minimapFull: "Minimap"
     }
 };

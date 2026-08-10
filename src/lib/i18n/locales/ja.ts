@@ -241,8 +241,8 @@ export const ja: Translations = {
     scrollbar: {
         title: "スクロールバー",
         standard: "標準",
-        custom: "カスタム",
-        minimap: "ミニマップ",
-        minimapFull: "ビジュアルミニマップ"
+        custom: "オリジナル",
+        minimap: "ミニマップ（最小）",
+        minimapFull: "ミニマップ"
     }
 };

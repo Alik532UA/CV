@@ -248,8 +248,8 @@ export const chk: Translations = {
     scrollbar: {
         title: "Scrollbar",
         standard: "Standard",
-        custom: "Custom",
-        minimap: "Minimap",
-        minimapFull: "Visual minimap"
+        custom: "Author's",
+        minimap: "Minimal Minimap",
+        minimapFull: "Minimap"
     }
 };

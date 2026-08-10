@@ -241,8 +241,8 @@ export const fi: Translations = {
     scrollbar: {
         title: "Vierityspalkki",
         standard: "Vakio",
-        custom: "Mukautettu",
-        minimap: "Pienoiskartta",
-        minimapFull: "Visuaalinen pienoiskartta"
+        custom: "Tekijän",
+        minimap: "Minimaalinen minimap",
+        minimapFull: "Minimap"
     }
 };

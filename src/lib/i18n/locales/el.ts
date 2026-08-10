@@ -241,8 +241,8 @@ export const el: Translations = {
     scrollbar: {
         title: "Γραμμή κύλισης",
         standard: "Τυπική",
-        custom: "Προσαρμοσμένη",
-        minimap: "Μικροχάρτης",
-        minimapFull: "Οπτικός μικροχάρτης"
+        custom: "Δημιουργού",
+        minimap: "Ελάχιστο minimap",
+        minimapFull: "Minimap"
     }
 };

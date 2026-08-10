@@ -241,8 +241,8 @@ export const pt: Translations = {
     scrollbar: {
         title: "Barra de rolagem",
         standard: "Padrão",
-        custom: "Personalizada",
-        minimap: "Minimapa",
-        minimapFull: "Minimapa visual"
+        custom: "De autor",
+        minimap: "Minimapa mínimo",
+        minimapFull: "Minimapa"
     }
 };

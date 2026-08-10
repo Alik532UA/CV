@@ -241,8 +241,8 @@ export const ro: Translations = {
     scrollbar: {
         title: "Bară de derulare",
         standard: "Standard",
-        custom: "Personalizată",
-        minimap: "Minihartă",
-        minimapFull: "Minihartă vizuală"
+        custom: "De autor",
+        minimap: "Minimapă minimă",
+        minimapFull: "Minimapă"
     }
 };

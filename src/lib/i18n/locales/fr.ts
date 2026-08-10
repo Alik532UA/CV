@@ -241,8 +241,8 @@ export const fr: Translations = {
     scrollbar: {
         title: "Barre de défilement",
         standard: "Standard",
-        custom: "Personnalisée",
-        minimap: "Minicarte",
-        minimapFull: "Minicarte visuelle"
+        custom: "D'auteur",
+        minimap: "Minicarte minimale",
+        minimapFull: "Minicarte"
     }
 };

@@ -241,8 +241,8 @@ export const pl: Translations = {
     scrollbar: {
         title: "Pasek przewijania",
         standard: "Standardowy",
-        custom: "Własny",
-        minimap: "Minimapa",
-        minimapFull: "Minimapa wizualna"
+        custom: "Autorski",
+        minimap: "Minimalna minimapa",
+        minimapFull: "Minimapa"
     }
 };

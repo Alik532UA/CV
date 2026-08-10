@@ -243,8 +243,8 @@ export const crh: Translations = {
     scrollbar: {
         title: "Kaydırma çıtası",
         standard: "Standart",
-        custom: "Özel",
-        minimap: "Miniharita",
-        minimapFull: "Görsel miniharita"
+        custom: "Müelliflik",
+        minimap: "Asgarıy harita",
+        minimapFull: "Harita"
     }
 };

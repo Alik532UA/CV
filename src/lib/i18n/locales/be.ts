@@ -241,8 +241,8 @@ export const be: Translations = {
     scrollbar: {
         title: "Паласа прокруткі",
         standard: "Стандартная",
-        custom: "Уласная",
-        minimap: "Мінімапа",
-        minimapFull: "Візуальная мінімапа"
+        custom: "Аўтарская",
+        minimap: "Мінімапа мінімальная",
+        minimapFull: "Мінімапа"
     }
 };

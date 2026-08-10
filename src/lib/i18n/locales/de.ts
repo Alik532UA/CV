@@ -241,8 +241,8 @@ export const de: Translations = {
     scrollbar: {
         title: "Scrollleiste",
         standard: "Standard",
-        custom: "Eigene",
-        minimap: "Minimap",
-        minimapFull: "Visuelle Minimap"
+        custom: "Autoren",
+        minimap: "Minimap minimal",
+        minimapFull: "Minimap"
     }
 };
