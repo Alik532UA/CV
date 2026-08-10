@@ -552,7 +552,7 @@
 
     :global(.flag-icon) {
         border-radius: 2px;
-        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.2);
     }
 
     :global(.flag-icon svg) {
