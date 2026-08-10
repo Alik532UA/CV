@@ -284,8 +284,8 @@
                                 <input
                                     type="range"
                                     min="10"
-                                    max="300"
-                                    step="5"
+                                    max="1000"
+                                    step="10"
                                     value={background.particlesCount}
                                     oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                     class="volume-slider"
@@ -388,8 +388,8 @@
                                     <input
                                         type="range"
                                         min="10"
-                                        max="300"
-                                        step="5"
+                                        max="1000"
+                                        step="10"
                                         value={background.particlesCount}
                                         oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                         class="volume-slider"
