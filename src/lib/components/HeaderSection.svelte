@@ -216,60 +216,115 @@
 <header class="header glass">
     <div class="header-content">
         <div class="controls">
-            <!-- Background Switcher (Desktop) -->
-            <div
-                class="toggle-group glass desktop-only"
-                data-testid="bg-toggle-toolbar"
-                role="radiogroup"
-                aria-label="Background effect"
-            >
-                <button
-                    onclick={() => background.set(0)}
-                    class:active={background.type === 0}
-                    title="Background Off"
-                    aria-label="Disable background effects"
-                    aria-checked={background.type === 0}
-                    role="radio"
-                    data-testid="bg-off-btn"
+            <!-- Background Control Wrapper (Desktop) -->
+            <div class="bg-control-wrapper desktop-only">
+                <div
+                    class="toggle-group glass"
+                    data-testid="bg-toggle-toolbar"
+                    role="radiogroup"
+                    aria-label="Background effect"
                 >
-                    <CircleOff size={18} />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => background.set(1)}
-                    class:active={background.type === 1}
-                    title="Particles Effect"
-                    aria-label="Enable particles background"
-                    aria-checked={background.type === 1}
-                    role="radio"
-                    data-testid="bg-particles-btn"
-                >
-                    <Sparkles size={18} />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => background.set(2)}
-                    class:active={background.type === 2}
-                    title="Waves Effect"
-                    aria-label="Enable waves background"
-                    aria-checked={background.type === 2}
-                    role="radio"
-                    data-testid="bg-waves-btn"
-                >
-                    <Waves size={18} />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => background.set(3)}
-                    class:active={background.type === 3}
-                    title="Shapes Effect"
-                    aria-label="Enable shapes background"
-                    aria-checked={background.type === 3}
-                    role="radio"
-                    data-testid="bg-shapes-btn"
-                >
-                    <Shapes size={18} />
-                </button>
+                    <button
+                        onclick={() => background.set(0)}
+                        class:active={background.type === 0}
+                        title="Background Off"
+                        aria-label="Disable background effects"
+                        aria-checked={background.type === 0}
+                        role="radio"
+                        data-testid="bg-off-btn"
+                    >
+                        <CircleOff size={18} />
+                    </button>
+                    <div class="divider" role="separator"></div>
+                    <button
+                        onclick={() => background.set(1)}
+                        class:active={background.type === 1}
+                        title="Particles Effect"
+                        aria-label="Enable particles background"
+                        aria-checked={background.type === 1}
+                        role="radio"
+                        data-testid="bg-particles-btn"
+                    >
+                        <Sparkles size={18} />
+                    </button>
+                    <div class="divider" role="separator"></div>
+                    <button
+                        onclick={() => background.set(2)}
+                        class:active={background.type === 2}
+                        title="Waves Effect"
+                        aria-label="Enable waves background"
+                        aria-checked={background.type === 2}
+                        role="radio"
+                        data-testid="bg-waves-btn"
+                    >
+                        <Waves size={18} />
+                    </button>
+                    <div class="divider" role="separator"></div>
+                    <button
+                        onclick={() => background.set(3)}
+                        class:active={background.type === 3}
+                        title="Shapes Effect"
+                        aria-label="Enable shapes background"
+                        aria-checked={background.type === 3}
+                        role="radio"
+                        data-testid="bg-shapes-btn"
+                    >
+                        <Shapes size={18} />
+                    </button>
+                </div>
+
+                {#if background.type !== 0}
+                    <div class="bg-slider-container">
+                        <div class="bg-slider-panel glass">
+                            {#if background.type === 1}
+                                <div class="bg-slider-info">
+                                    <span class="bg-slider-label">Particles</span>
+                                    <span class="bg-slider-value">{background.particlesCount}</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="10"
+                                    max="300"
+                                    step="5"
+                                    value={background.particlesCount}
+                                    oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
+                                    class="volume-slider"
+                                    aria-label="Particle Count"
+                                />
+                            {:else if background.type === 2}
+                                <div class="bg-slider-info">
+                                    <span class="bg-slider-label">Waves</span>
+                                    <span class="bg-slider-value">{background.wavesCount}</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="10"
+                                    step="1"
+                                    value={background.wavesCount}
+                                    oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
+                                    class="volume-slider"
+                                    aria-label="Wave Layers"
+                                />
+                            {:else if background.type === 3}
+                                <div class="bg-slider-info">
+                                    <span class="bg-slider-label">Line Width</span>
+                                    <span class="bg-slider-value">{background.shapesLineWidth}px</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="1"
+                                    max="500"
+                                    step="1"
+                                    value={background.shapesLineWidth}
+                                    oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}
+                                    class="volume-slider"
+                                    aria-label="Line Width"
+                                />
+                            {/if}
+                        </div>
+                    </div>
+                {/if}
             </div>
 
             <!-- Background Switcher (Mobile) -->
@@ -321,6 +376,55 @@
                         >
                             <Shapes size={16} /> <span>Shapes</span>
                         </button>
+
+                        {#if background.type !== 0}
+                            <div class="dropdown-divider"></div>
+                            <div class="mobile-bg-slider">
+                                {#if background.type === 1}
+                                    <div class="bg-slider-info">
+                                        <span class="bg-slider-label">Particles</span>
+                                        <span class="bg-slider-value">{background.particlesCount}</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="10"
+                                        max="300"
+                                        step="5"
+                                        value={background.particlesCount}
+                                        oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
+                                        class="volume-slider"
+                                    />
+                                {:else if background.type === 2}
+                                    <div class="bg-slider-info">
+                                        <span class="bg-slider-label">Waves</span>
+                                        <span class="bg-slider-value">{background.wavesCount}</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="10"
+                                        step="1"
+                                        value={background.wavesCount}
+                                        oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
+                                        class="volume-slider"
+                                    />
+                                {:else if background.type === 3}
+                                    <div class="bg-slider-info">
+                                        <span class="bg-slider-label">Line Width</span>
+                                        <span class="bg-slider-value">{background.shapesLineWidth}px</span>
+                                    </div>
+                                    <input
+                                        type="range"
+                                        min="1"
+                                        max="500"
+                                        step="1"
+                                        value={background.shapesLineWidth}
+                                        oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}
+                                        class="volume-slider"
+                                    />
+                                {/if}
+                            </div>
+                        {/if}
                     </div>
                 {/if}
             </div>
@@ -610,6 +714,72 @@
     .sound-toggle[aria-pressed="false"]:hover {
         color: var(--accent-primary);
         opacity: 1;
+    }
+
+    .bg-control-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .bg-slider-container {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-top: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+            visibility 0.3s;
+        z-index: 1001;
+    }
+
+    .bg-control-wrapper:hover .bg-slider-container,
+    .bg-control-wrapper:focus-within .bg-slider-container {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .bg-slider-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 140px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        backdrop-filter: var(--glass-blur);
+        box-shadow: var(--panel-shadow);
+    }
+
+    .bg-slider-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+
+    .bg-slider-value {
+        color: var(--accent-primary);
+        font-weight: 700;
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background: var(--border-color);
+        margin: 4px 0;
+    }
+
+    .mobile-bg-slider {
+        padding: 4px 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
     }
 
     .sound-control-wrapper {
