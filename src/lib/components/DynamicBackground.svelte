@@ -77,5 +77,15 @@
         /* Height is set via inline style for mobile stability */
         z-index: -1;
         pointer-events: none;
+        animation: fadeInBg 0.8s ease-in-out forwards;
+    }
+
+    @keyframes fadeInBg {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 </style>

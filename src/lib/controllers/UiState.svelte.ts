@@ -73,8 +73,18 @@ class ThemeState {
 	}
 }
 
+function getInitialBackgroundType(): 0 | 1 | 2 | 3 {
+	if (browser) {
+		const saved = storage.get("backgroundType");
+		if (saved && ["0", "1", "2", "3"].includes(saved)) {
+			return parseInt(saved) as 0 | 1 | 2 | 3;
+		}
+	}
+	return 1;
+}
+
 class BackgroundState {
-	type = $state<0 | 1 | 2 | 3>(1);
+	type = $state<0 | 1 | 2 | 3>(getInitialBackgroundType());
 
 	constructor() {}
 
