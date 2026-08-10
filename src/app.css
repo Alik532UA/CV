@@ -88,25 +88,24 @@ html {
     scrollbar-width: auto;
 }
 
-/* The page's main bar is drawn by PageScrollbar / Minimap. The native one is
-   hidden only once one of them has actually mounted and set this class: if neither
-   runs — touch device, narrow screen, an error — the page keeps an ordinary
-   working bar rather than none at all.
+/* The two rules that hide the page's native bar are NOT here — they live in a
+   <style> block in src/app.html, and deliberately so.
 
-   The class has exactly one owner, the effect in +layout.svelte, plus the
-   first-frame script in app.html. Letting the drawing components add and remove it
-   themselves races on every mode switch: the new component adds it, then the old
-   one's cleanup runs and takes it straight back off, leaving two visible bars. */
-html.has-custom-scrollbar {
-    scrollbar-width: none;
-}
+   The class that triggers them is set by the first-frame script, before anything
+   paints. That is only half of what is needed: the rule acting on the class has to
+   exist by then too. This file is bundled, and the dev server injects bundled CSS
+   through JavaScript rather than a render-blocking <link> — so at first paint the
+   class was there with nothing to act on it, and the native bar appeared and then
+   vanished. In app.html the rule is static markup in the head, which cannot arrive
+   late in any environment.
 
-html.has-custom-scrollbar::-webkit-scrollbar {
-    display: none;
-}
+   The class has exactly one owner, the effect in +layout.svelte, plus that
+   first-frame script. Letting the drawing components add and remove it themselves
+   races on every mode switch: the new component adds it, then the old one's cleanup
+   runs and takes it straight back off, leaving two visible bars. */
 
 /* Inner bars stay native, at a constant 10px: a custom overlay per scrollable
-   block is not worth it. Hiding above applies to the page only. */
+   block is not worth it. Hiding the page's bar applies to the page only. */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
