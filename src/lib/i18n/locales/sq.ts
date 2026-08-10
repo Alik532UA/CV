@@ -237,5 +237,12 @@ export const sq: Translations = {
     common: {
         close: "Mbyll",
         sound: "Tingull"
+    },
+    scrollbar: {
+        title: "Shiriti i rrëshqitjes",
+        standard: "Standard",
+        custom: "I përshtatur",
+        minimap: "Minimapë",
+        minimapFull: "Minimapë vizuale"
     }
 };

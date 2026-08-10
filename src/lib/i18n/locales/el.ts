@@ -237,5 +237,12 @@ export const el: Translations = {
     common: {
         close: "Κλείσιμο",
         sound: "Ήχος"
+    },
+    scrollbar: {
+        title: "Γραμμή κύλισης",
+        standard: "Τυπική",
+        custom: "Προσαρμοσμένη",
+        minimap: "Μικροχάρτης",
+        minimapFull: "Οπτικός μικροχάρτης"
     }
 };

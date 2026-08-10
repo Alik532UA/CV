@@ -237,5 +237,12 @@ export const hr: Translations = {
     common: {
         close: "Zatvori",
         sound: "Zvuk"
+    },
+    scrollbar: {
+        title: "Klizač",
+        standard: "Standardni",
+        custom: "Prilagođeni",
+        minimap: "Minimapa",
+        minimapFull: "Vizualna minimapa"
     }
 };

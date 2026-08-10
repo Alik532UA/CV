@@ -237,5 +237,12 @@ export const sv: Translations = {
     common: {
         close: "Stäng",
         sound: "Ljud"
+    },
+    scrollbar: {
+        title: "Rullningslist",
+        standard: "Standard",
+        custom: "Anpassad",
+        minimap: "Minikarta",
+        minimapFull: "Visuell minikarta"
     }
 };

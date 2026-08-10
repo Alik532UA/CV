@@ -237,5 +237,12 @@ export const ro: Translations = {
     common: {
         close: "Închide",
         sound: "Sunet"
+    },
+    scrollbar: {
+        title: "Bară de derulare",
+        standard: "Standard",
+        custom: "Personalizată",
+        minimap: "Minihartă",
+        minimapFull: "Minihartă vizuală"
     }
 };

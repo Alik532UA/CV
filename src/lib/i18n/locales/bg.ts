@@ -237,5 +237,12 @@ export const bg: Translations = {
     common: {
         close: "Затвори",
         sound: "Звук"
+    },
+    scrollbar: {
+        title: "Скролбар",
+        standard: "Стандартен",
+        custom: "Персонализиран",
+        minimap: "Миникарта",
+        minimapFull: "Визуална миникарта"
     }
 };

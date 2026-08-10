@@ -236,6 +236,13 @@ export const ja: Translations = {
     },
     common: {
         close: "閉じる",
-        sound: "サウンド"
+        sound: "サウンド"
+    },
+    scrollbar: {
+        title: "スクロールバー",
+        standard: "標準",
+        custom: "カスタム",
+        minimap: "ミニマップ",
+        minimapFull: "ビジュアルミニマップ"
     }
 };

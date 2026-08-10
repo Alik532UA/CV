@@ -237,5 +237,12 @@ export const et: Translations = {
     common: {
         close: "Sulge",
         sound: "Heli"
+    },
+    scrollbar: {
+        title: "Kerimisriba",
+        standard: "Standardne",
+        custom: "Kohandatud",
+        minimap: "Minikaart",
+        minimapFull: "Visuaalne minikaart"
     }
 };

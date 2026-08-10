@@ -237,5 +237,12 @@ export const da: Translations = {
     common: {
         close: "Luk",
         sound: "Lyd"
+    },
+    scrollbar: {
+        title: "Rullepanel",
+        standard: "Standard",
+        custom: "Tilpasset",
+        minimap: "Minikort",
+        minimapFull: "Visuelt minikort"
     }
 };

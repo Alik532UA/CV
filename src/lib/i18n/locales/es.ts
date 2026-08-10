@@ -237,5 +237,12 @@ export const es: Translations = {
     common: {
         close: "Cerrar",
         sound: "Sonido"
+    },
+    scrollbar: {
+        title: "Barra de desplazamiento",
+        standard: "Estándar",
+        custom: "Personalizada",
+        minimap: "Minimapa",
+        minimapFull: "Minimapa visual"
     }
 };

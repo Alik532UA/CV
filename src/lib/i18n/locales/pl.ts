@@ -237,5 +237,12 @@ export const pl: Translations = {
     common: {
         close: "Zamknij",
         sound: "Dźwięk"
+    },
+    scrollbar: {
+        title: "Pasek przewijania",
+        standard: "Standardowy",
+        custom: "Własny",
+        minimap: "Minimapa",
+        minimapFull: "Minimapa wizualna"
     }
 };

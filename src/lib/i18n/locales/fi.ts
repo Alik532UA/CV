@@ -237,5 +237,12 @@ export const fi: Translations = {
     common: {
         close: "Sulje",
         sound: "Ääni"
+    },
+    scrollbar: {
+        title: "Vierityspalkki",
+        standard: "Vakio",
+        custom: "Mukautettu",
+        minimap: "Pienoiskartta",
+        minimapFull: "Visuaalinen pienoiskartta"
     }
 };

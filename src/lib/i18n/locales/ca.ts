@@ -237,5 +237,12 @@ export const ca: Translations = {
     common: {
         close: "Tanca",
         sound: "So"
+    },
+    scrollbar: {
+        title: "Barra de desplaçament",
+        standard: "Estàndard",
+        custom: "Personalitzada",
+        minimap: "Minimapa",
+        minimapFull: "Minimapa visual"
     }
 };

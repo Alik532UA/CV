@@ -237,5 +237,12 @@ export const lv: Translations = {
     common: {
         close: "Aizvērt",
         sound: "Skaņa"
+    },
+    scrollbar: {
+        title: "Ritjosla",
+        standard: "Standarta",
+        custom: "Pielāgota",
+        minimap: "Minikarte",
+        minimapFull: "Vizuāla minikarte"
     }
 };

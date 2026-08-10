@@ -239,5 +239,12 @@ export const crh: Translations = {
     common: {
         close: "Qapatıñız",
         sound: "Ses"
+    },
+    scrollbar: {
+        title: "Kaydırma çıtası",
+        standard: "Standart",
+        custom: "Özel",
+        minimap: "Miniharita",
+        minimapFull: "Görsel miniharita"
     }
 };

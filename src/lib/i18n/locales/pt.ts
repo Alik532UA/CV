@@ -237,5 +237,12 @@ export const pt: Translations = {
     common: {
         close: "Fechar",
         sound: "Som"
+    },
+    scrollbar: {
+        title: "Barra de rolagem",
+        standard: "Padrão",
+        custom: "Personalizada",
+        minimap: "Minimapa",
+        minimapFull: "Minimapa visual"
     }
 };

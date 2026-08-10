@@ -237,5 +237,12 @@ export const tr: Translations = {
     common: {
         close: "Kapat",
         sound: "Ses"
+    },
+    scrollbar: {
+        title: "Kaydırma çubuğu",
+        standard: "Standart",
+        custom: "Özel",
+        minimap: "Mini harita",
+        minimapFull: "Görsel mini harita"
     }
 };

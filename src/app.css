@@ -35,6 +35,9 @@
     /* Text drawn on top of --accent-primary. It cannot be white in both themes:
        the dark theme's accent is a bright cyan that white sits on at 1.4:1. */
     --on-accent: #050505;
+    /* Scroll bars — the page's own custom one, and every inner one. */
+    --scrollbar-track: rgba(255, 255, 255, 0.06);
+    --scrollbar-thumb: rgba(var(--accent-primary-rgb), 0.45);
 }
 
 :root[data-theme='dark'] {
@@ -64,6 +67,8 @@
     --surface-subtle: rgba(0, 0, 0, 0.04);
     --surface-hover: rgba(0, 0, 0, 0.08);
     --on-accent: #ffffff;
+    --scrollbar-track: rgba(0, 0, 0, 0.06);
+    --scrollbar-thumb: rgba(var(--accent-primary-rgb), 0.45);
 }
 
 * {
@@ -75,6 +80,47 @@
 
 html {
     scroll-behavior: smooth;
+
+    /* Standard properties, understood by Firefox and by Chromium 121+. They are
+       inherited, so this one declaration covers the page and every block with its
+       own scroll — the language panel, the modals. */
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: auto;
+}
+
+/* The page's main bar is drawn by PageScrollbar / Minimap. The native one is
+   hidden only once one of them has actually mounted and set this class: if neither
+   runs — touch device, narrow screen, an error — the page keeps an ordinary
+   working bar rather than none at all.
+
+   The class has exactly one owner, the effect in +layout.svelte, plus the
+   first-frame script in app.html. Letting the drawing components add and remove it
+   themselves races on every mode switch: the new component adds it, then the old
+   one's cleanup runs and takes it straight back off, leaving two visible bars. */
+html.has-custom-scrollbar {
+    scrollbar-width: none;
+}
+
+html.has-custom-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Inner bars stay native, at a constant 10px: a custom overlay per scrollable
+   block is not worth it. Hiding above applies to the page only. */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 8px;
+    /* A border in the track's colour makes the thumb look thinner than the bar. */
+    border: 2px solid var(--scrollbar-track);
 }
 
 body {

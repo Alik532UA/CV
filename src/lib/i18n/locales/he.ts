@@ -240,5 +240,12 @@ export const he: Translations = {
     common: {
         close: "סגור",
         sound: "צליל"
+    },
+    scrollbar: {
+        title: "פס גלילה",
+        standard: "רגיל",
+        custom: "מותאם",
+        minimap: "מיני-מפה",
+        minimapFull: "מיני-מפה חזותית"
     }
 };

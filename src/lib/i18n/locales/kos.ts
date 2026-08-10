@@ -244,5 +244,12 @@ export const kos: Translations = {
     common: {
         close: "Kaeal",
         sound: "Sound"
+    },
+    scrollbar: {
+        title: "Scrollbar",
+        standard: "Standard",
+        custom: "Custom",
+        minimap: "Minimap",
+        minimapFull: "Visual minimap"
     }
 };

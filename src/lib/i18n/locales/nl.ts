@@ -237,5 +237,12 @@ export const nl: Translations = {
     common: {
         close: "Sluiten",
         sound: "Geluid"
+    },
+    scrollbar: {
+        title: "Schuifbalk",
+        standard: "Standaard",
+        custom: "Aangepast",
+        minimap: "Minimap",
+        minimapFull: "Visuele minimap"
     }
 };

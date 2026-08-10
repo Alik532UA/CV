@@ -237,5 +237,12 @@ export const be: Translations = {
     common: {
         close: "Закрыць",
         sound: "Гук"
+    },
+    scrollbar: {
+        title: "Паласа прокруткі",
+        standard: "Стандартная",
+        custom: "Уласная",
+        minimap: "Мінімапа",
+        minimapFull: "Візуальная мінімапа"
     }
 };

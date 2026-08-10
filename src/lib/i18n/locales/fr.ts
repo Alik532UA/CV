@@ -237,5 +237,12 @@ export const fr: Translations = {
     common: {
         close: "Fermer",
         sound: "Son"
+    },
+    scrollbar: {
+        title: "Barre de défilement",
+        standard: "Standard",
+        custom: "Personnalisée",
+        minimap: "Minicarte",
+        minimapFull: "Minicarte visuelle"
     }
 };

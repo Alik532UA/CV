@@ -237,5 +237,12 @@ export const uk: Translations = {
     common: {
         close: "Закрити",
         sound: "Звук"
+    },
+    scrollbar: {
+        title: "Смуга прокрутки",
+        standard: "Стандартна",
+        custom: "Власна",
+        minimap: "Мінімапа",
+        minimapFull: "Візуальна мінімапа"
     }
 };

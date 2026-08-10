@@ -237,5 +237,12 @@ export const cy: Translations = {
     common: {
         close: "Cau",
         sound: "Sain"
+    },
+    scrollbar: {
+        title: "Bar sgrolio",
+        standard: "Safonol",
+        custom: "Addasedig",
+        minimap: "Minimap",
+        minimapFull: "Minimap gweledol"
     }
 };

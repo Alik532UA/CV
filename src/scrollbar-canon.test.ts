@@ -1,0 +1,104 @@
+import { describe, expect, it } from "vitest";
+import { createHash } from "node:crypto";
+import { globSync, readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+/**
+ * Static invariants for SCROLLBAR-v8 § 11.
+ *
+ * The modes themselves — geometry, pointer events, drag feel — are only testable
+ * in a browser, and § 11 says so outright. What IS checkable from the source is the
+ * handful of facts that live in two places at once and go stale silently. Each of
+ * these has a matching checkbox in the canon.
+ */
+
+const ROOT = resolve(__dirname, "..");
+const read = (p: string) => readFileSync(resolve(ROOT, p), "utf8");
+
+const APP_HTML = read("src/app.html");
+const CONTROLLER = read("src/lib/controllers/ScrollbarState.svelte.ts");
+const SVELTE_CONFIG = read("svelte.config.js");
+
+/**
+ * Every source file that could plausibly touch the class or call scrollTo.
+ *
+ * This file excludes itself: it quotes the very patterns it forbids, and matched
+ * its own regex on the first run.
+ */
+function sourceFiles(): string[] {
+	// app.html is in scope: the first-frame script is the class's second owner.
+	return globSync("src/**/*.{ts,svelte,css,html}", { cwd: ROOT })
+		.map((p) => p.replace(/\\/g, "/"))
+		.filter((p) => !p.endsWith("scrollbar-canon.test.ts"));
+}
+
+describe("scrollbar canon § 8.2 — the first-frame script duplicates the controller", () => {
+	// The script in app.html cannot import the controller, so the media queries and
+	// the mode names exist twice. They drift silently: one behaviour on the first
+	// frame, another after hydration, and the visitor sees the jump.
+	it.each([
+		["(hover: hover) and (pointer: fine)"],
+		["(min-width: 1100px)"],
+		["minimap-full"]
+	])("both places agree on %s", (needle) => {
+		expect(APP_HTML, `missing from app.html: ${needle}`).toContain(needle);
+		expect(CONTROLLER, `missing from ScrollbarState: ${needle}`).toContain(needle);
+	});
+
+	it("the default mode matches in both places", () => {
+		// app.html: `localStorage.getItem(...) || 'custom'`
+		const html = APP_HTML.match(/scrollbarMode'\)\s*\|\|\s*'([a-z-]+)'/);
+		// controller: `mode = $state<ScrollbarMode>("custom")`
+		const ts = CONTROLLER.match(/mode\s*=\s*\$state<ScrollbarMode>\("([a-z-]+)"\)/);
+		expect(html?.[1], "no default found in app.html").toBeTruthy();
+		expect(ts?.[1], "no default found in the controller").toBeTruthy();
+		expect(html?.[1]).toBe(ts?.[1]);
+	});
+});
+
+describe("scrollbar canon § 2.3 — the hiding class has exactly one owner", () => {
+	it("has-custom-scrollbar is added or removed in exactly two places", () => {
+		// One: the effect in +layout.svelte. Two: the first-frame script. Any third is
+		// a drawing component doing it for itself, which races on every mode switch.
+		const owners: string[] = [];
+		for (const file of sourceFiles()) {
+			const text = read(file);
+			for (const m of text.matchAll(
+				/classList\.(?:add|remove|toggle)\(\s*["'`]has-custom-scrollbar/g
+			)) {
+				owners.push(`${file}: ${m[0]}`);
+			}
+		}
+		expect(owners.sort(), `owners:\n${owners.join("\n")}`).toHaveLength(2);
+	});
+});
+
+describe("scrollbar canon § 9.2 — behavior: 'auto' is forbidden", () => {
+	it("no scrollTo passes behavior: 'auto'", () => {
+		// 'auto' means "read CSS scroll-behavior", which is `smooth` in app.css. Every
+		// mouse move during a drag would start an animation and they would chase each
+		// other — correct-looking code that judders.
+		const offenders: string[] = [];
+		for (const file of sourceFiles()) {
+			const text = read(file);
+			if (/behavior:\s*["']auto["']/.test(text)) offenders.push(file);
+		}
+		expect(offenders, `behavior: 'auto' in:\n${offenders.join("\n")}`).toEqual([]);
+	});
+});
+
+describe("CSP — the first-frame script's hash is registered", () => {
+	it("svelte.config.js lists the hash of the script actually in app.html", () => {
+		// SvelteKit hashes only the scripts it emits itself, so this one is listed by
+		// hand — and editing the script changes the hash. It had already gone stale
+		// this way once, leaving the built site blocking its own theme script.
+		const inline = APP_HTML.match(/<script>([\s\S]*?)<\/script>/);
+		expect(inline?.[1], "no inline script in app.html").toBeTruthy();
+
+		const hash = "sha256-" + createHash("sha256").update(inline![1], "utf8").digest("base64");
+		expect(
+			SVELTE_CONFIG,
+			`app.html's inline script hashes to ${hash}, which svelte.config.js does not list`
+		).toContain(hash);
+	});
+});

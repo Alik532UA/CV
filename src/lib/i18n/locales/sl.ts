@@ -237,5 +237,12 @@ export const sl: Translations = {
     common: {
         close: "Zapri",
         sound: "Zvok"
+    },
+    scrollbar: {
+        title: "Drsnik",
+        standard: "Standardni",
+        custom: "Prilagojeni",
+        minimap: "Minimapa",
+        minimapFull: "Vizualna minimapa"
     }
 };

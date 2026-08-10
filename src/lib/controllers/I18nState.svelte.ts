@@ -238,6 +238,13 @@ const TranslationSchema = z.object({
 	common: z.object({
 		close: z.string(),
 		sound: z.string()
+	}),
+	scrollbar: z.object({
+		title: z.string(),
+		standard: z.string(),
+		custom: z.string(),
+		minimap: z.string(),
+		minimapFull: z.string()
 	})
 });
 
@@ -293,5 +300,8 @@ export const t = {
 	},
 	get common() {
 		return translations[language.current].common;
+	},
+	get scrollbar() {
+		return translations[language.current].scrollbar;
 	}
 };

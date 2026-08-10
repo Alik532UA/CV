@@ -237,5 +237,12 @@ export const ga: Translations = {
     common: {
         close: "Dún",
         sound: "Fuaim"
+    },
+    scrollbar: {
+        title: "Barra scrollaithe",
+        standard: "Caighdeánach",
+        custom: "Saincheaptha",
+        minimap: "Minimhapa",
+        minimapFull: "Minimhapa amhairc"
     }
 };

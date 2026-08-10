@@ -237,5 +237,12 @@ export const lt: Translations = {
     common: {
         close: "Uždaryti",
         sound: "Garsas"
+    },
+    scrollbar: {
+        title: "Slankjuostė",
+        standard: "Standartinė",
+        custom: "Pasirinktinė",
+        minimap: "Minižemėlapis",
+        minimapFull: "Vaizdinis minižemėlapis"
     }
 };

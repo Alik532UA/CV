@@ -16,6 +16,21 @@
 				var theme = saved || (prefersDark ? 'dark' : 'light');
 				document.documentElement.setAttribute('data-theme', theme);
 				document.documentElement.style.colorScheme = theme;
+
+				// Hide the native bar before the first frame, or it shows and then
+				// vanishes once the components mount — the same flicker the theme
+				// lines above exist to prevent.
+				//
+				// DUPLICATED CONDITIONS: this must agree with
+				// src/lib/controllers/ScrollbarState.svelte.ts, which a script in the
+				// document head cannot import. src/scrollbar-canon.test.ts fails if
+				// the two drift apart.
+				var sb = localStorage.getItem(PREFIX + 'scrollbarMode') || 'custom';
+				var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+				var wide = window.matchMedia('(min-width: 1100px)').matches;
+				if (fine && (sb === 'custom' || ((sb === 'minimap' || sb === 'minimap-full') && wide))) {
+					document.documentElement.classList.add('has-custom-scrollbar');
+				}
 			} catch (e) { }
 		})();
 	</script>

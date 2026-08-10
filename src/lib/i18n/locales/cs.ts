@@ -237,5 +237,12 @@ export const cs: Translations = {
     common: {
         close: "Zavřít",
         sound: "Zvuk"
+    },
+    scrollbar: {
+        title: "Posuvník",
+        standard: "Standardní",
+        custom: "Vlastní",
+        minimap: "Minimapa",
+        minimapFull: "Vizuální minimapa"
     }
 };

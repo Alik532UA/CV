@@ -24,7 +24,16 @@ const config = {
 					// gtag.js is injected at runtime by the analytics service; without
 					// this the browser blocks it and analytics silently never starts.
 					'https://www.googletagmanager.com',
-					'sha256-5kCri4c6Kc63HNipVm8tK0VilaNPrqM9D8fdBdzcuVI='
+					// Hash of the first-frame script in src/app.html — theme, then the
+					// class that hides the native scrollbar. SvelteKit hashes only the
+					// scripts it emits itself, so one living in the template has to be
+					// listed here by hand.
+					//
+					// EDITING THAT SCRIPT CHANGES THIS HASH. The previous value had gone
+					// stale exactly that way, and the built site was blocking the script
+					// outright; src/scrollbar-canon.test.ts now recomputes it and fails
+					// when the two disagree.
+					'sha256-AI5o/y+VHjRKg1MdVNz9bdfv1HxQjYTru8WN+qI1dss='
 				],
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],

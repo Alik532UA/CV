@@ -237,5 +237,12 @@ export const is: Translations = {
     common: {
         close: "Loka",
         sound: "Hljóð"
+    },
+    scrollbar: {
+        title: "Skrunustika",
+        standard: "Sjálfgefin",
+        custom: "Sérsniðin",
+        minimap: "Yfirlitskort",
+        minimapFull: "Sjónrænt yfirlitskort"
     }
 };

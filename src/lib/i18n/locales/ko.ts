@@ -237,5 +237,12 @@ export const ko: Translations = {
     common: {
         close: "닫기",
         sound: "소리"
+    },
+    scrollbar: {
+        title: "스크롤바",
+        standard: "기본",
+        custom: "사용자 지정",
+        minimap: "미니맵",
+        minimapFull: "비주얼 미니맵"
     }
 };

@@ -237,5 +237,12 @@ export const mt: Translations = {
     common: {
         close: "Agħlaq",
         sound: "Ħoss"
+    },
+    scrollbar: {
+        title: "Barra tal-iskrolljar",
+        standard: "Standard",
+        custom: "Personalizzata",
+        minimap: "Minimappa",
+        minimapFull: "Minimappa viżwali"
     }
 };

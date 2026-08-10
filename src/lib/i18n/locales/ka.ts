@@ -237,5 +237,12 @@ export const ka: Translations = {
     common: {
         close: "დახურვა",
         sound: "ხმა"
+    },
+    scrollbar: {
+        title: "გადახვევის ზოლი",
+        standard: "სტანდარტული",
+        custom: "მორგებული",
+        minimap: "მინირუკა",
+        minimapFull: "ვიზუალური მინირუკა"
     }
 };

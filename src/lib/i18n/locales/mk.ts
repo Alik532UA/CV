@@ -237,5 +237,12 @@ export const mk: Translations = {
     common: {
         close: "Затвори",
         sound: "Звук"
+    },
+    scrollbar: {
+        title: "Лизгач",
+        standard: "Стандарден",
+        custom: "Прилагоден",
+        minimap: "Миникарта",
+        minimapFull: "Визуелна миникарта"
     }
 };

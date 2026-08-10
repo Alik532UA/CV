@@ -244,5 +244,12 @@ export const chk: Translations = {
     common: {
         close: "Opano",
         sound: "Sound"
+    },
+    scrollbar: {
+        title: "Scrollbar",
+        standard: "Standard",
+        custom: "Custom",
+        minimap: "Minimap",
+        minimapFull: "Visual minimap"
     }
 };

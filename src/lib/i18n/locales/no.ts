@@ -237,5 +237,12 @@ export const no: Translations = {
     common: {
         close: "Lukk",
         sound: "Lyd"
+    },
+    scrollbar: {
+        title: "Rullefelt",
+        standard: "Standard",
+        custom: "Tilpasset",
+        minimap: "Minikart",
+        minimapFull: "Visuelt minikart"
     }
 };

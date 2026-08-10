@@ -14,6 +14,10 @@
 	import { theme, background, section } from "$lib/controllers/UiState.svelte";
 	import { sound } from "$lib/controllers/SoundState.svelte";
 	import { shortcuts } from "$lib/controllers/ShortcutState.svelte";
+	import { scrollbar } from "$lib/controllers/ScrollbarState.svelte";
+	import PageScrollbar from "$lib/components/ui/PageScrollbar.svelte";
+	import Minimap from "$lib/components/ui/Minimap.svelte";
+	import ScrollbarContextMenu from "$lib/components/ui/ScrollbarContextMenu.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
@@ -40,6 +44,18 @@
 	setContext("background", background);
 	setContext("language", language);
 	setContext("sound", sound);
+
+	/**
+	 * The class that hides the native scrollbar has exactly one owner: this effect.
+	 *
+	 * Left to the drawing components, switching modes races — the incoming one adds
+	 * the class, then the outgoing one's cleanup runs and takes it back off, and the
+	 * page shows both a custom bar and the system one.
+	 */
+	$effect(() => {
+		if (!browser) return;
+		document.documentElement.classList.toggle("has-custom-scrollbar", scrollbar.hidesNative);
+	});
 
 	// Runes (Svelte 5)
 	// The observer below owns this value; it lives on the section controller so
@@ -85,6 +101,7 @@
 		// Initialize global states
 		theme.init();
 		background.init();
+		scrollbar.init();
 		// The route segment decides the language; init falls back to the saved
 		// choice only at the bare path, where none was named.
 		language.init(page.data.routeLanguage);
@@ -166,6 +183,15 @@
 		{@render children()}
 	</main>
 </div>
+
+<PageScrollbar />
+<Minimap />
+
+<!-- The menu lives at the root, not inside the bars: the minimap has
+     overflow: hidden and would clip it, and the menu is shared by all four modes —
+     after a switch the component that opened it disappears, and would take the
+     menu with it. -->
+<ScrollbarContextMenu />
 
 <Toast />
 
