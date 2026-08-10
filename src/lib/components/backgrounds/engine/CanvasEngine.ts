@@ -37,6 +37,12 @@ export abstract class CanvasEngine {
 			this.init();
 			this.startLoop();
 
+			requestAnimationFrame(() => {
+				if (this.canvas) {
+					this.canvas.classList.add("mounted");
+				}
+			});
+
 			window.addEventListener("resize", this.throttledResize);
 			window.addEventListener("scroll", this.throttledScroll);
 		}
@@ -44,6 +50,9 @@ export abstract class CanvasEngine {
 
 	public unmount() {
 		logService.info("engine", "Unmounting canvas engine");
+		if (this.canvas) {
+			this.canvas.classList.remove("mounted");
+		}
 		this.stopLoop();
 		if (browser) {
 			window.removeEventListener("resize", this.throttledResize);

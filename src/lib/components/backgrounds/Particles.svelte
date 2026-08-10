@@ -37,5 +37,11 @@
         height: 100%;
         z-index: -1;
         pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+    }
+
+    .bg-canvas:global(.mounted) {
+        opacity: 1;
     }
 </style>
