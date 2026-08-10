@@ -218,6 +218,18 @@
         color: var(--accent-primary);
     }
 
+    /* A lighter version of the .active treatment: hovering a section should
+       read as "this is what you would land on", not compete with the section
+       you are already in. */
+    li:not(.active):hover {
+        background: rgba(var(--accent-primary-rgb), 0.06);
+        border-color: var(--border-color);
+    }
+
+    li:not(.active):hover a {
+        color: var(--accent-primary);
+    }
+
     .icon {
         margin-right: 15px;
         font-size: 1.2rem;

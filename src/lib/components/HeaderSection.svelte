@@ -296,25 +296,63 @@
                 </button>
             </div>
 
-            <!-- Sound Toggle: data-sfx-ignore so switching sounds off is itself
-                 silent — the delegated click handler runs in the capture phase,
-                 ahead of this button's own handler, and would otherwise fire the
-                 click sound on the way out. -->
-            <button
-                class="glass-icon-btn sound-toggle"
-                onclick={() => sound.toggle()}
-                data-sfx-ignore
-                title={t.common.sound}
-                aria-label={t.common.sound}
-                aria-pressed={sound.enabled}
-                data-testid="sound-toggle-btn"
+            <!-- Sound control, ported from the sea page's audio control: the
+                 slider is revealed by hovering the wrapper, and a wheel over it
+                 nudges the level. preventDefault stops that wheel from also
+                 scrolling the page underneath. -->
+            <div
+                class="sound-control-wrapper"
+                data-testid="sound-container"
+                onwheel={(e) => {
+                    e.preventDefault();
+                    sound.adjustVolumeByWheel(e.deltaY);
+                }}
+                role="presentation"
             >
-                {#if sound.enabled}
-                    <Volume2 size={18} />
-                {:else}
-                    <VolumeX size={18} />
-                {/if}
-            </button>
+                <!-- data-sfx-ignore so switching sounds off is itself silent: the
+                     delegated click handler runs in the capture phase, ahead of
+                     this button's own handler, and would otherwise fire the click
+                     sound on the way out. -->
+                <button
+                    class="glass-icon-btn sound-toggle"
+                    onclick={() => sound.toggle()}
+                    data-sfx-ignore
+                    title={t.common.sound}
+                    aria-label={t.common.sound}
+                    aria-pressed={sound.enabled}
+                    data-testid="sound-toggle-btn"
+                >
+                    {#if sound.enabled && sound.volume > 0}
+                        <Volume2 size={18} />
+                    {:else}
+                        <VolumeX size={18} />
+                    {/if}
+                </button>
+                <!-- Two levels, same as the sea page's language panel: the outer
+                     div carries the position and a transparent top padding that
+                     bridges the gap under the button, the inner one is the glass
+                     surface. One element cannot do both — a background on the
+                     bridge would paint over the header's edge. -->
+                <div class="volume-slider-container">
+                    <div class="volume-panel glass">
+                        <!-- Labelled by the button's own word rather than a second
+                             translated string: role="slider" plus the percentage
+                             in aria-valuetext already says this sets a level. -->
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={sound.volume}
+                            oninput={(e) => sound.setVolume(e.currentTarget.valueAsNumber)}
+                            class="volume-slider"
+                            aria-label={t.common.sound}
+                            aria-valuetext="{Math.round(sound.volume * 100)}%"
+                            data-testid="sound-volume-slider"
+                        />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -385,6 +423,14 @@
         box-shadow: none;
     }
 
+    /* These sit at opacity 0.5 until selected, which left them with no hover
+       state at all — the group border was the only thing that reacted. */
+    .toggle-group button:not(.active):hover {
+        background: rgba(var(--accent-primary-rgb), 0.12);
+        color: var(--accent-primary);
+        opacity: 1;
+    }
+
     :global(.flag-icon) {
         border-radius: 2px;
         overflow: hidden;
@@ -424,6 +470,11 @@
         transition: var(--transition);
     }
 
+    .glass-icon-btn:hover {
+        background: rgba(var(--accent-primary-rgb), 0.12);
+        border-color: var(--accent-primary);
+    }
+
     .lang-trigger {
         width: auto;
         padding: 0 10px;
@@ -435,6 +486,97 @@
     .sound-toggle[aria-pressed="false"] {
         color: var(--text-secondary);
         opacity: 0.5;
+    }
+
+    .sound-toggle[aria-pressed="false"]:hover {
+        color: var(--accent-primary);
+        opacity: 1;
+    }
+
+    .sound-control-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .volume-slider-container {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        /* Transparent bridge: the panel hangs below the button, and without this
+           the pointer leaves the wrapper on the way down and it vanishes. */
+        padding-top: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+            visibility 0.3s;
+        z-index: 1001;
+    }
+
+    /* focus-within on the wrapper rather than the panel: it means tabbing to the
+       button, or tapping it on a touch screen, also brings the slider up. Behind
+       hover alone it would be unreachable without a mouse. */
+    .sound-control-wrapper:hover .volume-slider-container,
+    .sound-control-wrapper:focus-within .volume-slider-container {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .volume-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 110px;
+        padding: 12px 12px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.9);
+        border: 1px solid var(--border-color);
+        backdrop-filter: var(--glass-blur);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .volume-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 2px;
+        background: var(--border-color);
+        outline: none;
+        cursor: pointer;
+    }
+
+    .volume-slider:focus-visible {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 6px;
+    }
+
+    .volume-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s;
+    }
+
+    .volume-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.2);
+    }
+
+    .volume-slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border: none;
+        border-radius: 50%;
+        background: var(--accent-primary);
+        cursor: pointer;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
 
     .lang-code {
