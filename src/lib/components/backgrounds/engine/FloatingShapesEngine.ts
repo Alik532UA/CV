@@ -28,13 +28,13 @@ export class FloatingShapesEngine extends CanvasEngine {
             this.shapes.push({
                 x: Math.random() * this.width,
                 y: Math.random() * this.height,
-                size: 20 + Math.random() * 40,
+                size: 45 + Math.random() * 75,
                 rotation: Math.random() * Math.PI * 2,
                 rotationSpeed: (Math.random() - 0.5) * 0.01,
                 vx: (Math.random() - 0.5) * 0.5,
                 vy: (Math.random() - 0.5) * 0.5,
                 type: types[Math.floor(Math.random() * types.length)],
-                alpha: 0.05 + Math.random() * 0.08,
+                alpha: 0.06 + Math.random() * 0.10,
             });
         }
     }
@@ -65,7 +65,7 @@ export class FloatingShapesEngine extends CanvasEngine {
             const currentAlpha = shape.alpha * pulse;
 
             this.ctx!.strokeStyle = colors.primary + currentAlpha + ")";
-            this.ctx!.lineWidth = 1.5;
+            this.ctx!.lineWidth = 3;
             this.ctx!.beginPath();
 
             switch (shape.type) {
