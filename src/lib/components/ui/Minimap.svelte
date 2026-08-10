@@ -44,6 +44,9 @@
     let stripTop = 0;
     let pendingY = 0;
     let frame = 0;
+    /** The element holding pointer capture, and for which pointer. */
+    let capturedStrip: HTMLElement | null = null;
+    let capturedPointerId = -1;
     /** Marker position while dragging — straight from the cursor, never via the
      *  scroll event, or it trails the cursor by a frame. */
     let dragMarkerTop = $state(0);
@@ -378,6 +381,12 @@
     }
 
     function onPointerDown(e: PointerEvent) {
+        // Suppresses the compatibility mouse events this press would otherwise
+        // produce, and with them the selection drag the browser starts from a
+        // mousedown. Pointer capture keeps delivering the moves either way; what
+        // this stops is the browser running its own gesture alongside ours.
+        e.preventDefault();
+
         const strip = e.currentTarget as HTMLElement;
         stripTop = strip.getBoundingClientRect().top;
         const localY = e.clientY - stripTop;
@@ -388,8 +397,18 @@
 
         hold.stop();
         dragging = true;
-        strip.setPointerCapture(e.pointerId);
+        // Ordered after the first scroll request so a throw here — a pointer id the
+        // browser no longer considers active — cannot swallow the initial jump.
         requestScroll(e.clientY);
+        try {
+            strip.setPointerCapture(e.pointerId);
+            capturedStrip = strip;
+            capturedPointerId = e.pointerId;
+        } catch {
+            // Without capture, moves arrive only while the cursor is over the strip.
+            // Survivable at 180px, not at 28px — the window listener is what actually
+            // carries the gesture, so this is left to fail quietly.
+        }
     }
 
     function onPointerMove(e: PointerEvent) {
@@ -407,7 +426,12 @@
         hold.aim(e.clientY - rect.top);
     }
 
-    function endDrag(e: PointerEvent) {
+    /**
+     * Takes no event: it is called both from the strip and from the window, and the
+     * element to release capture on is the one that took it, not whichever target
+     * the event happens to carry.
+     */
+    function endDrag() {
         if (!dragging) return;
         dragging = false;
         hold.stop();
@@ -415,17 +439,34 @@
             cancelAnimationFrame(frame);
             frame = 0;
         }
-        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+        if (capturedStrip !== null) {
+            try {
+                capturedStrip.releasePointerCapture(capturedPointerId);
+            } catch {
+                // Already released — by the browser, or with the element.
+            }
+            capturedStrip = null;
+        }
     }
 </script>
 
 <svelte:window
     bind:innerWidth={windowWidth}
     onpointermove={(e) => {
-        if (dragging) return;
+        // While dragging, this is what carries the gesture — not the strip's own
+        // handler. The schematic strip is 28px wide, so the slightest sideways drift
+        // takes the cursor off it, and if pointer capture ever fails to take there is
+        // nothing else delivering moves. The 180px visual strip hid the same
+        // fragility simply by being wide enough to stay under the cursor.
+        if (dragging) {
+            requestScroll(e.clientY);
+            return;
+        }
         mouseX = e.clientX;
         pointerInside = true;
     }}
+    onpointerup={endDrag}
+    onpointercancel={endDrag}
     onpointerleave={() => (pointerInside = false)}
 />
 
@@ -497,6 +538,15 @@
         cursor: pointer;
         overflow: hidden;
         touch-action: none;
+        /* Inherited by the strip's children, so nothing inside it can start a text
+           selection. A selection drag beginning here is not harmless: the strip sits
+           against the right edge of the window, which is exactly where the browser's
+           own selection autoscroll kicks in, and that then fights every scrollTo the
+           drag makes. It only ever affected the schematic mode, because there the
+           press lands on a child element; the visual mode's clone already carries
+           `user-select: none` and takes no pointer events at all. */
+        user-select: none;
+        -webkit-user-select: none;
         /* The movement is driven by the spring in the script; a CSS transition here
            would only fight it. */
         transition: background 0.2s;
@@ -530,6 +580,11 @@
         left: 0;
         right: 0;
         display: block;
+        /* Both are drawings, not targets. The marker already opted out; the blocks
+           did not, so in the schematic mode every press landed on a block rather
+           than on the strip — a different element from the one the visual mode is
+           pressed on, and the only one of the two that could begin a selection. */
+        pointer-events: none;
     }
 
     .minimap__block {
@@ -541,7 +596,6 @@
         background: color-mix(in srgb, var(--accent-primary), transparent 85%);
         border-top: 1px solid var(--accent-primary);
         border-bottom: 1px solid var(--accent-primary);
-        pointer-events: none;
     }
 
     @media print {

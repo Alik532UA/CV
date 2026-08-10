@@ -116,6 +116,32 @@ describe("scrollbar canon § 9.10 / § 9.11 — the minimap must not fight its o
 		expect(stripRules).not.toMatch(/display:\s*none/);
 	});
 
+	it("suppresses the browser's own gesture on the drag surface", () => {
+		// The strip sits against the right edge of the window, which is where the
+		// browser's selection autoscroll lives. Let a selection start on a press and
+		// that autoscroll fights every scrollTo the drag makes — the schematic mode
+		// scrolled or stuck depending on which won. Three things stop it, and all
+		// three have to hold.
+		expect(MINIMAP, "no user-select: none on .minimap").toMatch(
+			/\.minimap\s*\{[^}]*user-select:\s*none/
+		);
+		expect(MINIMAP, "no preventDefault in the pointerdown handler").toMatch(
+			/function onPointerDown[\s\S]{0,400}?e\.preventDefault\(\)/
+		);
+		// Blocks are a drawing. Without this the press lands on a child element in the
+		// schematic mode and on the strip itself in the visual one — different targets
+		// for what is meant to be the same gesture.
+		const blockRule = MINIMAP.match(/\.minimap__block,\s*\.minimap__viewport\s*\{([^}]*)\}/);
+		expect(blockRule?.[1], "no shared .minimap__block rule found").toBeTruthy();
+		expect(blockRule![1]).toMatch(/pointer-events:\s*none/);
+	});
+
+	it("carries the drag on the window, not only on the strip", () => {
+		// 28px wide: the slightest sideways drift takes the cursor off it, and if
+		// pointer capture ever fails to take, the strip's own handler hears nothing.
+		expect(MINIMAP).toMatch(/<svelte:window[\s\S]*?if \(dragging\) \{\s*requestScroll/);
+	});
+
 	it("marks the clone inert, not merely tabindex-stripped", () => {
 		// removeAttribute('tabindex') only unmakes what tabindex made focusable.
 		// <button> and <a href> are focusable natively, and this page's clone holds
