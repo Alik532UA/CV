@@ -161,7 +161,7 @@
     }
 
     .close-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--surface-hover);
         color: var(--accent-primary);
         transform: rotate(90deg);
     }

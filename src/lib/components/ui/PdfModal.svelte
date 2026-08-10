@@ -134,7 +134,7 @@
         color: var(--text-primary);
         padding: 15px;
         border-radius: 16px;
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--surface-subtle);
         border: 1px solid transparent;
         transition: var(--transition);
         text-align: center;
@@ -188,7 +188,7 @@
         max-height: 72px;
         padding: 0 10px;
         border-radius: 10px;
-        background: rgba(255, 255, 255, 0.04);
+        background: var(--surface-subtle);
         border: 1px solid var(--border-color);
         color: var(--text-primary);
         text-decoration: none;

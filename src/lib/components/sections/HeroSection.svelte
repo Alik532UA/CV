@@ -281,7 +281,7 @@
         padding: 6px 14px;
         border-radius: 15px;
         font-size: 0.85rem;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--surface-subtle);
         border: 1px solid var(--border-color);
     }
 

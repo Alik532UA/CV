@@ -175,7 +175,7 @@
 		top: -40px;
 		left: 0;
 		background: var(--accent-primary);
-		color: #fff;
+		color: var(--on-accent);
 		padding: 8px;
 		z-index: 9999;
 		transition: top 0.3s;

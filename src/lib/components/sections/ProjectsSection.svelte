@@ -145,22 +145,25 @@
         gap: 6px;
         padding: 8px 16px;
         border-radius: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--text-secondary, rgba(255, 255, 255, 0.7));
+        background: var(--surface-subtle);
+        border: 1px solid var(--border-color);
+        color: var(--text-secondary);
         font-size: 0.88rem;
         cursor: pointer;
         transition: all 0.2s ease;
     }
 
     .filter-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--text-primary, #ffffff);
+        background: var(--surface-hover);
+        color: var(--text-primary);
     }
 
     .filter-btn.active {
-        background: rgba(var(--accent-primary-rgb, 0, 242, 255), 0.2);
-        color: #ffffff;
+        background: rgba(var(--accent-primary-rgb), 0.2);
+        /* Not white: over a 20% accent tint that only works on a dark page. The
+           toggle groups in the header already colour their active option this
+           way. */
+        color: var(--accent-primary);
         border-color: var(--accent-primary);
         box-shadow: 0 4px 14px rgba(var(--accent-primary-rgb, 0, 242, 255), 0.25);
     }
@@ -204,10 +207,12 @@
         box-shadow: 0 4px 14px rgba(112, 0, 255, 0.4);
     }
 
+    /* Shows only in the moment before an image paints, so it follows the theme
+       rather than flashing a dark band on a light page. */
     .project-img {
         height: 200px;
         overflow: hidden;
-        background: rgba(0, 0, 0, 0.2);
+        background: var(--surface-subtle);
     }
 
     /* The card body is not clickable — only the button inside it is — so the
@@ -251,9 +256,9 @@
         font-size: 0.76rem;
         padding: 3px 8px;
         border-radius: 6px;
-        background: rgba(255, 255, 255, 0.06);
-        color: var(--text-secondary, rgba(255, 255, 255, 0.6));
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: var(--surface-subtle);
+        color: var(--text-secondary);
+        border: 1px solid var(--border-color);
     }
 
     .project-btn {

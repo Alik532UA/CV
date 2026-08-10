@@ -239,7 +239,7 @@
 
     .progress-bar {
         height: 8px;
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--surface-subtle);
         border-radius: 4px;
         overflow: hidden;
     }
@@ -248,7 +248,7 @@
         height: 100%;
         background: var(--gradient);
         border-radius: 4px;
-        box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+        box-shadow: 0 0 10px rgba(var(--accent-primary-rgb), 0.3);
     }
 
     .btn-toggle-exp {

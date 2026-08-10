@@ -72,7 +72,7 @@
     a.active {
         color: var(--accent-primary);
         background: var(--card-bg);
-        box-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+        box-shadow: 0 0 15px rgba(var(--accent-primary-rgb), 0.15);
     }
 
     /* Without the glow, which is reserved for the section actually in view. */
