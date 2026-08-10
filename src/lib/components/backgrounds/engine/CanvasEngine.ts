@@ -140,11 +140,15 @@ export abstract class CanvasEngine {
 			return {
 				primary: "rgba(0, 113, 227, ",
 				secondary: "rgba(94, 92, 230, ",
+				rgbPrimary: "rgb(0, 113, 227)",
+				rgbSecondary: "rgb(94, 92, 230)",
 			};
 		}
 		return {
 			primary: "rgba(0, 242, 255, ",
 			secondary: "rgba(112, 0, 255, ",
+			rgbPrimary: "rgb(0, 242, 255)",
+			rgbSecondary: "rgb(112, 0, 255)",
 		};
 	}
 }

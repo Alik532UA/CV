@@ -10,6 +10,7 @@ interface FloatingShape {
     vy: number;
     type: "triangle" | "square" | "hexagon" | "circle";
     alpha: number;
+    pulseOffset: number;
 }
 
 export class FloatingShapesEngine extends CanvasEngine {
@@ -34,7 +35,8 @@ export class FloatingShapesEngine extends CanvasEngine {
                 vx: (Math.random() - 0.5) * 0.5,
                 vy: (Math.random() - 0.5) * 0.5,
                 type: types[Math.floor(Math.random() * types.length)],
-                alpha: 0.06 + Math.random() * 0.10,
+                alpha: 0.08 + Math.random() * 0.12,
+                pulseOffset: Math.random() * Math.PI * 2,
             });
         }
     }
@@ -61,10 +63,11 @@ export class FloatingShapesEngine extends CanvasEngine {
             this.ctx!.translate(shape.x, shape.y);
             this.ctx!.rotate(shape.rotation + scrollRotation);
 
-            const pulse = Math.sin(time * 0.8 + shape.rotation) * 0.3 + 0.7;
-            const currentAlpha = shape.alpha * pulse;
+            const pulse = Math.sin(time * 1.2 + shape.pulseOffset) * 0.3 + 0.7;
+            const currentAlpha = Math.max(0.01, Math.min(1, shape.alpha * pulse));
 
-            this.ctx!.strokeStyle = colors.primary + currentAlpha + ")";
+            this.ctx!.globalAlpha = currentAlpha;
+            this.ctx!.strokeStyle = colors.rgbPrimary;
             this.ctx!.lineWidth = 3;
             this.ctx!.beginPath();
 
