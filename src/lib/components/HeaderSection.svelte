@@ -75,6 +75,48 @@
         langMenu.close();
     }
 
+    let langPanel: HTMLDivElement | undefined = $state();
+
+    /**
+     * Arrow keys move focus between the options, so Enter and Space keep working
+     * as the browser's own activation rather than needing a second code path.
+     *
+     * Down and Up step through DOM order. The panel is laid out in CSS columns,
+     * so that reads as down a group and on to the next, which is where the eye
+     * goes anyway; Right and Left are wired to the same step so a visitor who
+     * reaches for them is not met with nothing.
+     */
+    function handleLangKeydown(event: KeyboardEvent) {
+        const step =
+            event.key === "ArrowDown" || event.key === "ArrowRight" ? 1
+            : event.key === "ArrowUp" || event.key === "ArrowLeft" ? -1
+            : event.key === "Home" ? "first"
+            : event.key === "End" ? "last"
+            : null;
+        if (step === null || !langPanel) return;
+
+        const options = [...langPanel.querySelectorAll<HTMLButtonElement>('button[role="menuitemradio"]')];
+        if (!options.length) return;
+
+        event.preventDefault();
+        // Arrows would otherwise run the caret along the search text.
+        event.stopPropagation();
+
+        const from = options.indexOf(document.activeElement as HTMLButtonElement);
+        let next: number;
+        if (step === "first") next = 0;
+        else if (step === "last") next = options.length - 1;
+        // From the search box, Down opens at the top of the list and Up at the
+        // bottom, so both arrows have somewhere to go on the first press.
+        else if (from === -1) next = step === 1 ? 0 : options.length - 1;
+        else next = (from + step + options.length) % options.length;
+
+        options[next].focus();
+        // The clip for moving a selection, as against committing to one — Enter
+        // fires the click, and the click handler plays "selected" itself.
+        sound.play("hover");
+    }
+
     // Close dropdown when clicking outside
     function handleClickOutside(event: MouseEvent) {
         const target = event.target as HTMLElement;
@@ -240,7 +282,17 @@
                 </button>
 
                 {#if langMenu.isOpen}
-                    <div class="lang-dropdown glass" role="menu">
+                    <!-- Arrow keys are handled on the panel rather than the
+                         options, so they work from the search box too — it takes
+                         focus as the panel opens, which is where every keyboard
+                         visitor starts. -->
+                    <div
+                        class="lang-dropdown glass"
+                        role="menu"
+                        tabindex="-1"
+                        bind:this={langPanel}
+                        onkeydown={handleLangKeydown}
+                    >
                         <!-- svelte-ignore a11y_autofocus -->
                         <input
                             type="text"
@@ -534,10 +586,10 @@
         width: 110px;
         padding: 12px 12px;
         border-radius: 12px;
-        background: rgba(0, 0, 0, 0.9);
+        background: var(--panel-bg);
         border: 1px solid var(--border-color);
         backdrop-filter: var(--glass-blur);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--panel-shadow);
     }
 
     .volume-slider {
@@ -593,7 +645,7 @@
         position: absolute;
         top: 60px;
         right: 0;
-        background: rgba(0, 0, 0, 0.9);
+        background: var(--panel-bg);
         border: 1px solid var(--border-color);
         border-radius: 12px;
         padding: 8px;
@@ -602,7 +654,7 @@
         gap: 4px;
         min-width: 140px;
         backdrop-filter: var(--glass-blur);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: var(--panel-shadow);
         z-index: 1001;
     }
 
@@ -613,11 +665,11 @@
 
     .lang-search {
         flex-shrink: 0;
-        background: rgba(255, 255, 255, 0.06);
+        background: var(--surface-subtle);
         border: 1px solid var(--border-color);
         border-radius: 8px;
         padding: 8px 10px;
-        color: var(--text-primary, #fff);
+        color: var(--text-primary);
         font-size: 0.85rem;
     }
 
@@ -656,8 +708,9 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        /* No extra opacity on top: against the light panel that took a 3.6:1
+           label down to roughly 2:1. */
         color: var(--text-secondary);
-        opacity: 0.6;
     }
 
     .lang-empty {
@@ -680,7 +733,10 @@
         padding: 8px 12px;
         background: transparent;
         border: none;
-        color: var(--text-secondary);
+        /* Primary, not secondary: these are the panel's actionable content, and
+           on the light panel --text-secondary lands at 3.6:1. It read as passable
+           only while the panel was hardcoded near-black. */
+        color: var(--text-primary);
         cursor: pointer;
         border-radius: 8px;
         width: 100%;
@@ -690,7 +746,22 @@
 
     .bg-dropdown button:hover,
     .lang-dropdown button:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--surface-hover);
+    }
+
+    /* Arrow keys move focus, so this ring is what the visitor is steering — a
+       hover style alone would leave them navigating blind.
+       Plain :focus rather than :focus-visible: the move is programmatic, and
+       Chrome only grants :focus-visible to a programmatic focus when it decides
+       the last interaction was keyboard. These buttons can only take focus while
+       the panel is open, and clicking one closes it, so there is no case where a
+       mouse user is left looking at a stray ring. */
+    .bg-dropdown button:focus,
+    .lang-dropdown button:focus {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+        outline: 2px solid var(--accent-primary);
+        outline-offset: -2px;
     }
 
     .bg-dropdown button.active,
