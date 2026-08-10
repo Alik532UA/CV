@@ -142,6 +142,26 @@ describe("scrollbar canon § 9.10 / § 9.11 — the minimap must not fight its o
 		expect(MINIMAP).toMatch(/<svelte:window[\s\S]*?if \(dragging\) \{\s*requestScroll/);
 	});
 
+	// The custom bar has the same shape — a track with a child indicator, pressed
+	// against the right edge — so it has the same defect. It is harder to notice
+	// there only because the thumb is usually under the cursor already, being the
+	// thing people grab; a press beside it on a 10px track misses every time.
+	it("applies the same three to the custom bar, whose track is narrower still", () => {
+		const BAR = read("src/lib/components/ui/PageScrollbar.svelte");
+		expect(BAR, "no user-select: none on .page-scrollbar").toMatch(
+			/\.page-scrollbar\s*\{[^}]*user-select:\s*none/
+		);
+		expect(BAR, "no pointer-events: none on the thumb").toMatch(
+			/\.page-scrollbar__thumb\s*\{[^}]*pointer-events:\s*none/
+		);
+		expect(BAR, "no preventDefault in the pointerdown handler").toMatch(
+			/function onTrackPointerDown[\s\S]{0,400}?e\.preventDefault\(\)/
+		);
+		expect(BAR, "the window does not carry the drag").toMatch(
+			/<svelte:window[\s\S]*?if \(dragging\) \{\s*requestScroll/
+		);
+	});
+
 	it("marks the clone inert, not merely tabindex-stripped", () => {
 		// removeAttribute('tabindex') only unmakes what tabindex made focusable.
 		// <button> and <a href> are focusable natively, and this page's clone holds

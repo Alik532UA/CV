@@ -30,6 +30,9 @@
      * scrolling anyway.
      */
     let trackTop = 0;
+    /** The element holding pointer capture, and for which pointer. */
+    let capturedTrack: HTMLElement | null = null;
+    let capturedPointerId = -1;
     /** Last pointer position, not yet applied. */
     let pendingY = 0;
     let frame = 0;
@@ -185,6 +188,12 @@
     }
 
     function onTrackPointerDown(e: PointerEvent) {
+        // Suppresses the compatibility mouse events the browser starts a text
+        // selection from. The track hugs the right edge of the window, which is where
+        // the browser's own selection autoscroll takes over, and that then fights
+        // every scrollTo this drag makes.
+        e.preventDefault();
+
         const track = e.currentTarget as HTMLElement;
         trackTop = track.getBoundingClientRect().top;
         const localY = e.clientY - trackTop;
@@ -197,8 +206,16 @@
 
         hold.stop();
         dragging = true;
-        track.setPointerCapture(e.pointerId);
+        // Before the capture, so a throw there cannot swallow the opening jump.
         requestScroll(e.clientY);
+        try {
+            track.setPointerCapture(e.pointerId);
+            capturedTrack = track;
+            capturedPointerId = e.pointerId;
+        } catch {
+            // A 10px track loses the cursor to the slightest sideways drift, so the
+            // gesture is really carried by the window listener below.
+        }
     }
 
     function onTrackPointerMove(e: PointerEvent) {
@@ -216,7 +233,11 @@
         hold.aim(e.clientY - rect.top);
     }
 
-    function endDrag(e: PointerEvent) {
+    /**
+     * Takes no event: it is called from the track and from the window, and capture
+     * must come off the element that took it rather than the event's target.
+     */
+    function endDrag() {
         if (!dragging) return;
         dragging = false;
         hold.stop();
@@ -224,19 +245,33 @@
             cancelAnimationFrame(frame);
             frame = 0;
         }
-        (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+        if (capturedTrack !== null) {
+            try {
+                capturedTrack.releasePointerCapture(capturedPointerId);
+            } catch {
+                // Already released — by the browser, or with the element.
+            }
+            capturedTrack = null;
+        }
     }
 </script>
 
 <svelte:window
     bind:innerWidth={windowWidth}
     onpointermove={(e) => {
-        // While dragging the width is already at maximum, and a state update on
-        // every move would cost a repaint for nothing.
-        if (dragging) return;
+        // While dragging this carries the gesture, and the width is already at
+        // maximum so mouseX is left alone — a state update per move would cost a
+        // repaint for nothing. The track is 10px wide: without this, a drag survives
+        // only as long as pointer capture holds and the cursor stays over it.
+        if (dragging) {
+            requestScroll(e.clientY);
+            return;
+        }
         mouseX = e.clientX;
         pointerInside = true;
     }}
+    onpointerup={endDrag}
+    onpointercancel={endDrag}
     onpointerleave={() => (pointerInside = false)}
 />
 
@@ -289,6 +324,11 @@
         box-shadow: -6px 0 18px rgba(0, 0, 0, 0.22);
         cursor: pointer;
         touch-action: none;
+        /* Inherited by the thumb: a press on the track must not begin a text
+           selection, because the track hugs the window's right edge and that is where
+           the browser's selection autoscroll lives. */
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     /* Gone past the edge — takes no presses and is read by nothing. */
@@ -303,6 +343,10 @@
         right: 2px;
         background: var(--scrollbar-thumb);
         border-radius: 999px;
+        /* An indicator, not a target: the press has to reach the track, which is what
+           runs the gesture. Otherwise pressing the thumb and pressing beside it start
+           on different elements. */
+        pointer-events: none;
         transition: background 0.15s;
     }
 
