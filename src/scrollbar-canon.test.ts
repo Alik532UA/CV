@@ -186,7 +186,9 @@ describe("CSP — the first-frame script's hash is registered", () => {
 		const inline = APP_HTML.match(/<script>([\s\S]*?)<\/script>/);
 		expect(inline?.[1], "no inline script in app.html").toBeTruthy();
 
-		const hash = "sha256-" + createHash("sha256").update(inline![1], "utf8").digest("base64");
+		// Normalize line endings to LF (\n) so hash is cross-platform deterministic (Windows CRLF vs Linux LF)
+		const scriptText = inline![1].replace(/\r\n/g, "\n");
+		const hash = "sha256-" + createHash("sha256").update(scriptText, "utf8").digest("base64");
 		expect(
 			SVELTE_CONFIG,
 			`app.html's inline script hashes to ${hash}, which svelte.config.js does not list`

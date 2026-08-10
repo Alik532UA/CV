@@ -33,7 +33,7 @@ const config = {
 					// stale exactly that way, and the built site was blocking the script
 					// outright; src/scrollbar-canon.test.ts now recomputes it and fails
 					// when the two disagree.
-					'sha256-AI5o/y+VHjRKg1MdVNz9bdfv1HxQjYTru8WN+qI1dss='
+					'sha256-++fBQYhblTP7n81ZDDjJeFGYQXAzTnYXBKA2PeKk8ZY='
 				],
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],
