@@ -87,6 +87,44 @@ describe("scrollbar canon § 9.2 — behavior: 'auto' is forbidden", () => {
 	});
 });
 
+describe("scrollbar canon § 9.10 / § 9.11 — the minimap must not fight its own drag", () => {
+	const MINIMAP = read("src/lib/components/ui/Minimap.svelte");
+
+	it("has exactly one Spring, the slide-out", () => {
+		// A second one is either the marker height or a presence spring. The first
+		// makes grabOffset disagree with the clamp it was taken under; the second
+		// needs a class that stops the element rendering, which releases the pointer
+		// capture and kills the gesture mid-move. Both read as "it sometimes sticks".
+		const springs = [...MINIMAP.matchAll(/new Spring\(/g)];
+		expect(springs, `found ${springs.length} Spring instances`).toHaveLength(1);
+	});
+
+	it("never turns itself non-rendered", () => {
+		// Scoped to the strip: pointer-events: none on .minimap__clone is required,
+		// so only rules for .minimap itself are of interest. The print block is cut
+		// out as well — `display: none` there is what the canon asks for, and it can
+		// never fire mid-gesture.
+		const styles = MINIMAP.slice(MINIMAP.indexOf("<style>")).replace(
+			/@media print\s*\{[\s\S]*?\n\s*\}/g,
+			""
+		);
+		const stripRules = [...styles.matchAll(/\.minimap(?:--[\w-]+|\.[\w-]+)?\s*\{([^}]*)\}/g)]
+			.map((m) => m[1])
+			.join("\n");
+		expect(stripRules).not.toMatch(/visibility:\s*hidden/);
+		expect(stripRules).not.toMatch(/pointer-events:\s*none/);
+		expect(stripRules).not.toMatch(/display:\s*none/);
+	});
+
+	it("changes only the background on hover", () => {
+		// The strip is the full height of the viewport, so any edge treatment on it is
+		// a bright line down the whole screen rather than the highlight it looks like.
+		const hover = MINIMAP.match(/\.minimap:hover[^{]*\{([^}]*)\}/);
+		expect(hover?.[1], "no .minimap:hover rule found").toBeTruthy();
+		expect(hover![1]).not.toMatch(/border|outline|box-shadow/);
+	});
+});
+
 describe("CSP — the first-frame script's hash is registered", () => {
 	it("svelte.config.js lists the hash of the script actually in app.html", () => {
 		// SvelteKit hashes only the scripts it emits itself, so this one is listed by

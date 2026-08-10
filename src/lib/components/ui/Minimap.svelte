@@ -77,21 +77,22 @@
      */
     const mapHeight = $derived(isFull ? Math.min(cloneHeight, viewportHeight) : viewportHeight);
 
-    const rawMarkerHeight = $derived(
+    /**
+     * NOT sprung, unlike the custom bar's thumb.
+     *
+     * A drag reads this three times over — grabOffset is half of it, the clamp is
+     * mapHeight minus it, and pxPerScroll divides by it. A value that changes every
+     * animation frame makes all three disagree with the frame that set grabOffset,
+     * and the marker drifts and sticks instead of tracking the cursor. The custom
+     * bar can afford the spring because there the height is the only thing sprung
+     * and the strip is the full viewport; here the schematic strip is 28px wide and
+     * the drift is the whole interaction.
+     */
+    const markerHeight = $derived(
         isFull
             ? Math.max(viewportHeight * scale, MIN_MARKER)
             : Math.max((viewportHeight / pageHeight) * mapHeight, MIN_MARKER)
     );
-
-    /** Sprung for the same reason as the custom bar's thumb: the height jumps when
-     *  the page height changes. The position is never sprung. */
-    const springHeight = new Spring(MIN_MARKER, { stiffness: 0.2, damping: 0.9 });
-
-    $effect(() => {
-        springHeight.target = rawMarkerHeight;
-    });
-
-    const markerHeight = $derived(springHeight.current);
     const pxPerScroll = $derived(
         Math.max(mapHeight - markerHeight, 0) / Math.max(pageHeight - viewportHeight, 1)
     );
@@ -130,16 +131,17 @@
         progress.target = target;
     });
 
-    const presence = new Spring(0, { stiffness: 0.15, damping: 0.8 });
-
-    $effect(() => {
-        presence.target = visible ? 1 : 0;
-    });
-
-    /** At rest the strip hides past the edge, leaving only the handle. */
-    const hiddenPart = $derived(
-        (1 - progress.current) * (fullWidth - HANDLE_WIDTH) + (1 - presence.current) * fullWidth
-    );
+    /**
+     * At rest the strip hides past the edge, leaving only the handle.
+     *
+     * There is deliberately no second spring for arrival and departure here, and so
+     * no class that turns the element non-rendered while one settles. Pointer
+     * capture is released the moment its element stops being rendered, and the drag
+     * dies mid-gesture with no way to tell why. The custom bar needs that spring
+     * because it has no other way to leave; this strip already slides out through
+     * `progress`, so it only has to mount on `visible`.
+     */
+    const hiddenPart = $derived((1 - progress.current) * (fullWidth - HANDLE_WIDTH));
 
     function measure() {
         if (!browser) return;
@@ -392,14 +394,15 @@
     onpointerleave={() => (pointerInside = false)}
 />
 
-<!-- Mounted on the chosen mode, hidden by sliding away: leaving the DOM on a short
-     page would give the departure nothing to animate. -->
-{#if chosen}
+<!-- Mounted on `visible`, so the element is simply absent on a page with nothing to
+     scroll. Nothing here needs an exit animation — the strip's only movement is the
+     slide driven by `progress` — and the alternative, keeping it mounted and turning
+     it non-rendered, costs the pointer capture a drag depends on. -->
+{#if visible}
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
         class="minimap"
         class:minimap--full={isFull}
-        class:minimap--hidden={presence.current < 0.01}
         class:dragging
         class:holding={hold.holding}
         style="width: {fullWidth}px; height: {mapHeight}px;
@@ -464,16 +467,15 @@
         transition: background 0.2s;
     }
 
-    .minimap--hidden {
-        pointer-events: none;
-        visibility: hidden;
-    }
-
+    /* Background only. An accent border here reads as a bright outline drawn down
+       the side of the page — the strip is the full height of the viewport, so any
+       edge treatment on it is a line across the whole screen rather than the
+       highlight it looks like in a small mock-up. The marker inside already carries
+       the accent, and that is the part worth pointing at. */
     .minimap:hover,
     .minimap.holding,
     .minimap.dragging {
-        background: var(--panel-bg);
-        border-left-color: var(--accent-primary);
+        background: color-mix(in srgb, var(--panel-bg), var(--text-primary) 6%);
     }
 
     .minimap__clone {
