@@ -325,6 +325,64 @@
                 {/if}
             </div>
 
+            <!-- Sound control, ported from the sea page's audio control: the
+                 slider is revealed by hovering the wrapper, and a wheel over it
+                 nudges the level. preventDefault stops that wheel from also
+                 scrolling the page underneath. -->
+            <div
+                class="sound-control-wrapper"
+                data-testid="sound-container"
+                onwheel={(e) => {
+                    e.preventDefault();
+                    sound.adjustVolumeByWheel(e.deltaY);
+                }}
+                role="presentation"
+            >
+                <!-- data-sfx-ignore so switching sounds off is itself silent: the
+                     delegated click handler runs in the capture phase, ahead of
+                     this button's own handler, and would otherwise fire the click
+                     sound on the way out. -->
+                <button
+                    class="glass-icon-btn sound-toggle"
+                    onclick={() => sound.toggle()}
+                    data-sfx-ignore
+                    title={t.common.sound}
+                    aria-label={t.common.sound}
+                    aria-pressed={sound.enabled}
+                    data-testid="sound-toggle-btn"
+                >
+                    {#if sound.enabled && sound.volume > 0}
+                        <Volume2 size={18} />
+                    {:else}
+                        <VolumeX size={18} />
+                    {/if}
+                </button>
+                <!-- Two levels, same as the sea page's language panel: the outer
+                     div carries the position and a transparent top padding that
+                     bridges the gap under the button, the inner one is the glass
+                     surface. One element cannot do both — a background on the
+                     bridge would paint over the header's edge. -->
+                <div class="volume-slider-container">
+                    <div class="volume-panel glass">
+                        <!-- Labelled by the button's own word rather than a second
+                             translated string: role="slider" plus the percentage
+                             in aria-valuetext already says this sets a level. -->
+                        <input
+                            type="range"
+                            min="0"
+                            max="1"
+                            step="0.01"
+                            value={sound.volume}
+                            oninput={(e) => sound.setVolume(e.currentTarget.valueAsNumber)}
+                            class="volume-slider"
+                            aria-label={t.common.sound}
+                            aria-valuetext="{Math.round(sound.volume * 100)}%"
+                            data-testid="sound-volume-slider"
+                        />
+                    </div>
+                </div>
+            </div>
+
             <!-- Language Switcher: one trigger for every viewport, since an
                  inline row (the old desktop layout) stops scaling well past a
                  handful of languages. The panel adds a search box and groups
@@ -417,64 +475,6 @@
                 >
                     <Moon size={18} />
                 </button>
-            </div>
-
-            <!-- Sound control, ported from the sea page's audio control: the
-                 slider is revealed by hovering the wrapper, and a wheel over it
-                 nudges the level. preventDefault stops that wheel from also
-                 scrolling the page underneath. -->
-            <div
-                class="sound-control-wrapper"
-                data-testid="sound-container"
-                onwheel={(e) => {
-                    e.preventDefault();
-                    sound.adjustVolumeByWheel(e.deltaY);
-                }}
-                role="presentation"
-            >
-                <!-- data-sfx-ignore so switching sounds off is itself silent: the
-                     delegated click handler runs in the capture phase, ahead of
-                     this button's own handler, and would otherwise fire the click
-                     sound on the way out. -->
-                <button
-                    class="glass-icon-btn sound-toggle"
-                    onclick={() => sound.toggle()}
-                    data-sfx-ignore
-                    title={t.common.sound}
-                    aria-label={t.common.sound}
-                    aria-pressed={sound.enabled}
-                    data-testid="sound-toggle-btn"
-                >
-                    {#if sound.enabled && sound.volume > 0}
-                        <Volume2 size={18} />
-                    {:else}
-                        <VolumeX size={18} />
-                    {/if}
-                </button>
-                <!-- Two levels, same as the sea page's language panel: the outer
-                     div carries the position and a transparent top padding that
-                     bridges the gap under the button, the inner one is the glass
-                     surface. One element cannot do both — a background on the
-                     bridge would paint over the header's edge. -->
-                <div class="volume-slider-container">
-                    <div class="volume-panel glass">
-                        <!-- Labelled by the button's own word rather than a second
-                             translated string: role="slider" plus the percentage
-                             in aria-valuetext already says this sets a level. -->
-                        <input
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.01"
-                            value={sound.volume}
-                            oninput={(e) => sound.setVolume(e.currentTarget.valueAsNumber)}
-                            class="volume-slider"
-                            aria-label={t.common.sound}
-                            aria-valuetext="{Math.round(sound.volume * 100)}%"
-                            data-testid="sound-volume-slider"
-                        />
-                    </div>
-                </div>
             </div>
         </div>
     </div>
