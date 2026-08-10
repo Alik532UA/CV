@@ -77,41 +77,105 @@
 
     let langPanel: HTMLDivElement | undefined = $state();
 
+    /** Within this many pixels of each other, two options are in the same column. */
+    const COLUMN_TOLERANCE = 20;
+
+    /** Left edges of the rendered columns, ordered left to right. */
+    function columnEdges(options: HTMLButtonElement[]): number[] {
+        const edges: number[] = [];
+        for (const option of options) {
+            const { left } = option.getBoundingClientRect();
+            if (!edges.some((edge) => Math.abs(edge - left) < COLUMN_TOLERANCE)) edges.push(left);
+        }
+        return edges.sort((a, b) => a - b);
+    }
+
+    /**
+     * The option one column over, at the nearest height to the current one.
+     *
+     * CSS multi-column layout puts nothing about columns in the DOM — the groups
+     * are one flat list that the browser flows into however many columns fit — so
+     * sideways movement has to be read off the geometry. Stepping the list index
+     * instead, as this first did, just repeats what Down and Up already do.
+     *
+     * @returns null at the outermost column: clamped rather than wrapped, since
+     * jumping the full width of the panel is disorienting in a way that Down
+     * rolling over to the top is not.
+     */
+    function columnNeighbour(
+        options: HTMLButtonElement[],
+        current: HTMLButtonElement,
+        direction: 1 | -1
+    ): HTMLButtonElement | null {
+        const edges = columnEdges(options);
+        const columnOf = (el: HTMLButtonElement) =>
+            edges.findIndex((edge) => Math.abs(edge - el.getBoundingClientRect().left) < COLUMN_TOLERANCE);
+
+        const wanted = columnOf(current) + direction;
+        if (wanted < 0 || wanted >= edges.length) return null;
+
+        const rect = current.getBoundingClientRect();
+        const middle = rect.top + rect.height / 2;
+
+        let best: HTMLButtonElement | null = null;
+        let bestGap = Infinity;
+        for (const option of options) {
+            if (columnOf(option) !== wanted) continue;
+            const r = option.getBoundingClientRect();
+            const gap = Math.abs(r.top + r.height / 2 - middle);
+            if (gap < bestGap) {
+                bestGap = gap;
+                best = option;
+            }
+        }
+        return best;
+    }
+
     /**
      * Arrow keys move focus between the options, so Enter and Space keep working
      * as the browser's own activation rather than needing a second code path.
      *
-     * Down and Up step through DOM order. The panel is laid out in CSS columns,
-     * so that reads as down a group and on to the next, which is where the eye
-     * goes anyway; Right and Left are wired to the same step so a visitor who
-     * reaches for them is not met with nothing.
+     * Down and Up run the flat list and roll over at its ends. Right and Left
+     * move a column at a time, keeping the vertical position.
      */
     function handleLangKeydown(event: KeyboardEvent) {
-        const step =
-            event.key === "ArrowDown" || event.key === "ArrowRight" ? 1
-            : event.key === "ArrowUp" || event.key === "ArrowLeft" ? -1
-            : event.key === "Home" ? "first"
-            : event.key === "End" ? "last"
-            : null;
-        if (step === null || !langPanel) return;
+        const vertical = event.key === "ArrowDown" ? 1 : event.key === "ArrowUp" ? -1 : 0;
+        const sideways = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
+        const jump = event.key === "Home" ? "first" : event.key === "End" ? "last" : null;
+        if (!vertical && !sideways && !jump) return;
+        if (!langPanel) return;
+
+        const focused = document.activeElement as HTMLElement | null;
+        // Left and Right belong to the caret while the search box has focus.
+        // Down and Up are taken from it deliberately: that is how a visitor gets
+        // out of the field and into the list.
+        if (sideways && focused?.classList.contains("lang-search")) return;
 
         const options = [...langPanel.querySelectorAll<HTMLButtonElement>('button[role="menuitemradio"]')];
         if (!options.length) return;
 
+        const from = options.indexOf(focused as HTMLButtonElement);
+        let target: HTMLButtonElement | null;
+
+        if (jump) {
+            target = jump === "first" ? options[0] : options[options.length - 1];
+        } else if (vertical) {
+            // From the search box, Down opens at the top of the list and Up at
+            // the bottom, so both have somewhere to go on the first press.
+            target = from === -1
+                ? (vertical === 1 ? options[0] : options[options.length - 1])
+                : options[(from + vertical + options.length) % options.length];
+        } else {
+            target = from === -1 ? options[0] : columnNeighbour(options, options[from], sideways as 1 | -1);
+        }
+
+        // Claimed even when there is nowhere to go, so the outermost column does
+        // not hand the key back and scroll the page behind the panel.
         event.preventDefault();
-        // Arrows would otherwise run the caret along the search text.
         event.stopPropagation();
+        if (!target) return;
 
-        const from = options.indexOf(document.activeElement as HTMLButtonElement);
-        let next: number;
-        if (step === "first") next = 0;
-        else if (step === "last") next = options.length - 1;
-        // From the search box, Down opens at the top of the list and Up at the
-        // bottom, so both arrows have somewhere to go on the first press.
-        else if (from === -1) next = step === 1 ? 0 : options.length - 1;
-        else next = (from + step + options.length) % options.length;
-
-        options[next].focus();
+        target.focus();
         // The clip for moving a selection, as against committing to one — Enter
         // fires the click, and the click handler plays "selected" itself.
         sound.play("hover");
