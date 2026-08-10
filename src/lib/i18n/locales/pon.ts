@@ -242,6 +242,7 @@ export const pon: Translations = {
         light: "Light Theme"
     },
     common: {
-        close: "Ritidi"
+        close: "Ritidi",
+        sound: "Sound"
     }
 };

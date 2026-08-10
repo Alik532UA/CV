@@ -235,6 +235,7 @@ export const lt: Translations = {
         light: "Šviesi Tema"
     },
     common: {
-        close: "Uždaryti"
+        close: "Uždaryti",
+        sound: "Garsas"
     }
 };

@@ -235,6 +235,7 @@ export const el: Translations = {
         light: "Ανοιχτό Θέμα"
     },
     common: {
-        close: "Κλείσιμο"
+        close: "Κλείσιμο",
+        sound: "Ήχος"
     }
 };

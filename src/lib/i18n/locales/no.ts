@@ -235,6 +235,7 @@ export const no: Translations = {
         light: "Lyst tema"
     },
     common: {
-        close: "Lukk"
+        close: "Lukk",
+        sound: "Lyd"
     }
 };

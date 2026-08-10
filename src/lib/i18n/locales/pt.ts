@@ -235,6 +235,7 @@ export const pt: Translations = {
         light: "Tema Claro"
     },
     common: {
-        close: "Fechar"
+        close: "Fechar",
+        sound: "Som"
     }
 };

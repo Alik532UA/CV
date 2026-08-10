@@ -235,6 +235,7 @@ export const da: Translations = {
         light: "Lyst tema"
     },
     common: {
-        close: "Luk"
+        close: "Luk",
+        sound: "Lyd"
     }
 };

@@ -242,6 +242,7 @@ export const chk: Translations = {
         light: "Light Theme"
     },
     common: {
-        close: "Opano"
+        close: "Opano",
+        sound: "Sound"
     }
 };

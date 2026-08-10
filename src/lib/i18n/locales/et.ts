@@ -235,6 +235,7 @@ export const et: Translations = {
         light: "Hele Teema"
     },
     common: {
-        close: "Sulge"
+        close: "Sulge",
+        sound: "Heli"
     }
 };

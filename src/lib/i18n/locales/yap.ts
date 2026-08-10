@@ -242,6 +242,7 @@ export const yap: Translations = {
         light: "Light Theme"
     },
     common: {
-        close: "Mith"
+        close: "Mith",
+        sound: "Sound"
     }
 };

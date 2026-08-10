@@ -235,6 +235,7 @@ export const mk: Translations = {
         light: "Светла тема"
     },
     common: {
-        close: "Затвори"
+        close: "Затвори",
+        sound: "Звук"
     }
 };

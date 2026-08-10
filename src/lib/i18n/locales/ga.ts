@@ -235,6 +235,7 @@ export const ga: Translations = {
         light: "Téama Geal"
     },
     common: {
-        close: "Dún"
+        close: "Dún",
+        sound: "Fuaim"
     }
 };

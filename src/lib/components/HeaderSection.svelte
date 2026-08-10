@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getContext } from "svelte";
-    import type { Language } from "$lib/controllers/I18nState.svelte";
+    import { t, type Language } from "$lib/controllers/I18nState.svelte";
     import {
         Sun,
         Moon,
@@ -8,6 +8,8 @@
         Waves,
         CircleOff,
         Shapes,
+        Volume2,
+        VolumeX,
     } from "lucide-svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS } from "$lib/i18n/languageMeta";
@@ -19,6 +21,8 @@
     const theme = getContext<any>("theme");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const background = getContext<any>("background");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sound = getContext<any>("sound");
 
     let isBgDropdownOpen = $state(false);
     let isLangDropdownOpen = $state(false);
@@ -291,6 +295,26 @@
                     <Moon size={18} />
                 </button>
             </div>
+
+            <!-- Sound Toggle: data-sfx-ignore so switching sounds off is itself
+                 silent — the delegated click handler runs in the capture phase,
+                 ahead of this button's own handler, and would otherwise fire the
+                 click sound on the way out. -->
+            <button
+                class="glass-icon-btn sound-toggle"
+                onclick={() => sound.toggle()}
+                data-sfx-ignore
+                title={t.common.sound}
+                aria-label={t.common.sound}
+                aria-pressed={sound.enabled}
+                data-testid="sound-toggle-btn"
+            >
+                {#if sound.enabled}
+                    <Volume2 size={18} />
+                {:else}
+                    <VolumeX size={18} />
+                {/if}
+            </button>
         </div>
     </div>
 </header>
@@ -404,6 +428,13 @@
         width: auto;
         padding: 0 10px;
         gap: 6px;
+    }
+
+    /* Matches the dimmed look the theme and background groups use for the
+       option that is not currently active. */
+    .sound-toggle[aria-pressed="false"] {
+        color: var(--text-secondary);
+        opacity: 0.5;
     }
 
     .lang-code {

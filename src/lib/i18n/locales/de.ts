@@ -235,6 +235,7 @@ export const de: Translations = {
         light: "Helles Design"
     },
     common: {
-        close: "Schließen"
+        close: "Schließen",
+        sound: "Ton"
     }
 };

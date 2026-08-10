@@ -235,6 +235,7 @@ export const tr: Translations = {
         light: "Açık Tema"
     },
     common: {
-        close: "Kapat"
+        close: "Kapat",
+        sound: "Ses"
     }
 };

@@ -235,6 +235,7 @@ export const fr: Translations = {
         light: "Thème Clair"
     },
     common: {
-        close: "Fermer"
+        close: "Fermer",
+        sound: "Son"
     }
 };

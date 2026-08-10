@@ -237,6 +237,7 @@ export const crh: Translations = {
         light: "Aydın Tema"
     },
     common: {
-        close: "Qapatıñız"
+        close: "Qapatıñız",
+        sound: "Ses"
     }
 };

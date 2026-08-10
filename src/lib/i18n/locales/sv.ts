@@ -235,6 +235,7 @@ export const sv: Translations = {
         light: "Ljust tema"
     },
     common: {
-        close: "Stäng"
+        close: "Stäng",
+        sound: "Ljud"
     }
 };

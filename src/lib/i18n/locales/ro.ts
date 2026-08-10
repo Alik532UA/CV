@@ -235,6 +235,7 @@ export const ro: Translations = {
         light: "Temă deschisă"
     },
     common: {
-        close: "Închide"
+        close: "Închide",
+        sound: "Sunet"
     }
 };

@@ -12,6 +12,7 @@
 	import { replaceState, afterNavigate } from "$app/navigation";
 	import { language } from "$lib/controllers/I18nState.svelte";
 	import { theme, background } from "$lib/controllers/UiState.svelte";
+	import { sound } from "$lib/controllers/SoundState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
@@ -37,6 +38,7 @@
 	setContext("theme", theme);
 	setContext("background", background);
 	setContext("language", language);
+	setContext("sound", sound);
 
 	// Runes (Svelte 5)
 	let activeSection = $state("about");
@@ -86,6 +88,11 @@
 		language.init(page.data.routeLanguage);
 		initAnalytics();
 
+		// One delegated pair of listeners on document rather than a directive on
+		// each of the ~43 interactive elements, so modals and anything added later
+		// are covered without being wired up individually.
+		const teardownSound = sound.init();
+
 		const observedElements = new SvelteSet<Element>();
 		// This is a single page, so without per-section events the report would
 		// show one page view and nothing about how far anyone actually read.
@@ -133,6 +140,7 @@
 		return () => {
 			observer.disconnect();
 			mutationObserver.disconnect();
+			teardownSound?.();
 		};
 	});
 </script>

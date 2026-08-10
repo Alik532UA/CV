@@ -235,6 +235,7 @@ export const sq: Translations = {
         light: "Temë e Çelët"
     },
     common: {
-        close: "Mbyll"
+        close: "Mbyll",
+        sound: "Tingull"
     }
 };

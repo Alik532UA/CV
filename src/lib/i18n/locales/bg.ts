@@ -235,6 +235,7 @@ export const bg: Translations = {
         light: "Светла тема"
     },
     common: {
-        close: "Затвори"
+        close: "Затвори",
+        sound: "Звук"
     }
 };

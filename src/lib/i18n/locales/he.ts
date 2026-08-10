@@ -238,6 +238,7 @@ export const he: Translations = {
         light: "ערכת נושא בהירה"
     },
     common: {
-        close: "סגור"
+        close: "סגור",
+        sound: "צליל"
     }
 };

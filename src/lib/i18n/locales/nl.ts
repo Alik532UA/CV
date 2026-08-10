@@ -235,6 +235,7 @@ export const nl: Translations = {
         light: "Licht Thema"
     },
     common: {
-        close: "Sluiten"
+        close: "Sluiten",
+        sound: "Geluid"
     }
 };

@@ -235,6 +235,7 @@ export const ko: Translations = {
         light: "라이트 테마"
     },
     common: {
-        close: "닫기"
+        close: "닫기",
+        sound: "소리"
     }
 };

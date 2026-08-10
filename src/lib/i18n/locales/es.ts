@@ -235,6 +235,7 @@ export const es: Translations = {
         light: "Tema Claro"
     },
     common: {
-        close: "Cerrar"
+        close: "Cerrar",
+        sound: "Sonido"
     }
 };

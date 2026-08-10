@@ -235,6 +235,7 @@ export const sl: Translations = {
         light: "Svetla tema"
     },
     common: {
-        close: "Zapri"
+        close: "Zapri",
+        sound: "Zvok"
     }
 };

@@ -235,6 +235,7 @@ export const mt: Translations = {
         light: "Tema Ċara"
     },
     common: {
-        close: "Agħlaq"
+        close: "Agħlaq",
+        sound: "Ħoss"
     }
 };

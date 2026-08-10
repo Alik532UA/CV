@@ -14,6 +14,7 @@ const LOG_CONFIG: Record<string, boolean> = {
 	ui: true,
 	storage: true,
 	i18n: true,
+	sfx: true,
 	engine: true,
 	app: true
 };

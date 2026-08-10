@@ -235,6 +235,7 @@ export const ca: Translations = {
         light: "Tema clar"
     },
     common: {
-        close: "Tanca"
+        close: "Tanca",
+        sound: "So"
     }
 };

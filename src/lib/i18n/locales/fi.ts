@@ -235,6 +235,7 @@ export const fi: Translations = {
         light: "Vaalea Teema"
     },
     common: {
-        close: "Sulje"
+        close: "Sulje",
+        sound: "Ääni"
     }
 };

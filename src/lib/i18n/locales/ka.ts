@@ -235,6 +235,7 @@ export const ka: Translations = {
         light: "ღია თემა"
     },
     common: {
-        close: "დახურვა"
+        close: "დახურვა",
+        sound: "ხმა"
     }
 };

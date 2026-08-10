@@ -235,6 +235,7 @@ export const sk: Translations = {
         light: "Svetlá téma"
     },
     common: {
-        close: "Zavrieť"
+        close: "Zavrieť",
+        sound: "Zvuk"
     }
 };

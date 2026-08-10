@@ -235,6 +235,7 @@ export const lv: Translations = {
         light: "Gaišā Tēma"
     },
     common: {
-        close: "Aizvērt"
+        close: "Aizvērt",
+        sound: "Skaņa"
     }
 };

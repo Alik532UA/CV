@@ -235,6 +235,7 @@ export const is: Translations = {
         light: "Ljóst þema"
     },
     common: {
-        close: "Loka"
+        close: "Loka",
+        sound: "Hljóð"
     }
 };

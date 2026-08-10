@@ -236,7 +236,8 @@ const TranslationSchema = z.object({
 		light: z.string()
 	}),
 	common: z.object({
-		close: z.string()
+		close: z.string(),
+		sound: z.string()
 	})
 });
 

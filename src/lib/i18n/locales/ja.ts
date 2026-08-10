@@ -235,6 +235,7 @@ export const ja: Translations = {
         light: "ライトテーマ"
     },
     common: {
-        close: "閉じる"
+        close: "閉じる",
+        sound: "サウンド"
     }
 };

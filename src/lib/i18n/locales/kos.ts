@@ -242,6 +242,7 @@ export const kos: Translations = {
         light: "Light Theme"
     },
     common: {
-        close: "Kaeal"
+        close: "Kaeal",
+        sound: "Sound"
     }
 };

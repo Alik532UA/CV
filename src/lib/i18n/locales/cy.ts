@@ -235,6 +235,7 @@ export const cy: Translations = {
         light: "Thema Olau"
     },
     common: {
-        close: "Cau"
+        close: "Cau",
+        sound: "Sain"
     }
 };

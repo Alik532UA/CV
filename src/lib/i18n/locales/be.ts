@@ -235,6 +235,7 @@ export const be: Translations = {
         light: "Светлая тэма"
     },
     common: {
-        close: "Закрыць"
+        close: "Закрыць",
+        sound: "Гук"
     }
 };
