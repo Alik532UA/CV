@@ -5,29 +5,25 @@
     let { theme = "dark", layers = 3 } = $props<{ theme?: string; layers?: number }>();
 
     let canvas: HTMLCanvasElement;
-    let engine: WavesEngine;
+    let engine = $state<WavesEngine>();
 
     $effect(() => {
         if (engine) {
             engine.setTheme(theme);
-        }
-    });
-
-    $effect(() => {
-        if (engine) {
             engine.setWaveLayers(layers);
         }
     });
 
     onMount(() => {
-        engine = new WavesEngine(theme);
-        engine.setWaveLayers(layers);
+        const inst = new WavesEngine(theme);
+        inst.setWaveLayers(layers);
         if (canvas) {
-            engine.mount(canvas);
+            inst.mount(canvas);
         }
-        
+        engine = inst;
+
         return () => {
-            engine?.unmount();
+            inst.unmount();
         };
     });
 </script>

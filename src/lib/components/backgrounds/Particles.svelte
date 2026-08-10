@@ -5,30 +5,25 @@
     let { theme = "dark", count = 80 } = $props<{ theme?: string; count?: number }>();
 
     let canvas: HTMLCanvasElement;
-    let engine: ParticlesEngine;
+    let engine = $state<ParticlesEngine>();
 
-    // Reactive theme update
     $effect(() => {
         if (engine) {
             engine.setTheme(theme);
-        }
-    });
-
-    $effect(() => {
-        if (engine) {
             engine.setParticleCount(count);
         }
     });
 
     onMount(() => {
-        engine = new ParticlesEngine(theme);
-        engine.setParticleCount(count);
+        const inst = new ParticlesEngine(theme);
+        inst.setParticleCount(count);
         if (canvas) {
-            engine.mount(canvas);
+            inst.mount(canvas);
         }
-        
+        engine = inst;
+
         return () => {
-            engine?.unmount();
+            inst.unmount();
         };
     });
 </script>

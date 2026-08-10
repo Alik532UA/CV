@@ -5,29 +5,25 @@
     let { theme = "dark", lineWidth = 300 } = $props<{ theme?: string; lineWidth?: number }>();
 
     let canvas: HTMLCanvasElement;
-    let engine: FloatingShapesEngine;
+    let engine = $state<FloatingShapesEngine>();
 
     $effect(() => {
         if (engine) {
             engine.setTheme(theme);
-        }
-    });
-
-    $effect(() => {
-        if (engine) {
             engine.setLineWidth(lineWidth);
         }
     });
 
     onMount(() => {
-        engine = new FloatingShapesEngine(theme);
-        engine.setLineWidth(lineWidth);
+        const inst = new FloatingShapesEngine(theme);
+        inst.setLineWidth(lineWidth);
         if (canvas) {
-            engine.mount(canvas);
+            inst.mount(canvas);
         }
-        
+        engine = inst;
+
         return () => {
-            engine?.unmount();
+            inst.unmount();
         };
     });
 </script>
