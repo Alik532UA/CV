@@ -397,10 +397,6 @@
         backdrop-filter: var(--glass-blur);
     }
 
-    .toggle-group:hover {
-        border-color: var(--accent-primary);
-    }
-
     .toggle-group button {
         background: transparent;
         border: none;

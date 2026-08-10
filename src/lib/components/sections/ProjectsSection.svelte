@@ -180,11 +180,6 @@
         transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .project-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-    }
-
     .featured-card {
         border: 1px solid rgba(168, 85, 247, 0.5);
         box-shadow: 0 0 25px rgba(112, 0, 255, 0.2);
@@ -215,15 +210,13 @@
         background: rgba(0, 0, 0, 0.2);
     }
 
+    /* The card body is not clickable — only the button inside it is — so the
+       zoom that used to run on .project-card:hover went too: it read as "this
+       whole tile is a link" and clicking the tile did nothing. */
     .project-img img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.4s ease;
-    }
-
-    .project-card:hover .project-img img {
-        transform: scale(1.04);
     }
 
     .project-content {

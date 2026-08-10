@@ -141,10 +141,10 @@
         min-width: 0;
     }
 
+    /* Kept, unlike the plain cards: the whole surface is a link. */
     a.pdf-option:hover {
         background: rgba(var(--accent-primary-rgb), 0.1);
         border-color: var(--accent-primary);
-        transform: translateY(-3px);
     }
 
     .pdf-preview {

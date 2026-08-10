@@ -98,7 +98,6 @@ body {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 242, 255, 0.4);
 }
 
@@ -141,16 +140,16 @@ body {
     border-radius: 2px;
 }
 
+/* No :hover state. Every one of the 19 places this class is used is a plain
+   div — bio, profile, education, experience, skills, projects, hobbies, the
+   modal body — and none of them does anything when clicked. An accent border
+   and a lift on all of them promised an action that was never there. Cards
+   whose whole surface really is a link style their own hover, as
+   a.pdf-option does. */
 .card {
     border-radius: 20px;
     padding: 30px;
     transition: var(--transition);
-}
-
-.card:hover {
-    border-color: var(--accent-primary);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* Sections & Grids */
@@ -203,14 +202,11 @@ body {
     color: var(--accent-primary);
 }
 
+/* Also no :hover — these are read-only timeline entries. */
 .exp-card {
     position: relative;
     padding: 25px;
     border-left: 2px solid var(--border-color);
-}
-
-.exp-card:hover {
-    border-left-color: var(--accent-primary);
 }
 
 .inline-icon {

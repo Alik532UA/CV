@@ -240,7 +240,22 @@ class SoundState {
 		if (element.hasAttribute("disabled") || element.getAttribute("aria-disabled") === "true") {
 			return null;
 		}
+		if (this.isAlreadySelected(element)) return null;
 		return element;
+	}
+
+	/**
+	 * Clicking the option you are already on does nothing anywhere on this site:
+	 * the theme and background buttons guard on it, language set() returns early,
+	 * a project filter re-applies itself, and a nav link scrolls to the section
+	 * already in view. A confirmation sound there reports something that did not
+	 * happen. `.active` is this codebase's marker for that state, and the hover
+	 * rules skip the same elements — so these stay silent and unlit together.
+	 */
+	private isAlreadySelected(element: HTMLElement): boolean {
+		if (element.getAttribute("aria-checked") === "true") return true;
+		// The sidebar carries .active on the li, with the link filling it.
+		return element.classList.contains("active") || !!element.closest("li.active");
 	}
 
 	/**

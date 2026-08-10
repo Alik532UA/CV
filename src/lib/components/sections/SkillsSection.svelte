@@ -170,11 +170,6 @@
         transition: transform 0.3s ease;
     }
 
-    .platform-item:hover {
-        transform: translateY(-5px);
-        border-color: var(--accent-primary);
-    }
-
     .platform-icon {
         color: var(--accent-primary);
         background: rgba(var(--accent-primary-rgb), 0.1);
