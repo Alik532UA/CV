@@ -59,17 +59,27 @@ export class FloatingShapesEngine extends CanvasEngine {
             shape.y += shape.vy;
             shape.rotation += shape.rotationSpeed;
 
-            if (shape.x < -shape.size) shape.x = this.width + shape.size;
-            if (shape.x > this.width + shape.size) shape.x = -shape.size;
-            if (shape.y < -shape.size) shape.y = this.height + shape.size;
-            if (shape.y > this.height + shape.size) shape.y = -shape.size;
+            const maxOffset = shape.size * 2;
+            if (shape.x < -maxOffset) shape.x = this.width + maxOffset;
+            if (shape.x > this.width + maxOffset) shape.x = -maxOffset;
+            if (shape.y < -maxOffset) shape.y = this.height + maxOffset;
+            if (shape.y > this.height + maxOffset) shape.y = -maxOffset;
+
+            // Calculate smooth edge fade factor: shapes strictly fade out to 0% opacity near edges
+            const edgeMargin = Math.max(160, shape.size * 1.5);
+            const distX = Math.min(shape.x, this.width - shape.x);
+            const distY = Math.min(shape.y, this.height - shape.y);
+            const edgeDist = Math.min(distX, distY);
+            const edgeAlpha = Math.max(0, Math.min(1, edgeDist / edgeMargin));
+
+            const pulse = Math.sin(time * 1.2 + shape.pulseOffset) * 0.3 + 0.7;
+            const currentAlpha = Math.max(0, Math.min(1, shape.alpha * pulse * edgeAlpha));
+
+            if (currentAlpha <= 0.001) return;
 
             this.ctx!.save();
             this.ctx!.translate(shape.x, shape.y);
             this.ctx!.rotate(shape.rotation + scrollRotation);
-
-            const pulse = Math.sin(time * 1.2 + shape.pulseOffset) * 0.3 + 0.7;
-            const currentAlpha = Math.max(0.01, Math.min(1, shape.alpha * pulse));
 
             this.ctx!.globalAlpha = currentAlpha;
             this.ctx!.strokeStyle = colors.rgbPrimary;
