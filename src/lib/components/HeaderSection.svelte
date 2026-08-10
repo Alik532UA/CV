@@ -14,6 +14,9 @@
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS } from "$lib/i18n/languageMeta";
     import { onMount, onDestroy } from "svelte";
+    // Imported rather than taken from context, unlike the three below: this one
+    // is shared with the L shortcut, and a direct import keeps its types.
+    import { langMenu } from "$lib/controllers/UiState.svelte";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const language = getContext<any>("language");
@@ -25,8 +28,16 @@
     const sound = getContext<any>("sound");
 
     let isBgDropdownOpen = $state(false);
-    let isLangDropdownOpen = $state(false);
     let langQuery = $state("");
+
+    // Covers the L shortcut as well as the trigger button: however the panel
+    // came open, it opens on an empty query rather than last time's leftovers.
+    $effect(() => {
+        if (langMenu.isOpen) {
+            langQuery = "";
+            isBgDropdownOpen = false;
+        }
+    });
 
     const filteredLanguageMeta = $derived(
         LANGUAGE_META.filter((l) => {
@@ -47,15 +58,11 @@
 
     function toggleBgDropdown() {
         isBgDropdownOpen = !isBgDropdownOpen;
-        if (isBgDropdownOpen) isLangDropdownOpen = false;
+        if (isBgDropdownOpen) langMenu.close();
     }
 
     function toggleLangDropdown() {
-        isLangDropdownOpen = !isLangDropdownOpen;
-        if (isLangDropdownOpen) {
-            isBgDropdownOpen = false;
-            langQuery = "";
-        }
+        langMenu.toggle();
     }
 
     function selectBackground(type: 0 | 1 | 2 | 3) {
@@ -65,7 +72,7 @@
 
     function selectLanguage(lang: Language) {
         language.set(lang);
-        isLangDropdownOpen = false;
+        langMenu.close();
     }
 
     // Close dropdown when clicking outside
@@ -74,8 +81,8 @@
         if (isBgDropdownOpen && !target.closest(".mobile-bg-switcher")) {
             isBgDropdownOpen = false;
         }
-        if (isLangDropdownOpen && !target.closest(".lang-switcher-wrapper")) {
-            isLangDropdownOpen = false;
+        if (langMenu.isOpen && !target.closest(".lang-switcher-wrapper")) {
+            langMenu.close();
         }
     }
 
@@ -226,13 +233,13 @@
                     onclick={(e) => { e.stopPropagation(); toggleLangDropdown(); }}
                     aria-label="Select language"
                     aria-haspopup="true"
-                    aria-expanded={isLangDropdownOpen}
+                    aria-expanded={langMenu.isOpen}
                 >
                     <ActiveFlag width="20" height="15" class="flag-icon" />
                     <span class="lang-code">{language.current.toUpperCase()}</span>
                 </button>
 
-                {#if isLangDropdownOpen}
+                {#if langMenu.isOpen}
                     <div class="lang-dropdown glass" role="menu">
                         <!-- svelte-ignore a11y_autofocus -->
                         <input

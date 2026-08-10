@@ -11,8 +11,9 @@
 	import { page } from "$app/state";
 	import { replaceState, afterNavigate } from "$app/navigation";
 	import { language } from "$lib/controllers/I18nState.svelte";
-	import { theme, background } from "$lib/controllers/UiState.svelte";
+	import { theme, background, section } from "$lib/controllers/UiState.svelte";
 	import { sound } from "$lib/controllers/SoundState.svelte";
+	import { shortcuts } from "$lib/controllers/ShortcutState.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
@@ -41,7 +42,8 @@
 	setContext("sound", sound);
 
 	// Runes (Svelte 5)
-	let activeSection = $state("about");
+	// The observer below owns this value; it lives on the section controller so
+	// the PgUp/PgDn and 1-9 shortcuts step from the same "current" the navs show.
 	let isRouterReady = $state(false);
 
 	// URL Sync Effect for Sections
@@ -51,8 +53,8 @@
 			const url = new URL(window.location.href);
 			
 			// Only sync Section Hash here
-			if (activeSection && url.hash !== `#${activeSection}`) {
-				url.hash = activeSection;
+			if (section.active && url.hash !== `#${section.active}`) {
+				url.hash = section.active;
 				// eslint-disable-next-line svelte/no-navigation-without-resolve
 				replaceState(url.toString(), {});
 			}
@@ -92,6 +94,7 @@
 		// each of the ~43 interactive elements, so modals and anything added later
 		// are covered without being wired up individually.
 		const teardownSound = sound.init();
+		const teardownShortcuts = shortcuts.init();
 
 		const observedElements = new SvelteSet<Element>();
 		// This is a single page, so without per-section events the report would
@@ -102,7 +105,7 @@
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						activeSection = entry.target.id;
+						section.observed(entry.target.id);
 						// Once per load: the observer re-fires every time a
 						// section scrolls back into view.
 						if (!reportedSections.has(entry.target.id)) {
@@ -141,6 +144,7 @@
 			observer.disconnect();
 			mutationObserver.disconnect();
 			teardownSound?.();
+			teardownShortcuts?.();
 		};
 	});
 </script>
@@ -155,8 +159,8 @@
 
 <div class="app-layout" class:language-changing={language.isChanging}>
 	<Header />
-	<Sidebar {activeSection} />
-	<BottomNav {activeSection} />
+	<Sidebar activeSection={section.active} />
+	<BottomNav activeSection={section.active} />
 	<LogCopyButton />
 	<main id="main-content">
 		{@render children()}

@@ -13,8 +13,12 @@ const SOUND_FILES = {
 
 export type SoundName = keyof typeof SOUND_FILES;
 
-/** Half volume as a linear gain multiplier — about -6 dB off the files' own level. */
-const DEFAULT_VOLUME = 0.5;
+/**
+ * Linear gain multiplier. The clips are ripped from the game at full level, and
+ * a menu blip answering every hover has to sit far below anything the visitor
+ * came for — so this is a floor to raise from, not a level to cut down to.
+ */
+const DEFAULT_VOLUME = 0.05;
 
 /** Same increment per wheel notch the sea page's audio control uses. */
 const WHEEL_STEP = 0.05;
@@ -92,14 +96,12 @@ class SoundState {
 		// those clicks at all.
 		document.addEventListener("pointerover", this.handlePointerOver, true);
 		document.addEventListener("click", this.handleClick, true);
-		document.addEventListener("keydown", this.handleShortcut);
 
 		return () => {
 			document.removeEventListener("pointerdown", unlock, true);
 			document.removeEventListener("keydown", unlock, true);
 			document.removeEventListener("pointerover", this.handlePointerOver, true);
 			document.removeEventListener("click", this.handleClick, true);
-			document.removeEventListener("keydown", this.handleShortcut);
 			void this.ctx?.close();
 			this.ctx = null;
 			this.buffers.clear();
@@ -173,21 +175,6 @@ class SoundState {
 		this.lastPreviewAt = now;
 		this.play("hover");
 	}
-
-	/** Mirrors the sea page's M shortcut. */
-	private handleShortcut = (event: KeyboardEvent) => {
-		if (event.code !== "KeyM" || event.ctrlKey || event.metaKey || event.altKey) return;
-
-		// The language panel has a search box, and the sea page's version of this
-		// shortcut fires while typing in it. Anything that takes text input has to
-		// keep its own keystrokes.
-		const target = event.target as HTMLElement | null;
-		if (target?.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target?.tagName ?? "")) {
-			return;
-		}
-
-		this.toggle();
-	};
 
 	private async preload() {
 		const ctx = this.ctx;
