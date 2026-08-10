@@ -126,12 +126,6 @@ export abstract class CanvasEngine {
 		this.init();
 	}
 
-	private handleScroll() {
-		if (browser) {
-			this.scrollY = window.scrollY;
-		}
-	}
-
 	protected abstract init(): void;
 	protected abstract draw(): void;
 
