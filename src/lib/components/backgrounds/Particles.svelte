@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { ParticlesEngine } from "./engine/ParticlesEngine";
 
-    let { theme = "dark" } = $props<{ theme?: string }>();
+    let { theme = "dark", count = 80 } = $props<{ theme?: string; count?: number }>();
 
     let canvas: HTMLCanvasElement;
     let engine: ParticlesEngine;
@@ -14,8 +14,15 @@
         }
     });
 
+    $effect(() => {
+        if (engine) {
+            engine.setParticleCount(count);
+        }
+    });
+
     onMount(() => {
         engine = new ParticlesEngine(theme);
+        engine.setParticleCount(count);
         if (canvas) {
             engine.mount(canvas);
         }

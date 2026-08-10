@@ -83,8 +83,22 @@ function getInitialBackgroundType(): 0 | 1 | 2 | 3 {
 	return 1;
 }
 
+function getSavedNumber(key: string, fallback: number): number {
+	if (browser) {
+		const saved = storage.get(key);
+		if (saved) {
+			const parsed = parseInt(saved, 10);
+			if (!isNaN(parsed)) return parsed;
+		}
+	}
+	return fallback;
+}
+
 class BackgroundState {
 	type = $state<0 | 1 | 2 | 3>(getInitialBackgroundType());
+	particlesCount = $state<number>(getSavedNumber("bgParticlesCount", 80));
+	wavesCount = $state<number>(getSavedNumber("bgWavesCount", 3));
+	shapesLineWidth = $state<number>(getSavedNumber("bgShapesLineWidth", 300));
 
 	constructor() {}
 
@@ -95,6 +109,9 @@ class BackgroundState {
 				this.type = parseInt(saved) as 0 | 1 | 2 | 3;
 				logService.info("ui", `Initializing background type: ${this.type}`);
 			}
+			this.particlesCount = getSavedNumber("bgParticlesCount", 80);
+			this.wavesCount = getSavedNumber("bgWavesCount", 3);
+			this.shapesLineWidth = getSavedNumber("bgShapesLineWidth", 300);
 		}
 	}
 
@@ -104,6 +121,21 @@ class BackgroundState {
 			storage.set("backgroundType", type.toString());
 			logService.info("ui", `Background type changed: ${type}`);
 		}
+	}
+
+	setParticlesCount(count: number) {
+		this.particlesCount = count;
+		if (browser) storage.set("bgParticlesCount", count.toString());
+	}
+
+	setWavesCount(count: number) {
+		this.wavesCount = count;
+		if (browser) storage.set("bgWavesCount", count.toString());
+	}
+
+	setShapesLineWidth(width: number) {
+		this.shapesLineWidth = width;
+		if (browser) storage.set("bgShapesLineWidth", width.toString());
 	}
 
 	/** For the B shortcut: four options, so it steps rather than toggles. */

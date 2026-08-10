@@ -14,22 +14,36 @@ export class ParticlesEngine extends CanvasEngine {
     private particles: Particle[] = [];
     private currentScrollOffset = 0;
     private targetScrollOffset = 0;
+    private targetCount = 80;
+
+    public setParticleCount(count: number) {
+        this.targetCount = count;
+        this.adjustParticleCount(count);
+    }
+
+    private adjustParticleCount(count: number) {
+        if (this.particles.length < count) {
+            const toAdd = count - this.particles.length;
+            for (let i = 0; i < toAdd; i++) {
+                const y = Math.random() * (this.height || 800);
+                this.particles.push({
+                    x: Math.random() * (this.width || 1200),
+                    y: y,
+                    baseY: y,
+                    vx: (Math.random() - 0.5) * 0.4,
+                    vy: (Math.random() - 0.5) * 0.4,
+                    size: Math.random() * 2 + 1.5,
+                    pulseOffset: Math.random() * Math.PI * 2,
+                });
+            }
+        } else if (this.particles.length > count) {
+            this.particles.length = count;
+        }
+    }
 
     protected init() {
         this.particles = [];
-        const count = Math.min(80, Math.floor((this.width * this.height) / 15000));
-        for (let i = 0; i < count; i++) {
-            const y = Math.random() * this.height;
-            this.particles.push({
-                x: Math.random() * this.width,
-                y: y,
-                baseY: y,
-                vx: (Math.random() - 0.5) * 0.4,
-                vy: (Math.random() - 0.5) * 0.4,
-                size: Math.random() * 2 + 1.5,
-                pulseOffset: Math.random() * Math.PI * 2,
-            });
-        }
+        this.adjustParticleCount(this.targetCount);
     }
 
     protected draw() {

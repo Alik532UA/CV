@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
     import { FloatingShapesEngine } from "./engine/FloatingShapesEngine";
 
-    let { theme = "dark" } = $props<{ theme?: string }>();
+    let { theme = "dark", lineWidth = 300 } = $props<{ theme?: string; lineWidth?: number }>();
 
     let canvas: HTMLCanvasElement;
     let engine: FloatingShapesEngine;
@@ -13,8 +13,15 @@
         }
     });
 
+    $effect(() => {
+        if (engine) {
+            engine.setLineWidth(lineWidth);
+        }
+    });
+
     onMount(() => {
         engine = new FloatingShapesEngine(theme);
+        engine.setLineWidth(lineWidth);
         if (canvas) {
             engine.mount(canvas);
         }

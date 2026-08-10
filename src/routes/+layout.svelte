@@ -170,7 +170,13 @@
 
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<DynamicBackground backgroundType={background.type} theme={theme.current} />
+<DynamicBackground
+	backgroundType={background.type}
+	theme={theme.current}
+	particlesCount={background.particlesCount}
+	wavesCount={background.wavesCount}
+	shapesLineWidth={background.shapesLineWidth}
+/>
 
 <div class="theme-transition-overlay" class:active={theme.isChanging}></div>
 

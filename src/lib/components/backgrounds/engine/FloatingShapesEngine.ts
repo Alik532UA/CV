@@ -15,6 +15,11 @@ interface FloatingShape {
 
 export class FloatingShapesEngine extends CanvasEngine {
     private shapes: FloatingShape[] = [];
+    private lineWidth = 300;
+
+    public setLineWidth(width: number) {
+        this.lineWidth = width;
+    }
 
     protected init() {
         this.shapes = [];
@@ -68,7 +73,7 @@ export class FloatingShapesEngine extends CanvasEngine {
 
             this.ctx!.globalAlpha = currentAlpha;
             this.ctx!.strokeStyle = colors.rgbPrimary;
-            this.ctx!.lineWidth = 3;
+            this.ctx!.lineWidth = this.lineWidth;
             this.ctx!.beginPath();
 
             switch (shape.type) {

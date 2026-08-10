@@ -5,9 +5,18 @@
     import { fade } from "svelte/transition";
     import { onMount } from "svelte";
 
-    let { backgroundType = 1, theme = "dark" } = $props<{
+    let {
+        backgroundType = 1,
+        theme = "dark",
+        particlesCount = 80,
+        wavesCount = 3,
+        shapesLineWidth = 300,
+    } = $props<{
         backgroundType?: 0 | 1 | 2 | 3;
         theme?: string;
+        particlesCount?: number;
+        wavesCount?: number;
+        shapesLineWidth?: number;
     }>();
 
     let fixedHeight = $state("100vh");
@@ -49,7 +58,7 @@
         in:fade={{ duration: 800 }}
         out:fade={{ duration: 800 }}
     >
-        <Particles {theme} />
+        <Particles {theme} count={particlesCount} />
     </div>
 {:else if backgroundType === 2}
     <div
@@ -58,7 +67,7 @@
         in:fade={{ duration: 800 }}
         out:fade={{ duration: 800 }}
     >
-        <Waves {theme} />
+        <Waves {theme} layers={wavesCount} />
     </div>
 {:else if backgroundType === 3}
     <div
@@ -67,7 +76,7 @@
         in:fade={{ duration: 800 }}
         out:fade={{ duration: 800 }}
     >
-        <FloatingShapes {theme} />
+        <FloatingShapes {theme} lineWidth={shapesLineWidth} />
     </div>
 {/if}
 

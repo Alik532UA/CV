@@ -3,9 +3,14 @@ import { CanvasEngine } from "./CanvasEngine";
 export class WavesEngine extends CanvasEngine {
     private waveTime = 0;
     
-    // Configurable parameters (can be made dynamic if needed)
+    // Configurable parameters
     private waveBaseHeight = 0.9;
     private waveScrollSpeed = 0.25;
+    private waveLayers = 3;
+
+    public setWaveLayers(layers: number) {
+        this.waveLayers = layers;
+    }
 
     protected init() {
         // No specific init needed for waves, they are purely math-based
@@ -18,7 +23,7 @@ export class WavesEngine extends CanvasEngine {
         const scrollInfluence = this.currentScrollY * 0.002;
         this.ctx.clearRect(0, 0, this.width, this.height);
 
-        for (let layer = 0; layer < 3; layer++) {
+        for (let layer = 0; layer < this.waveLayers; layer++) {
             this.ctx.beginPath();
             this.ctx.moveTo(0, this.height);
 
