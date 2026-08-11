@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { MapPin, Mail, FileText, Sparkles } from "lucide-svelte";
+    import { MapPin, Mail, FileText } from "lucide-svelte";
     import { base } from "$app/paths";
     import { t } from "$lib/controllers/I18nState.svelte";
-    import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { EMAIL, CONTACTS } from "$lib/config/contacts";
     import { handleEmailCopy } from "$lib/utils/emailCopy";
     import IconLinkedIn from "$lib/components/icons/IconLinkedIn.svelte";
@@ -33,10 +32,8 @@
 
     <div class="about-grid">
         <div class="about-main">
-            <!-- Mobile only: on desktop these live in the sidebar, which is
-                 hidden under 768px. Icons carry no visible label — five of
-                 them plus the PDF button do not fit a phone row otherwise.
-                 PDF keeps its label because it is the one action a recruiter
+            <!-- Hidden on desktop: the sidebar carries these there. It only appears once
+                 the sidebar is gone, under 768px. This is the one place a recruiter on mobile
                  is actually looking for. -->
             <div class="contacts-grid">
                 <!-- Absolute external URL or app scheme, never a route -->
@@ -97,14 +94,7 @@
                     class="btn-secondary nowrap-btn pdf-btn"
                     onclick={onOpenPdfModal}
                 >
-                    <span><FileText size={18} aria-hidden="true" /></span> PDF
-                    version
-                </button>
-                <button
-                    class="btn-primary nowrap-btn ai-btn"
-                    onclick={() => aiChat.open()}
-                >
-                    <Sparkles size={18} aria-hidden="true" /> AI Job Matcher
+                    <span><FileText size={18} aria-hidden="true" /></span> PDF version
                 </button>
             </div>
 
@@ -243,22 +233,32 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 10px;
+        padding: 0;
         min-width: 0;
+        width: 100%;
+        height: 46px;
+        border-radius: 12px;
+        box-sizing: border-box;
     }
 
     .pdf-btn {
-        /* The one labelled action, so it takes the full row under the icons. */
         grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 46px;
+        width: 100%;
+        border-radius: 12px;
+        box-sizing: border-box;
     }
 
     @media (max-width: 768px) {
         .contacts-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 8px;
-            /* It sits above the bio card now, so the gap goes below it. */
+            gap: 10px;
             margin-bottom: 25px;
+            width: 100%;
         }
     }
 
