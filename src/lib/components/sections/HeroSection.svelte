@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { MapPin, Mail, FileText } from "lucide-svelte";
+    import { MapPin, Mail, FileText, Sparkles } from "lucide-svelte";
     import { base } from "$app/paths";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { EMAIL, CONTACTS } from "$lib/config/contacts";
     import { handleEmailCopy } from "$lib/utils/emailCopy";
     import IconLinkedIn from "$lib/components/icons/IconLinkedIn.svelte";
@@ -98,6 +99,12 @@
                 >
                     <span><FileText size={18} aria-hidden="true" /></span> PDF
                     version
+                </button>
+                <button
+                    class="btn-primary nowrap-btn ai-btn"
+                    onclick={() => aiChat.open()}
+                >
+                    <Sparkles size={18} aria-hidden="true" /> AI Job Matcher
                 </button>
             </div>
 

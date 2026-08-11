@@ -15,6 +15,7 @@
     import IconTelegram from "$lib/components/icons/IconTelegram.svelte";
     import IconViber from "$lib/components/icons/IconViber.svelte";
     import { pdfModal } from "$lib/controllers/PdfModalState.svelte";
+    import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { CONTACTS } from "$lib/config/contacts";
     import { handleEmailCopy } from "$lib/utils/emailCopy";
 
@@ -133,6 +134,8 @@
         color: var(--accent-primary);
         border-color: var(--accent-primary);
     }
+
+
 
     .pdf-button {
         display: flex;

@@ -5,19 +5,17 @@
     // Sections
     import HeroSection from "$lib/components/sections/HeroSection.svelte";
     import { pdfModal } from "$lib/controllers/PdfModalState.svelte";
+    import { aiChat } from "$lib/controllers/AiChatState.svelte";
     
     // UI
     import ErrorFallback from "$lib/components/ui/ErrorFallback.svelte";
 
-    // Consumed by child sections through their own props; the language now
-    // comes from the layout, so nothing is read from it directly here.
+    // Consumed by child sections through their own props
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let { data }: PageProps = $props();
 
     // Runes (Svelte 5)
     let isMobile = $state(false);
-    // Shared rather than local: the sidebar in +layout.svelte opens this too,
-    // and it cannot reach state declared here.
 
     onMount(() => {
         const mediaQuery = window.matchMedia("(max-width: 768px)");
@@ -83,6 +81,12 @@
     {#if pdfModal.isOpen}
         {#await import("$lib/components/ui/PdfModal.svelte") then { default: PdfModal }}
             <PdfModal bind:show={pdfModal.isOpen} />
+        {/await}
+    {/if}
+
+    {#if aiChat.isOpen}
+        {#await import("$lib/components/ui/AiMatchModal.svelte") then { default: AiMatchModal }}
+            <AiMatchModal />
         {/await}
     {/if}
 </div>

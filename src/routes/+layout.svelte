@@ -21,6 +21,7 @@
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
+	import FloatingAiButton from "$lib/components/ui/FloatingAiButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
 	import { setContext } from "svelte";
 
@@ -199,6 +200,7 @@
      menu with it. -->
 <ScrollbarContextMenu />
 
+<FloatingAiButton />
 <Toast />
 
 <style>
