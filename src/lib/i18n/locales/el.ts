@@ -51,7 +51,7 @@ export const el: Translations = {
         },
         descriptions: {
             intellias_desc: "Δοκιμές εφαρμογών Web, Desktop και Mobile. Αυτοματισμός δοκιμών (C#, Selenium, WinAppDriver, Appium). Διερεύνηση διαρροών μνήμης και race conditions.",
-            absoft_desc: "Δοκιμές συσκευών και εφαρμογών κινητών για στρατιωτικό βιντεοκαταγραφέα σε C.",
+            absoft_desc: "Δοκιμές συσκευών και εφαρμογών κινητών για βιντεοκαταγραφέα",
             singree_desc: "Βελτιστοποίηση και ανάλυση μηχανών αναζήτησης.",
             unicorn_desc: "Επεξεργασία βίντεο για κανάλια YouTube.",
             nutduet_desc: "Επεξεργασία εκδηλώσεων και σκηνικών παραστάσεων.",

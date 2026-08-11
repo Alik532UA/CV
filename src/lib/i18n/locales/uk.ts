@@ -51,7 +51,7 @@ export const uk: Translations = {
         },
         descriptions: {
             intellias_desc: "Тестування Web, Desktop та Mobile додатків. Автоматизація (C#, Selenium, WinAppDriver, Appium). Дослідження витоків пам'яті та race conditions.",
-            absoft_desc: "Тестування пристроїв та мобільних додатків для військового відеореєстратора на C.",
+            absoft_desc: "Тестування пристроїв та мобільних додатків для відеореєстратора",
             singree_desc: "Аналіз пошукових систем.",
             unicorn_desc: "Монтаж відео для YouTube.",
             nutduet_desc: "Монтаж заходів та виступів.",

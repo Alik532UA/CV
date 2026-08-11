@@ -51,7 +51,7 @@ export const it: Translations = {
         },
         descriptions: {
             intellias_desc: "Test di applicazioni Web, Desktop e Mobile. Automazione dei test (C#, Selenium, WinAppDriver, Appium). Indagine su memory leak e race condition.",
-            absoft_desc: "Test di dispositivi e applicazioni mobile per un videoregistratore militare in C.",
+            absoft_desc: "Test di dispositivi e applicazioni mobile per un videoregistratore",
             singree_desc: "Ottimizzazione e analisi per motori di ricerca.",
             unicorn_desc: "Montaggio video per canali YouTube.",
             nutduet_desc: "Montaggio di eventi e spettacoli dal vivo.",

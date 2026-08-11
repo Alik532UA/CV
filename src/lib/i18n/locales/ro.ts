@@ -51,7 +51,7 @@ export const ro: Translations = {
         },
         descriptions: {
             intellias_desc: "Testarea aplicațiilor Web, Desktop și Mobile. Automatizarea testării (C#, Selenium, WinAppDriver, Appium). Investigarea scurgerilor de memorie și a race conditions.",
-            absoft_desc: "Testarea dispozitivelor și aplicațiilor mobile pentru un reportofon video militar în C.",
+            absoft_desc: "Testarea dispozitivelor și aplicațiilor mobile pentru un reportofon video",
             singree_desc: "Optimizare și analiză pentru motoare de căutare.",
             unicorn_desc: "Montaj video pentru canale YouTube.",
             nutduet_desc: "Montaj de evenimente și spectacole live.",

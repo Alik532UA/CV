@@ -68,7 +68,7 @@ export const KNOWLEDGE_BASE_UA = `# Алік Заполнов
    - Health Application (Харчова промисловість / Сша): Єдиний QA на проєкті (Greenfield з нуля). Автоматизація мобільного додатка (Java, Selenium, Appium), виявив 100+ критичних дефектів, створив повну документацію.
    - Sanitary Ware Store & Back Office (Ритейл): Test Engineer (Web, Mobile, Embedded, API, React, SAP Hybris).
 2. AB Soft | 06/2021 — 12/2021 | QA Engineer
-   - Video Recorder (Військове обладнання / Hardware): C, Embedded, Hardware testing з нуля.
+   - Video Recorder (Hardware): Embedded, Hardware testing з нуля.
 
 ## 🚀 Проєкти та Портфоліо
 1. MindStep — Стратегічна вебгра (Svelte) з 23 E2E автотестами на Playwright.
@@ -115,7 +115,7 @@ Actively utilizes AI tools (Claude Code, Gemini CLI, Antigravity IDE/CLI, Cursor
    - Health Application (Healthcare / USA): Sole QA (Greenfield from scratch). Mobile automation (Java, Selenium, Appium), uncovered 100+ critical bugs.
    - Sanitary Ware Store & Back Office (Retail): Test Engineer (Web, Mobile, Embedded, API, React, SAP Hybris).
 2. AB Soft | 06/2021 — 12/2021 | QA Engineer
-   - Video Recorder (Military / Hardware): C, Embedded, Hardware testing from scratch.
+   - Video Recorder (Hardware): Embedded, Hardware testing from scratch.
 
 ## 🚀 Projects & Portfolio
 1. MindStep — Strategic web game (Svelte) with 23 E2E Playwright autotests.
@@ -172,7 +172,7 @@ export const STRUCTURED_PROFILE: KnowledgeProfile = {
             role: "QA Engineer",
             stack: ["C", "Embedded", "Hardware testing"],
             highlights: [
-                "Hardware and mobile app testing for military video recorder project",
+                "Hardware and mobile app testing for video recorder project",
                 "Implemented MQA processes from scratch"
             ]
         }

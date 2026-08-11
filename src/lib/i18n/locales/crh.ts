@@ -53,7 +53,7 @@ export const crh: Translations = {
         },
         descriptions: {
             intellias_desc: "Web, Desktop ve Mobile uyğulamalarını sınav etüv. Sınav avtomatlaştırması (C#, Selenium, WinAppDriver, Appium). Hafıza sızıntıları ve race conditions'nı tedqiq etüv.",
-            absoft_desc: "C tilinde askeriy video registratorı içün cihazlar ve mobil uyğulamalarnı sınav etüv.",
+            absoft_desc: "Video registratorı içün cihazlar ve mobil uyğulamalarnı sınav etüv",
             singree_desc: "Qıdıruv motorlarını optimizatsiyası ve tahlili.",
             unicorn_desc: "YouTube kanalları içün video montajı.",
             nutduet_desc: "Tedbirler ve sahne çıqışlarınıñ montajı.",

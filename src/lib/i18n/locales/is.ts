@@ -51,7 +51,7 @@ export const is: Translations = {
         },
         descriptions: {
             intellias_desc: "Prófun á Web-, Desktop- og Mobile-forritum. Sjálfvirkni prófana (C#, Selenium, WinAppDriver, Appium). Rannsókn á minnisleka og race conditions.",
-            absoft_desc: "Prófun tækja og farsímaforrita fyrir hernaðarlegan myndbandsupptökutæki í C.",
+            absoft_desc: "Prófun tækja og farsímaforrita fyrir myndbandsupptökutæki",
             singree_desc: "Leitarvélabestun og greining.",
             unicorn_desc: "Myndbandsvinnsla fyrir YouTube-rásir.",
             nutduet_desc: "Klipping viðburða og sviðsframkomu.",

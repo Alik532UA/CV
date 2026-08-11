@@ -51,7 +51,7 @@ export const ga: Translations = {
         },
         descriptions: {
             intellias_desc: "Tástáil feidhmchlár Gréasáin, Deisce agus Móibíleach. Uathoibriú tástála (C#, Selenium, WinAppDriver, Appium). Imscrúdú sceitheanna cuimhne agus race conditions.",
-            absoft_desc: "Tástáil gléasanna agus feidhmchlár móibíleach do thaifeadán físe míleata i C.",
+            absoft_desc: "Tástáil gléasanna agus feidhmchlár móibíleach do thaifeadán físe",
             singree_desc: "Optamú agus anailís innill chuardaigh.",
             unicorn_desc: "Eagarthóireacht físe do chainéil YouTube.",
             nutduet_desc: "Eagarthóireacht imeachtaí agus taibhithe stáitse.",

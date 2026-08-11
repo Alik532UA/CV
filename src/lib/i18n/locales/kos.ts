@@ -58,7 +58,7 @@ export const kos: Translations = {
         },
         descriptions: {
             intellias_desc: "Test Web, Desktop, ac Mobile app. Test automation (C#, Selenium, WinAppDriver, Appium). Suk memory leak ac race condition.",
-            absoft_desc: "Test device ac mobile app nu ke sie video recorder military ma simusla ke C.",
+            absoft_desc: "Test device ac mobile app nu ke sie video recorder",
             singree_desc: "Search engine optimization ac analysis.",
             unicorn_desc: "Video editing nu ke YouTube channel.",
             nutduet_desc: "Editing ke event ac stage performance.",

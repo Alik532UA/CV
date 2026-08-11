@@ -51,7 +51,7 @@ export const cy: Translations = {
         },
         descriptions: {
             intellias_desc: "Profi apiau Gwe, Bwrdd Gwaith a Symudol. Awtomeiddio profi (C#, Selenium, WinAppDriver, Appium). Ymchwilio i ollyngiadau cof ac amodau ras.",
-            absoft_desc: "Profi dyfeisiau ac apiau symudol ar gyfer recordydd fideo milwrol yn C.",
+            absoft_desc: "Profi dyfeisiau ac apiau symudol ar gyfer recordydd fideo",
             singree_desc: "Optimeiddio a dadansoddi peiriannau chwilio.",
             unicorn_desc: "Golygu fideo ar gyfer sianeli YouTube.",
             nutduet_desc: "Golygu digwyddiadau a pherfformiadau llwyfan.",

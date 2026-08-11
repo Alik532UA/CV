@@ -58,7 +58,7 @@ export const pon: Translations = {
         },
         descriptions: {
             intellias_desc: "Kasongsong Web, Desktop, oh Mobile app kan. Test automation (C#, Selenium, WinAppDriver, Appium). Rapahki memory leak oh race condition kan.",
-            absoft_desc: "Kasongsong device oh mobile app kan ong video recorder en sounpei ehu me ntingdi ni C.",
+            absoft_desc: "Kasongsong device oh mobile app kan ong video recorder ehu",
             singree_desc: "Search engine optimization oh koasoi.",
             unicorn_desc: "Wia video editing ong YouTube channel kan.",
             nutduet_desc: "Editing ong event oh stage performance kan.",

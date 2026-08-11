@@ -51,7 +51,7 @@ export const lt: Translations = {
         },
         descriptions: {
             intellias_desc: "Web, Desktop ir Mobile programų testavimas. Testavimo automatizavimas (C#, Selenium, WinAppDriver, Appium). Atminties nutekėjimų ir race conditions tyrimas.",
-            absoft_desc: "Įrenginių ir mobiliųjų programų testavimas kariniam vaizdo registratoriui C kalba.",
+            absoft_desc: "Įrenginių ir mobiliųjų programų testavimas vaizdo registratoriui",
             singree_desc: "Paieškos sistemų optimizavimas ir analizė.",
             unicorn_desc: "Vaizdo montažas YouTube kanalams.",
             nutduet_desc: "Renginių ir scenos pasirodymų montažas.",

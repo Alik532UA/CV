@@ -51,7 +51,7 @@ export const sq: Translations = {
         },
         descriptions: {
             intellias_desc: "Testimi i aplikacioneve Web, Desktop dhe Mobile. Automatizimi i testimit (C#, Selenium, WinAppDriver, Appium). Hetimi i rrjedhjeve të memories dhe race conditions.",
-            absoft_desc: "Testimi i pajisjeve dhe aplikacioneve mobile për një regjistrues video ushtarak në C.",
+            absoft_desc: "Testimi i pajisjeve dhe aplikacioneve mobile për një regjistrues video",
             singree_desc: "Optimizimi dhe analiza e motorëve të kërkimit.",
             unicorn_desc: "Montazhi i videove për kanale YouTube.",
             nutduet_desc: "Montazhi i eventeve dhe performancave skenike.",

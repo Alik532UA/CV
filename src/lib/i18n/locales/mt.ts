@@ -51,7 +51,7 @@ export const mt: Translations = {
         },
         descriptions: {
             intellias_desc: "Ittestjar ta' applikazzjonijiet Web, Desktop u Mobile. Awtomatizzazzjoni tal-ittestjar (C#, Selenium, WinAppDriver, Appium). Investigazzjoni ta' memory leaks u race conditions.",
-            absoft_desc: "Ittestjar ta' apparat u applikazzjonijiet mobbli għal reġistratur tal-vidjo militari f'C.",
+            absoft_desc: "Ittestjar ta' apparat u applikazzjonijiet mobbli għal reġistratur tal-vidjo",
             singree_desc: "Ottimizzazzjoni u analiżi tal-magni tat-tiftix.",
             unicorn_desc: "Editjar tal-vidjo għal kanali YouTube.",
             nutduet_desc: "Editjar ta' avvenimenti u wirjiet fuq il-palk.",

@@ -51,7 +51,7 @@ export const fi: Translations = {
         },
         descriptions: {
             intellias_desc: "Web-, Desktop- ja Mobile-sovellusten testaus. Testauksen automatisointi (C#, Selenium, WinAppDriver, Appium). Muistivuotojen ja race conditioneiden tutkiminen.",
-            absoft_desc: "Laitteiden ja mobiilisovellusten testaus sotilaalliselle videotallentimelle C-kielellä.",
+            absoft_desc: "Laitteiden ja mobiilisovellusten testaus videotallentimelle",
             singree_desc: "Hakukoneoptimointi ja -analyysi.",
             unicorn_desc: "Videoeditointi YouTube-kanaville.",
             nutduet_desc: "Tapahtumien ja lavaesitysten editointi.",

@@ -51,7 +51,7 @@ export const ko: Translations = {
         },
         descriptions: {
             intellias_desc: "Web, Desktop, Mobile 애플리케이션 테스트. 테스트 자동화(C#, Selenium, WinAppDriver, Appium). 메모리 누수 및 race condition 조사.",
-            absoft_desc: "C언어로 개발된 군용 비디오 레코더의 장치 및 모바일 애플리케이션 테스트.",
+            absoft_desc: "비디오 레코더의 장치 및 모바일 애플리케이션 테스트",
             singree_desc: "검색 엔진 최적화 및 분석.",
             unicorn_desc: "YouTube 채널용 영상 편집.",
             nutduet_desc: "행사 및 무대 공연 편집.",

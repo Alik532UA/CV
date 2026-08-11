@@ -51,7 +51,7 @@ export const tr: Translations = {
         },
         descriptions: {
             intellias_desc: "Web, Desktop ve Mobile uygulama testleri. Test otomasyonu (C#, Selenium, WinAppDriver, Appium). Bellek sızıntıları ve race condition araştırması.",
-            absoft_desc: "C dilinde askeri bir video kaydedici için cihaz ve mobil uygulama testleri.",
+            absoft_desc: "Bir video kaydedici için cihaz ve mobil uygulama testleri",
             singree_desc: "Arama motoru optimizasyonu ve analizi.",
             unicorn_desc: "YouTube kanalları için video montajı.",
             nutduet_desc: "Etkinlik ve sahne performanslarının montajı.",

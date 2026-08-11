@@ -58,7 +58,7 @@ export const chk: Translations = {
         },
         descriptions: {
             intellias_desc: "Test Web, Desktop, me Mobile app kewe. Test automation (C#, Selenium, WinAppDriver, Appium). Kükkün memory leak me race condition kewe.",
-            absoft_desc: "Test device me mobile app kewe fän military video recorder mi C.",
+            absoft_desc: "Test device me mobile app kewe fän video recorder",
             singree_desc: "Search engine optimization me analysis.",
             unicorn_desc: "Video editing fän YouTube channel kewe.",
             nutduet_desc: "Editing fän event me stage performance kewe.",

@@ -58,7 +58,7 @@ export const yap: Translations = {
         },
         descriptions: {
             intellias_desc: "Test Web, Desktop, nge Mobile app kan. Test automation (C#, Selenium, WinAppDriver, Appium). Gay memory leak nge race condition kan.",
-            absoft_desc: "Test device nge mobile app kan ko reb e video recorder ko military ni ba yoloy u C.",
+            absoft_desc: "Test device nge mobile app kan ko reb e video recorder",
             singree_desc: "Search engine optimization nge analysis.",
             unicorn_desc: "Video editing ko YouTube channel kan.",
             nutduet_desc: "Editing ko event nge stage performance kan.",

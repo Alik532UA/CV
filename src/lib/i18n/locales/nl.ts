@@ -51,7 +51,7 @@ export const nl: Translations = {
         },
         descriptions: {
             intellias_desc: "Testen van Web-, Desktop- en Mobile-applicaties. Testautomatisering (C#, Selenium, WinAppDriver, Appium). Onderzoek naar memory leaks en race conditions.",
-            absoft_desc: "Testen van apparaten en mobiele applicaties voor een militaire videorecorder in C.",
+            absoft_desc: "Testen van apparaten en mobiele applicaties voor een videorecorder",
             singree_desc: "Zoekmachineoptimalisatie en -analyse.",
             unicorn_desc: "Videomontage voor YouTube-kanalen.",
             nutduet_desc: "Montage van evenementen en live-optredens.",

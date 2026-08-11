@@ -51,7 +51,7 @@ export const et: Translations = {
         },
         descriptions: {
             intellias_desc: "Web-, Desktop- ja Mobile-rakenduste testimine. Testiautomaatika (C#, Selenium, WinAppDriver, Appium). Mäluleketa ja race condition'ite uurimine.",
-            absoft_desc: "Sõjaväe videosalvesti seadmete ja mobiilirakenduste testimine C-keeles.",
+            absoft_desc: "Videosalvesti seadmete ja mobiilirakenduste testimine",
             singree_desc: "Otsingumootorite optimeerimine ja analüüs.",
             unicorn_desc: "Videomontaaž YouTube'i kanalitele.",
             nutduet_desc: "Ürituste ja lavaesinemiste montaaž.",

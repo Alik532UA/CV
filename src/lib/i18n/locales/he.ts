@@ -54,7 +54,7 @@ export const he: Translations = {
         },
         descriptions: {
             intellias_desc: "בדיקת אפליקציות Web, Desktop ו-Mobile. אוטומציית בדיקות (C#, Selenium, WinAppDriver, Appium). חקירת דליפות זיכרון ו-race conditions.",
-            absoft_desc: "בדיקת מכשירים ואפליקציות מובייל עבור מקליט וידאו צבאי בשפת C.",
+            absoft_desc: "בדיקת מכשירים ואפליקציות מובייל עבור מקליט וידאו",
             singree_desc: "אופטימיזציה וניתוח מנועי חיפוש.",
             unicorn_desc: "עריכת וידאו לערוצי YouTube.",
             nutduet_desc: "עריכת אירועים והופעות במה.",

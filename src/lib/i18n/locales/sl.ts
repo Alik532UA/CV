@@ -51,7 +51,7 @@ export const sl: Translations = {
         },
         descriptions: {
             intellias_desc: "Testiranje Web, Desktop in Mobile aplikacij. Avtomatizacija testiranja (C#, Selenium, WinAppDriver, Appium). Preiskovanje uhajanja pomnilnika in race conditions.",
-            absoft_desc: "Testiranje naprav in mobilnih aplikacij za vojaški videorekorder v jeziku C.",
+            absoft_desc: "Testiranje naprav in mobilnih aplikacij za videorekorder",
             singree_desc: "Optimizacija in analiza za iskalnike.",
             unicorn_desc: "Video montaža za YouTube kanale.",
             nutduet_desc: "Montaža dogodkov in odrskih nastopov.",

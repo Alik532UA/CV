@@ -51,7 +51,7 @@ export const ja: Translations = {
         },
         descriptions: {
             intellias_desc: "Web、デスクトップ、モバイルアプリケーションのテスト。テスト自動化（C#、Selenium、WinAppDriver、Appium）。メモリリークや競合状態の調査。",
-            absoft_desc: "C言語で開発された軍用ビデオレコーダーの実機テストおよびモバイルアプリケーションのテスト。",
+            absoft_desc: "ビデオレコーダーの実機テストおよびモバイルアプリケーションのテスト",
             singree_desc: "検索エンジン最適化（SEO）と分析。",
             unicorn_desc: "YouTubeチャンネルの動画編集。",
             nutduet_desc: "イベントや舞台公演の動画編集。",
