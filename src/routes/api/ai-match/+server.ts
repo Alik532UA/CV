@@ -128,7 +128,7 @@ ${KNOWLEDGE_BASE_UA}
 
         // Try primary model gemini-3.6-flash first, fallback to gemini-3.5-flash -> gemini-3.1-flash-lite on 429
         let lastError: Error | null = null;
-        let responseJson: any = null;
+        let responseJson: Record<string, unknown> | null = null;
 
         for (const modelName of MODEL_FALLBACK_CHAIN) {
             try {
@@ -155,11 +155,11 @@ ${KNOWLEDGE_BASE_UA}
                     throw new Error(`Gemini API Error (${modelName}): ${apiRes.status} ${errText}`);
                 }
 
-                responseJson = await apiRes.json();
+                responseJson = (await apiRes.json()) as Record<string, unknown>;
                 break; // Successfully got response
-            } catch (err: any) {
-                lastError = err;
-                console.error(`[AI-Match] Error with model ${modelName}:`, err.message);
+            } catch (err: unknown) {
+                lastError = err as Error;
+                console.error(`[AI-Match] Error with model ${modelName}:`, lastError.message);
             }
         }
 
@@ -167,7 +167,8 @@ ${KNOWLEDGE_BASE_UA}
             throw lastError || new Error('All models in fallback chain failed.');
         }
 
-        const rawText = responseJson.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const candidates = responseJson.candidates as Array<{ content?: { parts?: Array<{ text?: string }> } }> | undefined;
+        const rawText = candidates?.[0]?.content?.parts?.[0]?.text || '';
 
         if (history.length === 0) {
             try {
@@ -179,8 +180,9 @@ ${KNOWLEDGE_BASE_UA}
         } else {
             return json({ isFirstAnalysis: false, reply: rawText });
         }
-    } catch (err: any) {
-        console.error('[AI-Match API Error]:', err);
-        return json({ error: err.message || 'Internal server error' }, { status: 500 });
+    } catch (err: unknown) {
+        const errorObj = err as Error;
+        console.error('[AI-Match API Error]:', errorObj);
+        return json({ error: errorObj.message || 'Internal server error' }, { status: 500 });
     }
 };

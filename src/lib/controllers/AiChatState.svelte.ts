@@ -1,5 +1,4 @@
 import { base } from "$app/paths";
-import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
 export interface MatchResult {
@@ -13,6 +12,13 @@ export interface MatchResult {
 export interface ChatMessage {
     role: "user" | "model";
     content: string;
+}
+
+interface ApiResponse {
+    result?: MatchResult;
+    rawText?: string;
+    reply?: string;
+    error?: string;
 }
 
 class AiChatState {
@@ -58,9 +64,9 @@ class AiChatState {
             });
 
             const rawResponseText = await res.text();
-            let data: any;
+            let data: ApiResponse;
             try {
-                data = JSON.parse(rawResponseText);
+                data = JSON.parse(rawResponseText) as ApiResponse;
             } catch {
                 throw new Error(
                     rawResponseText.includes("GEMINI_API_KEY") || res.status === 500
@@ -95,8 +101,9 @@ class AiChatState {
             ];
 
             logService.info("ui", `Job analyzed successfully. Match: ${this.matchResult?.matchPercentage}%`);
-        } catch (err: any) {
-            this.error = err.message || "An unexpected error occurred.";
+        } catch (err: unknown) {
+            const errorObj = err as Error;
+            this.error = errorObj.message || "An unexpected error occurred.";
             logService.error("ui", `Job analysis error: ${this.error}`);
         } finally {
             this.isLoading = false;
@@ -123,9 +130,9 @@ class AiChatState {
             });
 
             const rawResponseText = await res.text();
-            let data: any;
+            let data: ApiResponse;
             try {
-                data = JSON.parse(rawResponseText);
+                data = JSON.parse(rawResponseText) as ApiResponse;
             } catch {
                 throw new Error(`Помилка сервера (${res.status}): ${rawResponseText.slice(0, 150)}`);
             }
@@ -137,8 +144,9 @@ class AiChatState {
             const modelReply = data.reply || data.rawText || "Дякую за запитання!";
             this.history = [...this.history, { role: "model", content: modelReply }];
             logService.info("ui", "Received reply from gemini-3.6-flash");
-        } catch (err: any) {
-            this.error = err.message || "An error occurred while sending message.";
+        } catch (err: unknown) {
+            const errorObj = err as Error;
+            this.error = errorObj.message || "An error occurred while sending message.";
             logService.error("ui", `Send message error: ${this.error}`);
         } finally {
             this.isLoading = false;

@@ -2,7 +2,6 @@
     import BaseModal from "./BaseModal.svelte";
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { Sparkles, CheckCircle2, AlertCircle, Send, RotateCcw, Bot, User, Loader2 } from "lucide-svelte";
-    import { t } from "$lib/controllers/I18nState.svelte";
 
     let jobInput = $state("");
     let chatInput = $state("");
@@ -103,7 +102,7 @@
                     <div class="detail-box strengths">
                         <h5><CheckCircle2 size={16} color="#10b981" /> Сильні сторони</h5>
                         <ul>
-                            {#each aiChat.matchResult.keyStrengths as strength}
+                            {#each aiChat.matchResult.keyStrengths as strength (strength)}
                                 <li>{strength}</li>
                             {/each}
                         </ul>
@@ -113,7 +112,7 @@
                         <div class="detail-box gaps">
                             <h5><AlertCircle size={16} color="#f59e0b" /> Уточнення / Прогалини</h5>
                             <ul>
-                                {#each aiChat.matchResult.potentialGaps as gap}
+                                {#each aiChat.matchResult.potentialGaps as gap (gap)}
                                     <li>{gap}</li>
                                 {/each}
                             </ul>
