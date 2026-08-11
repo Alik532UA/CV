@@ -129,14 +129,14 @@
                 aiChat.open();
             }}
         >
-            <div class="ai-banner-content">
-                <Sparkles size={22} class="ai-sparkle-icon" />
-                <div class="ai-banner-text">
+            <div class="ai-banner-header">
+                <div class="ai-banner-title-group">
+                    <Sparkles size={20} class="ai-sparkle-icon" />
                     <span class="ai-banner-title">AI Job Matcher</span>
-                    <span class="ai-banner-sub">Перевірити сумісність вакансії з кандидатом</span>
                 </div>
+                <span class="ai-badge">gemini-3.6-flash</span>
             </div>
-            <span class="ai-badge">gemini-3.6-flash</span>
+            <p class="ai-banner-sub">Перевірити сумісність вакансії з кандидатом</p>
         </button>
     </div>
 </BaseModal>
@@ -158,51 +158,59 @@
 
     .ai-banner-btn {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
         width: 100%;
-        padding: 14px 20px;
-        border-radius: 14px;
-        border: 1px solid rgba(var(--accent-primary-rgb), 0.3);
-        background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.12) 0%, rgba(139, 92, 246, 0.18) 100%);
+        padding: 16px 20px;
+        border-radius: 16px;
+        border: 1px solid rgba(var(--accent-primary-rgb), 0.35);
+        background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.14) 0%, rgba(139, 92, 246, 0.22) 100%);
         color: var(--text-primary);
         font-family: inherit;
         cursor: pointer;
         transition: var(--transition);
+        text-align: left;
+        box-sizing: border-box;
     }
 
     .ai-banner-btn:hover {
-        background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.22) 0%, rgba(139, 92, 246, 0.3) 100%);
+        background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.24) 0%, rgba(139, 92, 246, 0.35) 100%);
         border-color: var(--accent-primary);
-        box-shadow: 0 4px 16px rgba(var(--accent-primary-rgb), 0.2);
+        box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.25);
     }
 
-    .ai-banner-content {
+    .ai-banner-header {
         display: flex;
         align-items: center;
-        gap: 12px;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .ai-banner-title-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     :global(.ai-banner-btn .ai-sparkle-icon) {
         color: var(--accent-primary);
-    }
-
-    .ai-banner-text {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
+        flex-shrink: 0;
     }
 
     .ai-banner-title {
         font-weight: 700;
-        font-size: 1rem;
+        font-size: 1.05rem;
         color: var(--text-primary);
+        white-space: nowrap;
     }
 
     .ai-banner-sub {
-        font-size: 0.82rem;
+        font-size: 0.85rem;
         color: var(--text-secondary);
+        margin: 0;
+        line-height: 1.4;
     }
 
     .ai-badge {
@@ -214,6 +222,7 @@
         padding: 4px 10px;
         border-radius: 8px;
         white-space: nowrap;
+        flex-shrink: 0;
     }
 
     .pdf-option {
