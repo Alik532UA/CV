@@ -9,6 +9,7 @@
     interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
         show: boolean;
         title?: string;
+        titleSnippet?: Snippet;
         children: Snippet;
         onclose?: () => void;
     }
@@ -16,6 +17,7 @@
     let { 
         show = $bindable(), 
         title,
+        titleSnippet,
         children,
         onclose,
         ...restProps
@@ -96,7 +98,7 @@
             onclick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-labelledby={title ? "modal-title" : undefined}
+            aria-labelledby={title || titleSnippet ? "modal-title" : undefined}
             tabindex="-1"
             transition:scale={{ duration: 200, start: 0.95 }}
             {...restProps}
@@ -105,7 +107,11 @@
                 <X size={24} />
             </button>
 
-            {#if title}
+            {#if titleSnippet}
+                <h3 id="modal-title">
+                    {@render titleSnippet()}
+                </h3>
+            {:else if title}
                 <h3 id="modal-title">{title}</h3>
             {/if}
 

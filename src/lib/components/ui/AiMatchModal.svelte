@@ -36,13 +36,19 @@
     }
 </script>
 
-<BaseModal bind:show={aiChat.isOpen} title="AI Job Matcher (gemini-3.6-flash)" onclose={() => aiChat.close()}>
+<BaseModal bind:show={aiChat.isOpen} onclose={() => aiChat.close()}>
+    {#snippet titleSnippet()}
+        <div class="modal-title-with-badge">
+            <span>AI Job Matcher</span>
+            <span class="ai-badge">gemini-3.6-flash</span>
+        </div>
+    {/snippet}
     <div class="ai-matcher-container">
         {#if !aiChat.matchResult}
             <!-- Step 1: Input Job Description / Link -->
             <div class="input-step">
                 <p class="subtitle">
-                    Вставте <strong>текст вакансії</strong> або <strong>посилання</strong> (DOU, Djinni, Work.ua тощо). AI проаналізує сумісність з Аліком на <strong>gemini-3.6-flash</strong>.
+                    Вставте <strong>текст вакансії</strong> або <strong>посилання</strong> (DOU, Djinni, Work.ua тощо). AI проаналізує сумісність з Аліком.
                 </p>
 
                 <textarea
@@ -454,5 +460,24 @@
     @keyframes spin {
         from { transform: rotate(0deg); }
         to { transform: rotate(360deg); }
+    }
+
+    :global(.modal-title-with-badge) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .ai-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        background: var(--gradient);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 8px;
+        white-space: nowrap;
     }
 </style>
