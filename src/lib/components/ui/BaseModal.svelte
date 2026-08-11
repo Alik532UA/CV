@@ -134,7 +134,7 @@
 
     .modal-content {
         position: relative;
-        background: var(--card-bg);
+        background: var(--panel-bg);
         padding: 40px;
         border-radius: 24px;
         max-width: 650px;
