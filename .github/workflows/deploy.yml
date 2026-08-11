@@ -42,6 +42,8 @@ jobs:
         run: npm run test:unit
 
       - name: Build
+        env:
+          PUBLIC_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: npm run build
 
       - name: Upload Artifacts
