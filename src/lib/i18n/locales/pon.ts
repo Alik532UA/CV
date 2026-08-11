@@ -46,6 +46,9 @@ export const pon: Translations = {
         showNonIT: "Kasalehda Doadoahk me Kaidehn IT",
         hideNonIT: "Ekihsang Doadoahk me Kaidehn IT",
         present: "Ansou Wet",
+        companies: {
+            theater_company: "Sukuhlen Theatre"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

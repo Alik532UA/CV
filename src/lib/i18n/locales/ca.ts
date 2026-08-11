@@ -35,10 +35,13 @@ export const ca: Translations = {
         }
     },
     experience: {
-        title: "Experiència",
-        showNonIT: "Mostra l'experiència no informàtica",
-        hideNonIT: "Amaga l'experiència no informàtica",
-        present: "Actualment",
+        title: "Experiència laboral",
+        showNonIT: "Mostrar experiència no IT",
+        hideNonIT: "Amagar experiència no IT",
+        present: "actualitat",
+        companies: {
+            theater_company: "Escola de Teatre"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

@@ -39,6 +39,9 @@ export const el: Translations = {
         showNonIT: "Εμφάνιση Εμπειρίας εκτός IT",
         hideNonIT: "Απόκρυψη Εμπειρίας εκτός IT",
         present: "Σήμερα",
+        companies: {
+            theater_company: "Θεατρική Σχολή"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

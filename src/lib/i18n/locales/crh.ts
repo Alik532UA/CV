@@ -41,6 +41,9 @@ export const crh: Translations = {
         showNonIT: "IT-den tış tejribeni köster",
         hideNonIT: "IT-den tış tejribeni gizle",
         present: "Şimdiki vaqıt",
+        companies: {
+            theater_company: "Tiyatro mektebi"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

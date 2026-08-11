@@ -56,7 +56,8 @@ const rawExperience: ExperienceData = {
         {
             id: "theater",
             date: "02/2012 – 09/2015",
-            company: "CHILDREN'S THEATER SCHOOL",
+            company: "THEATER SCHOOL",
+            companyKey: "theater_company",
             roleKey: "theater_role",
             descKey: "theater_desc"
         }

@@ -39,6 +39,9 @@ export const mt: Translations = {
         showNonIT: "Uri l-esperjenza mhux IT",
         hideNonIT: "Aħbi l-esperjenza mhux IT",
         present: "Bħalissa",
+        companies: {
+            theater_company: "Skola tat-Teatru"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

@@ -46,6 +46,9 @@ export const kos: Translations = {
         showNonIT: "Akkalemye Orekma Sayen IT",
         hideNonIT: "Okanla Orekma Sayen IT",
         present: "Pacl Inge",
+        companies: {
+            theater_company: "Skul ke Theatre"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

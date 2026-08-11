@@ -46,6 +46,9 @@ export const chk: Translations = {
         showNonIT: "Pwäri Experience Nge Esap IT",
         hideNonIT: "Opano Experience Nge Esap IT",
         present: "Ikenäi",
+        companies: {
+            theater_company: "Skulen Theatre"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

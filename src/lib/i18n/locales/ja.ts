@@ -39,6 +39,9 @@ export const ja: Translations = {
         showNonIT: "IT以外の職歴を表示",
         hideNonIT: "IT以外の職歴を非表示",
         present: "現在",
+        companies: {
+            theater_company: "演劇学校"
+        },
         roles: {
             intellias_role: "QAエンジニア（手動・自動テスト）",
             absoft_role: "QAエンジニア（手動テスト）",

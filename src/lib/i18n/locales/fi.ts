@@ -39,6 +39,9 @@ export const fi: Translations = {
         showNonIT: "Näytä muu kuin IT-kokemus",
         hideNonIT: "Piilota muu kuin IT-kokemus",
         present: "Nykyhetki",
+        companies: {
+            theater_company: "Teatterikoulu"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

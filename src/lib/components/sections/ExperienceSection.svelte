@@ -17,7 +17,7 @@
         {#each experienceData.it as exp (exp.id)}
             <div class="exp-card glass card">
                 <span class="date">{exp.date}</span>
-                <h3>{exp.company}</h3>
+                <h3>{(exp.companyKey && (t.experience.companies as Record<string, string>)?.[exp.companyKey]) || exp.company}</h3>
                 <p class="role">{t.experience.roles[exp.roleKey]}</p>
                 <p class="desc">{t.experience.descriptions[exp.descKey]}</p>
             </div>
@@ -38,7 +38,7 @@
                 {#each experienceData.nonIT as exp (exp.id)}
                     <div class="exp-card glass card non-it">
                         <span class="date">{exp.date}</span>
-                        <h3>{exp.company}</h3>
+                        <h3>{(exp.companyKey && (t.experience.companies as Record<string, string>)?.[exp.companyKey]) || exp.company}</h3>
                         <p class="role">{t.experience.roles[exp.roleKey]}</p>
                         <p class="desc">{t.experience.descriptions[exp.descKey]}</p>
                     </div>
@@ -101,6 +101,13 @@
 
     :global(.btn-toggle-exp svg.rotated) {
         transform: rotate(180deg);
+    }
+
+    .non-it-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 10px;
     }
 </style>
 

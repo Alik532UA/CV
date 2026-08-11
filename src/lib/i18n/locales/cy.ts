@@ -39,6 +39,9 @@ export const cy: Translations = {
         showNonIT: "Dangos Profiad Nad yw'n TG",
         hideNonIT: "Cuddio Profiad Nad yw'n TG",
         present: "Presennol",
+        companies: {
+            theater_company: "Ysgol Theatr"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

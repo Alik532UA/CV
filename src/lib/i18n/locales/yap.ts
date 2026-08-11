@@ -46,6 +46,9 @@ export const yap: Translations = {
         showNonIT: "Dag e Maruwel ni Gathi IT",
         hideNonIT: "Mith e Maruwel ni Gathi IT",
         present: "Chiney",
+        companies: {
+            theater_company: "Skul e Theatre"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

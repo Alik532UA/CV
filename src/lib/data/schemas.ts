@@ -16,6 +16,7 @@ export const ExperienceItemSchema = z.object({
     id: z.string(),
     date: z.string(),
     company: z.string(),
+    companyKey: z.string().optional(),
     roleKey: z.string(), // Key for translations
     descKey: z.string()  // Key for translations
 });

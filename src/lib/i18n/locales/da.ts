@@ -39,6 +39,9 @@ export const da: Translations = {
         showNonIT: "Vis erfaring uden for IT",
         hideNonIT: "Skjul erfaring uden for IT",
         present: "Nutid",
+        companies: {
+            theater_company: "Teaterskole"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

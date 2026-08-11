@@ -39,6 +39,9 @@ export const ko: Translations = {
         showNonIT: "비IT 경력 보기",
         hideNonIT: "비IT 경력 숨기기",
         present: "현재",
+        companies: {
+            theater_company: "연극 학교"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

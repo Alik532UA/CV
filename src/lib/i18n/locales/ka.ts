@@ -39,6 +39,9 @@ export const ka: Translations = {
         showNonIT: "არა-IT გამოცდილების ჩვენება",
         hideNonIT: "არა-IT გამოცდილების დამალვა",
         present: "აწმყო",
+        companies: {
+            theater_company: "თეატრალური სკოლა"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

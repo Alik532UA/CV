@@ -35,10 +35,13 @@ export const be: Translations = {
         }
     },
     experience: {
-        title: "Досвед",
-        showNonIT: "Паказаць не-IT досвед",
-        hideNonIT: "Схаваць не-IT досвед",
-        present: "Цяпер",
+        title: "Вопыт працы",
+        showNonIT: "Паказаць non-IT вопыт",
+        hideNonIT: "Схаваць non-IT вопыт",
+        present: "па цяперашні час",
+        companies: {
+            theater_company: "Тэатральная школа"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

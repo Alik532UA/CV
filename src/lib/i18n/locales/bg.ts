@@ -35,10 +35,13 @@ export const bg: Translations = {
         }
     },
     experience: {
-        title: "Опит",
-        showNonIT: "Покажи опит извън IT",
-        hideNonIT: "Скрий опит извън IT",
-        present: "Настояще",
+        title: "Трудов опит",
+        showNonIT: "Покажи non-IT опит",
+        hideNonIT: "Скрии non-IT опит",
+        present: "досега",
+        companies: {
+            theater_company: "Театрално училище"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

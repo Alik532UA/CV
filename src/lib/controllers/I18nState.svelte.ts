@@ -195,6 +195,7 @@ const TranslationSchema = z.object({
 		showNonIT: z.string(),
 		hideNonIT: z.string(),
 		present: z.string(),
+		companies: z.record(z.string(), z.string()).optional(),
 		roles: z.record(z.string(), z.string()),
 		descriptions: z.record(z.string(), z.string())
 	}),

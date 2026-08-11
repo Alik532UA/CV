@@ -42,6 +42,9 @@ export const he: Translations = {
         showNonIT: "הצג ניסיון שאינו IT",
         hideNonIT: "הסתר ניסיון שאינו IT",
         present: "הווה",
+        companies: {
+            theater_company: "בית ספר לתיאטרון"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

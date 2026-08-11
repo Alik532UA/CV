@@ -39,6 +39,9 @@ export const sk: Translations = {
         showNonIT: "Zobraziť skúsenosti mimo IT",
         hideNonIT: "Skryť skúsenosti mimo IT",
         present: "Súčasnosť",
+        companies: {
+            theater_company: "Divadelná škola"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

@@ -39,6 +39,9 @@ export const ga: Translations = {
         showNonIT: "Taispeáin Taithí Neamh-TF",
         hideNonIT: "Folaigh Taithí Neamh-TF",
         present: "Faoi Láthair",
+        companies: {
+            theater_company: "Scoil Amharclainne"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

@@ -35,10 +35,13 @@ export const en: Translations = {
         }
     },
     experience: {
-        title: "Experience",
-        showNonIT: "Show Non-IT Experience",
-        hideNonIT: "Hide Non-IT Experience",
-        present: "Present",
+        title: "Work Experience",
+        showNonIT: "Show non-IT experience",
+        hideNonIT: "Hide non-IT experience",
+        present: "present",
+        companies: {
+            theater_company: "Theater School"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

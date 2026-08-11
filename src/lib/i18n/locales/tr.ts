@@ -39,6 +39,9 @@ export const tr: Translations = {
         showNonIT: "IT Dışı Deneyimi Göster",
         hideNonIT: "IT Dışı Deneyimi Gizle",
         present: "Şimdi",
+        companies: {
+            theater_company: "Tiyatro Okulu"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",

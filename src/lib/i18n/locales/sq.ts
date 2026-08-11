@@ -39,6 +39,9 @@ export const sq: Translations = {
         showNonIT: "Shfaq përvojën jo-IT",
         hideNonIT: "Fshih përvojën jo-IT",
         present: "Aktualisht",
+        companies: {
+            theater_company: "Shkolla e Teatrit"
+        },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
             absoft_role: "Manual QA Engineer",
