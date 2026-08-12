@@ -108,6 +108,12 @@ export const AI_PROVIDERS: readonly AiProviderEntry[] = [
 		baseUrl: SAMBANOVA_CHAT,
 		score: 80
 	}
+	// Решта каталогу SambaNova (DeepSeek-V3.1 / V3.2, Meta-Llama-3.3-70B-Instruct,
+	// MiniMax-M2.7, gpt-oss-120b) свідомо відсутня: `GET /v1/models` показує їх
+	// ключу, але кожна на інференсі віддає 402 «A payment method is required».
+	// Перевірено живими запитами 13.08.2026 — на безкоштовному плані з усього
+	// каталогу працює лише gemma-4-31B-it. Список моделей, доступних кожному
+	// ключу, будь-коли можна перезняти через GET /models на проксі.
 ];
 
 export function findProvider(id: string | null | undefined): AiProviderEntry | undefined {

@@ -201,9 +201,15 @@
         max-width: min(340px, 90vw);
         padding: 8px;
         border-radius: 12px;
-        background: var(--card-bg, #12121a);
-        border: 1px solid var(--border-color, rgba(255, 255, 255, 0.12));
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+        /* --panel-bg, а не --card-bg: друге — це майже прозорий тінт для карток
+           усередині сторінки (0.03), і крізь нього просвічував текст модалки.
+           Той самий набір змінних, що в ScrollbarContextMenu, тому світла тема
+           працює без окремих правил. */
+        background: var(--panel-bg);
+        border: 1px solid var(--border-color);
+        box-shadow: var(--panel-shadow);
+        backdrop-filter: var(--glass-blur);
+        -webkit-backdrop-filter: var(--glass-blur);
         text-align: left;
     }
 
@@ -219,7 +225,7 @@
     .ai-model-menu__sep {
         height: 1px;
         margin: 4px 0;
-        background: var(--border-color, rgba(255, 255, 255, 0.12));
+        background: var(--border-color);
     }
 
     .ai-model-menu__item {
@@ -239,7 +245,7 @@
     }
 
     .ai-model-menu__item:hover:not(:disabled) {
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--surface-hover);
     }
 
     .ai-model-menu__item:disabled {
@@ -248,7 +254,7 @@
     }
 
     .ai-model-menu__item.active {
-        background: rgba(0, 242, 255, 0.12);
+        background: rgba(var(--accent-primary-rgb), 0.12);
     }
 
     .ai-model-menu__label {
@@ -267,7 +273,7 @@
 
     .ai-model-menu__provider {
         font-size: 0.68rem;
-        opacity: 0.6;
+        color: var(--text-secondary);
     }
 
     .ai-model-menu__status {
@@ -296,6 +302,6 @@
         margin: 6px 4px 2px;
         font-size: 0.68rem;
         line-height: 1.4;
-        opacity: 0.6;
+        color: var(--text-secondary);
     }
 </style>

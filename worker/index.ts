@@ -113,6 +113,19 @@ export default {
 			);
 		}
 
+		if (request.method === "GET" && url.pathname === "/models") {
+			// Діагностика: що реально доступно кожному ключу. Реєстр моделей інакше
+			// перевіряється лише живим запитом — а модель, яку провайдер прибрав,
+			// проявляється як 404 у першого ж відвідувача.
+			//
+			// Origin-gated, бо це службова інформація про наш акаунт, хоч і не
+			// секретна: жодного ключа у відповіді немає, тільно назви моделей.
+			if (!isAllowedOrigin(origin, allowed)) {
+				return json({ ok: false, error: "Origin not allowed" }, 403);
+			}
+			return json(await listProviderModels(env), 200, corsHeaders(origin));
+		}
+
 		if (request.method !== "POST") {
 			return json({ ok: false, error: "Method not allowed" }, 405, corsHeaders(origin));
 		}
@@ -341,6 +354,60 @@ async function callProvider(
 	}
 
 	return { ok: false, kind: "unknown", error: `${entry.provider}: no response` };
+}
+
+/**
+ * Питає кожного провайдера, які моделі бачить його ключ. Один запит на ключ, а не
+ * на модель: ключі спільні для всіх записів реєстру.
+ */
+async function listProviderModels(env: Env): Promise<Record<string, unknown>> {
+	const endpoints: Array<{ provider: string; url: string; headers: Record<string, string> }> = [];
+	const seen = new Set<string>();
+
+	for (const entry of AI_PROVIDERS) {
+		const key = apiKeyFor(entry, env);
+		if (!key || seen.has(entry.keyName)) continue;
+		seen.add(entry.keyName);
+
+		endpoints.push(
+			entry.wire === "gemini"
+				? {
+						provider: entry.provider,
+						url: `${entry.baseUrl}?pageSize=100`,
+						headers: { "x-goog-api-key": key }
+					}
+				: {
+						provider: entry.provider,
+						// .../chat/completions → .../models
+						url: entry.baseUrl.replace(/\/chat\/completions$/, "/models"),
+						headers: { Authorization: `Bearer ${key}` }
+					}
+		);
+	}
+
+	const results = await Promise.all(
+		endpoints.map(async ({ provider, url, headers }) => {
+			try {
+				const res = await fetch(url, { headers, signal: AbortSignal.timeout(15_000) });
+				const text = await res.text();
+				if (!res.ok) {
+					return [provider, { status: res.status, error: extractProviderError(text) }] as const;
+				}
+				const payload = JSON.parse(text) as {
+					data?: Array<{ id?: string }>;
+					models?: Array<{ name?: string }>;
+				};
+				const ids = payload.data
+					? payload.data.map((m) => m.id ?? "")
+					: (payload.models ?? []).map((m) => (m.name ?? "").replace(/^models\//, ""));
+				return [provider, { status: res.status, models: ids.filter(Boolean).sort() }] as const;
+			} catch (err) {
+				return [provider, { error: err instanceof Error ? err.message : String(err) }] as const;
+			}
+		})
+	);
+
+	return { ok: true, providers: Object.fromEntries(results) };
 }
 
 function apiKeyFor(entry: AiProviderEntry, env: Env): string | undefined {
