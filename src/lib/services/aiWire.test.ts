@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import type { AiProviderEntry } from "$lib/config/aiProviders";
 import {
+	buildBindingInput,
 	buildWireRequest,
 	extractJsonObject,
 	extractProviderError,
@@ -90,6 +91,61 @@ describe("buildWireRequest / openai", () => {
 			buildWireRequest(groq, { apiKey: "k", system: "s", messages, jsonMode: true }).init.body
 		);
 		expect(body.response_format).toBeUndefined();
+	});
+});
+
+describe("cf-binding", () => {
+	const cf: AiProviderEntry = {
+		id: "cloudflare-gpt-oss-120b",
+		provider: "Cloudflare",
+		model: "@cf/openai/gpt-oss-120b",
+		wire: "cf-binding",
+		keyName: null,
+		baseUrl: "",
+		score: 40
+	};
+
+	it("вхід для env.AI.run має system першим повідомленням", () => {
+		const input = buildBindingInput({ system: "sys", messages, jsonMode: true });
+		expect(input.messages.map((m) => m.role)).toEqual(["system", "user", "assistant"]);
+		expect(input.messages[0].content).toBe("sys");
+		expect(input.temperature).toBeLessThan(0.5);
+	});
+
+	it("HTTP-білдер на біндінгу кидає помилку, а не мовчки шле запит у нікуди", () => {
+		// baseUrl порожній: без цієї перевірки fetch пішов би на "" і впав би
+		// незрозумілою помилкою мережі замість явної.
+		expect(() =>
+			buildWireRequest(cf, { apiKey: "", system: "s", messages, jsonMode: false })
+		).toThrow(/cf-binding/);
+	});
+
+	it("текст беруть з response або з OpenAI-подібної обгортки", () => {
+		expect(extractReplyText("cf-binding", { response: " відповідь " })).toBe("відповідь");
+		// Реальний формат @cf/openai/gpt-oss-120b — саме `choices`, а не `response`.
+		expect(extractReplyText("cf-binding", { choices: [{ message: { content: "з choices" } }] })).toBe(
+			"з choices"
+		);
+	});
+
+	it("роздуми без відповіді дають порожній рядок, а не текст роздумів", () => {
+		// Справжня відповідь, знята з біндінга 13.08.2026: бюджет токенів пішов у
+		// `reasoning`, `content` лишився null. Показати роздуми користувачу було б
+		// гірше за перемикання на наступного провайдера.
+		const reasoningOnly = {
+			choices: [
+				{
+					finish_reason: "length",
+					message: { content: null, reasoning: "We need to analyze the vacancy…" }
+				}
+			]
+		};
+		expect(extractReplyText("cf-binding", reasoningOnly)).toBe("");
+	});
+
+	it("просить достатній бюджет токенів — інакше reasoning-модель не дійде до відповіді", () => {
+		const input = buildBindingInput({ system: "s", messages, jsonMode: true });
+		expect(input.max_tokens).toBeGreaterThanOrEqual(2048);
 	});
 });
 

@@ -12,8 +12,12 @@
  * SvelteKit не знає нічого.
  */
 
-/** Формат протоколу. Двох досить: Gemini native + усе OpenAI-сумісне. */
-export type AiWire = "gemini" | "openai";
+/**
+ * Формат виклику. Два перших — HTTP: Gemini native і все OpenAI-сумісне.
+ * Третій — біндінг Workers AI: не HTTP взагалі, а виклик рантайму воркера
+ * (`env.AI.run`), тому й ключа не потребує.
+ */
+export type AiWire = "gemini" | "openai" | "cf-binding";
 
 export interface AiProviderEntry {
 	/**
@@ -27,11 +31,15 @@ export interface AiProviderEntry {
 	/** Назва моделі в API провайдера. */
 	model: string;
 	wire: AiWire;
-	/** Ім'я секрету у Worker. Ключів у бандлі сайту не буває — тільки назви. */
-	keyName: "GEMINI_API_KEY" | "GROQ_API_KEY" | "SAMBANOVA_API_KEY";
+	/**
+	 * Ім'я секрету у Worker. Ключів у бандлі сайту не буває — тільки назви.
+	 * `null` — доступ через біндінг платформи, ключа не існує в принципі.
+	 */
+	keyName: "GEMINI_API_KEY" | "GROQ_API_KEY" | null;
 	/**
 	 * Для `openai` — повний URL chat/completions.
 	 * Для `gemini` — базовий шлях до моделей, до якого дописується `{model}:generateContent`.
+	 * Для `cf-binding` — порожній рядок: URL не існує.
 	 */
 	baseUrl: string;
 	/**
@@ -43,7 +51,6 @@ export interface AiProviderEntry {
 
 const GEMINI_BASE = "https://generativelanguage.googleapis.com/v1beta/models/";
 const GROQ_CHAT = "https://api.groq.com/openai/v1/chat/completions";
-const SAMBANOVA_CHAT = "https://api.sambanova.ai/v1/chat/completions";
 
 /**
  * Порядок у масиві не має значення — ланцюжок будується сортуванням за `score`
@@ -99,21 +106,25 @@ export const AI_PROVIDERS: readonly AiProviderEntry[] = [
 	// SambaNova gpt-oss-120b (score 85 за замірами ADSS) свідомо відсутня: на
 	// безкоштовному плані вона віддає 402 «A payment method is required». Тримати
 	// її в реєстрі означало б витрачати спробу щоразу, як спливе cooldown.
+	// Хвіст ланцюжка — Workers AI. Ключа не потребує взагалі: воркер викликає
+	// модель через біндінг рантайму. Score свідомо низький: безкоштовна квота —
+	// 10 000 neurons на добу, а один наш аналіз коштує ~190, тобто ~50 запитів.
+	// Це добрий резерв, коли Google і Groq вичерпані, але не голова ланцюжка.
 	{
-		id: "samba-gemma-4-31b",
-		provider: "SambaNova",
-		model: "gemma-4-31B-it",
-		wire: "openai",
-		keyName: "SAMBANOVA_API_KEY",
-		baseUrl: SAMBANOVA_CHAT,
-		score: 80
+		id: "cloudflare-gpt-oss-120b",
+		provider: "Cloudflare",
+		model: "@cf/openai/gpt-oss-120b",
+		wire: "cf-binding",
+		keyName: null,
+		baseUrl: "",
+		score: 40
 	}
-	// Решта каталогу SambaNova (DeepSeek-V3.1 / V3.2, Meta-Llama-3.3-70B-Instruct,
-	// MiniMax-M2.7, gpt-oss-120b) свідомо відсутня: `GET /v1/models` показує їх
-	// ключу, але кожна на інференсі віддає 402 «A payment method is required».
-	// Перевірено живими запитами 13.08.2026 — на безкоштовному плані з усього
-	// каталогу працює лише gemma-4-31B-it. Список моделей, доступних кожному
-	// ключу, будь-коли можна перезняти через GET /models на проксі.
+	// SambaNova прибрана 13.08.2026: на безкоштовному плані з усього її каталогу
+	// (gpt-oss-120b, DeepSeek-V3.1/V3.2, Meta-Llama-3.3-70B-Instruct, MiniMax-M2.7)
+	// інференс дозволений лише для gemma-4-31B-it, і навіть вона тарифікується за
+	// токени — у білінгу з'явився рахунок. Решта віддає 402 «A payment method is
+	// required», хоч і присутня у відповіді GET /v1/models. Методика перезняття —
+	// GET /models на проксі; деталі у sveltekit-canon AI-PROVIDERS-v8 § 3.
 ];
 
 export function findProvider(id: string | null | undefined): AiProviderEntry | undefined {

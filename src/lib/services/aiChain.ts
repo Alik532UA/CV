@@ -73,6 +73,22 @@ export function cooldownMsFor(kind: FailureKind, retryAfterSeconds?: number | nu
 	return Math.min(fromHeader, 2 * 60 * 60 * 1000);
 }
 
+/**
+ * Виклик через біндінг платформи падає винятком без HTTP-коду, тому клас
+ * доводиться визначати за текстом. Дефолт свідомо `transient`: невідома
+ * помилка має дати ще одну спробу, а не гасити модель на пів дня.
+ */
+export function classifyBindingError(message: string | null | undefined): FailureKind {
+	const text = (message ?? "").toLowerCase();
+	if (/quota|neuron|capacity|exceeded|too many|rate limit|billing|payment/.test(text)) {
+		return "quota";
+	}
+	if (/not found|no such model|unknown model|invalid model|unsupported/.test(text)) {
+		return "unavailable";
+	}
+	return "transient";
+}
+
 /** Парсер `Retry-After`: або секунди, або HTTP-дата. */
 export function parseRetryAfter(header: string | null, now: number): number | null {
 	if (!header) return null;

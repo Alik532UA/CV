@@ -50,7 +50,7 @@ async function stubProxy(
 		'gemini-31-flash-lite',
 		'groq-gpt-oss-120b',
 		'groq-llama-33-70b',
-		'samba-gemma-4-31b'
+		'cloudflare-gpt-oss-120b'
 	];
 
 	await page.route(

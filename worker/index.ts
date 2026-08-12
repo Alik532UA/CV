@@ -32,17 +32,23 @@ import {
 } from "../src/lib/services/aiChain";
 import { buildMessages, buildSystemPrompt, isFirstAnalysis } from "../src/lib/services/aiPrompt";
 import {
+	buildBindingInput,
 	buildWireRequest,
 	extractJsonObject,
 	extractProviderError,
 	extractReplyText,
 	type AiPromptMessage
 } from "../src/lib/services/aiWire";
+import { classifyBindingError } from "../src/lib/services/aiChain";
 
 interface Env {
 	GEMINI_API_KEY?: string;
 	GROQ_API_KEY?: string;
-	SAMBANOVA_API_KEY?: string;
+	/**
+	 * Біндінг Workers AI. Ключа не має: доступ дає сама платформа тому воркеру,
+	 * у конфігурації якого оголошено `[ai] binding = "AI"`.
+	 */
+	AI?: { run(model: string, input: unknown): Promise<unknown> };
 	/** Кома-розділений список. Порожній — беремо DEFAULT_ORIGINS. */
 	ALLOWED_ORIGINS?: string;
 	RATE_PER_MINUTE?: string;
@@ -190,7 +196,7 @@ async function handleMatch(
 		now: startedAt,
 		pinnedId: req.pinnedId,
 		cooldowns,
-		hasKey: (entry) => Boolean(apiKeyFor(entry, env))
+		hasKey: (entry) => isAvailable(entry, env)
 	});
 
 	if (chain.length === 0) {
@@ -216,6 +222,9 @@ async function handleMatch(
 
 	const attempts: Array<{ id: string; status?: number; kind?: FailureKind; error?: string }> = [];
 	let lastError = "Усі моделі в ланцюжку недоступні.";
+	/** Остання відповідь, з якої не вийшло дістати JSON. Резерв на кінець ланцюжка. */
+	let lastTextWithoutJson: { id: string; model: string; provider: string; text: string } | null =
+		null;
 
 	for (const entry of chain.slice(0, MAX_ATTEMPTS)) {
 		if (Date.now() - startedAt > TOTAL_DEADLINE_MS) {
@@ -223,15 +232,41 @@ async function handleMatch(
 			break;
 		}
 
-		const apiKey = apiKeyFor(entry, env) as string;
-		const request = buildWireRequest(entry, {
-			apiKey,
-			system,
-			messages,
-			jsonMode: firstAnalysis
-		});
+		let outcome: ProviderOutcome =
+			entry.wire === "cf-binding"
+				? await callBinding(entry, env, buildBindingInput({ system, messages, jsonMode: firstAnalysis }))
+				: await callProvider(
+						entry,
+						buildWireRequest(entry, {
+							apiKey: apiKeyFor(entry, env) as string,
+							system,
+							messages,
+							jsonMode: firstAnalysis
+						})
+					);
 
-		const outcome = await callProvider(entry, request);
+		if (outcome.ok && !extractReplyText(entry.wire, outcome.payload)) {
+			// Формально успіх (HTTP 200), фактично нічого не сказано. Так поводяться
+			// reasoning-моделі, коли бюджет токенів пішов у роздуми: `content: null`
+			// при `finish_reason: "length"`. Для користувача це той самий збій, тому
+			// провайдер вважається невдалим і ланцюжок іде далі — інакше в UI
+			// з'явилося б «модель не повернула структуровану оцінку».
+			console.warn(`[proxy] ${entry.id} returned an empty answer, treating as failure`);
+			outcome = { ok: false, kind: "transient", error: `${entry.provider}: порожня відповідь` };
+		}
+
+		if (outcome.ok && firstAnalysis) {
+			// Перший аналіз без JSON — теж невдача цього провайдера. Наступний у
+			// ланцюжку цілком може віддати структуру, і показати картку краще, ніж
+			// сирий обрізаний текст. Сам текст запам'ятовуємо: якщо JSON не вийде ні
+			// в кого, віддамо його як є (§ «вигаданих даних не буває»).
+			const text = extractReplyText(entry.wire, outcome.payload);
+			if (text && !extractJsonObject(text)) {
+				console.warn(`[proxy] ${entry.id} answered without valid JSON, trying next provider`);
+				lastTextWithoutJson = { id: entry.id, model: entry.model, provider: entry.provider, text };
+				outcome = { ok: false, kind: "transient", error: `${entry.provider}: відповідь не є JSON` };
+			}
+		}
 
 		if (outcome.ok) {
 			const rawText = extractReplyText(entry.wire, outcome.payload);
@@ -282,6 +317,27 @@ async function handleMatch(
 				corsHeaders(origin)
 			);
 		}
+	}
+
+	if (lastTextWithoutJson) {
+		// Структуру не дав ніхто, але текст є. Показати його честніше, ніж помилку:
+		// HR побачить відповідь моделі й позначку, що оцінка не структурована.
+		console.warn(`[proxy] no provider returned JSON; falling back to raw text from ${lastTextWithoutJson.id}`);
+		return json(
+			{
+				ok: true,
+				modelId: lastTextWithoutJson.id,
+				model: lastTextWithoutJson.model,
+				provider: lastTextWithoutJson.provider,
+				isFirstAnalysis: true,
+				result: null,
+				rawText: lastTextWithoutJson.text,
+				attempts,
+				cooldowns: remainingCooldowns(Date.now())
+			},
+			200,
+			corsHeaders(origin)
+		);
 	}
 
 	return json(
@@ -365,9 +421,10 @@ async function listProviderModels(env: Env): Promise<Record<string, unknown>> {
 	const seen = new Set<string>();
 
 	for (const entry of AI_PROVIDERS) {
-		const key = apiKeyFor(entry, env);
-		if (!key || seen.has(entry.keyName)) continue;
-		seen.add(entry.keyName);
+		// Біндінг каталогу моделей не має — там список фіксує сама платформа.
+		const key = entry.keyName ? apiKeyFor(entry, env) : undefined;
+		if (!key || seen.has(entry.keyName as string)) continue;
+		seen.add(entry.keyName as string);
 
 		endpoints.push(
 			entry.wire === "gemini"
@@ -410,13 +467,44 @@ async function listProviderModels(env: Env): Promise<Record<string, unknown>> {
 	return { ok: true, providers: Object.fromEntries(results) };
 }
 
+/**
+ * Виклик моделі через біндінг. HTTP-коду тут немає взагалі — помилка приходить
+ * винятком, тому клас визначає classifyBindingError за текстом.
+ */
+async function callBinding(
+	entry: AiProviderEntry,
+	env: Env,
+	input: unknown
+): Promise<ProviderOutcome> {
+	if (!env.AI) {
+		return { ok: false, kind: "unavailable", error: `${entry.provider}: AI binding не оголошений` };
+	}
+
+	try {
+		return { ok: true, payload: await env.AI.run(entry.model, input) };
+	} catch (err) {
+		const message = err instanceof Error ? err.message : String(err);
+		return {
+			ok: false,
+			kind: classifyBindingError(message),
+			error: `${entry.provider}/${entry.model}: ${message.slice(0, 300)}`
+		};
+	}
+}
+
 function apiKeyFor(entry: AiProviderEntry, env: Env): string | undefined {
+	if (!entry.keyName) return undefined;
 	const key = env[entry.keyName];
 	return key && key.trim().length > 10 ? key.trim() : undefined;
 }
 
+/** Чи можна взагалі спробувати цього провайдера: є ключ або є біндінг. */
+function isAvailable(entry: AiProviderEntry, env: Env): boolean {
+	return entry.wire === "cf-binding" ? Boolean(env.AI) : Boolean(apiKeyFor(entry, env));
+}
+
 function keyedProviderIds(env: Env): string[] {
-	return AI_PROVIDERS.filter((p) => apiKeyFor(p, env)).map((p) => p.id);
+	return AI_PROVIDERS.filter((p) => isAvailable(p, env)).map((p) => p.id);
 }
 
 function prune(now: number): void {

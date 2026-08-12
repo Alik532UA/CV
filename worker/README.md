@@ -29,16 +29,23 @@ npx wrangler login
 ```bash
 npx wrangler secret put GEMINI_API_KEY --config worker/wrangler.toml
 npx wrangler secret put GROQ_API_KEY --config worker/wrangler.toml
-npx wrangler secret put SAMBANOVA_API_KEY --config worker/wrangler.toml
 ```
 
-Де брати (усі три мають безкоштовний тариф):
+Де брати (обидва — безкоштовні, без картки):
 
-| Секрет               | Звідки                                  |
-| -------------------- | --------------------------------------- |
-| `GEMINI_API_KEY`     | https://aistudio.google.com/app/apikey  |
-| `GROQ_API_KEY`       | https://console.groq.com/keys           |
-| `SAMBANOVA_API_KEY`  | https://cloud.sambanova.ai/apis         |
+| Секрет           | Звідки                                 |
+| ---------------- | -------------------------------------- |
+| `GEMINI_API_KEY` | https://aistudio.google.com/app/apikey |
+| `GROQ_API_KEY`   | https://console.groq.com/keys          |
+
+Третій провайдер у ланцюжку — **Workers AI**, і секрету він не потребує: доступ
+дає біндінг `[ai]` у `wrangler.toml`. Квота — 10 000 neurons/добу на акаунт,
+приблизно 50 аналізів вакансії, тому в ланцюжку він стоїть останнім.
+
+> `SAMBANOVA_API_KEY` більше не використовується (13.08.2026): на безкоштовному
+> плані інференс дозволений лише для однієї моделі, і навіть вона тарифікується
+> за токени. Якщо секрет ще заданий — видали його:
+> `npx wrangler secret delete SAMBANOVA_API_KEY --config worker/wrangler.toml`
 
 Публікація:
 

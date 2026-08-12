@@ -35,9 +35,63 @@ export interface WireRequest {
 const TEMPERATURE_JSON = 0.2;
 const TEMPERATURE_CHAT = 0.7;
 
+/**
+ * Бюджет на роздуми + власне відповідь для reasoning-моделей через біндінг.
+ * 4096 виявилося замало: gpt-oss обривався на роздумах приблизно в половині
+ * спроб. Ціна щедрішого бюджету — neurons лише за фактично згенеровані токени.
+ */
+const BINDING_MAX_TOKENS = 8192;
+
+/**
+ * Повідомлення у форматі OpenAI/Workers AI: system окремим першим елементом.
+ * Спільне для `openai` і `cf-binding` — інакше дві копії мапінгу ролей
+ * розійшлися б, а помітно це стало б лише на другому провайдері.
+ */
+export function buildChatMessages(
+	system: string,
+	messages: AiPromptMessage[]
+): Array<{ role: "system" | "user" | "assistant"; content: string }> {
+	return [
+		{ role: "system" as const, content: system },
+		...messages.map((m) => ({
+			role: m.role === "user" ? ("user" as const) : ("assistant" as const),
+			content: m.content
+		}))
+	];
+}
+
+/**
+ * Вхід для `env.AI.run(model, …)`. Не HTTP-запит: URL і заголовків тут немає,
+ * бо біндінг — виклик рантайму воркера, а не мережі.
+ */
+export function buildBindingInput(
+	options: Pick<WireRequestOptions, "system" | "messages" | "jsonMode">
+): {
+	messages: ReturnType<typeof buildChatMessages>;
+	temperature: number;
+	max_tokens: number;
+} {
+	return {
+		messages: buildChatMessages(options.system, options.messages),
+		temperature: options.jsonMode ? TEMPERATURE_JSON : TEMPERATURE_CHAT,
+		/**
+		 * Без явного ліміту Workers AI дає дефолт на кілька сотень токенів, а
+		 * gpt-oss — reasoning-модель: вона витрачає їх на `reasoning` і повертає
+		 * `content: null` з `finish_reason: "length"`. Тобто відповідь приходить
+		 * порожньою не через помилку, а через бюджет.
+		 */
+		max_tokens: BINDING_MAX_TOKENS
+	};
+}
+
 export function buildWireRequest(entry: AiProviderEntry, options: WireRequestOptions): WireRequest {
 	const { apiKey, system, messages, jsonMode } = options;
 	const temperature = jsonMode ? TEMPERATURE_JSON : TEMPERATURE_CHAT;
+
+	if (entry.wire === "cf-binding") {
+		// Не тихий фолбек на HTTP: біндінг не має URL, і запит нікуди не пішов би.
+		throw new Error(`${entry.id}: cf-binding викликається через buildBindingInput, не HTTP`);
+	}
 
 	if (entry.wire === "gemini") {
 		return {
@@ -74,13 +128,7 @@ export function buildWireRequest(entry: AiProviderEntry, options: WireRequestOpt
 			},
 			body: JSON.stringify({
 				model: entry.model,
-				messages: [
-					{ role: "system", content: system },
-					...messages.map((m) => ({
-						role: m.role === "user" ? "user" : "assistant",
-						content: m.content
-					}))
-				],
+				messages: buildChatMessages(system, messages),
 				temperature
 			})
 			// `response_format: json_object` тут свідомо не надсилаємо: набір
@@ -99,8 +147,20 @@ interface OpenAiPayload {
 	choices?: Array<{ message?: { content?: string } }>;
 }
 
+/** Біндінг Workers AI віддає текст полем `response`, а не `choices`. */
+interface BindingPayload {
+	response?: string;
+}
+
 export function extractReplyText(wire: AiWire, payload: unknown): string {
 	if (!payload || typeof payload !== "object") return "";
+
+	if (wire === "cf-binding") {
+		const binding = payload as BindingPayload & OpenAiPayload;
+		// `response` — документований формат; `choices` як запас, бо частина
+		// моделей Workers AI віддає OpenAI-подібну обгортку.
+		return (binding.response ?? binding.choices?.[0]?.message?.content ?? "").trim();
+	}
 
 	if (wire === "gemini") {
 		const parts = (payload as GeminiPayload).candidates?.[0]?.content?.parts ?? [];

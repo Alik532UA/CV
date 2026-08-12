@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { AI_PROVIDERS, type AiProviderEntry } from "$lib/config/aiProviders";
 import {
 	buildChain,
+	classifyBindingError,
 	classifyStatus,
 	cooldownMsFor,
 	isRetryableOnSameProvider,
@@ -166,10 +167,35 @@ describe("реєстр AI_PROVIDERS", () => {
 		expect(new Set(AI_PROVIDERS.map((p) => p.provider)).size).toBeGreaterThan(1);
 	});
 
-	it("кожен запис має ключ і базовий URL", () => {
+	it("HTTP-записи мають ключ і базовий URL, біндінг — ні того, ні того", () => {
 		for (const p of AI_PROVIDERS) {
-			expect(p.keyName).toBeTruthy();
-			expect(p.baseUrl.startsWith("https://")).toBe(true);
+			if (p.wire === "cf-binding") {
+				// Сенс біндінга саме в тому, що ключа не існує: нема чого зливати.
+				expect(p.keyName).toBeNull();
+				expect(p.baseUrl).toBe("");
+			} else {
+				expect(p.keyName).toBeTruthy();
+				expect(p.baseUrl.startsWith("https://")).toBe(true);
+			}
 		}
+	});
+});
+
+describe("classifyBindingError", () => {
+	it("вичерпану квоту відрізняє від тимчасової помилки", () => {
+		expect(classifyBindingError("Quota exceeded for this account")).toBe("quota");
+		expect(classifyBindingError("AiError: out of neurons")).toBe("quota");
+		expect(classifyBindingError("Capacity temporarily unavailable")).toBe("quota");
+	});
+
+	it("невідому модель гасить надовго", () => {
+		expect(classifyBindingError("No such model @cf/typo")).toBe("unavailable");
+		expect(classifyBindingError("unsupported model")).toBe("unavailable");
+	});
+
+	it("невідому помилку вважає тимчасовою — це ще одна спроба, а не пів дня простою", () => {
+		expect(classifyBindingError("socket hang up")).toBe("transient");
+		expect(classifyBindingError("")).toBe("transient");
+		expect(classifyBindingError(null)).toBe("transient");
 	});
 });
