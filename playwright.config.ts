@@ -34,5 +34,12 @@ export default defineConfig({
 		command: 'npm run dev',
 		port: 5173,
 		reuseExistingServer: !process.env.CI,
+		env: {
+			// Адреса-заглушка AI-проксі: усі запити на неї перехоплює page.route у
+			// tests/ai-matcher.spec.ts, тому нічого справді слухати цей порт не має.
+			// Без цієї змінної модалка одразу каже «проксі не налаштований» і тест
+			// не має що перевіряти.
+			PUBLIC_AI_PROXY_URL: 'http://127.0.0.1:8788'
+		}
 	},
 });

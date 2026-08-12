@@ -1,0 +1,22 @@
+{
+	// Окремий конфіг, бо воркер не входить у tsconfig SvelteKit (той бере лише
+	// `src/**`). Без цього файлу єдиний код, що працює з ключами, лишився б
+	// узагалі без перевірки типів. Запускається як `npm run check:worker`.
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		// DOM — заради Request/Response/fetch/AbortSignal, які рантайм воркера
+		// надає. @types/node навпаки виключаємо (`types: []`): у воркері немає ні
+		// Buffer, ні NodeJS.Timeout, і хибні підказки шкідливіші за їх відсутність.
+		"lib": ["esnext", "dom"],
+		"types": [],
+		"strict": true,
+		"noEmit": true,
+		"skipLibCheck": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"forceConsistentCasingInFileNames": true
+	},
+	"include": ["index.ts"]
+}

@@ -7,7 +7,8 @@
     class="floating-ai-btn"
     onclick={() => aiChat.open()}
     aria-label="Open AI Job Matcher"
-    title="AI Job Matcher (gemini-3.6-flash)"
+    data-testid="ai-matcher-open-btn"
+    title="AI Job Matcher ({aiChat.activeEntry.model})"
 >
     <span class="pulse-glow"></span>
     <span class="icon-wrapper">

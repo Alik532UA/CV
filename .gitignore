@@ -30,6 +30,9 @@ desktop.ini
 !.env.example
 !.env.test
 
+# Локальні секрети Cloudflare Worker (ключі AI-провайдерів)
+worker/.dev.vars
+
 # Тимчасові файли Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*

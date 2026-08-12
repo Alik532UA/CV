@@ -1,0 +1,16 @@
+# Cloudflare Worker: AI-проксі для CV. Ключі провайдерів — секрети (wrangler
+# secret put), у цьому файлі їх немає і бути не може: він у git.
+name = "cv-ai-proxy"
+main = "index.ts"
+compatibility_date = "2026-08-01"
+workers_dev = true
+
+[vars]
+# Кома-розділений список. Origin GitHub Pages — у нижньому регістрі, як його
+# надсилає браузер. localhost — для `npm run dev` разом з `npm run worker:dev`.
+ALLOWED_ORIGINS = "https://alik532ua.github.io,http://localhost:5173,http://localhost:4173"
+
+# Ліміти проти вичерпання квоти через відкритий проксі.
+RATE_PER_MINUTE = "6"
+RATE_PER_DAY = "40"
+DAILY_TOTAL = "300"

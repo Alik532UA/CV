@@ -134,7 +134,9 @@
                     <Sparkles size={20} class="ai-sparkle-icon" />
                     <span class="ai-banner-title">AI Job Matcher</span>
                 </div>
-                <span class="ai-badge">gemini-3.6-flash</span>
+                <!-- Не перемикач, а підпис: вкладена кнопка всередині кнопки-банера
+                     була б невалідною розміткою. Перемикати модель — у самій модалці. -->
+                <span class="ai-badge">{aiChat.activeEntry.model}</span>
             </div>
             <p class="ai-banner-sub">Перевірити сумісність вакансії з кандидатом</p>
         </button>

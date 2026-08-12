@@ -1,5 +1,6 @@
 <script lang="ts">
     import BaseModal from "./BaseModal.svelte";
+    import AiModelPicker from "./AiModelPicker.svelte";
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { Sparkles, CheckCircle2, AlertCircle, Send, RotateCcw, Bot, User, Loader2 } from "lucide-svelte";
 
@@ -40,11 +41,11 @@
     {#snippet titleSnippet()}
         <div class="modal-title-with-badge">
             <span>AI Job Matcher</span>
-            <span class="ai-badge">gemini-3.6-flash</span>
+            <AiModelPicker />
         </div>
     {/snippet}
     <div class="ai-matcher-container">
-        {#if !aiChat.matchResult}
+        {#if !aiChat.hasAnalysis}
             <!-- Step 1: Input Job Description / Link -->
             <div class="input-step">
                 <p class="subtitle">
@@ -53,6 +54,7 @@
 
                 <textarea
                     class="job-textarea"
+                    data-testid="ai-job-input-textarea"
                     placeholder="Вставте опис вакансії або URL посилання на вакансію..."
                     bind:value={jobInput}
                     onkeydown={handleKeydown}
@@ -69,6 +71,7 @@
 
                 <button
                     class="btn-primary analyze-btn"
+                    data-testid="ai-analyze-btn"
                     onclick={handleAnalyze}
                     disabled={aiChat.isLoading || !jobInput.trim()}
                 >
@@ -91,10 +94,24 @@
                     </button>
                 </div>
 
+                {#if !aiChat.matchResult}
+                    <!-- Модель не віддала JSON. Показуємо відповідь як є: раніше на
+                         цьому місці підставлялися вигадані 85% і фейкові сильні
+                         сторони, тобто HR бачив цифру, якої ніхто не рахував. -->
+                    <div class="raw-panel" data-testid="ai-raw-analysis-panel">
+                        <h4>Відповідь AI</h4>
+                        <p>{aiChat.rawAnalysis}</p>
+                        <span class="raw-panel__note">
+                            Модель не повернула структуровану оцінку — показуємо текст без змін.
+                        </span>
+                    </div>
+                {:else}
                 <!-- Match Score Badge -->
                 <div class="score-card">
                     <div class="score-ring" style="--score-color: {getScoreColor(aiChat.matchResult.matchPercentage)}">
-                        <span class="score-value">{aiChat.matchResult.matchPercentage}%</span>
+                        <span class="score-value" data-testid="ai-match-score-value">
+                            {aiChat.matchResult.matchPercentage}%
+                        </span>
                         <span class="score-label">Match</span>
                     </div>
                     <div class="score-summary">
@@ -125,6 +142,7 @@
                         </div>
                     {/if}
                 </div>
+                {/if}
 
                 <!-- Interactive Chat thread -->
                 <div class="chat-section">
@@ -166,6 +184,7 @@
                         <input
                             type="text"
                             class="chat-input"
+                            data-testid="ai-chat-input"
                             placeholder="Поставити додаткове питання про досвід Аліка..."
                             bind:value={chatInput}
                             onkeydown={handleKeydown}
@@ -173,6 +192,7 @@
                         />
                         <button
                             class="send-btn"
+                            data-testid="ai-chat-send-btn"
                             onclick={handleSendMessage}
                             disabled={aiChat.isLoading || !chatInput.trim()}
                         >
@@ -470,14 +490,27 @@
         flex-wrap: wrap;
     }
 
-    .ai-badge {
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.4px;
-        background: var(--gradient);
-        color: white;
-        padding: 4px 10px;
-        border-radius: 8px;
-        white-space: nowrap;
+    /* Бейдж моделі переїхав у AiModelPicker.svelte — він тепер перемикач, а не
+       підпис, і стиль живе разом з ним. */
+
+    .raw-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 14px;
+        background: var(--surface-subtle);
+        border: 1px solid var(--border-color);
+    }
+
+    .raw-panel p {
+        margin: 0;
+        white-space: pre-wrap;
+        line-height: 1.5;
+    }
+
+    .raw-panel__note {
+        font-size: 0.78rem;
+        color: var(--text-secondary);
     }
 </style>
