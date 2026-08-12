@@ -526,7 +526,15 @@ function allowedOrigins(env: Env): string[] {
 
 function isAllowedOrigin(origin: string | null, allowed: string[]): boolean {
 	if (!origin) return false;
-	return allowed.includes(origin.toLowerCase());
+	const normalized = origin.toLowerCase();
+	if (allowed.includes(normalized)) return true;
+
+	// Будь-який порт локальної машини. Список фіксованих портів тут не працює:
+	// vite бере наступний вільний (5173 → 5174 → …), а IDE-харнеси й Playwright
+	// підставляють свій. Origin `localhost` може прийти тільки зі сторінки, яку
+	// розробник сам відкрив у себе, тому дозволяти всі порти безпечно — на відміну
+	// від публічних доменів, які лишаються строгим списком.
+	return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(normalized);
 }
 
 function corsHeaders(origin: string | null): Record<string, string> {

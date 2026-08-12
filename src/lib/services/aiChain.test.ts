@@ -39,8 +39,20 @@ describe("classifyStatus", () => {
 		expect(classifyStatus(403)).toBe("quota");
 		expect(classifyStatus(401)).toBe("auth");
 		expect(classifyStatus(400)).toBe("request");
-		expect(classifyStatus(404)).toBe("request");
+		expect(classifyStatus(422)).toBe("request");
 		expect(classifyStatus(503)).toBe("transient");
+	});
+
+	it("402 і 404 — про модель, а не про запит: ланцюжок мусить іти далі", () => {
+		// Реальний випадок: SambaNova gpt-oss-120b на безкоштовному плані віддає
+		// 402. Якби це вважалося нашою помилкою, запит помер би тут, замість того
+		// щоб за секунду отримати відповідь від Gemini.
+		expect(classifyStatus(402)).toBe("unavailable");
+		expect(classifyStatus(404)).toBe("unavailable");
+		expect(shouldTryNextProvider("unavailable")).toBe(true);
+		expect(isRetryableOnSameProvider("unavailable")).toBe(false);
+		// Довгий cooldown: платний тариф чи прибрана модель самі не з'являться.
+		expect(cooldownMsFor("unavailable", null)).toBeGreaterThan(cooldownMsFor("quota", null));
 	});
 
 	it("на зламаному запиті ланцюжок не палиться", () => {

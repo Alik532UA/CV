@@ -96,15 +96,9 @@ export const AI_PROVIDERS: readonly AiProviderEntry[] = [
 		baseUrl: GROQ_CHAT,
 		score: 74
 	},
-	{
-		id: "samba-gpt-oss-120b",
-		provider: "SambaNova",
-		model: "gpt-oss-120b",
-		wire: "openai",
-		keyName: "SAMBANOVA_API_KEY",
-		baseUrl: SAMBANOVA_CHAT,
-		score: 85
-	},
+	// SambaNova gpt-oss-120b (score 85 за замірами ADSS) свідомо відсутня: на
+	// безкоштовному плані вона віддає 402 «A payment method is required». Тримати
+	// її в реєстрі означало б витрачати спробу щоразу, як спливе cooldown.
 	{
 		id: "samba-gemma-4-31b",
 		provider: "SambaNova",

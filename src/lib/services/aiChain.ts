@@ -20,6 +20,13 @@ export type FailureKind =
 	| "quota"
 	/** Ключ невалідний (401). Наступні запити цим ключем теж не мають сенсу. */
 	| "auth"
+	/**
+	 * Модель існує, але не для цього ключа: 402 (потрібна картка — так віддає
+	 * SambaNova платні моделі на безкоштовному плані) або 404 (модель прибрали чи
+	 * назву змінили). Саме по собі це не полагодиться, але сусідній провайдер
+	 * відповість — тому довгий cooldown і одразу наступний у ланцюжку.
+	 */
+	| "unavailable"
 	/** Тимчасове: 5xx, обрив мережі, таймаут. Та сама модель варта ще спроби. */
 	| "transient"
 	/** Наша вина: 400/404/422. Інші моделі відповіли б так само. */
@@ -30,6 +37,7 @@ export type FailureKind =
 export const COOLDOWN_MS: Record<FailureKind, number> = {
 	quota: 30 * 60 * 1000,
 	auth: 6 * 60 * 60 * 1000,
+	unavailable: 12 * 60 * 60 * 1000,
 	transient: 60 * 1000,
 	request: 0,
 	unknown: 5 * 60 * 1000
@@ -41,7 +49,12 @@ export function classifyStatus(status: number): FailureKind {
 	// Для нас це однаково «зараз через цей ключ не працює».
 	if (status === 403) return "quota";
 	if (status === 401) return "auth";
-	if (status === 400 || status === 404 || status === 422) return "request";
+	// 402 і 404 — саме про цю модель, а не про наш запит. Тому НЕ "request":
+	// інакше платна модель у списку зупиняла б ланцюжок, і сусідній безкоштовний
+	// провайдер, який відповів би за секунду, навіть не пробувався (так сталося з
+	// SambaNova gpt-oss-120b, що на безкоштовному плані віддає 402).
+	if (status === 402 || status === 404) return "unavailable";
+	if (status === 400 || status === 422) return "request";
 	if (status >= 500) return "transient";
 	return "unknown";
 }

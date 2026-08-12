@@ -50,7 +50,6 @@ async function stubProxy(
 		'gemini-31-flash-lite',
 		'groq-gpt-oss-120b',
 		'groq-llama-33-70b',
-		'samba-gpt-oss-120b',
 		'samba-gemma-4-31b'
 	];
 
