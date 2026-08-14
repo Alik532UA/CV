@@ -169,14 +169,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: var(--transition);
         z-index: 10;
     }
 
     .close-btn:hover {
         background: var(--surface-hover);
         color: var(--accent-primary);
-        transform: rotate(90deg);
     }
 
     h3 {
