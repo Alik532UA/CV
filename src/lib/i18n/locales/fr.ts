@@ -254,5 +254,33 @@ export const fr: Translations = {
         genericTitle: "Une erreur est survenue",
         genericText: "La page n'a pas pu s'afficher. Recharger règle généralement le problème.",
         backHome: "Retour au CV"
+    },
+    ai: {
+        subtitle: "Collez le texte d'une offre ou son lien : l'IA la comparera à l'expérience d'Alik.",
+        jobPlaceholder: "Description du poste, ou un lien...",
+        analyze: "Analyser l'offre",
+        analyzing: "Analyse en cours...",
+        newAnalysis: "Nouvelle analyse",
+        newAnalysisHint: "Analyser une autre offre",
+        rawTitle: "Réponse de l'IA",
+        rawNote: "Le modèle n'a pas renvoyé d'évaluation structurée : voici son texte tel quel.",
+        summaryTitle: "Conclusion de l'IA",
+        matchLabel: "Correspondance",
+        strengths: "Points forts",
+        gaps: "Lacunes et questions",
+        followUpTitle: "Poser une question sur l'expérience d'Alik :",
+        chatPlaceholder: "Votre question sur l'expérience d'Alik...",
+        thinking: "L'IA réfléchit...",
+        modelTitle: "Modèle d'IA",
+        modelAuto: "Auto — le meilleur disponible",
+        bannerSub: "Vérifier si l'offre correspond au candidat",
+        open: "Ouvrir AI Job Matcher",
+        statusNoKey: "pas de clé",
+        statusCooldown: "limite ~{minutes} min",
+        statusAnswered: "a répondu",
+        statusReady: "prêt",
+        tooltipAnswered: "{model} ({provider}) a répondu. Cliquez pour en choisir un autre.",
+        tooltipWillTry: "{model} ({provider}) sera essayé en premier. Cliquez pour en choisir un autre.",
+        pinHint: "Le modèle choisi est essayé en premier. S'il atteint sa limite, la requête passe automatiquement au suivant."
     }
 };

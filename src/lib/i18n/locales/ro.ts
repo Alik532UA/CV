@@ -254,5 +254,33 @@ export const ro: Translations = {
         genericTitle: "Ceva nu a mers bine",
         genericText: "Pagina nu a putut fi afișată. De obicei ajută reîncărcarea.",
         backHome: "Înapoi la CV"
+    },
+    ai: {
+        subtitle: "Lipiți textul unui anunț sau un link către el — IA îl va compara cu experiența lui Alik.",
+        jobPlaceholder: "Descrierea postului sau un link către anunț...",
+        analyze: "Analizează anunțul",
+        analyzing: "Se analizează...",
+        newAnalysis: "Analiză nouă",
+        newAnalysisHint: "Analizează alt anunț",
+        rawTitle: "Răspunsul IA",
+        rawNote: "Modelul nu a returnat o evaluare structurată — afișăm textul nemodificat.",
+        summaryTitle: "Concluzia IA",
+        matchLabel: "Potrivire",
+        strengths: "Puncte forte",
+        gaps: "Lipsuri și întrebări",
+        followUpTitle: "Puneți o întrebare suplimentară despre experiența lui Alik:",
+        chatPlaceholder: "Întrebarea dumneavoastră despre experiența lui Alik...",
+        thinking: "IA se gândește...",
+        modelTitle: "Model IA",
+        modelAuto: "Automat — cel mai bun disponibil",
+        bannerSub: "Verificați cât de bine se potrivește anunțul cu candidatul",
+        open: "Deschide AI Job Matcher",
+        statusNoKey: "fără cheie",
+        statusCooldown: "limită ~{minutes} min",
+        statusAnswered: "a răspuns",
+        statusReady: "pregătit",
+        tooltipAnswered: "A răspuns {model} ({provider}). Faceți clic pentru a alege altul.",
+        tooltipWillTry: "Se va încerca mai întâi {model} ({provider}). Faceți clic pentru a alege altul.",
+        pinHint: "Modelul ales este încercat primul. Dacă își epuizează cota, cererea trece automat la următorul."
     }
 };

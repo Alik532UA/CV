@@ -2,6 +2,7 @@
     import BaseModal from "./BaseModal.svelte";
     import AiModelPicker from "./AiModelPicker.svelte";
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
+    import { t } from "$lib/controllers/I18nState.svelte";
     import { Sparkles, CheckCircle2, AlertCircle, Send, RotateCcw, Bot, User, Loader2 } from "lucide-svelte";
 
     let jobInput = $state("");
@@ -48,14 +49,12 @@
         {#if !aiChat.hasAnalysis}
             <!-- Step 1: Input Job Description / Link -->
             <div class="input-step">
-                <p class="subtitle">
-                    Вставте <strong>текст вакансії</strong> або <strong>посилання</strong> (DOU, Djinni, Work.ua тощо). AI проаналізує сумісність з Аліком.
-                </p>
+                <p class="subtitle">{t.ai.subtitle}</p>
 
                 <textarea
                     class="job-textarea"
                     data-testid="ai-job-input-textarea"
-                    placeholder="Вставте опис вакансії або URL посилання на вакансію..."
+                    placeholder={t.ai.jobPlaceholder}
                     bind:value={jobInput}
                     onkeydown={handleKeydown}
                     rows="6"
@@ -77,10 +76,10 @@
                 >
                     {#if aiChat.isLoading}
                         <Loader2 size={18} class="spin" />
-                        <span>Аналізуємо вакансію...</span>
+                        <span>{t.ai.analyzing}</span>
                     {:else}
                         <Sparkles size={18} />
-                        <span>Проаналізувати вакансію</span>
+                        <span>{t.ai.analyze}</span>
                     {/if}
                 </button>
             </div>
@@ -88,9 +87,9 @@
             <!-- Step 2: Visual Match Scorecard & Chat -->
             <div class="result-step">
                 <div class="header-actions">
-                    <button class="reset-btn" onclick={() => aiChat.reset()} title="Проаналізувати іншу вакансію">
+                    <button class="reset-btn" onclick={() => aiChat.reset()} title={t.ai.newAnalysisHint}>
                         <RotateCcw size={16} />
-                        <span>Новий аналіз</span>
+                        <span>{t.ai.newAnalysis}</span>
                     </button>
                 </div>
 
@@ -99,10 +98,10 @@
                          цьому місці підставлялися вигадані 85% і фейкові сильні
                          сторони, тобто HR бачив цифру, якої ніхто не рахував. -->
                     <div class="raw-panel" data-testid="ai-raw-analysis-panel">
-                        <h4>Відповідь AI</h4>
+                        <h4>{t.ai.rawTitle}</h4>
                         <p>{aiChat.rawAnalysis}</p>
                         <span class="raw-panel__note">
-                            Модель не повернула структуровану оцінку — показуємо текст без змін.
+                            {t.ai.rawNote}
                         </span>
                     </div>
                 {:else}
@@ -112,10 +111,10 @@
                         <span class="score-value" data-testid="ai-match-score-value">
                             {aiChat.matchResult.matchPercentage}%
                         </span>
-                        <span class="score-label">Match</span>
+                        <span class="score-label">{t.ai.matchLabel}</span>
                     </div>
                     <div class="score-summary">
-                        <h4>Висновок AI</h4>
+                        <h4>{t.ai.summaryTitle}</h4>
                         <p>{aiChat.matchResult.summary}</p>
                     </div>
                 </div>
@@ -123,7 +122,7 @@
                 <!-- Strengths & Gaps -->
                 <div class="details-grid">
                     <div class="detail-box strengths">
-                        <h5><CheckCircle2 size={16} color="#10b981" /> Сильні сторони</h5>
+                        <h5><CheckCircle2 size={16} color="#10b981" /> {t.ai.strengths}</h5>
                         <ul>
                             {#each aiChat.matchResult.keyStrengths as strength (strength)}
                                 <li>{strength}</li>
@@ -133,7 +132,7 @@
 
                     {#if aiChat.matchResult.potentialGaps?.length}
                         <div class="detail-box gaps">
-                            <h5><AlertCircle size={16} color="#f59e0b" /> Уточнення / Прогалини</h5>
+                            <h5><AlertCircle size={16} color="#f59e0b" /> {t.ai.gaps}</h5>
                             <ul>
                                 {#each aiChat.matchResult.potentialGaps as gap (gap)}
                                     <li>{gap}</li>
@@ -146,7 +145,7 @@
 
                 <!-- Interactive Chat thread -->
                 <div class="chat-section">
-                    <h5>Поставити додаткове запитання про досвід Аліка:</h5>
+                    <h5>{t.ai.followUpTitle}</h5>
 
                     <div class="messages-list">
                         {#each aiChat.history.slice(2) as msg, index (index)}
@@ -167,7 +166,7 @@
                                 <div class="avatar"><Bot size={14} /></div>
                                 <div class="content">
                                     <Loader2 size={16} class="spin" />
-                                    <span>AI думає...</span>
+                                    <span>{t.ai.thinking}</span>
                                 </div>
                             </div>
                         {/if}
@@ -185,7 +184,7 @@
                             type="text"
                             class="chat-input"
                             data-testid="ai-chat-input"
-                            placeholder="Поставити додаткове питання про досвід Аліка..."
+                            placeholder={t.ai.chatPlaceholder}
                             bind:value={chatInput}
                             onkeydown={handleKeydown}
                             disabled={aiChat.isLoading}

@@ -254,5 +254,33 @@ export const is: Translations = {
         genericTitle: "Eitthvað fór úrskeiðis",
         genericText: "Ekki tókst að birta síðuna. Yfirleitt dugar að endurhlaða.",
         backHome: "Til baka á ferilskrána"
+    },
+    ai: {
+        subtitle: "Límdu inn starfsauglýsingu eða tengil á hana — gervigreindin ber hana saman við reynslu Aliks.",
+        jobPlaceholder: "Starfslýsing eða tengill á auglýsinguna...",
+        analyze: "Greina auglýsinguna",
+        analyzing: "Greini...",
+        newAnalysis: "Ný greining",
+        newAnalysisHint: "Greina aðra auglýsingu",
+        rawTitle: "Svar gervigreindar",
+        rawNote: "Líkanið skilaði ekki skipulögðu mati — textinn birtist óbreyttur.",
+        summaryTitle: "Niðurstaða gervigreindar",
+        matchLabel: "Samsvörun",
+        strengths: "Styrkleikar",
+        gaps: "Eyður og spurningar",
+        followUpTitle: "Spurðu nánar um reynslu Aliks:",
+        chatPlaceholder: "Spurningin þín um reynslu Aliks...",
+        thinking: "Gervigreindin hugsar...",
+        modelTitle: "Gervigreindarlíkan",
+        modelAuto: "Sjálfvirkt — besta í boði",
+        bannerSub: "Athugaðu hversu vel auglýsingin passar við umsækjandann",
+        open: "Opna AI Job Matcher",
+        statusNoKey: "enginn lykill",
+        statusCooldown: "mörk ~{minutes} mín",
+        statusAnswered: "svaraði",
+        statusReady: "tilbúið",
+        tooltipAnswered: "{model} ({provider}) svaraði. Smelltu til að velja annað.",
+        tooltipWillTry: "{model} ({provider}) verður reynt fyrst. Smelltu til að velja annað.",
+        pinHint: "Valna líkanið er reynt fyrst. Klárist kvótinn heldur beiðnin sjálfkrafa áfram niður listann."
     }
 };

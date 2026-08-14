@@ -254,5 +254,33 @@ export const ca: Translations = {
         genericTitle: "Alguna cosa ha anat malament",
         genericText: "No s'ha pogut mostrar la pàgina. Normalment ajuda tornar a carregar.",
         backHome: "Torna al currículum"
+    },
+    ai: {
+        subtitle: "Enganxa el text d'una oferta o un enllaç: la IA la compararà amb l'experiència de l'Alik.",
+        jobPlaceholder: "Descripció de la posició o un enllaç a l'oferta...",
+        analyze: "Analitza l'oferta",
+        analyzing: "Analitzant...",
+        newAnalysis: "Nova anàlisi",
+        newAnalysisHint: "Analitza una altra oferta",
+        rawTitle: "Resposta de la IA",
+        rawNote: "El model no ha retornat una valoració estructurada: en mostrem el text sense canvis.",
+        summaryTitle: "Conclusió de la IA",
+        matchLabel: "Coincidència",
+        strengths: "Punts forts",
+        gaps: "Mancances i dubtes",
+        followUpTitle: "Fes una pregunta sobre l'experiència de l'Alik:",
+        chatPlaceholder: "La teva pregunta sobre l'experiència de l'Alik...",
+        thinking: "La IA està pensant...",
+        modelTitle: "Model d'IA",
+        modelAuto: "Automàtic — el millor disponible",
+        bannerSub: "Comprova si l'oferta encaixa amb el candidat",
+        open: "Obre AI Job Matcher",
+        statusNoKey: "sense clau",
+        statusCooldown: "límit ~{minutes} min",
+        statusAnswered: "ha respost",
+        statusReady: "a punt",
+        tooltipAnswered: "Ha respost {model} ({provider}). Fes clic per triar-ne un altre.",
+        tooltipWillTry: "Primer es provarà {model} ({provider}). Fes clic per triar-ne un altre.",
+        pinHint: "El model triat es prova primer. Si esgota la quota, la petició passa automàticament al següent."
     }
 };

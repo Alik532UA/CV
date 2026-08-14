@@ -261,5 +261,33 @@ export const yap: Translations = {
         genericTitle: "Bay ban'en nib kireb",
         genericText: "Dabiyog ni ngan dag fare page. Reload e ra ayuweg.",
         backHome: "Sul ko fare CV"
+    },
+    ai: {
+        subtitle: "Mu paste reb e job ad ara reb e link ngay — AI e ra taareb ngak e maruwel rok Alik.",
+        jobPlaceholder: "Job description ara reb e link...",
+        analyze: "Ngan yaliy fare job ad",
+        analyzing: "Be yaliy...",
+        newAnalysis: "Bin nib beech e analysis",
+        newAnalysisHint: "Ngan yaliy bugul e job ad",
+        rawTitle: "Fulweg ko AI",
+        rawNote: "Fare model e de pi'eg reb e score nib format — gamow be dag fare thin ni dariy e thil.",
+        summaryTitle: "Lungun e AI",
+        matchLabel: "Match",
+        strengths: "Gelngin",
+        gaps: "Tin nib m'ay nge deer",
+        followUpTitle: "Mu fith reb e deer u murung'agen e maruwel rok Alik:",
+        chatPlaceholder: "Fare deer rom u murung'agen e maruwel rok Alik...",
+        thinking: "AI be lemnag...",
+        modelTitle: "Model ko AI",
+        modelAuto: "Auto — bin nib fel' ni bay",
+        bannerSub: "Mu guy ko ke puluw fare job ad ngak fare candidate",
+        open: "Ngan bing AI Job Matcher",
+        statusNoKey: "dariy e key",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "ke fulweg",
+        statusReady: "ke m'agan",
+        tooltipAnswered: "{model} ({provider}) e ke fulweg. Mu klik ni ngam mel'eg beeni ku bugul.",
+        tooltipWillTry: "Ra som'on ni ngan guy {model} ({provider}). Mu klik ni ngam mel'eg beeni ku bugul.",
+        pinHint: "Fare model ni kam mel'eg e ra som'on ni ngan guy. Faanra ke mus e limit rok, ma fare request e ra yan ko bin ni bay tomuren."
     }
 };

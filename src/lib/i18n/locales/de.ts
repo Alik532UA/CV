@@ -254,5 +254,33 @@ export const de: Translations = {
         genericTitle: "Etwas ist schiefgelaufen",
         genericText: "Die Seite konnte nicht angezeigt werden. Neu laden hilft meistens.",
         backHome: "Zurück zum Lebenslauf"
+    },
+    ai: {
+        subtitle: "Stellenanzeige oder deren Link einfügen — die KI vergleicht sie mit Aliks Erfahrung.",
+        jobPlaceholder: "Stellenbeschreibung oder ein Link dazu...",
+        analyze: "Stellenanzeige analysieren",
+        analyzing: "Wird analysiert...",
+        newAnalysis: "Neue Analyse",
+        newAnalysisHint: "Andere Stellenanzeige analysieren",
+        rawTitle: "Antwort der KI",
+        rawNote: "Das Modell lieferte keine strukturierte Bewertung — hier der Text unverändert.",
+        summaryTitle: "Fazit der KI",
+        matchLabel: "Übereinstimmung",
+        strengths: "Stärken",
+        gaps: "Lücken und Rückfragen",
+        followUpTitle: "Rückfrage zu Aliks Erfahrung stellen:",
+        chatPlaceholder: "Ihre Frage zu Aliks Erfahrung...",
+        thinking: "Die KI denkt nach...",
+        modelTitle: "KI-Modell",
+        modelAuto: "Automatisch — bestes verfügbares",
+        bannerSub: "Prüfen, wie gut die Stelle zum Kandidaten passt",
+        open: "AI Job Matcher öffnen",
+        statusNoKey: "kein Schlüssel",
+        statusCooldown: "Limit ~{minutes} Min.",
+        statusAnswered: "hat geantwortet",
+        statusReady: "bereit",
+        tooltipAnswered: "{model} ({provider}) hat geantwortet. Klicken, um ein anderes zu wählen.",
+        tooltipWillTry: "{model} ({provider}) wird zuerst versucht. Klicken, um ein anderes zu wählen.",
+        pinHint: "Das gewählte Modell wird zuerst versucht. Ist sein Kontingent erschöpft, geht die Anfrage automatisch weiter."
     }
 };

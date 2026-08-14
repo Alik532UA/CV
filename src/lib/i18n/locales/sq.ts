@@ -254,5 +254,33 @@ export const sq: Translations = {
         genericTitle: "Diçka shkoi keq",
         genericText: "Faqja nuk mund të shfaqej. Zakonisht ndihmon ringarkimi.",
         backHome: "Kthehu te CV-ja"
+    },
+    ai: {
+        subtitle: "Ngjit tekstin e një shpalljeje pune ose një lidhje drejt saj — IA do ta krahasojë me përvojën e Alikut.",
+        jobPlaceholder: "Përshkrimi i pozicionit ose një lidhje drejt shpalljes...",
+        analyze: "Analizo shpalljen",
+        analyzing: "Po analizohet...",
+        newAnalysis: "Analizë e re",
+        newAnalysisHint: "Analizo një shpallje tjetër",
+        rawTitle: "Përgjigjja e IA-s",
+        rawNote: "Modeli nuk ktheu një vlerësim të strukturuar — po e shfaqim tekstin pa ndryshime.",
+        summaryTitle: "Përfundimi i IA-s",
+        matchLabel: "Përputhje",
+        strengths: "Pikat e forta",
+        gaps: "Mangësi dhe pyetje",
+        followUpTitle: "Bëni një pyetje shtesë për përvojën e Alikut:",
+        chatPlaceholder: "Pyetja juaj për përvojën e Alikut...",
+        thinking: "IA po mendon...",
+        modelTitle: "Modeli i IA-s",
+        modelAuto: "Automatik — më i miri i disponueshëm",
+        bannerSub: "Kontrolloni sa përputhet shpallja me kandidatin",
+        open: "Hap AI Job Matcher",
+        statusNoKey: "pa çelës",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "u përgjigj",
+        statusReady: "gati",
+        tooltipAnswered: "U përgjigj {model} ({provider}). Kliko për të zgjedhur një tjetër.",
+        tooltipWillTry: "Së pari do të provohet {model} ({provider}). Kliko për të zgjedhur një tjetër.",
+        pinHint: "Modeli i zgjedhur provohet i pari. Nëse mbaron kuotën, kërkesa kalon automatikisht te tjetri."
     }
 };

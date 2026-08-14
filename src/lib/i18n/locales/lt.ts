@@ -254,5 +254,33 @@ export const lt: Translations = {
         genericTitle: "Kažkas nepavyko",
         genericText: "Puslapio parodyti nepavyko. Paprastai padeda perkrauti.",
         backHome: "Atgal į CV"
+    },
+    ai: {
+        subtitle: "Įklijuok skelbimo tekstą arba nuorodą į jį — DI palygins jį su Aliko patirtimi.",
+        jobPlaceholder: "Pareigybės aprašymas arba nuoroda į skelbimą...",
+        analyze: "Analizuoti skelbimą",
+        analyzing: "Analizuojama...",
+        newAnalysis: "Nauja analizė",
+        newAnalysisHint: "Analizuoti kitą skelbimą",
+        rawTitle: "DI atsakymas",
+        rawNote: "Modelis nepateikė struktūruoto vertinimo — tekstą rodome nepakeistą.",
+        summaryTitle: "DI išvada",
+        matchLabel: "Atitikimas",
+        strengths: "Stipriosios pusės",
+        gaps: "Spragos ir klausimai",
+        followUpTitle: "Užduok papildomą klausimą apie Aliko patirtį:",
+        chatPlaceholder: "Tavo klausimas apie Aliko patirtį...",
+        thinking: "DI mąsto...",
+        modelTitle: "DI modelis",
+        modelAuto: "Automatiškai — geriausias prieinamas",
+        bannerSub: "Patikrink, kaip skelbimas atitinka kandidatą",
+        open: "Atidaryti AI Job Matcher",
+        statusNoKey: "nėra rakto",
+        statusCooldown: "limitas ~{minutes} min",
+        statusAnswered: "atsakė",
+        statusReady: "paruoštas",
+        tooltipAnswered: "Atsakė {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
+        tooltipWillTry: "Pirmiausia bus bandomas {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
+        pinHint: "Pasirinktas modelis bandomas pirmas. Jei baigsis jo kvota, užklausa automatiškai keliauja sąrašu toliau."
     }
 };

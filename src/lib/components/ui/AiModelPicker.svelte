@@ -1,6 +1,8 @@
 <script lang="ts">
     import { AI_PROVIDERS } from "$lib/config/aiProviders";
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
+    import { t } from "$lib/controllers/I18nState.svelte";
+    import { fill } from "$lib/i18n/fill";
     import { providerStatus } from "$lib/services/aiChain";
     import { Check, ChevronDown, Zap } from "lucide-svelte";
 
@@ -43,10 +45,14 @@
             }))
     );
 
+    // Через fill(), а не через склейку рядків: перекладачеві потрібне ціле
+    // речення з дірками, бо порядок слів у мовах різний і переставити три
+    // склеєні шматки він не може (I18N-v8 § 4.1).
     const badgeTitle = $derived(
-        aiChat.isModelConfirmed
-            ? `Відповіла модель ${aiChat.activeEntry.model} (${aiChat.activeEntry.provider}). Натисніть, щоб обрати іншу.`
-            : `Спочатку буде спроба ${aiChat.activeEntry.model} (${aiChat.activeEntry.provider}). Натисніть, щоб обрати іншу.`
+        fill(aiChat.isModelConfirmed ? t.ai.tooltipAnswered : t.ai.tooltipWillTry, {
+            model: aiChat.activeEntry.model,
+            provider: aiChat.activeEntry.provider
+        })
     );
 
     function choose(id: string | null) {
@@ -92,7 +98,7 @@
                 }
             }}
         >
-            <span class="ai-model-menu__title">Модель AI</span>
+            <span class="ai-model-menu__title">{t.ai.modelTitle}</span>
 
             <button
                 type="button"
@@ -104,7 +110,7 @@
                 onclick={() => choose(null)}
             >
                 <Zap size={14} />
-                <span class="ai-model-menu__label">Авто — найкраща доступна</span>
+                <span class="ai-model-menu__label">{t.ai.modelAuto}</span>
                 {#if aiChat.pinnedId === null}<Check size={14} />{/if}
             </button>
 
@@ -131,23 +137,20 @@
                         data-testid="ai-model-{entry.id}-status"
                     >
                         {#if status === "no-key"}
-                            немає ключа
+                            {t.ai.statusNoKey}
                         {:else if status === "cooling"}
-                            ліміт ~{minutesLeft} хв
+                            {fill(t.ai.statusCooldown, { minutes: minutesLeft })}
                         {:else if aiChat.activeModelId === entry.id}
-                            відповіла
+                            {t.ai.statusAnswered}
                         {:else}
-                            готова
+                            {t.ai.statusReady}
                         {/if}
                     </span>
                     {#if aiChat.pinnedId === entry.id}<Check size={14} />{/if}
                 </button>
             {/each}
 
-            <p class="ai-model-menu__hint">
-                Обрана модель пробується першою. Якщо в неї закінчаться ліміти — запит піде далі по
-                списку автоматично.
-            </p>
+            <p class="ai-model-menu__hint">{t.ai.pinHint}</p>
         </div>
     {/if}
 </div>

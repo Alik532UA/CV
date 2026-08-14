@@ -267,6 +267,38 @@ const TranslationSchema = z.object({
 		genericTitle: z.string(),
 		genericText: z.string(),
 		backHome: z.string()
+	}),
+	/**
+	 * AI Job Matcher. The product name itself is not here — "AI Job Matcher"
+	 * stays as it is in every locale, the same way the job titles in the hero do.
+	 */
+	ai: z.object({
+		subtitle: z.string(),
+		jobPlaceholder: z.string(),
+		analyze: z.string(),
+		analyzing: z.string(),
+		newAnalysis: z.string(),
+		newAnalysisHint: z.string(),
+		rawTitle: z.string(),
+		rawNote: z.string(),
+		summaryTitle: z.string(),
+		matchLabel: z.string(),
+		strengths: z.string(),
+		gaps: z.string(),
+		followUpTitle: z.string(),
+		chatPlaceholder: z.string(),
+		thinking: z.string(),
+		modelTitle: z.string(),
+		modelAuto: z.string(),
+		bannerSub: z.string(),
+		open: z.string(),
+		statusNoKey: z.string(),
+		statusCooldown: z.string(),
+		statusAnswered: z.string(),
+		statusReady: z.string(),
+		tooltipAnswered: z.string(),
+		tooltipWillTry: z.string(),
+		pinHint: z.string()
 	})
 });
 
@@ -328,5 +360,8 @@ export const t = {
 	},
 	get errorPage() {
 		return translations[language.current].errorPage;
+	},
+	get ai() {
+		return translations[language.current].ai;
 	}
 };

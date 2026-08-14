@@ -254,5 +254,33 @@ export const tr: Translations = {
         genericTitle: "Bir şeyler ters gitti",
         genericText: "Sayfa görüntülenemedi. Genellikle yeniden yüklemek yeterlidir.",
         backHome: "CV'ye dön"
+    },
+    ai: {
+        subtitle: "Bir iş ilanının metnini veya bağlantısını yapıştırın — yapay zekâ onu Alik'in deneyimiyle karşılaştıracak.",
+        jobPlaceholder: "Pozisyon açıklaması veya ilana bağlantı...",
+        analyze: "İlanı analiz et",
+        analyzing: "Analiz ediliyor...",
+        newAnalysis: "Yeni analiz",
+        newAnalysisHint: "Başka bir ilanı analiz et",
+        rawTitle: "Yapay zekâ yanıtı",
+        rawNote: "Model yapılandırılmış bir değerlendirme döndürmedi — metni olduğu gibi gösteriyoruz.",
+        summaryTitle: "Yapay zekâ sonucu",
+        matchLabel: "Uyum",
+        strengths: "Güçlü yönler",
+        gaps: "Eksikler ve sorular",
+        followUpTitle: "Alik'in deneyimi hakkında ek soru sorun:",
+        chatPlaceholder: "Alik'in deneyimi hakkındaki sorunuz...",
+        thinking: "Yapay zekâ düşünüyor...",
+        modelTitle: "Yapay zekâ modeli",
+        modelAuto: "Otomatik — mevcut en iyisi",
+        bannerSub: "İlanın adayla ne kadar uyuştuğunu görün",
+        open: "AI Job Matcher'ı aç",
+        statusNoKey: "anahtar yok",
+        statusCooldown: "limit ~{minutes} dk",
+        statusAnswered: "yanıtladı",
+        statusReady: "hazır",
+        tooltipAnswered: "{model} ({provider}) yanıtladı. Başkasını seçmek için tıklayın.",
+        tooltipWillTry: "Önce {model} ({provider}) denenecek. Başkasını seçmek için tıklayın.",
+        pinHint: "Seçilen model önce denenir. Kotası dolarsa istek otomatik olarak listedeki sıradakine geçer."
     }
 };

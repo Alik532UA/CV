@@ -254,5 +254,33 @@ export const ja: Translations = {
         genericTitle: "問題が発生しました",
         genericText: "ページを表示できませんでした。再読み込みで解決することがほとんどです。",
         backHome: "履歴書に戻る"
+    },
+    ai: {
+        subtitle: "求人情報の本文またはそのリンクを貼り付けてください。AI がアリックの経験と照合します。",
+        jobPlaceholder: "求人情報の本文、またはそのリンク...",
+        analyze: "求人を分析する",
+        analyzing: "分析中...",
+        newAnalysis: "新しい分析",
+        newAnalysisHint: "別の求人を分析する",
+        rawTitle: "AI の回答",
+        rawNote: "モデルが構造化された評価を返さなかったため、本文をそのまま表示しています。",
+        summaryTitle: "AI の判定",
+        matchLabel: "適合度",
+        strengths: "強み",
+        gaps: "不足点と確認事項",
+        followUpTitle: "アリックの経験について追加で質問する:",
+        chatPlaceholder: "アリックの経験についての質問...",
+        thinking: "AI が考えています...",
+        modelTitle: "AI モデル",
+        modelAuto: "自動 — 利用可能な最良のモデル",
+        bannerSub: "求人と候補者の適合度を確認する",
+        open: "AI Job Matcher を開く",
+        statusNoKey: "キーなし",
+        statusCooldown: "制限 約{minutes}分",
+        statusAnswered: "回答しました",
+        statusReady: "利用可能",
+        tooltipAnswered: "{model}（{provider}）が回答しました。クリックして別のモデルを選べます。",
+        tooltipWillTry: "最初に {model}（{provider}）を試します。クリックして別のモデルを選べます。",
+        pinHint: "選んだモデルが最初に試されます。上限に達した場合は、自動的にリストの次へ進みます。"
     }
 };

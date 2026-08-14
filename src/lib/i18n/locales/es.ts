@@ -254,5 +254,33 @@ export const es: Translations = {
         genericTitle: "Algo salió mal",
         genericText: "No se pudo mostrar la página. Recargar suele ayudar.",
         backHome: "Volver al currículum"
+    },
+    ai: {
+        subtitle: "Pega el texto de una oferta o un enlace a ella: la IA la comparará con la experiencia de Alik.",
+        jobPlaceholder: "Descripción de la oferta, o un enlace...",
+        analyze: "Analizar la oferta",
+        analyzing: "Analizando...",
+        newAnalysis: "Nuevo análisis",
+        newAnalysisHint: "Analizar otra oferta",
+        rawTitle: "Respuesta de la IA",
+        rawNote: "El modelo no devolvió una valoración estructurada: mostramos su texto sin cambios.",
+        summaryTitle: "Conclusión de la IA",
+        matchLabel: "Coincidencia",
+        strengths: "Puntos fuertes",
+        gaps: "Carencias y dudas",
+        followUpTitle: "Haz una pregunta sobre la experiencia de Alik:",
+        chatPlaceholder: "Tu pregunta sobre la experiencia de Alik...",
+        thinking: "La IA está pensando...",
+        modelTitle: "Modelo de IA",
+        modelAuto: "Automático: el mejor disponible",
+        bannerSub: "Comprueba si la oferta encaja con el candidato",
+        open: "Abrir AI Job Matcher",
+        statusNoKey: "sin clave",
+        statusCooldown: "límite ~{minutes} min",
+        statusAnswered: "respondió",
+        statusReady: "lista",
+        tooltipAnswered: "Respondió {model} ({provider}). Haz clic para elegir otro.",
+        tooltipWillTry: "Se probará primero {model} ({provider}). Haz clic para elegir otro.",
+        pinHint: "El modelo elegido se prueba primero. Si agota su cuota, la petición pasa al siguiente de la lista automáticamente."
     }
 };

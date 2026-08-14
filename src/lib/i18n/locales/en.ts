@@ -260,5 +260,33 @@ export const en: Translations = {
         genericTitle: "Something went wrong",
         genericText: "The page could not be displayed. Reloading usually helps.",
         backHome: "Back to the CV"
+    },
+    ai: {
+        subtitle: "Paste a job ad or a link to one — the AI will compare it with Alik's experience.",
+        jobPlaceholder: "Job description, or a link to it...",
+        analyze: "Analyze the job ad",
+        analyzing: "Analyzing...",
+        newAnalysis: "New analysis",
+        newAnalysisHint: "Analyze another job ad",
+        rawTitle: "AI answer",
+        rawNote: "The model gave no structured score — showing its text unchanged.",
+        summaryTitle: "AI verdict",
+        matchLabel: "Match",
+        strengths: "Strengths",
+        gaps: "Gaps and questions",
+        followUpTitle: "Ask a follow-up about Alik's experience:",
+        chatPlaceholder: "Your question about Alik's experience...",
+        thinking: "The AI is thinking...",
+        modelTitle: "AI model",
+        modelAuto: "Auto — best available",
+        bannerSub: "Check how a job ad matches this candidate",
+        open: "Open AI Job Matcher",
+        statusNoKey: "no key",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "answered",
+        statusReady: "ready",
+        tooltipAnswered: "{model} ({provider}) answered. Click to choose another.",
+        tooltipWillTry: "{model} ({provider}) will be tried first. Click to choose another.",
+        pinHint: "The chosen model is tried first. If it runs out of quota, the request moves down the list automatically."
     }
 };

@@ -256,5 +256,33 @@ export const crh: Translations = {
         genericTitle: "Bir şey yañlış ketti",
         genericText: "Sahifeni köstermek mümkün olmadı. Ekseriya yañıdan yükleme yardım ete.",
         backHome: "Rezümege qayt"
+    },
+    ai: {
+        subtitle: "Iş ilânınıñ metnini yaki oña bağlantını qoyuñız — AI onı Alikniñ tecribesinen kıyaslaycaq.",
+        jobPlaceholder: "Vazife tarifi yaki ilânğa bağlantı...",
+        analyze: "İlânnı tahlil et",
+        analyzing: "Tahlil etile...",
+        newAnalysis: "Yañı tahlil",
+        newAnalysisHint: "Başqa ilânnı tahlil et",
+        rawTitle: "AI cevabı",
+        rawNote: "Model tertipli baa bermedi — metinni deñiştirmeden köstermektemiz.",
+        summaryTitle: "AI netice",
+        matchLabel: "Uyğunlıq",
+        strengths: "Küçlü taraflar",
+        gaps: "Boşluqlar ve sualler",
+        followUpTitle: "Alikniñ tecribesi aqqında qoşma sual beriñiz:",
+        chatPlaceholder: "Alikniñ tecribesi aqqında sualiñiz...",
+        thinking: "AI tüşüne...",
+        modelTitle: "AI modeli",
+        modelAuto: "Avto — eñ yahşı mevcut",
+        bannerSub: "İlân namzetke ne qadar uyğan olğanını teşkeriñiz",
+        open: "AI Job Matcher aç",
+        statusNoKey: "anahtar yoq",
+        statusCooldown: "limit ~{minutes} daq.",
+        statusAnswered: "cevap berdi",
+        statusReady: "azır",
+        tooltipAnswered: "{model} ({provider}) cevap berdi. Başqasını saylamaq içün basıñız.",
+        tooltipWillTry: "Evelâ {model} ({provider}) sınalır. Başqasını saylamaq içün basıñız.",
+        pinHint: "Saylanğan model evelâ sınalır. Limitleri bitse, soraş özü-özünden listede kelecekke keçe."
     }
 };

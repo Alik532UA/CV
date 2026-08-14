@@ -257,5 +257,33 @@ export const he: Translations = {
         genericTitle: "משהו השתבש",
         genericText: "לא ניתן היה להציג את הדף. בדרך כלל רענון עוזר.",
         backHome: "חזרה לקורות החיים"
+    },
+    ai: {
+        subtitle: "הדביקו טקסט של מודעת דרושים או קישור אליה — ה-AI ישווה אותה לניסיון של אליק.",
+        jobPlaceholder: "תיאור המשרה או קישור למודעה...",
+        analyze: "נתח את המודעה",
+        analyzing: "מנתח...",
+        newAnalysis: "ניתוח חדש",
+        newAnalysisHint: "נתח מודעה אחרת",
+        rawTitle: "תשובת ה-AI",
+        rawNote: "המודל לא החזיר הערכה מובנית — מוצג הטקסט ללא שינוי.",
+        summaryTitle: "מסקנת ה-AI",
+        matchLabel: "התאמה",
+        strengths: "נקודות חוזק",
+        gaps: "פערים ושאלות",
+        followUpTitle: "שאלו שאלה נוספת על הניסיון של אליק:",
+        chatPlaceholder: "השאלה שלכם על הניסיון של אליק...",
+        thinking: "ה-AI חושב...",
+        modelTitle: "מודל AI",
+        modelAuto: "אוטומטי — הטוב ביותר הזמין",
+        bannerSub: "בדקו כמה המשרה מתאימה למועמד",
+        open: "פתח את AI Job Matcher",
+        statusNoKey: "אין מפתח",
+        statusCooldown: "מגבלה ~{minutes} דק'",
+        statusAnswered: "השיב",
+        statusReady: "מוכן",
+        tooltipAnswered: "{model} ({provider}) השיב. לחצו כדי לבחור אחר.",
+        tooltipWillTry: "תחילה ינוסה {model} ({provider}). לחצו כדי לבחור אחר.",
+        pinHint: "המודל שנבחר מנוסה ראשון. אם המכסה שלו נגמרת, הבקשה עוברת אוטומטית לבא בתור."
     }
 };

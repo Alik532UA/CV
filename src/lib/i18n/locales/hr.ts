@@ -254,5 +254,33 @@ export const hr: Translations = {
         genericTitle: "Nešto je pošlo po zlu",
         genericText: "Stranicu nije bilo moguće prikazati. Obično pomaže ponovno učitavanje.",
         backHome: "Natrag na životopis"
+    },
+    ai: {
+        subtitle: "Zalijepite tekst oglasa ili poveznicu na njega — AI će ga usporediti s Alikovim iskustvom.",
+        jobPlaceholder: "Opis radnog mjesta ili poveznica na oglas...",
+        analyze: "Analiziraj oglas",
+        analyzing: "Analiziram...",
+        newAnalysis: "Nova analiza",
+        newAnalysisHint: "Analiziraj drugi oglas",
+        rawTitle: "Odgovor AI-ja",
+        rawNote: "Model nije vratio strukturiranu ocjenu — prikazujemo tekst bez izmjena.",
+        summaryTitle: "Zaključak AI-ja",
+        matchLabel: "Podudarnost",
+        strengths: "Prednosti",
+        gaps: "Praznine i pitanja",
+        followUpTitle: "Postavite dodatno pitanje o Alikovu iskustvu:",
+        chatPlaceholder: "Vaše pitanje o Alikovu iskustvu...",
+        thinking: "AI razmišlja...",
+        modelTitle: "AI model",
+        modelAuto: "Automatski — najbolji dostupni",
+        bannerSub: "Provjerite koliko oglas odgovara kandidatu",
+        open: "Otvori AI Job Matcher",
+        statusNoKey: "nema ključa",
+        statusCooldown: "ograničenje ~{minutes} min",
+        statusAnswered: "odgovorio",
+        statusReady: "spreman",
+        tooltipAnswered: "Odgovorio je {model} ({provider}). Kliknite za odabir drugoga.",
+        tooltipWillTry: "Prvo će se pokušati {model} ({provider}). Kliknite za odabir drugoga.",
+        pinHint: "Odabrani model pokušava se prvi. Ako potroši kvotu, zahtjev automatski ide na sljedeći s popisa."
     }
 };

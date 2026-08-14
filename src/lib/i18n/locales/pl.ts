@@ -254,5 +254,33 @@ export const pl: Translations = {
         genericTitle: "Coś poszło nie tak",
         genericText: "Nie udało się wyświetlić strony. Zwykle pomaga odświeżenie.",
         backHome: "Powrót do CV"
+    },
+    ai: {
+        subtitle: "Wklej treść ogłoszenia lub link do niego — AI porówna je z doświadczeniem Alika.",
+        jobPlaceholder: "Opis stanowiska lub link do ogłoszenia...",
+        analyze: "Przeanalizuj ogłoszenie",
+        analyzing: "Analizowanie...",
+        newAnalysis: "Nowa analiza",
+        newAnalysisHint: "Przeanalizuj inne ogłoszenie",
+        rawTitle: "Odpowiedź AI",
+        rawNote: "Model nie zwrócił oceny w ustalonym formacie — pokazujemy tekst bez zmian.",
+        summaryTitle: "Wniosek AI",
+        matchLabel: "Dopasowanie",
+        strengths: "Mocne strony",
+        gaps: "Braki i pytania",
+        followUpTitle: "Zadaj dodatkowe pytanie o doświadczenie Alika:",
+        chatPlaceholder: "Twoje pytanie o doświadczenie Alika...",
+        thinking: "AI myśli...",
+        modelTitle: "Model AI",
+        modelAuto: "Automatycznie — najlepszy dostępny",
+        bannerSub: "Sprawdź, jak ogłoszenie pasuje do kandydata",
+        open: "Otwórz AI Job Matcher",
+        statusNoKey: "brak klucza",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "odpowiedział",
+        statusReady: "gotowy",
+        tooltipAnswered: "Odpowiedział {model} ({provider}). Kliknij, aby wybrać inny.",
+        tooltipWillTry: "Najpierw zostanie użyty {model} ({provider}). Kliknij, aby wybrać inny.",
+        pinHint: "Wybrany model jest próbowany jako pierwszy. Gdy wyczerpie limit, żądanie automatycznie trafia do następnego."
     }
 };

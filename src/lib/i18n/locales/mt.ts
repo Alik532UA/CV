@@ -254,5 +254,33 @@ export const mt: Translations = {
         genericTitle: "Xi ħaġa marret ħażin",
         genericText: "Il-paġna ma setgħetx tintwera. Ġeneralment jgħin li terġa' ttellagħha.",
         backHome: "Lura għas-CV"
+    },
+    ai: {
+        subtitle: "Waħħal it-test ta' reklam tax-xogħol jew link għalih — l-IA tqabblu mal-esperjenza ta' Alik.",
+        jobPlaceholder: "Deskrizzjoni tal-pożizzjoni jew link għar-reklam...",
+        analyze: "Analizza r-reklam",
+        analyzing: "Qed nanalizza...",
+        newAnalysis: "Analiżi ġdida",
+        newAnalysisHint: "Analizza reklam ieħor",
+        rawTitle: "Tweġiba tal-IA",
+        rawNote: "Il-mudell ma tax valutazzjoni strutturata — qed nuru t-test kif inhu.",
+        summaryTitle: "Konklużjoni tal-IA",
+        matchLabel: "Qbil",
+        strengths: "Punti b'saħħithom",
+        gaps: "Nuqqasijiet u mistoqsijiet",
+        followUpTitle: "Staqsi mistoqsija oħra dwar l-esperjenza ta' Alik:",
+        chatPlaceholder: "Il-mistoqsija tiegħek dwar l-esperjenza ta' Alik...",
+        thinking: "L-IA qed taħseb...",
+        modelTitle: "Mudell tal-IA",
+        modelAuto: "Awtomatiku — l-aħjar disponibbli",
+        bannerSub: "Ara kemm ir-reklam jaqbel mal-kandidat",
+        open: "Iftaħ AI Job Matcher",
+        statusNoKey: "bla ċavetta",
+        statusCooldown: "limitu ~{minutes} min",
+        statusAnswered: "wieġeb",
+        statusReady: "lest",
+        tooltipAnswered: "Wieġeb {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
+        tooltipWillTry: "L-ewwel jiġi ppruvat {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
+        pinHint: "Il-mudell magħżul jiġi ppruvat l-ewwel. Jekk jispiċċalu l-kwota, it-talba tgħaddi awtomatikament għal ta' warajh."
     }
 };

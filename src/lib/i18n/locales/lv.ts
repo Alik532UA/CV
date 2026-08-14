@@ -254,5 +254,33 @@ export const lv: Translations = {
         genericTitle: "Kaut kas nogāja greizi",
         genericText: "Lapu neizdevās parādīt. Parasti palīdz pārlādēšana.",
         backHome: "Atpakaļ uz CV"
+    },
+    ai: {
+        subtitle: "Ielīmē sludinājuma tekstu vai saiti uz to — MI to salīdzinās ar Alika pieredzi.",
+        jobPlaceholder: "Amata apraksts vai saite uz sludinājumu...",
+        analyze: "Analizēt sludinājumu",
+        analyzing: "Analizē...",
+        newAnalysis: "Jauna analīze",
+        newAnalysisHint: "Analizēt citu sludinājumu",
+        rawTitle: "MI atbilde",
+        rawNote: "Modelis nesniedza strukturētu vērtējumu — tekstu rādām nemainītu.",
+        summaryTitle: "MI secinājums",
+        matchLabel: "Atbilstība",
+        strengths: "Stiprās puses",
+        gaps: "Nepilnības un jautājumi",
+        followUpTitle: "Uzdod papildu jautājumu par Alika pieredzi:",
+        chatPlaceholder: "Tavs jautājums par Alika pieredzi...",
+        thinking: "MI domā...",
+        modelTitle: "MI modelis",
+        modelAuto: "Automātiski — labākais pieejamais",
+        bannerSub: "Pārbaudi, cik labi sludinājums atbilst kandidātam",
+        open: "Atvērt AI Job Matcher",
+        statusNoKey: "nav atslēgas",
+        statusCooldown: "limits ~{minutes} min",
+        statusAnswered: "atbildēja",
+        statusReady: "gatavs",
+        tooltipAnswered: "Atbildēja {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
+        tooltipWillTry: "Vispirms tiks mēģināts {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
+        pinHint: "Izvēlētais modelis tiek mēģināts pirmais. Ja tam beidzas kvota, pieprasījums automātiski pāriet uz nākamo."
     }
 };

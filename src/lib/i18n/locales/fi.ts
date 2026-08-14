@@ -254,5 +254,33 @@ export const fi: Translations = {
         genericTitle: "Jokin meni pieleen",
         genericText: "Sivua ei voitu näyttää. Uudelleenlataus auttaa yleensä.",
         backHome: "Takaisin ansioluetteloon"
+    },
+    ai: {
+        subtitle: "Liitä työpaikkailmoitus tai linkki siihen — tekoäly vertaa sitä Alikin kokemukseen.",
+        jobPlaceholder: "Tehtävänkuvaus tai linkki ilmoitukseen...",
+        analyze: "Analysoi ilmoitus",
+        analyzing: "Analysoidaan...",
+        newAnalysis: "Uusi analyysi",
+        newAnalysisHint: "Analysoi toinen ilmoitus",
+        rawTitle: "Tekoälyn vastaus",
+        rawNote: "Malli ei palauttanut jäsenneltyä arviota — teksti näytetään sellaisenaan.",
+        summaryTitle: "Tekoälyn johtopäätös",
+        matchLabel: "Osuvuus",
+        strengths: "Vahvuudet",
+        gaps: "Puutteet ja kysymykset",
+        followUpTitle: "Kysy lisää Alikin kokemuksesta:",
+        chatPlaceholder: "Kysymyksesi Alikin kokemuksesta...",
+        thinking: "Tekoäly miettii...",
+        modelTitle: "Tekoälymalli",
+        modelAuto: "Automaattinen — paras saatavilla",
+        bannerSub: "Tarkista, miten hyvin ilmoitus sopii hakijalle",
+        open: "Avaa AI Job Matcher",
+        statusNoKey: "ei avainta",
+        statusCooldown: "raja ~{minutes} min",
+        statusAnswered: "vastasi",
+        statusReady: "valmis",
+        tooltipAnswered: "{model} ({provider}) vastasi. Napsauta valitaksesi toisen.",
+        tooltipWillTry: "{model} ({provider}) kokeillaan ensin. Napsauta valitaksesi toisen.",
+        pinHint: "Valittua mallia kokeillaan ensin. Jos kiintiö loppuu, pyyntö siirtyy automaattisesti listalla seuraavaan."
     }
 };

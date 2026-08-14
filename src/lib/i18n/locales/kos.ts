@@ -261,5 +261,33 @@ export const kos: Translations = {
         genericTitle: "Oasr ma tafongla",
         genericText: "Tia ku in akkalemyeyuk page sac. Reload uh ac kasru.",
         backHome: "Folokla nu ke CV"
+    },
+    ai: {
+        subtitle: "Filisya sie job ad ku sie link nu kac — AI ac lumwacni nu ke orekma lal Alik.",
+        jobPlaceholder: "Job description ku sie link...",
+        analyze: "Lohng job ad sac",
+        analyzing: "Lohng...",
+        newAnalysis: "Analysis sasu",
+        newAnalysisHint: "Lohng sie pac job ad",
+        rawTitle: "Top lun AI",
+        rawNote: "Model sac tia sang sie score ke format — kut akkalemye text sac oana ma oan.",
+        summaryTitle: "Nunak lun AI",
+        matchLabel: "Match",
+        strengths: "Ku",
+        gaps: "Ma wangin ac mwe siyuk",
+        followUpTitle: "Siyuk pac ke orekma lal Alik:",
+        chatPlaceholder: "Mwe siyuk lom ke orekma lal Alik...",
+        thinking: "AI el nunku...",
+        modelTitle: "Model AI",
+        modelAuto: "Auto — ma wo emeet ma oasr",
+        bannerSub: "Liye lah job ad sac fal nu sin candidate",
+        open: "Ikasla AI Job Matcher",
+        statusNoKey: "wangin key",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "topuk tari",
+        statusReady: "akola",
+        tooltipAnswered: "{model} ({provider}) topuk tari. Klik in sulela sie pac.",
+        tooltipWillTry: "Ac srike meet {model} ({provider}). Klik in sulela sie pac.",
+        pinHint: "Model se kom sulela ac srikeyuk meet. Fin safla limit lal, siyuk sac ac som nu ke ma tok."
     }
 };

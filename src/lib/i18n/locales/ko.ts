@@ -254,5 +254,33 @@ export const ko: Translations = {
         genericTitle: "문제가 발생했습니다",
         genericText: "페이지를 표시할 수 없습니다. 새로 고침하면 대개 해결됩니다.",
         backHome: "이력서로 돌아가기"
+    },
+    ai: {
+        subtitle: "채용 공고 내용이나 링크를 붙여 넣으세요. AI가 알릭의 경력과 비교합니다.",
+        jobPlaceholder: "채용 공고 내용 또는 링크...",
+        analyze: "공고 분석하기",
+        analyzing: "분석 중...",
+        newAnalysis: "새 분석",
+        newAnalysisHint: "다른 공고 분석하기",
+        rawTitle: "AI 답변",
+        rawNote: "모델이 정해진 형식의 평가를 반환하지 않아 원문을 그대로 표시합니다.",
+        summaryTitle: "AI 결론",
+        matchLabel: "적합도",
+        strengths: "강점",
+        gaps: "부족한 점과 확인 사항",
+        followUpTitle: "알릭의 경력에 대해 추가로 질문하기:",
+        chatPlaceholder: "알릭의 경력에 대한 질문...",
+        thinking: "AI가 생각하는 중...",
+        modelTitle: "AI 모델",
+        modelAuto: "자동 — 사용 가능한 최적 모델",
+        bannerSub: "공고가 후보자와 얼마나 맞는지 확인하기",
+        open: "AI Job Matcher 열기",
+        statusNoKey: "키 없음",
+        statusCooldown: "제한 약 {minutes}분",
+        statusAnswered: "응답함",
+        statusReady: "사용 가능",
+        tooltipAnswered: "{model}({provider})이(가) 응답했습니다. 클릭하여 다른 모델을 선택하세요.",
+        tooltipWillTry: "먼저 {model}({provider})을(를) 시도합니다. 클릭하여 다른 모델을 선택하세요.",
+        pinHint: "선택한 모델을 먼저 시도합니다. 한도를 모두 쓰면 요청은 자동으로 목록의 다음 모델로 넘어갑니다."
     }
 };

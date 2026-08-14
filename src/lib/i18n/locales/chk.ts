@@ -261,5 +261,33 @@ export const chk: Translations = {
         genericTitle: "Mi wor eú osukosuk",
         genericText: "Ese tongeni pwáraatá ewe page. Reload epwe álisi.",
         backHome: "Liwiniti ewe CV"
+    },
+    ai: {
+        subtitle: "Paste ewe job ad are ewe link ngeni — AI epwe alolo ngeni ekkewe experience an Alik.",
+        jobPlaceholder: "Job description are ewe link...",
+        analyze: "Alolo ewe job ad",
+        analyzing: "Mi alolo...",
+        newAnalysis: "Analysis sefo",
+        newAnalysisHint: "Alolo pwan eu job ad",
+        rawTitle: "Poluwan AI",
+        rawNote: "Ewe model ese ngeni score mi wor format — sipwe pwarata ewe text ren usun chok.",
+        summaryTitle: "Kapasen AI",
+        matchLabel: "Match",
+        strengths: "Pochokkul",
+        gaps: "Ekkewe mi nom me kapas eis",
+        followUpTitle: "Kapas eis pwan ussun experience an Alik:",
+        chatPlaceholder: "Om kapas eis ussun experience an Alik...",
+        thinking: "AI mi ekiek...",
+        modelTitle: "Model AI",
+        modelAuto: "Auto — ewe mi murinno seni meinisin",
+        bannerSub: "Nengeni ika ewe job ad a fich ngeni ewe candidate",
+        open: "Suuki AI Job Matcher",
+        statusNoKey: "ese wor key",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "a poluweni",
+        statusReady: "mi mmolnetá",
+        tooltipAnswered: "{model} ({provider}) a poluweni. Click ika kopwe filata pwan eu.",
+        tooltipWillTry: "Epwe akkomw sotuni {model} ({provider}). Click ika kopwe filata pwan eu.",
+        pinHint: "Ewe model ka filata epwe akkomw sotun. Ika a nomw an limit, ewe request epwe feino ngeni ewe mwirin."
     }
 };

@@ -254,5 +254,33 @@ export const ga: Translations = {
         genericTitle: "Chuaigh rud éigin amú",
         genericText: "Níorbh fhéidir an leathanach a thaispeáint. De ghnáth is leor é a athlódáil.",
         backHome: "Ar ais chuig an CV"
+    },
+    ai: {
+        subtitle: "Greamaigh téacs fógra poist nó nasc chuige — déanfaidh an IS comparáid le taithí Alik.",
+        jobPlaceholder: "Cur síos ar an bpost, nó nasc chuige...",
+        analyze: "Déan anailís ar an bhfógra",
+        analyzing: "Á anailísiú...",
+        newAnalysis: "Anailís nua",
+        newAnalysisHint: "Déan anailís ar fhógra eile",
+        rawTitle: "Freagra an IS",
+        rawNote: "Níor thug an tsamhail measúnú struchtúrtha — seo an téacs gan athrú.",
+        summaryTitle: "Conclúid an IS",
+        matchLabel: "Meaitseáil",
+        strengths: "Láidreachtaí",
+        gaps: "Bearnaí agus ceisteanna",
+        followUpTitle: "Cuir ceist bhreise faoi thaithí Alik:",
+        chatPlaceholder: "Do cheist faoi thaithí Alik...",
+        thinking: "Tá an IS ag machnamh...",
+        modelTitle: "Samhail IS",
+        modelAuto: "Uathoibríoch — an ceann is fearr atá ar fáil",
+        bannerSub: "Féach cé chomh maith is a oireann an post don iarrthóir",
+        open: "Oscail AI Job Matcher",
+        statusNoKey: "gan eochair",
+        statusCooldown: "teorainn ~{minutes} nóim",
+        statusAnswered: "d'fhreagair",
+        statusReady: "réidh",
+        tooltipAnswered: "D'fhreagair {model} ({provider}). Cliceáil chun ceann eile a roghnú.",
+        tooltipWillTry: "Bainfear triail as {model} ({provider}) ar dtús. Cliceáil chun ceann eile a roghnú.",
+        pinHint: "Bainfear triail as an tsamhail roghnaithe ar dtús. Má ídítear a cuóta, leanann an t-iarratas ar aghaidh go huathoibríoch."
     }
 };

@@ -138,7 +138,7 @@
                      була б невалідною розміткою. Перемикати модель — у самій модалці. -->
                 <span class="ai-badge">{aiChat.activeEntry.model}</span>
             </div>
-            <p class="ai-banner-sub">Перевірити сумісність вакансії з кандидатом</p>
+            <p class="ai-banner-sub">{t.ai.bannerSub}</p>
         </button>
     </div>
 </BaseModal>

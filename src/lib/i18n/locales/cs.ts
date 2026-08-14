@@ -254,5 +254,33 @@ export const cs: Translations = {
         genericTitle: "Něco se pokazilo",
         genericText: "Stránku se nepodařilo zobrazit. Obvykle pomůže znovu načíst.",
         backHome: "Zpět na životopis"
+    },
+    ai: {
+        subtitle: "Vložte text inzerátu nebo odkaz na něj — AI ho porovná s Alikovými zkušenostmi.",
+        jobPlaceholder: "Popis pozice nebo odkaz na inzerát...",
+        analyze: "Analyzovat inzerát",
+        analyzing: "Analyzuji...",
+        newAnalysis: "Nová analýza",
+        newAnalysisHint: "Analyzovat jiný inzerát",
+        rawTitle: "Odpověď AI",
+        rawNote: "Model nevrátil strukturované hodnocení — zobrazujeme text beze změn.",
+        summaryTitle: "Závěr AI",
+        matchLabel: "Shoda",
+        strengths: "Silné stránky",
+        gaps: "Mezery a dotazy",
+        followUpTitle: "Zeptejte se doplňkově na Alikovy zkušenosti:",
+        chatPlaceholder: "Váš dotaz na Alikovy zkušenosti...",
+        thinking: "AI přemýšlí...",
+        modelTitle: "Model AI",
+        modelAuto: "Automaticky — nejlepší dostupný",
+        bannerSub: "Ověřte, jak inzerát odpovídá kandidátovi",
+        open: "Otevřít AI Job Matcher",
+        statusNoKey: "bez klíče",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "odpověděl",
+        statusReady: "připraven",
+        tooltipAnswered: "Odpověděl {model} ({provider}). Klepnutím vyberete jiný.",
+        tooltipWillTry: "Nejdřív se zkusí {model} ({provider}). Klepnutím vyberete jiný.",
+        pinHint: "Vybraný model se zkouší jako první. Když vyčerpá limit, požadavek automaticky pokračuje dalším."
     }
 };

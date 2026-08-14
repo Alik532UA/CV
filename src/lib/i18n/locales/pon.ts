@@ -261,5 +261,33 @@ export const pon: Translations = {
         genericTitle: "Mie mehkot sapwung",
         genericText: "Sohte kak kasalehda page-o. Reload kin sewese.",
         backHome: "Pwurala ni CV"
+    },
+    ai: {
+        subtitle: "Kihdi oaralap en doadoahk de link ong — AI pahn karasapene ong sapwellimen Alik experience.",
+        jobPlaceholder: "Job description de link...",
+        analyze: "Kasawih oaralap",
+        analyzing: "Kasawih...",
+        newAnalysis: "Analysis kapw",
+        newAnalysisHint: "Kasawih ehu oaralap tohrohr",
+        rawTitle: "Sapeng en AI",
+        rawNote: "Model-o sohte kihda score ni format — se kasalehda text-o duwehte.",
+        summaryTitle: "Kaimwiseklahn AI",
+        matchLabel: "Match",
+        strengths: "Kehl kan",
+        gaps: "Me sohte mie oh peidek kan",
+        followUpTitle: "Idek pil ehu duwen sapwellimen Alik experience:",
+        chatPlaceholder: "Noumw peidek duwen sapwellimen Alik experience...",
+        thinking: "AI kin medemedewe...",
+        modelTitle: "Model AI",
+        modelAuto: "Auto — me keieu mwahu me mie",
+        bannerSub: "Kilang ia uwen oaralap-o eh konehng candidate-o",
+        open: "Ritingada AI Job Matcher",
+        statusNoKey: "sohte key",
+        statusCooldown: "limit ~{minutes} min",
+        statusAnswered: "sapengki",
+        statusReady: "onopadahr",
+        tooltipAnswered: "{model} ({provider}) sapengki. Klik pwehn pilada emen tohrohr.",
+        tooltipWillTry: "E pahn tepin song {model} ({provider}). Klik pwehn pilada emen tohrohr.",
+        pinHint: "Model me ke pilada pahn tepin song. Ma eh limit imwisekla, peidek pahn kohla ni me kohdo."
     }
 };

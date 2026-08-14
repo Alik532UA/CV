@@ -254,5 +254,33 @@ export const no: Translations = {
         genericTitle: "Noe gikk galt",
         genericText: "Siden kunne ikke vises. Å laste inn på nytt hjelper som regel.",
         backHome: "Tilbake til CV-en"
+    },
+    ai: {
+        subtitle: "Lim inn en stillingsannonse eller en lenke til den — KI-en sammenligner den med Aliks erfaring.",
+        jobPlaceholder: "Stillingsbeskrivelse eller en lenke til annonsen...",
+        analyze: "Analyser annonsen",
+        analyzing: "Analyserer...",
+        newAnalysis: "Ny analyse",
+        newAnalysisHint: "Analyser en annen annonse",
+        rawTitle: "KI-ens svar",
+        rawNote: "Modellen ga ingen strukturert vurdering — teksten vises uendret.",
+        summaryTitle: "KI-ens konklusjon",
+        matchLabel: "Treff",
+        strengths: "Styrker",
+        gaps: "Hull og spørsmål",
+        followUpTitle: "Still et oppfølgingsspørsmål om Aliks erfaring:",
+        chatPlaceholder: "Ditt spørsmål om Aliks erfaring...",
+        thinking: "KI-en tenker...",
+        modelTitle: "KI-modell",
+        modelAuto: "Auto — beste tilgjengelige",
+        bannerSub: "Se hvor godt annonsen passer kandidaten",
+        open: "Åpne AI Job Matcher",
+        statusNoKey: "ingen nøkkel",
+        statusCooldown: "grense ~{minutes} min",
+        statusAnswered: "svarte",
+        statusReady: "klar",
+        tooltipAnswered: "{model} ({provider}) svarte. Klikk for å velge en annen.",
+        tooltipWillTry: "{model} ({provider}) prøves først. Klikk for å velge en annen.",
+        pinHint: "Den valgte modellen prøves først. Går kvoten tom, går forespørselen automatisk videre i lista."
     }
 };

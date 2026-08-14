@@ -254,5 +254,33 @@ export const et: Translations = {
         genericTitle: "Midagi läks valesti",
         genericText: "Lehte ei õnnestunud kuvada. Tavaliselt aitab uuesti laadimine.",
         backHome: "Tagasi CV juurde"
+    },
+    ai: {
+        subtitle: "Kleebi tööpakkumise tekst või link sellele — tehisintellekt võrdleb seda Aliki kogemusega.",
+        jobPlaceholder: "Ametikoha kirjeldus või link kuulutusele...",
+        analyze: "Analüüsi kuulutust",
+        analyzing: "Analüüsin...",
+        newAnalysis: "Uus analüüs",
+        newAnalysisHint: "Analüüsi teist kuulutust",
+        rawTitle: "Tehisintellekti vastus",
+        rawNote: "Mudel ei andnud struktureeritud hinnangut — tekst on kuvatud muutmata kujul.",
+        summaryTitle: "Tehisintellekti järeldus",
+        matchLabel: "Vastavus",
+        strengths: "Tugevused",
+        gaps: "Lüngad ja küsimused",
+        followUpTitle: "Küsi lisaks Aliki kogemuse kohta:",
+        chatPlaceholder: "Sinu küsimus Aliki kogemuse kohta...",
+        thinking: "Tehisintellekt mõtleb...",
+        modelTitle: "Tehisintellekti mudel",
+        modelAuto: "Automaatne — parim saadaolev",
+        bannerSub: "Vaata, kui hästi kuulutus kandidaadiga sobib",
+        open: "Ava AI Job Matcher",
+        statusNoKey: "võtit pole",
+        statusCooldown: "limiit ~{minutes} min",
+        statusAnswered: "vastas",
+        statusReady: "valmis",
+        tooltipAnswered: "Vastas {model} ({provider}). Klõpsa teise valimiseks.",
+        tooltipWillTry: "Kõigepealt proovitakse {model} ({provider}). Klõpsa teise valimiseks.",
+        pinHint: "Valitud mudelit proovitakse esimesena. Kui kvoot saab otsa, liigub päring automaatselt loendis edasi."
     }
 };

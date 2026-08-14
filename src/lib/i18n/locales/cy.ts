@@ -254,5 +254,33 @@ export const cy: Translations = {
         genericTitle: "Aeth rhywbeth o'i le",
         genericText: "Nid oedd modd dangos y dudalen. Fel arfer mae ail-lwytho yn helpu.",
         backHome: "Yn ôl i'r CV"
+    },
+    ai: {
+        subtitle: "Gludwch destun hysbyseb swydd neu ddolen ato — bydd y DA yn ei gymharu â phrofiad Alik.",
+        jobPlaceholder: "Disgrifiad o'r swydd, neu ddolen ato...",
+        analyze: "Dadansoddi'r hysbyseb",
+        analyzing: "Wrthi'n dadansoddi...",
+        newAnalysis: "Dadansoddiad newydd",
+        newAnalysisHint: "Dadansoddi hysbyseb arall",
+        rawTitle: "Ateb y DA",
+        rawNote: "Ni roddodd y model sgôr strwythuredig — dyma'r testun heb ei newid.",
+        summaryTitle: "Casgliad y DA",
+        matchLabel: "Cydweddiad",
+        strengths: "Cryfderau",
+        gaps: "Bylchau a chwestiynau",
+        followUpTitle: "Gofynnwch gwestiwn pellach am brofiad Alik:",
+        chatPlaceholder: "Eich cwestiwn am brofiad Alik...",
+        thinking: "Mae'r DA yn meddwl...",
+        modelTitle: "Model DA",
+        modelAuto: "Awtomatig — y gorau sydd ar gael",
+        bannerSub: "Gwiriwch pa mor dda mae'r swydd yn gweddu i'r ymgeisydd",
+        open: "Agor AI Job Matcher",
+        statusNoKey: "dim allwedd",
+        statusCooldown: "terfyn ~{minutes} mun",
+        statusAnswered: "atebodd",
+        statusReady: "barod",
+        tooltipAnswered: "Atebodd {model} ({provider}). Cliciwch i ddewis un arall.",
+        tooltipWillTry: "Bydd {model} ({provider}) yn cael ei drio gyntaf. Cliciwch i ddewis un arall.",
+        pinHint: "Caiff y model a ddewiswyd ei drio gyntaf. Os yw'n defnyddio ei gwota, mae'r cais yn symud ymlaen yn awtomatig."
     }
 };

@@ -254,5 +254,33 @@ export const sv: Translations = {
         genericTitle: "Något gick fel",
         genericText: "Sidan kunde inte visas. Att ladda om brukar hjälpa.",
         backHome: "Tillbaka till CV:t"
+    },
+    ai: {
+        subtitle: "Klistra in en jobbannons eller en länk till den — AI:n jämför den med Aliks erfarenhet.",
+        jobPlaceholder: "Tjänstebeskrivning eller en länk till annonsen...",
+        analyze: "Analysera annonsen",
+        analyzing: "Analyserar...",
+        newAnalysis: "Ny analys",
+        newAnalysisHint: "Analysera en annan annons",
+        rawTitle: "AI:ns svar",
+        rawNote: "Modellen gav ingen strukturerad bedömning — texten visas oförändrad.",
+        summaryTitle: "AI:ns slutsats",
+        matchLabel: "Träff",
+        strengths: "Styrkor",
+        gaps: "Luckor och frågor",
+        followUpTitle: "Ställ en följdfråga om Aliks erfarenhet:",
+        chatPlaceholder: "Din fråga om Aliks erfarenhet...",
+        thinking: "AI:n tänker...",
+        modelTitle: "AI-modell",
+        modelAuto: "Auto — bästa tillgängliga",
+        bannerSub: "Se hur väl annonsen matchar kandidaten",
+        open: "Öppna AI Job Matcher",
+        statusNoKey: "ingen nyckel",
+        statusCooldown: "gräns ~{minutes} min",
+        statusAnswered: "svarade",
+        statusReady: "redo",
+        tooltipAnswered: "{model} ({provider}) svarade. Klicka för att välja en annan.",
+        tooltipWillTry: "{model} ({provider}) provas först. Klicka för att välja en annan.",
+        pinHint: "Den valda modellen provas först. Tar kvoten slut går förfrågan automatiskt vidare i listan."
     }
 };

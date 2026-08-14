@@ -254,5 +254,33 @@ export const nl: Translations = {
         genericTitle: "Er is iets misgegaan",
         genericText: "De pagina kon niet worden weergegeven. Opnieuw laden helpt meestal.",
         backHome: "Terug naar het cv"
+    },
+    ai: {
+        subtitle: "Plak een vacaturetekst of een link ernaartoe — de AI vergelijkt die met Aliks ervaring.",
+        jobPlaceholder: "Vacaturebeschrijving, of een link...",
+        analyze: "Vacature analyseren",
+        analyzing: "Bezig met analyseren...",
+        newAnalysis: "Nieuwe analyse",
+        newAnalysisHint: "Andere vacature analyseren",
+        rawTitle: "Antwoord van de AI",
+        rawNote: "Het model gaf geen gestructureerde beoordeling — dit is de tekst ongewijzigd.",
+        summaryTitle: "Conclusie van de AI",
+        matchLabel: "Match",
+        strengths: "Sterke punten",
+        gaps: "Hiaten en vragen",
+        followUpTitle: "Stel een vervolgvraag over Aliks ervaring:",
+        chatPlaceholder: "Uw vraag over Aliks ervaring...",
+        thinking: "De AI denkt na...",
+        modelTitle: "AI-model",
+        modelAuto: "Automatisch — beste beschikbare",
+        bannerSub: "Controleer hoe goed de vacature bij de kandidaat past",
+        open: "AI Job Matcher openen",
+        statusNoKey: "geen sleutel",
+        statusCooldown: "limiet ~{minutes} min",
+        statusAnswered: "antwoordde",
+        statusReady: "gereed",
+        tooltipAnswered: "{model} ({provider}) antwoordde. Klik om een ander te kiezen.",
+        tooltipWillTry: "{model} ({provider}) wordt eerst geprobeerd. Klik om een ander te kiezen.",
+        pinHint: "Het gekozen model wordt eerst geprobeerd. Raakt het quotum op, dan gaat het verzoek automatisch naar het volgende."
     }
 };

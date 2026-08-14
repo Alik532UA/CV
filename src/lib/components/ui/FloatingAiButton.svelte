@@ -1,12 +1,13 @@
 <script lang="ts">
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
+    import { t } from "$lib/controllers/I18nState.svelte";
     import { Sparkles } from "lucide-svelte";
 </script>
 
 <button
     class="floating-ai-btn"
     onclick={() => aiChat.open()}
-    aria-label="Open AI Job Matcher"
+    aria-label={t.ai.open}
     data-testid="ai-matcher-open-btn"
     title="AI Job Matcher ({aiChat.activeEntry.model})"
 >
