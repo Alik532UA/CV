@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { getContext } from "svelte";
     import { t, type Language } from "$lib/controllers/I18nState.svelte";
     import {
         Sun,
@@ -14,18 +13,28 @@
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
     import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS, languageBadge } from "$lib/i18n/languageMeta";
     import { onMount, onDestroy } from "svelte";
-    // Imported rather than taken from context, unlike the three below: this one
-    // is shared with the L shortcut, and a direct import keeps its types.
-    import { langMenu } from "$lib/controllers/UiState.svelte";
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const language = getContext<any>("language");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const theme = getContext<any>("theme");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const background = getContext<any>("background");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const sound = getContext<any>("sound");
+    /**
+     * All five controllers are imported directly, the way `langMenu` already
+     * was. The other four used to come through `getContext<any>("theme")` and
+     * friends — a string key and a disabled type check on every one of them,
+     * each with its own `eslint-disable` for the `any` the project's own
+     * config calls an error.
+     *
+     * The note that used to sit above `langMenu` said the direct import "keeps
+     * its types", which was exactly right and exactly the argument against the
+     * other four: `getContext<T>` compiles with any `T` you write, because
+     * TypeScript believes the annotation rather than the value. `any` dropped
+     * even that pretence — renaming `background.type` would have gone
+     * unnoticed here until the panel stopped working in a browser.
+     *
+     * These are module-level singletons, so context was handing this component
+     * the same object the import gives it; nothing changes at runtime.
+     * SVELTE-CORE-v8 § 3.3 — and `src/context-conventions.test.ts` now keeps a
+     * string-keyed context from coming back.
+     */
+    import { langMenu, theme, background } from "$lib/controllers/UiState.svelte";
+    import { language } from "$lib/controllers/I18nState.svelte";
+    import { sound } from "$lib/controllers/SoundState.svelte";
 
     let isBgDropdownOpen = $state(false);
     let langQuery = $state("");

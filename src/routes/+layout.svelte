@@ -23,7 +23,6 @@
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 	import FloatingAiButton from "$lib/components/ui/FloatingAiButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
-	import { setContext } from "svelte";
 
 	let { children } = $props();
 
@@ -40,11 +39,12 @@
 		language.current = page.data.language ?? "en";
 	});
 
-	// Inject controllers via Context API for architectural consistency
-	setContext("theme", theme);
-	setContext("background", background);
-	setContext("language", language);
-	setContext("sound", sound);
+	// The four setContext("theme", …) calls that stood here are gone. They fed
+	// exactly one consumer, HeaderSection, which read them back as
+	// getContext<any>("theme") — a string key plus a disabled type check, for
+	// module-level singletons the component can simply import. Context earns
+	// its cost when the instance differs per subtree; here it only cost types.
+	// SVELTE-CORE-v8 § 3.3.
 
 	/**
 	 * The class that hides the native scrollbar has exactly one owner: this effect.
