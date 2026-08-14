@@ -13,14 +13,17 @@ import type { PageLoad } from "./$types";
  */
 export function entries() {
 	return [
-		{ lang: undefined as string | undefined },
-		...SUPPORTED_LANGUAGES.map((lang) => ({ lang: lang as string }))
+		{ lang: undefined },
+		...SUPPORTED_LANGUAGES.map((lang) => ({ lang }))
 	];
 }
 
 export const load: PageLoad = ({ params }) => {
-	// An unknown segment is a 404 rather than a silent fall back to English, so
-	// a typo does not quietly serve the wrong page under a real-looking URL.
+	// Belt and braces. `src/params/lang.ts` already rejects an unknown segment
+	// before this runs, so under normal circumstances this branch is dead — but
+	// deleting the matcher is a one-file mistake that would otherwise turn
+	// /CV/xyz/ back into a silent fall back to English under a real-looking URL,
+	// and nothing would say so.
 	if (params.lang !== undefined && !isLanguage(params.lang)) {
 		error(404, `Unknown language: ${params.lang}`);
 	}

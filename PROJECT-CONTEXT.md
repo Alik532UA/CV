@@ -98,7 +98,6 @@ teatralo4ka.odesa.ua тут не значиться: у нього `base: ''`, �
 | a11y-аудит (ACCESSIBILITY § 10) | `@axe-core/playwright` не підключено | Додати в e2e-джоб разом із наступним пунктом |
 | E2E ходить по dev-серверу, а не по зібраному сайту (CODE-QUALITY § 5.7) | `playwright.config.ts` піднімає `npm run dev` | Перевести `webServer` на `npm run preview` над `build/` |
 | Повний набір e2e в CI | У workflow виконується лише `tests/invariants.spec.ts` (chromium) | Окремий джоб після збірки |
-| Скрипт над `build/` (SEO § 6.1) | Не написаний | Порожнє тіло, `sveltekit-prerender` в адресах, кількість canonical, зсув мов |
 | Сенсорні зони 44×44 (ACCESSIBILITY § 10.3) | Потрібен Playwright із мобільним вьюпортом | Разом з e2e-джобом |
 | Відсутність FOUC теми, збереження теми між перезавантаженнями (UI-UX § 4) | Те саме | Те саме |
 | Пороги coverage (CODE-QUALITY § 6.2) | `coverage` не налаштований у `vitest.config.ts` | — |

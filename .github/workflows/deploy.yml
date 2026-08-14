@@ -80,6 +80,14 @@ jobs:
           PUBLIC_AI_PROXY_URL: ${{ secrets.AI_PROXY_URL }}
         run: npm run build
 
+      # Клас дефектів, якого не видно в коді: зсув мов від модульного
+      # синглтона під час prerender, `sveltekit-prerender` в адресах, порожнє
+      # тіло сторінки, зламані абсолютні URL від відносного base. Усе це
+      # читається з build/, тому крок стоїть саме тут — між збіркою і
+      # викладанням (SEO-v8 § 6.1).
+      - name: Verify build output
+        run: npm run check:build
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
