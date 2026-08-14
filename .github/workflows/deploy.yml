@@ -49,6 +49,29 @@ jobs:
       - name: Audit dependencies
         run: npm audit --audit-level=high
 
+      # Рантайм-інваріант унікальності data-testid (TESTID-AND-NAMING-v8 § 1.9.2).
+      # Статична перевірка в юніт-тестах бачить усі testid, але не бачить, що
+      # один компонент відрендерився двічі — тоді два різні елементи
+      # відповідають одному селектору, і тест бере перший-ліпший.
+      #
+      # Лише chromium і лише цей файл: решта e2e-набору (54 тести в трьох
+      # браузерах) — окрема історія з іншим часом і іншою стабільністю, а
+      # § 1.9.3 вимагає в CI саме інваріант. Playwright сам піднімає dev-сервер
+      # (`webServer` у конфізі), тому крок не залежить від збірки.
+      - name: Install Playwright chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Unique data-testid invariant
+        run: npx playwright test tests/invariants.spec.ts --project=chromium
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
       # Ключів AI тут немає свідомо: усе, що потрапляє в збірку статичного сайту,
       # видно у DevTools. Ключі живуть секретами Cloudflare Worker, а сайт знає
       # лише його URL.
