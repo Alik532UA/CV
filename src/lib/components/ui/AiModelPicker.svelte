@@ -285,11 +285,11 @@
     }
 
     .ai-model-menu__status--ready {
-        color: var(--score-high, #10b981);
+        color: var(--score-high);
     }
 
     .ai-model-menu__status--cooling {
-        color: var(--score-low, #f59e0b);
+        color: var(--score-low);
     }
 
     .ai-model-menu__status--no-key {
@@ -298,7 +298,7 @@
 
     .ai-model-menu__item.answered .ai-model-menu__model::after {
         content: " •";
-        color: var(--score-high, #10b981);
+        color: var(--score-high);
     }
 
     .ai-model-menu__hint {

@@ -32,9 +32,9 @@
     }
 
     function getScoreColor(pct: number): string {
-        if (pct >= 80) return "var(--score-high, #10b981)";
-        if (pct >= 60) return "var(--score-mid, #00f2ff)";
-        return "var(--score-low, #f59e0b)";
+        if (pct >= 80) return "var(--score-high)";
+        if (pct >= 60) return "var(--score-mid)";
+        return "var(--score-low)";
     }
 </script>
 
