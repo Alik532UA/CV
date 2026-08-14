@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { en } from "../i18n/locales/en";
+import { enUS } from "../i18n/locales/en-us";
 import { uk } from "../i18n/locales/uk";
 import { ja } from "../i18n/locales/ja";
 import { es } from "../i18n/locales/es";
@@ -45,16 +46,22 @@ import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 import { track } from "$lib/services/analytics";
 import { goto } from "$app/navigation";
-import { langPath } from "$lib/i18n/routing";
+import { bcp47, langPath } from "$lib/i18n/routing";
 
+/**
+ * "en" is British English and "en-us" American. The region subtag is lowercase
+ * because this doubles as the URL segment, and /CV/en-us/ has to resolve on
+ * case-sensitive static hosting — `bcp47()` in i18n/routing spells it back the
+ * canonical way for `lang` and `hreflang` attributes.
+ */
 export type Language =
-	| "en" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
+	| "en" | "en-us" | "uk" | "ja" | "es" | "fr" | "pt" | "it" | "de" | "nl" | "be"
 	| "pl" | "cs" | "sk" | "bg" | "hr" | "sl" | "mk" | "ro" | "sv" | "no" | "da" | "is"
 	| "ca" | "fi" | "el" | "ga" | "cy" | "et" | "lv" | "lt" | "crh" | "ka" | "sq" | "ko" | "tr" | "he" | "mt"
 	| "chk" | "pon" | "kos" | "yap";
 
 export const SUPPORTED_LANGUAGES: readonly Language[] = [
-	"en", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
+	"en", "en-us", "uk", "ja", "es", "fr", "pt", "it", "de", "nl", "be",
 	"pl", "cs", "sk", "bg", "hr", "sl", "mk", "ro", "sv", "no", "da", "is",
 	"ca", "fi", "el", "ga", "cy", "et", "lv", "lt", "crh", "ka", "sq", "ko", "tr", "he", "mt",
 	"chk", "pon", "kos", "yap"
@@ -104,7 +111,7 @@ class LanguageState {
 			}
 		}
 
-		document.documentElement.lang = this.current;
+		document.documentElement.lang = bcp47(this.current);
 	}
 
 	set(lang: Language) {
@@ -121,7 +128,7 @@ class LanguageState {
 			this.current = lang;
 			if (browser) {
 				storage.set("lang", lang);
-				document.documentElement.lang = lang;
+				document.documentElement.lang = bcp47(lang);
 			}
 			// Same route id (/[[lang]]) with only the parameter changing, so
 			// SvelteKit updates in place instead of remounting — the switch stays
@@ -252,7 +259,7 @@ const TranslationSchema = z.object({
 export type Translations = z.infer<typeof TranslationSchema>;
 
 export const translations: Record<Language, Translations> = {
-	en, uk, ja, es, fr, pt, it, de, nl, be,
+	en, "en-us": enUS, uk, ja, es, fr, pt, it, de, nl, be,
 	pl, cs, sk, bg, hr, sl, mk, ro, sv, no, da, is,
 	ca, fi, el, ga, cy, et, lv, lt, crh, ka, sq, ko, tr, he, mt,
 	chk, pon, kos, yap

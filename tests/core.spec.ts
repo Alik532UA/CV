@@ -45,9 +45,19 @@ test.describe('Core Functionality', () => {
 		await expect(page.locator('html')).toHaveAttribute('lang', 'es');
 		await expect(page).toHaveURL(/\/CV\/es\//);
 
-		// The search box filters the list down to a single match
+		// Англійська тут дві — британська й американська, тому "English" звужує
+		// список до двох, а не до одної. Американська несе регіон і в адресі, і в
+		// атрибуті lang, де він пишеться канонічно: en-US, не en-us.
 		await openLangPanel();
 		await langSwitcher.getByPlaceholder('Search language...').fill('English');
+		await expect(langSwitcher.getByRole('menuitemradio')).toHaveCount(2);
+		await page.getByTestId('lang-en-us-btn').click();
+		await expect(page.locator('html')).toHaveAttribute('lang', 'en-US');
+		await expect(page).toHaveURL(/\/CV\/en-us\//);
+
+		// The search box filters the list down to a single match
+		await openLangPanel();
+		await langSwitcher.getByPlaceholder('Search language...').fill('English (UK)');
 		const results = langSwitcher.getByRole('menuitemradio');
 		await expect(results).toHaveCount(1);
 		await results.first().click();

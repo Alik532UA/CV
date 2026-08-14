@@ -12,7 +12,7 @@
         VolumeX,
     } from "lucide-svelte";
     import FlagEN from "$lib/components/flags/FlagEN.svelte";
-    import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS } from "$lib/i18n/languageMeta";
+    import { LANGUAGE_META, LANGUAGE_GROUP_ORDER, LANGUAGE_GROUP_LABELS, languageBadge } from "$lib/i18n/languageMeta";
     import { onMount, onDestroy } from "svelte";
     // Imported rather than taken from context, unlike the three below: this one
     // is shared with the L shortcut, and a direct import keeps its types.
@@ -504,7 +504,7 @@
                     aria-expanded={langMenu.isOpen}
                 >
                     <ActiveFlag width="20" height="15" class="flag-icon" />
-                    <span class="lang-code">{language.current.toUpperCase()}</span>
+                    <span class="lang-code">{languageBadge(language.current)}</span>
                 </button>
 
                 {#if langMenu.isOpen}

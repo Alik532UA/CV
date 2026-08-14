@@ -1,6 +1,6 @@
 <script lang="ts">
     import { language, translations } from "$lib/controllers/I18nState.svelte";
-    import { INDEXED_LANGUAGES, isIndexed, langUrl } from "$lib/i18n/routing";
+    import { INDEXED_LANGUAGES, bcp47, isIndexed, langUrl, ogLocale } from "$lib/i18n/routing";
     
     // Hardcoded rather than taken from page.url.origin: these tags are read out
     // of the prerendered HTML, and during prerendering SvelteKit reports a
@@ -83,7 +83,7 @@
     <!-- Alternates for the reviewed languages only, so search engines are not
          pointed at pages this site asks them not to index. -->
     {#each INDEXED_LANGUAGES as alt (alt)}
-        <link rel="alternate" hreflang={alt} href={langUrl(SITE_ORIGIN, alt)} />
+        <link rel="alternate" hreflang={bcp47(alt)} href={langUrl(SITE_ORIGIN, alt)} />
     {/each}
     <link rel="alternate" hreflang="x-default" href={langUrl(SITE_ORIGIN, "en")} />
 
@@ -92,7 +92,7 @@
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content="{title} | CV" />
     <meta property="og:description" content={description} />
-    <meta property="og:locale" content={language.current === 'uk' ? 'uk_UA' : (language.current === 'ja' ? 'ja_JP' : 'en_US')} />
+    <meta property="og:locale" content={ogLocale(language.current)} />
     <meta property="og:image" content={imageUrl} />
 
     <!-- Twitter -->

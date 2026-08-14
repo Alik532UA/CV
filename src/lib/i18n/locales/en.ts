@@ -1,7 +1,13 @@
 import type { Translations } from "../../controllers/I18nState.svelte";
 
+/**
+ * British English — the site's default, and the variety a European job market
+ * expects (the site is a "CV", not a "resume"). American English lives in
+ * `en-us.ts`, which is built from this file and only restates the words that
+ * differ, so the two can never drift apart in content.
+ */
 export const en: Translations = {
-    lastUpdate: "Last update: August 8, 2026",
+    lastUpdate: "Last update: 8 August 2026",
     title: ["AQA Engineer", "AI Explorer", "Game Maker"],
     title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
     nav: {
@@ -40,7 +46,7 @@ export const en: Translations = {
         hideNonIT: "Hide non-IT experience",
         present: "present",
         companies: {
-            theater_company: "Theater School"
+            theater_company: "Theatre School"
         },
         roles: {
             intellias_role: "Manual & Automation QA Engineer",
@@ -55,7 +61,7 @@ export const en: Translations = {
         descriptions: {
             intellias_desc: "Web, Desktop, and Mobile application testing. Test automation (C#, Selenium, WinAppDriver, Appium). Investigating memory leaks and race conditions.",
             absoft_desc: "Device and mobile application testing for a video recorder",
-            singree_desc: "Search engine optimization and analysis.",
+            singree_desc: "Search engine optimisation and analysis.",
             unicorn_desc: "Video editing for YouTube channels.",
             nutduet_desc: "Editing events and stage performances.",
             channel7_desc: "Editing news broadcasts.",
@@ -76,8 +82,8 @@ export const en: Translations = {
     },
     skills: {
         title: "Skills & Stack",
-        showMore: "Show Specialized Skills",
-        hideMore: "Hide Specialized Skills",
+        showMore: "Show Specialised Skills",
+        hideMore: "Hide Specialised Skills",
         platforms: {
             desktop: "Desktop app: C#, Selenium, WinAppDriver",
             web: "Web: C#, Selenium, Playwright",
@@ -119,7 +125,7 @@ export const en: Translations = {
         title: "Additional Information",
         iq: "125 (Above Average)",
         olympics: "3rd place - 2016, All-Ukrainian Olympiad in Computer System Diagnostics",
-        driver: "Driver's License (since 2015)",
+        driver: "Driving Licence (since 2015)",
         languages: {
             title: "Languages",
             uk: "Ukrainian — Native",
@@ -182,7 +188,7 @@ export const en: Translations = {
             cv3d: {
                 id: "cv3d",
                 title: "3D CV Experience",
-                description: "Interactive 3D resume game built from scratch on Godot 4. Explore the world, interact with objects, and discover easter eggs!",
+                description: "Interactive 3D CV game built from scratch on Godot 4. Explore the world, interact with objects, and discover easter eggs!",
                 button: "Launch 3D CV",
                 url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
