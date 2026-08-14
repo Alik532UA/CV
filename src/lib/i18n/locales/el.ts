@@ -247,5 +247,12 @@ export const el: Translations = {
         custom: "Δημιουργού",
         minimap: "Ελάχιστο minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Η σελίδα δεν βρέθηκε",
+        notFoundText: "Αυτή η διεύθυνση δεν υπάρχει. Ο κωδικός γλώσσας στον σύνδεσμο μπορεί να είναι λάθος.",
+        genericTitle: "Κάτι πήγε στραβά",
+        genericText: "Η σελίδα δεν ήταν δυνατό να εμφανιστεί. Συνήθως βοηθά η επαναφόρτωση.",
+        backHome: "Επιστροφή στο βιογραφικό"
     }
 };

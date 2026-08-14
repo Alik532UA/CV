@@ -247,5 +247,12 @@ export const de: Translations = {
         custom: "Autoren",
         minimap: "Minimap minimal",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Seite nicht gefunden",
+        notFoundText: "Diese Adresse gibt es nicht. Möglicherweise ist der Sprachcode im Link falsch.",
+        genericTitle: "Etwas ist schiefgelaufen",
+        genericText: "Die Seite konnte nicht angezeigt werden. Neu laden hilft meistens.",
+        backHome: "Zurück zum Lebenslauf"
     }
 };

@@ -254,5 +254,12 @@ export const chk: Translations = {
         custom: "Author's",
         minimap: "Minimal Minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Ese kúna ewe page",
+        notFoundText: "Ese wor ei address. Neman mi wor mwáál lón ewe language code.",
+        genericTitle: "Mi wor eú osukosuk",
+        genericText: "Ese tongeni pwáraatá ewe page. Reload epwe álisi.",
+        backHome: "Liwiniti ewe CV"
     }
 };

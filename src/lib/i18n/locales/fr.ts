@@ -247,5 +247,12 @@ export const fr: Translations = {
         custom: "D'auteur",
         minimap: "Minicarte minimale",
         minimapFull: "Minicarte"
+    },
+    errorPage: {
+        notFoundTitle: "Page introuvable",
+        notFoundText: "Cette adresse n'existe pas. Le code de langue du lien est peut-être erroné.",
+        genericTitle: "Une erreur est survenue",
+        genericText: "La page n'a pas pu s'afficher. Recharger règle généralement le problème.",
+        backHome: "Retour au CV"
     }
 };

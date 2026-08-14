@@ -254,5 +254,12 @@ export const yap: Translations = {
         custom: "Author's",
         minimap: "Minimal Minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Dariy fare page ni kan pirieg",
+        notFoundText: "Dariy e re address ney. Sana bay e kireb ko language code u fare link.",
+        genericTitle: "Bay ban'en nib kireb",
+        genericText: "Dabiyog ni ngan dag fare page. Reload e ra ayuweg.",
+        backHome: "Sul ko fare CV"
     }
 };

@@ -247,5 +247,12 @@ export const be: Translations = {
         custom: "Аўтарская",
         minimap: "Мінімапа мінімальная",
         minimapFull: "Мінімапа"
+    },
+    errorPage: {
+        notFoundTitle: "Старонку не знойдзена",
+        notFoundText: "Такога адраса тут няма. Магчыма, у спасылцы памылка ў кодзе мовы.",
+        genericTitle: "Нешта пайшло не так",
+        genericText: "Старонку не ўдалося паказаць. Звычайна дапамагае перазагрузка.",
+        backHome: "Вярнуцца да рэзюмэ"
     }
 };

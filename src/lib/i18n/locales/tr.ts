@@ -247,5 +247,12 @@ export const tr: Translations = {
         custom: "Özel",
         minimap: "Minimal minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Sayfa bulunamadı",
+        notFoundText: "Böyle bir adres yok. Bağlantıdaki dil kodu hatalı olabilir.",
+        genericTitle: "Bir şeyler ters gitti",
+        genericText: "Sayfa görüntülenemedi. Genellikle yeniden yüklemek yeterlidir.",
+        backHome: "CV'ye dön"
     }
 };

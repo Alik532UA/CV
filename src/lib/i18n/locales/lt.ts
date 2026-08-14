@@ -247,5 +247,12 @@ export const lt: Translations = {
         custom: "Autoriaus",
         minimap: "Minimalus minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Puslapis nerastas",
+        notFoundText: "Tokio adreso nėra. Nuorodoje nurodytas kalbos kodas gali būti klaidingas.",
+        genericTitle: "Kažkas nepavyko",
+        genericText: "Puslapio parodyti nepavyko. Paprastai padeda perkrauti.",
+        backHome: "Atgal į CV"
     }
 };

@@ -247,5 +247,12 @@ export const ro: Translations = {
         custom: "De autor",
         minimap: "Minimapă minimă",
         minimapFull: "Minimapă"
+    },
+    errorPage: {
+        notFoundTitle: "Pagina nu a fost găsită",
+        notFoundText: "Această adresă nu există. Codul de limbă din link poate fi greșit.",
+        genericTitle: "Ceva nu a mers bine",
+        genericText: "Pagina nu a putut fi afișată. De obicei ajută reîncărcarea.",
+        backHome: "Înapoi la CV"
     }
 };

@@ -250,5 +250,12 @@ export const he: Translations = {
         custom: "של המחבר",
         minimap: "מינימפה מינימלית",
         minimapFull: "מינימפה"
+    },
+    errorPage: {
+        notFoundTitle: "הדף לא נמצא",
+        notFoundText: "הכתובת הזו לא קיימת. ייתכן שקוד השפה בקישור שגוי.",
+        genericTitle: "משהו השתבש",
+        genericText: "לא ניתן היה להציג את הדף. בדרך כלל רענון עוזר.",
+        backHome: "חזרה לקורות החיים"
     }
 };

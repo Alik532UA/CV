@@ -70,5 +70,12 @@ export const enUS: Translations = {
                 description: "Official website and admin portal for Odesa Theater School featuring interactive widgets, dark ocean theme, and photo galleries."
             }
         }
+    },
+    errorPage: {
+        notFoundTitle: "Page not found",
+        notFoundText: "There is no such address here. The language code in the link may be misspelled.",
+        genericTitle: "Something went wrong",
+        genericText: "The page could not be displayed. Reloading usually helps.",
+        backHome: "Back to the resume"
     }
 };

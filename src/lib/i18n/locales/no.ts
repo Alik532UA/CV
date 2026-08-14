@@ -247,5 +247,12 @@ export const no: Translations = {
         custom: "Forfatterens",
         minimap: "Minimal minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Fant ikke siden",
+        notFoundText: "Denne adressen finnes ikke. Språkkoden i lenken kan være feil.",
+        genericTitle: "Noe gikk galt",
+        genericText: "Siden kunne ikke vises. Å laste inn på nytt hjelper som regel.",
+        backHome: "Tilbake til CV-en"
     }
 };

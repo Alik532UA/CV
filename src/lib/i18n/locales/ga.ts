@@ -247,5 +247,12 @@ export const ga: Translations = {
         custom: "Údair",
         minimap: "Minimap íosta",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Níorbh fhéidir an leathanach a aimsiú",
+        notFoundText: "Níl an seoladh seo ann. Seans go bhfuil an cód teanga sa nasc mícheart.",
+        genericTitle: "Chuaigh rud éigin amú",
+        genericText: "Níorbh fhéidir an leathanach a thaispeáint. De ghnáth is leor é a athlódáil.",
+        backHome: "Ar ais chuig an CV"
     }
 };

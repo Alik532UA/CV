@@ -247,5 +247,12 @@ export const lv: Translations = {
         custom: "Autora",
         minimap: "Minimāls minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Lapa nav atrasta",
+        notFoundText: "Šāda adrese neeksistē. Saitē norādītais valodas kods var būt nepareizs.",
+        genericTitle: "Kaut kas nogāja greizi",
+        genericText: "Lapu neizdevās parādīt. Parasti palīdz pārlādēšana.",
+        backHome: "Atpakaļ uz CV"
     }
 };

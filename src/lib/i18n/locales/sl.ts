@@ -247,5 +247,12 @@ export const sl: Translations = {
         custom: "Avtorska",
         minimap: "Minimapa minimalna",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Strani ni mogoče najti",
+        notFoundText: "Ta naslov ne obstaja. Jezikovna koda v povezavi je morda napačna.",
+        genericTitle: "Nekaj je šlo narobe",
+        genericText: "Strani ni bilo mogoče prikazati. Običajno pomaga ponovno nalaganje.",
+        backHome: "Nazaj na življenjepis"
     }
 };

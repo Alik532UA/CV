@@ -247,5 +247,12 @@ export const hr: Translations = {
         custom: "Autorska",
         minimap: "Minimapa minimalna",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Stranica nije pronađena",
+        notFoundText: "Ova adresa ne postoji. Kod jezika u poveznici možda je pogrešan.",
+        genericTitle: "Nešto je pošlo po zlu",
+        genericText: "Stranicu nije bilo moguće prikazati. Obično pomaže ponovno učitavanje.",
+        backHome: "Natrag na životopis"
     }
 };

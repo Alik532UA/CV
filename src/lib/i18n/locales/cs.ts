@@ -247,5 +247,12 @@ export const cs: Translations = {
         custom: "Autorská",
         minimap: "Minimapa minimální",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Stránka nenalezena",
+        notFoundText: "Taková adresa neexistuje. Kód jazyka v odkazu může být chybný.",
+        genericTitle: "Něco se pokazilo",
+        genericText: "Stránku se nepodařilo zobrazit. Obvykle pomůže znovu načíst.",
+        backHome: "Zpět na životopis"
     }
 };

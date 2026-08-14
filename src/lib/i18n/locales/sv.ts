@@ -247,5 +247,12 @@ export const sv: Translations = {
         custom: "Författarens",
         minimap: "Minimal minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Sidan hittades inte",
+        notFoundText: "Den här adressen finns inte. Språkkoden i länken kan vara felaktig.",
+        genericTitle: "Något gick fel",
+        genericText: "Sidan kunde inte visas. Att ladda om brukar hjälpa.",
+        backHome: "Tillbaka till CV:t"
     }
 };

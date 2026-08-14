@@ -247,5 +247,12 @@ export const it: Translations = {
         custom: "D'autore",
         minimap: "Minimappa minima",
         minimapFull: "Minimappa"
+    },
+    errorPage: {
+        notFoundTitle: "Pagina non trovata",
+        notFoundText: "Questo indirizzo non esiste. Il codice lingua nel link potrebbe essere errato.",
+        genericTitle: "Qualcosa è andato storto",
+        genericText: "Non è stato possibile mostrare la pagina. Di solito basta ricaricare.",
+        backHome: "Torna al curriculum"
     }
 };

@@ -254,5 +254,12 @@ export const pon: Translations = {
         custom: "Author's",
         minimap: "Minimal Minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Sohte diarada page-o",
+        notFoundText: "Sohte mie address wet. Ele mie sapwung nan language code en link-o.",
+        genericTitle: "Mie mehkot sapwung",
+        genericText: "Sohte kak kasalehda page-o. Reload kin sewese.",
+        backHome: "Pwurala ni CV"
     }
 };

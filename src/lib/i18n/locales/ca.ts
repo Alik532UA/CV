@@ -247,5 +247,12 @@ export const ca: Translations = {
         custom: "D'autor",
         minimap: "Minimapa mínim",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Pàgina no trobada",
+        notFoundText: "Aquesta adreça no existeix. El codi d'idioma de l'enllaç pot ser incorrecte.",
+        genericTitle: "Alguna cosa ha anat malament",
+        genericText: "No s'ha pogut mostrar la pàgina. Normalment ajuda tornar a carregar.",
+        backHome: "Torna al currículum"
     }
 };

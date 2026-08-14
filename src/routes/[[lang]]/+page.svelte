@@ -38,7 +38,7 @@
             <ExperienceSection />
         {/await}
         {#snippet failed()}
-            <ErrorFallback sectionName="Досвід" />
+            <ErrorFallback section="experience" />
         {/snippet}
     </svelte:boundary>
     
@@ -47,7 +47,7 @@
             <SkillsSection />
         {/await}
         {#snippet failed()}
-            <ErrorFallback sectionName="Навички" />
+            <ErrorFallback section="skills" />
         {/snippet}
     </svelte:boundary>
     
@@ -56,7 +56,7 @@
             <ProjectsSection />
         {/await}
         {#snippet failed()}
-            <ErrorFallback sectionName="Проєкти" />
+            <ErrorFallback section="projects" />
         {/snippet}
     </svelte:boundary>
     
@@ -65,7 +65,7 @@
             <EducationSection />
         {/await}
         {#snippet failed()}
-            <ErrorFallback sectionName="Освіта" />
+            <ErrorFallback section="education" />
         {/snippet}
     </svelte:boundary>
     
@@ -74,7 +74,7 @@
             <OtherSection />
         {/await}
         {#snippet failed()}
-            <ErrorFallback sectionName="Додатково" />
+            <ErrorFallback section="additional" />
         {/snippet}
     </svelte:boundary>
 

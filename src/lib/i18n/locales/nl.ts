@@ -247,5 +247,12 @@ export const nl: Translations = {
         custom: "Van auteur",
         minimap: "Minimale minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Pagina niet gevonden",
+        notFoundText: "Dit adres bestaat niet. Mogelijk klopt de taalcode in de link niet.",
+        genericTitle: "Er is iets misgegaan",
+        genericText: "De pagina kon niet worden weergegeven. Opnieuw laden helpt meestal.",
+        backHome: "Terug naar het cv"
     }
 };

@@ -247,5 +247,12 @@ export const ja: Translations = {
         custom: "オリジナル",
         minimap: "ミニマップ（最小）",
         minimapFull: "ミニマップ"
+    },
+    errorPage: {
+        notFoundTitle: "ページが見つかりません",
+        notFoundText: "このアドレスは存在しません。リンクの言語コードに誤りがある可能性があります。",
+        genericTitle: "問題が発生しました",
+        genericText: "ページを表示できませんでした。再読み込みで解決することがほとんどです。",
+        backHome: "履歴書に戻る"
     }
 };

@@ -247,5 +247,12 @@ export const ko: Translations = {
         custom: "커스텀",
         minimap: "미니맵 (최소)",
         minimapFull: "미니맵"
+    },
+    errorPage: {
+        notFoundTitle: "페이지를 찾을 수 없습니다",
+        notFoundText: "이 주소는 존재하지 않습니다. 링크의 언어 코드가 잘못되었을 수 있습니다.",
+        genericTitle: "문제가 발생했습니다",
+        genericText: "페이지를 표시할 수 없습니다. 새로 고침하면 대개 해결됩니다.",
+        backHome: "이력서로 돌아가기"
     }
 };

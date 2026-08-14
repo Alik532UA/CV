@@ -247,5 +247,12 @@ export const sq: Translations = {
         custom: "E autorit",
         minimap: "Minimapa minimale",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Faqja nuk u gjet",
+        notFoundText: "Kjo adresë nuk ekziston. Kodi i gjuhës në lidhje mund të jetë i gabuar.",
+        genericTitle: "Diçka shkoi keq",
+        genericText: "Faqja nuk mund të shfaqej. Zakonisht ndihmon ringarkimi.",
+        backHome: "Kthehu te CV-ja"
     }
 };

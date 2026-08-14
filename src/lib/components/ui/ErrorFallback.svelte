@@ -1,16 +1,31 @@
 <script lang="ts">
     import type { HTMLAttributes } from "svelte/elements";
+    import { t } from "$lib/controllers/I18nState.svelte";
+
+    /**
+     * What a `<svelte:boundary>` shows when one section of the page throws.
+     *
+     * The section is named by its nav key rather than by a ready-made string:
+     * the five call sites used to pass "Досвід", "Навички", "Проєкти" and so on
+     * — Ukrainian literals on a site that renders in 42 languages, so a German
+     * visitor whose Experience section failed was told about it in Ukrainian.
+     * The keys resolve through `t.nav`, which already holds exactly these five
+     * names in every locale; no new dictionary entries were needed.
+     */
+    type SectionKey = keyof typeof t.nav;
 
     interface Props extends HTMLAttributes<HTMLDivElement> {
-        sectionName: string;
+        section: SectionKey;
     }
 
-    let { sectionName, ...restProps }: Props = $props();
+    let { section, ...restProps }: Props = $props();
 </script>
 
-<div class="error-fallback" {...restProps}>
-    <h3>Помилка завантаження секції "{sectionName}"</h3>
-    <p>Спробуйте оновити сторінку або перевірте підключення до мережі.</p>
+<!-- role="alert": this replaces content that was expected to be there, and a
+     screen-reader user gets no other signal that it went missing. -->
+<div class="error-fallback" role="alert" {...restProps}>
+    <h3>{t.nav[section]} — {t.errorPage.genericTitle}</h3>
+    <p>{t.errorPage.genericText}</p>
 </div>
 
 <style>

@@ -247,5 +247,12 @@ export const is: Translations = {
         custom: "Höfundar",
         minimap: "Lágmarks minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Síðan fannst ekki",
+        notFoundText: "Þetta vistfang er ekki til. Tungumálakóðinn í tenglinum gæti verið rangur.",
+        genericTitle: "Eitthvað fór úrskeiðis",
+        genericText: "Ekki tókst að birta síðuna. Yfirleitt dugar að endurhlaða.",
+        backHome: "Til baka á ferilskrána"
     }
 };

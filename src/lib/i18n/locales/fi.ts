@@ -247,5 +247,12 @@ export const fi: Translations = {
         custom: "Tekijän",
         minimap: "Minimaalinen minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Sivua ei löytynyt",
+        notFoundText: "Tätä osoitetta ei ole. Linkin kielikoodi voi olla virheellinen.",
+        genericTitle: "Jokin meni pieleen",
+        genericText: "Sivua ei voitu näyttää. Uudelleenlataus auttaa yleensä.",
+        backHome: "Takaisin ansioluetteloon"
     }
 };

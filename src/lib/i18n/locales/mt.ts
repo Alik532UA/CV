@@ -247,5 +247,12 @@ export const mt: Translations = {
         custom: "Tal-awtur",
         minimap: "Minimap minima",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Il-paġna ma nstabitx",
+        notFoundText: "Dan l-indirizz ma jeżistix. Il-kodiċi tal-lingwa fil-link jista' jkun żbaljat.",
+        genericTitle: "Xi ħaġa marret ħażin",
+        genericText: "Il-paġna ma setgħetx tintwera. Ġeneralment jgħin li terġa' ttellagħha.",
+        backHome: "Lura għas-CV"
     }
 };

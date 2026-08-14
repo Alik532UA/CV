@@ -253,5 +253,12 @@ export const en: Translations = {
         custom: "Author's",
         minimap: "Minimal Minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Page not found",
+        notFoundText: "There is no such address here. The language code in the link may be misspelled.",
+        genericTitle: "Something went wrong",
+        genericText: "The page could not be displayed. Reloading usually helps.",
+        backHome: "Back to the CV"
     }
 };

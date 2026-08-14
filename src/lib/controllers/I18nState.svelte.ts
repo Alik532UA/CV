@@ -253,6 +253,20 @@ const TranslationSchema = z.object({
 		custom: z.string(),
 		minimap: z.string(),
 		minimapFull: z.string()
+	}),
+	/**
+	 * Texts for +error.svelte and for the per-section boundary fallback.
+	 *
+	 * Required, not optional: a missing key here is caught by svelte-check in
+	 * every one of the 42 locale files before anything runs, which is the whole
+	 * reason the dictionaries are typed `.ts` rather than JSON.
+	 */
+	errorPage: z.object({
+		notFoundTitle: z.string(),
+		notFoundText: z.string(),
+		genericTitle: z.string(),
+		genericText: z.string(),
+		backHome: z.string()
 	})
 });
 
@@ -311,5 +325,8 @@ export const t = {
 	},
 	get scrollbar() {
 		return translations[language.current].scrollbar;
+	},
+	get errorPage() {
+		return translations[language.current].errorPage;
 	}
 };

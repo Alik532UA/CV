@@ -247,5 +247,12 @@ export const pl: Translations = {
         custom: "Autorski",
         minimap: "Minimalna minimapa",
         minimapFull: "Minimapa"
+    },
+    errorPage: {
+        notFoundTitle: "Nie znaleziono strony",
+        notFoundText: "Taki adres nie istnieje. Kod języka w odnośniku może być błędny.",
+        genericTitle: "Coś poszło nie tak",
+        genericText: "Nie udało się wyświetlić strony. Zwykle pomaga odświeżenie.",
+        backHome: "Powrót do CV"
     }
 };

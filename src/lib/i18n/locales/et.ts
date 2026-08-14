@@ -247,5 +247,12 @@ export const et: Translations = {
         custom: "Autor",
         minimap: "Minimaalne minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Lehte ei leitud",
+        notFoundText: "Sellist aadressi ei ole. Lingi keelekood võib olla vale.",
+        genericTitle: "Midagi läks valesti",
+        genericText: "Lehte ei õnnestunud kuvada. Tavaliselt aitab uuesti laadimine.",
+        backHome: "Tagasi CV juurde"
     }
 };

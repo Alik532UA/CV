@@ -247,5 +247,12 @@ export const cy: Translations = {
         custom: "Awdur",
         minimap: "Minimap lleiaf",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Heb ddod o hyd i'r dudalen",
+        notFoundText: "Nid yw'r cyfeiriad hwn yn bodoli. Efallai bod y cod iaith yn y ddolen yn anghywir.",
+        genericTitle: "Aeth rhywbeth o'i le",
+        genericText: "Nid oedd modd dangos y dudalen. Fel arfer mae ail-lwytho yn helpu.",
+        backHome: "Yn ôl i'r CV"
     }
 };

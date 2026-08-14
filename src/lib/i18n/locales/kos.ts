@@ -254,5 +254,12 @@ export const kos: Translations = {
         custom: "Author's",
         minimap: "Minimal Minimap",
         minimapFull: "Minimap"
+    },
+    errorPage: {
+        notFoundTitle: "Wangin page sac konauk",
+        notFoundText: "Wangin address se inge. Sahp oasr tafongla ke language code ke link uh.",
+        genericTitle: "Oasr ma tafongla",
+        genericText: "Tia ku in akkalemyeyuk page sac. Reload uh ac kasru.",
+        backHome: "Folokla nu ke CV"
     }
 };

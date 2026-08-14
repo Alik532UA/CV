@@ -249,5 +249,12 @@ export const crh: Translations = {
         custom: "Müelliflik",
         minimap: "Asgarıy harita",
         minimapFull: "Harita"
+    },
+    errorPage: {
+        notFoundTitle: "Sahife tapılmadı",
+        notFoundText: "Bu adres yoq. Belki bağlantıdaki til kodunda hata bar.",
+        genericTitle: "Bir şey yañlış ketti",
+        genericText: "Sahifeni köstermek mümkün olmadı. Ekseriya yañıdan yükleme yardım ete.",
+        backHome: "Rezümege qayt"
     }
 };
