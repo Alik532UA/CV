@@ -86,7 +86,7 @@
 		</div>
 
 		<div class="toast-content">
-			<div class="toast-message" data-testid="toast-text-label">{msg.message}</div>
+			<div class="toast-message" data-testid="toast-message">{msg.message}</div>
 			{#if msg.action}
 				<button
 					class="toast-action"
