@@ -298,7 +298,8 @@ const TranslationSchema = z.object({
 		statusReady: z.string(),
 		tooltipAnswered: z.string(),
 		tooltipWillTry: z.string(),
-		pinHint: z.string()
+		pinHint: z.string(),
+		emptyAnswer: z.string()
 	})
 });
 

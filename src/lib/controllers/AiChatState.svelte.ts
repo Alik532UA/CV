@@ -3,7 +3,7 @@ import { AI_PROVIDERS, findProvider, type AiProviderEntry } from "$lib/config/ai
 import { pruneCooldowns, type CooldownMap } from "$lib/services/aiChain";
 import { logService } from "$lib/services/logService.svelte";
 import { storage } from "$lib/services/storage";
-import { language } from "$lib/controllers/I18nState.svelte";
+import { language, t } from "$lib/controllers/I18nState.svelte";
 
 export interface MatchResult {
 	matchPercentage: number;
@@ -151,21 +151,34 @@ class AiChatState {
 			const data = await this.post({ input: this.initialInput });
 
 			const result = this.normalizeResult(data.result);
+			const rawText = data.rawText?.trim() ?? "";
+
 			if (result) {
 				this.matchResult = result;
 				this.rawAnalysis = null;
-			} else {
-				// Модель не віддала JSON. Раніше на цьому місці підставлялося
-				// `matchPercentage: 85` з вигаданими сильними сторонами — тобто HR
-				// бачив дані, яких ніхто не рахував.
+			} else if (rawText) {
+				// Модель не віддала JSON, але щось сказала. Раніше на цьому місці
+				// підставлялося `matchPercentage: 85` з вигаданими сильними
+				// сторонами — HR бачив дані, яких ніхто не рахував. Тепер — сирий
+				// текст із позначкою (AI-PROVIDERS-v8 § 7.2).
 				this.matchResult = null;
-				this.rawAnalysis = data.rawText?.trim() || "Модель не повернула структурований аналіз.";
+				this.rawAnalysis = rawText;
 				logService.warn("ui", "AI answer was not valid JSON — showing raw text");
+			} else {
+				// «Успіх, у якому нічого не сказано» (§ 6.1.1). HTTP 200, ланцюжок
+				// відпрацював, тіло порожнє. Доти сюди підставлявся текст-заглушка,
+				// тобто збій показувався як результат. Це помилка, і виглядати вона
+				// має як помилка.
+				this.matchResult = null;
+				this.rawAnalysis = null;
+				this.error = t.ai.emptyAnswer;
+				logService.error("ui", `AI returned an empty answer (model: ${data.model ?? "?"})`);
+				return;
 			}
 
 			this.history = [
 				{ role: "user", content: this.initialInput },
-				{ role: "model", content: data.rawText || "" }
+				{ role: "model", content: rawText }
 			];
 
 			logService.info(
@@ -192,7 +205,18 @@ class AiChatState {
 		try {
 			logService.info("ui", "Sending follow-up message to AI proxy...");
 			const data = await this.post({ input: userMsg, history: context });
-			const modelReply = data.reply || data.rawText || "Дякую за запитання!";
+			const modelReply = (data.reply || data.rawText || "").trim();
+
+			if (!modelReply) {
+				// Те саме, що й у analyzeJob: порожня відповідь — це збій, а не
+				// репліка. Тут раніше вставлялося «Дякую за запитання!» — ввічлива
+				// фраза від імені моделі, якої модель не казала, і після якої HR
+				// чекав відповіді по суті.
+				this.error = t.ai.emptyAnswer;
+				logService.error("ui", `AI returned an empty reply (model: ${data.model ?? "?"})`);
+				return;
+			}
+
 			this.history = [...this.history, { role: "model", content: modelReply }];
 			logService.info("ui", `Received reply from ${data.model ?? "?"}`);
 		} catch (err) {

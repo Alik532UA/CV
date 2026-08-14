@@ -281,6 +281,7 @@ export const is: Translations = {
         statusReady: "tilbúið",
         tooltipAnswered: "{model} ({provider}) svaraði. Smelltu til að velja annað.",
         tooltipWillTry: "{model} ({provider}) verður reynt fyrst. Smelltu til að velja annað.",
-        pinHint: "Valna líkanið er reynt fyrst. Klárist kvótinn heldur beiðnin sjálfkrafa áfram niður listann."
+        pinHint: "Valna líkanið er reynt fyrst. Klárist kvótinn heldur beiðnin sjálfkrafa áfram niður listann.",
+        emptyAnswer: "Líkanið skilaði auðu svari. Reyndu aftur eða veldu annað líkan á merkinu að ofan."
     }
 };

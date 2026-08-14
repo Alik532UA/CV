@@ -281,6 +281,7 @@ export const sk: Translations = {
         statusReady: "pripravený",
         tooltipAnswered: "Odpovedal {model} ({provider}). Kliknutím vyberiete iný.",
         tooltipWillTry: "Najskôr sa skúsi {model} ({provider}). Kliknutím vyberiete iný.",
-        pinHint: "Vybraný model sa skúša ako prvý. Keď vyčerpá limit, požiadavka automaticky pokračuje ďalším."
+        pinHint: "Vybraný model sa skúša ako prvý. Keď vyčerpá limit, požiadavka automaticky pokračuje ďalším.",
+        emptyAnswer: "Model vrátil prázdnu odpoveď. Skúste to znova alebo vyberte iný model na odznaku vyššie."
     }
 };

@@ -281,6 +281,7 @@ export const lv: Translations = {
         statusReady: "gatavs",
         tooltipAnswered: "Atbildēja {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
         tooltipWillTry: "Vispirms tiks mēģināts {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
-        pinHint: "Izvēlētais modelis tiek mēģināts pirmais. Ja tam beidzas kvota, pieprasījums automātiski pāriet uz nākamo."
+        pinHint: "Izvēlētais modelis tiek mēģināts pirmais. Ja tam beidzas kvota, pieprasījums automātiski pāriet uz nākamo.",
+        emptyAnswer: "Modelis atgrieza tukšu atbildi. Mēģini vēlreiz vai izvēlies citu modeli augšējā nozīmītē."
     }
 };

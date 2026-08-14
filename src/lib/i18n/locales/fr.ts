@@ -281,6 +281,7 @@ export const fr: Translations = {
         statusReady: "prêt",
         tooltipAnswered: "{model} ({provider}) a répondu. Cliquez pour en choisir un autre.",
         tooltipWillTry: "{model} ({provider}) sera essayé en premier. Cliquez pour en choisir un autre.",
-        pinHint: "Le modèle choisi est essayé en premier. S'il atteint sa limite, la requête passe automatiquement au suivant."
+        pinHint: "Le modèle choisi est essayé en premier. S'il atteint sa limite, la requête passe automatiquement au suivant.",
+        emptyAnswer: "Le modèle a renvoyé une réponse vide. Réessayez ou choisissez un autre modèle sur le badge ci-dessus."
     }
 };

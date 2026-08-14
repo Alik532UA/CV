@@ -288,6 +288,7 @@ export const pon: Translations = {
         statusReady: "onopadahr",
         tooltipAnswered: "{model} ({provider}) sapengki. Klik pwehn pilada emen tohrohr.",
         tooltipWillTry: "E pahn tepin song {model} ({provider}). Klik pwehn pilada emen tohrohr.",
-        pinHint: "Model me ke pilada pahn tepin song. Ma eh limit imwisekla, peidek pahn kohla ni me kohdo."
+        pinHint: "Model me ke pilada pahn tepin song. Ma eh limit imwisekla, peidek pahn kohla ni me kohdo.",
+        emptyAnswer: "Model-o kihda sapeng me sohte audepe. Song sapahl, de pilada model tohrohr ni badge powe."
     }
 };

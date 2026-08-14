@@ -281,6 +281,7 @@ export const lt: Translations = {
         statusReady: "paruoštas",
         tooltipAnswered: "Atsakė {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
         tooltipWillTry: "Pirmiausia bus bandomas {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
-        pinHint: "Pasirinktas modelis bandomas pirmas. Jei baigsis jo kvota, užklausa automatiškai keliauja sąrašu toliau."
+        pinHint: "Pasirinktas modelis bandomas pirmas. Jei baigsis jo kvota, užklausa automatiškai keliauja sąrašu toliau.",
+        emptyAnswer: "Modelis grąžino tuščią atsakymą. Bandyk dar kartą arba pasirink kitą modelį viršuje esančiame ženklelyje."
     }
 };

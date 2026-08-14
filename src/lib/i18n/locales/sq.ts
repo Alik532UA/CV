@@ -281,6 +281,7 @@ export const sq: Translations = {
         statusReady: "gati",
         tooltipAnswered: "U përgjigj {model} ({provider}). Kliko për të zgjedhur një tjetër.",
         tooltipWillTry: "Së pari do të provohet {model} ({provider}). Kliko për të zgjedhur një tjetër.",
-        pinHint: "Modeli i zgjedhur provohet i pari. Nëse mbaron kuotën, kërkesa kalon automatikisht te tjetri."
+        pinHint: "Modeli i zgjedhur provohet i pari. Nëse mbaron kuotën, kërkesa kalon automatikisht te tjetri.",
+        emptyAnswer: "Modeli ktheu një përgjigje bosh. Provoni sërish ose zgjidhni një model tjetër te distinktivi më sipër."
     }
 };

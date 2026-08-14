@@ -281,6 +281,7 @@ export const cy: Translations = {
         statusReady: "barod",
         tooltipAnswered: "Atebodd {model} ({provider}). Cliciwch i ddewis un arall.",
         tooltipWillTry: "Bydd {model} ({provider}) yn cael ei drio gyntaf. Cliciwch i ddewis un arall.",
-        pinHint: "Caiff y model a ddewiswyd ei drio gyntaf. Os yw'n defnyddio ei gwota, mae'r cais yn symud ymlaen yn awtomatig."
+        pinHint: "Caiff y model a ddewiswyd ei drio gyntaf. Os yw'n defnyddio ei gwota, mae'r cais yn symud ymlaen yn awtomatig.",
+        emptyAnswer: "Rhoddodd y model ateb gwag. Rhowch gynnig arall arni, neu dewiswch fodel arall ar y bathodyn uchod."
     }
 };

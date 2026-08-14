@@ -288,6 +288,7 @@ export const chk: Translations = {
         statusReady: "mi mmolnetá",
         tooltipAnswered: "{model} ({provider}) a poluweni. Click ika kopwe filata pwan eu.",
         tooltipWillTry: "Epwe akkomw sotuni {model} ({provider}). Click ika kopwe filata pwan eu.",
-        pinHint: "Ewe model ka filata epwe akkomw sotun. Ika a nomw an limit, ewe request epwe feino ngeni ewe mwirin."
+        pinHint: "Ewe model ka filata epwe akkomw sotun. Ika a nomw an limit, ewe request epwe feino ngeni ewe mwirin.",
+        emptyAnswer: "Ewe model ese ngeni poluwan. Sotuni sefan, are filata pwan eu model won ewe badge won asan."
     }
 };

@@ -281,6 +281,7 @@ export const nl: Translations = {
         statusReady: "gereed",
         tooltipAnswered: "{model} ({provider}) antwoordde. Klik om een ander te kiezen.",
         tooltipWillTry: "{model} ({provider}) wordt eerst geprobeerd. Klik om een ander te kiezen.",
-        pinHint: "Het gekozen model wordt eerst geprobeerd. Raakt het quotum op, dan gaat het verzoek automatisch naar het volgende."
+        pinHint: "Het gekozen model wordt eerst geprobeerd. Raakt het quotum op, dan gaat het verzoek automatisch naar het volgende.",
+        emptyAnswer: "Het model gaf een leeg antwoord. Probeer opnieuw of kies hierboven een ander model."
     }
 };

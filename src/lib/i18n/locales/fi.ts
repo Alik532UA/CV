@@ -281,6 +281,7 @@ export const fi: Translations = {
         statusReady: "valmis",
         tooltipAnswered: "{model} ({provider}) vastasi. Napsauta valitaksesi toisen.",
         tooltipWillTry: "{model} ({provider}) kokeillaan ensin. Napsauta valitaksesi toisen.",
-        pinHint: "Valittua mallia kokeillaan ensin. Jos kiintiö loppuu, pyyntö siirtyy automaattisesti listalla seuraavaan."
+        pinHint: "Valittua mallia kokeillaan ensin. Jos kiintiö loppuu, pyyntö siirtyy automaattisesti listalla seuraavaan.",
+        emptyAnswer: "Malli palautti tyhjän vastauksen. Yritä uudelleen tai valitse toinen malli yllä olevasta merkistä."
     }
 };

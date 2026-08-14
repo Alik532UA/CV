@@ -281,6 +281,7 @@ export const ro: Translations = {
         statusReady: "pregătit",
         tooltipAnswered: "A răspuns {model} ({provider}). Faceți clic pentru a alege altul.",
         tooltipWillTry: "Se va încerca mai întâi {model} ({provider}). Faceți clic pentru a alege altul.",
-        pinHint: "Modelul ales este încercat primul. Dacă își epuizează cota, cererea trece automat la următorul."
+        pinHint: "Modelul ales este încercat primul. Dacă își epuizează cota, cererea trece automat la următorul.",
+        emptyAnswer: "Modelul a returnat un răspuns gol. Încercați din nou sau alegeți alt model din insigna de mai sus."
     }
 };

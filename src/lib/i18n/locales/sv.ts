@@ -281,6 +281,7 @@ export const sv: Translations = {
         statusReady: "redo",
         tooltipAnswered: "{model} ({provider}) svarade. Klicka för att välja en annan.",
         tooltipWillTry: "{model} ({provider}) provas först. Klicka för att välja en annan.",
-        pinHint: "Den valda modellen provas först. Tar kvoten slut går förfrågan automatiskt vidare i listan."
+        pinHint: "Den valda modellen provas först. Tar kvoten slut går förfrågan automatiskt vidare i listan.",
+        emptyAnswer: "Modellen gav ett tomt svar. Försök igen eller välj en annan modell i märket ovan."
     }
 };

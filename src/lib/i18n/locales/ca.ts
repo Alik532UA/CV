@@ -281,6 +281,7 @@ export const ca: Translations = {
         statusReady: "a punt",
         tooltipAnswered: "Ha respost {model} ({provider}). Fes clic per triar-ne un altre.",
         tooltipWillTry: "Primer es provarà {model} ({provider}). Fes clic per triar-ne un altre.",
-        pinHint: "El model triat es prova primer. Si esgota la quota, la petició passa automàticament al següent."
+        pinHint: "El model triat es prova primer. Si esgota la quota, la petició passa automàticament al següent.",
+        emptyAnswer: "El model ha retornat una resposta buida. Torna-ho a provar o tria un altre model a la insígnia de dalt."
     }
 };

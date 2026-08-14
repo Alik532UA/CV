@@ -288,6 +288,7 @@ export const yap: Translations = {
         statusReady: "ke m'agan",
         tooltipAnswered: "{model} ({provider}) e ke fulweg. Mu klik ni ngam mel'eg beeni ku bugul.",
         tooltipWillTry: "Ra som'on ni ngan guy {model} ({provider}). Mu klik ni ngam mel'eg beeni ku bugul.",
-        pinHint: "Fare model ni kam mel'eg e ra som'on ni ngan guy. Faanra ke mus e limit rok, ma fare request e ra yan ko bin ni bay tomuren."
+        pinHint: "Fare model ni kam mel'eg e ra som'on ni ngan guy. Faanra ke mus e limit rok, ma fare request e ra yan ko bin ni bay tomuren.",
+        emptyAnswer: "Fare model e pi'eg reb e fulweg ni dariy ban'en riy. Mu guy bayay, ara mu mel'eg beeni ku bugul e model u fare badge u lang."
     }
 };

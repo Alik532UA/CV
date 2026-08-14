@@ -281,6 +281,7 @@ export const pt: Translations = {
         statusReady: "pronto",
         tooltipAnswered: "Respondeu {model} ({provider}). Clique para escolher outro.",
         tooltipWillTry: "Será tentado primeiro {model} ({provider}). Clique para escolher outro.",
-        pinHint: "O modelo escolhido é tentado primeiro. Se esgotar a quota, o pedido passa automaticamente ao seguinte."
+        pinHint: "O modelo escolhido é tentado primeiro. Se esgotar a quota, o pedido passa automaticamente ao seguinte.",
+        emptyAnswer: "O modelo devolveu uma resposta vazia. Tente novamente ou escolha outro modelo no crachá acima."
     }
 };

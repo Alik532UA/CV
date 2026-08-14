@@ -281,6 +281,7 @@ export const de: Translations = {
         statusReady: "bereit",
         tooltipAnswered: "{model} ({provider}) hat geantwortet. Klicken, um ein anderes zu wählen.",
         tooltipWillTry: "{model} ({provider}) wird zuerst versucht. Klicken, um ein anderes zu wählen.",
-        pinHint: "Das gewählte Modell wird zuerst versucht. Ist sein Kontingent erschöpft, geht die Anfrage automatisch weiter."
+        pinHint: "Das gewählte Modell wird zuerst versucht. Ist sein Kontingent erschöpft, geht die Anfrage automatisch weiter.",
+        emptyAnswer: "Das Modell lieferte eine leere Antwort. Versuchen Sie es erneut oder wählen Sie oben ein anderes Modell."
     }
 };

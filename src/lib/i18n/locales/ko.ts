@@ -281,6 +281,7 @@ export const ko: Translations = {
         statusReady: "사용 가능",
         tooltipAnswered: "{model}({provider})이(가) 응답했습니다. 클릭하여 다른 모델을 선택하세요.",
         tooltipWillTry: "먼저 {model}({provider})을(를) 시도합니다. 클릭하여 다른 모델을 선택하세요.",
-        pinHint: "선택한 모델을 먼저 시도합니다. 한도를 모두 쓰면 요청은 자동으로 목록의 다음 모델로 넘어갑니다."
+        pinHint: "선택한 모델을 먼저 시도합니다. 한도를 모두 쓰면 요청은 자동으로 목록의 다음 모델로 넘어갑니다.",
+        emptyAnswer: "모델이 빈 응답을 반환했습니다. 다시 시도하거나 위 배지에서 다른 모델을 선택하세요."
     }
 };

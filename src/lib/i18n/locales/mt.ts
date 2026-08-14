@@ -281,6 +281,7 @@ export const mt: Translations = {
         statusReady: "lest",
         tooltipAnswered: "Wieġeb {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
         tooltipWillTry: "L-ewwel jiġi ppruvat {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
-        pinHint: "Il-mudell magħżul jiġi ppruvat l-ewwel. Jekk jispiċċalu l-kwota, it-talba tgħaddi awtomatikament għal ta' warajh."
+        pinHint: "Il-mudell magħżul jiġi ppruvat l-ewwel. Jekk jispiċċalu l-kwota, it-talba tgħaddi awtomatikament għal ta' warajh.",
+        emptyAnswer: "Il-mudell ta tweġiba vojta. Erġa' pprova, jew agħżel mudell ieħor mill-badge ta' fuq."
     }
 };

@@ -281,6 +281,7 @@ export const sl: Translations = {
         statusReady: "pripravljen",
         tooltipAnswered: "Odgovoril je {model} ({provider}). Kliknite za izbiro drugega.",
         tooltipWillTry: "Najprej bo poskušen {model} ({provider}). Kliknite za izbiro drugega.",
-        pinHint: "Izbrani model se poskusi prvi. Če porabi kvoto, zahteva samodejno preide na naslednjega."
+        pinHint: "Izbrani model se poskusi prvi. Če porabi kvoto, zahteva samodejno preide na naslednjega.",
+        emptyAnswer: "Model je vrnil prazen odgovor. Poskusite znova ali izberite drug model na znački zgoraj."
     }
 };

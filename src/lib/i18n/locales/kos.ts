@@ -288,6 +288,7 @@ export const kos: Translations = {
         statusReady: "akola",
         tooltipAnswered: "{model} ({provider}) topuk tari. Klik in sulela sie pac.",
         tooltipWillTry: "Ac srike meet {model} ({provider}). Klik in sulela sie pac.",
-        pinHint: "Model se kom sulela ac srikeyuk meet. Fin safla limit lal, siyuk sac ac som nu ke ma tok."
+        pinHint: "Model se kom sulela ac srikeyuk meet. Fin safla limit lal, siyuk sac ac som nu ke ma tok.",
+        emptyAnswer: "Model sac sang sie top wangin kac. Srike sifil, ku sulela sie pac model ke badge lucng."
     }
 };

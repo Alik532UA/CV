@@ -287,6 +287,7 @@ export const en: Translations = {
         statusReady: "ready",
         tooltipAnswered: "{model} ({provider}) answered. Click to choose another.",
         tooltipWillTry: "{model} ({provider}) will be tried first. Click to choose another.",
-        pinHint: "The chosen model is tried first. If it runs out of quota, the request moves down the list automatically."
+        pinHint: "The chosen model is tried first. If it runs out of quota, the request moves down the list automatically.",
+        emptyAnswer: "The model returned an empty answer. Try again, or pick another model from the badge above."
     }
 };

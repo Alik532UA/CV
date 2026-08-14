@@ -281,6 +281,7 @@ export const no: Translations = {
         statusReady: "klar",
         tooltipAnswered: "{model} ({provider}) svarte. Klikk for å velge en annen.",
         tooltipWillTry: "{model} ({provider}) prøves først. Klikk for å velge en annen.",
-        pinHint: "Den valgte modellen prøves først. Går kvoten tom, går forespørselen automatisk videre i lista."
+        pinHint: "Den valgte modellen prøves først. Går kvoten tom, går forespørselen automatisk videre i lista.",
+        emptyAnswer: "Modellen ga et tomt svar. Prøv igjen, eller velg en annen modell i merket over."
     }
 };

@@ -281,6 +281,7 @@ export const et: Translations = {
         statusReady: "valmis",
         tooltipAnswered: "Vastas {model} ({provider}). Klõpsa teise valimiseks.",
         tooltipWillTry: "Kõigepealt proovitakse {model} ({provider}). Klõpsa teise valimiseks.",
-        pinHint: "Valitud mudelit proovitakse esimesena. Kui kvoot saab otsa, liigub päring automaatselt loendis edasi."
+        pinHint: "Valitud mudelit proovitakse esimesena. Kui kvoot saab otsa, liigub päring automaatselt loendis edasi.",
+        emptyAnswer: "Mudel tagastas tühja vastuse. Proovi uuesti või vali ülal olevast märgist teine mudel."
     }
 };

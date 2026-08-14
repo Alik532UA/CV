@@ -281,6 +281,7 @@ export const ja: Translations = {
         statusReady: "利用可能",
         tooltipAnswered: "{model}（{provider}）が回答しました。クリックして別のモデルを選べます。",
         tooltipWillTry: "最初に {model}（{provider}）を試します。クリックして別のモデルを選べます。",
-        pinHint: "選んだモデルが最初に試されます。上限に達した場合は、自動的にリストの次へ進みます。"
+        pinHint: "選んだモデルが最初に試されます。上限に達した場合は、自動的にリストの次へ進みます。",
+        emptyAnswer: "モデルの回答が空でした。もう一度試すか、上のバッジから別のモデルを選んでください。"
     }
 };

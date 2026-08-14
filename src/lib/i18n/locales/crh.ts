@@ -283,6 +283,7 @@ export const crh: Translations = {
         statusReady: "azır",
         tooltipAnswered: "{model} ({provider}) cevap berdi. Başqasını saylamaq içün basıñız.",
         tooltipWillTry: "Evelâ {model} ({provider}) sınalır. Başqasını saylamaq içün basıñız.",
-        pinHint: "Saylanğan model evelâ sınalır. Limitleri bitse, soraş özü-özünden listede kelecekke keçe."
+        pinHint: "Saylanğan model evelâ sınalır. Limitleri bitse, soraş özü-özünden listede kelecekke keçe.",
+        emptyAnswer: "Model boş cevap qaytardı. Kene deñeñiz yaki yuqarıdaki bejdte başqa model saylañız."
     }
 };

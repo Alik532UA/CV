@@ -281,6 +281,7 @@ export const ga: Translations = {
         statusReady: "réidh",
         tooltipAnswered: "D'fhreagair {model} ({provider}). Cliceáil chun ceann eile a roghnú.",
         tooltipWillTry: "Bainfear triail as {model} ({provider}) ar dtús. Cliceáil chun ceann eile a roghnú.",
-        pinHint: "Bainfear triail as an tsamhail roghnaithe ar dtús. Má ídítear a cuóta, leanann an t-iarratas ar aghaidh go huathoibríoch."
+        pinHint: "Bainfear triail as an tsamhail roghnaithe ar dtús. Má ídítear a cuóta, leanann an t-iarratas ar aghaidh go huathoibríoch.",
+        emptyAnswer: "Thug an tsamhail freagra folamh. Bain triail eile as, nó roghnaigh samhail eile ar an suaitheantas thuas."
     }
 };

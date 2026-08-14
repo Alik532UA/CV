@@ -281,6 +281,7 @@ export const cs: Translations = {
         statusReady: "připraven",
         tooltipAnswered: "Odpověděl {model} ({provider}). Klepnutím vyberete jiný.",
         tooltipWillTry: "Nejdřív se zkusí {model} ({provider}). Klepnutím vyberete jiný.",
-        pinHint: "Vybraný model se zkouší jako první. Když vyčerpá limit, požadavek automaticky pokračuje dalším."
+        pinHint: "Vybraný model se zkouší jako první. Když vyčerpá limit, požadavek automaticky pokračuje dalším.",
+        emptyAnswer: "Model vrátil prázdnou odpověď. Zkuste to znovu nebo vyberte jiný model na odznaku výše."
     }
 };

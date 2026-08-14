@@ -281,6 +281,7 @@ export const tr: Translations = {
         statusReady: "hazır",
         tooltipAnswered: "{model} ({provider}) yanıtladı. Başkasını seçmek için tıklayın.",
         tooltipWillTry: "Önce {model} ({provider}) denenecek. Başkasını seçmek için tıklayın.",
-        pinHint: "Seçilen model önce denenir. Kotası dolarsa istek otomatik olarak listedeki sıradakine geçer."
+        pinHint: "Seçilen model önce denenir. Kotası dolarsa istek otomatik olarak listedeki sıradakine geçer.",
+        emptyAnswer: "Model boş bir yanıt döndürdü. Tekrar deneyin veya yukarıdaki rozetten başka bir model seçin."
     }
 };
