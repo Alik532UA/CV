@@ -90,7 +90,7 @@
                 </a>
             {/each}
         </div>
-        <button class="pdf-button" onclick={() => pdfModal.open()}>
+        <button class="pdf-button" onclick={() => pdfModal.open()} data-testid="sidebar-pdf-btn">
             <FileText size={18} aria-hidden="true" />
             <span>PDF version</span>
         </button>

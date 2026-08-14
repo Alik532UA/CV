@@ -502,6 +502,7 @@
                     aria-label="Select language"
                     aria-haspopup="true"
                     aria-expanded={langMenu.isOpen}
+                    data-testid="lang-trigger-btn"
                 >
                     <ActiveFlag width="20" height="15" class="flag-icon" />
                     <span class="lang-code">{languageBadge(language.current)}</span>

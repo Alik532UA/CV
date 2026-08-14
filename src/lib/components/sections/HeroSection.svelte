@@ -93,6 +93,7 @@
                 <button
                     class="btn-secondary nowrap-btn pdf-btn"
                     onclick={onOpenPdfModal}
+                    data-testid="hero-pdf-btn"
                 >
                     <span><FileText size={18} aria-hidden="true" /></span> PDF version
                 </button>

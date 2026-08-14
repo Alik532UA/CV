@@ -1,5 +1,17 @@
 import { defineConfig, devices } from '@playwright/test';
 
+/**
+ * Окремий порт саме для тестів, і свій у кожному проєкті.
+ *
+ * Було `5173` плюс `reuseExistingServer: !process.env.CI`. 5173 — типовий порт
+ * Vite, тобто той самий в усіх сімох проєктах. Якщо на ньому вже висить
+ * dev-сервер ІНШОГО проєкту, Playwright спокійно бере його й перевіряє чужий
+ * застосунок: тест зелений, перевірено не те (AI-AGENT-PITFALLS-v8 § 1).
+ * Це не гіпотеза — саме так інваріант унікальності `data-testid` тут одного
+ * разу «пройшов», дивлячись на сусідній сайт.
+ */
+const TEST_PORT = 5273;
+
 export default defineConfig({
 	testDir: './tests',
 	timeout: 30 * 1000,
@@ -13,7 +25,7 @@ export default defineConfig({
 	reporter: 'html',
 	use: {
 		actionTimeout: 0,
-		baseURL: 'http://localhost:5173',
+		baseURL: `http://localhost:${TEST_PORT}`,
 		trace: 'on-first-retry',
 	},
 	projects: [
@@ -31,9 +43,11 @@ export default defineConfig({
 		},
 	],
 	webServer: {
-		command: 'npm run dev',
-		port: 5173,
-		reuseExistingServer: !process.env.CI,
+		// `--strictPort`: зайнятий порт мусить УПАСТИ, а не тихо з'їхати на
+		// наступний — інакше `port` нижче вказував би на чужий сервер.
+		command: `npm run dev -- --port ${TEST_PORT} --strictPort`,
+		port: TEST_PORT,
+		reuseExistingServer: false,
 		env: {
 			// Адреса-заглушка AI-проксі: усі запити на неї перехоплює page.route у
 			// tests/ai-matcher.spec.ts, тому нічого справді слухати цей порт не має.
