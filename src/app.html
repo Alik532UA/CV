@@ -7,6 +7,29 @@
 	<meta name="color-scheme" content="light dark" />
 	<meta name="theme-color" content="#050505" />
 	<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon.png" />
+
+	<!--
+		Шрифт підключений тут, а не через `@import` в app.css, і це не стиль, а
+		швидкість. `@import` усередині CSS змушує браузер спершу завантажити й
+		розпарсити app.css, ЛИШЕ ПОТІМ побачити адресу шрифтового CSS,
+		завантажити його і лише тоді — самі файли шрифту. Три послідовні кроки,
+		кожен — окремий round-trip.
+
+		`<link>` у розмітці бачить preload-сканер одразу, ще до парсингу CSS, і
+		тягне шрифтовий CSS паралельно з app.css. `preconnect` заздалегідь
+		відкриває з'єднання з обома хостами Google Fonts (CSS лежить на
+		googleapis.com, самі файли — на gstatic.com), щоб на момент запиту не
+		платити за DNS і TLS.
+
+		`display=swap` лишається в адресі: без нього текст невидимий, поки
+		шрифт вантажиться (PERFORMANCE-v8 § 2).
+	-->
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+	/>
 	<!--
 		These two rules hide the page's native scrollbar, and they live here rather
 		than in app.css on purpose.
