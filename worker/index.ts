@@ -30,7 +30,12 @@ import {
 	type CooldownMap,
 	type FailureKind
 } from "../src/lib/services/aiChain";
-import { buildMessages, buildSystemPrompt, isFirstAnalysis } from "../src/lib/services/aiPrompt";
+import {
+	buildMessages,
+	buildSystemPrompt,
+	isFirstAnalysis,
+	replyLanguageName
+} from "../src/lib/services/aiPrompt";
 import {
 	buildBindingInput,
 	buildWireRequest,
@@ -173,6 +178,8 @@ interface MatchRequest {
 	input: string;
 	history: AiPromptMessage[];
 	pinnedId: string | null;
+	/** Мова відповіді — назва англійською, уже зведена з тега сайту. */
+	replyLanguage: string;
 }
 
 async function handleMatch(
@@ -188,7 +195,7 @@ async function handleMatch(
 			? await fetchJobTextFromUrl(req.input)
 			: req.input;
 
-	const system = buildSystemPrompt();
+	const system = buildSystemPrompt(req.replyLanguage);
 	const messages = buildMessages(input, req.history);
 
 	prune(startedAt);
@@ -525,7 +532,7 @@ function remainingCooldowns(now: number): Record<string, number> {
 
 function parseBody(body: unknown): MatchRequest | { error: string } {
 	if (!body || typeof body !== "object") return { error: "Body must be an object" };
-	const raw = body as { input?: unknown; history?: unknown; model?: unknown };
+	const raw = body as { input?: unknown; history?: unknown; model?: unknown; language?: unknown };
 
 	const input = typeof raw.input === "string" ? raw.input.trim().slice(0, MAX_INPUT_CHARS) : "";
 
@@ -558,7 +565,13 @@ function parseBody(body: unknown): MatchRequest | { error: string } {
 			? raw.model
 			: null;
 
-	return { input, history, pinnedId };
+	// Тег приходить ззовні, тому не довіряємо йому як рядку в промпті:
+	// replyLanguageName зводить його до одного з відомих значень, а все
+	// незнайоме — до англійської. Інакше сюди можна було б вписати будь-що
+	// і дописати собі інструкцію в системний промпт.
+	const replyLanguage = replyLanguageName(raw.language);
+
+	return { input, history, pinnedId, replyLanguage };
 }
 
 /**

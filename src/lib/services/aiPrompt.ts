@@ -25,7 +25,80 @@ export const MATCH_RESULT_FIELDS = [
 	"recommendedResponse"
 ] as const;
 
-export function buildSystemPrompt(): string {
+/**
+ * Мова, якою модель має відповідати, за тегом мови сайту.
+ *
+ * Раніше промпт казав «відповідай українською», і це не залежало ні від чого:
+ * англомовний рекрутер відкривав /CV/ і отримував український аналіз своєї ж
+ * англійської вакансії. Мова інтерфейсу — єдиний сигнал про те, якою мовою
+ * відвідувач читає, тож вона тепер і вирішує.
+ *
+ * Значення — назва мови англійською, бо саме так її надійніше розпізнають
+ * моделі, а не ендонім.
+ *
+ * ПʼЯТЬ ТЕГІВ НАВМИСНО ВКАЗУЮТЬ НА АНГЛІЙСЬКУ. Кримськотатарською і чотирма
+ * мікронезійськими жодна з моделей ланцюжка не пише впевнено — у самих файлах
+ * локалей це записано як «unverified machine translation». Каліченa відповідь
+ * про досвід кандидата гірша за англійську: перша виглядає як недбалість
+ * автора, друга — як розумний фолбек.
+ */
+const REPLY_LANGUAGE: Record<string, string> = {
+	en: "English",
+	"en-us": "English",
+	uk: "Ukrainian",
+	ja: "Japanese",
+	es: "Spanish",
+	fr: "French",
+	pt: "Portuguese",
+	it: "Italian",
+	de: "German",
+	nl: "Dutch",
+	be: "Belarusian",
+	pl: "Polish",
+	cs: "Czech",
+	sk: "Slovak",
+	bg: "Bulgarian",
+	hr: "Croatian",
+	sl: "Slovenian",
+	mk: "Macedonian",
+	ro: "Romanian",
+	sv: "Swedish",
+	no: "Norwegian",
+	da: "Danish",
+	is: "Icelandic",
+	ca: "Catalan",
+	fi: "Finnish",
+	el: "Greek",
+	ga: "Irish",
+	cy: "Welsh",
+	et: "Estonian",
+	lv: "Latvian",
+	lt: "Lithuanian",
+	ka: "Georgian",
+	sq: "Albanian",
+	ko: "Korean",
+	tr: "Turkish",
+	he: "Hebrew",
+	mt: "Maltese",
+	crh: "English",
+	chk: "English",
+	pon: "English",
+	kos: "English",
+	yap: "English"
+};
+
+export const DEFAULT_REPLY_LANGUAGE = "English";
+
+/**
+ * Назва мови відповіді за тегом. Невідомий тег дає англійську, а не виняток:
+ * тег приходить із запиту, тобто ззовні, і промпт не місце для падіння.
+ */
+export function replyLanguageName(tag: unknown): string {
+	if (typeof tag !== "string") return DEFAULT_REPLY_LANGUAGE;
+	return REPLY_LANGUAGE[tag] ?? DEFAULT_REPLY_LANGUAGE;
+}
+
+export function buildSystemPrompt(replyLanguage: string = DEFAULT_REPLY_LANGUAGE): string {
 	return `Ти — AI-асистент Аліка Заполнова (Automation QA Engineer & AI Integration Specialist).
 Твоя мета — проаналізувати вимоги вакансії від HR або рекрутера, порівняти їх зі знаннями про Аліка та дати об'єктивний, професійний висновок.
 
@@ -44,7 +117,7 @@ ${KNOWLEDGE_BASE_UA}
   "recommendedResponse": "Привіт! Дякую за цікаву вакансію. Алік має релевантний досвід і буде радий обговорити деталі."
 }
 4. Якщо в запиті є історія діалогу (продовження чату з HR), відповідай звичайним текстом від імені AI-асистента Аліка.
-5. Відповідай українською, якщо HR не пише іншою мовою.`;
+5. МОВА ВІДПОВІДІ: ${replyLanguage}. Це мова, якою відвідувач читає сайт — тримайся її, навіть якщо текст вакансії іншою мовою. Виняток один: поле "recommendedResponse" — це готовий текст, який відвідувач надішле рекрутерові, тому воно пишеться мовою самої вакансії.`;
 }
 
 /**

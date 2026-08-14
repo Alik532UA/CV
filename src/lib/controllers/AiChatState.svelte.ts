@@ -3,6 +3,7 @@ import { AI_PROVIDERS, findProvider, type AiProviderEntry } from "$lib/config/ai
 import { pruneCooldowns, type CooldownMap } from "$lib/services/aiChain";
 import { logService } from "$lib/services/logService.svelte";
 import { storage } from "$lib/services/storage";
+import { language } from "$lib/controllers/I18nState.svelte";
 
 export interface MatchResult {
 	matchPercentage: number;
@@ -214,7 +215,16 @@ class AiChatState {
 			res = await fetch(proxyUrl(), {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ ...payload, model: this.pinnedId ?? undefined })
+				body: JSON.stringify({
+					...payload,
+					model: this.pinnedId ?? undefined,
+					// Мова інтерфейсу — єдиний сигнал про те, якою мовою читає
+					// відвідувач. Проксі зводить тег до назви мови й підставляє її в
+					// системний промпт; доти промпт беззастережно вимагав української,
+					// і англомовний рекрутер отримував український аналіз власної
+					// англійської вакансії.
+					language: language.current
+				})
 			});
 		} catch (err) {
 			throw new Error(`Не вдалося звернутися до AI-проксі: ${(err as Error).message}`);
