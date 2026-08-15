@@ -84,6 +84,41 @@ describe("CSP declares only what a meta policy can deliver", () => {
 		).toEqual([]);
 	});
 
+	/**
+	 * § 6.3, and the half of it that is easy to miss.
+	 *
+	 * `mode: 'hash'` plus a hand-written hash in `script-src` looks like the
+	 * inline first-frame script is covered. It is not, unless the script also
+	 * stands AFTER `%sveltekit.head%`: SvelteKit emits the
+	 * <meta http-equiv="Content-Security-Policy"> at exactly that placeholder,
+	 * and a meta policy is required by spec to govern only what follows it.
+	 *
+	 * This project shipped that way — script above, policy below — so the hash
+	 * that `scrollbar-canon.test.ts` so carefully keeps in sync was decorative.
+	 * Nothing about the page looked wrong, which is the whole problem: the
+	 * failure of a policy is invisible, because a policy that does not apply
+	 * blocks nothing and warns about nothing.
+	 */
+	it("puts the first-frame script after the policy that is meant to cover it", () => {
+		// Comments are stripped first, and the reverse experiment is why. The
+		// comment explaining this rule names `%sveltekit.head%` itself, and the
+		// first version of this check found THAT occurrence — so it stayed green
+		// with the script moved back above the real placeholder. Positions are
+		// preserved by blanking the comments rather than deleting them.
+		const stripped = APP_HTML.replace(/<!--[\s\S]*?-->/g, (c) => " ".repeat(c.length));
+		const head = stripped.indexOf("%sveltekit.head%");
+		const script = stripped.indexOf("<script>");
+
+		expect(head, "%sveltekit.head% is gone from app.html").toBeGreaterThan(-1);
+		expect(script, "no inline script in app.html — has it moved?").toBeGreaterThan(-1);
+		expect(
+			script,
+			`the inline script sits above %sveltekit.head%, so the meta CSP does not ` +
+				`apply to it and its hash in script-src protects nothing (§ 6.3). ` +
+				`Move the script below the placeholder.`
+		).toBeGreaterThan(head);
+	});
+
 	it("keeps object-src and base-uri, which have no default to fall back on", () => {
 		// There is no default-src here, so an omitted directive is not inherited
 		// — it is unrestricted. These two are cheap and close real injection paths.
