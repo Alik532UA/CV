@@ -41,17 +41,41 @@ for (const path of PAGES) {
 }
 
 /**
- * ЩО ТУТ НЕ ПОКРИТО, і це сказано прямо, а не мовчить.
+ * ЩО БУЛО НЕ ПОКРИТО — і чому тепер покрито.
  *
- * Модалка вибору PDF і мовне меню лишаються поза перевіркою. Локатори для них
- * тепер є — `sidebar-pdf-btn`, `hero-pdf-btn`, `lang-trigger-btn` (додані разом
- * із цим файлом; до того ключові кнопки user-flow взагалі не мали локаторів), —
- * але послідовність «клік -> панель у DOM» у цьому проході не завелася: клік
- * проходить, а `pdf-option-ats` і `lang-en-btn` до екрана не доїжджають за 30 с.
- * Причина не з'ясована, тому тесту тут немає: червоний або пропущений тест у
- * наборі гірший за відсутній — його швидко починають ігнорувати.
+ * Тут стояв запис: «клік проходить, а `pdf-option-ats` і `lang-en-btn` до
+ * екрана не доїжджають за 30 с. Причина не з'ясована». Причина з'ясувалася на
+ * чотирьох тестах `ai-matcher.spec.ts`, які падали точно так само й з тієї ж
+ * причини: клік одразу після `goto()` потрапляє в кнопку, яку намалював
+ * prerender, але обробник `onclick` до гідрації ще не навішаний. Клік минає
+ * повз застосунок і не каже про це нічого — а падає потім очікування панелі,
+ * тобто симптом вказує зовсім не туди, де причина.
  *
- * Наступний крок, коли до цього дійдуть руки: подивитися, чи модалка взагалі
- * монтується при `pdfModal.open()` на ширині desktop, і чи не потрібен мобільний
- * viewport для `hero-pdf-btn`.
+ * Ліки канонічні: пара «клік + очікування» під `toPass`, доки застосунок не
+ * оживе (CODE-QUALITY-v8 § 5.3). Модалка й меню працюють — це перевірено
+ * вручну на зібраному сайті через `npm run preview`.
  */
+async function clickUntilVisible(
+	page: import("@playwright/test").Page,
+	trigger: string,
+	appears: string
+) {
+	const target = page.getByTestId(appears);
+	await expect(async () => {
+		await page.getByTestId(trigger).click();
+		await expect(target).toBeVisible({ timeout: 1000 });
+	}).toPass({ timeout: 15000 });
+	return target;
+}
+
+test("unique data-testid with the PDF modal open", async ({ page }) => {
+	await page.goto("/CV/");
+	await clickUntilVisible(page, "sidebar-pdf-btn", "pdf-option-ats");
+	expectUnique(await collectIds(page, "PDF modal"), "PDF modal");
+});
+
+test("unique data-testid with the language menu open", async ({ page }) => {
+	await page.goto("/CV/");
+	await clickUntilVisible(page, "lang-trigger-btn", "lang-en-btn");
+	expectUnique(await collectIds(page, "language menu"), "language menu");
+});

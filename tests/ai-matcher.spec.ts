@@ -1,4 +1,22 @@
 import { test, expect, type Page, type Route } from '@playwright/test';
+import { en } from '../src/lib/i18n/locales/en';
+
+/**
+ * Тексти інтерфейсу беруться зі словника, а не з літералів у тесті.
+ *
+ * Три перевірки нижче були написані з українськими рядками («ліміт»,
+ * «відповіла»), а голий шлях `/CV/` за рішенням проєкту англійський — тож вони
+ * падали на `Received string: "limit ~15 min"`. Це саме той випадок, від якого
+ * застерігає CODE-QUALITY-v8 § 5.7: локаль браузера в Playwright — `en-US`, і
+ * тест, написаний у своїй мові, перевіряє не те, що бачить відвідувач.
+ *
+ * Словник замість літерала знімає питання цілком: перевірка лишається чинною і
+ * після зміни формулювання, і при зміні типової мови.
+ */
+const t = en.ai;
+
+/** Стабільна частина рядка з підстановкою: "limit ~{minutes} min" → "limit ~". */
+const upTo = (template: string) => template.split('{')[0].trim();
 
 /**
  * AI-проксі тут завжди підроблений: справжній витрачав би квоту Gemini на кожен
@@ -70,6 +88,13 @@ async function stubProxy(
 			stub.requests.push(request.postDataJSON());
 
 			const isFirst = stub.requests.length === 1;
+			// `options.result ?? MATCH_RESULT` тут стояло — і воно скасовувало сенс
+			// виклику `stubProxy(page, { result: null })`: `null ?? X` дає X, тож
+			// «модель не віддала JSON» перетворювалося на звичайну вдалу відповідь.
+			// Тест «відповідь без JSON показується як текст» шукав панель сирого
+			// тексту й не знаходив її, бо на екрані був score. Розрізняємо
+			// «не передали» і «передали null» явно.
+			const result = 'result' in options ? options.result : MATCH_RESULT;
 			await route.fulfill({
 				status: 200,
 				contentType: 'application/json',
@@ -79,8 +104,8 @@ async function stubProxy(
 					model: options.model ?? 'openai/gpt-oss-120b',
 					provider: options.provider ?? 'Groq',
 					isFirstAnalysis: isFirst,
-					result: isFirst ? (options.result ?? MATCH_RESULT) : null,
-					rawText: options.rawText ?? JSON.stringify(options.result ?? MATCH_RESULT),
+					result: isFirst ? result : null,
+					rawText: options.rawText ?? JSON.stringify(result),
 					reply: isFirst ? undefined : 'Готовий обговорити деталі.',
 					cooldowns: options.cooldowns ?? {}
 				})
@@ -91,10 +116,31 @@ async function stubProxy(
 	return stub;
 }
 
+/**
+ * Клік по кнопці, яка щось відкриває, робиться з перевіркою стану, а не всліпу
+ * (CODE-QUALITY-v8 § 5.3).
+ *
+ * Тут стояв голий `click()` одразу після `goto()`, і чотири тести з цього файлу
+ * падали постійно: `ai-job-input-textarea` не з'являвся за 5 с. Причина не в
+ * модалці — вона працює. Причина в тому, що `onclick={() => aiChat.open()}` до
+ * гідрації ще не навішаний: клік по кнопці, яку намалював prerender, не робить
+ * нічого й нічого про це не каже.
+ *
+ * Симптом при цьому вказує не туди: у виводі падає очікування текстової області,
+ * тому шукати починають у модалці. Саме так у tests/invariants.spec.ts опинився
+ * коментар «клік проходить, а панель до екрана не доїжджає, причина не з'ясована».
+ *
+ * `toPass` повторює пару «клік + очікування», доки застосунок не оживе. Той
+ * самий патерн уже стоїть у tests/toast.spec.ts (`copyEmail`) — з тієї ж
+ * причини, лише знайденої раніше.
+ */
 async function openMatcher(page: Page) {
 	await page.goto('/CV/');
-	await page.getByTestId('ai-matcher-open-btn').click();
-	await expect(page.getByTestId('ai-job-input-textarea')).toBeVisible();
+	const textarea = page.getByTestId('ai-job-input-textarea');
+	await expect(async () => {
+		await page.getByTestId('ai-matcher-open-btn').click();
+		await expect(textarea).toBeVisible({ timeout: 1000 });
+	}).toPass({ timeout: 15000 });
 }
 
 async function analyze(page: Page) {
@@ -124,8 +170,12 @@ test.describe('AI Job Matcher', () => {
 
 		// Модель, що впала через ліміт, позначена в списку як «остигає».
 		await badge.click();
-		await expect(page.getByTestId('ai-model-gemini-36-flash-status')).toContainText('ліміт');
-		await expect(page.getByTestId('ai-model-groq-gpt-oss-120b-status')).toContainText('відповіла');
+		await expect(page.getByTestId('ai-model-gemini-36-flash-status')).toContainText(
+			upTo(t.statusCooldown)
+		);
+		await expect(page.getByTestId('ai-model-groq-gpt-oss-120b-status')).toContainText(
+			t.statusAnswered
+		);
 	});
 
 	test('ручний вибір моделі доїжджає до проксі й не скасовує fallback', async ({ page }) => {
@@ -145,8 +195,14 @@ test.describe('AI Job Matcher', () => {
 		await expect(page.getByTestId('ai-model-badge-btn')).toContainText('openai/gpt-oss-120b');
 
 		// Вибір переживає перезавантаження — він у localStorage.
+		// Після reload діє те саме правило, що й у openMatcher: до гідрації клік
+		// по кнопці нічого не робить і нічого про це не каже.
 		await page.reload();
-		await page.getByTestId('ai-matcher-open-btn').click();
+		const textarea = page.getByTestId('ai-job-input-textarea');
+		await expect(async () => {
+			await page.getByTestId('ai-matcher-open-btn').click();
+			await expect(textarea).toBeVisible({ timeout: 1000 });
+		}).toPass({ timeout: 15000 });
 		await page.getByTestId('ai-model-badge-btn').click();
 		await expect(page.getByTestId('ai-model-gemini-35-flash-btn')).toHaveAttribute(
 			'aria-checked',
