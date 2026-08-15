@@ -97,7 +97,7 @@ prerendered, але сторінки позначені `noindex`. Підвищ�
 
 🌐 **https://alik532ua.github.io/CV/** — спільний домен, власного тут немає. Тому `paths.base` дорівнює `/CV`, а всі ключі сховища мають префікс `cv-svelte_`: origin ділиться з сусідніми проєктами.
 
-Про переїзд на власний домен (якщо колись) — [CUSTOM-DOMAIN-v8.md](../sveltekit-canon/selection_criteria/v8/CUSTOM-DOMAIN-v8.md): міняти `base` наосліп не можна, там зібрані граблі двох уже наявних переїздів.
+Про переїзд на власний домен (якщо колись) — [CUSTOM-DOMAIN-v8.md](../sveltekit-canon/selection_criteria/v8/ops/CUSTOM-DOMAIN-v8.md): міняти `base` наосліп не можна, там зібрані граблі двох уже наявних переїздів.
 
 Push у `main` → GitHub Actions збирає сайт і викладає на Pages через OIDC.
 Окремою job деплоїться воркер — щоб падіння Cloudflare не блокувало сайт і
