@@ -86,6 +86,12 @@
 </script>
 
 {#if show}
+    <!-- Обґрунтування: тло — це поверхня «клікнути повз, щоб закрити», а не
+         елемент керування. Клавіатурний еквівалент у неї вже є, і кращий:
+         Escape, який ловить handleKeydown на window вище. Дати тлу role і
+         tabindex означало б поставити в порядок табуляції зупинку, яка нічого
+         не робить, і оголосити читалці елемент, якого для неї не існує
+         (ACCESSIBILITY-v8 § 10.5). -->
     <!-- svelte-ignore a11y_click_events_have_key_events -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div

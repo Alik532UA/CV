@@ -278,6 +278,10 @@
 <!-- Mounted on `enabled`, not `visible`: a bar that left the DOM on a page with
      nothing to scroll would have nothing to animate away. -->
 {#if enabled}
+    <!-- Обґрунтування: те саме, що в Minimap.svelte — поверхня перетягування,
+         законний виняток для drag handle (ACCESSIBILITY-v8 § 1). Смуга не
+         забирає прокрутку в документа, лише дублює її, тож клавіатурний шлях
+         (PageUp/PageDown, стрілки, Home/End) лишається нативним і повним. -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
         class="page-scrollbar"

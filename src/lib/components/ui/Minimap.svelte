@@ -475,6 +475,12 @@
      slide driven by `progress` — and the alternative, keeping it mounted and turning
      it non-rendered, costs the pointer capture a drag depends on. -->
 {#if visible}
+    <!-- Обґрунтування: це поверхня перетягування — рівно той виняток, який
+         ACCESSIBILITY-v8 § 1 називає законним для drag handle. Ролі кнопки в
+         неї немає, бо натискання тут не дія, а координата. Клавіатурний
+         еквівалент лишається нативним: мінімапа не забирає прокрутку в
+         документа, а лише малює її поруч, тож PageUp/PageDown/стрілки/Home/End
+         працюють як завжди. -->
     <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
         class="minimap"
