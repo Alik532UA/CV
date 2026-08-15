@@ -242,7 +242,10 @@
         font-size: 0.75rem;
         color: var(--text-secondary);
         text-align: center;
-        opacity: 0.7;
+        /* `opacity: 0.7` тут не було: --text-secondary уже приглушений, і
+           множення приглушень давало #919195 — 2.75:1 при потрібних 4.5
+           (ACCESSIBILITY-v8 § 6). Найдрібніший текст на сторінці був найгірше
+           читаний. */
     }
 
     @media (max-width: 768px) {

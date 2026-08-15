@@ -1,5 +1,11 @@
 import { test, expect, type Page } from "@playwright/test";
 
+/**
+ * Адреси тут `/CV/`, а не `/`. `base` у svelte.config.js — `/CV`, і прев'ю
+ * зібраного сайту (на відміну від dev-сервера) на голий `/` нічого не віддає:
+ * `page.goto("/")` вів би на 404, а тест «падав» би на пошуку локатора
+ * (CODE-QUALITY-v8 § 5.4).
+ */
 async function waitForHydration(page: Page) {
 	await page.waitForFunction(() => "__svelte" in window);
 }
@@ -49,7 +55,7 @@ test.describe("Email toast", () => {
 
 	test.describe("clipboard available", () => {
 		test.beforeEach(async ({ page }) => {
-			await page.goto("/");
+			await page.goto("/CV/");
 			await waitForHydration(page);
 			await emailLink(page).waitFor({ state: "visible" });
 			await primeClipboard(page);
@@ -137,7 +143,7 @@ test.describe("Email toast", () => {
 
 	test("on a narrow screen the email toast falls back to the global stack", async ({ page }) => {
 		await page.setViewportSize({ width: 375, height: 812 });
-		await page.goto("/");
+		await page.goto("/CV/");
 		await waitForHydration(page);
 		await emailLink(page).waitFor({ state: "visible" });
 		await primeClipboard(page);
@@ -151,7 +157,7 @@ test.describe("Email toast", () => {
 	});
 
 	test("falls back to a mailto link when clipboard is unavailable", async ({ page }) => {
-		await page.goto("/");
+		await page.goto("/CV/");
 		await waitForHydration(page);
 		await emailLink(page).waitFor({ state: "visible" });
 		await page.evaluate(() => {

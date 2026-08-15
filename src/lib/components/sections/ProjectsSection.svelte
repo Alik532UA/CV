@@ -162,8 +162,12 @@
         background: rgba(var(--accent-primary-rgb), 0.2);
         /* Not white: over a 20% accent tint that only works on a dark page. The
            toggle groups in the header already colour their active option this
-           way. */
-        color: var(--accent-primary);
+           way.
+
+           `--accent-on-tint`, а не сам акцент: у світлій темі 20%-й акцент дає
+           фон #c4d8ee, і акцент на ньому — 3.82:1, тобто нижче AA. У темній
+           темі змінна дорівнює акценту, тож там нічого не змінилося. */
+        color: var(--accent-on-tint);
         border-color: var(--accent-primary);
         box-shadow: 0 4px 14px rgba(var(--accent-primary-rgb, 0, 242, 255), 0.25);
     }
