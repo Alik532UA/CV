@@ -13,7 +13,17 @@
 			copied = true;
 			setTimeout(() => (copied = false), 2000);
 		} catch (err) {
-			console.error("Failed to copy logs:", err);
+			// `warn`, а не `error`: буфер обміну недоступний за нормальних умов —
+			// сторінка без фокуса, відмова в дозволі, HTTP замість HTTPS
+			// (ERROR-HANDLING-v8 § 1.4). Рівень `error` тут піднімав би
+			// `logService.errorCount`, тобто саме той лічильник, від якого
+			// залежить видимість цієї кнопки: невдала спроба скопіювати звіт
+			// створювала б привід показати кнопку, що копіює звіт.
+			//
+			// І через logService, а не console: пакет забороняє console у
+			// продакшн-коді (CODE-QUALITY-v8 § анти-патерни), а тут воно ще й
+			// не потрапляло у звіт, який ця сама кнопка й віддає.
+			logService.warn("ui", `Failed to copy the log report: ${String(err)}`);
 		}
 	}
 </script>
