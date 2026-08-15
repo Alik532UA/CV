@@ -12,6 +12,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"check:worker": "tsc --noEmit -p worker/tsconfig.json",
 		"check:build": "node scripts/check-build.mjs",
+		"check:bundle": "node scripts/check-bundle.mjs",
 		"lint": "eslint .",
 		"test": "npm run test:unit && npm run test:e2e",
 		"test:unit": "vitest run",

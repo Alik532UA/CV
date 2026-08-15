@@ -88,6 +88,12 @@ jobs:
       - name: Verify build output
         run: npm run check:build
 
+      # Бюджет початкового JS (PERFORMANCE-v8 § 1). Міряє те, що браузер тягне
+      # на першу сторінку, а не теку `entry/` з шаблону канону — там лежать два
+      # завантажувачі на 2 КБ, і гейт над ними не впав би ніколи.
+      - name: Check JS budget
+        run: npm run check:bundle
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
