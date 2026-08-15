@@ -144,17 +144,24 @@
 </BaseModal>
 
 <style>
+    /*
+     * Усі вертикальні розміри тут — функція висоти вікна, а не константи.
+     *
+     * Мета: на будь-якому екрані вміст СТИСКАЄТЬСЯ до розміру, що вміщується,
+     * замість того щоб вилазити за межі або ховатися під прокрутку. `dvh`
+     * замість `vh`, бо на мобільних висота живе разом із панеллю браузера.
+     */
     .pdf-modal-container {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: clamp(8px, 1.8dvh, 20px);
         width: 100%;
     }
 
     .pdf-options {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        gap: clamp(8px, 1.8dvh, 20px);
         width: 100%;
     }
 
@@ -162,9 +169,9 @@
         display: flex;
         flex-direction: column;
         align-items: stretch;
-        gap: 8px;
+        gap: clamp(2px, 0.8dvh, 8px);
         width: 100%;
-        padding: 16px 20px;
+        padding: clamp(8px, 1.8dvh, 16px) 20px;
         border-radius: 16px;
         border: 1px solid rgba(var(--accent-primary-rgb), 0.35);
         background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.14) 0%, rgba(139, 92, 246, 0.22) 100%);
@@ -182,11 +189,25 @@
         box-shadow: 0 4px 20px rgba(var(--accent-primary-rgb), 0.25);
     }
 
+    /*
+     * `flex-wrap` тут — не косметика, а те, що не дає рядку вилізти.
+     *
+     * Було: заголовок із `white-space: nowrap` і бейдж із `flex-shrink: 0` в
+     * одному рядку. Коли їхня сума перевищувала ширину, поступитися не міг
+     * ніхто — і банер віддавав ГОРИЗОНТАЛЬНУ прокрутку. Назва моделі приходить
+     * ззовні (`aiChat.activeEntry.model`), тож її довжина не під нашим
+     * контролем: сьогодні `gemini-3.6-flash`, завтра довша.
+     *
+     * Тепер бейдж переходить на свій рядок, коли не вміщується, а до того
+     * стискається шрифтом. Зайва висота з'являється лише в тому випадку, коли
+     * альтернатива — обрізаний вміст.
+     */
     .ai-banner-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 10px;
+        flex-wrap: wrap;
+        gap: clamp(4px, 1.2vw, 10px);
         width: 100%;
     }
 
@@ -194,6 +215,9 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        /* Без цього флекс-елемент не може стати вужчим за свій вміст, і
+           перенесення не спрацьовує — рядок усе одно вилазить. */
+        min-width: 0;
     }
 
     :global(.ai-banner-btn .ai-sparkle-icon) {
@@ -203,28 +227,41 @@
 
     .ai-banner-title {
         font-weight: 700;
-        font-size: 1.05rem;
+        font-size: clamp(0.92rem, 2.2dvh, 1.05rem);
         color: var(--text-primary);
         white-space: nowrap;
     }
 
+    /* Опис у два рядки — найбільший поодинокий блок банера, тож саме він
+       найбільше й віддає на низькому екрані. `line-height` теж плавний:
+       на фіксованих 1.4 два рядки з'їдають більше, ніж сам шрифт. */
     .ai-banner-sub {
-        font-size: 0.85rem;
+        font-size: clamp(0.74rem, 1.9dvh, 0.85rem);
         color: var(--text-secondary);
         margin: 0;
-        line-height: 1.4;
+        line-height: clamp(1.25, 0.3dvh, 1.4);
     }
 
     .ai-badge {
-        font-size: 0.72rem;
+        /* Розмір ведений ШИРИНОЮ вікна, на відміну від решти тут: бейдж
+           упирається саме в неї, а не у висоту. Нижня межа не агресивна
+           навмисно — коли місця бракує, першим спрацьовує перенесення рядка,
+           тож стискати шрифт до нечитабельного немає потреби. */
+        font-size: clamp(0.66rem, 2.4vw, 0.72rem);
         font-weight: 700;
         letter-spacing: 0.4px;
         background: var(--gradient);
         color: white;
-        padding: 4px 10px;
+        padding: 4px clamp(6px, 1.8vw, 10px);
         border-radius: 8px;
         white-space: nowrap;
         flex-shrink: 0;
+        /* Останній рубіж: якщо навіть на своєму рядку назва моделі довша за
+           банер, вона скорочується трикрапкою, а не тягне за собою прокрутку
+           всієї модалки. */
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .pdf-option {
@@ -248,9 +285,20 @@
         border-color: var(--accent-primary);
     }
 
+    /*
+     * Пропорція A4 ведена шириною колонки — і саме тому на низькому екрані
+     * прев'ю виростало до 252px при вікні 380px заввишки: медіазапити нижче
+     * дивляться лише на ШИРИНУ, тож у ландшафті телефона діяла десктопна
+     * сітка з високими картками.
+     *
+     * `max-height` рахується з висоти вікна. Коли він спрацьовує, пропорція
+     * поступається — зображення обрізається по `object-fit: cover`, і це
+     * правильний компроміс: це мініатюра, а не документ.
+     */
     .pdf-preview {
         aspect-ratio: 210/297;
         width: 100%;
+        max-height: clamp(72px, 30dvh, 320px);
         border-radius: 10px;
         overflow: hidden;
         border: 1px solid var(--border-color);
@@ -275,7 +323,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: 10px;
+        gap: clamp(5px, 1.2dvh, 10px);
         min-height: 0;
     }
 
@@ -306,6 +354,30 @@
         font-weight: 600;
         font-size: 0.95rem;
         white-space: nowrap;
+    }
+
+    /*
+     * Низьке вікно — незалежно від ширини.
+     *
+     * Решта медіазапитів тут дивиться лише на ширину, і саме через це
+     * ландшафт телефона (740×380) отримував десктопну розкладку: чотири файли
+     * в стовпчик, високі прев'ю, повні відступи. Висота — окрема вісь, і її
+     * теж треба питати.
+     *
+     * Сітка 2×2 замість стовпчика economить близько 85px — найбільший
+     * поодинокий виграш висоти в цьому вікні.
+     */
+    @media (max-height: 620px) {
+        .pdf-file-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-content: center;
+        }
+
+        .pdf-file-btn {
+            flex: none;
+            max-height: none;
+        }
     }
 
     @media (max-width: 640px) {
@@ -339,26 +411,33 @@
     @media (max-width: 480px) {
         .pdf-options {
             grid-template-columns: 1fr;
-            max-height: 70vh;
-            overflow-y: auto;
-            padding-right: 5px;
         }
+
+        /* Власної прокрутки тут більше немає. Доти стояло
+           `max-height: 70vh; overflow-y: auto`, і воно не рятувало: обмежувався
+           лише цей блок, а картка модалки росла далі — разом із заголовком,
+           банером AI та відступами, — тож хрестик усе одно виїжджав за екран.
+           Замість обрізати вміст, він тепер стискається (clamp вище). */
 
         .pdf-option {
             flex-direction: row;
             align-items: center;
             text-align: left;
-            gap: 15px;
+            gap: clamp(8px, 1.6dvh, 15px);
+            padding: clamp(6px, 1.4dvh, 10px);
         }
 
+        /* Прев'ю — найбільший вертикальний споживач після списку файлів, тож
+           воно й віддає найбільше. Пропорція A4 збережена: висота ведена, а
+           ширина рахується з неї. */
         .pdf-preview {
-            width: 60px;
-            height: 80px;
+            height: clamp(44px, 9dvh, 80px);
+            width: calc(clamp(44px, 9dvh, 80px) * 210 / 297);
             flex-shrink: 0;
         }
 
         .pdf-option span {
-            font-size: 1.1rem;
+            font-size: clamp(0.85rem, 2.2dvh, 1.1rem);
             white-space: normal;
         }
 
@@ -367,7 +446,7 @@
             flex-direction: column;
             align-items: stretch;
             text-align: center;
-            gap: 12px;
+            gap: clamp(6px, 1.4dvh, 12px);
         }
 
         .pdf-option-group > span {
@@ -377,11 +456,28 @@
         .pdf-file-btn {
             flex: none;
             max-height: none;
-            min-height: 44px;
+            /* 44px — рекомендований мінімум дотику, і він тримається, доки
+               екран це дозволяє. Нижче — стискається: недосяжна кнопка гірша
+               за трохи меншу. */
+            min-height: clamp(34px, 6.4dvh, 44px);
         }
 
         .pdf-file-label {
-            font-size: 1rem;
+            font-size: clamp(0.85rem, 2.1dvh, 1rem);
+        }
+
+        /*
+         * Низький екран: чотири файли стають сіткою 2×2.
+         *
+         * Це найбільший виграш висоти з усіх — чотири рядки по ~44px із
+         * проміжками займають близько 200px, сітка 2×2 — удвічі менше. Саме
+         * стовпчик ATS і робив вікно вищим за екран на телефоні 429×636.
+         */
+        @media (max-height: 720px) {
+            .pdf-file-list {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
         }
     }
 </style>

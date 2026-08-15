@@ -136,6 +136,11 @@
         left: 0;
         width: 100%;
         height: 100%;
+        /* `dvh` окремим рядком, а не замість `100%`: на мобільних висота
+           змінюється разом зі згортанням панелі браузера, і без цього нижня
+           частина модалки лишається під нею. Той самий прийом уже вживаний у
+           HeaderSection. Старі браузери просто ігнорують цей рядок. */
+        height: 100dvh;
         background: rgba(0, 0, 0, 0.6);
         backdrop-filter: blur(8px);
         z-index: 2000;
@@ -143,17 +148,40 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
+        box-sizing: border-box;
     }
 
+    /*
+     * Картка СТИСКАЄТЬСЯ під висоту екрана, а не прокручується.
+     *
+     * Доти тут не було ні `max-height`, ні фіксованих пропорцій: бекдроп
+     * центрує вміст флексбоксом, тож картка, вища за екран, вилазила в ОБИДВА
+     * боки — і `close-btn` із `position: absolute; top: 10px` опинялася над
+     * видимою областю. На телефоні з невисоким екраном вікно ставало
+     * незакривабельним нічим, окрім Escape або тапу по тлу.
+     *
+     * Відступи задані через `clamp(… , dvh, …)`, тобто ростуть із висотою
+     * вікна й тануть на низьких екранах. `dvh`, а не `vh`: на мобільних висота
+     * змінюється разом зі згортанням панелі браузера.
+     *
+     * `overflow-y: auto` на тілі лишається СТРАХОВКОЮ, а не механізмом. При
+     * розмірах, які трапляються на справжніх телефонах, вміст уміщається без
+     * неї — але якщо колись не вмістить (дуже низький ландшафт, величезний
+     * системний шрифт), краще смуга прокрутки, ніж недосяжна кнопка.
+     */
     .modal-content {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
         background: var(--panel-bg);
-        padding: 40px;
+        padding: clamp(16px, 3.2dvh, 40px);
         border-radius: 24px;
         max-width: 650px;
         width: 100%;
         border: 1px solid var(--border-color);
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
     }
 
     .close-btn {
@@ -179,20 +207,33 @@
 
     h3 {
         color: var(--text-primary);
-        margin-bottom: 30px;
-        font-size: 1.75rem;
+        /* Разом із padding картки: на низькому екрані заголовок віддає висоту
+           вмісту, а не змушує вікно вилазити за межі. */
+        margin-bottom: clamp(12px, 2.6dvh, 30px);
+        font-size: clamp(1.15rem, 3.4dvh, 1.75rem);
         text-align: center;
         font-weight: 700;
         letter-spacing: -0.02em;
+        flex-shrink: 0;
     }
 
     .modal-body {
         position: relative;
+        overflow-y: auto;
+        /* `min-height: 0` обов'язковий: без нього флекс-елемент не може стати
+           меншим за свій вміст, і `overflow-y` не спрацьовує взагалі —
+           картка знову виростає за межі екрана. */
+        min-height: 0;
+        /* Догортавши до краю, сторінка під модалкою не починає їхати. */
+        overscroll-behavior: contain;
     }
 
     @media (max-width: 640px) {
         .modal-content {
-            padding: 30px 20px;
+            /* Горизонтальний відступ фіксований — по ширині місця вистачає
+               завжди. Вертикальний лишається плавним: саме він визначає, чи
+               вміститься вікно. */
+            padding: clamp(14px, 2.8dvh, 30px) 20px;
         }
 
         /* Tucked into the corner, and the title starts below it. The title is
@@ -206,9 +247,11 @@
         }
 
         h3 {
-            font-size: 1.4rem;
-            margin-top: 22px;
-            margin-bottom: 20px;
+            /* Верхня межа нижча, ніж на десктопі, але правило те саме: розмір
+               іде за висотою вікна, а не за фіксованим числом. */
+            font-size: clamp(1.05rem, 3dvh, 1.4rem);
+            margin-top: clamp(14px, 2.4dvh, 22px);
+            margin-bottom: clamp(10px, 2dvh, 20px);
         }
     }
 </style>
