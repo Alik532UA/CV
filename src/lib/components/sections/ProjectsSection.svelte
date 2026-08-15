@@ -170,7 +170,11 @@
 
     .projects-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* `minmax(320px, 1fr)` is a hard floor: the column stays 320px wide even
+           when the container is narrower, and the card sticks out of the page.
+           `min(320px, 100%)` keeps the 320px wrap threshold on wide screens and
+           lets the single column follow the container below it. */
+        grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
         gap: 24px;
     }
 

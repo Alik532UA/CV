@@ -186,6 +186,12 @@
         font-size: 1.1rem;
         line-height: 1.7;
         margin-bottom: 0;
+        /* The bio is prose with unbreakable tech tokens in it —
+           "(Java/Appium/Playwright)." alone measures 211px. An unbreakable word
+           sets the min-content width of everything above it, so that one token
+           was the page's second width floor after the project grid. `anywhere`
+           rather than `break-word`: only this value lowers intrinsic size. */
+        overflow-wrap: anywhere;
     }
 
     /* A direct child of .about-grid rather than of the text column, so it runs

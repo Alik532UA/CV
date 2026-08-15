@@ -69,7 +69,9 @@
 <style>
     .other-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* See .projects-grid: the bare 320px minimum is a floor the column never
+           goes below, so it widens the whole page on a small screen. */
+        grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
         gap: 20px;
     }
 

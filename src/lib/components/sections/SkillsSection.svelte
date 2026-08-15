@@ -207,7 +207,10 @@
 
     .skills-categories-sub {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        /* min() so the column can follow a narrower container instead of holding
+           350px and pushing the page wider. The 768px override below stays as the
+           layout decision; this is the safety net for every width in between. */
+        grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
         gap: 20px;
         margin-bottom: 20px;
     }

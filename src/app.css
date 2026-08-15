@@ -253,7 +253,9 @@ body {
 }
 
 .bio {
-    padding: 40px;
+    /* 40px on each side is 21% of a 375px screen handed to padding. Led by the
+       window width, so nothing changes from 667px up. */
+    padding: clamp(20px, 6vw, 40px);
     position: relative;
 }
 
