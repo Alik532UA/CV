@@ -6,9 +6,13 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		prerender: {
-			handleMissingId: 'ignore'
-		},
+		// Типове `handleMissingId: 'fail'` повернуто навмисно. Стояло `'ignore'`,
+		// і саме воно глушило найдорожчий дефект проєкту: бокове меню веде на
+		// `#experience`, `#skills`, `#projects`, `#education`, `#other`, а секції
+		// були обгорнуті в `{#await import(...)}` і в prerender не потрапляли
+		// зовсім. Кравлер бачив п'ять посилань у нікуди на кожній із 44 сторінок і
+		// мовчав саме через цей рядок.
+		prerender: {},
 		adapter: adapter({
 			fallback: '404.html'
 		}),

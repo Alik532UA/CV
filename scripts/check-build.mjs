@@ -28,6 +28,22 @@ const INDEXED = ["en", "en-us", "uk", "ja"];
 /** Мінімум видимого тексту на сторінці. Порожнє тіло — це § 1.1. */
 const MIN_BODY_TEXT = 200;
 
+/**
+ * Якорі секцій, на які веде бокове меню, — і саме той інваріант, якого тут
+ * бракувало.
+ *
+ * `MIN_BODY_TEXT` міряє тіло сторінки цілком, тому одна Hero-секція його
+ * задовольняла з запасом. Тим часом решта п'яти були обгорнуті в
+ * `{#await import(...)}`, під час prerender віддавали порожню pending-гілку, і
+ * в кожній із 44 сторінок їх не було зовсім (SVELTEKIT-DATA-v8 § 2.5).
+ * Перевірка «тіло не порожнє» на це не реагує ніяк — потрібен перелік того, що
+ * саме має бути.
+ *
+ * Список звіряється з `navItems` у SidebarNav.svelte: меню посилається на
+ * `#id`, тож відсутній якір — це ще й посилання в нікуди.
+ */
+const SECTION_IDS = ["about", "experience", "skills", "projects", "education", "other"];
+
 const problems = [];
 const fail = (msg) => problems.push(msg);
 
@@ -71,6 +87,12 @@ for (const file of files) {
 			.trim();
 		if (text.length < MIN_BODY_TEXT) {
 			fail(`${file}: видимого тексту ${text.length} символів (мінімум ${MIN_BODY_TEXT})`);
+		}
+
+		// § 1.1 (продовження) — тіло не порожнє, але без основного вмісту
+		const missingSections = SECTION_IDS.filter((id) => !html.includes(`id="${id}"`));
+		if (missingSections.length > 0) {
+			fail(`${file}: у prerender немає секцій — ${missingSections.join(", ")}`);
 		}
 	}
 
