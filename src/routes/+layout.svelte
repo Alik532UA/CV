@@ -1,8 +1,8 @@
 <script lang="ts">
 	import "../app.css";
-	import Sidebar from "$lib/components/SidebarNav.svelte";
+	import SidebarNav from "$lib/components/SidebarNav.svelte";
 	import BottomNav from "$lib/components/BottomNav.svelte";
-	import Header from "$lib/components/HeaderSection.svelte";
+	import HeaderSection from "$lib/components/HeaderSection.svelte";
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import SEO from "$lib/components/SEO.svelte";
 	import { onMount } from "svelte";
@@ -182,8 +182,8 @@
 <div class="theme-transition-overlay" class:active={theme.isChanging}></div>
 
 <div class="app-layout" class:language-changing={language.isChanging}>
-	<Header />
-	<Sidebar activeSection={section.active} />
+	<HeaderSection />
+	<SidebarNav activeSection={section.active} />
 	<BottomNav activeSection={section.active} />
 	<LogCopyButton />
 	<main id="main-content">
