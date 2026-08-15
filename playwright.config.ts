@@ -9,8 +9,14 @@ import { defineConfig, devices } from '@playwright/test';
  * застосунок: тест зелений, перевірено не те (AI-AGENT-PITFALLS-v8 § 1).
  * Це не гіпотеза — саме так інваріант унікальності `data-testid` тут одного
  * разу «пройшов», дивлячись на сусідній сайт.
+ *
+ * 5299, а не 5273: на 5273 сидить `Slovko`, тобто «свій порт у кожному проєкті»
+ * виконувалося лише наполовину. Обидва конфіги мають `--strictPort` і
+ * `reuseExistingServer: false`, тож зіткнення давало голосне падіння, а не тихо
+ * перевірений чужий сайт — але саме цього правило й мало уникати. Число
+ * узгоджене з `cv-dev` (5199) у `.claude/launch.json` кореневої теки.
  */
-const TEST_PORT = 5273;
+const TEST_PORT = 5299;
 
 export default defineConfig({
 	testDir: './tests',
