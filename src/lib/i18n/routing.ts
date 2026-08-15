@@ -41,6 +41,33 @@ export function bcp47(lang: Language): string {
 }
 
 /**
+ * Languages written right to left. Hebrew is the only one this site ships;
+ * Arabic, Persian and Urdu would belong here too if they were ever added
+ * (I18N-v8 § 6).
+ *
+ * WHY THIS EXISTS AT ALL. `he` was in the language list from the start and
+ * `dir="rtl"` appeared nowhere in the project — so the Hebrew version rendered
+ * left to right: punctuation at the wrong end of every line, and a document the
+ * browser and screen reader both believed was LTR. PROJECT-CONTEXT.md carried
+ * the debt as "either do it or drop `he` from the list"; this is doing it.
+ *
+ * A Set rather than a string comparison, because the mistake to avoid here is
+ * `lang.startsWith("he")` — that also matches nothing today but would quietly
+ * catch a future `he-IL` and miss `iw`, the deprecated tag some systems still
+ * emit.
+ */
+const RTL_LANGUAGES: ReadonlySet<Language> = new Set<Language>(["he"]);
+
+/**
+ * The `dir` attribute for `<html>`. Used in two places that must not disagree:
+ * `hooks.server.ts` bakes it into every prerendered page, and `I18nState.set()`
+ * updates it when the visitor switches language without a reload.
+ */
+export function textDirection(lang: Language): "ltr" | "rtl" {
+	return RTL_LANGUAGES.has(lang) ? "rtl" : "ltr";
+}
+
+/**
  * og:locale wants the underscore form. Only the reviewed languages are worth
  * spelling out; the rest are noindex machine translations, so they report the
  * site's default English rather than each carrying a hand-written entry.

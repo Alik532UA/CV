@@ -1,7 +1,7 @@
 import type { Handle } from "@sveltejs/kit";
 import { base } from "$app/paths";
 import { isLanguage, type Language } from "$lib/controllers/I18nState.svelte";
-import { bcp47, DEFAULT_LANGUAGE } from "$lib/i18n/routing";
+import { bcp47, DEFAULT_LANGUAGE, textDirection } from "$lib/i18n/routing";
 
 /**
  * Ставить `lang` на `<html>` у ЗІБРАНОМУ HTML кожної сторінки.
@@ -28,11 +28,17 @@ function languageFromPath(pathname: string): Language {
 }
 
 export const handle: Handle = ({ event, resolve }) => {
-	const lang = bcp47(languageFromPath(event.url.pathname));
+	const language = languageFromPath(event.url.pathname);
+	const lang = bcp47(language);
+	// `dir` разом із `lang`, і з тієї самої причини: іврит у списку мов був від
+	// початку, а `dir="rtl"` у проєкті не існував ніде. Сторінка /he/ їхала
+	// зліва направо — розділові знаки не на тому кінці рядка, і документ, який
+	// і браузер, і читалка вважали LTR (I18N-v8 § 6).
+	const dir = textDirection(language);
 
 	return resolve(event, {
 		// Плейсхолдер, а не regex по всьому документу: заміна `lang="en"`
 		// наосліп зачепила б і `hreflang="en"` у тегах alternate.
-		transformPageChunk: ({ html }) => html.replace("%lang%", lang)
+		transformPageChunk: ({ html }) => html.replace("%lang%", lang).replace("%dir%", dir)
 	});
 };

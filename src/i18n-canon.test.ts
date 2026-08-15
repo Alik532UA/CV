@@ -127,3 +127,47 @@ describe("locale-aware formatting", () => {
 		).toEqual([]);
 	});
 });
+
+describe("writing direction travels with the language (§ 6)", () => {
+	/**
+	 * `he` shipped in the language list from the first commit and `dir="rtl"`
+	 * existed nowhere in the project, so the Hebrew page laid out left to right:
+	 * punctuation at the wrong end of every line, and a document that both the
+	 * browser and a screen reader believed was LTR. PROJECT-CONTEXT.md carried
+	 * it as "either do it or drop `he`".
+	 *
+	 * The direction is now derived in one place — `textDirection()` — and used
+	 * in two: `hooks.server.ts` bakes it into every prerendered page, and
+	 * `I18nState` updates it on a switch without reload. This test exists
+	 * because those two are the pair that can silently drift: setting `lang`
+	 * without `dir` gives the worst of both, a page declared Hebrew and laid
+	 * out the other way.
+	 */
+	it("every place that sets documentElement.lang also sets dir", () => {
+		const offenders: string[] = [];
+		for (const file of globSync("src/**/*.{ts,svelte}", { cwd: ROOT })) {
+			const path = file.replace(/\\/g, "/");
+			if (path.endsWith("i18n-canon.test.ts")) continue;
+			const lines = read(path).split("\n");
+			lines.forEach((line, i) => {
+				if (!/documentElement\.lang\s*=/.test(line)) return;
+				// The dir assignment is expected within the same short block.
+				const near = lines.slice(i, i + 4).join("\n");
+				if (!/documentElement\.dir\s*=/.test(near)) {
+					offenders.push(`${path}:${i + 1}`);
+				}
+			});
+		}
+		expect(
+			offenders,
+			`lang is set without dir — a Hebrew page would render left to right:\n${offenders.join("\n")}`
+		).toEqual([]);
+	});
+
+	it("the sole source of direction knows about Hebrew and nothing else yet", () => {
+		const routing = read("src/lib/i18n/routing.ts");
+		expect(routing, "textDirection() is gone — who sets dir now?").toContain("textDirection");
+		// A canary against the opposite mistake: marking everything rtl.
+		expect(routing).toMatch(/RTL_LANGUAGES[\s\S]{0,120}"he"/);
+	});
+});

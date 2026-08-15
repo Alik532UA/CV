@@ -46,7 +46,7 @@ import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 import { track } from "$lib/services/analytics";
 import { goto } from "$app/navigation";
-import { bcp47, langPath } from "$lib/i18n/routing";
+import { bcp47, langPath, textDirection } from "$lib/i18n/routing";
 
 /**
  * "en" is British English and "en-us" American. The region subtag is lowercase
@@ -111,7 +111,11 @@ class LanguageState {
 			}
 		}
 
+		// `dir` іде поруч із `lang` скрізь, де той виставляється. Розійшовшись,
+		// вони дають найгірший варіант: документ оголошений івритом і
+		// розкладений зліва направо (I18N-v8 § 6).
 		document.documentElement.lang = bcp47(this.current);
+		document.documentElement.dir = textDirection(this.current);
 	}
 
 	set(lang: Language) {
@@ -129,6 +133,7 @@ class LanguageState {
 			if (browser) {
 				storage.set("lang", lang);
 				document.documentElement.lang = bcp47(lang);
+				document.documentElement.dir = textDirection(lang);
 			}
 			// Same route id (/[[lang]]) with only the parameter changing, so
 			// SvelteKit updates in place instead of remounting — the switch stays

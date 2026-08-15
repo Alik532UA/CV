@@ -147,6 +147,33 @@ for (const lang of INDEXED) {
 	}
 }
 
+// I18N-v8 § 6 — мова, яка пишеться справа наліво, має це оголосити.
+//
+// Іврит був у списку мов від початку, а `dir="rtl"` у проєкті не існував ніде:
+// /he/ рендерився зліва направо. Симптом видно лише тому, хто читає івритом,
+// тому перевірка тут, а не «подивимося перед релізом».
+{
+	const rtlPages = { he: "rtl" };
+	for (const [lang, expected] of Object.entries(rtlPages)) {
+		const file = join(BUILD, lang, "index.html").replace(/\\/g, "/");
+		if (!existsSync(file)) {
+			fail(`немає build/${lang}/index.html — сторінка RTL-мови не згенерована`);
+			continue;
+		}
+		const dir = readFileSync(file, "utf8").match(/<html[^>]+dir="([^"]+)"/)?.[1] ?? "";
+		if (dir !== expected) {
+			fail(`${file}: <html dir="${dir}">, очікується "${expected}"`);
+		}
+	}
+
+	// Зворотний бік того самого: LTR-сторінка не має роз'їхатися в rtl.
+	const home = readFileSync(join(BUILD, "index.html"), "utf8");
+	const homeDir = home.match(/<html[^>]+dir="([^"]+)"/)?.[1] ?? "";
+	if (homeDir !== "ltr") {
+		fail(`build/index.html: <html dir="${homeDir}">, очікується "ltr"`);
+	}
+}
+
 // Секретів у бандлі бути не може: усе з нього видно у DevTools.
 for (const file of htmlFiles(BUILD).concat(
 	existsSync(join(BUILD, "_app")) ? htmlFiles(join(BUILD, "_app")) : []
