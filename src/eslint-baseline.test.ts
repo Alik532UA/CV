@@ -4,7 +4,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 /**
  * CODE-QUALITY-v8 § 6.4.2 — базовий набір ESLint увімкнений.
  *
- * Чому цей тест існує. У цьому проєкті всі 14 правил стоять у `error`, і порушень
+ * Чому цей тест існує. У цьому проєкті всі 15 правил стоять у `error`, і порушень
  * немає в жодного. Тест не про борг — він про те, щоб цей нуль лишався
  * ПЕРЕВІРЕНИМ: у трьох сусідніх проєктах такий самий нуль у звіті `lint`
  * означав не «порушень немає», а «правила вимкнені, і ніхто не питав».
@@ -22,6 +22,7 @@ const BASELINE = [
 	'no-new-func',
 	'no-script-url',
 	'no-restricted-syntax',
+	'no-console',
 	'@typescript-eslint/no-explicit-any',
 	'@typescript-eslint/no-unused-vars',
 	'@typescript-eslint/ban-ts-comment',

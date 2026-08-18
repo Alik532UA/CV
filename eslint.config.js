@@ -93,6 +93,20 @@ export default tseslint.config(
       // CODE-QUALITY-v8 § 1: `@ts-ignore` без записаної причини.
       "@typescript-eslint/ban-ts-comment": "error",
 
+      /**
+       * DEBUGGING-v8 § 4, перший пункт. Писати в консоль має право рівно один
+       * файл — `logService.svelte.ts`; виняток для нього нижче, разом зі
+       * скриптами й воркером, де консоль і є вихідним каналом.
+       *
+       * Правило додане після коміту, який прибирав `console.error` руками:
+       * порушень у `src/` лишилося нуль, і саме тому воно одразу `error`, а не
+       * `warn` (той самий принцип, що для решти набору вище). Без гейта
+       * наступний `console.log` доїде у продакшн — він нічого не ламає, тож
+       * ніхто його не помітить, а разом із ним у консоль відвідувача поїде те,
+       * що мало залишитися в журналі.
+       */
+      "no-console": "error",
+
       // SVELTE-CORE-v8 § 1.5: голі Set/Map/Date як реактивний стан.
       "svelte/prefer-svelte-reactivity": "error",
 
@@ -171,6 +185,23 @@ export default tseslint.config(
     rules: {
       'no-restricted-globals': 'off',
       'no-restricted-properties': 'off'
+    }
+  },
+  {
+    /**
+     * Три місця, де консоль — не залишений дебаг, а вихідний канал
+     * (DEBUGGING-v8 § 4):
+     *
+     *   1. `logService` — єдиний, кому канон дозволяє писати в консоль
+     *      браузера; решта коду ходить через нього;
+     *   2. `scripts/` — гейти над `build/`. Їхній звіт читає людина в
+     *      терміналі й CI-лог, іншого виводу в них немає;
+     *   3. `worker/` — Cloudflare Worker. Там `console` пише у `wrangler tail`,
+     *      тобто це і є серверний журнал проксі, а не дебаг у чужому браузері.
+     */
+    files: ['src/lib/services/logService.svelte.ts', 'scripts/**', 'worker/**'],
+    rules: {
+      'no-console': 'off'
     }
   }
 );
