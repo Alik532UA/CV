@@ -6,43 +6,18 @@
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { track } from "$lib/services/analytics";
     import type { HTMLAttributes } from "svelte/elements";
+    import {
+        ATS_FILES,
+        THEMED_FILES,
+        PREVIEW_WIDTH,
+        PREVIEW_HEIGHT
+    } from "$lib/config/cvDownloads";
 
     interface Props extends Omit<HTMLAttributes<HTMLDivElement>, 'title' | 'onclose'> {
         show: boolean;
     }
 
     let { show = $bindable(), ...restProps }: Props = $props();
-
-    const atsFiles = [
-        {
-            id: "en-pdf",
-            label: "EN · PDF",
-            format: "pdf",
-            name: "AlikZapolnov-ATS-RMS-EN.pdf",
-            url: "https://drive.google.com/file/d/1xieP4ItkVvk6_ly1r9sayGYGRZ9MRf06/view?usp=drive_link"
-        },
-        {
-            id: "en-md",
-            label: "EN · MD",
-            format: "md",
-            name: "AlikZapolnov-ATS-RMS-EN.md",
-            url: "https://drive.google.com/file/d/1SQdR3vb2JNlVTiRH-vI-Hn2R-0E2MT_k/view?usp=drive_link"
-        },
-        {
-            id: "ua-pdf",
-            label: "UA · PDF",
-            format: "pdf",
-            name: "AlikZapolnov-ATS-RMS-UA.pdf",
-            url: "https://drive.google.com/file/d/1vOJysOCzkn_bxVEugr3c2w5HPVfsT1nf/view?usp=drive_link"
-        },
-        {
-            id: "ua-md",
-            label: "UA · MD",
-            format: "md",
-            name: "AlikZapolnov-ATS-RMS-UA.md",
-            url: "https://drive.google.com/file/d/1HF6J92xqrLjAdFPHwJTBthzF1Te8B-zA/view?usp=drive_link"
-        }
-    ];
 </script>
 
 <BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"} {...restProps}>
@@ -50,7 +25,7 @@
         <div class="pdf-options">
             <div class="pdf-option pdf-option-group" data-testid="pdf-option-ats">
                 <div class="pdf-file-list">
-                    {#each atsFiles as file (file.id)}
+                    {#each ATS_FILES as file (file.id)}
                         <!-- Absolute Google Drive URL, not an app route -->
                         <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
                         <a href={file.url}
@@ -75,48 +50,35 @@
                 </div>
                 <span>{t.pdf_modal?.ats || "ATS / RMS"}</span>
             </div>
-            <a
-                href="https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="pdf-option"
-                data-testid="pdf-option-dark"
-                onclick={() => {
-                    track("cv_download", { variant: "dark" });
-                    show = false;
-                }}
-            >
-                <div class="pdf-preview">
-                    <img
-                        src="{base}/pdf-preview/Alik-Zapolnov-CV-dark.jpg"
-                        alt="Dark Theme CV Preview"
-                        loading="lazy"
-                        decoding="async"
-                    />
-                </div>
-                <span>{t.pdf_modal?.dark || "Dark Theme"}</span>
-            </a>
-            <a
-                href="https://drive.google.com/file/d/1bNX2y5uD99DrQ1-jjjbFyYQJbeWeeCLB/view"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="pdf-option"
-                data-testid="pdf-option-light"
-                onclick={() => {
-                    track("cv_download", { variant: "light" });
-                    show = false;
-                }}
-            >
-                <div class="pdf-preview">
-                    <img
-                        src="{base}/pdf-preview/Alik-Zapolnov-CV-light.jpg"
-                        alt="Light Theme CV Preview"
-                        loading="lazy"
-                        decoding="async"
-                    />
-                </div>
-                <span>{t.pdf_modal?.light || "Light Theme"}</span>
-            </a>
+            {#each THEMED_FILES as file (file.id)}
+                <!-- Absolute Google Drive URL, not an app route -->
+                <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+                <a href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="pdf-option"
+                    data-testid="pdf-option-{file.id}"
+                    onclick={() => {
+                        track("cv_download", { variant: file.id });
+                        show = false;
+                    }}
+                >
+                    <div class="pdf-preview">
+                        <img
+                            src="{base}/pdf-preview/{file.image}"
+                            alt={file.alt}
+                            loading="lazy"
+                            decoding="async"
+                            width={PREVIEW_WIDTH}
+                            height={PREVIEW_HEIGHT}
+                        />
+                    </div>
+                    <!-- Підпис читається В РОЗМІТЦІ, а не збирається в масиві
+                         вище: там він застиг би на мові, яка була в момент
+                         створення масиву (SVELTE-CORE-v8 § 1.1). -->
+                    <span>{t.pdf_modal?.[file.id] || file.fallback}</span>
+                </a>
+            {/each}
         </div>
 
         <button

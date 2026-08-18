@@ -162,7 +162,7 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 		"src/lib/components/HeaderSection.svelte": 1075,
 		"src/lib/components/ui/Minimap.svelte": 613,
 		"src/lib/components/ui/AiMatchModal.svelte": 516,
-		"src/lib/components/ui/PdfModal.svelte": 484,
+		"src/lib/components/ui/PdfModal.svelte": 446,
 		"src/lib/controllers/I18nState.svelte.ts": 374,
 		"src/lib/components/ui/PageScrollbar.svelte": 369,
 		"src/lib/components/sections/HeroSection.svelte": 336,
