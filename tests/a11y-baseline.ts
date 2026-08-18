@@ -21,11 +21,13 @@
 /** Типи порушень, які вже є. Новий id — падіння, навіть якщо кількість не зросла. */
 export const A11Y_KNOWN: Record<string, readonly string[]> = {
 	home: [],
+	homeDark: [],
 	aiModal: []
 };
 
 /** Кількість порушень. Рухається лише вниз. */
 export const A11Y_BASELINE: Record<string, number> = {
 	home: 0,
+	homeDark: 0,
 	aiModal: 0
 };
