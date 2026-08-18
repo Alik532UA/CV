@@ -1,5 +1,28 @@
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+
+/**
+ * Хеш інлайн-скрипта першого кадру — ОБЧИСЛЕНИЙ із `src/app.html`, а не
+ * вписаний рядком (SECURITY-v8 § 16).
+ *
+ * Рядком він тут уже стояв і вже розходився зі скриптом: правка скрипта міняє
+ * хеш, і зібраний сайт починає блокувати власний скрипт — у dev при цьому все
+ * зелено, бо там політика приїжджає заголовком із nonce. Наступного разу
+ * розійтися нічому: значення береться з того самого файлу, який SvelteKit
+ * покладе у `<head>`.
+ *
+ * Регулярка бере ПЕРШИЙ `<script>` без атрибутів — саме таким є скрипт першого
+ * кадру; `<script type="application/ld+json">` під неї не підпадає. Порожній
+ * результат означав би хеш порожнього рядка в політиці, тому це помилка збірки,
+ * а не мовчазний фолбек.
+ */
+const inlineScript = readFileSync('src/app.html', 'utf8').match(/<script>([\s\S]*?)<\/script>/)?.[1];
+if (!inlineScript) {
+	throw new Error('svelte.config.js: у src/app.html немає інлайн-скрипта — CSP нічого хешувати');
+}
+const inlineScriptHash = `sha256-${createHash('sha256').update(inlineScript).digest('base64')}`;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -31,13 +54,12 @@ const config = {
 					// Hash of the first-frame script in src/app.html — theme, then the
 					// class that hides the native scrollbar. SvelteKit hashes only the
 					// scripts it emits itself, so one living in the template has to be
-					// listed here by hand.
+					// listed here.
 					//
-					// EDITING THAT SCRIPT CHANGES THIS HASH. The previous value had gone
-					// stale exactly that way, and the built site was blocking the script
-					// outright; src/scrollbar-canon.test.ts now recomputes it and fails
-					// when the two disagree.
-					'sha256-++fBQYhblTP7n81ZDDjJeFGYQXAzTnYXBKA2PeKk8ZY='
+					// Обчислюється вгорі цього файлу з самого app.html. Рядком тут
+					// стояло значення, яке вже одного разу розійшлося зі скриптом і
+					// заблокувало його у зібраному сайті; тепер розходитися нічому.
+					inlineScriptHash
 				],
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],

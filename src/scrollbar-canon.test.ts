@@ -179,19 +179,35 @@ describe("scrollbar canon § 9.10 / § 9.11 — the minimap must not fight its o
 });
 
 describe("CSP — the first-frame script's hash is registered", () => {
-	it("svelte.config.js lists the hash of the script actually in app.html", () => {
-		// SvelteKit hashes only the scripts it emits itself, so this one is listed by
-		// hand — and editing the script changes the hash. It had already gone stale
-		// this way once, leaving the built site blocking its own theme script.
-		const inline = APP_HTML.match(/<script>([\s\S]*?)<\/script>/);
-		expect(inline?.[1], "no inline script in app.html").toBeTruthy();
-
-		// Normalize line endings to LF (\n) so hash is cross-platform deterministic (Windows CRLF vs Linux LF)
-		const scriptText = inline![1].replace(/\r\n/g, "\n");
-		const hash = "sha256-" + createHash("sha256").update(scriptText, "utf8").digest("base64");
+	/**
+	 * ЧОМУ ЦЕЙ ТЕСТ ЗМІНИВСЯ. Він порівнював хеш скрипта з ЛІТЕРАЛОМ у
+	 * svelte.config.js — тобто ловив розходження, яке взагалі не мусило бути
+	 * можливим. Канон (SECURITY-v8 § 16) каже інше: хеш обчислюється з файлу
+	 * під час збірки, і тоді розходитися нічому. Так тепер і зроблено.
+	 *
+	 * Тому тут лишається рівно те, чого обчислення не гарантує саме собою:
+	 * що літерал не повернувся. Із ним у конфігу було б ДВА джерела істини, і
+	 * друге знову застаріло б. А те, що політика у зібраному HTML справді
+	 * покриває скрипт, який у ньому лежить, перевіряє `npm run check:build` над
+	 * `build/` — там це видно на самому артефакті, а не на його джерелі.
+	 */
+	it("хеш обчислюється з app.html, а не вписаний рядком", () => {
 		expect(
 			SVELTE_CONFIG,
-			`app.html's inline script hashes to ${hash}, which svelte.config.js does not list`
-		).toContain(hash);
+			"хеш береться з src/app.html — інакше він знову розійдеться зі скриптом"
+		).toMatch(/createHash\(["']sha256["']\)[\s\S]{0,200}?app\.html|app\.html[\s\S]{0,300}?createHash/);
+
+		const literals = [...SVELTE_CONFIG.matchAll(/['"]sha256-[A-Za-z0-9+/=]+['"]/g)].map((m) => m[0]);
+		expect(
+			literals,
+			`друге джерело істини для хеша — приберіть літерал:\n${literals.join("\n")}`
+		).toEqual([]);
+	});
+
+	it("перевірка жива: інлайн-скрипт в app.html на місці й хешується", () => {
+		const inline = APP_HTML.match(/<script>([\s\S]*?)<\/script>/);
+		expect(inline?.[1], "no inline script in app.html").toBeTruthy();
+		const hash = "sha256-" + createHash("sha256").update(inline![1], "utf8").digest("base64");
+		expect(hash).toMatch(/^sha256-[A-Za-z0-9+/=]{44}$/);
 	});
 });

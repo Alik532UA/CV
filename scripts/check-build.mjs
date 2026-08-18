@@ -16,6 +16,7 @@
  * Запускається після `npm run build`. Вихід ≠ 0 — це помилка збірки.
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { join } from "node:path";
 
 const BUILD = "build";
@@ -109,6 +110,37 @@ for (const file of files) {
 	// § 1.3 — абсолютний URL, склеєний із відносним base
 	for (const m of html.matchAll(/https?:\/\/[^"'\s]*\.\/[^"'\s]*/g)) {
 		fail(`${file}: зламаний абсолютний URL — ${m[0].slice(0, 80)}`);
+	}
+
+	/*
+	 * SECURITY-v8 § 6.3 — політика покриває КОЖЕН інлайн-скрипт цієї сторінки.
+	 *
+	 * Перевіряється на артефакті, а не на джерелі, бо саме тут живе дефект:
+	 * у dev SvelteKit віддає політику ЗАГОЛОВКОМ із nonce, і будь-який скрипт
+	 * виконується; у збірці лишається `<meta>`, де працюють тільки хеші.
+	 * Скрипт, чийого хеша немає, блокується мовчки — сторінка просто їде без
+	 * теми, і жодного рядка в консолі розробника, який дивиться на dev.
+	 *
+	 * Береться КОЖЕН `<script>` без атрибутів: їх на сторінці два — скрипт
+	 * першого кадру з app.html і завантажувач самого SvelteKit, і другий
+	 * ловить те, чого не бачить перший (наприклад режим csp, збитий на nonce).
+	 * Атрибут SvelteKit пише малими літерами — звідси прапорець `i`.
+	 */
+	{
+		const csp = html.match(/<meta http-equiv="content-security-policy" content="([^"]*)"/i)?.[1];
+		const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+		if (inline.length === 0) {
+			fail(`${file}: жодного інлайн-скрипта — перевірка CSP мертва, шаблон змінився?`);
+		} else if (!csp) {
+			fail(`${file}: інлайн-скрипти є, а <meta> з політикою немає — csp.mode зламався`);
+		} else {
+			for (const [, source] of inline) {
+				const hash = `sha256-${createHash("sha256").update(source).digest("base64")}`;
+				if (!csp.includes(hash)) {
+					fail(`${file}: інлайн-скрипт (${source.length} символів) не покритий CSP — ${hash}`);
+				}
+			}
+		}
 	}
 
 	// § 2.1 — рівно одна canonical
