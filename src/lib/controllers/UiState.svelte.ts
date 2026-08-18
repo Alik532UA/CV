@@ -1,51 +1,91 @@
 import { browser } from "$app/environment";
+import { on } from "svelte/events";
 import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 
-class ThemeState {
+/** Експортується заради тестів: синглтон нижче не дає зібрати чистий екземпляр. */
+export class ThemeState {
 	current = $state("dark");
 	isChanging = $state(false);
 
 	constructor() {}
 
-	init() {
-		if (browser) {
-			const params = new URLSearchParams(window.location.search);
-			const themeParam = params.get("theme");
-			const saved = storage.get("theme");
-			
-			const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-			const systemTheme = mediaQuery.matches ? "dark" : "light";
-			
-			const initialTheme = themeParam || saved || systemTheme;
-			
-			logService.info("ui", `Initializing theme: ${initialTheme} (source: ${themeParam ? "URL" : saved ? "storage" : "system"})`);
-			this.set(initialTheme);
+	/**
+	 * @returns teardown, як у `sound.init()` і `shortcuts.init()`.
+	 *
+	 * Форма `init()` + cleanup у споживача — не канонічна для НОВОГО коду
+	 * (SVELTE-CORE-v8 § 2.9 віддає перевагу `createSubscriber`), але тут вона
+	 * лишається свідомо: `createSubscriber` вмикає підписку, коли геттер
+	 * уперше читають у реактивному контексті, а ця підписка мусить бути живою
+	 * незалежно від того, чи хтось читає — вона ЗАСТОСОВУЄ тему до
+	 * `documentElement`, а не віддає значення. Канонічним лишається інше:
+	 * підписка знімається, а не живе вічно.
+	 */
+	init(): () => void {
+		if (!browser) return () => {};
 
-			// Listen for system theme changes if user hasn't explicitly set a theme
-			mediaQuery.addEventListener("change", (e) => {
-				if (!storage.get("theme")) {
-					const newTheme = e.matches ? "dark" : "light";
-					logService.info("ui", `System theme changed to: ${newTheme}`);
-					this.set(newTheme);
+		// Одноразове читання адреси під час `init()`, не реактивне джерело:
+		// `SvelteURLSearchParams` дав би реактивність, на яку ніхто не підписаний.
+		// Той самий виняток із тією ж причиною стоїть у +layout.svelte.
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
+		const themeParam = new URLSearchParams(window.location.search).get("theme");
+		const saved = storage.get("theme");
+
+		const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+		const systemTheme = mediaQuery.matches ? "dark" : "light";
+
+		const initialTheme = themeParam || saved || systemTheme;
+
+		logService.info(
+			"ui",
+			`Initializing theme: ${initialTheme} (source: ${themeParam ? "URL" : saved ? "storage" : "system"})`
+		);
+		// APPLY, А НЕ SET — і це вся суть правки нижче.
+		//
+		// Доти `init()` викликав `set()`, який ЗАПИСУЄ в сховище. Тобто перший
+		// же візит записував туди тему, виведену з `prefers-color-scheme`, і
+		// вона ставала «явним вибором користувача» назавжди: скрипт першого
+		// кадру в app.html читає саме цей ключ. Відвідувач, який ніколи не
+		// торкався перемикача, більше ніколи не бачив, як сайт іде за системою.
+		//
+		// Тим самим записом убивалася й підписка нижче: її умова
+		// `!storage.get("theme")` після `set()` хибна ЗАВЖДИ, тож тіло не
+		// виконувалося жодного разу. Код виглядав як реалізована фіча, а був
+		// недосяжною гілкою (PROJECT-STRUCTURE-v8 § 4.3 про той самий клас).
+		//
+		// Адреса теж не є вибором: `?theme=` — це перегляд за посиланням, а не
+		// налаштування. Пише в сховище тільки `toggle()`, тобто сам користувач.
+		this.apply(initialTheme);
+
+		const offSystemTheme = on(mediaQuery, "change", (e: MediaQueryListEvent) => {
+			if (storage.get("theme")) return; // явний вибір користувача сильніший
+			const newTheme = e.matches ? "dark" : "light";
+			logService.info("ui", `System theme changed to: ${newTheme}`);
+			this.apply(newTheme);
+		});
+
+		// Sync to URL reactively using native history API
+		const destroyUrlSync = $effect.root(() => {
+			$effect(() => {
+				const theme = this.current;
+				// Локальний буфер для складання адреси, а не стан: живе рівно
+				// один прогін ефекту й одразу віддається в replaceState.
+				// eslint-disable-next-line svelte/prefer-svelte-reactivity
+				const url = new URL(window.location.href);
+				if (url.searchParams.get("theme") !== theme) {
+					url.searchParams.set("theme", theme);
+					// history.replaceState doesn't trigger reactive dependencies,
+					// but we use untrack to be architecturally consistent
+					window.history.replaceState(null, "", url.toString());
+					logService.info("ui", `Theme synced to URL: ${theme}`);
 				}
 			});
+		});
 
-			// Sync to URL reactively using native history API
-			$effect.root(() => {
-				$effect(() => {
-					const theme = this.current;
-					const url = new URL(window.location.href);
-					if (url.searchParams.get("theme") !== theme) {
-						url.searchParams.set("theme", theme);
-						// history.replaceState doesn't trigger reactive dependencies, 
-						// but we use untrack to be architecturally consistent
-						window.history.replaceState(null, "", url.toString());
-						logService.info("ui", `Theme synced to URL: ${theme}`);
-					}
-				});
-			});
-		}
+		return () => {
+			offSystemTheme();
+			destroyUrlSync();
+		};
 	}
 
 	async toggle() {
@@ -63,13 +103,19 @@ class ThemeState {
 		}, 200);
 	}
 
-	set(theme: string) {
+	/** Показати тему. Нічого не запам'ятовує — це не вибір користувача. */
+	apply(theme: string) {
 		this.current = theme;
 		if (browser) {
 			document.documentElement.setAttribute("data-theme", theme);
 			document.documentElement.style.colorScheme = theme;
-			storage.set("theme", theme);
 		}
+	}
+
+	/** Вибір користувача: показати й запам'ятати. */
+	set(theme: string) {
+		this.apply(theme);
+		if (browser) storage.set("theme", theme);
 	}
 }
 

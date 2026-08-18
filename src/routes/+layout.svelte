@@ -100,7 +100,10 @@
 		migrateStorageKeys();
 
 		// Initialize global states
-		theme.init();
+		// theme.init() підписується на prefers-color-scheme і піднімає
+		// $effect.root для синхронізації з адресою — обидва треба зняти, як у
+		// sound і shortcuts нижче (SVELTE-CORE-v8 § 2.2, § 2.9).
+		const teardownTheme = theme.init();
 		background.init();
 		scrollbar.init();
 		// The route segment decides the language; init falls back to the saved
@@ -161,6 +164,7 @@
 		return () => {
 			observer.disconnect();
 			mutationObserver.disconnect();
+			teardownTheme?.();
 			teardownSound?.();
 			teardownShortcuts?.();
 		};
