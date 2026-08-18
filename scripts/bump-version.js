@@ -19,9 +19,15 @@ pkg.version = newVersion;
 writeFileSync(pkgPath, JSON.stringify(pkg, null, "\t") + "\n");
 
 // 4. Generate app-version.json
+//
+// Тільки версія. `buildTime` тут стояв і був неправдою: це момент, коли хтось
+// запустив bump, а не момент збірки, і на кожній наступній збірці лишався тим
+// самим. VERSIONING-v8 § 1.4 забороняє комітити дані моменту збірки саме тому:
+// у баг-репорті такий рядок відповідає на питання «яку збірку бачив
+// користувач» упевнено й неправильно. Знадобиться справжній час збірки — його
+// дописує крок збірки у `build/`, а не цей скрипт у `static/`.
 const appVersion = {
-	version: newVersion,
-	buildTime: new Date().toISOString()
+	version: newVersion
 };
 
 writeFileSync(versionPath, JSON.stringify(appVersion, null, "\t") + "\n");
