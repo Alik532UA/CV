@@ -1,0 +1,59 @@
+/**
+ * База для перевірки сенсорних зон (ACCESSIBILITY-v8 § 8, § 10.3).
+ *
+ * ЧОМУ БАЗА, А НЕ `toEqual([])`. Правило § 8 не перевіряв ніхто, і перший же
+ * замір показав 18 замалих цілей на головній і ще три в модалці. Гейт із нулем
+ * тут означав би одне з двох: або переверстати мобільну шапку, панель фільтрів і
+ * картки проєктів одним комітом наосліп, або вимкнути гейт — а вимкнений гейт
+ * гірший за відсутній (CODE-QUALITY-v8 § 6.4.1 про `off` в ESLint,
+ * ACCESSIBILITY-v8 § 10.1.1 про нуль в axe). Тому борг оформлений тим самим
+ * патерном, що вже застосований у цьому проєкті для axe і для розміру файлів:
+ *
+ *   KNOWN — поіменний перелік. НОВА замала ціль валить прогін навіть у межах
+ *           числа, тож борг не ховається за лічильником;
+ *   COUNT — кількість. Рухається лише вниз, і кожне зменшення робиться разом
+ *           із правкою, що його спричинила.
+ *
+ * Числа отримані прогоном `npx playwright test --project=chromium
+ * tests/touch-targets.spec.ts` на вьюпорті 390×844, а не оцінені
+ * (AI-AGENT-PITFALLS-v8 § 5.5). Розміри в назвах не зберігаються навмисно:
+ * інакше база червоніла б від зміни шрифту на піксель.
+ *
+ * Порядок розбору, від найдешевшого до найдорожчого:
+ *   1. `base-modal-close-btn` (40×40) — канон називає кнопку закриття
+ *      найчастішим порушником (UI-ELEMENTS-v8 § 3), і їй бракує 4px;
+ *   2. картки проєктів (245×42) і кнопка аналізу (308×42) — бракує 2px висоти;
+ *   3. панель фільтрів (34px) і перемикач теми (38×32) — потрібна переверстка;
+ *   4. `ai-model-badge-btn` (130×23) — найменша ціль на сайті.
+ */
+
+/** Поіменно. Нова назва — падіння, навіть якщо кількість не зросла. */
+export const TOUCH_KNOWN: Record<string, readonly string[]> = {
+	home: [
+		'a "Skip to main content"',
+		"Select background effect",
+		"sound-toggle-btn",
+		"lang-trigger-btn",
+		"theme-light-btn",
+		"theme-dark-btn",
+		'button "All Projects"',
+		'button "Games"',
+		'button "Apps"',
+		'button "Websites"',
+		"project-btn-mindstep",
+		"project-btn-slovko",
+		"project-btn-digitalworkshop",
+		"project-btn-cv3d",
+		"project-btn-cv_web",
+		"project-btn-teatralo4ka",
+		"project-btn-as5",
+		"project-btn-vetcrew"
+	],
+	aiModal: ["base-modal-close-btn", "ai-model-badge-btn", "ai-analyze-btn"]
+};
+
+/** Кількість замалих цілей. Рухається лише вниз. */
+export const TOUCH_BASELINE: Record<string, number> = {
+	home: 18,
+	aiModal: 3
+};
