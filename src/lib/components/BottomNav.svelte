@@ -31,7 +31,13 @@
             aria-label={item.label}
             title={item.label}
         >
-            <span class="icon">
+            <!-- Без class="icon". Клас тут був, а правила `.icon` у цьому
+                 компоненті немає: єдине таке правило живе в SidebarNav.svelte,
+                 куди скоуп не дістає (SVELTE-UI-v8 § 3.5). Тобто
+                 `margin-right: 15px` не діяв тут ніколи — і не мав би: у
+                 горизонтальній панелі значок стоїть сам. Клас лишався
+                 обіцянкою, що правку `.icon` у Sidebar видно і тут. -->
+            <span>
                 <item.icon size={24} aria-hidden="true" />
             </span>
         </a>
