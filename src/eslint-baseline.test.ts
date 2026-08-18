@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import { ESLint } from 'eslint';
 import { beforeAll, describe, expect, it } from 'vitest';
 
@@ -37,8 +38,16 @@ const BASELINE = [
  * Файл-зразок мусить бути `.svelte`: частина правил (`svelte/*`) живе лише в
  * overrides-блоці для цього розширення, і на `.ts` їх у зібраному конфігу немає.
  * Файли зі списку винятків для `svelte/no-at-html-tags` для зразка не годяться.
+ *
+ * І він мусить ІСНУВАТИ. Тут стояло `src/routes/+page.svelte` — шлях, якого в
+ * цьому проєкті немає: сторінка живе в `src/routes/[[lang=lang]]/`. Тест від
+ * цього не червонів, бо `calculateConfigForFile` розв'язує конфіг за формою
+ * шляху й до диска не звертається, — тобто чотирнадцять правил перевірялися для
+ * ВИГАДАНОГО файлу. Збігом воно й працювало: `.svelte` є `.svelte`. Але жоден
+ * зі списків винятків за шляхом (`storage.ts`, `tests/**`) на такому зразку не
+ * спрацював би, і перевірка мовчки перестала б відповідати проєкту.
  */
-const SAMPLE = 'src/routes/+page.svelte';
+const SAMPLE = 'src/routes/[[lang=lang]]/+page.svelte';
 
 function levelOf(entry: unknown): string | number | undefined {
 	return Array.isArray(entry) ? (entry[0] as string | number) : (entry as string | number);
@@ -58,8 +67,15 @@ describe('базовий набір ESLint (CODE-QUALITY-v8 § 6.4.1)', () => {
 		// 30 c, а не типові 5: розвʼязання конфігу тягне пресети svelte та
 		// typescript-eslint і в найбільшому з проєктів займає 3,5 c. Під
 		// паралельним прогоном у CI типового ліміту не вистачає — файл падав
-		// з 14 пропущеними перевірками, тобто гейт червонів без порушення.
+		// з усіма пропущеними перевірками, тобто гейт червонів без порушення.
 	}, 30_000);
+
+	it('перевірка жива: файл-зразок існує', () => {
+		expect(
+			existsSync(SAMPLE),
+			`${SAMPLE} немає на диску — конфіг розв'язується для шляху, якого не існує`
+		).toBe(true);
+	});
 
 	it.each(BASELINE)('%s не вимкнене', (rule) => {
 		const level = levelOf(rules[rule]);
