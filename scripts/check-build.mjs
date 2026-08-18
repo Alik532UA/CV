@@ -52,16 +52,21 @@ if (!existsSync(BUILD)) {
 	process.exit(1);
 }
 
-function htmlFiles(dir, out = []) {
+function allFiles(dir, out = []) {
 	for (const entry of readdirSync(dir)) {
 		const full = join(dir, entry);
-		if (statSync(full).isDirectory()) htmlFiles(full, out);
-		else if (entry.endsWith(".html")) out.push(full.replace(/\\/g, "/"));
+		if (statSync(full).isDirectory()) allFiles(full, out);
+		else out.push(full.replace(/\\/g, "/"));
 	}
 	return out;
 }
 
-const files = htmlFiles(BUILD);
+/** Усе, що читається як текст. Решта (jpg, png, mp3, pdf) не сканується. */
+const TEXT_ASSET = /\.(html|js|mjs|cjs|json|css|map|txt|xml|webmanifest)$/i;
+
+const everything = allFiles(BUILD);
+const files = everything.filter((f) => f.endsWith(".html"));
+const textAssets = everything.filter((f) => TEXT_ASSET.test(f));
 
 // Перевірка, яка захищає решту перевірок: порожній список дав би «проблем
 // немає» на зламаній збірці (AI-AGENT-PITFALLS-v8 § 1).
@@ -174,13 +179,58 @@ for (const lang of INDEXED) {
 	}
 }
 
-// Секретів у бандлі бути не може: усе з нього видно у DevTools.
-for (const file of htmlFiles(BUILD).concat(
-	existsSync(join(BUILD, "_app")) ? htmlFiles(join(BUILD, "_app")) : []
-)) {
+/**
+ * Секретів у бандлі бути не може: усе з нього видно у DevTools
+ * (SECURITY-v8 § 16 «Секрети в бандлі [static]», AI-PROVIDERS-v8 § 9).
+ *
+ * ЩО ТУТ БУЛО НЕ ТАК. Сканувалися `htmlFiles(BUILD)` плюс
+ * `htmlFiles(BUILD + '/_app')` — а в `_app/` немає ЖОДНОГО `.html`: там 21
+ * файл `.js`. Другий доданок повертав порожній масив, перший уже входив у
+ * перший, і сам бандл не перевіряв ніхто. Гейт звітував «проблем немає» про
+ * файли, у яких ключ опинитися й не може: інлайнить його бандлер саме в `.js`.
+ * Класичний зелений, що виглядає як доказ (AI-AGENT-PITFALLS-v8 § 1).
+ *
+ * ДРУГА ПОЛОВИНА — за чим саме шукати. Ім'я змінної (`GEMINI_API_KEY: "…"`)
+ * у зібраному коді не переживає мініфікацію: `import.meta.env.PUBLIC_X`
+ * підставляється як ГОЛИЙ рядковий літерал, і від імені не лишається нічого.
+ * Тому головний детектор — форма самого ключа, як і приписує канон
+ * (`grep -rlE '(AIza|gsk_|sk-|cfut_)' build/`). Ім'я змінної лишається другим
+ * детектором: воно ловить ключ, вписаний у джерела руками.
+ *
+ * Зворотний експеримент (AI-AGENT-PITFALLS-v8 § 1.1): дописати в будь-який
+ * файл `build/_app/immutable/chunks/*.js` рядок `"AIzaSy` + 33 символи — гейт
+ * мусить назвати цей файл. Перевірено 2026-08-19: назвав.
+ */
+const SECRET_PATTERNS = [
+	// Google AI (Gemini) — `GEMINI_API_KEY` у секретах воркера.
+	[/(?<![A-Za-z0-9_-])AIza[A-Za-z0-9_-]{20,}/g, "ключ Google AI (AIza…)"],
+	// Groq — `GROQ_API_KEY` там само.
+	[/(?<![A-Za-z0-9_-])gsk_[A-Za-z0-9]{20,}/g, "ключ Groq (gsk_…)"],
+	// OpenAI-сумісні: жоден із них зараз не в реєстрі, але `wire: "openai"`
+	// існує, тож наступний провайдер прийде саме такої форми.
+	[/(?<![A-Za-z0-9_-])sk-[A-Za-z0-9-]{20,}/g, "ключ OpenAI-сумісного API (sk-…)"],
+	[/(?<![A-Za-z0-9_-])cfut_[A-Za-z0-9_-]{20,}/g, "токен Cloudflare (cfut_…)"],
+	// Не про AI, але в бандлі статичного сайту їм місця немає так само.
+	[/(?<![A-Za-z0-9_-])(?:ghp|gho|github_pat)_[A-Za-z0-9_]{20,}/g, "токен GitHub"],
+	// Ім'я секрету з присвоєним значенням — ключ, вписаний у джерела руками.
+	[/(GEMINI|GROQ|CLOUDFLARE|OPENAI)_API_KEY\s*[:=]\s*["'][^"']{8,}/g, "ім'я секрету зі значенням"]
+];
+
+// Перевірка, яка захищає перевірку: набір без жодного `.js` означає, що
+// структура `build/` змінилася і сканувати нічого — саме той стан, у якому
+// гейт мовчав досі.
+const scannedJs = textAssets.filter((f) => f.endsWith(".js"));
+if (scannedJs.length === 0) {
+	console.error("У build/ немає жодного .js — сканувати бандл нічим, перевірка мертва.");
+	process.exit(1);
+}
+
+for (const file of textAssets) {
 	const text = readFileSync(file, "utf8");
-	for (const m of text.matchAll(/(GEMINI|GROQ|CLOUDFLARE|OPENAI)_API_KEY\s*[:=]\s*["'][^"']{8,}/g)) {
-		fail(`${file}: схоже на ключ у бандлі — ${m[0].slice(0, 40)}`);
+	for (const [pattern, what] of SECRET_PATTERNS) {
+		for (const m of text.matchAll(pattern)) {
+			fail(`${file}: ${what} у бандлі — ${m[0].slice(0, 24)}…`);
+		}
 	}
 }
 
@@ -190,4 +240,6 @@ if (problems.length > 0) {
 	process.exit(1);
 }
 
-console.log(`Збірка перевірена: ${files.length} HTML, проблем немає.`);
+console.log(
+	`Збірка перевірена: ${files.length} HTML, ${textAssets.length} текстових файлів просканованих на секрети (з них ${scannedJs.length} JS), проблем немає.`
+);
