@@ -115,6 +115,7 @@
                 class="close-btn"
                 onclick={close}
                 aria-label={t.common.close}
+                aria-keyshortcuts="Escape"
                 data-testid="base-modal-close-btn"
             >
                 <X size={24} />

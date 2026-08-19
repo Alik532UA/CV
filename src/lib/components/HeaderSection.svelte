@@ -232,6 +232,7 @@
                     data-testid="bg-toggle-toolbar"
                     role="radiogroup"
                     aria-label="Background effect"
+                    aria-keyshortcuts="B"
                 >
                     <button
                         onclick={() => background.set(0)}
@@ -337,10 +338,7 @@
             </div>
 
             <!-- Background Switcher (Mobile) -->
-            <div
-                class="mobile-bg-switcher mobile-only"
-                data-testid="bg-toggle-mobile-toolbar"
-            >
+            <div class="mobile-bg-switcher mobile-only" data-testid="bg-toggle-mobile-toolbar">
                 <button
                     class="glass-icon-btn"
                     onclick={(e) => { e.stopPropagation(); toggleBgDropdown(); }}
@@ -462,6 +460,7 @@
                     title={t.common.sound}
                     aria-label={t.common.sound}
                     aria-pressed={sound.enabled}
+                    aria-keyshortcuts="M"
                     data-testid="sound-toggle-btn"
                 >
                     {#if sound.enabled && sound.volume > 0}
@@ -501,16 +500,14 @@
                  handful of languages. The panel adds a search box and groups
                  once the list grows; with 4 languages it is sparse but the
                  structure is what needs to hold up as more are added. -->
-            <div
-                class="lang-switcher-wrapper"
-                data-testid="lang-select"
-            >
+            <div class="lang-switcher-wrapper" data-testid="lang-select">
                 <button
                     class="glass-icon-btn lang-trigger"
                     onclick={(e) => { e.stopPropagation(); toggleLangDropdown(); }}
                     aria-label="Select language"
                     aria-haspopup="true"
                     aria-expanded={langMenu.isOpen}
+                    aria-keyshortcuts="L"
                     data-testid="lang-trigger-btn"
                 >
                     <ActiveFlag width="20" height="15" class="flag-icon" />
@@ -582,6 +579,7 @@
                     title="Light Theme"
                     aria-label="Enable light theme"
                     aria-pressed={theme.current === "light"}
+                    aria-keyshortcuts="T"
                     data-testid="theme-light-btn"
                 >
                     <Sun size={18} />
@@ -593,6 +591,7 @@
                     title="Dark Theme"
                     aria-label="Enable dark theme"
                     aria-pressed={theme.current === "dark"}
+                    aria-keyshortcuts="T"
                     data-testid="theme-dark-btn"
                 >
                     <Moon size={18} />
