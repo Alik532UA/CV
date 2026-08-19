@@ -92,3 +92,26 @@ export function langPath(lang: Language): string {
 export function langUrl(origin: string, lang: Language): string {
 	return lang === DEFAULT_LANGUAGE ? `${origin}/CV/` : `${origin}/CV/${lang}/`;
 }
+
+/**
+ * Маршрути, які існують, працюють, але не призначені пошуку
+ * (BETA-CHECKLIST-v8 § 4, SEO-v8 § 1).
+ *
+ * Один механізм на три вимоги, як і `isIndexed` вище: сторінка звідси не
+ * отримує `canonical`, не отримує `hreflang` і не потрапляє в sitemap — бо
+ * sitemap перелічує лише те, у чого canonical є. Трьох окремих правок для
+ * кожного нового службового маршруту не потрібно.
+ *
+ * Це НЕ таємниця. Сайт статичний і зібраний з відкритого репозиторію, довжина
+ * шляху не додає до захисту нічого, адреса працює завжди і дається посиланням
+ * тому, хто погодився допомогти. Прихованість тут означає рівно одне: сторінка
+ * не конкурує з резюме у видачі й не приводить туди тих, хто прийшов читати CV.
+ *
+ * Значення — id маршруту в тій самій формі, у якій його повідомляє SvelteKit
+ * (`page.route.id`), щоб порівняння не залежало від base path.
+ */
+export const HIDDEN_ROUTES: readonly string[] = ["/beta-test-checklists"];
+
+export function isHiddenRoute(routeId: string | null): boolean {
+	return routeId !== null && HIDDEN_ROUTES.includes(routeId);
+}

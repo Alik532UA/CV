@@ -6,7 +6,6 @@
 	import DynamicBackground from "$lib/components/DynamicBackground.svelte";
 	import SEO from "$lib/components/SEO.svelte";
 	import { onMount } from "svelte";
-	import { SvelteSet } from "svelte/reactivity";
 	import { browser } from "$app/environment";
 	import { page } from "$app/state";
 	import { replaceState, afterNavigate } from "$app/navigation";
@@ -19,12 +18,21 @@
 	import Minimap from "$lib/components/ui/Minimap.svelte";
 	import ScrollbarContextMenu from "$lib/components/ui/ScrollbarContextMenu.svelte";
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
-	import { initAnalytics, trackPageView, track } from "$lib/services/analytics";
+	import { isHiddenRoute } from "$lib/i18n/routing";
+	import { initAnalytics, trackPageView } from "$lib/services/analytics";
+	import { observeSections } from "$lib/utils/sectionObserver";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 	import FloatingAiButton from "$lib/components/ui/FloatingAiButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
 
 	let { children } = $props();
+
+	/**
+	 * Службовий маршрут (BETA-CHECKLIST-v8 § 4): чеклист ручної перевірки. Він
+	 * ділить із сайтом тему, смугу прокрутки й шапку, але не має ні секцій
+	 * резюме, ні приводу пропонувати AI-аналіз вакансії.
+	 */
+	const hiddenRoute = $derived(isHiddenRoute(page.route.id));
 
 	// Set here rather than in the page component: SEO.svelte lives in this
 	// layout and renders before the page does, and `language` is a module
@@ -117,53 +125,10 @@
 		const teardownSound = sound.init();
 		const teardownShortcuts = shortcuts.init();
 
-		const observedElements = new SvelteSet<Element>();
-		// This is a single page, so without per-section events the report would
-		// show one page view and nothing about how far anyone actually read.
-		const reportedSections = new SvelteSet<string>();
+		const teardownSections = observeSections();
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						section.observed(entry.target.id);
-						// Once per load: the observer re-fires every time a
-						// section scrolls back into view.
-						if (!reportedSections.has(entry.target.id)) {
-							reportedSections.add(entry.target.id);
-							track("section_view", { section: entry.target.id });
-						}
-					}
-				});
-			},
-			{ 
-				threshold: 0.2,
-				rootMargin: '-70px 0px -30% 0px' 
-			},
-		);
-
-		const attachObservers = () => {
-			document.querySelectorAll("section[id]").forEach((section) => {
-				if (!observedElements.has(section)) {
-					observedElements.add(section);
-					observer.observe(section);
-				}
-			});
-		};
-
-		attachObservers();
-
-		const mutationObserver = new MutationObserver(() => {
-			attachObservers();
-		});
-
-		if (document.body) {
-			mutationObserver.observe(document.body, { childList: true, subtree: true });
-		}
-		
 		return () => {
-			observer.disconnect();
-			mutationObserver.disconnect();
+			teardownSections();
 			teardownTheme?.();
 			teardownSound?.();
 			teardownShortcuts?.();
@@ -187,10 +152,17 @@
 
 <div class="app-layout" class:language-changing={language.isChanging}>
 	<HeaderSection />
-	<SidebarNav activeSection={section.active} />
-	<BottomNav activeSection={section.active} />
+	{#if !hiddenRoute}
+		<!-- Обидві навігації посилаються на якорі секцій резюме (#about,
+		     #experience…). На службовому маршруті таких секцій немає, тож
+		     кожне посилання вело б у нікуди — зламана обіцянка кнопки
+		     (BETA-CHECKLIST-v8 § 4). Шапка лишається: у ній перемикачі теми й
+		     мови, і вони потрібні саме тому, хто прийшов перевіряти. -->
+		<SidebarNav activeSection={section.active} />
+		<BottomNav activeSection={section.active} />
+	{/if}
 	<LogCopyButton />
-	<main id="main-content">
+	<main id="main-content" class:full-width={hiddenRoute}>
 		{@render children()}
 	</main>
 </div>
@@ -204,7 +176,9 @@
      menu with it. -->
 <ScrollbarContextMenu />
 
-<FloatingAiButton />
+{#if !hiddenRoute}
+	<FloatingAiButton />
+{/if}
 <Toast />
 
 <style>
@@ -235,6 +209,14 @@
 		padding: 40px;
 		position: relative;
 		transition: filter 0.2s ease-in-out;
+	}
+
+	/* Відступ під бокове меню лишався б і там, де меню немає: 280px порожнечі
+	   ліворуч від вмісту. `margin-inline-start`, а не `margin-left`, — щоб на
+	   івриті відступ був із того боку, з якого меню й стоїть. */
+	main.full-width {
+		margin-left: 0;
+		margin-inline-start: 0;
 	}
 
 	/* Global Blur for Language Change */

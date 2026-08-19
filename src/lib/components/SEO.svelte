@@ -1,6 +1,7 @@
 <script lang="ts">
+    import { page } from "$app/state";
     import { language, translations } from "$lib/controllers/I18nState.svelte";
-    import { INDEXED_LANGUAGES, bcp47, isIndexed, langUrl, ogLocale } from "$lib/i18n/routing";
+    import { INDEXED_LANGUAGES, bcp47, isHiddenRoute, isIndexed, langUrl, ogLocale } from "$lib/i18n/routing";
     
     // Hardcoded rather than taken from page.url.origin: these tags are read out
     // of the prerendered HTML, and during prerendering SvelteKit reports a
@@ -28,6 +29,15 @@
     // but kept out of the index rather than risking the domain being judged on
     // forty pages nobody has read.
     let indexable = $derived(isIndexed(language.current));
+
+    /**
+     * Службовий маршрут (BETA-CHECKLIST-v8 § 4). Одне рішення закриває три
+     * вимоги одразу: сторінка не отримує ні `canonical`, ні `hreflang`, а
+     * sitemap перелічує лише те, у чого canonical є, — тож і туди вона не
+     * потрапляє. Замість цього — `noindex, nofollow`: `follow`, як у машинних
+     * перекладів, тут зайвий, бо йти з неї нікуди.
+     */
+    let hidden = $derived(isHiddenRoute(page.route.id));
 
     // Structured data: lets search engines read this as a person rather than
     // guessing from prose, which is what drives the knowledge-panel style
@@ -75,17 +85,21 @@
     <title>{title} | Alik Zapolnov</title>
     <meta name="description" content={description} />
     <meta name="author" content="Alik Zapolnov" />
-    <link rel="canonical" href={canonical} />
-    {#if !indexable}
-        <meta name="robots" content="noindex, follow" />
-    {/if}
+    {#if hidden}
+        <meta name="robots" content="noindex, nofollow" />
+    {:else}
+        <link rel="canonical" href={canonical} />
+        {#if !indexable}
+            <meta name="robots" content="noindex, follow" />
+        {/if}
 
-    <!-- Alternates for the reviewed languages only, so search engines are not
-         pointed at pages this site asks them not to index. -->
-    {#each INDEXED_LANGUAGES as alt (alt)}
-        <link rel="alternate" hreflang={bcp47(alt)} href={langUrl(SITE_ORIGIN, alt)} />
-    {/each}
-    <link rel="alternate" hreflang="x-default" href={langUrl(SITE_ORIGIN, "en")} />
+        <!-- Alternates for the reviewed languages only, so search engines are not
+             pointed at pages this site asks them not to index. -->
+        {#each INDEXED_LANGUAGES as alt (alt)}
+            <link rel="alternate" hreflang={bcp47(alt)} href={langUrl(SITE_ORIGIN, alt)} />
+        {/each}
+        <link rel="alternate" hreflang="x-default" href={langUrl(SITE_ORIGIN, "en")} />
+    {/if}
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />

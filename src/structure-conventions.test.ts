@@ -45,10 +45,21 @@ describe("PROJECT-STRUCTURE § 4.3 — існування ≠ досяжніст
 	 * неправильно виставленої оцінки SEO цілому проєкту — `SEO.svelte` був
 	 * написаний повністю й не підключений нікуди.
 	 */
+	/**
+	 * Кожне джерело читається РАЗ, а не заново для кожного компонента.
+	 *
+	 * Наївна форма — `COMPONENTS.filter(c => SOURCES.some(o => read(o)…))` —
+	 * це N×M звернень до диска: 76 компонентів × 190 джерел. Поки файлів було
+	 * менше, вона вкладалася в типовий ліміт vitest; із двома новими вона стала
+	 * падати ЛИШЕ в повному прогоні, де тести йдуть паралельно, і виглядало це
+	 * як зламаний інваріант, а не як брак часу. Той самий клас, що описаний у
+	 * `src/eslint-baseline.test.ts`: гейт червоніє без порушення.
+	 */
 	it("кожен компонент десь імпортується", () => {
+		const byFile = new Map(SOURCES.map((p) => [p, read(p)]));
 		const orphans = COMPONENTS.filter((file) => {
 			const name = basename(file);
-			return !SOURCES.some((other) => other !== file && read(other).includes(name));
+			return !SOURCES.some((other) => other !== file && byFile.get(other)!.includes(name));
 		});
 		expect(orphans, `ніде не імпортовані — підключити або видалити:\n${orphans.join("\n")}`).toEqual(
 			[]
@@ -173,7 +184,20 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 		"src/lib/services/aiWire.ts": 255
 	};
 
-	const measured = SOURCES.filter((f) => !f.startsWith("src/lib/i18n/locales/")).map((f) => ({
+	/**
+	 * Випадок «великий статичний вміст без логіки» з § 7 — не тека, а ПЕРЕЛІК.
+	 *
+	 * Словники локалей були тут від початку. Другим записом стали пункти
+	 * чеклиста: це так само пари рядків uk/en без жодної логіки, і 35 пунктів
+	 * не вміщуються у 250 рядків за побудовою (BETA-CHECKLIST-v8 § 2.4).
+	 *
+	 * Названий саме файл, а не тека `src/lib/data/`: виняток мусить бути видимий
+	 * у diff. Теку довелося б розширювати мовчки щоразу, коли туди покладуть
+	 * щось із логікою — а `schemas.ts` там уже лежить.
+	 */
+	const DATA_ONLY = [/^src\/lib\/i18n\/locales\//, /^src\/lib\/data\/betaChecklist\.ts$/];
+
+	const measured = SOURCES.filter((f) => !DATA_ONLY.some((re) => re.test(f))).map((f) => ({
 		file: f,
 		lines: read(f).split("\n").length,
 		limit: LIMITS.find(([re]) => re.test(f))?.[1] ?? Infinity

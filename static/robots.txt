@@ -2,4 +2,10 @@
 User-agent: *
 Disallow:
 
+# Службова сторінка ручної перевірки (BETA-CHECKLIST-v8 § 4). Вона працює й
+# доступна за прямим посиланням — це не таємниця, а прохання не приводити туди
+# тих, хто шукав резюме. Ту саму обіцянку дублюють `noindex` у самій сторінці
+# та її відсутність у sitemap; `Disallow` тут — третій бік того самого рішення.
+Disallow: /CV/beta-test-checklists/
+
 Sitemap: https://alik532ua.github.io/CV/sitemap.xml
