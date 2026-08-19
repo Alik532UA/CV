@@ -90,6 +90,10 @@ class LogService {
 			`DATE: ${new Date().toISOString()}`,
 			`URL: ${browser ? window.location.href : "SSR"}`,
 			`USER_AGENT: ${browser ? navigator.userAgent : "SSR"}`,
+			// Half of all "nothing works" reports are explained by this one line
+			// (DEBUGGING-v8 § 2.3): the visitor was offline, and every request in
+			// the log below failed for that single reason.
+			`ONLINE: ${browser ? navigator.onLine : "SSR"}`,
 			// Non-zero means preferences were not saved this session — private
 			// mode, a full quota, or site data blocked. Without this line the
 			// report from such a device looks identical to a healthy one.

@@ -98,7 +98,13 @@
 
     <div class="footer-info">
         <p>{t.lastUpdate}</p>
-        <!-- <p class="version">v{__APP_VERSION__}</p> -->
+        <!--
+            The version number lives on the service badge (ui/LogCopyButton),
+            not here. It sat commented out at this spot for a long time, which is
+            the worst of the three options: a visitor reading a CV has no use for
+            a build number, and whoever debugs a screenshot could not see one
+            either. The badge shows it in dev and, on request, in production.
+        -->
     </div>
 </aside>
 
