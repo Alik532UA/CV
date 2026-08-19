@@ -71,8 +71,8 @@ const textAssets = everything.filter((f) => TEXT_ASSET.test(f));
 
 // Перевірка, яка захищає решту перевірок: порожній список дав би «проблем
 // немає» на зламаній збірці (AI-AGENT-PITFALLS-v8 § 1).
-if (files.length < 40) {
-	console.error(`Знайдено лише ${files.length} HTML — перевірка мертва, очікується 43+.`);
+if (files.length < 41) {
+	console.error(`Знайдено лише ${files.length} HTML — перевірка мертва, очікується 44+.`);
 	process.exit(1);
 }
 
@@ -82,6 +82,17 @@ for (const file of files) {
 	// 404.html — це оболонка SPA для GitHub Pages: вона свідомо порожня й не
 	// має canonical. Решта правил до неї застосовні.
 	const isShell = file.endsWith("/404.html");
+
+	/*
+	 * Службова сторінка перевіряється НАВПАКИ (BETA-CHECKLIST-v8 § 5.5).
+	 *
+	 * Прирівняти її до 404-оболонки було б дешевше на два рядки й неправильно:
+	 * разом із canonical вона перестала б перевірятися на порожнє тіло й на
+	 * <title>, і найслабше покритою стала б саме та сторінка, якою користуються
+	 * тестувальники. Тому вона лишається в загальному потоці, і лише вимоги до
+	 * неї дзеркальні: noindex Є, canonical і hreflang НЕМАЄ.
+	 */
+	const isHidden = file === `${BUILD}/beta-test-checklists/index.html`;
 
 	// § 1.1 — сторінка в індексі з порожнім тілом
 	if (!isShell) {
@@ -95,8 +106,9 @@ for (const file of files) {
 			fail(`${file}: видимого тексту ${text.length} символів (мінімум ${MIN_BODY_TEXT})`);
 		}
 
-		// § 1.1 (продовження) — тіло не порожнє, але без основного вмісту
-		const missingSections = SECTION_IDS.filter((id) => !html.includes(`id="${id}"`));
+		// § 1.1 (продовження) — тіло не порожнє, але без основного вмісту.
+		// Службова сторінка секцій резюме не має й мати не мусить.
+		const missingSections = isHidden ? [] : SECTION_IDS.filter((id) => !html.includes(`id="${id}"`));
 		if (missingSections.length > 0) {
 			fail(`${file}: у prerender немає секцій — ${missingSections.join(", ")}`);
 		}
@@ -143,8 +155,45 @@ for (const file of files) {
 		}
 	}
 
+	/*
+	 * BETA-HIDDEN-PAGE (BETA-CHECKLIST-v8 § 5.5) — обіцянка перевіряється з
+	 * ОБОХ боків, і кожен мусить червоніти окремо.
+	 *
+	 * Зворотний експеримент, який тут уже прогнано: прибрати `noindex` із
+	 * зібраного HTML — код 1; дописати canonical — теж 1. І пильно: заміна в
+	 * HTML, яка нічого не знайшла, дає зелений прогін, що виглядає як доказ,
+	 * тому обидві підміни робилися по рядку, скопійованому з самого файлу.
+	 */
+	if (isHidden) {
+		if (!/<meta name="robots" content="noindex/.test(html)) {
+			fail(`${file}: службова сторінка без noindex — вона піде в індекс`);
+		}
+		if (/rel="canonical"/.test(html)) {
+			fail(`${file}: службова сторінка з canonical — вона потрапить і в sitemap`);
+		}
+		if (/rel="alternate" hreflang/.test(html)) {
+			fail(`${file}: службова сторінка з hreflang — вона запрошує кравлера`);
+		}
+		if (!/<title>[^<]{5,}<\/title>/.test(html)) {
+			fail(`${file}: службова сторінка без title`);
+		}
+		// BETA-ASCII-SLUG: кириличний гомогліф у назві маршруту дає адресу, яка
+		// виглядає правильною й не працює.
+		if (/[^\x00-\x7F]/.test(file)) {
+			fail(`${file}: у шляху службової сторінки є не-ASCII символ`);
+		}
+		const sitemap = readFileSync(join(BUILD, "sitemap.xml"), "utf8");
+		if (sitemap.includes("beta-test-checklists")) {
+			fail("sitemap.xml: службова сторінка в sitemap");
+		}
+		const robots = readFileSync(join(BUILD, "robots.txt"), "utf8");
+		if (!robots.includes("Disallow: /CV/beta-test-checklists/")) {
+			fail("robots.txt: немає Disallow для службової сторінки");
+		}
+	}
+
 	// § 2.1 — рівно одна canonical
-	if (!isShell) {
+	if (!isShell && !isHidden) {
 		const canonicals = html.match(/<link[^>]+rel="canonical"[^>]*>/g) ?? [];
 		if (canonicals.length !== 1) {
 			fail(`${file}: canonical знайдено ${canonicals.length} разів, очікується 1`);
@@ -164,6 +213,18 @@ for (const file of files) {
 // SVELTEKIT-DATA § 6.1 — згенеровано те, що очікували
 if (!existsSync(join(BUILD, "index.html"))) {
 	fail("немає build/index.html — головна сторінка не згенерована");
+}
+
+/*
+ * Службова сторінка мусить ІСНУВАТИ, і це найважливіший з її чотирьох чеків.
+ *
+ * Усі дзеркальні перевірки вище живуть усередині `if (isHidden)`. Якщо сторінка
+ * зникне — прибрали маршрут, зламався prerender, — блок не виконається жодного
+ * разу, і гейт звітуватиме «проблем немає» про сторінку, якої не існує. Рівно
+ * той хибний зелений, від якого застерігає § 5.5.
+ */
+if (!existsSync(join(BUILD, "beta-test-checklists", "index.html"))) {
+	fail("немає build/beta-test-checklists/index.html — сторінка чеклиста не згенерована");
 }
 for (const lang of INDEXED) {
 	if (!existsSync(join(BUILD, lang, "index.html"))) {

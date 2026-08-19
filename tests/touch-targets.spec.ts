@@ -82,6 +82,18 @@ test("на телефоні жодна ціль не стала меншою з�
 	assertAgainstBaseline(await tooSmall(page), "home");
 });
 
+/**
+ * Сторінка чеклиста починає з НУЛЯ, і це не збіг: її кнопки зроблені з
+ * `min-height: 44px` одразу, бо саме на ній людина сидить із телефоном у руках.
+ * Ключ у базі окремий — щоб борг головної сторінки не ховав регресію тут.
+ */
+test("на сторінці чеклиста всі цілі не менші за 44×44", async ({ page }) => {
+	await page.goto("/CV/beta-test-checklists/");
+	await expect(page.getByTestId("beta-tabs-toolbar")).toBeVisible();
+
+	assertAgainstBaseline(await tooSmall(page.locator("main")), "betaChecklist");
+});
+
 test("цілі всередині відкритої модалки міряються окремо", async ({ page }) => {
 	// Аудит бачить лише те, що на екрані (§ 10.2): без відкриття модалка не
 	// перевіряється ніколи, а кнопка закриття — найчастіший порушник правила.

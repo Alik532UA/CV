@@ -22,6 +22,7 @@
 export const A11Y_KNOWN: Record<string, readonly string[]> = {
 	home: [],
 	homeDark: [],
+	betaChecklist: [],
 	aiModal: []
 };
 
@@ -29,5 +30,6 @@ export const A11Y_KNOWN: Record<string, readonly string[]> = {
 export const A11Y_BASELINE: Record<string, number> = {
 	home: 0,
 	homeDark: 0,
+	betaChecklist: 0,
 	aiModal: 0
 };

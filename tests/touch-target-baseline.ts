@@ -57,11 +57,14 @@ export const TOUCH_KNOWN: Record<string, readonly string[]> = {
 		"project-btn-as5",
 		"project-btn-vetcrew"
 	],
-	aiModal: ["base-modal-close-btn", "ai-model-badge-btn", "ai-analyze-btn"]
+	aiModal: ["base-modal-close-btn", "ai-model-badge-btn", "ai-analyze-btn"],
+	/** Нова сторінка, зроблена одразу за правилом. Порожньо — і мусить лишитися. */
+	betaChecklist: []
 };
 
 /** Кількість замалих цілей. Рухається лише вниз. */
 export const TOUCH_BASELINE: Record<string, number> = {
 	home: 18,
-	aiModal: 3
+	aiModal: 3,
+	betaChecklist: 0
 };
