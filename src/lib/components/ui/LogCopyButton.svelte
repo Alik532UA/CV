@@ -89,16 +89,19 @@
 		in:scale={{ duration: 300, start: 0.5 }}
 		out:fade={{ duration: 200 }}
 	>
+		<!-- The version sits OUTSIDE the branches: the error count is ADDED to it rather
+		     than replacing it. Otherwise, in dev — where an error is almost always
+		     present — the version would never be on screen at all. -->
 		{#if copied}
 			<div in:scale={{ duration: 200 }}>
-				<Check size={18} />
+				<Check size={14} class="hint-icon" />
 			</div>
 		{:else if logService.errorCount > 0}
-			<span class="count">{logService.errorCount > 99 ? "!" : logService.errorCount}</span>
+			<span class="count">{logService.errorCount > 99 ? "99+" : logService.errorCount}</span>
 		{:else}
 			<Copy size={12} class="hint-icon" />
-			<span class="version">{appVersion}</span>
 		{/if}
+		<span class="version">{appVersion}</span>
 	</button>
 {/if}
 
@@ -149,17 +152,11 @@
 	}
 
 	/*
-	 * With errors it becomes a circle rather than a pill: in that state what
-	 * matters is that something happened, not which build it happened on. The
-	 * version stays in the report this same click copies.
+	 * The shape does NOT change between states: a pill stays a pill, because the
+	 * version stays in place. Errors used to turn the badge into a 32px circle, which
+	 * lost not just the version but the element's recognisability — a different thing
+	 * appeared in the corner and had to be re-read.
 	 */
-	.log-fab.has-errors,
-	.log-fab.copied {
-		width: 32px;
-		min-height: 32px;
-		padding: 0;
-		border-radius: 50%;
-	}
 
 	/*
 	 * Darker than #ff4444 for WCAG AA rather than for taste: white text on the
@@ -180,10 +177,20 @@
 		border-color: #1b5e20;
 	}
 
+	/*
+	 * The count is a chip BEFORE the number, not text instead of it. Darker red than
+	 * the capsule itself (#7f1d1d on #c92a2a): white on it gives 10:1, and the chip
+	 * reads as its own element rather than as a smear.
+	 */
 	.count {
 		font-weight: bold;
-		font-size: 12px;
+		font-size: 11px;
 		font-family: monospace;
+		line-height: 1;
+		padding: 2px 5px;
+		border-radius: 8px;
+		background-color: #7f1d1d;
+		color: white;
 	}
 
 	/*
@@ -199,12 +206,6 @@
 			padding: 0 12px;
 			border-radius: 22px;
 			bottom: 80px;
-		}
-
-		.log-fab.has-errors,
-		.log-fab.copied {
-			width: 44px;
-			padding: 0;
 		}
 
 		.version {
