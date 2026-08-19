@@ -91,6 +91,43 @@ describe("dictionary parity is enforced by the type", () => {
 	 * reader. Checked in the dictionaries, because that is where the visible
 	 * text lives.
 	 */
+	/**
+	 * ПОЛОВИНА, ЯКОЇ ТИП НЕ ЛОВИТЬ. Анотація `: Translations` доводить, що ключі
+	 * на місці, і не доводить нічого про значення: `title: ""` компілюється
+	 * бездоганно, а на екрані дає порожню кнопку, порожній заголовок або зникле
+	 * речення. Канон вимагає обидві перевірки в одному місці
+	 * (I18N-v8 § 7.1: «жодного порожнього рядка»), і саме її тут бракувало.
+	 *
+	 * Пробіл рахується порожнім навмисно: `" "` — це той самий дефект, тільки
+	 * невидимий у diff.
+	 */
+	const EMPTY_VALUE = String.raw`([A-Za-z_$][\w$]*)\s*:\s*(""|''|` + "``" + String.raw`|"\s+"|'\s+')`;
+
+	it("finds an empty value when there is one", () => {
+		// Регулярка — це весь тест; мовчки зламана звітує про успіх.
+		const one = new RegExp(EMPTY_VALUE);
+		expect('\ttitle: "",').toMatch(one);
+		expect("\ttitle: ' ',").toMatch(one);
+		expect('\ttitle: "Close",').not.toMatch(one);
+		expect("\ttitle: 'Закрити',").not.toMatch(one);
+	});
+
+	it("no locale value is an empty string", () => {
+		const bad: string[] = [];
+		for (const file of globSync("src/lib/i18n/locales/*.ts", { cwd: ROOT })) {
+			const path = `src/lib/i18n/locales/${basename(file)}`;
+			const text = read(path);
+			for (const m of text.matchAll(new RegExp(EMPTY_VALUE, "g"))) {
+				const line = text.slice(0, m.index).split("\n").length;
+				bad.push(`${path}:${line}  ${m[1]}`);
+			}
+		}
+		expect(
+			bad,
+			`порожній рядок у словнику — тип цього не бачить, а сторінка покаже нічого:\n${bad.join("\n")}`
+		).toEqual([]);
+	});
+
 	it("no emoji in interface strings", () => {
 		const emoji = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u;
 		const bad: string[] = [];
