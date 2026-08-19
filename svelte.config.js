@@ -2,6 +2,7 @@ import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { SITE_BASE } from './src/lib/config/site.js';
 
 /**
  * Хеш інлайн-скрипта першого кадру — ОБЧИСЛЕНИЙ із `src/app.html`, а не
@@ -40,7 +41,11 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: '/CV'
+			// Звідти ж, звідки canonical, hreflang і гейт над `build/`
+			// (CUSTOM-DOMAIN-v8: origin і base міняються ОДНИМ комітом, інакше
+			// адреси або подвоюються, або втрачають префікс). Літерал тут був
+			// четвертою копією рядка `/CV`.
+			base: SITE_BASE
 		},
 		csp: {
 			mode: 'hash',

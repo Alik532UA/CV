@@ -18,13 +18,36 @@
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
+import { SITE_BASE as BASE, SITE_ORIGIN } from "../src/lib/config/site.js";
 
 const BUILD = "build";
-const SITE_ORIGIN = "https://alik532ua.github.io";
-const BASE = "/CV";
 
-/** Мови, які мають бути в індексі. Має збігатися з INDEXED_LANGUAGES. */
-const INDEXED = ["en", "en-us", "uk", "ja"];
+/**
+ * Мови в індексі — ВИТЯГНУТІ з `routing.ts`, а не переписані сюди.
+ *
+ * Тут стояла копія масиву з приміткою «має збігатися з INDEXED_LANGUAGES» —
+ * форма, яку CUSTOM-DOMAIN-v8 називає окремим анти-патерном: гейт звіряв
+ * зібраний сайт із власною копією очікування, тобто сам із собою. Промоція
+ * мови в індекс — це один рядок у `routing.ts`; забути другий рядок тут значило
+ * б отримати зелений гейт, який перевіряє вчорашній склад.
+ *
+ * Розбір регуляркою, бо `routing.ts` — TypeScript і тягне за собою `$lib` та
+ * тип із контролера: голий Node його не імпортує. Порожній результат — помилка,
+ * а не мовчазний фолбек: гейт зі списком мов «нічого» пройшов би завжди.
+ */
+const ROUTING_SOURCE = readFileSync("src/lib/i18n/routing.ts", "utf8");
+const INDEXED = [
+	...(ROUTING_SOURCE.match(/INDEXED_LANGUAGES[^=]*=\s*\[([^\]]*)\]/)?.[1] ?? "").matchAll(
+		/"([^"]+)"/g
+	)
+].map((m) => m[1]);
+if (INDEXED.length === 0) {
+	console.error(
+		"check-build: не вдалося прочитати INDEXED_LANGUAGES із src/lib/i18n/routing.ts — " +
+			"гейт не має з чим звіряти hreflang і sitemap."
+	);
+	process.exit(1);
+}
 
 /** Мінімум видимого тексту на сторінці. Порожнє тіло — це § 1.1. */
 const MIN_BODY_TEXT = 200;

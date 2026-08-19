@@ -1,4 +1,5 @@
 import { base } from "$app/paths";
+import { SITE_BASE } from "$lib/config/site.js";
 import type { Language } from "$lib/controllers/I18nState.svelte";
 
 /**
@@ -88,9 +89,17 @@ export function langPath(lang: Language): string {
 	return lang === DEFAULT_LANGUAGE ? `${base}/` : `${base}/${lang}/`;
 }
 
-/** Absolute form, for canonical and hreflang tags. */
+/**
+ * Absolute form, for canonical and hreflang tags.
+ *
+ * The base path comes from `config/site.js` rather than being spelled `/CV`
+ * here: it was the third copy of that string in the project, and the one
+ * nobody would think to look at when the site moves to its own domain.
+ */
 export function langUrl(origin: string, lang: Language): string {
-	return lang === DEFAULT_LANGUAGE ? `${origin}/CV/` : `${origin}/CV/${lang}/`;
+	return lang === DEFAULT_LANGUAGE
+		? `${origin}${SITE_BASE}/`
+		: `${origin}${SITE_BASE}/${lang}/`;
 }
 
 /**

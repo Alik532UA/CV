@@ -2,17 +2,11 @@
     import { page } from "$app/state";
     import { language, translations } from "$lib/controllers/I18nState.svelte";
     import { INDEXED_LANGUAGES, bcp47, isHiddenRoute, isIndexed, langUrl, ogLocale } from "$lib/i18n/routing";
-    
-    // Hardcoded rather than taken from page.url.origin: these tags are read out
-    // of the prerendered HTML, and during prerendering SvelteKit reports a
-    // placeholder host. Every og:/twitter: tag here used to ship as
-    // "http://sveltekit-prerender/..." — a host that does not resolve — so link
-    // previews on Facebook, LinkedIn and Telegram had no image and a dead URL.
-    const SITE_ORIGIN = "https://alik532ua.github.io";
-    // Spelled out rather than using `base` from $app/paths: that value is
-    // relative (it resolves to "." here), so gluing it onto an absolute origin
-    // produced "https://alik532ua.github.io./images/...".
-    const SITE_BASE = "/CV";
+    // Both values come from one place, and the reasons they cannot be taken
+    // from `page.url.origin` or from `base` live there (config/site.js): during
+    // prerender the first is a host that does not resolve, and the second is
+    // relative, which glued onto an origin gives "https://host./images/...".
+    import { SITE_BASE, SITE_ORIGIN } from "$lib/config/site.js";
 
     let t = $derived(translations[language.current]);
     let title = $derived(t.hero.greeting);
