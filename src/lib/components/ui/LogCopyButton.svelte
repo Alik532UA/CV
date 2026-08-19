@@ -173,8 +173,9 @@
 		border-color: #7f1d1d;
 	}
 
+	/* The green follows the same rule: #2f9e44 gave 3.45:1 under white text, #237a35 gives 5.38:1. */
 	.log-fab.copied {
-		background-color: #2f9e44;
+		background-color: #237a35;
 		color: white;
 		border-color: #1b5e20;
 	}
