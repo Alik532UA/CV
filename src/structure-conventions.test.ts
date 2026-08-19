@@ -150,6 +150,10 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 * числом для ESLint і базове число для axe — борг видимий і вимірний, а не
 	 * схований за вимкненим правилом.
 	 *
+	 * СПИСОК СКОРОТИВСЯ. `SkillsSection.svelte` вийшов звідси 2026-08-20: три
+	 * картки платформ, переписані розміткою тричі, стали одним `{#each}` —
+	 * 301 → 298, тобто в межу 300. Це і є єдиний дозволений напрямок руху.
+	 *
 	 * ЧИСЛА ВИМІРЯНІ, А НЕ ЗГАДАНІ. У PROJECT-CONTEXT.md стояло «дев'ять файлів
 	 * понад межу, найбільший — 1057 рядків»; фактично їх одинадцять поза
 	 * локалями, і найбільший — 1066 (AI-AGENT-PITFALLS-v8 § 5.5).
@@ -180,7 +184,6 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 		"src/lib/components/ui/Toast.svelte": 319,
 		"src/lib/components/ui/AiModelPicker.svelte": 311,
 		"src/lib/controllers/AiChatState.svelte.ts": 303,
-		"src/lib/components/sections/SkillsSection.svelte": 301,
 		"src/lib/services/aiWire.ts": 255
 	};
 

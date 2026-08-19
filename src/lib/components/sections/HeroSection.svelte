@@ -262,7 +262,7 @@
     @media (max-width: 768px) {
         .contacts-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             margin-bottom: 25px;
             width: 100%;

@@ -6,6 +6,14 @@
     import { t } from "$lib/controllers/I18nState.svelte";
 
     let showMoreSkills = $state(false);
+
+    /* Три картки платформ відрізнялися лише значком, назвою та ключем словника.
+       Назви — літерали навмисно: це терміни, яких у словниках немає. */
+    let platforms = $derived([
+        { name: "Desktop app", icon: Monitor, detail: t.skills.platforms.desktop },
+        { name: "Web", icon: Globe, detail: t.skills.platforms.web },
+        { name: "Mobile app", icon: Smartphone, detail: t.skills.platforms.mobile }
+    ]);
 </script>
 
 <Section id="skills" title={t.skills.title}>
@@ -14,27 +22,15 @@
     {/snippet}
 
     <div class="platforms-grid">
-        <div class="platform-item glass card">
-            <div class="platform-icon"><Monitor size={24} aria-hidden="true" /></div>
-            <div class="platform-text">
-                <strong>Desktop app</strong>
-                <span>{t.skills.platforms.desktop.split(": ")[1]}</span>
+        {#each platforms as platform (platform.name)}
+            <div class="platform-item glass card">
+                <div class="platform-icon"><platform.icon size={24} aria-hidden="true" /></div>
+                <div class="platform-text">
+                    <strong>{platform.name}</strong>
+                    <span>{platform.detail.split(": ")[1]}</span>
+                </div>
             </div>
-        </div>
-        <div class="platform-item glass card">
-            <div class="platform-icon"><Globe size={24} aria-hidden="true" /></div>
-            <div class="platform-text">
-                <strong>Web</strong>
-                <span>{t.skills.platforms.web.split(": ")[1]}</span>
-            </div>
-        </div>
-        <div class="platform-item glass card">
-            <div class="platform-icon"><Smartphone size={24} aria-hidden="true" /></div>
-            <div class="platform-text">
-                <strong>Mobile app</strong>
-                <span>{t.skills.platforms.mobile.split(": ")[1]}</span>
-            </div>
-        </div>
+        {/each}
     </div>
 
     <div class="skills-categories">
@@ -157,7 +153,7 @@
     /* Platforms Grid */
     .platforms-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 20px;
         margin-bottom: 40px;
     }
@@ -168,6 +164,7 @@
         gap: 15px;
         padding: 20px;
         transition: transform 0.3s ease;
+        min-width: 0;
     }
 
     .platform-icon {
@@ -186,6 +183,7 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
+        min-width: 0;
     }
 
     .platform-text strong {

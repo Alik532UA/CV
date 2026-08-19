@@ -32,6 +32,15 @@ function styleSources(): string[] {
 const HARD_FLOOR = /minmax\(\s*(?!min\()[\d.]+(?:px|rem|em|ch)\s*,/g;
 
 /**
+ * A fixed column count whose track is a bare `1fr` — `repeat(3, 1fr)`.
+ *
+ * `auto-fit`/`auto-fill` are excluded on purpose: those are § 1.1's case, and
+ * `minmax(0, 1fr)` is the WRONG fix for them — with a zero floor the columns
+ * stop wrapping and a wide screen gets N thin ones instead of two.
+ */
+const BARE_FR = /repeat\(\s*\d+\s*,\s*1fr\s*\)/g;
+
+/**
  * Comments are not code. A comment explaining the anti-pattern has to quote it,
  * and a scanner that reads comments then fails on its own documentation — the
  * first run of this test did exactly that, on the comment added with the fix.
@@ -59,6 +68,35 @@ describe("fluid sizing canon § 1 — a grid column may not have a hard floor", 
 			HARD_FLOOR
 		);
 		expect(withoutComments("/* minmax(320px, 1fr) */\n.g { gap: 0 }")).not.toMatch(HARD_FLOOR);
+	});
+
+	it("finds a bare 1fr track list when it is there", () => {
+		expect("grid-template-columns: repeat(3, 1fr);").toMatch(BARE_FR);
+		expect("grid-template-columns: repeat(3, minmax(0, 1fr));").not.toMatch(BARE_FR);
+		// `repeat(auto-fit, …)` is the other rule's business (§ 1.1) and is not
+		// fixed by minmax(0): with it the columns stop wrapping altogether.
+		expect("grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));").not.toMatch(
+			BARE_FR
+		);
+		expect(withoutComments("/* repeat(3, 1fr) */\n.g { gap: 0 }")).not.toMatch(BARE_FR);
+	});
+
+	it("no fixed column count uses a bare 1fr", () => {
+		const offenders: string[] = [];
+		for (const file of styleSources()) {
+			if (file.endsWith("fluid-sizing-canon.test.ts")) continue;
+			const text = withoutComments(read(file));
+			for (const m of text.matchAll(BARE_FR)) {
+				const line = text.slice(0, m.index).split("\n").length;
+				offenders.push(`${file}:${line}  ${m[0]}`);
+			}
+		}
+		expect(
+			offenders,
+			"`1fr` — це `minmax(auto, 1fr)`: колонка не стане вужчою за min-content свого " +
+				"вмісту, хоч би скільки місця лишилось. Для колонок із картками потрібне " +
+				`\`minmax(0, 1fr)\` і \`min-width: 0\` на самій картці:\n${offenders.join("\n")}`
+		).toEqual([]);
 	});
 
 	it("no minmax() takes an absolute minimum directly", () => {
