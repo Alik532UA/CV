@@ -67,6 +67,7 @@
 		justify-content: center;
 		gap: 12px;
 		min-height: 50vh;
+		min-height: 50dvh;
 		padding: 40px 20px;
 		text-align: center;
 	}
