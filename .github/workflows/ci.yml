@@ -1,0 +1,107 @@
+# Гейти якості на PR — окремим workflow, а не тригером у deploy.yml.
+#
+# ЩО ЦЕ ЗАКРИВАЄ. `deploy.yml` запускається лише на `push` у `main`. Отже
+# кожен PR, який відкриває Dependabot — а він відкриває їх щопонеділка
+# (.github/dependabot.yml) — приїжджав БЕЗ ЖОДНОЇ перевірки: ані типів, ані
+# лінта, ані тестів, ані аудиту. Зливати оновлення залежностей доводилося
+# наосліп, а перше червоне з'являлося вже після злиття, у `main`.
+# DEPENDENCIES-v8 § 3.1 називає це прямо: автоматичне злиття оновлень без
+# прогону тестів — анти-патерн, і гейт мусить стояти ДО злиття.
+#
+# ЧОМУ НЕ `pull_request` у deploy.yml. Той workflow закінчується
+# `actions/deploy-pages@v4` і має `pages: write` та `id-token: write`. Додати
+# туди тригер PR означало б або деплой із гілки, або ланцюжок `if:` на кожному
+# кроці, де одна помилка коштує продакшену. Тут прав рівно стільки, скільки
+# треба, щоб прочитати код, і жодного кроку деплою немає взагалі.
+#
+# ЧОМУ КРОКИ ТІ САМІ, А НЕ «швидкий набір». Гейт, який перевіряє менше за
+# той, що стоїть після злиття, дає зелене на PR і червоне в `main` — тобто
+# рівно ту саму сліпоту, тільки на крок пізніше. Єдина відмінність від
+# deploy.yml — немає кроків збірки артефакту й викладання.
+name: CI
+
+on:
+  pull_request:
+    branches: ["main"]
+  # Кнопка на випадок «перевірити гілку, не відкриваючи PR».
+  workflow_dispatch:
+
+# Тільки читання. Цей workflow нічого нікуди не викладає.
+permissions:
+  contents: read
+
+# Новий пуш у ту саму гілку скасовує попередній прогін: черга з п'яти прогонів
+# одного PR не додає інформації, а раннери займає.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Static Analysis
+        run: |
+          npm run check
+          npm run check:worker
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Unit Tests
+        run: npm run test:unit
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high
+
+      # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
+      # `playwright install` без кешу качає ~130 МБ щоразу.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright chromium
+        run: npx playwright install --with-deps chromium
+
+      # `webServer` у playwright.config.ts сам збирає сайт і піднімає прев'ю,
+      # тож окремий крок Build перед цим не потрібен.
+      - name: E2E (chromium) — сценарії, testid-інваріант, axe
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7
+
+      - name: Build
+        run: npm run build
+
+      # Збірка не має чіпати відстежувані файли. Типовий порушник —
+      # згенерований `app-version.json`: варто дописати туди момент збірки, і
+      # робоче дерево стає брудним після кожного локального прогону
+      # (VERSIONING-v8 § 1.4, CI-CD-AND-TOOLS-v8 § 1.5).
+      - name: Збірка не змінює відстежувані файли
+        run: git diff --exit-code
+
+      - name: Verify build output
+        run: npm run check:build
+
+      - name: Check JS budget
+        run: npm run check:bundle

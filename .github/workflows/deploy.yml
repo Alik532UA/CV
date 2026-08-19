@@ -49,6 +49,14 @@ jobs:
       - name: Audit dependencies
         run: npm audit --audit-level=high
 
+      # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
+      # `playwright install` без кешу качає ~130 МБ щоразу.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
       - name: Install Playwright chromium
         run: npx playwright install --with-deps chromium
 
@@ -97,6 +105,14 @@ jobs:
         env:
           PUBLIC_AI_PROXY_URL: ${{ secrets.AI_PROXY_URL }}
         run: npm run build
+
+      # Збірка не має чіпати відстежувані файли, і це ЄДИНА машинна перевірка
+      # правила «артефакт збірки не комітиться» (VERSIONING-v8 § 1.4,
+      # CI-CD-AND-TOOLS-v8 § 1.5). Типовий порушник — `static/app-version.json`:
+      # варто дописати туди момент збірки, і робоче дерево стає брудним після
+      # кожного локального прогону, а `git status` перестає щось означати.
+      - name: Збірка не змінює відстежувані файли
+        run: git diff --exit-code
 
       # Клас дефектів, якого не видно в коді: зсув мов від модульного
       # синглтона під час prerender, `sveltekit-prerender` в адресах, порожнє
