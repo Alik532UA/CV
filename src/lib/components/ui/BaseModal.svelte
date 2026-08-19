@@ -27,6 +27,24 @@
     let modalRef: HTMLDivElement | undefined = $state();
     let previouslyFocused: HTMLElement | null = null;
 
+    /**
+     * Ідентифікатор заголовка — від `$props.id()`, а не сталим рядком.
+     *
+     * Сталий рядок працює рівно доти, доки модалка на сторінці одна. Тут вона
+     * не одна: `pdfModal.isOpen` і `aiChat.isOpen` — незалежні стани, тож
+     * обидві можуть бути відкриті водночас, і тоді на сторінці два елементи з
+     * однаковим `id`. `aria-labelledby` у такому разі резолвиться в ПЕРШИЙ —
+     * друга модалка називає себе заголовком чужої. Помилки не буде ніде: ні в
+     * типах, ні в збірці, ні в axe (він бачить лише стан одразу після
+     * завантаження, коли відкрито щонайбільше одну).
+     *
+     * `$props.id()` дає значення, унікальне на екземпляр і стабільне між
+     * сервером і клієнтом — на відміну від лічильника чи `Math.random()`, які
+     * розходяться між SSR і гідрацією (SVELTE-CORE-v8 § 1.7,
+     * ACCESSIBILITY-v8 § 4.2.1).
+     */
+    const titleId = $props.id();
+
     function close() {
         show = false;
         onclose?.();
@@ -105,7 +123,7 @@
             onclick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
-            aria-labelledby={title || titleSnippet ? "modal-title" : undefined}
+            aria-labelledby={title || titleSnippet ? titleId : undefined}
             tabindex="-1"
             transition:scale={{ duration: 200, start: 0.95 }}
             {...restProps}
@@ -122,11 +140,11 @@
             </button>
 
             {#if titleSnippet}
-                <h3 id="modal-title">
+                <h3 id={titleId}>
                     {@render titleSnippet()}
                 </h3>
             {:else if title}
-                <h3 id="modal-title">{title}</h3>
+                <h3 id={titleId}>{title}</h3>
             {/if}
 
             <div class="modal-body">
