@@ -925,7 +925,6 @@
     }
 
     .lang-search:focus {
-        outline: none;
         border-color: var(--accent-primary);
     }
 

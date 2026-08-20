@@ -107,3 +107,40 @@ test("модалка AI Matcher доступна у ВІДКРИТОМУ ста�
 
 	await audit(page, "aiModal");
 });
+
+/**
+ * Видимий фокус на полях вводу (ACCESSIBILITY-v8 § — `outline: none` без
+ * альтернативного індикатора, HIGH).
+ *
+ * ЧОМУ ЦЬОГО НЕ ЛОВИТЬ axe. Він перевіряє наявність порушень у РОЗМІТЦІ й
+ * кольори тексту; «чи видно, де зараз фокус» — властивість обчисленого стилю в
+ * стані `:focus-visible`, у який axe елементи не заводить. Три поля цього сайту
+ * прибирали нативну обводку через `outline: none` і лишали замість неї зміну
+ * кольору рамки в 1px — тобто гейт був зелений, а людина з клавіатурою
+ * шукала б курсор по відтінку.
+ *
+ * Перевіряється саме ОБЧИСЛЕНИЙ стиль після справжнього `Tab`/focus, а не
+ * наявність правила в CSS: правило можна перекрити специфічністю компонента, і
+ * побачити це можна лише в браузері.
+ */
+test("поле вводу у фокусі має видиму обводку", async ({ page }) => {
+	test.setTimeout(90_000);
+	await page.goto("/CV/");
+
+	const textarea = page.getByTestId("ai-job-input-textarea");
+	await expect(async () => {
+		await page.getByTestId("ai-matcher-open-btn").click();
+		await expect(textarea).toBeVisible({ timeout: 5000 });
+	}).toPass({ timeout: 45_000 });
+
+	await textarea.focus();
+	const ring = await textarea.evaluate((el) => {
+		const cs = getComputedStyle(el);
+		return { style: cs.outlineStyle, width: parseFloat(cs.outlineWidth), color: cs.outlineColor };
+	});
+
+	expect(ring.style, "обводки немає зовсім — фокус видно лише за кольором рамки").not.toBe("none");
+	expect(ring.width, "обводка тонша за 2px").toBeGreaterThanOrEqual(2);
+	// Прозора обводка — це та сама відсутність, тільки записана інакше.
+	expect(ring.color).not.toMatch(/rgba\([^)]*,\s*0\)/);
+});

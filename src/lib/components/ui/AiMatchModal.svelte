@@ -229,7 +229,6 @@
         font-family: inherit;
         font-size: 0.95rem;
         resize: vertical;
-        outline: none;
         transition: var(--transition);
     }
 
@@ -440,7 +439,6 @@
         border: 1px solid var(--border-color);
         color: var(--text-primary);
         font-size: 0.9rem;
-        outline: none;
     }
 
     .chat-input:focus {
