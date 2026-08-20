@@ -20,12 +20,16 @@
 	import { migrateStorageKeys } from "$lib/utils/storageMigration";
 	import { isHiddenRoute } from "$lib/i18n/routing";
 	import { initAnalytics, trackPageView } from "$lib/services/analytics";
+	import { webVitals } from "$lib/controllers/webVitals.svelte";
 	import { observeSections } from "$lib/utils/sectionObserver";
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 	import FloatingAiButton from "$lib/components/ui/FloatingAiButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
 
 	let { children } = $props();
+
+	// Start RUM Core Web Vitals collection (OBSERVABILITY-v8 § 2.1)
+	$effect(() => webVitals.start());
 
 	/**
 	 * Службовий маршрут (BETA-CHECKLIST-v8 § 4): чеклист ручної перевірки. Він

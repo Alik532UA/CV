@@ -1,23 +1,26 @@
 import { browser, dev } from "$app/environment";
 
 /**
- * Google Analytics 4.
- *
- * The measurement ID sits here rather than in an environment variable on
- * purpose: it is public by design — it ships in the page source of every site
- * that uses GA — so hiding it would buy nothing while forcing the value through
- * the GitHub Actions build for the static adapter.
- *
- * Replacing the ID with a placeholder turns every export here into a no-op —
- * no script is loaded and nothing is sent — so the file can be carried into a
- * new project without it reporting into this property.
+ * Google Analytics 4 (ANALYTICS-v8 § 1).
  */
-const GA_ID = "G-0G0N13KZG6";
+const GA_ID: string = "G-0G0N13KZG6";
+const PLACEHOLDER: string = "G-XXXXXXXXXX";
 
-const isConfigured = /^G-[A-Z0-9]{6,}$/.test(GA_ID) && !GA_ID.includes("XXXX");
+const isConfigured = GA_ID !== PLACEHOLDER && /^G-[A-Z0-9]{6,}$/.test(GA_ID);
 
 // `dev` keeps local work from landing in the same property as real traffic.
 const enabled = browser && !dev && isConfigured;
+
+export type AnalyticsEvent =
+	| 'pdf_download'
+	| 'cv_download'
+	| 'project_click'
+	| 'ai_match_open'
+	| 'section_view'
+	| 'language_change'
+	| 'theme_change'
+	| 'contact_click'
+	| 'service_badge_click';
 
 type EventParams = Record<string, string | number | boolean>;
 
@@ -61,18 +64,10 @@ export function trackPageView() {
 	// gtag queues into dataLayer until its script arrives.
 	initAnalytics();
 	const { origin, pathname } = window.location;
-	// Рядок запиту відкидається, і після переїзду мови в СЕГМЕНТ ШЛЯХУ причина
-	// стала інша, ніж була. Раніше мова жила в `?lang=`, і залишений запит
-	// розбив би одну сторінку на сорок із гаком рядків звіту. Тепер мова — у
-	// `pathname`, тож `/CV/uk/` і `/CV/` — окремі рядки за побудовою, і це саме
-	// те, що потрібно: глибина читання цікава окремо на кожній мові.
-	//
-	// Відкидається натомість службовий шум: `?theme=`, `?debug=1` і будь-яка
-	// utm-мітка. Кожен із них інакше створив би дублікат тієї самої сторінки.
 	window.gtag?.("event", "page_view", { page_location: `${origin}${pathname}` });
 }
 
-export function track(event: string, params: EventParams = {}) {
+export function track(event: AnalyticsEvent, params: EventParams = {}) {
 	if (!enabled) return;
 	initAnalytics();
 	window.gtag?.("event", event, params);

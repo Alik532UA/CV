@@ -69,6 +69,14 @@ const config = {
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],
 				'font-src': ['self', 'https://fonts.gstatic.com'],
+				'connect-src': [
+					'self',
+					'https://www.googletagmanager.com',
+					'https://*.google-analytics.com',
+					'https://*.analytics.google.com',
+					'https://*.sentry.io',
+					'https://*.ingest.sentry.io'
+				],
 				'object-src': ['none'],
 				'base-uri': ['self']
 				// NO frame-ancestors, AND THAT IS NOT AN OVERSIGHT. It used to be
