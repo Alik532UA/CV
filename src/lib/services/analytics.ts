@@ -61,9 +61,14 @@ export function trackPageView() {
 	// gtag queues into dataLayer until its script arrives.
 	initAnalytics();
 	const { origin, pathname } = window.location;
-	// The active language lives in ?lang= and is rewritten in place on every
-	// switch. Left in page_location it would split this one page into forty-odd
-	// separate rows in the report, so the query string is dropped.
+	// Рядок запиту відкидається, і після переїзду мови в СЕГМЕНТ ШЛЯХУ причина
+	// стала інша, ніж була. Раніше мова жила в `?lang=`, і залишений запит
+	// розбив би одну сторінку на сорок із гаком рядків звіту. Тепер мова — у
+	// `pathname`, тож `/CV/uk/` і `/CV/` — окремі рядки за побудовою, і це саме
+	// те, що потрібно: глибина читання цікава окремо на кожній мові.
+	//
+	// Відкидається натомість службовий шум: `?theme=`, `?debug=1` і будь-яка
+	// utm-мітка. Кожен із них інакше створив би дублікат тієї самої сторінки.
 	window.gtag?.("event", "page_view", { page_location: `${origin}${pathname}` });
 }
 
