@@ -154,6 +154,11 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 * картки платформ, переписані розміткою тричі, стали одним `{#each}` —
 	 * 301 → 298, тобто в межу 300. Це і є єдиний дозволений напрямок руху.
 	 *
+	 * Тоді ж підтягнуто вниз два числа, під якими з'явився запас: HeaderSection
+	 * 1075 → 1073 і AiMatchModal 516 → 514. Запас, лишений у списку, — це тихий
+	 * дозвіл відрости назад, і наступна правка скористалася б ним, не показавши
+	 * нічого червоного.
+	 *
 	 * ЧИСЛА ВИМІРЯНІ, А НЕ ЗГАДАНІ. У PROJECT-CONTEXT.md стояло «дев'ять файлів
 	 * понад межу, найбільший — 1057 рядків»; фактично їх одинадцять поза
 	 * локалями, і найбільший — 1066 (AI-AGENT-PITFALLS-v8 § 5.5).
@@ -174,9 +179,9 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 * 2026-08-16. Вони лише спадають.
 	 */
 	const ALLOWED: Record<string, number> = {
-		"src/lib/components/HeaderSection.svelte": 1075,
+		"src/lib/components/HeaderSection.svelte": 1073,
 		"src/lib/components/ui/Minimap.svelte": 613,
-		"src/lib/components/ui/AiMatchModal.svelte": 516,
+		"src/lib/components/ui/AiMatchModal.svelte": 514,
 		"src/lib/components/ui/PdfModal.svelte": 446,
 		"src/lib/controllers/I18nState.svelte.ts": 374,
 		"src/lib/components/ui/PageScrollbar.svelte": 369,
