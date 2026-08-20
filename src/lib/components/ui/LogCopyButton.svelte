@@ -60,7 +60,7 @@
 		try {
 			await navigator.clipboard.writeText(logService.getReport());
 			copied = true;
-			copyTimer = setTimeout(() => (copied = false), 2000);
+			copyTimer = setTimeout(() => (copied = false), 1500);
 		} catch (err) {
 			// `warn`, not `error`: the clipboard is unavailable under perfectly
 			// normal conditions — an unfocused page, a denied permission, HTTP
