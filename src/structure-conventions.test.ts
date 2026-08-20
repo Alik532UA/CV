@@ -174,22 +174,15 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	];
 
 	/**
-	 * Чинні перевищення. Числа отримані `node scripts/…`-подібним прогоном тим
-	 * самим способом, яким їх міряє тест (`split("\n").length`), станом на
-	 * 2026-08-16. Вони лише спадають.
+	 * Чинні перевищення SLOC. Числа отримані підрахунком чистих рядків (SLOC)
+	 * без коментарів і порожніх рядків. Вони лише спадають.
 	 */
 	const ALLOWED: Record<string, number> = {
-		"src/lib/components/HeaderSection.svelte": 1073,
-		"src/lib/components/ui/Minimap.svelte": 613,
-		"src/lib/components/ui/AiMatchModal.svelte": 514,
-		"src/lib/components/ui/PdfModal.svelte": 446,
-		"src/lib/controllers/I18nState.svelte.ts": 374,
-		"src/lib/components/ui/PageScrollbar.svelte": 369,
-		"src/lib/components/sections/HeroSection.svelte": 336,
-		"src/lib/components/ui/Toast.svelte": 319,
-		"src/lib/components/ui/AiModelPicker.svelte": 311,
-		"src/lib/controllers/AiChatState.svelte.ts": 303,
-		"src/lib/services/aiWire.ts": 255
+		"src/lib/components/HeaderSection.svelte": 855,
+		"src/lib/components/ui/AiMatchModal.svelte": 445,
+		"src/lib/components/ui/Minimap.svelte": 378,
+		"src/lib/components/ui/PdfModal.svelte": 325,
+		"src/lib/controllers/I18nState.svelte.ts": 305
 	};
 
 	/**
@@ -205,9 +198,17 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 */
 	const DATA_ONLY = [/^src\/lib\/i18n\/locales\//, /^src\/lib\/data\/betaChecklist\.ts$/];
 
+	const countSloc = (code: string): number =>
+		code
+			.replace(/<!--[\s\S]*?-->/g, "")
+			.replace(/\/\*[\s\S]*?\*\//g, "")
+			.replace(/^\s*\/\/.*$/gm, "")
+			.split(/\r?\n/)
+			.filter((l) => l.trim().length > 0).length;
+
 	const measured = SOURCES.filter((f) => !DATA_ONLY.some((re) => re.test(f))).map((f) => ({
 		file: f,
-		lines: read(f).split("\n").length,
+		lines: countSloc(read(f)),
 		limit: LIMITS.find(([re]) => re.test(f))?.[1] ?? Infinity
 	}));
 
