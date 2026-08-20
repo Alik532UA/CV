@@ -128,6 +128,9 @@ jobs:
       - name: Check JS budget
         run: npm run check:bundle
 
+      - name: Lighthouse Audit
+        run: npx @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
+
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
