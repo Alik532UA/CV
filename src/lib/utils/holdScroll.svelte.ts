@@ -50,6 +50,25 @@ export class HoldScroll {
 		this.geometry = geometry;
 	}
 
+	/**
+	 * Автоматичний рух сторінки — рівно те, від чого захищає
+	 * `prefers-reduced-motion` (HOLD-SCROLL-v8 § — «рух, що не зупиняється при
+	 * prefers-reduced-motion», HIGH). Механіка вимикається ЦІЛКОМ, а не
+	 * сповільнюється: людині, якій від руху паморочиться, повільний рух не
+	 * кращий за швидкий.
+	 *
+	 * Перевірка тут, а не в компонентах: обидва малювальники користувалися
+	 * `reducedMotion` лише для власної пружини появи, тож сама прокрутка
+	 * їхала однаково. Одна перевірка в спільному класі покриває всіх, і
+	 * наступний малювальник отримає її задарма.
+	 *
+	 * Читається на кожен `aim()`, а не запам'ятовується: настройку міняють
+	 * посеред сесії, і запам'ятоване значення пережило б зміну.
+	 */
+	private reducedMotion(): boolean {
+		return browser && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+	}
+
 	/** Which zone a point falls in relative to the marker: above, on it, or below. */
 	zoneOf(localY: number): -1 | 0 | 1 {
 		const { markerTop, markerHeight } = this.geometry();
@@ -66,6 +85,11 @@ export class HoldScroll {
 	 * the movement never begins.
 	 */
 	aim(localY: number) {
+		if (this.reducedMotion()) {
+			this.stop();
+			return;
+		}
+
 		const zone = this.zoneOf(localY);
 		this.targetY = localY;
 

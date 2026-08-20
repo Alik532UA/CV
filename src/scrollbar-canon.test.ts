@@ -211,3 +211,34 @@ describe("CSP — the first-frame script's hash is registered", () => {
 		expect(hash).toMatch(/^sha256-[A-Za-z0-9+/=]{44}$/);
 	});
 });
+
+/**
+ * HOLD-SCROLL-v8 § — «рух, що не зупиняється при `prefers-reduced-motion`», HIGH.
+ *
+ * Прокрутка від наведення — це сторінка, яка їде сама, без натискання. Саме
+ * такий рух настройка `prefers-reduced-motion` і має скасовувати, причому
+ * ЦІЛКОМ: людині, якій від руху паморочиться, повільніший рух не кращий за
+ * швидкий.
+ *
+ * Що тут було: обидва малювальники читали `prefers-reduced-motion`, але
+ * застосовували його лише до власної пружини появи смуги. Сам `HoldScroll`
+ * про настройку не знав узагалі, тож сторінка їхала однаково. Знайти це очима
+ * майже неможливо — слово в компоненті є, і виглядає воно як виконана вимога.
+ */
+describe("hold-scroll canon — автоматичний рух вимикається настройкою", () => {
+	const HOLD = "src/lib/utils/holdScroll.svelte.ts";
+
+	it("перевірка жива: механіка на місці й нею користуються", () => {
+		expect(read(HOLD)).toMatch(/requestAnimationFrame/);
+		const users = sourceFiles().filter((f) => /new HoldScroll\(/.test(read(f)));
+		expect(users.length, "HoldScroll ніхто не створює — перевіряти нема чого").toBeGreaterThan(1);
+	});
+
+	it("сама механіка знає про prefers-reduced-motion, а не лише її показ", () => {
+		expect(
+			read(HOLD),
+			"перевірка живе в компонентах і стосується там лише появи смуги — " +
+				"сторінка їде однаково; guard мусить бути в спільному класі"
+		).toMatch(/prefers-reduced-motion/);
+	});
+});
