@@ -85,6 +85,8 @@
         <link rel="canonical" href={canonical} />
         {#if !indexable}
             <meta name="robots" content="noindex, follow" />
+        {:else}
+            <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
         {/if}
 
         <!-- Alternates for the reviewed languages only, so search engines are not

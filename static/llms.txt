@@ -1,0 +1,31 @@
+# Alik Zapolnov — QA Engineer & Frontend Developer Portfolio
+
+> Interactive multilingual resume and portfolio of Alik Zapolnov: Automation QA Engineer and Fullstack Developer specializing in SvelteKit, TypeScript, Test Automation, and AI Integrations.
+
+## Main Pages
+
+- [Resume / Portfolio (English)](https://alik532ua.github.io/CV/): Full career profile, professional background, skills, and portfolio projects.
+- [Резюме українською](https://alik532ua.github.io/CV/uk/): Повний профіль українською мовою.
+- [履歴書 (日本語)](https://alik532ua.github.io/CV/ja/): 日本語版レジュメ・経歴書.
+
+## Key Skills & Expertise
+
+- Automation QA: Playwright, Cypress, Vitest, Jest, Test-Driven Development (TDD), CI/CD workflows (GitHub Actions).
+- Frontend & Fullstack: SvelteKit 2, Svelte 5 (Runes), TypeScript, HTML5/CSS3, TailwindCSS, REST APIs.
+- AI & LLM Systems: Generative Engine Optimization (GEO/LLMO), AI agent workflows, prompt engineering, RAG pipelines.
+- Standards & Quality: WCAG accessibility, web performance optimization (Core Web Vitals), Observability & Sentry integration.
+
+## Selected Projects
+
+- [DigitalWorkshop](https://alik532ua.github.io/DigitalWorkshop/): Interactive suite of digital web utilities and applications.
+- [MindStep](https://alik532ua.github.io/MindStep/): Step-by-step cognitive training game.
+- [Slovko](https://alik532ua.github.io/Slovko/): Daily Ukrainian word puzzle game.
+- [Adopt an Animal](https://adoptananimal.github.io/adoptananimal/): Rescued animal adoption portal.
+
+## Contacts
+
+- Email: alikzapolnov@gmail.com
+- Telegram: https://t.me/alik532
+- LinkedIn: https://linkedin.com/in/alik-qa-engineer
+- GitHub: https://github.com/Alik532UA
+- [Sitemap](https://alik532ua.github.io/CV/sitemap.xml): XML index of verified resume routes.

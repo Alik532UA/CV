@@ -1,11 +1,18 @@
 # allow crawling everything by default
 User-agent: *
-Disallow:
+Disallow: /CV/beta-test-checklists/
 
-# Службова сторінка ручної перевірки (BETA-CHECKLIST-v8 § 4). Вона працює й
-# доступна за прямим посиланням — це не таємниця, а прохання не приводити туди
-# тих, хто шукав резюме. Ту саму обіцянку дублюють `noindex` у самій сторінці
-# та її відсутність у sitemap; `Disallow` тут — третій бік того самого рішення.
+# AI Search Crawlers
+User-agent: GPTBot
+Allow: /
+Disallow: /CV/beta-test-checklists/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /CV/beta-test-checklists/
+
+User-agent: ClaudeBot
+Allow: /
 Disallow: /CV/beta-test-checklists/
 
 Sitemap: https://alik532ua.github.io/CV/sitemap.xml
