@@ -48,3 +48,5 @@ temp/
 /test-results/
 /playwright-report/
 /playwright/.cache/
+# Звіти Lighthouse CI — артефакт прогону, а не джерело.
+.lighthouseci/
