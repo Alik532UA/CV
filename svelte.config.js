@@ -25,6 +25,37 @@ if (!inlineScript) {
 }
 const inlineScriptHash = `sha256-${createHash('sha256').update(inlineScript).digest('base64')}`;
 
+/**
+ * Origin AI-проксі для `connect-src` — ВИВЕДЕНИЙ із тієї самої змінної, з якої
+ * застосунок бере адресу проксі, а не вписаний рядком.
+ *
+ * Це не зручність. Доти `connect-src` у політиці не було зовсім, тобто
+ * з'єднання не обмежувалися нічим (`default-src` тут теж немає, а без нього
+ * фолбеку не існує). Коміт із телеметрією додав перелік із шести origin'ів
+ * Google і Sentry — і тим самим уперше ЗАБОРОНИВ усе інше, зокрема власний
+ * проксі, через який працює AI Job Matcher. Наслідок: чотири e2e-перевірки
+ * `ai-matcher.spec.ts` не знаходили жодного елемента, бо запит гинув у CSP ще
+ * до того, як Playwright встигав його підмінити, а в продакшні функція просто
+ * не працювала б. Політику перевіряють по `build/index.html`, і саме цього не
+ * було зроблено — при тому, що коментар нижче в цьому ж файлі про це й
+ * попереджає.
+ *
+ * Тепер розійтися нічому: якщо змінна порожня, `isConfigured` у
+ * `AiChatState.svelte.ts` вимикає функцію, і в політику нема чого додавати.
+ * Якщо вона є — в політику їде рівно той origin, куди піде `fetch`.
+ */
+const aiProxyOrigin = (() => {
+	const raw = process.env.PUBLIC_AI_PROXY_URL?.trim();
+	if (!raw) return [];
+	try {
+		return [new URL(raw).origin];
+	} catch {
+		throw new Error(
+			`svelte.config.js: PUBLIC_AI_PROXY_URL="${raw}" не є адресою — CSP не може вивести origin`
+		);
+	}
+})();
+
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: vitePreprocess(),
@@ -75,7 +106,10 @@ const config = {
 					'https://*.google-analytics.com',
 					'https://*.analytics.google.com',
 					'https://*.sentry.io',
-					'https://*.ingest.sentry.io'
+					'https://*.ingest.sentry.io',
+					// Власний проксі — з `PUBLIC_AI_PROXY_URL` (див. вгорі файлу).
+					// Порожній перелік, коли змінної немає: тоді й функція вимкнена.
+					...aiProxyOrigin
 				],
 				'object-src': ['none'],
 				'base-uri': ['self']
