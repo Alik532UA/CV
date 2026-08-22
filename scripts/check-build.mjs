@@ -19,6 +19,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { join } from "node:path";
 import { SITE_BASE as BASE, SITE_ORIGIN } from "../src/lib/config/site.js";
+import { checkGeo } from "./check-geo.mjs";
 
 const BUILD = "build";
 
@@ -349,6 +350,16 @@ for (const file of textAssets) {
 		}
 	}
 }
+
+
+// ---------------------------------------------------------------------------
+// SEO-v8 § 7.5 — артефакти AI-пошуку (llms.txt і групи robots.txt).
+//
+// Розбір живе в `check-geo`, бо він робить власний парсер `robots.txt`:
+// краулер, що збігся з іменованою групою, ігнорує `User-agent: *` цілком, тож
+// пропущений там `Disallow` не «наслідується», а ВІДКРИВАЄ шлях саме цьому
+// боту. У кількох майже однакових блоках очима така дірка не видно.
+for (const msg of checkGeo(BUILD)) fail(msg);
 
 if (problems.length > 0) {
 	console.error(`\nПеревірка збірки не пройдена — ${problems.length} проблем:\n`);
