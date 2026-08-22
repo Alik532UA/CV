@@ -58,12 +58,15 @@ jobs:
           npm run check:worker
 
       - name: Linting
+        if: ${{ !cancelled() }}
         run: npm run lint
 
       - name: Unit Tests
+        if: ${{ !cancelled() }}
         run: npm run test:unit
 
       - name: Audit dependencies
+        if: ${{ !cancelled() }}
         run: npm audit --audit-level=high
 
       # Кеш браузерів між прогонами: `npm ci` їх не приносить, а

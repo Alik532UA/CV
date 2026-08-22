@@ -38,15 +38,18 @@ jobs:
           npm run check:worker
 
       - name: Linting
+        if: ${{ !cancelled() }}
         run: npm run lint
 
       - name: Unit Tests
+        if: ${{ !cancelled() }}
         run: npm run test:unit
 
       # Поріг high, а не moderate: після оновлення лишилися лише 4 low, але
       # moderate-поріг довелося б вимкнути на першому ж транзитивному
       # попередженні, а вимкнений гейт гірший за відсутній.
       - name: Audit dependencies
+        if: ${{ !cancelled() }}
         run: npm audit --audit-level=high
 
       # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
