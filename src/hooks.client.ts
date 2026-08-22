@@ -1,53 +1,45 @@
-import { env } from '$env/dynamic/public';
-import { dev } from '$app/environment';
-import { logService } from '$lib/services/logService.svelte';
 import type { HandleClientError } from '@sveltejs/kit';
+import { logService } from '$lib/services/logService.svelte';
 
 /**
- * Telemetry endpoint for CSP validation (OBSERVABILITY-v8 § 1.5):
- * - https://*.sentry.io
- * - https://*.ingest.sentry.io
+ * Неперехоплені помилки клієнта (ERROR-HANDLING-v8 § 2.4).
+ *
+ * До появи цього файлу помилка, яку не спіймали в місці виникнення, зникала
+ * безслідно: SvelteKit показував порожню сторінку помилки, а `logService` —
+ * той самий, чий вміст копіює кнопка в інтерфейсі — про неї не знав. Тобто
+ * єдиний спосіб дізнатися про збій у відвідувача полягав у тому, щоб він сам
+ * відкрив консоль браузера.
+ *
+ * Гачок спрацьовує лише на НЕОЧІКУВАНІ помилки: `error()` і `redirect()` через
+ * нього не проходять, тож 404 сюди не потрапляє. Перевірка статусу нижче —
+ * дешева перестраховка, щоб у журналі не з'явився шум. Прибирати її не варто:
+ * без неї кожна помилкова адреса крутить `errorCount` і фарбує службове табло
+ * червоним, тобто сигнал «щось зламалося» починає означати «хтось помилився
+ * посиланням».
+ *
+ * **Тут НЕМАЄ Sentry, і це рішення, а не пропуск.** Блок ініціалізації
+ * `@sentry/sveltekit` тут стояв і не працював жодного разу: пакет у
+ * залежностях відсутній, тож імпорт писався через змінну з `@vite-ignore`,
+ * аби збірка не впала на нерозв'язному модулі. У браузері голий специфікатор
+ * не резолвиться в принципі, а `.catch(() => null)` ковтав це мовчки. DSN при
+ * цьому не заданий ніде — навіть у `.env.example`. OBSERVABILITY-v8 має
+ * «Пріоритет: optional» і «Скіп-якщо: хобі-проєкт без активних
+ * користувачів», тож правильна відповідь тут — не імітувати трекінг, а не
+ * мати його. Місце збору звітів — `logService` і кнопка копіювання.
  */
-const DSN = env.PUBLIC_SENTRY_DSN || '';
-const sentryPkg = '@sentry/sveltekit';
+export const handleError: HandleClientError = ({ error, event, status }) => {
+	if (status === 404) return;
 
-interface SentryClient {
-	init: (options: Record<string, unknown>) => void;
-	captureException: (error: unknown, context?: Record<string, unknown>) => void;
-}
+	const normalized = error instanceof Error ? error : new Error(String(error));
+	logService.error(
+		'app',
+		`Unhandled client error at ${event?.url?.pathname ?? 'unknown route'}: ${normalized.message}`
+	);
 
-const tracker: Promise<SentryClient | null> | null =
-	DSN && !dev
-		? import(/* @vite-ignore */ sentryPkg)
-				.then((module: unknown) => {
-					const Sentry = module as SentryClient;
-					Sentry.init({
-						dsn: DSN,
-						enabled: !dev,
-						tracesSampleRate: 0.1,
-						replaysSessionSampleRate: 0.0,
-						replaysOnErrorSampleRate: 1.0,
-						environment: import.meta.env.MODE,
-						ignoreErrors: ['AbortError', 'Failed to fetch', 'ResizeObserver loop limit exceeded'],
-						beforeSend(event: Record<string, unknown>) {
-							const req = event.request as Record<string, Record<string, unknown>> | undefined;
-							if (req?.headers) {
-								delete req.headers['authorization'];
-								delete req.headers['cookie'];
-							}
-							return event;
-						}
-					});
-					return Sentry;
-				})
-				.catch(() => null)
-		: null;
-
-export const handleError: HandleClientError = async ({ error, event, status, message }) => {
-	logService.error('app', `Unhandled client error at ${event.url.pathname}: ${error}`);
-	if (tracker) {
-		const Sentry = await tracker;
-		Sentry?.captureException(error, { extra: { route: event.url.pathname, status, message } });
-	}
-	return { message: '' };
+	/*
+	 * Повертається УЗАГАЛЬНЕНЕ повідомлення, а не `error.message`: текст
+	 * рантайму («Cannot read properties of undefined») відвідувачу нічого не
+	 * пояснює, зате показує нутрощі застосунку.
+	 */
+	return { message: 'Something went wrong. Try reloading the page.' };
 };

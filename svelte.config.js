@@ -100,13 +100,18 @@ const config = {
 				'style-src': ['self', 'unsafe-inline', 'https://fonts.googleapis.com'],
 				'img-src': ['self', 'data:', 'https:'],
 				'font-src': ['self', 'https://fonts.gstatic.com'],
+				/*
+				 * Перелік вичерпний, і кожен рядок тут мусить відповідати запиту,
+				 * який застосунок СПРАВДІ робить. Origin'и Sentry звідси прибрані
+				 * разом із мертвим блоком у `hooks.client.ts` (див. пояснення там):
+				 * дозвіл на з'єднання, якого ніхто не встановлює, лише розширює
+				 * поверхню політики й підказує, що трекінг ніби є.
+				 */
 				'connect-src': [
 					'self',
 					'https://www.googletagmanager.com',
 					'https://*.google-analytics.com',
 					'https://*.analytics.google.com',
-					'https://*.sentry.io',
-					'https://*.ingest.sentry.io',
 					// Власний проксі — з `PUBLIC_AI_PROXY_URL` (див. вгорі файлу).
 					// Порожній перелік, коли змінної немає: тоді й функція вимкнена.
 					...aiProxyOrigin
