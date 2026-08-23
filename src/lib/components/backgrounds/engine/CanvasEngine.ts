@@ -40,11 +40,19 @@ export abstract class CanvasEngine {
 			this.init();
 			this.startLoop();
 
-			requestAnimationFrame(() => {
-				if (this.canvas) {
-					this.canvas.classList.add("mounted");
-				}
-			});
+			/*
+			 * Тут стояв `requestAnimationFrame(() => canvas.classList.add("mounted"))`
+			 * — спосіб змусити браузер побачити зміну `opacity` і запустити перехід
+			 * появи. Тепер поява цілком у CSS: `@starting-style` у трьох
+			 * компонентах тла (UI-ELEMENTS-v8 `UIE-STARTING-STYLE`).
+			 *
+			 * Прибрано не як зайвий рядок, а тому що двигун відповідав за
+			 * ВИДИМІСТЬ тла. Рядок стояв нижче за `return` при `ctx === null`, тож
+			 * будь-яка відмова контексту робила тло невидимим назавжди — при
+			 * робочому журналі й робочому циклі малювання. Тепер спокійний стан
+			 * елемента `opacity: 1`, і найгірший наслідок відмови — поява без
+			 * плавності.
+			 */
 
 			window.addEventListener("resize", this.throttledResize);
 			window.addEventListener("scroll", this.handleScroll, { passive: true });
@@ -53,9 +61,6 @@ export abstract class CanvasEngine {
 
 	public unmount() {
 		logService.info("engine", "Unmounting canvas engine");
-		if (this.canvas) {
-			this.canvas.classList.remove("mounted");
-		}
 		this.stopLoop();
 		if (browser) {
 			window.removeEventListener("resize", this.throttledResize);
