@@ -23,7 +23,34 @@ const inlineScript = readFileSync('src/app.html', 'utf8').match(/<script>([\s\S]
 if (!inlineScript) {
 	throw new Error('svelte.config.js: у src/app.html немає інлайн-скрипта — CSP нічого хешувати');
 }
-const inlineScriptHash = `sha256-${createHash('sha256').update(inlineScript).digest('base64')}`;
+/**
+ * CRLF нормалізується в LF ПЕРЕД хешуванням, і це не про охайність.
+ *
+ * Браузер хешує не байти файлу, а текстовий вузол `<script>` після розбору HTML,
+ * а розбір нормалізує CRLF у LF («preprocessing the input stream» у HTML
+ * Standard). Тут `app.html` наразі лежить із LF, тож без цього рядка все
+ * працювало б і далі — але працювало б ВИПАДКОВО: одна зміна `core.autocrlf`,
+ * один свіжий клон на Windows, і в політику поїде хеш, якого браузер не приймає.
+ *
+ * Ціна помилки не косметична: блокується ВЕСЬ скрипт першого кадру. У
+ * `teatralo4ka` це 2026-08-23 вимкнуло заставку з кулісами (без `data-splash`
+ * CSS куліс не спрацьовував — лишався суцільний фон), у `DigitalWorkshop` —
+ * анти-FOUC тему. Обидва проєкти на Linux були справні, тобто CI цього не бачив.
+ *
+ * Тримає інваріант `src/csp-hash.test.ts`.
+ *
+ * ## Чому тут `@type`, а не просто `const`
+ *
+ * `script-src` у SvelteKit типізований проти літерального `` `sha256-${string}` ``,
+ * і один широкий `string` розширює ЦІЛИЙ масив директиви — падають і сусідні
+ * рядки з адресами, яких ніхто не чіпав. До 2026-08-23 цього не було видно:
+ * `svelte-check` дивиться на `src/`, а конфіг імпортували лише `scripts/` та
+ * `e2e/`, які в перевірку не входять. Щойно його зажадав інваріант із `src/`
+ * (`csp-hash.test.ts`), невідповідності виявилися — обидві латентні.
+ *
+ * @type {`sha256-${string}`}
+ */
+const inlineScriptHash = `sha256-${createHash('sha256').update(inlineScript.replace(/\r\n/g, '\n')).digest('base64')}`;
 
 /**
  * Origin AI-проксі для `connect-src` — ВИВЕДЕНИЙ із тієї самої змінної, з якої
@@ -44,11 +71,21 @@ const inlineScriptHash = `sha256-${createHash('sha256').update(inlineScript).dig
  * `AiChatState.svelte.ts` вимикає функцію, і в політику нема чого додавати.
  * Якщо вона є — в політику їде рівно той origin, куди піде `fetch`.
  */
+/**
+ * Форма — та сама, що в `HostSource` усередині SvelteKit:
+ * `${протокол}://${хост.із.точкою}`. Сам тип `Csp` пакет НЕ експортує
+ * (перевірено `tsc`: «Namespace '@sveltejs/kit' has no exported member
+ * 'Csp'»), тож літерал виписаний тут, а не імпортований.
+ *
+ * @type {`${string}://${string}.${string}`[]}
+ */
 const aiProxyOrigin = (() => {
 	const raw = process.env.PUBLIC_AI_PROXY_URL?.trim();
 	if (!raw) return [];
 	try {
-		return [new URL(raw).origin];
+		return [
+			/** @type {`${string}://${string}.${string}`} */ (new URL(raw).origin)
+		];
 	} catch {
 		throw new Error(
 			`svelte.config.js: PUBLIC_AI_PROXY_URL="${raw}" не є адресою — CSP не може вивести origin`
