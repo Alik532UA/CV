@@ -1,85 +1,45 @@
 /* Шрифт Outfit підключений <link>-ом у src/app.html — див. коментар там. */
 
 :root {
-    --bg-color: #050505;
-    --sidebar-bg: rgba(15, 15, 15, 0.7);
-    --header-bg: rgba(5, 5, 5, 0.8);
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --border-color: rgba(255, 255, 255, 0.1);
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    --accent-primary: #00f2ff;
-    --accent-primary-rgb: 0, 242, 255;
-    /* Пара до світлої теми. Тут окремого відтінку не треба: 20%-й ціан на
-       майже чорному лишається темним фоном, і сам акцент на ньому читається. */
-    --accent-on-tint: var(--accent-primary);
-    --accent-secondary: #7000ff;
-    --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --glass-blur: blur(12px);
-    /* Neutral, not slate: rgba(15, 23, 42, …) is blue-tinted and read as a
-       coloured panel next to the grey glass cards. Kept opaque rather than
-       reusing --card-bg, which is nearly transparent and only works under a
-       modal's scrim — a toast floats over live content with nothing behind it. */
-    --toast-bg: rgba(18, 18, 18, 0.88);
-    --toast-action-bg: rgba(255, 255, 255, 0.08);
-    --toast-hover-bg: rgba(255, 255, 255, 0.14);
-    /* Panels that float over the page — the language and background dropdowns,
-       the volume popover — and the tinted surfaces used inside cards. A white
-       tint reads as "slightly raised" over a dark page and as nothing at all
-       over a light one, so each theme needs its own; the same goes for a panel
-       that was hardcoded near-black. Kept separate from the --toast-* trio
-       above, whose opacities are tuned for something floating over live
-       content with nothing behind it. */
-    --panel-bg: rgba(18, 18, 18, 0.95);
-    --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --surface-subtle: rgba(255, 255, 255, 0.05);
-    --surface-hover: rgba(255, 255, 255, 0.1);
-    /* Text drawn on top of --accent-primary. It cannot be white in both themes:
-       the dark theme's accent is a bright cyan that white sits on at 1.4:1. */
-    --on-accent: #050505;
-    /* Scroll bars — the page's own custom one, and every inner one. */
-    --scrollbar-track: rgba(255, 255, 255, 0.06);
-    --scrollbar-thumb: rgba(var(--accent-primary-rgb), 0.45);
-    /* The <svelte:boundary> fallback shown when one section of the page throws.
-       ErrorFallback.svelte referenced these three from the day it was written
-       and no theme declared them, so `background-color: var(--error-bg)` was
-       invalid at computed-value time: not a wrong colour but no background at
-       all, and `border: 1px solid var(--error-border)` no border at all. The
-       one panel whose whole job is to look different from the page around it
-       rendered as bare text on all five section boundaries. Red rather than the
-       accent on purpose: it must not read as a normal card. */
-    --error-bg: rgba(239, 68, 68, 0.12);
-    --error-text: #fca5a5;
-    --error-border: rgba(239, 68, 68, 0.4);
-    /* Match score in the AI panels. The same three literals were repeated in
-       five places as `var(--score-high, #10b981)` fallbacks — a fallback for a
-       variable no theme declares is not insurance, it is the value, and it is
-       the same value in both themes whether that reads or not. */
-    --score-high: #10b981;
-    --score-mid: #00f2ff;
-    --score-low: #f59e0b;
-}
-
-:root[data-theme='dark'] {
-    color-scheme: dark;
-}
-
-:root[data-theme='light'] {
-    color-scheme: light;
-}
-
-[data-theme='light'] {
-    --bg-color: #f5f5f7;
-    --sidebar-bg: rgba(255, 255, 255, 0.7);
-    --header-bg: rgba(245, 245, 247, 0.8);
-    --card-bg: rgba(0, 0, 0, 0.02);
-    --border-color: rgba(0, 0, 0, 0.1);
-    --text-primary: #1d1d1f;
     /*
-     * Обидва кольори затемнені під WCAG AA (ACCESSIBILITY-v8 § 6), і числа тут
-     * не на око: axe знайшов 51 елемент із контрастом нижче 4.5:1 у світлій
-     * темі — увесь другорядний текст і всі посилання бокового меню.
+     * `color-scheme: light dark` на бареному `:root` — база для `light-dark()`
+     * (UI-UX-v8 § 1.5.1, `UIUX-LIGHT-DARK`). БЕЗ нього `light-dark()` мовчки
+     * віддає перший аргумент, тобто не помилка, а тихо неправильне значення.
+     *
+     * Нижче `:root[data-theme='dark']` і `:root[data-theme='light']` звужують
+     * схему до однієї — це ЯВНИЙ вибір користувача, і він перекриває системну
+     * перевагу перемиканням схеми, а не другим набором значень.
+     */
+    color-scheme: light dark;
+
+    /*
+     * ПАЛІТРА ЖИВЕ В ОДНОМУ МІСЦІ: перший аргумент `light-dark()` — світле
+     * значення, другий — темне. Окремого блока `[data-theme='light']` більше
+     * немає (див. пояснення під `:root[data-theme='light']` нижче).
+     *
+     * Атрибут `data-theme` ставить інлайн-скрипт першого кадру, і він
+     * інлайновий — тобто його пускає рівно ХЕШ у CSP. 2026-08-23 у сусідньому
+     * `teatralo4ka` такий скрипт був заблокований через розбіжність хеша (CRLF
+     * проти LF), і симптомом стала не помилка в консолі, а «інший вигляд». Тут
+     * тим самим шляхом людина зі СВІТЛОЮ системною темою бачила б чорну
+     * сторінку до приїзду JS, а з JS, вимкненим цілком, — назавжди.
+     *
+     * `light-dark()` знімає цю залежність: системна перевага — це CSS, вона
+     * працює до будь-якого скрипта. Скрипт лишається, але відповідає лише за
+     * ЯВНИЙ вибір, і перекриває перевагу ЗВУЖЕННЯМ схеми, а не другим набором
+     * значень.
+     */
+    --bg-color: light-dark(#f5f5f7, #050505);
+    --sidebar-bg: light-dark(rgba(255, 255, 255, 0.7), rgba(15, 15, 15, 0.7));
+    --header-bg: light-dark(rgba(245, 245, 247, 0.8), rgba(5, 5, 5, 0.8));
+    --card-bg: light-dark(rgba(0, 0, 0, 0.02), rgba(255, 255, 255, 0.03));
+    --border-color: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+    --text-primary: light-dark(#1d1d1f, #ffffff);
+    /*
+     * Світлі значення `--text-secondary` і `--accent-primary` затемнені під
+     * WCAG AA (ACCESSIBILITY-v8 § 6), і числа не на око: axe знайшов 51 елемент
+     * із контрастом нижче 4.5:1 у світлій темі — увесь другорядний текст і всі
+     * посилання бокового меню.
      *
      * Було / стало, найгірший випадок із фонів, які трапляються (#f5f5f7,
      * #f0f0f2 і #ebebed на панелях, #e6e6e8 під --surface-subtle, #ffffff у
@@ -91,35 +51,118 @@
      * дають із запасом. Затемнення акценту заразом ПОЛІПШУЄ контраст білого
      * тексту на ньому (--on-accent), тож зворотного боку в цієї правки немає.
      */
-    --text-secondary: #646469;
-    --accent-primary: #0066cc;
-    --accent-primary-rgb: 0, 102, 204;
+    --text-secondary: light-dark(#646469, #a0a0a0);
+    --accent-primary: light-dark(#0066cc, #00f2ff);
+    /*
+     * ЄДИНА змінна палітри, яка НЕ перекладена на `light-dark()`, і причина
+     * синтаксична, а не смакова.
+     *
+     * Тут лежить не колір, а трійка компонент — її підставляють у
+     * `rgba(var(--accent-primary-rgb), 0.15)` у двадцяти місцях. `light-dark()`
+     * приймає РІВНО ДВА аргументи, розділені комою, а `0, 102, 204` уже містить
+     * коми: `light-dark(0, 102, 204, 0, 242, 255)` — це шість аргументів, тобто
+     * значення недійсне. Спроба була зроблена і відкинута саме тому.
+     *
+     * Перехід на `rgb(0 102 204 / 0.15)` (сучасний синтаксис без ком) зняв би
+     * обмеження, але це правка двадцяти вжитків у дев'яти компонентах — окрема
+     * задача з візуальною перевіркою, а не побічний ефект цієї.
+     *
+     * Наслідок, який треба знати: коли скрипт теми не виконався і схему обрав
+     * CSS, ця трійка лишається темною. Вона живе лише в напівпрозорих підсвітках
+     * (0.06–0.4), тож дає трохи інший відтінок акценту, а не нечитабельний текст.
+     */
+    --accent-primary-rgb: 0, 242, 255;
     /* Текст поверх заливки самим акцентом (активний фільтр, активна опція
-       перемикача). На світлій темі 20%-й акцент дає фон #c4d8ee, і сам акцент
-       на ньому — 3.82:1. Тому окремий, темніший відтінок: 4.91:1. */
-    --accent-on-tint: #0056ad;
-    --accent-secondary: #5e5ce6;
-    --toast-bg: rgba(255, 255, 255, 0.94);
-    --toast-action-bg: rgba(0, 0, 0, 0.06);
-    --toast-hover-bg: rgba(0, 0, 0, 0.1);
-    --panel-bg: rgba(255, 255, 255, 0.96);
-    --panel-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-    --surface-subtle: rgba(0, 0, 0, 0.04);
-    --surface-hover: rgba(0, 0, 0, 0.08);
-    --on-accent: #ffffff;
-    --scrollbar-track: rgba(0, 0, 0, 0.06);
+       перемикача). У СВІТЛІЙ темі 20%-й акцент дає фон #c4d8ee, і сам акцент на
+       ньому — 3.82:1, тому потрібен окремий темніший відтінок: 4.91:1. У ТЕМНІЙ
+       окремого не треба — 20%-й ціан на майже чорному лишається темним фоном, і
+       сам акцент на ньому читається. */
+    --accent-on-tint: light-dark(#0056ad, var(--accent-primary));
+    --accent-secondary: light-dark(#5e5ce6, #7000ff);
+    --gradient: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-blur: blur(12px);
+    /* Neutral, not slate: rgba(15, 23, 42, …) is blue-tinted and read as a
+       coloured panel next to the grey glass cards. Kept opaque rather than
+       reusing --card-bg, which is nearly transparent and only works under a
+       modal's scrim — a toast floats over live content with nothing behind it. */
+    --toast-bg: light-dark(rgba(255, 255, 255, 0.94), rgba(18, 18, 18, 0.88));
+    --toast-action-bg: light-dark(rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.08));
+    --toast-hover-bg: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.14));
+    /* Panels that float over the page — the language and background dropdowns,
+       the volume popover — and the tinted surfaces used inside cards. A white
+       tint reads as "slightly raised" over a dark page and as nothing at all
+       over a light one, so each theme needs its own; the same goes for a panel
+       that was hardcoded near-black. Kept separate from the --toast-* trio
+       above, whose opacities are tuned for something floating over live
+       content with nothing behind it. */
+    --panel-bg: light-dark(rgba(255, 255, 255, 0.96), rgba(18, 18, 18, 0.95));
+    --panel-shadow: light-dark(0 4px 20px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.4));
+    --surface-subtle: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.05));
+    --surface-hover: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
+    /* Text drawn on top of --accent-primary. It cannot be white in both themes:
+       the dark theme's accent is a bright cyan that white sits on at 1.4:1. */
+    --on-accent: light-dark(#ffffff, #050505);
+    /* Scroll bars — the page's own custom one, and every inner one. */
+    --scrollbar-track: light-dark(rgba(0, 0, 0, 0.06), rgba(255, 255, 255, 0.06));
     --scrollbar-thumb: rgba(var(--accent-primary-rgb), 0.45);
-    /* Same three, retuned: the dark theme's #fca5a5 sits on this light panel
-       at about 2:1, which is unreadable. */
-    --error-bg: rgba(239, 68, 68, 0.08);
-    --error-text: #b91c1c;
-    --error-border: rgba(239, 68, 68, 0.35);
-    /* Darkened for a light background: the dark theme's cyan #00f2ff and amber
-       #f59e0b sit on white at roughly 1.3:1 and 2:1. */
-    --score-high: #047857;
-    --score-mid: #0e7490;
-    --score-low: #b45309;
+    /* The <svelte:boundary> fallback shown when one section of the page throws.
+       ErrorFallback.svelte referenced these three from the day it was written
+       and no theme declared them, so `background-color: var(--error-bg)` was
+       invalid at computed-value time: not a wrong colour but no background at
+       all, and `border: 1px solid var(--error-border)` no border at all. The
+       one panel whose whole job is to look different from the page around it
+       rendered as bare text on all five section boundaries. Red rather than the
+       accent on purpose: it must not read as a normal card.
+
+       Світлі значення — не ті самі, приглушені: темний #fca5a5 на світлій
+       панелі дає близько 2:1, тобто не читається. */
+    --error-bg: light-dark(rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.12));
+    --error-text: light-dark(#b91c1c, #fca5a5);
+    --error-border: light-dark(rgba(239, 68, 68, 0.35), rgba(239, 68, 68, 0.4));
+    /* Match score in the AI panels. The same three literals were repeated in
+       five places as `var(--score-high, #10b981)` fallbacks — a fallback for a
+       variable no theme declares is not insurance, it is the value, and it was
+       the same value in both themes whether that read or not.
+
+       Світлі значення затемнені: темні #00f2ff і #f59e0b на білому дають
+       приблизно 1.3:1 і 2:1. */
+    --score-high: light-dark(#047857, #10b981);
+    --score-mid: light-dark(#0e7490, #00f2ff);
+    --score-low: light-dark(#b45309, #f59e0b);
 }
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+    color-scheme: light;
+}
+
+/*
+ * СВІТЛА ТЕМА БІЛЬШЕ НЕ Є ОКРЕМИМ НАБОРОМ ЗНАЧЕНЬ.
+ *
+ * Тут стояв блок `[data-theme='light']` із 25 оголошеннями — по одному на
+ * кожен токен, що відрізняється між темами. Тепер ті самі значення стоять
+ * ПЕРШИМ аргументом `light-dark()` у `:root`, а темні — другим. Жоден колір не
+ * змінився; перевіряється порівнянням diff цього коміту.
+ *
+ * ЧОМУ НЕ МОЖНА БУЛО ЛИШИТИ ПОЛОВИНУ. Спершу було переведено рівно одну змінну
+ * — `--bg-color`, «ту, від якої залежить читабельність». Це виявилося саме тим
+ * випадком, коли частковий переклад ГІРШИЙ за жодний: базовий `:root` тут описує
+ * ТЕМНУ тему, тож при заблокованому скрипті й світлій системній перевазі
+ * сторінка брала світле тло (з `light-dark()`) і білий текст `#ffffff` (з
+ * `:root`) — нечитабельну пару там, де доти була просто «не та тема». Тому
+ * переклад доведено до кінця, а не лишений посередині.
+ *
+ * Єдиний виняток — `--accent-primary-rgb`; причина синтаксична й описана в
+ * `:root` поруч із ним.
+ *
+ * Порожнього блока не лишилося: явний вибір світлої теми перекриває системну
+ * перевагу через `:root[data-theme='light'] { color-scheme: light }` вище, і
+ * цього достатньо, щоб `light-dark()` віддав перший аргумент.
+ */
 
 * {
     margin: 0;
