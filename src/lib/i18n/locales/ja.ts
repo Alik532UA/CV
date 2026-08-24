@@ -239,7 +239,7 @@ export const ja: Translations = {
     },
     common: {
         close: "閉じる",
-        sound: "サウンド"
+        sound: "サウンド"
     },
     scrollbar: {
         title: "スクロールバー",
