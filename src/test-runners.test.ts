@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, globSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
 /**
@@ -101,6 +101,44 @@ describe('файли перевірок', () => {
 		}
 
 		expect(orphans, `перевірки, яких не запускає ніхто:\n${orphans.join('\n')}`).toEqual([]);
+	});
+
+	/**
+	 * Глоб `include` із `vitest.config.ts` бачить усі юніт-перевірки, які лежать
+	 * на диску.
+	 *
+	 * ЧОГО НЕ ЛОВИТЬ РЕШТА ФАЙЛУ. Перевірки вище питають «чи є в проєкту раннер
+	 * для цього файлу» — і відповідають так навіть тоді, коли раннер його не
+	 * добирає. Достатньо звузити глоб (`src/lib/**` замість `src/**`), і
+	 * половина набору тихо перестає виконуватися: прогін зелений, кількість у
+	 * звіті менша, а на неї ніхто не дивиться.
+	 *
+	 * Повне зникнення глоба цим не ловиться — тоді не запуститься й цей файл.
+	 * Проти нуля стоїть інше: `passWithNoTests` прибрано з конфігу, тож нуль
+	 * файлів тепер вихід із кодом 1, а не «успіх».
+	 *
+	 * Шаблон читається з конфігу, а не переписаний сюди: копія розійшлася б з
+	 * оригіналом і почала б доводити щось про себе саму.
+	 */
+	it('глоб vitest добирає кожну юніт-перевірку, яка лежить на диску', () => {
+		// Сирий текст: `withoutComments` з'їдає `/*` всередині самого глоба
+		// `src/**/` і лишає шаблон, який не добирає нічого.
+		const config = readFileSync(join(ROOT, 'vitest.config.ts'), 'utf8');
+		const pattern = /include:\s*\[\s*'([^']+)'/.exec(config)?.[1];
+		expect(pattern, 'у vitest.config.ts більше немає include — перевірка мертва').toBeTruthy();
+
+		const collected = new Set(
+			globSync(pattern!, { cwd: ROOT }).map((f) => f.replace(/\\/g, '/'))
+		);
+		// Playwright-специфікації живуть у `tests/` і до цього глоба не належать.
+		const onDisk = specFiles.filter((f) => f.startsWith('src/'));
+
+		expect(onDisk.length, 'у src/ не знайдено перевірок — сканер шукає не там').toBeGreaterThan(10);
+		const missed = onDisk.filter((f) => !collected.has(f));
+		expect(
+			missed,
+			`глоб vitest їх не добирає — вони не виконуються ніде:\n${missed.join('\n')}`
+		).toEqual([]);
 	});
 
 	it('жоден файл перевірки не вимикає типи через @ts-nocheck', () => {
