@@ -97,7 +97,22 @@
        above, whose opacities are tuned for something floating over live
        content with nothing behind it. */
     --panel-bg: light-dark(rgba(255, 255, 255, 0.96), rgba(18, 18, 18, 0.95));
-    --panel-shadow: light-dark(0 4px 20px rgba(0, 0, 0, 0.12), 0 4px 20px rgba(0, 0, 0, 0.4));
+    /*
+     * `light-dark()` СТОЇТЬ У КОЛІРНІЙ ПОЗИЦІЇ, а не навколо всього значення
+     * (UI-UX-v8 § 1.5.1.3, `UIUX-LIGHT-DARK-COLOR-ONLY`).
+     *
+     * Доти було `light-dark(0 4px 20px rgba(…), 0 4px 20px rgba(…))` — і це
+     * значення НЕДІЙСНЕ: `light-dark()` приймає лише `<color>`, а тінь зі
+     * зсувами кольором не є. Наслідок не «взяти перший аргумент», а зникла
+     * властивість цілком: заміряно в проді 26.08 — `box-shadow: none` на обох
+     * правилах, що просять цей токен, тобто панелі не мали тіні НІ В ОДНІЙ
+     * темі. Мовчання повне: оголошення користувацької змінної приймає будь-які
+     * лексеми, тож ні збірка, ні `svelte-check`, ні консоль не кажуть нічого.
+     *
+     * Геометрія `0 4px 20px` у парі однакова, різна лише прозорість чорного —
+     * тож у `light-dark()` іде рівно те, що справді різне.
+     */
+    --panel-shadow: 0 4px 20px light-dark(rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.4));
     --surface-subtle: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.05));
     --surface-hover: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
     /* Text drawn on top of --accent-primary. It cannot be white in both themes:
