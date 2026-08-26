@@ -273,6 +273,12 @@ export const ko: Translations = {
         tooltipAnswered: "{model}({provider})이(가) 응답했습니다. 클릭하여 다른 모델을 선택하세요.",
         tooltipWillTry: "먼저 {model}({provider})을(를) 시도합니다. 클릭하여 다른 모델을 선택하세요.",
         pinHint: "선택한 모델을 먼저 시도합니다. 한도를 모두 쓰면 요청은 자동으로 목록의 다음 모델로 넘어갑니다.",
-        emptyAnswer: "모델이 빈 응답을 반환했습니다. 다시 시도하거나 위 배지에서 다른 모델을 선택하세요."
+        emptyAnswer: "모델이 빈 응답을 반환했습니다. 다시 시도하거나 위 배지에서 다른 모델을 선택하세요.",
+        errorNetwork: "AI 서비스에 연결하지 못했습니다. 연결 상태를 확인한 뒤 다시 시도하세요.",
+        errorTimeout: "AI 서비스가 제때 응답하지 않았습니다. 다시 시도하세요.",
+        errorRateLimitMinute: "연속된 요청이 너무 많습니다. 1분 뒤에 다시 시도하세요.",
+        errorRateLimitDay: "오늘의 요청 한도에 도달했습니다. 내일 다시 시도하세요.",
+        errorUnavailable: "지금은 사용할 수 있는 모델이 없습니다. 몇 분 뒤에 다시 시도하거나 위 배지에서 다른 모델을 선택하세요.",
+        errorGeneric: "AI 서비스가 예상치 못한 응답을 반환했습니다({status}). 다시 시도하세요."
     }
 };

@@ -273,6 +273,12 @@ export const lt: Translations = {
         tooltipAnswered: "Atsakė {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
         tooltipWillTry: "Pirmiausia bus bandomas {model} ({provider}). Spustelėk, kad pasirinktum kitą.",
         pinHint: "Pasirinktas modelis bandomas pirmas. Jei baigsis jo kvota, užklausa automatiškai keliauja sąrašu toliau.",
-        emptyAnswer: "Modelis grąžino tuščią atsakymą. Bandyk dar kartą arba pasirink kitą modelį viršuje esančiame ženklelyje."
+        emptyAnswer: "Modelis grąžino tuščią atsakymą. Bandyk dar kartą arba pasirink kitą modelį viršuje esančiame ženklelyje.",
+        errorNetwork: "Nepavyko susisiekti su DI paslauga. Patikrink ryšį ir bandyk dar kartą.",
+        errorTimeout: "DI paslauga neatsakė laiku. Bandyk dar kartą.",
+        errorRateLimitMinute: "Per daug užklausų iš eilės. Bandyk po minutės.",
+        errorRateLimitDay: "Dienos užklausų riba išnaudota. Bandyk rytoj.",
+        errorUnavailable: "Šiuo metu nėra prieinamo modelio. Bandyk po kelių minučių arba pasirink kitą modelį viršuje esančiame ženklelyje.",
+        errorGeneric: "DI paslauga grąžino netikėtą atsakymą ({status}). Bandyk dar kartą."
     }
 };

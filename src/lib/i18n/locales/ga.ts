@@ -273,6 +273,12 @@ export const ga: Translations = {
         tooltipAnswered: "D'fhreagair {model} ({provider}). Cliceáil chun ceann eile a roghnú.",
         tooltipWillTry: "Bainfear triail as {model} ({provider}) ar dtús. Cliceáil chun ceann eile a roghnú.",
         pinHint: "Bainfear triail as an tsamhail roghnaithe ar dtús. Má ídítear a cuóta, leanann an t-iarratas ar aghaidh go huathoibríoch.",
-        emptyAnswer: "Thug an tsamhail freagra folamh. Bain triail eile as, nó roghnaigh samhail eile ar an suaitheantas thuas."
+        emptyAnswer: "Thug an tsamhail freagra folamh. Bain triail eile as, nó roghnaigh samhail eile ar an suaitheantas thuas.",
+        errorNetwork: "Níorbh fhéidir teagmháil a dhéanamh leis an tseirbhís IS. Seiceáil do cheangal agus bain triail eile as.",
+        errorTimeout: "Níor fhreagair an tseirbhís IS in am. Bain triail eile as.",
+        errorRateLimitMinute: "An iomarca iarratas as a chéile. Bain triail eile as i gceann nóiméid.",
+        errorRateLimitDay: "Sroicheadh an teorainn laethúil iarratas. Bain triail eile as amárach.",
+        errorUnavailable: "Níl aon tsamhail ar fáil faoi láthair. Bain triail eile as i gceann cúpla nóiméad, nó roghnaigh samhail eile ar an suaitheantas thuas.",
+        errorGeneric: "Thug an tseirbhís IS freagra gan choinne ({status}). Bain triail eile as."
     }
 };

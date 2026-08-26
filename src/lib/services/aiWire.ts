@@ -90,7 +90,7 @@ export function buildWireRequest(entry: AiProviderEntry, options: WireRequestOpt
 
 	if (entry.wire === "cf-binding") {
 		// Не тихий фолбек на HTTP: біндінг не має URL, і запит нікуди не пішов би.
-		throw new Error(`${entry.id}: cf-binding викликається через buildBindingInput, не HTTP`);
+		throw new Error(`${entry.id}: cf-binding goes through buildBindingInput, not HTTP`);
 	}
 
 	if (entry.wire === "gemini") {

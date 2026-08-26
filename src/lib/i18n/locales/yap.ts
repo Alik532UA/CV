@@ -280,6 +280,12 @@ export const yap: Translations = {
         tooltipAnswered: "{model} ({provider}) e ke fulweg. Mu klik ni ngam mel'eg beeni ku bugul.",
         tooltipWillTry: "Ra som'on ni ngan guy {model} ({provider}). Mu klik ni ngam mel'eg beeni ku bugul.",
         pinHint: "Fare model ni kam mel'eg e ra som'on ni ngan guy. Faanra ke mus e limit rok, ma fare request e ra yan ko bin ni bay tomuren.",
-        emptyAnswer: "Fare model e pi'eg reb e fulweg ni dariy ban'en riy. Mu guy bayay, ara mu mel'eg beeni ku bugul e model u fare badge u lang."
+        emptyAnswer: "Fare model e pi'eg reb e fulweg ni dariy ban'en riy. Mu guy bayay, ara mu mel'eg beeni ku bugul e model u fare badge u lang.",
+        errorNetwork: "Dabiyog ni nge taw ko fare AI service. Mu guy e connection rom ngem guy bayay.",
+        errorTimeout: "Fare AI service e dariy e fulweg rok u nap'an. Mu guy bayay.",
+        errorRateLimitMinute: "Kari yoor e request u tabathan. Mu guy bayay u tomuren reb e minit.",
+        errorRateLimitDay: "Ke mus e limit ko re rran ney. Mu guy bayay ko gabul.",
+        errorUnavailable: "Dariy beeni e model nib fel' e chiney. Mu guy bayay u tomuren boch e minit, ara mu mel'eg beeni ku bugul e model u fare badge u lang.",
+        errorGeneric: "Fare AI service e pi'eg reb e fulweg ni dariy ni ka nog ({status}). Mu guy bayay."
     }
 };

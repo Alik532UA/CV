@@ -273,6 +273,12 @@ export const nl: Translations = {
         tooltipAnswered: "{model} ({provider}) antwoordde. Klik om een ander te kiezen.",
         tooltipWillTry: "{model} ({provider}) wordt eerst geprobeerd. Klik om een ander te kiezen.",
         pinHint: "Het gekozen model wordt eerst geprobeerd. Raakt het quotum op, dan gaat het verzoek automatisch naar het volgende.",
-        emptyAnswer: "Het model gaf een leeg antwoord. Probeer opnieuw of kies hierboven een ander model."
+        emptyAnswer: "Het model gaf een leeg antwoord. Probeer opnieuw of kies hierboven een ander model.",
+        errorNetwork: "Kon de AI-dienst niet bereiken. Controleer je verbinding en probeer het opnieuw.",
+        errorTimeout: "De AI-dienst antwoordde niet op tijd. Probeer het opnieuw.",
+        errorRateLimitMinute: "Te veel verzoeken achter elkaar. Probeer het over een minuut opnieuw.",
+        errorRateLimitDay: "De daglimiet voor verzoeken is bereikt. Probeer het morgen opnieuw.",
+        errorUnavailable: "Er is nu geen model beschikbaar. Probeer het over een paar minuten of kies hierboven een ander model.",
+        errorGeneric: "De AI-dienst gaf een onverwacht antwoord ({status}). Probeer het opnieuw."
     }
 };

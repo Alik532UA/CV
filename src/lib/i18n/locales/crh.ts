@@ -275,6 +275,12 @@ export const crh: Translations = {
         tooltipAnswered: "{model} ({provider}) cevap berdi. Başqasını saylamaq içün basıñız.",
         tooltipWillTry: "Evelâ {model} ({provider}) sınalır. Başqasını saylamaq içün basıñız.",
         pinHint: "Saylanğan model evelâ sınalır. Limitleri bitse, soraş özü-özünden listede kelecekke keçe.",
-        emptyAnswer: "Model boş cevap qaytardı. Kene deñeñiz yaki yuqarıdaki bejdte başqa model saylañız."
+        emptyAnswer: "Model boş cevap qaytardı. Kene deñeñiz yaki yuqarıdaki bejdte başqa model saylañız.",
+        errorNetwork: "AI hızmetine bağlanılamadı. Bağlantıñıznı teşkeriñiz ve kene deñeñiz.",
+        errorTimeout: "AI hızmeti vaqtında cevap bermedi. Kene deñeñiz.",
+        errorRateLimitMinute: "Sıra ile pek çoq soraş. Bir daqqadan soñ kene deñeñiz.",
+        errorRateLimitDay: "Künlük soraş sıñırı toldı. Yarın kene deñeñiz.",
+        errorUnavailable: "Şu anda iç bir model mevcut degil. Birqaç daqqadan soñ deñeñiz yaki yuqarıdaki bejdte başqa model saylañız.",
+        errorGeneric: "AI hızmeti beklenmegen cevap qaytardı ({status}). Kene deñeñiz."
     }
 };

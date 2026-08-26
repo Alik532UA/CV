@@ -280,6 +280,12 @@ export const kos: Translations = {
         tooltipAnswered: "{model} ({provider}) topuk tari. Klik in sulela sie pac.",
         tooltipWillTry: "Ac srike meet {model} ({provider}). Klik in sulela sie pac.",
         pinHint: "Model se kom sulela ac srikeyuk meet. Fin safla limit lal, siyuk sac ac som nu ke ma tok.",
-        emptyAnswer: "Model sac sang sie top wangin kac. Srike sifil, ku sulela sie pac model ke badge lucng."
+        emptyAnswer: "Model sac sang sie top wangin kac. Srike sifil, ku sulela sie pac model ke badge lucng.",
+        errorNetwork: "Tia ku sun AI service uh. Liye connection lom ac srike sifil.",
+        errorTimeout: "AI service uh tia topuk ke pacl fal. Srike sifil.",
+        errorRateLimitMinute: "Pusla request ke pacl fototo. Srike sifil tukun sie minit.",
+        errorRateLimitDay: "Limit lun len se inge safla. Srike sifil lutu.",
+        errorUnavailable: "Wangin model oasr in pacl inge. Srike sifil tukun kutu minit, ku sulela sie pac model ke badge lucng.",
+        errorGeneric: "AI service uh sang sie top su tia lungse ({status}). Srike sifil."
     }
 };

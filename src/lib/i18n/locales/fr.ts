@@ -273,6 +273,12 @@ export const fr: Translations = {
         tooltipAnswered: "{model} ({provider}) a répondu. Cliquez pour en choisir un autre.",
         tooltipWillTry: "{model} ({provider}) sera essayé en premier. Cliquez pour en choisir un autre.",
         pinHint: "Le modèle choisi est essayé en premier. S'il atteint sa limite, la requête passe automatiquement au suivant.",
-        emptyAnswer: "Le modèle a renvoyé une réponse vide. Réessayez ou choisissez un autre modèle sur le badge ci-dessus."
+        emptyAnswer: "Le modèle a renvoyé une réponse vide. Réessayez ou choisissez un autre modèle sur le badge ci-dessus.",
+        errorNetwork: "Impossible de joindre le service IA. Vérifiez votre connexion et réessayez.",
+        errorTimeout: "Le service IA n'a pas répondu à temps. Réessayez.",
+        errorRateLimitMinute: "Trop de requêtes d'affilée. Réessayez dans une minute.",
+        errorRateLimitDay: "La limite quotidienne de requêtes est atteinte. Réessayez demain.",
+        errorUnavailable: "Aucun modèle n'est disponible pour le moment. Réessayez dans quelques minutes ou choisissez un autre modèle sur le badge ci-dessus.",
+        errorGeneric: "Le service IA a renvoyé une réponse inattendue ({status}). Réessayez."
     }
 };

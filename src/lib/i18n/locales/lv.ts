@@ -273,6 +273,12 @@ export const lv: Translations = {
         tooltipAnswered: "Atbildēja {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
         tooltipWillTry: "Vispirms tiks mēģināts {model} ({provider}). Noklikšķini, lai izvēlētos citu.",
         pinHint: "Izvēlētais modelis tiek mēģināts pirmais. Ja tam beidzas kvota, pieprasījums automātiski pāriet uz nākamo.",
-        emptyAnswer: "Modelis atgrieza tukšu atbildi. Mēģini vēlreiz vai izvēlies citu modeli augšējā nozīmītē."
+        emptyAnswer: "Modelis atgrieza tukšu atbildi. Mēģini vēlreiz vai izvēlies citu modeli augšējā nozīmītē.",
+        errorNetwork: "Neizdevās sazināties ar MI pakalpojumu. Pārbaudi savienojumu un mēģini vēlreiz.",
+        errorTimeout: "MI pakalpojums neatbildēja laikā. Mēģini vēlreiz.",
+        errorRateLimitMinute: "Pārāk daudz pieprasījumu pēc kārtas. Mēģini pēc minūtes.",
+        errorRateLimitDay: "Dienas pieprasījumu limits ir izsmelts. Mēģini rīt.",
+        errorUnavailable: "Šobrīd nav pieejams neviens modelis. Mēģini pēc dažām minūtēm vai izvēlies citu modeli augšējā nozīmītē.",
+        errorGeneric: "MI pakalpojums atgrieza negaidītu atbildi ({status}). Mēģini vēlreiz."
     }
 };

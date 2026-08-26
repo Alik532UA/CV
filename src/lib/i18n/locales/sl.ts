@@ -273,6 +273,12 @@ export const sl: Translations = {
         tooltipAnswered: "Odgovoril je {model} ({provider}). Kliknite za izbiro drugega.",
         tooltipWillTry: "Najprej bo poskušen {model} ({provider}). Kliknite za izbiro drugega.",
         pinHint: "Izbrani model se poskusi prvi. Če porabi kvoto, zahteva samodejno preide na naslednjega.",
-        emptyAnswer: "Model je vrnil prazen odgovor. Poskusite znova ali izberite drug model na znački zgoraj."
+        emptyAnswer: "Model je vrnil prazen odgovor. Poskusite znova ali izberite drug model na znački zgoraj.",
+        errorNetwork: "Storitve UI ni bilo mogoče doseči. Preverite povezavo in poskusite znova.",
+        errorTimeout: "Storitev UI ni odgovorila pravočasno. Poskusite znova.",
+        errorRateLimitMinute: "Preveč zahtev zapored. Poskusite čez minuto.",
+        errorRateLimitDay: "Dnevna omejitev zahtev je dosežena. Poskusite jutri.",
+        errorUnavailable: "Trenutno ni na voljo noben model. Poskusite čez nekaj minut ali izberite drug model na znački zgoraj.",
+        errorGeneric: "Storitev UI je vrnila nepričakovan odgovor ({status}). Poskusite znova."
     }
 };

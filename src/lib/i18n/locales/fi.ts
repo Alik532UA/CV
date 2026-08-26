@@ -273,6 +273,12 @@ export const fi: Translations = {
         tooltipAnswered: "{model} ({provider}) vastasi. Napsauta valitaksesi toisen.",
         tooltipWillTry: "{model} ({provider}) kokeillaan ensin. Napsauta valitaksesi toisen.",
         pinHint: "Valittua mallia kokeillaan ensin. Jos kiintiö loppuu, pyyntö siirtyy automaattisesti listalla seuraavaan.",
-        emptyAnswer: "Malli palautti tyhjän vastauksen. Yritä uudelleen tai valitse toinen malli yllä olevasta merkistä."
+        emptyAnswer: "Malli palautti tyhjän vastauksen. Yritä uudelleen tai valitse toinen malli yllä olevasta merkistä.",
+        errorNetwork: "Tekoälypalveluun ei saatu yhteyttä. Tarkista yhteys ja yritä uudelleen.",
+        errorTimeout: "Tekoälypalvelu ei vastannut ajoissa. Yritä uudelleen.",
+        errorRateLimitMinute: "Liian monta pyyntöä peräkkäin. Yritä uudelleen minuutin kuluttua.",
+        errorRateLimitDay: "Päivittäinen pyyntöraja on täynnä. Yritä huomenna uudelleen.",
+        errorUnavailable: "Yksikään malli ei ole juuri nyt käytettävissä. Yritä muutaman minuutin kuluttua tai valitse toinen malli yllä olevasta merkistä.",
+        errorGeneric: "Tekoälypalvelu palautti odottamattoman vastauksen ({status}). Yritä uudelleen."
     }
 };

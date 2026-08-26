@@ -4,6 +4,7 @@ import { pruneCooldowns, type CooldownMap } from "$lib/services/aiChain";
 import { logService } from "$lib/services/logService.svelte";
 import { storage } from "$lib/services/storage";
 import { language, t } from "$lib/controllers/I18nState.svelte";
+import { fill } from "$lib/i18n/fill";
 
 export interface MatchResult {
 	matchPercentage: number;
@@ -28,12 +29,26 @@ interface ProxyResponse {
 	result?: Partial<MatchResult> | null;
 	rawText?: string;
 	reply?: string;
+	/**
+	 * Технічний опис збою: «groq: 429 rate limit», «усі моделі недоступні».
+	 *
+	 * Це рядок ДЛЯ ЖУРНАЛУ, а не для екрана. Доти він ішов просто в
+	 * `this.error`, тобто у вікно відвідувача: воркер писав українською, сайт
+	 * має 42 мови, і людина, яка читає сторінку італійською, бачила кирилицю
+	 * з назвою провайдера. Тепер речення для екрана обирається за `code`
+	 * нижче, а це поле лишається в лозі — саме там воно й потрібне.
+	 */
 	error?: string;
-	code?: string;
+	code?: ProxyErrorCode;
+	/** Яка саме межа спрацювала при `rate-limited`: хвилинна чи денна. */
+	scope?: "minute" | "day" | "global";
 	/** id → скільки мілісекунд моделі ще «остигати». */
 	cooldowns?: Record<string, number>;
 	keyed?: string[];
 }
+
+/** Коди збою, які надсилає `worker/index.ts`. */
+type ProxyErrorCode = "rate-limited" | "no-providers" | "all-providers-failed" | "bad-request";
 
 const PINNED_KEY = "ai-pinned-model";
 
@@ -42,6 +57,104 @@ const CHAIN_HEAD: AiProviderEntry = [...AI_PROVIDERS].sort((a, b) => b.score - a
 
 function proxyUrl(): string {
 	return (env.PUBLIC_AI_PROXY_URL ?? "").replace(/\/+$/, "");
+}
+
+/**
+ * Збій запиту до проксі як ДАНІ, а не як готове речення.
+ *
+ * Різниця не косметична. `throw new Error("Помилка проксі (502)")` замикає мову
+ * повідомлення в тому місці, де про мову інтерфейсу нічого не відомо, і після
+ * цього єдиний спосіб показати його іншою — переписати рядок. Тут кидається
+ * розряд збою й технічна деталь для журналу; речення складається в `describe()`
+ * зі словника вже після того, як стало відомо, якою мовою читають сторінку.
+ */
+type FailureKind = "network" | "timeout" | "rateLimitMinute" | "rateLimitDay" | "unavailable" | "http";
+
+class AiRequestError extends Error {
+	readonly kind: FailureKind;
+	readonly status: number;
+
+	/** @param detail технічний опис для `logService`; на екран не потрапляє. */
+	constructor(kind: FailureKind, detail: string, status = 0) {
+		super(detail);
+		this.name = "AiRequestError";
+		this.kind = kind;
+		this.status = status;
+	}
+
+	/** Речення для екрана — щоразу поточною мовою інтерфейсу. */
+	describe(): string {
+		switch (this.kind) {
+			case "network":
+				return t.ai.errorNetwork;
+			case "timeout":
+				return t.ai.errorTimeout;
+			case "rateLimitMinute":
+				return t.ai.errorRateLimitMinute;
+			case "rateLimitDay":
+				return t.ai.errorRateLimitDay;
+			case "unavailable":
+				return t.ai.errorUnavailable;
+			case "http":
+				return fill(t.ai.errorGeneric, { status: this.status });
+		}
+	}
+}
+
+/**
+ * Скільки чекати на проксі, перш ніж вважати запит загубленим.
+ *
+ * Воркер має власну межу на весь ланцюжок (`TOTAL_DEADLINE_MS`), але вона не
+ * рятує від випадку, коли відповідь не приходить узагалі: обірваний тунель,
+ * присипаний мобільний браузер, проксі, що прийняв з'єднання й замовк. Без
+ * межі `fetch` у такому разі не завершується ніколи — `isLoading` лишається
+ * `true`, кнопка вимкнена, і єдиний вихід із «AI думає» — перезавантаження
+ * сторінки. Число більше за дедлайн воркера: інакше сайт здавався б у той
+ * момент, коли ланцюжок ще чесно працює.
+ */
+const REQUEST_TIMEOUT_MS = 75_000;
+
+/**
+ * `AbortSignal.timeout()` відхиляє проміс `TimeoutError`, а `AbortError`
+ * приходить, коли скасував хтось інший. Обидва — не «мережа впала», і плутати
+ * їх не можна: повідомлення різні.
+ */
+function isTimeout(err: unknown): boolean {
+	return err instanceof DOMException && (err.name === "TimeoutError" || err.name === "AbortError");
+}
+
+/**
+ * Код проксі → розряд збою, який щось означає для відвідувача.
+ *
+ * `no-providers` і `all-providers-failed` зводяться в один: перше — «ключів на
+ * сервері немає», друге — «ключі є, але всі моделі відмовили». Для того, хто
+ * дивиться на екран, це та сама подія й та сама дія — спробувати за кілька
+ * хвилин або обрати іншу модель. Різниця між ними потрібна в журналі, і вона
+ * там лишається, бо `detail` несе рядок воркера цілком.
+ */
+function kindFor(code: ProxyErrorCode | undefined, scope: ProxyResponse["scope"]): FailureKind {
+	if (code === "rate-limited") return scope === "minute" ? "rateLimitMinute" : "rateLimitDay";
+	if (code === "no-providers" || code === "all-providers-failed") return "unavailable";
+	return "http";
+}
+
+/**
+ * Що показати відвідувачеві. Виняток НЕ з `post()` — тобто помилка в самому
+ * контролері — теж отримує речення зі словника: голий `err.message` тут це
+ * назва властивості англійською в панелі результату, і саме так виглядав
+ * попередній варіант.
+ *
+ * `status: 0` — те, що віддає `XMLHttpRequest.status`, коли відповіді не було
+ * взагалі. Тут воно означає «збій стався до мережі», і цим відрізняє помилку
+ * коду від будь-якого справжнього коду відповіді в тому ж повідомленні.
+ */
+function describeFailure(err: unknown): string {
+	return err instanceof AiRequestError ? err.describe() : fill(t.ai.errorGeneric, { status: 0 });
+}
+
+/** Те саме, але для журналу: технічна деталь, без перекладу й без обрізання. */
+function detailOf(err: unknown): string {
+	return err instanceof Error ? err.message : String(err);
 }
 
 /**
@@ -186,8 +299,8 @@ class AiChatState {
 				`Job analyzed by ${data.model ?? "?"}. Match: ${this.matchResult?.matchPercentage ?? "n/a"}%`
 			);
 		} catch (err) {
-			this.error = (err as Error).message || "An unexpected error occurred.";
-			logService.error("ui", `Job analysis error: ${this.error}`);
+			this.error = describeFailure(err);
+			logService.error("ui", `Job analysis error: ${detailOf(err)}`);
 		} finally {
 			this.isLoading = false;
 		}
@@ -220,8 +333,8 @@ class AiChatState {
 			this.history = [...this.history, { role: "model", content: modelReply }];
 			logService.info("ui", `Received reply from ${data.model ?? "?"}`);
 		} catch (err) {
-			this.error = (err as Error).message || "An error occurred while sending message.";
-			logService.error("ui", `Send message error: ${this.error}`);
+			this.error = describeFailure(err);
+			logService.error("ui", `Send message error: ${detailOf(err)}`);
 		} finally {
 			this.isLoading = false;
 		}
@@ -229,8 +342,14 @@ class AiChatState {
 
 	private async post(payload: { input: string; history?: ChatMessage[] }): Promise<ProxyResponse> {
 		if (!this.isConfigured) {
-			throw new Error(
-				"AI-проксі не налаштований: вкажіть PUBLIC_AI_PROXY_URL (див. worker/README.md)."
+			// Єдиний рядок помилки поза словником, і навмисно англійською, а не
+			// українською: цей стан бачить не відвідувач, а той, хто зібрав сайт
+			// без `PUBLIC_AI_PROXY_URL`. Перекладати його на 42 мови означало б
+			// перекладати назву змінної оточення. Той самий випадок, що й текст
+			// підтвердження в `resetService`.
+			throw new AiRequestError(
+				"unavailable",
+				"AI proxy is not configured: set PUBLIC_AI_PROXY_URL (see worker/README.md)."
 			);
 		}
 
@@ -238,6 +357,7 @@ class AiChatState {
 		try {
 			res = await fetch(proxyUrl(), {
 				method: "POST",
+				signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
 					...payload,
@@ -251,7 +371,10 @@ class AiChatState {
 				})
 			});
 		} catch (err) {
-			throw new Error(`Не вдалося звернутися до AI-проксі: ${(err as Error).message}`);
+			if (isTimeout(err)) {
+				throw new AiRequestError("timeout", `no answer in ${REQUEST_TIMEOUT_MS} ms`);
+			}
+			throw new AiRequestError("network", `fetch failed: ${(err as Error).message}`);
 		}
 
 		const rawBody = await res.text();
@@ -259,13 +382,17 @@ class AiChatState {
 		try {
 			data = JSON.parse(rawBody) as ProxyResponse;
 		} catch {
-			throw new Error(`Проксі повернув не JSON (${res.status}): ${rawBody.slice(0, 150)}`);
+			throw new AiRequestError("http", `body is not JSON: ${rawBody.slice(0, 150)}`, res.status);
 		}
 
 		this.applyCooldowns(data.cooldowns);
 
 		if (!res.ok || data.ok === false) {
-			throw new Error(data.error || `Помилка проксі (${res.status})`);
+			throw new AiRequestError(
+				kindFor(data.code, data.scope),
+				data.error || `proxy returned ${res.status}`,
+				res.status
+			);
 		}
 
 		if (data.modelId) this.activeModelId = data.modelId;

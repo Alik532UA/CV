@@ -273,6 +273,12 @@ export const da: Translations = {
         tooltipAnswered: "{model} ({provider}) svarede. Klik for at vælge en anden.",
         tooltipWillTry: "{model} ({provider}) prøves først. Klik for at vælge en anden.",
         pinHint: "Den valgte model prøves først. Er kvoten opbrugt, går forespørgslen automatisk videre på listen.",
-        emptyAnswer: "Modellen gav et tomt svar. Prøv igen, eller vælg en anden model på mærket ovenfor."
+        emptyAnswer: "Modellen gav et tomt svar. Prøv igen, eller vælg en anden model på mærket ovenfor.",
+        errorNetwork: "Kunne ikke få fat i AI-tjenesten. Tjek forbindelsen, og prøv igen.",
+        errorTimeout: "AI-tjenesten svarede ikke i tide. Prøv igen.",
+        errorRateLimitMinute: "For mange forespørgsler i træk. Prøv igen om et minut.",
+        errorRateLimitDay: "Den daglige grænse for forespørgsler er nået. Prøv igen i morgen.",
+        errorUnavailable: "Ingen model er tilgængelig lige nu. Prøv igen om et par minutter, eller vælg en anden model på mærket ovenfor.",
+        errorGeneric: "AI-tjenesten gav et uventet svar ({status}). Prøv igen."
     }
 };

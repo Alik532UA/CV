@@ -273,6 +273,12 @@ export const pl: Translations = {
         tooltipAnswered: "Odpowiedział {model} ({provider}). Kliknij, aby wybrać inny.",
         tooltipWillTry: "Najpierw zostanie użyty {model} ({provider}). Kliknij, aby wybrać inny.",
         pinHint: "Wybrany model jest próbowany jako pierwszy. Gdy wyczerpie limit, żądanie automatycznie trafia do następnego.",
-        emptyAnswer: "Model zwrócił pustą odpowiedź. Spróbuj ponownie lub wybierz inny model na plakietce powyżej."
+        emptyAnswer: "Model zwrócił pustą odpowiedź. Spróbuj ponownie lub wybierz inny model na plakietce powyżej.",
+        errorNetwork: "Nie udało się połączyć z usługą AI. Sprawdź połączenie i spróbuj ponownie.",
+        errorTimeout: "Usługa AI nie odpowiedziała na czas. Spróbuj ponownie.",
+        errorRateLimitMinute: "Zbyt wiele żądań pod rząd. Spróbuj za minutę.",
+        errorRateLimitDay: "Dzienny limit żądań został wyczerpany. Spróbuj jutro.",
+        errorUnavailable: "W tej chwili żaden model nie jest dostępny. Spróbuj za kilka minut lub wybierz inny model na plakietce powyżej.",
+        errorGeneric: "Usługa AI zwróciła nieoczekiwaną odpowiedź ({status}). Spróbuj ponownie."
     }
 };

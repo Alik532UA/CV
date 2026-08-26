@@ -273,6 +273,12 @@ export const mt: Translations = {
         tooltipAnswered: "Wieġeb {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
         tooltipWillTry: "L-ewwel jiġi ppruvat {model} ({provider}). Ikklikkja biex tagħżel ieħor.",
         pinHint: "Il-mudell magħżul jiġi ppruvat l-ewwel. Jekk jispiċċalu l-kwota, it-talba tgħaddi awtomatikament għal ta' warajh.",
-        emptyAnswer: "Il-mudell ta tweġiba vojta. Erġa' pprova, jew agħżel mudell ieħor mill-badge ta' fuq."
+        emptyAnswer: "Il-mudell ta tweġiba vojta. Erġa' pprova, jew agħżel mudell ieħor mill-badge ta' fuq.",
+        errorNetwork: "Ma rnexxilniex nilħqu s-servizz tal-IA. Iċċekkja l-konnessjoni u erġa' pprova.",
+        errorTimeout: "Is-servizz tal-IA ma weġibx fil-ħin. Erġa' pprova.",
+        errorRateLimitMinute: "Wisq talbiet waħda wara l-oħra. Erġa' pprova wara minuta.",
+        errorRateLimitDay: "Il-limitu ta' kuljum tat-talbiet intlaħaq. Erġa' pprova għada.",
+        errorUnavailable: "Bħalissa m'hemm l-ebda mudell disponibbli. Erġa' pprova wara ftit minuti, jew agħżel mudell ieħor mill-badge ta' fuq.",
+        errorGeneric: "Is-servizz tal-IA ta tweġiba mhux mistennija ({status}). Erġa' pprova."
     }
 };

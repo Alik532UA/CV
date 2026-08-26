@@ -273,6 +273,12 @@ export const is: Translations = {
         tooltipAnswered: "{model} ({provider}) svaraði. Smelltu til að velja annað.",
         tooltipWillTry: "{model} ({provider}) verður reynt fyrst. Smelltu til að velja annað.",
         pinHint: "Valna líkanið er reynt fyrst. Klárist kvótinn heldur beiðnin sjálfkrafa áfram niður listann.",
-        emptyAnswer: "Líkanið skilaði auðu svari. Reyndu aftur eða veldu annað líkan á merkinu að ofan."
+        emptyAnswer: "Líkanið skilaði auðu svari. Reyndu aftur eða veldu annað líkan á merkinu að ofan.",
+        errorNetwork: "Ekki tókst að ná í gervigreindarþjónustuna. Athugaðu tenginguna og reyndu aftur.",
+        errorTimeout: "Gervigreindarþjónustan svaraði ekki í tæka tíð. Reyndu aftur.",
+        errorRateLimitMinute: "Of margar beiðnir í röð. Reyndu aftur eftir mínútu.",
+        errorRateLimitDay: "Daglegu hámarki beiðna er náð. Reyndu aftur á morgun.",
+        errorUnavailable: "Ekkert líkan er tiltækt núna. Reyndu aftur eftir nokkrar mínútur eða veldu annað líkan á merkinu að ofan.",
+        errorGeneric: "Gervigreindarþjónustan skilaði óvæntu svari ({status}). Reyndu aftur."
     }
 };

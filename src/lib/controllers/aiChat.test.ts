@@ -83,6 +83,93 @@ describe("a non-JSON answer is still shown", () => {
 	});
 });
 
+describe("a failure is reported in the visitor's language", () => {
+	/**
+	 * Every one of these used to reach the screen as a Ukrainian literal — three
+	 * from this controller, one straight out of the worker's `error` field. The
+	 * site is English by default and renders in 42 languages, so a recruiter
+	 * whose connection dropped read Cyrillic, and the sentence they read named a
+	 * provider they had never heard of.
+	 *
+	 * The proxy now sends a CODE and the site picks the sentence, so what is
+	 * asserted here is the mapping — including that the technical detail still
+	 * goes somewhere, just not onto the screen.
+	 */
+	function failWith(status: number, body: Record<string, unknown>) {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async () => new Response(JSON.stringify({ ok: false, ...body }), { status }))
+		);
+	}
+
+	it("a dead network reads as a network failure, not as a stack trace", async () => {
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async () => {
+				throw new TypeError("Failed to fetch");
+			})
+		);
+
+		await aiChat.analyzeJob("job");
+
+		expect(aiChat.error).toBe(t.ai.errorNetwork);
+	});
+
+	it("a silent proxy stops the spinner instead of hanging on it", async () => {
+		// `AbortSignal.timeout` rejects with exactly this; the wait itself is not
+		// reproduced here, only what the controller does when it ends.
+		vi.stubGlobal(
+			"fetch",
+			vi.fn(async () => {
+				throw new DOMException("The operation timed out.", "TimeoutError");
+			})
+		);
+
+		await aiChat.analyzeJob("job");
+
+		expect(aiChat.error).toBe(t.ai.errorTimeout);
+		expect(aiChat.isLoading, "the button must come back").toBe(false);
+	});
+
+	it("the request carries a deadline at all", async () => {
+		respond({ result: null, rawText: "text" });
+		await aiChat.analyzeJob("job");
+
+		const call = (globalThis.fetch as unknown as { mock: { calls: unknown[][] } }).mock.calls.at(-1);
+		expect((call?.[1] as RequestInit).signal, "without a signal the spinner runs forever").toBeInstanceOf(
+			AbortSignal
+		);
+	});
+
+	it("a minute limit and a day limit are different sentences", async () => {
+		failWith(429, { error: "per-minute quota spent", code: "rate-limited", scope: "minute" });
+		await aiChat.analyzeJob("job");
+		expect(aiChat.error).toBe(t.ai.errorRateLimitMinute);
+
+		failWith(429, { error: "per-IP daily quota spent", code: "rate-limited", scope: "day" });
+		await aiChat.analyzeJob("job");
+		expect(aiChat.error).toBe(t.ai.errorRateLimitDay);
+	});
+
+	it("an exhausted chain reads as an exhausted chain", async () => {
+		failWith(502, { error: "every model in the chain is unavailable", code: "all-providers-failed" });
+
+		await aiChat.analyzeJob("job");
+
+		expect(aiChat.error).toBe(t.ai.errorUnavailable);
+	});
+
+	it("a proxy message never reaches the screen verbatim", async () => {
+		// The whole point: whatever the worker writes there, it is a log line.
+		failWith(500, { error: "groq/llama-3.3-70b: 500 upstream exploded" });
+
+		await aiChat.analyzeJob("job");
+
+		expect(aiChat.error).not.toContain("groq");
+		expect(aiChat.error).toBe(t.ai.errorGeneric.replace("{status}", "500"));
+	});
+});
+
 describe("the site's language travels with the request", () => {
 	it("sends the current language so the model can answer in it", async () => {
 		respond({ result: null, rawText: "text" });

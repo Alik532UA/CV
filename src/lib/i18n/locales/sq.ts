@@ -273,6 +273,12 @@ export const sq: Translations = {
         tooltipAnswered: "U përgjigj {model} ({provider}). Kliko për të zgjedhur një tjetër.",
         tooltipWillTry: "Së pari do të provohet {model} ({provider}). Kliko për të zgjedhur një tjetër.",
         pinHint: "Modeli i zgjedhur provohet i pari. Nëse mbaron kuotën, kërkesa kalon automatikisht te tjetri.",
-        emptyAnswer: "Modeli ktheu një përgjigje bosh. Provoni sërish ose zgjidhni një model tjetër te distinktivi më sipër."
+        emptyAnswer: "Modeli ktheu një përgjigje bosh. Provoni sërish ose zgjidhni një model tjetër te distinktivi më sipër.",
+        errorNetwork: "Nuk u arrit të kontaktohej shërbimi i IA-s. Kontrolloni lidhjen dhe provoni sërish.",
+        errorTimeout: "Shërbimi i IA-s nuk u përgjigj në kohë. Provoni sërish.",
+        errorRateLimitMinute: "Shumë kërkesa njëra pas tjetrës. Provoni pas një minute.",
+        errorRateLimitDay: "Kufiri ditor i kërkesave u arrit. Provoni nesër.",
+        errorUnavailable: "Për momentin asnjë model nuk është i disponueshëm. Provoni pas disa minutash ose zgjidhni një model tjetër te distinktivi më sipër.",
+        errorGeneric: "Shërbimi i IA-s ktheu një përgjigje të papritur ({status}). Provoni sërish."
     }
 };

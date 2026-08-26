@@ -279,6 +279,12 @@ export const en: Translations = {
         tooltipAnswered: "{model} ({provider}) answered. Click to choose another.",
         tooltipWillTry: "{model} ({provider}) will be tried first. Click to choose another.",
         pinHint: "The chosen model is tried first. If it runs out of quota, the request moves down the list automatically.",
-        emptyAnswer: "The model returned an empty answer. Try again, or pick another model from the badge above."
+        emptyAnswer: "The model returned an empty answer. Try again, or pick another model from the badge above.",
+        errorNetwork: "Could not reach the AI service. Check your connection and try again.",
+        errorTimeout: "The AI service did not answer in time. Try again.",
+        errorRateLimitMinute: "Too many requests in a row. Try again in a minute.",
+        errorRateLimitDay: "The daily request limit has been reached. Try again tomorrow.",
+        errorUnavailable: "No AI model is available right now. Try again in a few minutes, or pick another model from the badge above.",
+        errorGeneric: "The AI service returned an unexpected answer ({status}). Try again."
     }
 };

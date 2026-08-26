@@ -273,6 +273,12 @@ export const no: Translations = {
         tooltipAnswered: "{model} ({provider}) svarte. Klikk for å velge en annen.",
         tooltipWillTry: "{model} ({provider}) prøves først. Klikk for å velge en annen.",
         pinHint: "Den valgte modellen prøves først. Går kvoten tom, går forespørselen automatisk videre i lista.",
-        emptyAnswer: "Modellen ga et tomt svar. Prøv igjen, eller velg en annen modell i merket over."
+        emptyAnswer: "Modellen ga et tomt svar. Prøv igjen, eller velg en annen modell i merket over.",
+        errorNetwork: "Fikk ikke kontakt med AI-tjenesten. Sjekk tilkoblingen og prøv igjen.",
+        errorTimeout: "AI-tjenesten svarte ikke i tide. Prøv igjen.",
+        errorRateLimitMinute: "For mange forespørsler på rad. Prøv igjen om et minutt.",
+        errorRateLimitDay: "Dagsgrensen for forespørsler er nådd. Prøv igjen i morgen.",
+        errorUnavailable: "Ingen modell er tilgjengelig akkurat nå. Prøv igjen om noen minutter, eller velg en annen modell i merket over.",
+        errorGeneric: "AI-tjenesten ga et uventet svar ({status}). Prøv igjen."
     }
 };

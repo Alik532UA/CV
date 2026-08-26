@@ -273,6 +273,12 @@ export const ja: Translations = {
         tooltipAnswered: "{model}（{provider}）が回答しました。クリックして別のモデルを選べます。",
         tooltipWillTry: "最初に {model}（{provider}）を試します。クリックして別のモデルを選べます。",
         pinHint: "選んだモデルが最初に試されます。上限に達した場合は、自動的にリストの次へ進みます。",
-        emptyAnswer: "モデルの回答が空でした。もう一度試すか、上のバッジから別のモデルを選んでください。"
+        emptyAnswer: "モデルの回答が空でした。もう一度試すか、上のバッジから別のモデルを選んでください。",
+        errorNetwork: "AI サービスに接続できませんでした。接続を確認してもう一度お試しください。",
+        errorTimeout: "AI サービスから時間内に応答がありませんでした。もう一度お試しください。",
+        errorRateLimitMinute: "短時間にリクエストが多すぎます。1 分ほど待ってからお試しください。",
+        errorRateLimitDay: "本日のリクエスト上限に達しました。明日またお試しください。",
+        errorUnavailable: "現在利用できるモデルがありません。数分後にもう一度試すか、上のバッジから別のモデルを選んでください。",
+        errorGeneric: "AI サービスが予期しない応答を返しました（{status}）。もう一度お試しください。"
     }
 };

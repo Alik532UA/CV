@@ -273,6 +273,12 @@ export const ro: Translations = {
         tooltipAnswered: "A răspuns {model} ({provider}). Faceți clic pentru a alege altul.",
         tooltipWillTry: "Se va încerca mai întâi {model} ({provider}). Faceți clic pentru a alege altul.",
         pinHint: "Modelul ales este încercat primul. Dacă își epuizează cota, cererea trece automat la următorul.",
-        emptyAnswer: "Modelul a returnat un răspuns gol. Încercați din nou sau alegeți alt model din insigna de mai sus."
+        emptyAnswer: "Modelul a returnat un răspuns gol. Încercați din nou sau alegeți alt model din insigna de mai sus.",
+        errorNetwork: "Serviciul IA nu a putut fi contactat. Verificați conexiunea și încercați din nou.",
+        errorTimeout: "Serviciul IA nu a răspuns la timp. Încercați din nou.",
+        errorRateLimitMinute: "Prea multe cereri la rând. Încercați peste un minut.",
+        errorRateLimitDay: "Limita zilnică de cereri a fost atinsă. Încercați mâine.",
+        errorUnavailable: "În acest moment niciun model nu este disponibil. Încercați peste câteva minute sau alegeți alt model din insigna de mai sus.",
+        errorGeneric: "Serviciul IA a returnat un răspuns neașteptat ({status}). Încercați din nou."
     }
 };

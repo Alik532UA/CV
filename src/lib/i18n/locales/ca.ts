@@ -273,6 +273,12 @@ export const ca: Translations = {
         tooltipAnswered: "Ha respost {model} ({provider}). Fes clic per triar-ne un altre.",
         tooltipWillTry: "Primer es provarà {model} ({provider}). Fes clic per triar-ne un altre.",
         pinHint: "El model triat es prova primer. Si esgota la quota, la petició passa automàticament al següent.",
-        emptyAnswer: "El model ha retornat una resposta buida. Torna-ho a provar o tria un altre model a la insígnia de dalt."
+        emptyAnswer: "El model ha retornat una resposta buida. Torna-ho a provar o tria un altre model a la insígnia de dalt.",
+        errorNetwork: "No s'ha pogut contactar amb el servei d'IA. Comprova la connexió i torna-ho a provar.",
+        errorTimeout: "El servei d'IA no ha respost a temps. Torna-ho a provar.",
+        errorRateLimitMinute: "Massa peticions seguides. Torna-ho a provar d'aquí a un minut.",
+        errorRateLimitDay: "S'ha assolit el límit diari de peticions. Torna-ho a provar demà.",
+        errorUnavailable: "Ara mateix no hi ha cap model disponible. Torna-ho a provar d'aquí a uns minuts o tria un altre model a la insígnia de dalt.",
+        errorGeneric: "El servei d'IA ha retornat una resposta inesperada ({status}). Torna-ho a provar."
     }
 };

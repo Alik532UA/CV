@@ -273,6 +273,12 @@ export const it: Translations = {
         tooltipAnswered: "Ha risposto {model} ({provider}). Fai clic per sceglierne un altro.",
         tooltipWillTry: "Verrà provato prima {model} ({provider}). Fai clic per sceglierne un altro.",
         pinHint: "Il modello scelto viene provato per primo. Se esaurisce la quota, la richiesta passa automaticamente al successivo.",
-        emptyAnswer: "Il modello ha restituito una risposta vuota. Riprova o scegli un altro modello dal badge sopra."
+        emptyAnswer: "Il modello ha restituito una risposta vuota. Riprova o scegli un altro modello dal badge sopra.",
+        errorNetwork: "Impossibile raggiungere il servizio IA. Controlla la connessione e riprova.",
+        errorTimeout: "Il servizio IA non ha risposto in tempo. Riprova.",
+        errorRateLimitMinute: "Troppe richieste di seguito. Riprova tra un minuto.",
+        errorRateLimitDay: "Il limite giornaliero di richieste è stato raggiunto. Riprova domani.",
+        errorUnavailable: "Al momento nessun modello è disponibile. Riprova tra qualche minuto o scegli un altro modello dal badge sopra.",
+        errorGeneric: "Il servizio IA ha restituito una risposta inattesa ({status}). Riprova."
     }
 };

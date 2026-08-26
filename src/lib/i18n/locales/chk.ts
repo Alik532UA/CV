@@ -280,6 +280,12 @@ export const chk: Translations = {
         tooltipAnswered: "{model} ({provider}) a poluweni. Click ika kopwe filata pwan eu.",
         tooltipWillTry: "Epwe akkomw sotuni {model} ({provider}). Click ika kopwe filata pwan eu.",
         pinHint: "Ewe model ka filata epwe akkomw sotun. Ika a nomw an limit, ewe request epwe feino ngeni ewe mwirin.",
-        emptyAnswer: "Ewe model ese ngeni poluwan. Sotuni sefan, are filata pwan eu model won ewe badge won asan."
+        emptyAnswer: "Ewe model ese ngeni poluwan. Sotuni sefan, are filata pwan eu model won ewe badge won asan.",
+        errorNetwork: "Ese tongeni ngeni ewe AI service. Nengeni om connection me sotuni sefan.",
+        errorTimeout: "Ewe AI service ese poluwan non fansoun. Sotuni sefan.",
+        errorRateLimitMinute: "Chommong request non eu fansoun. Sotuni sefan mwirin eu minute.",
+        errorRateLimitDay: "Ewe limit non ei ran a mwuchuno. Sotuni sefan nesor.",
+        errorUnavailable: "Esor eu model mi tongeni ikenai. Sotuni sefan mwirin ekkoch minute, are filata pwan eu model won ewe badge won asan.",
+        errorGeneric: "Ewe AI service a ngeni eu poluwan mi ese affat ({status}). Sotuni sefan."
     }
 };

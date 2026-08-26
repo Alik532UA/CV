@@ -273,6 +273,12 @@ export const es: Translations = {
         tooltipAnswered: "Respondió {model} ({provider}). Haz clic para elegir otro.",
         tooltipWillTry: "Se probará primero {model} ({provider}). Haz clic para elegir otro.",
         pinHint: "El modelo elegido se prueba primero. Si agota su cuota, la petición pasa al siguiente de la lista automáticamente.",
-        emptyAnswer: "El modelo devolvió una respuesta vacía. Inténtalo de nuevo o elige otro modelo en la insignia de arriba."
+        emptyAnswer: "El modelo devolvió una respuesta vacía. Inténtalo de nuevo o elige otro modelo en la insignia de arriba.",
+        errorNetwork: "No se pudo contactar con el servicio de IA. Comprueba tu conexión e inténtalo de nuevo.",
+        errorTimeout: "El servicio de IA no respondió a tiempo. Inténtalo de nuevo.",
+        errorRateLimitMinute: "Demasiadas peticiones seguidas. Inténtalo dentro de un minuto.",
+        errorRateLimitDay: "Se ha alcanzado el límite diario de peticiones. Inténtalo mañana.",
+        errorUnavailable: "Ahora mismo no hay ningún modelo disponible. Inténtalo en unos minutos o elige otro modelo en la insignia de arriba.",
+        errorGeneric: "El servicio de IA devolvió una respuesta inesperada ({status}). Inténtalo de nuevo."
     }
 };

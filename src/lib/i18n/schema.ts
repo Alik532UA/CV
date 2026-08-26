@@ -197,5 +197,22 @@ export interface Translations {
 		tooltipWillTry: string;
 		pinHint: string;
 		emptyAnswer: string;
+		/**
+		 * Кожен спосіб, яким AI Job Matcher може НЕ відповісти.
+		 *
+		 * Доти рядок помилки приходив звідусіль, крім словника: три літерали
+		 * українською в `AiChatState` і поле `error` з воркера — теж
+		 * українською. Сайт типово англійський і має 42 мови, тож
+		 * нідерландський рекрутер, у якого впала мережа, читав кирилицю з
+		 * назвою провайдера. Тепер проксі віддає КОД, а речення обирає сайт —
+		 * мовою, якою його читають.
+		 */
+		errorNetwork: string;
+		errorTimeout: string;
+		errorRateLimitMinute: string;
+		errorRateLimitDay: string;
+		errorUnavailable: string;
+		/** `{status}` — код відповіді проксі; він потрібен у баг-репорті. */
+		errorGeneric: string;
 	};
 }

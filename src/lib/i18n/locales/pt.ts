@@ -273,6 +273,12 @@ export const pt: Translations = {
         tooltipAnswered: "Respondeu {model} ({provider}). Clique para escolher outro.",
         tooltipWillTry: "Será tentado primeiro {model} ({provider}). Clique para escolher outro.",
         pinHint: "O modelo escolhido é tentado primeiro. Se esgotar a quota, o pedido passa automaticamente ao seguinte.",
-        emptyAnswer: "O modelo devolveu uma resposta vazia. Tente novamente ou escolha outro modelo no crachá acima."
+        emptyAnswer: "O modelo devolveu uma resposta vazia. Tente novamente ou escolha outro modelo no crachá acima.",
+        errorNetwork: "Não foi possível contactar o serviço de IA. Verifique a ligação e tente novamente.",
+        errorTimeout: "O serviço de IA não respondeu a tempo. Tente novamente.",
+        errorRateLimitMinute: "Demasiados pedidos seguidos. Tente daqui a um minuto.",
+        errorRateLimitDay: "O limite diário de pedidos foi atingido. Tente amanhã.",
+        errorUnavailable: "Neste momento não há nenhum modelo disponível. Tente daqui a alguns minutos ou escolha outro modelo no crachá acima.",
+        errorGeneric: "O serviço de IA devolveu uma resposta inesperada ({status}). Tente novamente."
     }
 };

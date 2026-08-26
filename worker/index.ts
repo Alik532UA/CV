@@ -152,7 +152,12 @@ export default {
 		const limit = checkRateLimit(ip, env, Date.now());
 		if (!limit.ok) {
 			console.warn(`[proxy] rate limit (${limit.scope}) for ${ip}`);
-			return json({ ok: false, error: limit.message, code: "rate-limited" }, 429, {
+			// `scope` їде на клієнт, бо «спробуйте за хвилину» і «спробуйте
+			// завтра» — це два різні речення, а вибрати між ними за самим
+			// `code: "rate-limited"` неможливо. Раніше різницю ніс `error`, і
+			// разом із нею на екран приїжджала українська: сайт віддає 42 мови,
+			// і жодна з них не мала стосунку до мови, якою пише воркер.
+			return json({ ok: false, error: limit.message, code: "rate-limited", scope: limit.scope }, 429, {
 				...corsHeaders(origin),
 				"Retry-After": String(limit.retryAfterSeconds)
 			});
@@ -209,7 +214,7 @@ async function handleMatch(
 	if (chain.length === 0) {
 		console.error("[proxy] no providers with keys configured");
 		return json(
-			{ ok: false, error: "AI-провайдери не налаштовані на сервері.", code: "no-providers" },
+			{ ok: false, error: "no provider keys are configured on the proxy", code: "no-providers" },
 			503,
 			corsHeaders(origin)
 		);
@@ -228,7 +233,7 @@ async function handleMatch(
 	}
 
 	const attempts: Array<{ id: string; status?: number; kind?: FailureKind; error?: string }> = [];
-	let lastError = "Усі моделі в ланцюжку недоступні.";
+	let lastError = "every model in the chain is unavailable";
 	/** Остання відповідь, з якої не вийшло дістати JSON. Резерв на кінець ланцюжка. */
 	let lastTextWithoutJson: { id: string; model: string; provider: string; text: string } | null =
 		null;
@@ -259,7 +264,7 @@ async function handleMatch(
 			// провайдер вважається невдалим і ланцюжок іде далі — інакше в UI
 			// з'явилося б «модель не повернула структуровану оцінку».
 			console.warn(`[proxy] ${entry.id} returned an empty answer, treating as failure`);
-			outcome = { ok: false, kind: "transient", error: `${entry.provider}: порожня відповідь` };
+			outcome = { ok: false, kind: "transient", error: `${entry.provider}: empty answer` };
 		}
 
 		if (outcome.ok && firstAnalysis) {
@@ -271,7 +276,7 @@ async function handleMatch(
 			if (text && !extractJsonObject(text)) {
 				console.warn(`[proxy] ${entry.id} answered without valid JSON, trying next provider`);
 				lastTextWithoutJson = { id: entry.id, model: entry.model, provider: entry.provider, text };
-				outcome = { ok: false, kind: "transient", error: `${entry.provider}: відповідь не є JSON` };
+				outcome = { ok: false, kind: "transient", error: `${entry.provider}: answer is not JSON` };
 			}
 		}
 
@@ -484,7 +489,7 @@ async function callBinding(
 	input: unknown
 ): Promise<ProviderOutcome> {
 	if (!env.AI) {
-		return { ok: false, kind: "unavailable", error: `${entry.provider}: AI binding не оголошений` };
+		return { ok: false, kind: "unavailable", error: `${entry.provider}: AI binding is not declared` };
 	}
 
 	try {
@@ -628,7 +633,7 @@ function checkRateLimit(ip: string, env: Env, now: number): RateVerdict {
 		return {
 			ok: false,
 			scope: "global",
-			message: "Денний ліміт запитів до AI вичерпано. Спробуйте завтра.",
+			message: "global daily quota spent",
 			retryAfterSeconds: Math.ceil((globalDayReset - now) / 1000)
 		};
 	}
@@ -651,7 +656,7 @@ function checkRateLimit(ip: string, env: Env, now: number): RateVerdict {
 		return {
 			ok: false,
 			scope: "minute",
-			message: "Занадто багато запитів. Спробуйте за хвилину.",
+			message: "per-minute quota spent",
 			retryAfterSeconds: Math.ceil((bucket.minuteReset - now) / 1000)
 		};
 	}
@@ -659,7 +664,7 @@ function checkRateLimit(ip: string, env: Env, now: number): RateVerdict {
 		return {
 			ok: false,
 			scope: "day",
-			message: "Ліміт запитів на сьогодні вичерпано.",
+			message: "per-IP daily quota spent",
 			retryAfterSeconds: Math.ceil((bucket.dayReset - now) / 1000)
 		};
 	}

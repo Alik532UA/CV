@@ -273,6 +273,12 @@ export const de: Translations = {
         tooltipAnswered: "{model} ({provider}) hat geantwortet. Klicken, um ein anderes zu wählen.",
         tooltipWillTry: "{model} ({provider}) wird zuerst versucht. Klicken, um ein anderes zu wählen.",
         pinHint: "Das gewählte Modell wird zuerst versucht. Ist sein Kontingent erschöpft, geht die Anfrage automatisch weiter.",
-        emptyAnswer: "Das Modell lieferte eine leere Antwort. Versuchen Sie es erneut oder wählen Sie oben ein anderes Modell."
+        emptyAnswer: "Das Modell lieferte eine leere Antwort. Versuchen Sie es erneut oder wählen Sie oben ein anderes Modell.",
+        errorNetwork: "Der KI-Dienst war nicht erreichbar. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+        errorTimeout: "Der KI-Dienst hat nicht rechtzeitig geantwortet. Versuchen Sie es erneut.",
+        errorRateLimitMinute: "Zu viele Anfragen hintereinander. Versuchen Sie es in einer Minute erneut.",
+        errorRateLimitDay: "Das Tageslimit an Anfragen ist erreicht. Versuchen Sie es morgen erneut.",
+        errorUnavailable: "Derzeit ist kein Modell verfügbar. Versuchen Sie es in einigen Minuten erneut oder wählen Sie oben ein anderes Modell.",
+        errorGeneric: "Der KI-Dienst hat eine unerwartete Antwort geliefert ({status}). Versuchen Sie es erneut."
     }
 };

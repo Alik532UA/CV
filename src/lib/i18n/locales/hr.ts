@@ -273,6 +273,12 @@ export const hr: Translations = {
         tooltipAnswered: "Odgovorio je {model} ({provider}). Kliknite za odabir drugoga.",
         tooltipWillTry: "Prvo će se pokušati {model} ({provider}). Kliknite za odabir drugoga.",
         pinHint: "Odabrani model pokušava se prvi. Ako potroši kvotu, zahtjev automatski ide na sljedeći s popisa.",
-        emptyAnswer: "Model je vratio prazan odgovor. Pokušajte ponovno ili odaberite drugi model na oznaci iznad."
+        emptyAnswer: "Model je vratio prazan odgovor. Pokušajte ponovno ili odaberite drugi model na oznaci iznad.",
+        errorNetwork: "Nije bilo moguće doći do AI usluge. Provjerite vezu i pokušajte ponovno.",
+        errorTimeout: "AI usluga nije odgovorila na vrijeme. Pokušajte ponovno.",
+        errorRateLimitMinute: "Previše zahtjeva zaredom. Pokušajte za minutu.",
+        errorRateLimitDay: "Dnevno ograničenje zahtjeva je iscrpljeno. Pokušajte sutra.",
+        errorUnavailable: "Trenutačno nije dostupan nijedan model. Pokušajte za nekoliko minuta ili odaberite drugi model na oznaci iznad.",
+        errorGeneric: "AI usluga je vratila neočekivan odgovor ({status}). Pokušajte ponovno."
     }
 };

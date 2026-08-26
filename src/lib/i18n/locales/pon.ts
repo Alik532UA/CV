@@ -280,6 +280,12 @@ export const pon: Translations = {
         tooltipAnswered: "{model} ({provider}) sapengki. Klik pwehn pilada emen tohrohr.",
         tooltipWillTry: "E pahn tepin song {model} ({provider}). Klik pwehn pilada emen tohrohr.",
         pinHint: "Model me ke pilada pahn tepin song. Ma eh limit imwisekla, peidek pahn kohla ni me kohdo.",
-        emptyAnswer: "Model-o kihda sapeng me sohte audepe. Song sapahl, de pilada model tohrohr ni badge powe."
+        emptyAnswer: "Model-o kihda sapeng me sohte audepe. Song sapahl, de pilada model tohrohr ni badge powe.",
+        errorNetwork: "Sohte kak lel AI service-o. Kilang omw connection oh song sapahl.",
+        errorTimeout: "AI service-o sohte sapeng ni ahnsou. Song sapahl.",
+        errorRateLimitMinute: "Request tohto ni ahnsou mwotomwot. Song sapahl mwurin ehu minit.",
+        errorRateLimitDay: "Limit en rahnwet solahr mie. Song sapahl lakapw.",
+        errorUnavailable: "Sohte model me mie ansou wet. Song sapahl mwurin ekei minit, de pilada model tohrohr ni badge powe.",
+        errorGeneric: "AI service-o kihda sapeng me sohte lelepek ({status}). Song sapahl."
     }
 };

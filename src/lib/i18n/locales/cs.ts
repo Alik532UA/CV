@@ -273,6 +273,12 @@ export const cs: Translations = {
         tooltipAnswered: "Odpověděl {model} ({provider}). Klepnutím vyberete jiný.",
         tooltipWillTry: "Nejdřív se zkusí {model} ({provider}). Klepnutím vyberete jiný.",
         pinHint: "Vybraný model se zkouší jako první. Když vyčerpá limit, požadavek automaticky pokračuje dalším.",
-        emptyAnswer: "Model vrátil prázdnou odpověď. Zkuste to znovu nebo vyberte jiný model na odznaku výše."
+        emptyAnswer: "Model vrátil prázdnou odpověď. Zkuste to znovu nebo vyberte jiný model na odznaku výše.",
+        errorNetwork: "Nepodařilo se spojit se službou AI. Zkontrolujte připojení a zkuste to znovu.",
+        errorTimeout: "Služba AI neodpověděla včas. Zkuste to znovu.",
+        errorRateLimitMinute: "Příliš mnoho požadavků za sebou. Zkuste to za minutu.",
+        errorRateLimitDay: "Denní limit požadavků je vyčerpán. Zkuste to zítra.",
+        errorUnavailable: "Momentálně není dostupný žádný model. Zkuste to za pár minut nebo vyberte jiný model na odznaku výše.",
+        errorGeneric: "Služba AI vrátila neočekávanou odpověď ({status}). Zkuste to znovu."
     }
 };

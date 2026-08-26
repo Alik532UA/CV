@@ -273,6 +273,12 @@ export const cy: Translations = {
         tooltipAnswered: "Atebodd {model} ({provider}). Cliciwch i ddewis un arall.",
         tooltipWillTry: "Bydd {model} ({provider}) yn cael ei drio gyntaf. Cliciwch i ddewis un arall.",
         pinHint: "Caiff y model a ddewiswyd ei drio gyntaf. Os yw'n defnyddio ei gwota, mae'r cais yn symud ymlaen yn awtomatig.",
-        emptyAnswer: "Rhoddodd y model ateb gwag. Rhowch gynnig arall arni, neu dewiswch fodel arall ar y bathodyn uchod."
+        emptyAnswer: "Rhoddodd y model ateb gwag. Rhowch gynnig arall arni, neu dewiswch fodel arall ar y bathodyn uchod.",
+        errorNetwork: "Methwyd cysylltu â'r gwasanaeth DA. Gwiriwch eich cysylltiad a rhowch gynnig arall arni.",
+        errorTimeout: "Ni atebodd y gwasanaeth DA mewn pryd. Rhowch gynnig arall arni.",
+        errorRateLimitMinute: "Gormod o geisiadau yn olynol. Rhowch gynnig arall arni ymhen munud.",
+        errorRateLimitDay: "Cyrhaeddwyd y terfyn ceisiadau dyddiol. Rhowch gynnig arall arni yfory.",
+        errorUnavailable: "Nid oes model ar gael ar hyn o bryd. Rhowch gynnig arall arni ymhen ychydig funudau, neu dewiswch fodel arall ar y bathodyn uchod.",
+        errorGeneric: "Rhoddodd y gwasanaeth DA ateb annisgwyl ({status}). Rhowch gynnig arall arni."
     }
 };

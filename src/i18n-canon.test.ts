@@ -64,6 +64,50 @@ describe("no user-facing text outside the dictionaries", () => {
 			`hardcoded text — it will show up untranslated in the other 41 languages:\n${offenders.join("\n")}`
 		).toEqual([]);
 	});
+
+	/**
+	 * ПОЛОВИНА, ЯКОЇ СКАНЕР ВИЩЕ НЕ БАЧИВ. Він читає `.svelte`, а рядок, що
+	 * потрапляє на екран, не зобов'язаний жити в компоненті: `aiChat.error`
+	 * малюється в `AiMatchModal`, а складається в `AiChatState.svelte.ts`. Саме
+	 * там і лишалися чотири літерали українською — «Не вдалося звернутися до
+	 * AI-проксі», «Проксі повернув не JSON», «Помилка проксі» — плюс поле
+	 * `error` з воркера, теж українською. Тобто відвідувач, який читає сайт
+	 * італійською, при обриві мережі отримував кирилицю, і докблок цього файлу
+	 * («так увесь AI Job Matcher і поїхав українською») описував стан, який
+	 * насправді не був виправлений до кінця.
+	 *
+	 * Перевіряється не весь контролер, а те, що видно: чи не присвоюється
+	 * `this.error` літералом. Ширший скан тут неможливий — сусідні файли повні
+	 * законної кирилиці (`betaChecklist` двомовний за побудовою, `knowledgeBase`
+	 * — вміст резюме, `aiPrompt` — системний промпт моделі, `languageMeta` —
+	 * самоназви мов).
+	 */
+	const ERROR_ASSIGNMENT = /\berror\s*=\s*(["'`])/g;
+
+	it("finds a literal assigned to error when there is one", () => {
+		// Регулярка — це весь тест; мовчки зламана звітує про успіх.
+		expect('this.error = "Помилка проксі";').toMatch(new RegExp(ERROR_ASSIGNMENT.source));
+		expect("this.error = describeFailure(err);").not.toMatch(new RegExp(ERROR_ASSIGNMENT.source));
+		expect("this.error = t.ai.emptyAnswer;").not.toMatch(new RegExp(ERROR_ASSIGNMENT.source));
+	});
+
+	it("no controller builds a visible error out of a literal", () => {
+		const offenders: string[] = [];
+		for (const file of globSync("src/lib/controllers/**/*.ts", { cwd: ROOT })) {
+			const path = file.replace(/\\/g, "/");
+			if (/\.(test|spec)\.ts$/.test(path)) continue;
+			const code = strippedMarkup(read(path));
+			code.split("\n").forEach((line, i) => {
+				if (new RegExp(ERROR_ASSIGNMENT.source).test(line)) {
+					offenders.push(`${path}:${i + 1}: ${line.trim().slice(0, 80)}`);
+				}
+			});
+		}
+		expect(
+			offenders,
+			`a visible error message frozen into one language:\n${offenders.join("\n")}`
+		).toEqual([]);
+	});
 });
 
 describe("dictionary parity is enforced by the type", () => {

@@ -273,6 +273,12 @@ export const tr: Translations = {
         tooltipAnswered: "{model} ({provider}) yanıtladı. Başkasını seçmek için tıklayın.",
         tooltipWillTry: "Önce {model} ({provider}) denenecek. Başkasını seçmek için tıklayın.",
         pinHint: "Seçilen model önce denenir. Kotası dolarsa istek otomatik olarak listedeki sıradakine geçer.",
-        emptyAnswer: "Model boş bir yanıt döndürdü. Tekrar deneyin veya yukarıdaki rozetten başka bir model seçin."
+        emptyAnswer: "Model boş bir yanıt döndürdü. Tekrar deneyin veya yukarıdaki rozetten başka bir model seçin.",
+        errorNetwork: "Yapay zekâ hizmetine ulaşılamadı. Bağlantınızı kontrol edip tekrar deneyin.",
+        errorTimeout: "Yapay zekâ hizmeti zamanında yanıt vermedi. Tekrar deneyin.",
+        errorRateLimitMinute: "Arka arkaya çok fazla istek. Bir dakika sonra tekrar deneyin.",
+        errorRateLimitDay: "Günlük istek sınırına ulaşıldı. Yarın tekrar deneyin.",
+        errorUnavailable: "Şu anda kullanılabilir model yok. Birkaç dakika sonra tekrar deneyin veya yukarıdaki rozetten başka bir model seçin.",
+        errorGeneric: "Yapay zekâ hizmeti beklenmedik bir yanıt döndürdü ({status}). Tekrar deneyin."
     }
 };

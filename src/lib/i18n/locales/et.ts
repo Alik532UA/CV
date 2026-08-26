@@ -273,6 +273,12 @@ export const et: Translations = {
         tooltipAnswered: "Vastas {model} ({provider}). Klõpsa teise valimiseks.",
         tooltipWillTry: "Kõigepealt proovitakse {model} ({provider}). Klõpsa teise valimiseks.",
         pinHint: "Valitud mudelit proovitakse esimesena. Kui kvoot saab otsa, liigub päring automaatselt loendis edasi.",
-        emptyAnswer: "Mudel tagastas tühja vastuse. Proovi uuesti või vali ülal olevast märgist teine mudel."
+        emptyAnswer: "Mudel tagastas tühja vastuse. Proovi uuesti või vali ülal olevast märgist teine mudel.",
+        errorNetwork: "Tehisintellekti teenusega ei õnnestunud ühendust saada. Kontrolli ühendust ja proovi uuesti.",
+        errorTimeout: "Tehisintellekti teenus ei vastanud õigeaegselt. Proovi uuesti.",
+        errorRateLimitMinute: "Liiga palju päringuid järjest. Proovi minuti pärast uuesti.",
+        errorRateLimitDay: "Päevane päringute piir on täis. Proovi homme uuesti.",
+        errorUnavailable: "Praegu pole ükski mudel saadaval. Proovi mõne minuti pärast või vali ülal olevast märgist teine mudel.",
+        errorGeneric: "Tehisintellekti teenus tagastas ootamatu vastuse ({status}). Proovi uuesti."
     }
 };
