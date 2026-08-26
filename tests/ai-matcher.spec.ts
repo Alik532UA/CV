@@ -223,7 +223,21 @@ test.describe('AI Job Matcher', () => {
 		await expect(page.getByTestId('ai-match-score-value')).toHaveCount(0);
 	});
 
-	test('помилка проксі показується користувачеві, а не тихо ковтається', async ({ page }) => {
+	/**
+	 * Збій показується — і саме тим реченням, яке відвідувач уміє прочитати.
+	 *
+	 * Доти тут очікувався рядок З ВОРКЕРА, показаний як є, — тобто тест
+	 * закріплював дефект: сайт віддає 42 мови, а повідомлення про збій
+	 * приїжджало українською в усіх сорока двох. Тепер проксі віддає код, а речення
+	 * обирає сайт — тож перевіряється ОБИДВІ половини: що збій видно, і
+	 * що технічний рядок воркера на екран не потрапляє.
+	 *
+	 * Голий шлях `/CV/` англійський, тож рядок береться зі словника `en`,
+	 * як і в решті файлу.
+	 */
+	test('збій показується мовою сайту, а не рядком проксі', async ({ page }) => {
+		const proxyDetail = 'groq/llama-3.3-70b: 502 upstream exploded';
+
 		await page.route(
 			(url) => url.host === PROXY_HOST,
 			async (route) => {
@@ -240,7 +254,7 @@ test.describe('AI Job Matcher', () => {
 					contentType: 'application/json',
 					body: JSON.stringify({
 						ok: false,
-						error: 'Усі моделі в ланцюжку недоступні.',
+						error: proxyDetail,
 						code: 'all-providers-failed'
 					})
 				});
@@ -250,6 +264,47 @@ test.describe('AI Job Matcher', () => {
 		await openMatcher(page);
 		await analyze(page);
 
-		await expect(page.getByText('Усі моделі в ланцюжку недоступні.')).toBeVisible();
+		await expect(page.getByText(t.errorUnavailable)).toBeVisible();
+		await expect(
+			page.getByText(proxyDetail),
+			'технічний рядок належить журналу, а не вікну відвідувача'
+		).toHaveCount(0);
+	});
+
+	/**
+	 * Хвилинна й денна межі — різні речення, бо це різні дії: зачекати
+	 * чи повернутися завтра. За самим `code: "rate-limited"` між ними не вибрати,
+	 * тому воркер надсилає ще й `scope`.
+	 */
+	test('хвилинна межа й денна читаються по-різному', async ({ page }) => {
+		await page.route(
+			(url) => url.host === PROXY_HOST,
+			async (route) => {
+				if (new URL(route.request().url()).pathname === '/health') {
+					await route.fulfill({
+						status: 200,
+						contentType: 'application/json',
+						body: JSON.stringify({ ok: true, keyed: [], cooldowns: {} })
+					});
+					return;
+				}
+				await route.fulfill({
+					status: 429,
+					contentType: 'application/json',
+					body: JSON.stringify({
+						ok: false,
+						error: 'per-minute quota spent',
+						code: 'rate-limited',
+						scope: 'minute'
+					})
+				});
+			}
+		);
+
+		await openMatcher(page);
+		await analyze(page);
+
+		await expect(page.getByText(t.errorRateLimitMinute)).toBeVisible();
+		await expect(page.getByText(t.errorRateLimitDay)).toHaveCount(0);
 	});
 });
