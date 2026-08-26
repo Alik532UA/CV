@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const mk: Translations = {
     lastUpdate: "Последно ажурирање: 8 август 2026",

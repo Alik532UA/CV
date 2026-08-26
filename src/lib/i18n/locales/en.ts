@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 /**
  * British English — the site's default, and the variety a European job market

@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const ja: Translations = {
     lastUpdate: "最終更新日: 2026年8月8日",

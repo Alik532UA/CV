@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const lt: Translations = {
     lastUpdate: "Paskutinį kartą atnaujinta: 2026 m. rugpjūčio 8 d.",

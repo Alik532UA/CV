@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const tr: Translations = {
     lastUpdate: "Son güncelleme: 8 Ağustos 2026",

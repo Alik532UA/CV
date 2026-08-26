@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 // DRAFT — UNVERIFIED MACHINE TRANSLATION. Kosraean is an extremely
 // low-resource language for automated translation; this file was produced

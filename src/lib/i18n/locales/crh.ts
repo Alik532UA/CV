@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 // Qırımtatar tili (latin yazı). Bu til içün material az olğanı sebebinden,
 // tercime ana tili sahibi tarafından tekrar teşkil etilmege muhtac.

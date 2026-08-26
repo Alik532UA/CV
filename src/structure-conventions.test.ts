@@ -154,6 +154,12 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 * картки платформ, переписані розміткою тричі, стали одним `{#each}` —
 	 * 301 → 298, тобто в межу 300. Це і є єдиний дозволений напрямок руху.
 	 *
+	 * `I18nState.svelte.ts` вийшов другим: 305 → 179, бо `TranslationSchema`
+	 * переїхав у `src/lib/i18n/schema.ts` (126). Список зробив тут рівно те, для чого
+	 * існує — не дав дописати шість ключів у файл, який і без них був
+	 * найбільшим контролером проєкту, і показав, що більшість його рядків
+	 * узагалі не про перемикання мови.
+	 *
 	 * Тоді ж підтягнуто вниз два числа, під якими з'явився запас: HeaderSection
 	 * 1075 → 1073 і AiMatchModal 516 → 514. Запас, лишений у списку, — це тихий
 	 * дозвіл відрости назад, і наступна правка скористалася б ним, не показавши
@@ -181,8 +187,7 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 		"src/lib/components/HeaderSection.svelte": 855,
 		"src/lib/components/ui/AiMatchModal.svelte": 445,
 		"src/lib/components/ui/Minimap.svelte": 378,
-		"src/lib/components/ui/PdfModal.svelte": 325,
-		"src/lib/controllers/I18nState.svelte.ts": 305
+		"src/lib/components/ui/PdfModal.svelte": 325
 	};
 
 	/**

@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const bg: Translations = {
     lastUpdate: "Последна актуализация: 8 август 2026",

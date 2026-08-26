@@ -1,4 +1,4 @@
-import type { Translations } from "../../controllers/I18nState.svelte";
+import type { Translations } from "../schema";
 
 export const ga: Translations = {
     lastUpdate: "Nuashonrú deireanach: 8 Lúnasa 2026",
