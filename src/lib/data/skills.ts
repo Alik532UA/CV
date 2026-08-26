@@ -15,9 +15,9 @@ import {
     Folder,
     Flame
 } from "lucide-svelte";
-import { SkillsDataSchema, type SkillsData } from "./schemas";
+import type { SkillsData } from "./schemas";
 
-const rawData = {
+export const skillsData: SkillsData = {
     ai: [
         { id: "claudeCode", level: 95, icon: Bot },
         { id: "geminiCli", level: 95, icon: Sparkles },
@@ -51,9 +51,3 @@ const rawData = {
         { id: "firebase", level: 65, icon: Flame },
     ],
 };
-
-/**
- * Validated skills data.
- * Throws an error during development if the structure is invalid.
- */
-export const skillsData: SkillsData = SkillsDataSchema.parse(rawData);

@@ -1,9 +1,6 @@
-import { EducationItemSchema } from "./schemas";
-import { z } from "zod";
+import type { EducationItem } from "./schemas";
 
-const EducationDataSchema = z.array(EducationItemSchema);
-
-const rawEducation = [
+export const educationData: EducationItem[] = [
     {
         id: "polytech",
         institutionKey: "polytech_name",
@@ -17,5 +14,3 @@ const rawEducation = [
         descKey: "theater_school_desc"
     }
 ];
-
-export const educationData = EducationDataSchema.parse(rawEducation);

@@ -1,5 +1,3 @@
-import { z } from "zod";
-
 /**
  * Форма словника — і єдине, що тримає паритет 42 мов.
  *
@@ -10,13 +8,18 @@ import { z } from "zod";
  * логіка перемикання мови. Тепер один файл описує ФОРМУ, другий — ПОВЕДІНКУ,
  * і зростання від нових ключів більше не торкається другого.
  *
- * ЧОМУ ZOD, ЯКЩО НІЩО НЕ ПАРСИТЬСЯ. Схема не виконується жодного разу: з неї
- * береться лише тип через `z.infer`, і саме тому поруч стоїть
- * `no-unused-vars`. Це навмисно — словники пишуться руками, а не приходять із
- * мережі, тож валідувати в рантаймі нема чого. Перевагу перед голим
- * `interface` дає одне: `.optional()` видно в тому ж рядку, що й ключ, і
- * додати необов'язковий розділ (як `philosophyItems`) не означає правити
- * структуру у 42 файлах.
+ * ЧОМУ НЕ ZOD. Тут стояв `z.object()` на 126 рядків із приміткою
+ * «не виконується жодного разу: з неї береться лише тип через `z.infer`» — і
+ * поруч `eslint-disable` на `no-unused-vars`, бо змінна справді ніде не
+ * читалася. Примітка була правдива, а висновок із неї — ні: для бандлера
+ * `z.object({...})` це виклик функції з можливими побічними ефектами, тож
+ * трясіння дерева його не прибирає, і `zod` їхав у браузер відвідувача
+ * ЦІЛКОМ — 103 КБ вихідного коду, 30 КБ gzip. Схема, що не виконується, все
+ * одно коштувала 12% бюджету JS сторінки.
+ *
+ * Обміняно рівно нічого: `.optional()` став `?`, `z.record(z.string(),
+ * z.string())` — `Record<string, string>`, решта — `string`. Рантаймової
+ * перевірки не було й до того.
  *
  * Кожен локальний словник анотований `: Translations` — саме анотація, а не
  * присвоєння, робить бракуючий ключ помилкою `svelte-check`. Без неї
@@ -24,94 +27,124 @@ import { z } from "zod";
  * побачить відвідувач у вигляді `undefined` на сторінці. За наявністю анотації
  * стежить `src/i18n-canon.test.ts`.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TranslationSchema = z.object({
-	lastUpdate: z.string(),
-	title: z.array(z.string()),
-	title_mobile: z.string(),
-	nav: z.object({
-		about: z.string(),
-		experience: z.string(),
-		education: z.string(),
-		skills: z.string(),
-		projects: z.string(),
-		additional: z.string(),
-		contact: z.string(),
-		bottom_nav_label: z.string()
-	}),
-	hero: z.object({
-		greeting: z.string(),
-		description: z.string(),
-		contactMe: z.string(),
-		downloadCV: z.string(),
-		emailCopied: z.string(),
-		openMailClient: z.string()
-	}),
-	about: z.object({
-		title: z.string(),
-		location: z.string(),
-		content: z.string(),
-		hobbiesTitle: z.string(),
-		philosophyTitle: z.string().optional(),
-		philosophyItems: z.record(z.string(), z.string()).optional()
-	}),
-	experience: z.object({
-		title: z.string(),
-		showNonIT: z.string(),
-		hideNonIT: z.string(),
-		present: z.string(),
-		companies: z.record(z.string(), z.string()).optional(),
-		roles: z.record(z.string(), z.string()),
-		descriptions: z.record(z.string(), z.string())
-	}),
-	education: z.object({
-		title: z.string(),
-		institutions: z.record(z.string(), z.string()),
-		descriptions: z.record(z.string(), z.string())
-	}),
-	skills: z.object({
-		title: z.string(),
-		showMore: z.string(),
-		hideMore: z.string(),
-		platforms: z.object({
-			desktop: z.string(),
-			web: z.string(),
-			mobile: z.string()
-		}),
-		categories: z.record(z.string(), z.string()),
-		items: z.record(z.string(), z.string())
-	}),
-	other: z.object({
-		title: z.string(),
-		iq: z.string(),
-		olympics: z.string(),
-		driver: z.string(),
-		languages: z.object({
-			title: z.string(),
-			uk: z.string(),
-			en: z.string(),
-			ru: z.string()
-		}),
-		hobbies: z.array(z.string())
-	}),
-	projects: z.record(z.string(), z.any()),
-	pdf_modal: z.object({
-		title: z.string(),
-		ats: z.string(),
-		dark: z.string(),
-		light: z.string()
-	}),
-	common: z.object({
-		close: z.string(),
-		sound: z.string()
-	}),
-	scrollbar: z.object({
-		title: z.string(),
-		standard: z.string(),
-		custom: z.string(),
-		minimap: z.string(),
-		minimapFull: z.string()
-	}),
+/**
+ * Картка проєкту в розділі «Проєкти та портфоліо».
+ *
+ * Увесь розділ `projects` мав тип `z.record(z.string(), z.any())`, тобто не
+ * мав типу зовсім: у 42 словниках форму карток не перевіряло НІЩО. Забутий
+ * `url` або `image` не був би помилкою збірки — він став би порожнім
+ * посиланням і битою картинкою рівно в тій мові, якою ніхто не відкриває
+ * сайт. Тепер це помилка `svelte-check` у тому файлі, де вона зроблена.
+ *
+ * `category` лишається рядком, а не об'єднанням літералів: перелік категорій
+ * живе поруч у `categories`, і сплести їх типом означало б, що додати
+ * категорію не можна без правки схеми.
+ */
+export interface ProjectItem {
+	id: string;
+	title: string;
+	description: string;
+	button: string;
+	url: string;
+	category: string;
+	image: string;
+	tech: string;
+	/** Показує значок «Featured». Є лише в тих карток, які його мають. */
+	featured?: boolean;
+}
+
+export interface Translations {
+	lastUpdate: string;
+	title: string[];
+	title_mobile: string;
+	nav: {
+		about: string;
+		experience: string;
+		education: string;
+		skills: string;
+		projects: string;
+		additional: string;
+		contact: string;
+		bottom_nav_label: string;
+	};
+	hero: {
+		greeting: string;
+		description: string;
+		contactMe: string;
+		downloadCV: string;
+		emailCopied: string;
+		openMailClient: string;
+	};
+	about: {
+		title: string;
+		location: string;
+		content: string;
+		hobbiesTitle: string;
+		philosophyTitle?: string;
+		philosophyItems?: Record<string, string>;
+	};
+	experience: {
+		title: string;
+		showNonIT: string;
+		hideNonIT: string;
+		present: string;
+		companies?: Record<string, string>;
+		roles: Record<string, string>;
+		descriptions: Record<string, string>;
+	};
+	education: {
+		title: string;
+		institutions: Record<string, string>;
+		descriptions: Record<string, string>;
+	};
+	skills: {
+		title: string;
+		showMore: string;
+		hideMore: string;
+		platforms: {
+			desktop: string;
+			web: string;
+			mobile: string;
+		};
+		categories: Record<string, string>;
+		items: Record<string, string>;
+	};
+	other: {
+		title: string;
+		iq: string;
+		olympics: string;
+		driver: string;
+		languages: {
+			title: string;
+			uk: string;
+			en: string;
+			ru: string;
+		};
+		hobbies: string[];
+	};
+	projects: {
+		title: string;
+		featuredBadge: string;
+		categories: Record<string, string>;
+		items: Record<string, ProjectItem>;
+	};
+	pdf_modal: {
+		title: string;
+		ats: string;
+		dark: string;
+		light: string;
+	};
+	common: {
+		close: string;
+		sound: string;
+	};
+	scrollbar: {
+		title: string;
+		standard: string;
+		custom: string;
+		minimap: string;
+		minimapFull: string;
+	};
 	/**
 	 * Texts for +error.svelte and for the per-section boundary fallback.
 	 *
@@ -119,46 +152,44 @@ const TranslationSchema = z.object({
 	 * every one of the 42 locale files before anything runs, which is the whole
 	 * reason the dictionaries are typed `.ts` rather than JSON.
 	 */
-	errorPage: z.object({
-		notFoundTitle: z.string(),
-		notFoundText: z.string(),
-		genericTitle: z.string(),
-		genericText: z.string(),
-		backHome: z.string()
-	}),
+	errorPage: {
+		notFoundTitle: string;
+		notFoundText: string;
+		genericTitle: string;
+		genericText: string;
+		backHome: string;
+	};
 	/**
 	 * AI Job Matcher. The product name itself is not here — "AI Job Matcher"
 	 * stays as it is in every locale, the same way the job titles in the hero do.
 	 */
-	ai: z.object({
-		subtitle: z.string(),
-		jobPlaceholder: z.string(),
-		analyze: z.string(),
-		analyzing: z.string(),
-		newAnalysis: z.string(),
-		newAnalysisHint: z.string(),
-		rawTitle: z.string(),
-		rawNote: z.string(),
-		summaryTitle: z.string(),
-		matchLabel: z.string(),
-		strengths: z.string(),
-		gaps: z.string(),
-		followUpTitle: z.string(),
-		chatPlaceholder: z.string(),
-		thinking: z.string(),
-		modelTitle: z.string(),
-		modelAuto: z.string(),
-		bannerSub: z.string(),
-		open: z.string(),
-		statusNoKey: z.string(),
-		statusCooldown: z.string(),
-		statusAnswered: z.string(),
-		statusReady: z.string(),
-		tooltipAnswered: z.string(),
-		tooltipWillTry: z.string(),
-		pinHint: z.string(),
-		emptyAnswer: z.string()
-	})
-});
-
-export type Translations = z.infer<typeof TranslationSchema>;
+	ai: {
+		subtitle: string;
+		jobPlaceholder: string;
+		analyze: string;
+		analyzing: string;
+		newAnalysis: string;
+		newAnalysisHint: string;
+		rawTitle: string;
+		rawNote: string;
+		summaryTitle: string;
+		matchLabel: string;
+		strengths: string;
+		gaps: string;
+		followUpTitle: string;
+		chatPlaceholder: string;
+		thinking: string;
+		modelTitle: string;
+		modelAuto: string;
+		bannerSub: string;
+		open: string;
+		statusNoKey: string;
+		statusCooldown: string;
+		statusAnswered: string;
+		statusReady: string;
+		tooltipAnswered: string;
+		tooltipWillTry: string;
+		pinHint: string;
+		emptyAnswer: string;
+	};
+}

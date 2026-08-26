@@ -1,6 +1,6 @@
-import { ExperienceDataSchema, type ExperienceData } from "./schemas";
+import type { ExperienceData } from "./schemas";
 
-const rawExperience: ExperienceData = {
+export const experienceData: ExperienceData = {
     it: [
         {
             id: "intellias",
@@ -63,5 +63,3 @@ const rawExperience: ExperienceData = {
         }
     ]
 };
-
-export const experienceData = ExperienceDataSchema.parse(rawExperience);
