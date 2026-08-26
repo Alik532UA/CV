@@ -143,7 +143,6 @@ export const ja: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Valheim向けの高度なAI MOD。LLM（Gemini, Groq, OpenAI, Ollama）、STT（Whisper）、Edge TTS、自律型NPCエージェント（農夫、採集者、修理係、配達カラス）を統合しています。",
                 button: "動画で見る",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -154,7 +153,6 @@ export const ja: Translations = {
                 title: "MindStep",
                 description: "戦略的な脳トレWebゲーム。安定性、リグレッション品質、パフォーマンスを担保するため、23件のPlaywright E2E自動テストで完全にカバーしています。",
                 button: "ゲームをプレイ",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -164,7 +162,6 @@ export const ja: Translations = {
                 title: "Slovko",
                 description: "クロスプラットフォームの単語学習アプリ＆Wordle風パズル。個人統計、ユーザーアカウント、競争型リーダーボード、7言語のi18n対応を備えています。",
                 button: "学習を始める",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -174,7 +171,6 @@ export const ja: Translations = {
                 title: "DigitalWorkshop",
                 description: "海をテーマにしたインタラクティブなショーケースハブ兼ポートフォリオポータル。すべてのWebアプリ、ゲーム、ツールを単一のレスポンシブインターフェースに統合しています。",
                 button: "ポータルを開く",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -184,7 +180,6 @@ export const ja: Translations = {
                 title: "3D CV Experience",
                 description: "Godot 4でゼロから構築したインタラクティブな3D履歴書ゲーム。世界を探索し、オブジェクトを操作して、隠された仕掛けを見つけましょう！",
                 button: "3D CVを起動",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
@@ -194,7 +189,6 @@ export const ja: Translations = {
                 title: "Alik CV Web",
                 description: "Svelte 5で構築したインタラクティブなWebポートフォリオサイト。トースト通知、状態の永続化、完全なi18n対応を備えています。",
                 button: "ポートフォリオを見る",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -204,7 +198,6 @@ export const ja: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "オデーサ演劇学校の公式ウェブサイトおよび管理ポータル。インタラクティブなウィジェット、ダークオーシャンテーマ、フォトギャラリーを備えています。",
                 button: "ウェブサイトを見る",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -214,7 +207,6 @@ export const ja: Translations = {
                 title: "Art School №5",
                 description: "オデーサ第5美術学校の公式ウェブサイト。多言語対応、ニュースフィード、レスポンシブデザインを備えています。",
                 button: "ウェブサイトを見る",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -224,7 +216,6 @@ export const ja: Translations = {
                 title: "VetCrewGames",
                 description: "動物保護の取り組みと動物福祉への関心を支援するインタラクティブなゲームプロジェクト。",
                 button: "プロジェクトを開く",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

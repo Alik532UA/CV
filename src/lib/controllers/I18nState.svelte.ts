@@ -45,7 +45,7 @@ import { storage } from "$lib/services/storage";
 import { logService } from "$lib/services/logService.svelte";
 import { track } from "$lib/services/analytics";
 import { goto } from "$app/navigation";
-import { bcp47, langPath, textDirection } from "$lib/i18n/routing";
+import { bcp47, DEFAULT_LANGUAGE, langPath, textDirection } from "$lib/i18n/routing";
 import type { Translations } from "$lib/i18n/schema";
 
 /**
@@ -92,14 +92,52 @@ class LanguageState {
 			this.current = routeLanguage;
 			logService.info("i18n", `Initializing language from route: ${routeLanguage}`);
 		} else {
-			// ?lang= links are already out in the world from before the move to
-			// paths, so honour them once and rewrite the address.
-			const legacy = new URLSearchParams(window.location.search).get("lang");
-			if (isLanguage(legacy)) {
-				this.current = legacy;
-				logService.info("i18n", `Migrating legacy ?lang=${legacy} to a path`);
-				// eslint-disable-next-line svelte/no-navigation-without-resolve
-				goto(langPath(legacy), { replaceState: true, noScroll: true, keepFocus: true });
+			/*
+			 * `?lang=` — тепер КОНТРАКТ, а не лише перехідник для старих посилань.
+			 *
+			 * Він з'явився як міграція з `?lang=` на шляхи. Лишається з другої
+			 * причини, яка не мине: сусідні сайти автора шлють сюди мову, якою
+			 * читав відвідувач ТАМ, а англійську вони не можуть покласти в шлях —
+			 * `/CV/en/` свідомо не існує, бо типова мова тут без префікса
+			 * (I18N-v8 § 3.1). Без параметра відвідувач, що прийшов з англійської
+			 * сторінки Slovko, отримав би тут ту мову, яку цей сайт запам'ятав із
+			 * минулого візиту. Таблиця, з якої будуються ті посилання, —
+			 * `src/lib/siblings.ts`.
+			 *
+			 * Вище за збережений вибір навмисно: параметр каже про ЦЕЙ перехід,
+			 * збережене — про попередні. У сховище не пишеться: візит не
+			 * перекреслює свідомого вибору, зробленого тут.
+			 *
+			 * `SvelteURLSearchParams` тут ні до чого: об'єкт живе кілька рядків
+			 * усередині `init()`, і на нього ніхто не підписаний.
+			 */
+			// eslint-disable-next-line svelte/prefer-svelte-reactivity
+			const params = new URLSearchParams(window.location.search);
+			const asked = params.get("lang");
+			if (isLanguage(asked)) {
+				this.current = asked;
+				logService.info("i18n", `Language taken from ?lang=${asked}`);
+
+				/*
+				 * Типова мова лишається в параметрі, решта переїжджає в шлях.
+				 *
+				 * `/CV/en/` не існує, тож прибрати `?lang=en` означало б лишити
+				 * голу адресу — тобто «вибору не зроблено», — і наступне
+				 * перезавантаження віддало б сторінку збереженій мові. Решта
+				 * параметрів їде разом зі шляхом: губити чужі параметри при
+				 * переписуванні адреси — окремий клас дефекту, і сусідній
+				 * DigitalWorkshop на ньому вже стояв.
+				 */
+				if (asked !== DEFAULT_LANGUAGE) {
+					params.delete("lang");
+					const rest = params.toString();
+					// eslint-disable-next-line svelte/no-navigation-without-resolve
+					goto(`${langPath(asked)}${rest ? `?${rest}` : ""}`, {
+						replaceState: true,
+						noScroll: true,
+						keepFocus: true
+					});
+				}
 			} else {
 				const saved = storage.get("lang");
 				if (isLanguage(saved)) {

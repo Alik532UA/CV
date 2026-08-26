@@ -143,7 +143,6 @@ export const ka: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "მოწინავე AI მოდიფიკაცია Valheim-ისთვის. აერთიანებს LLM-ებს (Gemini, Groq, OpenAI, Ollama), STT-ს (Whisper), Edge TTS-ს და ავტონომიურ NPC-აგენტებს (ფერმერები, შემგროვებლები, შემკეთებლები, საკურიერო ყვავები).",
                 button: "ვიდეოს ნახვა",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -154,7 +153,6 @@ export const ka: Translations = {
                 title: "MindStep",
                 description: "სტრატეგიული ვებ-თამაში ტვინის ვარჯიშისთვის. სრულად დაფარულია 23 E2E Playwright ავტოტესტით სტაბილურობის, რეგრესიის ხარისხისა და წარმადობის უზრუნველსაყოფად.",
                 button: "თამაში",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -164,7 +162,6 @@ export const ka: Translations = {
                 title: "Slovko",
                 description: "მრავალპლატფორმიანი სიტყვების შესწავლის აპლიკაცია და Wordle-ის სტილის თავსატეხი პირადი სტატისტიკით, მომხმარებელთა ანგარიშებით, საკონკურსო რეიტინგითა და i18n მხარდაჭერით 7 ენაზე.",
                 button: "სწავლის დაწყება",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -174,7 +171,6 @@ export const ka: Translations = {
                 title: "DigitalWorkshop",
                 description: "საზღვაო თემატიკის ინტერაქტიული ვიტრინის პორტალი, რომელიც აერთიანებს ყველა ვებ-აპლიკაციას, თამაშსა და ინსტრუმენტს ერთ ადაპტურ ინტერფეისში.",
                 button: "პორტალის გახსნა",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -184,7 +180,6 @@ export const ka: Translations = {
                 title: "3D CV Experience",
                 description: "ინტერაქტიული 3D რეზიუმეს თამაში, აშენებული ნულიდან Godot 4-ზე. გამოიკვლიეთ სამყარო, ითანამშრომლეთ ობიექტებთან და იპოვეთ საზაფხულო კვერცხები!",
                 button: "3D CV-ის გაშვება",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D გრაფიკა"
@@ -194,7 +189,6 @@ export const ka: Translations = {
                 title: "Alik CV Web",
                 description: "ინტერაქტიული ვებ-პორტფოლიო საიტი, აშენებული Svelte 5-ით, toast შეტყობინებებით, მდგომარეობის შენარჩუნებითა და სრული i18n მხარდაჭერით.",
                 button: "პორტფოლიოს ნახვა",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -204,7 +198,6 @@ export const ka: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "ოდესის თეატრალური სკოლის ოფიციალური საიტი და ადმინისტრირების პორტალი ინტერაქტიული ვიჯეტებით, ბნელი ოკეანის თემითა და ფოტოგალერეებით.",
                 button: "საიტის მონახულება",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -214,7 +207,6 @@ export const ka: Translations = {
                 title: "სახვითი ხელოვნების სკოლა №5",
                 description: "ოდესის სახვითი ხელოვნების სკოლა №5-ის ოფიციალური საიტი მრავალენოვანი მხარდაჭერით, ახალი ამბების ლენტითა და ადაპტური დიზაინით.",
                 button: "საიტის მონახულება",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -224,7 +216,6 @@ export const ka: Translations = {
                 title: "VetCrewGames",
                 description: "ინტერაქტიული სათამაშო პროექტი, რომელიც მხარს უჭერს ცხოველების გადარჩენის ინიციატივებსა და ცხოველთა დაცვის შესახებ ცნობიერების ამაღლებას.",
                 button: "პროექტის გახსნა",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

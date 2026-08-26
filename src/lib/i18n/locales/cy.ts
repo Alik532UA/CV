@@ -143,7 +143,6 @@ export const cy: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Addasiad AI datblygedig ar gyfer Valheim. Yn integreiddio LLMau (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS ac asiantau NPC ymreolaethol (ffermwyr, casglwyr, trwsiwyr, brain cludo).",
                 button: "Gwylio'r Fideo",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -154,7 +153,6 @@ export const cy: Translations = {
                 title: "MindStep",
                 description: "Gêm we strategol ar gyfer hyfforddi'r ymennydd. Wedi'i gorchuddio'n llawn â 23 o awtoprofion E2E Playwright i sicrhau sefydlogrwydd, ansawdd atchweliad a pherfformiad.",
                 button: "Chwarae",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -164,7 +162,6 @@ export const cy: Translations = {
                 title: "Slovko",
                 description: "Ap dysgu geiriau traws-lwyfan a phos tebyg i Wordle gydag ystadegau personol, cyfrifon defnyddwyr, taflen arweinwyr gystadleuol a chefnogaeth i18n mewn 7 iaith.",
                 button: "Dechrau Dysgu",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -174,7 +171,6 @@ export const cy: Translations = {
                 title: "DigitalWorkshop",
                 description: "Porth arddangos rhyngweithiol â thema forwrol sy'n uno pob ap gwe, gêm ac offeryn mewn un rhyngwyneb ymatebol.",
                 button: "Agor y Porth",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -184,7 +180,6 @@ export const cy: Translations = {
                 title: "3D CV Experience",
                 description: "Gêm CV 3D ryngweithiol wedi'i hadeiladu o'r dechrau ar Godot 4. Archwiliwch y byd, rhyngweithiwch â gwrthrychau, a darganfyddwch wyau Pasg!",
                 button: "Lansio 3D CV",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Graffeg 3D"
@@ -194,7 +189,6 @@ export const cy: Translations = {
                 title: "Alik CV Web",
                 description: "Gwefan bortffolio ryngweithiol wedi'i hadeiladu â Svelte 5 gyda hysbysiadau toast, dyfalbarhad cyflwr a chefnogaeth i18n lawn.",
                 button: "Gweld Portffolio",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -204,7 +198,6 @@ export const cy: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "Gwefan swyddogol a phorth gweinyddu Ysgol Theatr Odesa gyda widgetau rhyngweithiol, thema cefnfor tywyll a orielau lluniau.",
                 button: "Ymweld â'r Wefan",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -214,7 +207,6 @@ export const cy: Translations = {
                 title: "Ysgol Gelf №5",
                 description: "Gwefan swyddogol Ysgol Gelf №5 Odesa gyda chefnogaeth aml-iaith, ffrydiau newyddion a dyluniad ymatebol.",
                 button: "Ymweld â'r Wefan",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -224,7 +216,6 @@ export const cy: Translations = {
                 title: "VetCrewGames",
                 description: "Prosiect gemau rhyngweithiol sy'n cefnogi mentrau achub anifeiliaid ac ymwybyddiaeth diogelu anifeiliaid.",
                 button: "Agor y Prosiect",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

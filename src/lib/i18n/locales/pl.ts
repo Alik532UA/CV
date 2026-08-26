@@ -143,7 +143,6 @@ export const pl: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Zaawansowana modyfikacja AI do Valheim. Integruje LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS oraz autonomicznych agentów NPC (rolnicy, zbieracze, naprawiacze, kruki-kurierzy).",
                 button: "Zobacz wideo",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -154,7 +153,6 @@ export const pl: Translations = {
                 title: "MindStep",
                 description: "Strategiczna gra webowa do treningu mózgu. W pełni pokryta 23 testami E2E w Playwright, zapewniającymi stabilność, jakość regresji i wydajność.",
                 button: "Zagraj",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -164,7 +162,6 @@ export const pl: Translations = {
                 title: "Slovko",
                 description: "Wieloplatformowa aplikacja do nauki słówek i łamigłówka w stylu Wordle z osobistymi statystykami, kontami użytkowników, rankingiem konkurencyjnym i obsługą i18n w 7 językach.",
                 button: "Zacznij się uczyć",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -174,7 +171,6 @@ export const pl: Translations = {
                 title: "DigitalWorkshop",
                 description: "Interaktywny portal-wizytówka w morskim klimacie, łączący wszystkie aplikacje webowe, gry i narzędzia w jednym responsywnym interfejsie.",
                 button: "Otwórz portal",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -184,7 +180,6 @@ export const pl: Translations = {
                 title: "3D CV Experience",
                 description: "Interaktywna gra-CV 3D zbudowana od podstaw w Godot 4. Odkrywaj świat, wchodź w interakcje z obiektami i znajdź easter eggi!",
                 button: "Uruchom 3D CV",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Grafika 3D"
@@ -194,7 +189,6 @@ export const pl: Translations = {
                 title: "Alik CV Web",
                 description: "Interaktywna strona-portfolio zbudowana w Svelte 5 z powiadomieniami toast, zachowaniem stanu i pełną obsługą i18n.",
                 button: "Zobacz portfolio",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -204,7 +198,6 @@ export const pl: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "Oficjalna strona i panel administracyjny Odeskiej Szkoły Teatralnej z interaktywnymi widżetami, ciemnym motywem oceanicznym i galeriami zdjęć.",
                 button: "Odwiedź stronę",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -214,7 +207,6 @@ export const pl: Translations = {
                 title: "Szkoła Artystyczna №5",
                 description: "Oficjalna strona Odeskiej Szkoły Artystycznej №5 z obsługą wielu języków, aktualnościami i responsywnym designem.",
                 button: "Odwiedź stronę",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -224,7 +216,6 @@ export const pl: Translations = {
                 title: "VetCrewGames",
                 description: "Interaktywny projekt gier wspierający inicjatywy ratowania zwierząt i podnoszenia świadomości na temat ochrony zwierząt.",
                 button: "Otwórz projekt",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

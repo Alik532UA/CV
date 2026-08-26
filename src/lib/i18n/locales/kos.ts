@@ -150,7 +150,6 @@ export const kos: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "AI modification yohk nu ke Valheim. Akfototoye LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, ac autonomous NPC agent (mwet ima, mwet orani, mwet aksuwosye, courier raven).",
                 button: "Video Overview",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -161,7 +160,6 @@ export const kos: Translations = {
                 title: "MindStep",
                 description: "Web game strategic nu ke brain-training. Afyufi na ke 23 E2E Playwright autotest in akpwayeye stability, regression quality, ac performance.",
                 button: "Oru Game",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -171,7 +169,6 @@ export const kos: Translations = {
                 title: "Slovko",
                 description: "Cross-platform word-learning app ac Wordle-style puzzle ma oasr personal statistics, user accounts, competitive leaderboard, ac 7-language i18n support.",
                 button: "Mutawauk Lutlut",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -181,7 +178,6 @@ export const kos: Translations = {
                 title: "DigitalWorkshop",
                 description: "Sea-themed showcase hub ac portfolio portal ma akfototoye web app, game, ac tool nukewa ke sie interface ku in yokelik.",
                 button: "Ikasla Portal",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -191,7 +187,6 @@ export const kos: Translations = {
                 title: "3D CV Experience",
                 description: "3D resume game interactive, musaela mutawauk ke Godot 4. Suk facl, akfototoye ma, ac konauk easter egg!",
                 button: "Mutawauk 3D CV",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
@@ -201,7 +196,6 @@ export const kos: Translations = {
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website ma musaela ke Svelte 5, oasr toast notification, state persistence, ac full i18n support.",
                 button: "Liye Portfolio",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -211,7 +205,6 @@ export const kos: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website ac admin portal nu ke Odesa Theatre School ma oasr interactive widget, dark ocean theme, ac photo gallery.",
                 button: "Liye Website",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -221,7 +214,6 @@ export const kos: Translations = {
                 title: "Art School №5",
                 description: "Official website nu ke Odesa Art School №5 ma oasr multi-language support, news feed, ac responsive design.",
                 button: "Liye Website",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -231,7 +223,6 @@ export const kos: Translations = {
                 title: "VetCrewGames",
                 description: "Interactive gaming project ma kasru animal rescue initiative ac animal protection awareness.",
                 button: "Ikasla Project",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

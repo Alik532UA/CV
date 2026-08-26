@@ -2,26 +2,56 @@
     import { ExternalLink, Code, Sparkles, Filter } from "lucide-svelte";
     import { base } from "$app/paths";
     import Section from "../ui/Section.svelte";
-    import { t } from "$lib/controllers/I18nState.svelte";
+    import { language, t } from "$lib/controllers/I18nState.svelte";
+    import { siblingUrl, type SiblingId } from "$lib/siblings";
     import { track } from "$lib/services/analytics";
 
     type ProjectCategory = "all" | "games" | "apps" | "websites";
     let activeFilter = $state<ProjectCategory>("all");
 
-    const projectKeys = [
-        "and_dvergr",
-        "mindstep",
-        "slovko",
-        "digitalworkshop",
-        "cv3d",
-        "cv_web",
-        "teatralo4ka",
-        "as5",
-        "vetcrew"
-    ];
+    /**
+     * Адреса проєкту живе ТУТ, а не в словниках.
+     *
+     * Доти кожен із сорока одного файлу локалі ніс власну копію дев'яти адрес —
+     * близько трьохсот тридцяти літералів того самого факту. Це не лише борг
+     * супроводу: жодна з тих адрес не несла мови, тож читач японської сторінки
+     * натискав японський підпис і потрапляв на англійський або український сайт.
+     *
+     * `site` — коли ціль є одним із сайтів автора: тоді `siblingUrl` відкриває її
+     * мовою, якою читають тут (таблиця — `$lib/siblings`). `link` — коли ні:
+     * YouTube і itch.io нашої мови не мають.
+     *
+     * Словники лишають те, що й мусять, — ТЕКСТ: назву, опис, підпис кнопки.
+     */
+    const PROJECT_LINKS: Record<string, { site: SiblingId } | { link: string }> = {
+        and_dvergr: { link: "https://www.youtube.com/@AndDvergrShallSpeakAI" },
+        mindstep: { site: "mindstep" },
+        slovko: { site: "slovko" },
+        digitalworkshop: { site: "digitalworkshop" },
+        cv3d: { link: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience" },
+        cv_web: { site: "cv" },
+        teatralo4ka: { site: "teatralo4ka" },
+        as5: { site: "as5" },
+        vetcrew: { site: "vetcrewgames" }
+    };
+
+    const projectKeys = Object.keys(PROJECT_LINKS);
 
     const projectsList = $derived(
-        projectKeys.map(key => t.projects.items[key]).filter(Boolean)
+        projectKeys
+            .map(key => {
+                const data = t.projects.items[key];
+                if (!data) return null;
+                const target = PROJECT_LINKS[key];
+                return {
+                    ...data,
+                    href: "site" in target ? siblingUrl(target.site, language.current) : target.link
+                };
+            })
+            // Предикат, а не `Boolean`: той відсіює `null` у рантаймі, але тип
+            // лишає `| null`, і кожне звернення до картки в розмітці стає
+            // «possibly null» — сімнадцять помилок на один пропущений ключ.
+            .filter((project) => project !== null)
     );
 
     const filteredProjects = $derived(
@@ -101,11 +131,11 @@
                         </div>
                     {/if}
 
-                    <!-- project.url is always an absolute external URL, never an app route.
+                    <!-- project.href is always an absolute external URL, never an app route.
                          resolve() must not be used here: it strips the leading character
                          and collapses "//", turning https://… into /CV/ttps:/… -->
                     <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-                    <a href={project.url}
+                    <a href={project.href}
                         target="_blank"
                         rel="noopener noreferrer"
                         class="btn-primary project-btn {project.featured ? 'featured-btn' : ''}"

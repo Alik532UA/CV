@@ -149,7 +149,6 @@ export const en: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Advanced AI modification for Valheim. Integrates LLMs (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, and autonomous NPC agents (farmers, gatherers, repairers, courier ravens).",
                 button: "Video Overview",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -160,7 +159,6 @@ export const en: Translations = {
                 title: "MindStep",
                 description: "Strategic brain-training web game. Fully covered with 23 E2E Playwright autotests to ensure stability, regression quality, and performance.",
                 button: "Play Game",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -170,7 +168,6 @@ export const en: Translations = {
                 title: "Slovko",
                 description: "Cross-platform word-learning app & Wordle-style puzzle with personal statistics, user accounts, competitive leaderboard, and 7-language i18n support.",
                 button: "Start Learning",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -180,7 +177,6 @@ export const en: Translations = {
                 title: "DigitalWorkshop",
                 description: "Interactive Sea-themed showcase hub & portfolio portal uniting all web apps, games, and tools in a single responsive interface.",
                 button: "Open Portal",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -190,7 +186,6 @@ export const en: Translations = {
                 title: "3D CV Experience",
                 description: "Interactive 3D CV game built from scratch on Godot 4. Explore the world, interact with objects, and discover easter eggs!",
                 button: "Launch 3D CV",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
@@ -200,7 +195,6 @@ export const en: Translations = {
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website built with Svelte 5 featuring toast notifications, state persistence, and full i18n support.",
                 button: "View Portfolio",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -210,7 +204,6 @@ export const en: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website and admin portal for Odesa Theatre School featuring interactive widgets, dark ocean theme, and photo galleries.",
                 button: "Visit Website",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -220,7 +213,6 @@ export const en: Translations = {
                 title: "Art School №5",
                 description: "Official website for Odesa Art School №5 featuring multi-language support, news feeds, and responsive design.",
                 button: "Visit Website",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -230,7 +222,6 @@ export const en: Translations = {
                 title: "VetCrewGames",
                 description: "Interactive gaming project supporting animal rescue initiatives and animal protection awareness.",
                 button: "Open Project",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"

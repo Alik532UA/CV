@@ -143,7 +143,6 @@ export const fi: Translations = {
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Edistynyt tekoälymuunnos Valheimille. Integroi LLM:iä (Gemini, Groq, OpenAI, Ollama), STT:tä (Whisper), Edge TTS:ää ja autonomisia NPC-agentteja (viljelijät, kerääjät, korjaajat, kuriirivarikset).",
                 button: "Katso Video",
-                url: "https://www.youtube.com/@AndDvergrShallSpeakAI",
                 category: "games",
                 image: "AndDvergrShallSpeakAI.jpg",
                 tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
@@ -154,7 +153,6 @@ export const fi: Translations = {
                 title: "MindStep",
                 description: "Strateginen aivoharjoituspeli verkossa. Täysin katettu 23 E2E Playwright-autotestillä vakauden, regressiolaadun ja suorituskyvyn varmistamiseksi.",
                 button: "Pelaa",
-                url: "https://alik532ua.github.io/MindStep/",
                 category: "games",
                 image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
@@ -164,7 +162,6 @@ export const fi: Translations = {
                 title: "Slovko",
                 description: "Monialustainen sanojen oppimissovellus & Wordle-tyylinen pulmapeli, jossa on henkilökohtaiset tilastot, käyttäjätilit, kilpailullinen tulostaulu ja i18n-tuki 7 kielelle.",
                 button: "Aloita Oppiminen",
-                url: "https://alik532ua.github.io/Slovko/",
                 category: "apps",
                 image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
@@ -174,7 +171,6 @@ export const fi: Translations = {
                 title: "DigitalWorkshop",
                 description: "Interaktiivinen merenteemainen esittelyportaali, joka yhdistää kaikki web-sovellukset, pelit ja työkalut yhteen responsiiviseen käyttöliittymään.",
                 button: "Avaa Portaali",
-                url: "https://alik532ua.github.io/DigitalWorkshop/",
                 category: "websites",
                 image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
@@ -184,7 +180,6 @@ export const fi: Translations = {
                 title: "3D CV Experience",
                 description: "Interaktiivinen 3D-ansioluettelopeli, rakennettu tyhjästä Godot 4:llä. Tutki maailmaa, ole vuorovaikutuksessa esineiden kanssa ja löydä pääsiäismunia!",
                 button: "Käynnistä 3D CV",
-                url: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
                 category: "games",
                 image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D-grafiikka"
@@ -194,7 +189,6 @@ export const fi: Translations = {
                 title: "Alik CV Web",
                 description: "Interaktiivinen web-portfoliosivusto, rakennettu Svelte 5:llä, jossa on toast-ilmoitukset, tilan säilyvyys ja täysi i18n-tuki.",
                 button: "Näytä Portfolio",
-                url: "https://alik532ua.github.io/CV/",
                 category: "websites",
                 image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
@@ -204,7 +198,6 @@ export const fi: Translations = {
                 title: "Teatralo4ka.odesa.ua",
                 description: "Odesan Teatterikoulun virallinen verkkosivusto ja hallintaportaali, jossa on interaktiivisia widgettejä, tumma valtamerteema ja valokuvagalleriat.",
                 button: "Vieraile Sivustolla",
-                url: "https://teatralo4ka.odesa.ua/",
                 category: "websites",
                 image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
@@ -214,7 +207,6 @@ export const fi: Translations = {
                 title: "Taidekoulu №5",
                 description: "Odesan Taidekoulu №5:n virallinen verkkosivusto, jossa on monikielinen tuki, uutissyötteet ja responsiivinen design.",
                 button: "Vieraile Sivustolla",
-                url: "https://as5.odesa.ua/",
                 category: "websites",
                 image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
@@ -224,7 +216,6 @@ export const fi: Translations = {
                 title: "VetCrewGames",
                 description: "Interaktiivinen pelihanke, joka tukee eläinten pelastusaloitteita ja eläinsuojelutietoisuutta.",
                 button: "Avaa Projekti",
-                url: "https://alik532ua.github.io/VetCrewGames",
                 category: "games",
                 image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
