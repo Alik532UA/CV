@@ -10,42 +10,78 @@
     let activeFilter = $state<ProjectCategory>("all");
 
     /**
-     * Адреса проєкту живе ТУТ, а не в словниках.
+     * УСЕ, ЩО ЗНАЄ ПРО КАРТКУ САЙТ, А НЕ СЛОВНИК, — одним рядком на проєкт.
      *
-     * Доти кожен із сорока одного файлу локалі ніс власну копію дев'яти адрес —
-     * близько трьохсот тридцяти літералів того самого факту. Це не лише борг
-     * супроводу: жодна з тих адрес не несла мови, тож читач японської сторінки
-     * натискав японський підпис і потрапляв на англійський або український сайт.
+     * Спершу сюди переїхала лише адреса: кожен із сорока одного файлу локалі
+     * ніс власну копію дев'яти адрес — 369 літералів того самого факту. Це був
+     * не лише борг супроводу: жодна з тих адрес не несла мови, тож читач
+     * японської сторінки натискав японський підпис і потрапляв на англійський
+     * сайт.
      *
-     * `site` — коли ціль є одним із сайтів автора: тоді `siblingUrl` відкриває її
-     * мовою, якою читають тут (таблиця — `$lib/siblings`). `link` — коли ні:
+     * Тепер тим самим шляхом пішли `id`, `category`, `image` і `featured`.
+     * Заміряно перед правкою: 369 рядків `id` на дев'ять різних значень, 369
+     * рядків `category` на три, 369 рядків `image` на дев'ять — і РОЗБІЖНОСТЕЙ
+     * МІЖ МОВАМИ НУЛЬ у жодному з полів. Вони не перекладалися ніколи, лише
+     * копіювалися: ім'я файлу картинки не має мови, а `id` дослівно дорівнював
+     * ключу свого ж запису.
+     *
+     * `id` окремого поля тут не має саме тому — ним є ключ. Два імені однієї
+     * речі розходяться мовчки, і ловити таке нема чим.
+     *
+     * Ціна була не лише в супроводі: словники вантажаться ВСІ 42 одразу, тож
+     * кожен відвідувач качав ці 1148 рядків у складі початкового JS.
+     *
+     * ОДНА ТАБЛИЦЯ, А НЕ ДВІ. Розкласти адресу й решту полів по сусідніх мапах
+     * із однаковими ключами означало б рівно те дублювання, яке цей коміт
+     * прибирає: ключ, доданий в одну й забутий в іншій, дав би картку без
+     * картинки і без категорії — мовчки, бо `undefined` у spread не помітний.
+     *
+     * `site` — коли ціль є одним із сайтів автора: тоді `siblingUrl` відкриває
+     * її мовою, якою читають тут (таблиця — `$lib/siblings`). `link` — коли ні:
      * YouTube і itch.io нашої мови не мають.
      *
-     * Словники лишають те, що й мусять, — ТЕКСТ: назву, опис, підпис кнопки.
+     * Словники лишають те, що й мусять, — ТЕКСТ: назву, опис, підпис, стек.
      */
-    const PROJECT_LINKS: Record<string, { site: SiblingId } | { link: string }> = {
-        and_dvergr: { link: "https://www.youtube.com/@AndDvergrShallSpeakAI" },
-        mindstep: { site: "mindstep" },
-        slovko: { site: "slovko" },
-        digitalworkshop: { site: "digitalworkshop" },
-        cv3d: { link: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience" },
-        cv_web: { site: "cv" },
-        teatralo4ka: { site: "teatralo4ka" },
-        as5: { site: "as5" },
-        vetcrew: { site: "vetcrewgames" }
+    type ProjectMeta = {
+        category: Exclude<ProjectCategory, "all">;
+        image: string;
+        featured?: boolean;
+    } & ({ site: SiblingId } | { link: string });
+
+    const PROJECTS: Record<string, ProjectMeta> = {
+        and_dvergr: {
+            link: "https://www.youtube.com/@AndDvergrShallSpeakAI",
+            category: "games",
+            image: "AndDvergrShallSpeakAI.jpg",
+            featured: true
+        },
+        mindstep: { site: "mindstep", category: "games", image: "mindstep.jpg" },
+        slovko: { site: "slovko", category: "apps", image: "slovko.jpg" },
+        digitalworkshop: { site: "digitalworkshop", category: "websites", image: "DigitalWorkshop.jpg" },
+        cv3d: {
+            link: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
+            category: "games",
+            image: "cv_3d.jpg"
+        },
+        cv_web: { site: "cv", category: "websites", image: "cv_web.jpg" },
+        teatralo4ka: { site: "teatralo4ka", category: "websites", image: "teatralo4ka.jpg" },
+        as5: { site: "as5", category: "websites", image: "as5_odesa_ua.jpg" },
+        vetcrew: { site: "vetcrewgames", category: "games", image: "VetCrewGames.jpg" }
     };
 
-    const projectKeys = Object.keys(PROJECT_LINKS);
+    const projectKeys = Object.keys(PROJECTS);
 
     const projectsList = $derived(
         projectKeys
             .map(key => {
                 const data = t.projects.items[key];
                 if (!data) return null;
-                const target = PROJECT_LINKS[key];
+                const meta = PROJECTS[key];
                 return {
                     ...data,
-                    href: "site" in target ? siblingUrl(target.site, language.current) : target.link
+                    ...meta,
+                    id: key,
+                    href: "site" in meta ? siblingUrl(meta.site, language.current) : meta.link
                 };
             })
             // Предикат, а не `Boolean`: той відсіює `null` у рантаймі, але тип

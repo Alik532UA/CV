@@ -146,85 +146,57 @@ export const yap: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "AI modification nib ga'ay ngak Valheim. Be integrate LLM kan (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, nge autonomous NPC agent kan (chon maruwel u binaw, chon fek, chon toy, courier raven kan).",
                 button: "Video Overview",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Web game nib strategic ko brain-training. Ke mus'ay nag ni 23 E2E Playwright autotest kan ni fan ko stability, regression quality, nge performance.",
                 button: "Rin'e Game",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Cross-platform word-learning app nge Wordle-style puzzle nib bay personal statistics, user accounts, competitive leaderboard, nge 7-language i18n support.",
                 button: "Tabolngin e Skul",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Sea-themed showcase hub nge portfolio portal ni be integrate web app, game, nge tool urngin u reb e interface nib ma'ay ngan gel.",
                 button: "Ligeg e Portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "3D resume game nib interactive, ni yoloy nu tabolngin u Godot 4. Gay e fayleng, integrate object kan, nge fil easter egg kan!",
                 button: "Tabolngin e 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website ni yoloy u Svelte 5, bay toast notification kan, state persistence, nge full i18n support.",
                 button: "Guy e Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website nge admin portal ko Odesa Theatre School nib bay interactive widget kan, dark ocean theme, nge photo gallery kan.",
                 button: "Guy e Website",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Art School №5",
                 description: "Official website ko Odesa Art School №5 nib bay multi-language support, news feed kan, nge responsive design.",
                 button: "Guy e Website",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interactive gaming project ni be ayuw ko animal rescue initiative kan nge animal protection awareness.",
                 button: "Ligeg e Project",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

@@ -139,85 +139,57 @@ export const ka: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "მოწინავე AI მოდიფიკაცია Valheim-ისთვის. აერთიანებს LLM-ებს (Gemini, Groq, OpenAI, Ollama), STT-ს (Whisper), Edge TTS-ს და ავტონომიურ NPC-აგენტებს (ფერმერები, შემგროვებლები, შემკეთებლები, საკურიერო ყვავები).",
                 button: "ვიდეოს ნახვა",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "სტრატეგიული ვებ-თამაში ტვინის ვარჯიშისთვის. სრულად დაფარულია 23 E2E Playwright ავტოტესტით სტაბილურობის, რეგრესიის ხარისხისა და წარმადობის უზრუნველსაყოფად.",
                 button: "თამაში",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "მრავალპლატფორმიანი სიტყვების შესწავლის აპლიკაცია და Wordle-ის სტილის თავსატეხი პირადი სტატისტიკით, მომხმარებელთა ანგარიშებით, საკონკურსო რეიტინგითა და i18n მხარდაჭერით 7 ენაზე.",
                 button: "სწავლის დაწყება",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "საზღვაო თემატიკის ინტერაქტიული ვიტრინის პორტალი, რომელიც აერთიანებს ყველა ვებ-აპლიკაციას, თამაშსა და ინსტრუმენტს ერთ ადაპტურ ინტერფეისში.",
                 button: "პორტალის გახსნა",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "ინტერაქტიული 3D რეზიუმეს თამაში, აშენებული ნულიდან Godot 4-ზე. გამოიკვლიეთ სამყარო, ითანამშრომლეთ ობიექტებთან და იპოვეთ საზაფხულო კვერცხები!",
                 button: "3D CV-ის გაშვება",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D გრაფიკა"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "ინტერაქტიული ვებ-პორტფოლიო საიტი, აშენებული Svelte 5-ით, toast შეტყობინებებით, მდგომარეობის შენარჩუნებითა და სრული i18n მხარდაჭერით.",
                 button: "პორტფოლიოს ნახვა",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "ოდესის თეატრალური სკოლის ოფიციალური საიტი და ადმინისტრირების პორტალი ინტერაქტიული ვიჯეტებით, ბნელი ოკეანის თემითა და ფოტოგალერეებით.",
                 button: "საიტის მონახულება",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "სახვითი ხელოვნების სკოლა №5",
                 description: "ოდესის სახვითი ხელოვნების სკოლა №5-ის ოფიციალური საიტი მრავალენოვანი მხარდაჭერით, ახალი ამბების ლენტითა და ადაპტური დიზაინით.",
                 button: "საიტის მონახულება",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "ინტერაქტიული სათამაშო პროექტი, რომელიც მხარს უჭერს ცხოველების გადარჩენის ინიციატივებსა და ცხოველთა დაცვის შესახებ ცნობიერების ამაღლებას.",
                 button: "პროექტის გახსნა",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

@@ -139,85 +139,57 @@ export const ja: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Valheim向けの高度なAI MOD。LLM（Gemini, Groq, OpenAI, Ollama）、STT（Whisper）、Edge TTS、自律型NPCエージェント（農夫、採集者、修理係、配達カラス）を統合しています。",
                 button: "動画で見る",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "戦略的な脳トレWebゲーム。安定性、リグレッション品質、パフォーマンスを担保するため、23件のPlaywright E2E自動テストで完全にカバーしています。",
                 button: "ゲームをプレイ",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "クロスプラットフォームの単語学習アプリ＆Wordle風パズル。個人統計、ユーザーアカウント、競争型リーダーボード、7言語のi18n対応を備えています。",
                 button: "学習を始める",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "海をテーマにしたインタラクティブなショーケースハブ兼ポートフォリオポータル。すべてのWebアプリ、ゲーム、ツールを単一のレスポンシブインターフェースに統合しています。",
                 button: "ポータルを開く",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Godot 4でゼロから構築したインタラクティブな3D履歴書ゲーム。世界を探索し、オブジェクトを操作して、隠された仕掛けを見つけましょう！",
                 button: "3D CVを起動",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Svelte 5で構築したインタラクティブなWebポートフォリオサイト。トースト通知、状態の永続化、完全なi18n対応を備えています。",
                 button: "ポートフォリオを見る",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "オデーサ演劇学校の公式ウェブサイトおよび管理ポータル。インタラクティブなウィジェット、ダークオーシャンテーマ、フォトギャラリーを備えています。",
                 button: "ウェブサイトを見る",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Art School №5",
                 description: "オデーサ第5美術学校の公式ウェブサイト。多言語対応、ニュースフィード、レスポンシブデザインを備えています。",
                 button: "ウェブサイトを見る",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "動物保護の取り組みと動物福祉への関心を支援するインタラクティブなゲームプロジェクト。",
                 button: "プロジェクトを開く",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

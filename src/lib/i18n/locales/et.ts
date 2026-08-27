@@ -139,85 +139,57 @@ export const et: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Täiustatud AI modifikatsioon Valheimile. Integreerib LLM-e (Gemini, Groq, OpenAI, Ollama), STT-d (Whisper), Edge TTS-i ja autonoomseid NPC agente (talunikud, korjajad, remontijad, kulleri-varesed).",
                 button: "Vaata Videot",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Strateegiline veebipõhine ajutreeningmäng. Täielikult kaetud 23 Playwright E2E autotestiga, tagamaks stabiilsust, regressiooni kvaliteeti ja jõudlust.",
                 button: "Mängi",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Platvormideülene sõnaõppimise rakendus & Wordle-stiilis mõistatus isikliku statistika, kasutajakontode, konkureeriva edetabeli ja i18n toega 7 keeles.",
                 button: "Alusta Õppimist",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Interaktiivne merelise teemaga esitlusportaal, mis ühendab kõik veebirakendused, mängud ja tööriistad ühte responsiivsesse liidesesse.",
                 button: "Ava Portaal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Interaktiivne 3D CV-mäng, ehitatud nullist Godot 4-s. Uuri maailma, suhtle objektidega ja leia ülestõusmispühade munad!",
                 button: "Käivita 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D graafika"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interaktiivne veebiportfoolio, ehitatud Svelte 5-ga, toast-teadete, oleku säilitamise ja täieliku i18n toega.",
                 button: "Vaata Portfooliot",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Odesa Teatrikooli ametlik veebisait ja haldusportaal koos interaktiivsete vidinate, tumeda ookeaniteemaga ning fotogaleriidega.",
                 button: "Külasta Veebisaiti",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Kunstikool №5",
                 description: "Odesa Kunstikooli №5 ametlik veebisait mitmekeelse toe, uudistevoogude ja responsiivse disainiga.",
                 button: "Külasta Veebisaiti",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interaktiivne mänguprojekt, mis toetab loomade päästmise algatusi ja loomakaitse teadlikkust.",
                 button: "Ava Projekt",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

@@ -139,85 +139,57 @@ export const hr: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Napredna AI modifikacija za Valheim. Integrira LLM-ove (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS i autonomne NPC agente (farmeri, sakupljači, popravljači, gavrani-kuriri).",
                 button: "Pogledaj video",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Strateška web igra za trening mozga. U potpunosti pokrivena s 23 E2E testa u Playwrightu radi osiguranja stabilnosti, kvalitete regresije i performansi.",
                 button: "Igraj",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Višeplatformska aplikacija za učenje riječi i zagonetka u stilu Wordle s osobnom statistikom, korisničkim računima, natjecateljskom ljestvicom i podrškom za i18n na 7 jezika.",
                 button: "Počni učiti",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Interaktivni izložbeni portal s morskom tematikom koji objedinjuje sve web aplikacije, igre i alate u jedno responzivno sučelje.",
                 button: "Otvori portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Interaktivna 3D CV igra izgrađena od nule u Godotu 4. Istraži svijet, komuniciraj s objektima i pronađi easter egge!",
                 button: "Pokreni 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D grafika"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interaktivna web stranica-portfolio izrađena u Svelteu 5 s toast obavijestima, očuvanjem stanja i punom podrškom za i18n.",
                 button: "Pogledaj portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Službena web stranica i administrativni portal Odeske kazališne škole s interaktivnim widgetima, tamnom oceanskom temom i foto galerijama.",
                 button: "Posjeti stranicu",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Umjetnička škola №5",
                 description: "Službena web stranica Odeske umjetničke škole №5 s podrškom za više jezika, novostima i responzivnim dizajnom.",
                 button: "Posjeti stranicu",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interaktivni projekt igara u podršci inicijativama za spašavanje životinja i podizanju svijesti o zaštiti životinja.",
                 button: "Otvori projekt",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

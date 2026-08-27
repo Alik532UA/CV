@@ -139,85 +139,57 @@ export const lv: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Uzlabota AI modifikācija Valheim. Integrē LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS un autonomus NPC aģentus (zemnieki, vācēji, remontētāji, kurjeru vārnas).",
                 button: "Skatīt Video",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Stratēģiska tīmekļa spēle smadzeņu treniņam. Pilnībā pārklāta ar 23 E2E Playwright autotestiem, lai nodrošinātu stabilitāti, regresijas kvalitāti un veiktspēju.",
                 button: "Spēlēt",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Starpplatformu vārdu apguves lietotne un Wordle stila mīkla ar personīgo statistiku, lietotāju kontiem, konkurences līderu tabulu un i18n atbalstu 7 valodās.",
                 button: "Sākt Mācīties",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Interaktīvs jūras tematikas vitrīnas portāls, kas apvieno visas tīmekļa lietotnes, spēles un rīkus vienā atsaucīgā saskarnē.",
                 button: "Atvērt Portālu",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Interaktīva 3D CV spēle, veidota no nulles ar Godot 4. Izpēti pasauli, mijiedarbojies ar objektiem un atrodi lieldienu olas!",
                 button: "Palaist 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D grafika"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interaktīva tīmekļa portfolio vietne, veidota ar Svelte 5, ar toast paziņojumiem, stāvokļa saglabāšanu un pilnu i18n atbalstu.",
                 button: "Skatīt Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Odesas Teātra skolas oficiālā vietne un administrēšanas portāls ar interaktīviem sīkrīkiem, tumšu okeāna tēmu un fotoattēlu galerijām.",
                 button: "Apmeklēt Vietni",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Mākslas skola №5",
                 description: "Odesas Mākslas skolas №5 oficiālā vietne ar daudzvalodu atbalstu, ziņu plūsmām un atsaucīgu dizainu.",
                 button: "Apmeklēt Vietni",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interaktīvs spēļu projekts, kas atbalsta dzīvnieku glābšanas iniciatīvas un dzīvnieku aizsardzības apziņu.",
                 button: "Atvērt Projektu",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

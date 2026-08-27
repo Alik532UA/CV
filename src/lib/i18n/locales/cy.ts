@@ -139,85 +139,57 @@ export const cy: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Addasiad AI datblygedig ar gyfer Valheim. Yn integreiddio LLMau (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS ac asiantau NPC ymreolaethol (ffermwyr, casglwyr, trwsiwyr, brain cludo).",
                 button: "Gwylio'r Fideo",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Gêm we strategol ar gyfer hyfforddi'r ymennydd. Wedi'i gorchuddio'n llawn â 23 o awtoprofion E2E Playwright i sicrhau sefydlogrwydd, ansawdd atchweliad a pherfformiad.",
                 button: "Chwarae",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Ap dysgu geiriau traws-lwyfan a phos tebyg i Wordle gydag ystadegau personol, cyfrifon defnyddwyr, taflen arweinwyr gystadleuol a chefnogaeth i18n mewn 7 iaith.",
                 button: "Dechrau Dysgu",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Porth arddangos rhyngweithiol â thema forwrol sy'n uno pob ap gwe, gêm ac offeryn mewn un rhyngwyneb ymatebol.",
                 button: "Agor y Porth",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Gêm CV 3D ryngweithiol wedi'i hadeiladu o'r dechrau ar Godot 4. Archwiliwch y byd, rhyngweithiwch â gwrthrychau, a darganfyddwch wyau Pasg!",
                 button: "Lansio 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Graffeg 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Gwefan bortffolio ryngweithiol wedi'i hadeiladu â Svelte 5 gyda hysbysiadau toast, dyfalbarhad cyflwr a chefnogaeth i18n lawn.",
                 button: "Gweld Portffolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Gwefan swyddogol a phorth gweinyddu Ysgol Theatr Odesa gyda widgetau rhyngweithiol, thema cefnfor tywyll a orielau lluniau.",
                 button: "Ymweld â'r Wefan",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Ysgol Gelf №5",
                 description: "Gwefan swyddogol Ysgol Gelf №5 Odesa gyda chefnogaeth aml-iaith, ffrydiau newyddion a dyluniad ymatebol.",
                 button: "Ymweld â'r Wefan",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Prosiect gemau rhyngweithiol sy'n cefnogi mentrau achub anifeiliaid ac ymwybyddiaeth diogelu anifeiliaid.",
                 button: "Agor y Prosiect",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

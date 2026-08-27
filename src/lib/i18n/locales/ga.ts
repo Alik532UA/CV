@@ -139,85 +139,57 @@ export const ga: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Mionathrú AI ardleibhéil le haghaidh Valheim. Comhtháthaíonn sé LLManna (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS agus gníomhairí NPC uathrialacha (feirmeoirí, bailitheoirí, deisitheoirí, préacháin chúiréara).",
                 button: "Féach an Físeán",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Cluiche gréasáin straitéiseach le haghaidh oiliúint intinne. Clúdaithe go hiomlán le 23 uathtástáil E2E Playwright chun cobhsaíocht, cáilíocht chúlchéimniúcháin agus feidhmíocht a chinntiú.",
                 button: "Imir",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Feidhmchlár foghlama focal traschardaí & puzal ar nós Wordle le staitisticí pearsanta, cuntais úsáideora, ardán iomaíoch agus tacaíocht i18n i 7 dteanga.",
                 button: "Tosaigh ag Foghlaim",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Tairseach taispeántais idirghníomhach le téama farraige a nascann gach feidhmchlár gréasáin, cluiche agus uirlis in aon chomhéadan freagrúil amháin.",
                 button: "Oscail an Tairseach",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Cluiche CV 3D idirghníomhach tógtha ón nialas ar Godot 4. Taiscéal an domhan, idirghníomhaigh le rudaí, agus faigh na huibheacha Cásca!",
                 button: "Seol 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Grafaicí 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Suíomh punainne gréasáin idirghníomhach tógtha le Svelte 5 le fógraí toast, buanseasmhacht stádais agus tacaíocht iomlán i18n.",
                 button: "Féach an Phunann",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Suíomh gréasáin oifigiúil agus tairseach riaracháin Scoil Amharclainne Odesa le giuirléidí idirghníomhacha, téama aigéin dorcha agus dánlanna grianghraf.",
                 button: "Tabhair Cuairt ar an Suíomh",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Scoil Ealaíne №5",
                 description: "Suíomh gréasáin oifigiúil Scoil Ealaíne №5 Odesa le tacaíocht ilteangach, fothaí nuachta agus dearadh freagrúil.",
                 button: "Tabhair Cuairt ar an Suíomh",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Tionscadal cluichí idirghníomhach ag tacú le tionscnaimh tarrthála ainmhithe agus feasacht cosanta ainmhithe.",
                 button: "Oscail an Tionscadal",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

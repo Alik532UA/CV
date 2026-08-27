@@ -139,85 +139,57 @@ export const da: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Avanceret AI-modifikation til Valheim. Integrerer LLM'er (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS og autonome NPC-agenter (bønder, samlere, reparatører, kurerravne).",
                 button: "Se video",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Strategisk webbaseret hjernetræningsspil. Fuldt dækket med 23 E2E-tests i Playwright for at sikre stabilitet, regressionskvalitet og ydeevne.",
                 button: "Spil",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Platformuafhængig app til ordindlæring og Wordle-lignende puslespil med personlig statistik, brugerkonti, konkurrencerangliste og i18n-understøttelse på 7 sprog.",
                 button: "Begynd at lære",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Interaktiv showcase-portal med havtema, der samler alle webapps, spil og værktøjer i én responsiv grænseflade.",
                 button: "Åbn portalen",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Interaktivt 3D-CV-spil bygget fra bunden i Godot 4. Udforsk verdenen, interagér med objekter og find påskeæg!",
                 button: "Start 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D-grafik"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interaktivt webportfolio bygget med Svelte 5, med toast-notifikationer, tilstandspersistens og fuld i18n-understøttelse.",
                 button: "Se portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Officiel hjemmeside og administrationsportal for Odesas Teaterskole med interaktive widgets, mørkt havtema og fotogallerier.",
                 button: "Besøg hjemmesiden",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Kunstskole №5",
                 description: "Officiel hjemmeside for Odesas Kunstskole №5 med flersprogsunderstøttelse, nyhedsfeeds og responsivt design.",
                 button: "Besøg hjemmesiden",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interaktivt spilprojekt til støtte for initiativer om dyreredning og bevidsthed om dyrebeskyttelse.",
                 button: "Åbn projektet",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

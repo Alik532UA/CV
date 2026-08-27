@@ -139,85 +139,57 @@ export const mt: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Modifika avvanzata tal-AI għal Valheim. Tintegra LLMs (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, u aġenti NPC awtonomi (bdiewa, ġabbara, tiswijiet, ċawluni messaġġiera).",
                 button: "Ara l-Vidjo",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Logħba web strateġika għat-taħriġ tal-moħħ. Koperta kompletament b'23 awtotest E2E f'Playwright biex tiġi żgurata l-istabbiltà, il-kwalità tar-regressjoni u l-prestazzjoni.",
                 button: "Ilgħab",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Applikazzjoni multipjattaforma għat-tagħlim tal-kliem u taħbila fl-istil ta' Wordle bi statistika personali, kontijiet tal-utenti, klassifika kompetittiva u appoġġ i18n f'7 lingwi.",
                 button: "Ibda Titgħallem",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Ċentru ta' wirja interattiv bit-tema tal-baħar li jgħaqqad l-applikazzjonijiet web, il-logħob u l-għodod kollha f'interfaċċja responsiva waħda.",
                 button: "Iftaħ il-Portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Logħba tas-CV 3D interattiva, mibnija mix-xejn f'Godot 4. Esplora d-dinja, interaġixxi mal-oġġetti, u sib l-easter eggs!",
                 button: "Nedi s-CV 3D",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Grafika 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Sit tal-portafoll web interattiv mibni b'Svelte 5, b'notifiki toast, persistenza tal-istat u appoġġ i18n sħiħ.",
                 button: "Ara l-Portafoll",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Is-sit uffiċjali u l-portal amministrattiv tal-Iskola tat-Teatru ta' Odesa b'widgets interattivi, tema ta' oċean skur u galleriji tar-ritratti.",
                 button: "Żur is-Sit",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Skola tal-Arti №5",
                 description: "Is-sit uffiċjali tal-Iskola tal-Arti №5 ta' Odesa b'appoġġ multilingwi, feeds tal-aħbarijiet u disinn responsiv.",
                 button: "Żur is-Sit",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Proġett ta' logħob interattiv li jappoġġa inizjattivi ta' salvataġġ tal-annimali u sensibilizzazzjoni dwar il-protezzjoni tagħhom.",
                 button: "Iftaħ il-Proġett",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

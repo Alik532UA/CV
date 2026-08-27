@@ -139,85 +139,57 @@ export const is: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Háþróuð AI-viðbót fyrir Valheim. Samþættir LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS og sjálfstæða NPC-umboðsmenn (bændur, safnarar, viðgerðarmenn, sendihrafnar).",
                 button: "Horfa á myndband",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Stefnumótandi vefleikur fyrir heilaþjálfun. Að fullu prófaður með 23 E2E prófunum í Playwright til að tryggja stöðugleika, afturhvarfsgæði og afköst.",
                 button: "Spila",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Margpalla forrit til orðanáms og Wordle-líkrar þrautar með persónulegri tölfræði, notandaaðgangi, keppnistöflu og i18n stuðningi á 7 tungumálum.",
                 button: "Byrja að læra",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Gagnvirkur sýningarvefur með sjávarþema sem sameinar öll vefforrit, leiki og verkfæri í eitt svarhæft viðmót.",
                 button: "Opna gátt",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Gagnvirkur 3D ferilskrárleikur byggður frá grunni í Godot 4. Kannaðu heiminn, hafðu samskipti við hluti og finndu páskaegg!",
                 button: "Ræsa 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D grafík"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Gagnvirk vefsíða með eignasafni, byggð með Svelte 5, með toast-tilkynningum, varðveislu stöðu og fullum i18n stuðningi.",
                 button: "Skoða eignasafn",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Opinber vefsíða og stjórnunargátt Leikhússkóla Ódessu með gagnvirkum viðbótum, dökku hafþema og myndasöfnum.",
                 button: "Heimsækja vefsíðu",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Listaskóli №5",
                 description: "Opinber vefsíða Listaskóla №5 í Ódessu með fjöltyngdum stuðningi, fréttaveitum og svarhæfri hönnun.",
                 button: "Heimsækja vefsíðu",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Gagnvirkt leikjaverkefni sem styður björgunarverkefni dýra og vitundarvakningu um dýravernd.",
                 button: "Opna verkefni",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

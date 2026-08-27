@@ -142,85 +142,57 @@ export const he: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "מודיפיקציית AI מתקדמת עבור Valheim. משלבת LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS וסוכני NPC אוטונומיים (חקלאים, אספנים, מתקנים, עורבי שליחויות).",
                 button: "צפה בסרטון",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "משחק web אסטרטגי לאימון המוח. מכוסה במלואו ב-23 בדיקות E2E אוטומטיות ב-Playwright להבטחת יציבות, איכות רגרסיה וביצועים.",
                 button: "שחק",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "אפליקציית לימוד מילים רב-פלטפורמית וחידת סגנון Wordle עם סטטיסטיקה אישית, חשבונות משתמשים, טבלת מובילים תחרותית ותמיכת i18n ב-7 שפות.",
                 button: "התחל ללמוד",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "פורטל תצוגה אינטראקטיבי בנושא ימי המאחד את כל אפליקציות ה-web, המשחקים והכלים בממשק רספונסיבי אחד.",
                 button: "פתח פורטל",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "משחק קורות חיים תלת-ממדי אינטראקטיבי שנבנה מאפס ב-Godot 4. חקור את העולם, קיים אינטראקציה עם אובייקטים וגלה ביצי פסחא!",
                 button: "הפעל 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, גרפיקת 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "אתר תיק עבודות אינטראקטיבי שנבנה עם Svelte 5, עם התראות toast, שמירת מצב ותמיכת i18n מלאה.",
                 button: "צפה בתיק העבודות",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "האתר הרשמי ופורטל הניהול של בית הספר לתיאטרון של אודסה, עם ווידג'טים אינטראקטיביים, נושא אוקיינוס כהה וגלריות תמונות.",
                 button: "בקר באתר",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "בית ספר לאמנות №5",
                 description: "האתר הרשמי של בית הספר לאמנות №5 של אודסה, עם תמיכה רב-לשונית, פיד חדשות ועיצוב רספונסיבי.",
                 button: "בקר באתר",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "פרויקט משחקים אינטראקטיבי התומך ביוזמות הצלת בעלי חיים ובמודעות להגנה על בעלי חיים.",
                 button: "פתח פרויקט",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

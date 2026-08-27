@@ -146,85 +146,57 @@ export const chk: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "AI modification mi watteoch fän Valheim. Äeäni LLM kewe (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, me autonomous NPC agent kewe (farmer, gatherer, repairer, courier raven kewe).",
                 button: "Video Overview",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Web game mi strategic fän brain-training. A fully covered mi 23 E2E Playwright autotest kewe ren stability, regression quality, me performance.",
                 button: "Föri Game",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Cross-platform word-learning app me Wordle-style puzzle mi personal statistics, user accounts, competitive leaderboard, me 7-language i18n support.",
                 button: "Poputa Käeö",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Sea-themed showcase hub me portfolio portal mi äeäni web app, game, me tool meinisin lon eü responsive interface.",
                 button: "Süki Portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "3D resume game mi interactive, föri seni poputa lon Godot 4. Kükkün fanüfan, äeäni object kewe, me küna easter egg kewe!",
                 button: "Föri 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website mi föri seni Svelte 5, mi toast notification kewe, state persistence, me full i18n support.",
                 button: "Nengeni Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website me admin portal fän Odesa Theatre School mi interactive widget kewe, dark ocean theme, me photo gallery kewe.",
                 button: "Nengeni Website",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Art School №5",
                 description: "Official website fän Odesa Art School №5 mi multi-language support, news feed kewe, me responsive design.",
                 button: "Nengeni Website",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interactive gaming project mi support animal rescue initiative kewe me animal protection awareness.",
                 button: "Süki Project",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

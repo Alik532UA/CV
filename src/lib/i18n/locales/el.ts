@@ -139,85 +139,57 @@ export const el: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Προηγμένη τροποποίηση AI για το Valheim. Ενσωματώνει LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS και αυτόνομους πράκτορες NPC (αγρότες, συλλέκτες, επισκευαστές, κοράκια-ταχυδρόμους).",
                 button: "Δείτε το Βίντεο",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Στρατηγικό web παιχνίδι εκγύμνασης εγκεφάλου. Πλήρως καλυμμένο με 23 autotests E2E σε Playwright για διασφάλιση σταθερότητας, ποιότητας οπισθοδρόμησης και απόδοσης.",
                 button: "Παίξτε",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Εφαρμογή εκμάθησης λέξεων πολλαπλών πλατφορμών & παζλ τύπου Wordle με προσωπικά στατιστικά, λογαριασμούς χρηστών, ανταγωνιστική κατάταξη και υποστήριξη i18n σε 7 γλώσσες.",
                 button: "Ξεκινήστε να Μαθαίνετε",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Διαδραστική πύλη επίδειξης με θαλάσσιο θέμα που ενώνει όλες τις web εφαρμογές, παιχνίδια και εργαλεία σε μία ενιαία responsive διεπαφή.",
                 button: "Άνοιγμα Πύλης",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Διαδραστικό παιχνίδι 3D βιογραφικού, χτισμένο από το μηδέν στο Godot 4. Εξερευνήστε τον κόσμο, αλληλεπιδράστε με αντικείμενα και ανακαλύψτε easter eggs!",
                 button: "Εκκίνηση 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Γραφικά 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Διαδραστικός ιστότοπος portfolio, χτισμένος με Svelte 5, με ειδοποιήσεις toast, διατήρηση κατάστασης και πλήρη υποστήριξη i18n.",
                 button: "Δείτε το Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Επίσημος ιστότοπος και πύλη διαχείρισης της Θεατρικής Σχολής της Οδησσού με διαδραστικά widgets, σκούρο ωκεάνιο θέμα και φωτογραφικές συλλογές.",
                 button: "Επισκεφθείτε τον Ιστότοπο",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Σχολή Τέχνης №5",
                 description: "Επίσημος ιστότοπος της Σχολής Τέχνης №5 της Οδησσού με υποστήριξη πολλών γλωσσών, ροές ειδήσεων και responsive design.",
                 button: "Επισκεφθείτε τον Ιστότοπο",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Διαδραστικό παιχνιδιακό έργο που υποστηρίζει πρωτοβουλίες διάσωσης ζώων και ευαισθητοποίησης για την προστασία των ζώων.",
                 button: "Άνοιγμα Έργου",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

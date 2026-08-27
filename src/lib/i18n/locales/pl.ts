@@ -139,85 +139,57 @@ export const pl: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Zaawansowana modyfikacja AI do Valheim. Integruje LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS oraz autonomicznych agentów NPC (rolnicy, zbieracze, naprawiacze, kruki-kurierzy).",
                 button: "Zobacz wideo",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Strategiczna gra webowa do treningu mózgu. W pełni pokryta 23 testami E2E w Playwright, zapewniającymi stabilność, jakość regresji i wydajność.",
                 button: "Zagraj",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Wieloplatformowa aplikacja do nauki słówek i łamigłówka w stylu Wordle z osobistymi statystykami, kontami użytkowników, rankingiem konkurencyjnym i obsługą i18n w 7 językach.",
                 button: "Zacznij się uczyć",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Interaktywny portal-wizytówka w morskim klimacie, łączący wszystkie aplikacje webowe, gry i narzędzia w jednym responsywnym interfejsie.",
                 button: "Otwórz portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Interaktywna gra-CV 3D zbudowana od podstaw w Godot 4. Odkrywaj świat, wchodź w interakcje z obiektami i znajdź easter eggi!",
                 button: "Uruchom 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, Grafika 3D"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interaktywna strona-portfolio zbudowana w Svelte 5 z powiadomieniami toast, zachowaniem stanu i pełną obsługą i18n.",
                 button: "Zobacz portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Oficjalna strona i panel administracyjny Odeskiej Szkoły Teatralnej z interaktywnymi widżetami, ciemnym motywem oceanicznym i galeriami zdjęć.",
                 button: "Odwiedź stronę",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Szkoła Artystyczna №5",
                 description: "Oficjalna strona Odeskiej Szkoły Artystycznej №5 z obsługą wielu języków, aktualnościami i responsywnym designem.",
                 button: "Odwiedź stronę",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interaktywny projekt gier wspierający inicjatywy ratowania zwierząt i podnoszenia świadomości na temat ochrony zwierząt.",
                 button: "Otwórz projekt",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

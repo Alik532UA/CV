@@ -141,85 +141,57 @@ export const crh: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "Valheim içün ileri AI modifikatsiyası. LLM'lerni (Gemini, Groq, OpenAI, Ollama), STT'ni (Whisper), Edge TTS'ni ve avtonom NPC-agentlerini (çiftçiler, toplayıcılar, tamirciler, kurier qargalar) birleştirir.",
                 button: "Videonı Köriñiz",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Beyin çalıştırıcısı içün stratejik veb-oyun. Turğunlıq, regressiya keyfiyeti ve semereni temin etmek içün 23 E2E Playwright avtosınavı ile tamamen qapatılğan.",
                 button: "Oynañız",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Şahsiy statistika, qullanıcı hesapları, yarışma cetveli ve 7 tilde i18n desteği olğan platforma-aralıq söz üğrenüv uyğulaması ve Wordle uslübinde bulmaca.",
                 button: "Üğrenmege Başlañız",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Bütün veb-uyğulamalarnı, oyunlarnı ve aletlerni tek bir cevap bergen interfeyste birleştirgen, deñiz mevzulı interaktiv vitrina portalı.",
                 button: "Portalnı Açıñız",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "Godot 4'te sıfırdan qurulğan interaktiv 3D CV oyunı. Dünyanı keşif etiñiz, obyektler ile alâqada oluñız ve paskha yumurtalarını tapıñız!",
                 button: "3D CV'ni Başlatıñız",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Grafika"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Toast bildirimleri, hal saqlanması ve tam i18n desteği olğan, Svelte 5 ile qurulğan interaktiv veb-portfolio sayfası.",
                 button: "Portfolioğa Bakıñız",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "İnteraktiv vidjetler, qaranlıq okean mevzusı ve foto galereyalar ile Odesa Tiyatro Mektebiniñ resmiy saytı ve idare portalı.",
                 button: "Saytqa Bakıñız",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "№5 San'at Mektebi",
                 description: "Çoq-tilli destek, haber lentaları ve cevap bergen dizayn ile Odesa №5 San'at Mektebiniñ resmiy saytı.",
                 button: "Saytqa Bakıñız",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Hayvanlarnı qurtarma inisiativalarını ve hayvanları qoruma bilgisini desteklegen interaktiv oyun loyihası.",
                 button: "Loyihanı Açıñız",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

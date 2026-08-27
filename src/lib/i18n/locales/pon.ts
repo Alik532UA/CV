@@ -146,85 +146,57 @@ export const pon: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "AI modification kalaimwahu ehu ong Valheim. Kapatapene LLM kan (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, oh autonomous NPC agent kan (sounmwahng, sounkihsang, sounonop, courier raven kan).",
                 button: "Video Overview",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Web game strategic ong brain-training. Direkpene kaualap sang 23 E2E Playwright autotest pwehn kadehdehla stability, regression quality, oh performance.",
                 button: "Wia Game",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Cross-platform word-learning app oh Wordle-style puzzle me mie personal statistics, user accounts, competitive leaderboard, oh 7-language i18n support.",
                 button: "Tapihada Sukuhl",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Sea-themed showcase hub oh portfolio portal me kapatapene web app, game, oh tool koaros nan interface ehuete me kak keklapala.",
                 button: "Ritingada Portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "3D resume game me interactive, wiawihda sang tapiada nan Godot 4. Rapahki sampah, kapatapene dipwisou kan, oh diarada easter egg kan!",
                 button: "Tapihada 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website me wiawihda ni Svelte 5, mie toast notification kan, state persistence, oh full i18n support.",
                 button: "Kilang Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website oh admin portal ong Odesa Theatre School me mie interactive widget kan, dark ocean theme, oh photo gallery kan.",
                 button: "Kilang Website",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Art School №5",
                 description: "Official website ong Odesa Art School №5 me mie multi-language support, news feed kan, oh responsive design.",
                 button: "Kilang Website",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interactive gaming project me sawas ong animal rescue initiative kan oh animal protection awareness.",
                 button: "Ritingada Project",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }

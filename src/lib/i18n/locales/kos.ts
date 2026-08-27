@@ -146,85 +146,57 @@ export const kos: Translations = {
         },
         items: {
             and_dvergr: {
-                id: "and_dvergr",
                 title: "AndDvergrShallSpeakAI (Valheim AI Mod)",
                 description: "AI modification yohk nu ke Valheim. Akfototoye LLM (Gemini, Groq, OpenAI, Ollama), STT (Whisper), Edge TTS, ac autonomous NPC agent (mwet ima, mwet orani, mwet aksuwosye, courier raven).",
                 button: "Video Overview",
-                category: "games",
-                image: "AndDvergrShallSpeakAI.jpg",
-                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT",
-                featured: true
+                tech: "C#, BepInEx, Gemini, Groq, OpenAI, Ollama, Edge TTS, Whisper STT"
             },
             mindstep: {
-                id: "mindstep",
                 title: "MindStep",
                 description: "Web game strategic nu ke brain-training. Afyufi na ke 23 E2E Playwright autotest in akpwayeye stability, regression quality, ac performance.",
                 button: "Oru Game",
-                category: "games",
-                image: "mindstep.jpg",
                 tech: "Svelte 5, TypeScript, Playwright, Tailwind"
             },
             slovko: {
-                id: "slovko",
                 title: "Slovko",
                 description: "Cross-platform word-learning app ac Wordle-style puzzle ma oasr personal statistics, user accounts, competitive leaderboard, ac 7-language i18n support.",
                 button: "Mutawauk Lutlut",
-                category: "apps",
-                image: "slovko.jpg",
                 tech: "Svelte 5, TypeScript, Firebase, i18n"
             },
             digitalworkshop: {
-                id: "digitalworkshop",
                 title: "DigitalWorkshop",
                 description: "Sea-themed showcase hub ac portfolio portal ma akfototoye web app, game, ac tool nukewa ke sie interface ku in yokelik.",
                 button: "Ikasla Portal",
-                category: "websites",
-                image: "DigitalWorkshop.jpg",
                 tech: "SvelteKit 2, Svelte 5 (Runes), Vanilla CSS"
             },
             cv3d: {
-                id: "cv3d",
                 title: "3D CV Experience",
                 description: "3D resume game interactive, musaela mutawauk ke Godot 4. Suk facl, akfototoye ma, ac konauk easter egg!",
                 button: "Mutawauk 3D CV",
-                category: "games",
-                image: "cv_3d.jpg",
                 tech: "Godot Engine, GDScript, 3D Graphics"
             },
             cv_web: {
-                id: "cv_web",
                 title: "Alik CV Web",
                 description: "Interactive web portfolio website ma musaela ke Svelte 5, oasr toast notification, state persistence, ac full i18n support.",
                 button: "Liye Portfolio",
-                category: "websites",
-                image: "cv_web.jpg",
                 tech: "Svelte 5, TypeScript, Toast System, i18n"
             },
             teatralo4ka: {
-                id: "teatralo4ka",
                 title: "Teatralo4ka.odesa.ua",
                 description: "Official website ac admin portal nu ke Odesa Theatre School ma oasr interactive widget, dark ocean theme, ac photo gallery.",
                 button: "Liye Website",
-                category: "websites",
-                image: "teatralo4ka.jpg",
                 tech: "SvelteKit 2, Svelte 5, Firebase, CSS"
             },
             as5: {
-                id: "as5",
                 title: "Art School №5",
                 description: "Official website nu ke Odesa Art School №5 ma oasr multi-language support, news feed, ac responsive design.",
                 button: "Liye Website",
-                category: "websites",
-                image: "as5_odesa_ua.jpg",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
             vetcrew: {
-                id: "vetcrew",
                 title: "VetCrewGames",
                 description: "Interactive gaming project ma kasru animal rescue initiative ac animal protection awareness.",
                 button: "Ikasla Project",
-                category: "games",
-                image: "VetCrewGames.jpg",
                 tech: "Svelte 5, Web Games, CSS"
             }
         }
