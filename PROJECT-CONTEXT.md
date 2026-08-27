@@ -105,6 +105,10 @@ teatralo4ka.odesa.ua тут не значиться: у нього `base: ''`, �
 - [x] **DEBUGGING-v8.md** — `logService` + кнопка копіювання звіту
 - [x] **VERSIONING-v8.md** — версія в заголовку лог-звіту (`__APP_VERSION__`)
 - [x] **SCROLLBAR-v8.md** — чотири режими, мінімапа; це фіча сайту, а не службова деталь
+- [x] **MINIMAP-v8.md** — режими `minimap` і `minimap-full` у `src/lib/config/scrollbarModes.ts`, реалізація в `src/lib/components/ui/Minimap.svelte`. Потребує `SCROLLBAR`, який тут увімкнений
+- [x] **HOLD-SCROLL-v8.md** — прокрутка від наведення на край, `src/lib/utils/holdScroll.svelte.ts`; межу тримає `src/scrollbar-canon.test.ts`
+- [ ] **INPUT-TOOLS-v8.md** — кнопок «вставити / скопіювати / стерти» в полях немає. Полів для ручного заповнення тут два: пошук мови (де вставляють рідко, а стирають клавішею) і текстове поле AI Job Matcher (куди вакансію саме ВСТАВЛЯЮТЬ). Друге — законний кандидат; не зроблено, і це борг, а не рішення
+- [ ] **CLOUD-DATABASE-v8.md** — незастосовний: між користувачем і будь-якими даними тут немає бази. Стан живе в `localStorage` за префіксом `cv-svelte_`, а єдиний зовнішній виклик іде у власний Cloudflare Worker, який нічого не зберігає. `Скіп-якщо` спрацьовує раніше за критичність (README v8), тож CRITICAL цього файлу до проєкту не застосовується
 - [x] **HOTKEYS-v8.md** — `T`, `L`, `M`, `B`, `Esc`, `PgUp`/`PgDn`, `1`–`9` плюс службові жести `V` і `R`. Гейт `src/hotkeys-canon.test.ts` з'явився 2026-08-20; борг SC 2.1.4 — у таблиці рішень вище
 - [x] **AI-PROVIDERS-v8.md** — ланцюжок провайдерів через Cloudflare Worker
 - [ ] **OBSERVABILITY-v8.md** — Sentry немає. Персональне резюме з трафіком портфоліо; `logService` + `hooks.client.ts` покривають потребу
