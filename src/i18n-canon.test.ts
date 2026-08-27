@@ -110,6 +110,131 @@ describe("no user-facing text outside the dictionaries", () => {
 	});
 });
 
+/**
+ * ДРУГА ПОЛОВИНА ТОГО САМОГО ПРАВИЛА — АНГЛІЙСЬКОЮ (I18N-v8 § 2, ACCESSIBILITY-v8 § 4).
+ *
+ * Скан кирилиці вище чесно каже про свою межу: «літерал англійською не
+ * відрізнити від імені класу чи ролі». Це правда для ТЕКСТУ, але не для
+ * АТРИБУТІВ. `aria-label`, `title`, `placeholder` і `alt` за визначенням несуть
+ * рядок для людини — іншого змісту в них не буває. Тобто там, де скан кирилиці
+ * сліпий, форма атрибута сама каже, що знайдене — інтерфейс.
+ *
+ * ЩО ЦЕ ЗНАЙШЛО, КОЛИ З'ЯВИЛОСЯ. Двадцять чотири літерали, і майже всі — на
+ * кнопках, у яких НЕМАЄ іншої назви, крім `aria-label`: увесь перемикач тла,
+ * увесь перемикач теми, вибір мови, пошук у ньому. Тобто читалка вимовляла
+ * «Enable dark theme» відвідувачеві, який читає сайт японською, і жоден із
+ * тридцяти чотирьох гейтів проєкту цього не бачив. Ціна така сама, як в
+ * AI Job Matcher, що поїхав українською, — тільки помітна ще меншій частці
+ * людей, бо чути її лише читалкою.
+ *
+ * ФОРМА ПЕРЕВІРКИ — ТА САМА, ЩО ВЖЕ ПРАЦЮЄ В ЦЬОМУ ПРОЄКТІ для axe, розміру
+ * файлів і сенсорних цілей: поіменний перелік плюс число. Нуль тут означав би
+ * або переклад двадцяти трьох рядків на 42 мови одним комітом наосліп, або
+ * вимкнений гейт — а вимкнений гірший за відсутній.
+ */
+describe("інтерфейс не лишається англійським в атрибутах (§ 2)", () => {
+	/**
+	 * Атрибути, вміст яких завжди призначений людині. `aria-labelledby`,
+	 * `aria-controls` і подібні сюди не входять: там ідентифікатор, а не текст.
+	 */
+	const HUMAN_ATTRS =
+		/\b(aria-label|aria-description|aria-roledescription|aria-placeholder|aria-valuetext|title|placeholder|alt)="([^"{}]*)"/g;
+
+	/**
+	 * Власні назви, які не перекладаються НІКОЛИ й ні на яку мову.
+	 *
+	 * Це не борг і не виняток «поки що»: LinkedIn лишається LinkedIn і
+	 * японською, і івритом. Перелік свідомо вузький — рівно назви сервісів.
+	 */
+	const BRANDS = new Set(["LinkedIn", "WhatsApp", "Telegram", "Viber"]);
+
+	/** Борг: рядок для людини, застиглий англійською. Може лише коротшати. */
+	const UNTRANSLATED: Record<string, readonly string[]> = {
+		"src/lib/components/HeaderSection.svelte": [
+			"Background Off",
+			"Background effect",
+			"Dark Theme",
+			"Disable background effects",
+			"Enable dark theme",
+			"Enable light theme",
+			"Enable particles background",
+			"Enable shapes background",
+			"Enable waves background",
+			"Light Theme",
+			"Line Width",
+			"Particle Count",
+			"Particles Effect",
+			"Search language...",
+			"Select background effect",
+			"Select language",
+			"Shapes Effect",
+			"Theme selection",
+			"Wave Layers",
+			"Waves Effect"
+		],
+		"src/lib/components/sections/HeroSection.svelte": ["Email", "Profile"],
+		"src/lib/components/sections/ProjectsSection.svelte": ["Filter projects"]
+	};
+
+	/** @returns значення людських атрибутів, що не є ані порожніми, ані брендом. */
+	function literalAttrs(): Record<string, string[]> {
+		const found: Record<string, string[]> = {};
+		for (const pattern of ["src/lib/components/**/*.svelte", "src/routes/**/*.svelte"]) {
+			for (const file of globSync(pattern, { cwd: ROOT })) {
+				const path = file.replace(/\\/g, "/");
+				for (const m of strippedMarkup(read(path)).matchAll(HUMAN_ATTRS)) {
+					const value = m[2].trim();
+					if (!value || BRANDS.has(value)) continue;
+					(found[path] ??= []).push(value);
+				}
+			}
+		}
+		for (const list of Object.values(found)) list.sort();
+		return found;
+	}
+
+	it("the check is alive: it sees human-readable attributes at all", () => {
+		// Канарка (CODE-QUALITY-v8 § 3.5): регулярка, що перестала збігатися,
+		// звітувала б «боргу немає» до кінця життя проєкту.
+		const total = Object.values(literalAttrs()).reduce((n, list) => n + list.length, 0);
+		expect(total + Object.keys(UNTRANSLATED).length).toBeGreaterThan(0);
+		expect("aria-label=\"Enable dark theme\"").toMatch(new RegExp(HUMAN_ATTRS.source));
+		// Значення з виразу — це вже словник, і воно НЕ знахідка.
+		expect('aria-label={t.nav.bottom_nav_label}').not.toMatch(new RegExp(HUMAN_ATTRS.source));
+	});
+
+	it("жоден компонент не додає нового англійського рядка в атрибут", () => {
+		const found = literalAttrs();
+		const news: string[] = [];
+		for (const [path, values] of Object.entries(found)) {
+			const known = UNTRANSLATED[path] ?? [];
+			for (const value of values) {
+				if (!known.includes(value)) news.push(`${path}: "${value}"`);
+			}
+		}
+		expect(
+			news,
+			"рядок для людини, застиглий англійською: читалка вимовить його в усіх 42 мовах.\n" +
+				"Ключ у `Translations` + значення в 42 словниках, або — якщо це власна назва — у BRANDS:\n" +
+				news.join("\n")
+		).toEqual([]);
+	});
+
+	it("перелік не тримає рядків, які вже перекладено", () => {
+		const found = literalAttrs();
+		const stale: string[] = [];
+		for (const [path, values] of Object.entries(UNTRANSLATED)) {
+			for (const value of values) {
+				if (!(found[path] ?? []).includes(value)) stale.push(`${path}: "${value}"`);
+			}
+		}
+		expect(
+			stale,
+			`викреслити з переліку — запас дозволить рядкам відрости назад:\n${stale.join("\n")}`
+		).toEqual([]);
+	});
+});
+
 describe("dictionary parity is enforced by the type", () => {
 	/**
 	 * The parity guarantee of this project rests entirely on each locale being
