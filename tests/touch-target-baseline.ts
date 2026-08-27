@@ -20,7 +20,11 @@
  * інакше база червоніла б від зміни шрифту на піксель.
  *
  * Порядок розбору, від найдешевшого до найдорожчого:
- *   1. картки проєктів (245×42) і кнопка аналізу (308×42) — бракує 2px висоти;
+ *   1. ~~картки проєктів (245×42) і кнопка аналізу (308×42) — бракує 2px
+ *      висоти~~ — ЗАКРИТО. `min-height: 44px` на `.btn-primary` і
+ *      `.btn-secondary` у `src/app.css`: обидві кнопки складені з тих самих
+ *      12px відступу й рядка 0.9rem, тож одне оголошення закрило дев'ять
+ *      цілей — вісім карток і кнопку аналізу. `home` 18 → 10, `aiModal` 3 → 2;
  *   2. `base-modal-close-btn` (40×40) — канон називає кнопку закриття
  *      найчастішим порушником (UI-ELEMENTS-v8 § 3), і їй бракує 4px. АЛЕ:
  *      +4px тут недосить, і це виміряно, а не припущено. На 375px заголовок
@@ -47,24 +51,16 @@ export const TOUCH_KNOWN: Record<string, readonly string[]> = {
 		'button "All Projects"',
 		'button "Games"',
 		'button "Apps"',
-		'button "Websites"',
-		"project-btn-mindstep",
-		"project-btn-slovko",
-		"project-btn-digitalworkshop",
-		"project-btn-cv3d",
-		"project-btn-cv_web",
-		"project-btn-teatralo4ka",
-		"project-btn-as5",
-		"project-btn-vetcrew"
+		'button "Websites"'
 	],
-	aiModal: ["base-modal-close-btn", "ai-model-badge-btn", "ai-analyze-btn"],
+	aiModal: ["base-modal-close-btn", "ai-model-badge-btn"],
 	/** Нова сторінка, зроблена одразу за правилом. Порожньо — і мусить лишитися. */
 	betaChecklist: []
 };
 
 /** Кількість замалих цілей. Рухається лише вниз. */
 export const TOUCH_BASELINE: Record<string, number> = {
-	home: 18,
-	aiModal: 3,
+	home: 10,
+	aiModal: 2,
 	betaChecklist: 0
 };

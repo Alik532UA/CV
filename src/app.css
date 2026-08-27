@@ -280,10 +280,28 @@ body {
     text-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.3);
 }
 
+/*
+ * `min-height: 44px` НА ОБОХ КНОПКАХ — не косметика, а WCAG 2.5.8 (AA)
+ * і ACCESSIBILITY-v8 § 8.
+ *
+ * Заміряно, а не оцінено: `padding: 12px` зверху й знизу плюс рядок у 0.9rem
+ * (`.project-btn`, `.analyze-btn`) складаються в 42px. Тобто ДВОХ пікселів
+ * бракувало дев'ятьом цілям одразу — восьми карткам проєктів і кнопці аналізу,
+ * — і саме вони стояли першими в черзі розбору боргу
+ * (`tests/touch-target-baseline.ts`): «бракує 2px висоти».
+ *
+ * Чому `min-height`, а не більший `padding`: відступ змінив би вигляд кнопки на
+ * широкому екрані, де вона й так достатня. Мінімум добирає висоту рівно там, де
+ * її бракує, і мовчить там, де ні. `.icon-only` з `height: 46px` перекриває
+ * мінімум своїм більшим числом — тобто нічого не змінює.
+ *
+ * Межу тримає `tests/touch-targets.spec.ts` на вьюпорті 390×844.
+ */
 .btn-primary {
     background: var(--gradient);
     color: white;
     padding: 12px 24px;
+    min-height: 44px;
     border-radius: 12px;
     border: none;
     font-weight: 600;
@@ -304,6 +322,7 @@ body {
     border: 1px solid var(--border-color);
     color: var(--text-primary);
     padding: 12px 24px;
+    min-height: 44px;
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
