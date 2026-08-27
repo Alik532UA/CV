@@ -115,3 +115,112 @@ describe("fluid sizing canon § 1 — a grid column may not have a hard floor", 
 		).toEqual([]);
 	});
 });
+
+/**
+ * FS-CONTAINER (§ 7A, HIGH) — компонент міряє СЕБЕ, а не вікно.
+ *
+ * Канон називає спосіб пошуку прямо: `grep -rn "@media" src/lib/components/`.
+ * Тут їх 21, з них 17 прив'язані до розміру ВІКНА, і жодного `@container`.
+ *
+ * ЧОМУ ЦЕ НЕ ПРИДИРКА — ЗАМІРЯНО В ЖИВІЙ СТОРІНЦІ. Ширина `.platforms-grid`
+ * у `SkillsSection` за шириною вікна:
+ *
+ *     вікно 1440 → сітка 1080     вікно 1024 → сітка  657
+ *     вікно 1280 → сітка  920     вікно  768 → сітка  721
+ *
+ * Послідовність НЕ монотонна: на вікні 768 сітка ШИРША, ніж на 1024, бо бічна
+ * панель на 280px зникає раніше, ніж вікно встигає звузитися на ту саму
+ * величину. Тобто медіазапит ранжує компоненти не в тому порядку, у якому їм
+ * насправді тісно: `max-width: 1024px` спрацьовує там, де місця 657px, і там,
+ * де його 721px, однаково — а різницю між цими двома станами не бачить.
+ *
+ * ЧОМУ ПЕРЕВІРКА, А НЕ ПРАВКА. Заміна `@media` на `@container` — не переклад
+ * синтаксису: контейнер вужчий за вікно на 280px там, де є бічна панель, і
+ * дорівнює йому там, де її немає, тож КОЖНЕ число доводиться обирати заново.
+ * `@container (max-width: 1024px)` спрацював би на вікні ~1300px, тобто зламав
+ * би розкладку на десктопі. Це продуктове рішення з видимими наслідками, а не
+ * рефакторинг; поки воно не ухвалене, борг має бути ВИМІРЯНИЙ, а не описаний
+ * словами «частина законна, решта ні» (v8 README: правило, яке не можна
+ * перевірити, — це побажання).
+ *
+ * Пропозиція міграції з числами — у PROJECT-CONTEXT.md.
+ */
+describe("FS-CONTAINER § 7A — межа боргу медіазапитів у компонентах", () => {
+	/** Умови, що НЕ про доступне місце: пристрій, преференція, друк. */
+	const SIZE_KEYED = /\b(?:min|max)-(?:width|height)\b/;
+
+	/**
+	 * Скільки запитів за розміром вікна лишається в кожному компоненті.
+	 * Число може лише спадати — і спадає воно переїздом на `@container`
+	 * або зникненням самого правила.
+	 */
+	const WINDOW_KEYED: Record<string, number> = {
+		// Показ і приховування самих блоків розкладки — це справді про ВІКНО:
+		// на вузькому екрані бічна панель поступається нижньому меню. Канон це
+		// прямо дозволяє (§ 7A: «кількість колонок сторінки, показ бічної
+		// панелі»). Ці три — не борг, а межа: вони мають лишитися @media.
+		"src/lib/components/BottomNav.svelte": 1,
+		"src/lib/components/SidebarNav.svelte": 1,
+		"src/lib/components/HeaderSection.svelte": 1,
+		// Плаваюча кнопка прибита до вікна, а не до вмісту.
+		"src/lib/components/ui/FloatingAiButton.svelte": 1,
+		// Оболонки вікон: розмір модалки задає вікно, і це законно. Але правила
+		// ВСЕРЕДИНІ них (відступи, колонки) мають міряти саму модалку.
+		"src/lib/components/ui/BaseModal.svelte": 1,
+		"src/lib/components/ui/PdfModal.svelte": 4,
+		"src/lib/components/ui/Toast.svelte": 1,
+		// Справжні кандидати на @container: усе це живе в колонці вмісту, яка на
+		// 280px вужча за вікно там, де є бічна панель.
+		"src/lib/components/sections/HeroSection.svelte": 3,
+		"src/lib/components/sections/SkillsSection.svelte": 2,
+		"src/lib/components/ui/AiMatchModal.svelte": 1,
+		"src/lib/components/ui/Section.svelte": 1
+	};
+
+	function windowKeyed(): Record<string, number> {
+		const found: Record<string, number> = {};
+		for (const file of globSync("src/lib/components/**/*.svelte", { cwd: ROOT })) {
+			const path = file.replace(/\\/g, "/");
+			const code = withoutComments(read(path));
+			for (const m of code.matchAll(/@media([^{]+)\{/g)) {
+				if (SIZE_KEYED.test(m[1])) found[path] = (found[path] ?? 0) + 1;
+			}
+		}
+		return found;
+	}
+
+	it("перевірка жива: медіазапити в компонентах узагалі знайдено", () => {
+		const total = Object.values(windowKeyed()).reduce((a, b) => a + b, 0);
+		expect(total, "жодного @media — сканер шукає не там").toBeGreaterThan(5);
+	});
+
+	it("розрізняє запит за місцем і запит за пристроєм", () => {
+		// Регулярка — це весь тест.
+		expect("(max-width: 768px)").toMatch(SIZE_KEYED);
+		expect("(max-height: 620px)").toMatch(SIZE_KEYED);
+		expect(" print").not.toMatch(SIZE_KEYED);
+		expect("(prefers-reduced-motion: reduce)").not.toMatch(SIZE_KEYED);
+		expect("(hover: none)").not.toMatch(SIZE_KEYED);
+	});
+
+	it("жоден компонент не додає нового запиту за розміром вікна", () => {
+		const grown = Object.entries(windowKeyed())
+			.filter(([file, n]) => n > (WINDOW_KEYED[file] ?? 0))
+			.map(([file, n]) => `${file}: ${n}, дозволено ${WINDOW_KEYED[file] ?? 0}`);
+		expect(
+			grown,
+			"новий @media у компоненті — майже завжди мав бути @container (§ 7A):\n" + grown.join("\n")
+		).toEqual([]);
+	});
+
+	it("список не тримає числа, які вже не потрібні", () => {
+		const found = windowKeyed();
+		const stale = Object.entries(WINDOW_KEYED)
+			.filter(([file, n]) => (found[file] ?? 0) < n)
+			.map(([file, n]) => `${file}: ${found[file] ?? 0}, записано ${n}`);
+		expect(
+			stale,
+			`підтягнути число вниз — запас дозволить відрости назад:\n${stale.join("\n")}`
+		).toEqual([]);
+	});
+});
