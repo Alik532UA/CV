@@ -239,7 +239,7 @@
     }
 
     .icon {
-        margin-right: 15px;
+        margin-inline-end: 15px;
         font-size: 1.2rem;
     }
 

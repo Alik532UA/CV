@@ -217,7 +217,7 @@
     }
 
     .philosophy-list {
-        padding-left: 18px;
+        padding-inline-start: 18px;
         margin: 0;
         display: flex;
         flex-direction: column;

@@ -145,7 +145,7 @@
         color: var(--text-primary);
         font-family: inherit;
         font-size: 0.85rem;
-        text-align: left;
+        text-align: start;
         cursor: pointer;
         transition: var(--transition);
     }

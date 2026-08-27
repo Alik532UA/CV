@@ -350,7 +350,7 @@
 
     .detail-box ul {
         margin: 0;
-        padding-left: 18px;
+        padding-inline-start: 18px;
         font-size: 0.85rem;
         color: var(--text-secondary);
         line-height: 1.4;
@@ -376,7 +376,7 @@
         display: flex;
         flex-direction: column;
         gap: 8px;
-        padding-right: 4px;
+        padding-inline-end: 4px;
     }
 
     .chat-bubble {

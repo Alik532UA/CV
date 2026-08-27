@@ -990,7 +990,7 @@
         cursor: pointer;
         border-radius: 8px;
         width: 100%;
-        text-align: left;
+        text-align: start;
         transition: var(--transition);
     }
 
@@ -1045,7 +1045,7 @@
         }
 
         .mobile-bg-switcher {
-            margin-right: auto;
+            margin-inline-end: auto;
         }
 
         .bg-dropdown {

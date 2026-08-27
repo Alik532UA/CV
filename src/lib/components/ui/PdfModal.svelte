@@ -141,7 +141,7 @@
         font-family: inherit;
         cursor: pointer;
         transition: var(--transition);
-        text-align: left;
+        text-align: start;
         box-sizing: border-box;
     }
 
@@ -384,7 +384,7 @@
         .pdf-option {
             flex-direction: row;
             align-items: center;
-            text-align: left;
+            text-align: start;
             gap: clamp(8px, 1.6dvh, 15px);
             padding: clamp(6px, 1.4dvh, 10px);
         }

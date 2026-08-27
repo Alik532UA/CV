@@ -213,7 +213,7 @@
         box-shadow: var(--panel-shadow);
         backdrop-filter: var(--glass-blur);
         -webkit-backdrop-filter: var(--glass-blur);
-        text-align: left;
+        text-align: start;
     }
 
     .ai-model-menu__title {
@@ -243,7 +243,7 @@
         color: inherit;
         font-family: inherit;
         font-size: 0.8rem;
-        text-align: left;
+        text-align: start;
         cursor: pointer;
     }
 

@@ -415,12 +415,12 @@ body {
 .exp-card {
     position: relative;
     padding: 25px;
-    border-left: 2px solid var(--border-color);
+    border-inline-start: 2px solid var(--border-color);
 }
 
 .inline-icon {
     vertical-align: middle;
-    margin-right: 8px;
+    margin-inline-end: 8px;
     margin-top: -2px;
 }
 
