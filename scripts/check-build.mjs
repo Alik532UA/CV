@@ -198,6 +198,12 @@ for (const file of files) {
 		if (/rel="alternate" hreflang/.test(html)) {
 			fail(`${file}: службова сторінка з hreflang — вона запрошує кравлера`);
 		}
+		// Той самий зміст, інший словник. Службовий маршрут не лежить під
+		// `[[lang=lang]]`, тобто мовних версій НЕ МАЄ; оголосити їх через
+		// `og:locale:alternate` — сказати неправду тому, хто ділиться посиланням.
+		if (/property="og:locale:alternate"/.test(html)) {
+			fail(`${file}: службова сторінка з og:locale:alternate — мовних версій у неї немає`);
+		}
 		if (!/<title>[^<]{5,}<\/title>/.test(html)) {
 			fail(`${file}: службова сторінка без title`);
 		}
@@ -230,6 +236,37 @@ for (const file of files) {
 			if (!href.endsWith("/")) {
 				fail(`${file}: canonical без завершального слеша — ${href}`);
 			}
+		}
+	}
+
+	/*
+	 * § 5 — `og:locale` називає мову ЦІЄЇ сторінки, решта мов ідуть
+	 * `og:locale:alternate`.
+	 *
+	 * Читається зі зібраного HTML, а не з `SEO.svelte`, і це не формальність:
+	 * набір альтернатив складається з `INDEXED_LANGUAGES` уже під час
+	 * prerender, тобто в тому самому процесі, де живе клас дефектів «зсув мов
+	 * від модульного синглтона» (§ 1.4 нижче). У джерелі такий зсув не видно.
+	 *
+	 * Перевіряється рівно одне, зате те, чого не видно оком: сторінка не
+	 * називає СЕБЕ своєю ж альтернативою. Форма `alt !== lang` цього не дає —
+	 * `ogLocale()` віддає `en_GB` усім 38 невичитаним мовам, тож на `/he/`
+	 * власний `og:locale` теж `en_GB`, і фільтр за кодом лишив би його в обох
+	 * ролях. Звірка йде за ЗНАЧЕННЯМИ.
+	 */
+	if (!isShell) {
+		const own = html.match(/property="og:locale" content="([^"]+)"/)?.[1] ?? "";
+		const alternates = [
+			...html.matchAll(/property="og:locale:alternate" content="([^"]+)"/g)
+		].map((m) => m[1]);
+		if (!isHidden && !own) {
+			fail(`${file}: немає og:locale — сторінка не називає своєї мови`);
+		}
+		if (own && alternates.includes(own)) {
+			fail(`${file}: og:locale "${own}" перелічений і як альтернатива самому собі`);
+		}
+		if (new Set(alternates).size !== alternates.length) {
+			fail(`${file}: og:locale:alternate повторюється — ${alternates.join(", ")}`);
 		}
 	}
 }

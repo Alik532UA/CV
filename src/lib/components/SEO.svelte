@@ -103,6 +103,31 @@
     <meta property="og:title" content="{title} | CV" />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={ogLocale(language.current)} />
+    <!-- SEO-v8 § 5: `og:locale` називає мову ЦІЄЇ сторінки, а решта мов
+         оголошуються `og:locale:alternate` — інакше кожна мовна версія
+         виглядає для соцмережі поодинокою сторінкою без родичів, і превʼю
+         показує ту мову, яку вгадав краулер. Набір той самий, що й у
+         hreflang: лише вичитані мови, бо ділитися машинним перекладом як
+         рівноцінною версією — те саме, що просити його індексувати. Поточна
+         мова зі списку виключена: вона вже названа `og:locale` вище, а
+         дубль робить пару суперечливою.
+
+         Виключається не КОД мови, а ЗНАЧЕННЯ `og:locale`, і різниця тут не
+         теоретична. `ogLocale()` віддає `en_GB` усім 38 невичитаним мовам —
+         це рішення `routing.ts`, а не недогляд. Отже на `/he/` власний
+         `og:locale` — теж `en_GB`, і фільтр за кодом (`alt !== "he"`) лишив
+         би `en_GB` і зверху, і в переліку альтернатив: сторінка оголосила б
+         сама себе своєю ж альтернативою.
+
+         Під тією самою умовою, що й hreflang, і з тієї самої причини:
+         службовий маршрут не лежить під `[[lang=lang]]`, тобто мовних версій
+         НЕ МАЄ. Оголосити їх йому — сказати неправду про сторінку, яка й так
+         просить себе не індексувати (BETA-CHECKLIST-v8 § 4.1). -->
+    {#if !hidden}
+        {#each INDEXED_LANGUAGES.map(ogLocale).filter((loc) => loc !== ogLocale(language.current)) as loc (loc)}
+            <meta property="og:locale:alternate" content={loc} />
+        {/each}
+    {/if}
     <meta property="og:image" content={imageUrl} />
 
     <!-- Twitter -->
