@@ -116,6 +116,10 @@ export const ro: Translations = {
         }
     },
     other: {
+        highlights: "Realizări",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiadă",
+        driverLabel: "Permis",
         title: "Informații suplimentare",
         iq: "125 (peste medie)",
         olympics: "Locul 3 - 2016, Olimpiada Pan-Ucraineană de Diagnostic al Sistemelor Informatice",
@@ -199,6 +203,27 @@ export const ro: Translations = {
         ats: "ATS / RMS",
         dark: "Temă întunecată",
         light: "Temă deschisă"
+    },
+    ui: {
+        skipToContent: "Sari la conținutul principal",
+        background: "Efect de fundal",
+        backgroundOff: "Dezactivat",
+        backgroundParticles: "Particule",
+        backgroundWaves: "Valuri",
+        backgroundShapes: "Forme",
+        particleCount: "Numărul de particule",
+        waveLayers: "Straturi de valuri",
+        lineWidth: "Grosimea liniei",
+        theme: "Temă",
+        themeLight: "Temă deschisă",
+        themeDark: "Temă întunecată",
+        language: "Alege limba",
+        languageSearch: "Caută o limbă…",
+        profilePhoto: "Fotografie de profil",
+        filterProjects: "Filtrează proiectele",
+        email: "E-mail",
+        languageEmpty: "Nu s-au găsit limbi",
+        pdfVersion: "Versiune PDF"
     },
     common: {
         close: "Închide",

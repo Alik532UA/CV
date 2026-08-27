@@ -116,6 +116,10 @@ export const uk: Translations = {
         }
     },
     other: {
+        highlights: "Досягнення",
+        iqLabel: "IQ",
+        olympicsLabel: "Олімпіада",
+        driverLabel: "Посвідчення",
         title: "Додатково",
         iq: "125 (вище середнього)",
         olympics: "3 місце - 2016, Всеукраїнська олімпіада з діагностики комп'ютерних систем",
@@ -199,6 +203,27 @@ export const uk: Translations = {
         ats: "ATS / RMS",
         dark: "Темна тема",
         light: "Світла тема"
+    },
+    ui: {
+        skipToContent: "Перейти до основного вмісту",
+        background: "Ефект тла",
+        backgroundOff: "Вимкнено",
+        backgroundParticles: "Частинки",
+        backgroundWaves: "Хвилі",
+        backgroundShapes: "Фігури",
+        particleCount: "Кількість частинок",
+        waveLayers: "Шари хвиль",
+        lineWidth: "Товщина лінії",
+        theme: "Тема",
+        themeLight: "Світла тема",
+        themeDark: "Темна тема",
+        language: "Вибрати мову",
+        languageSearch: "Пошук мови…",
+        profilePhoto: "Фото профілю",
+        filterProjects: "Фільтрувати проєкти",
+        email: "Пошта",
+        languageEmpty: "Мов не знайдено",
+        pdfVersion: "PDF-версія"
     },
     common: {
         close: "Закрити",

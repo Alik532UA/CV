@@ -9,7 +9,7 @@
 	import { browser } from "$app/environment";
 	import { page } from "$app/state";
 	import { replaceState, afterNavigate } from "$app/navigation";
-	import { language } from "$lib/controllers/I18nState.svelte";
+	import { language, t } from "$lib/controllers/I18nState.svelte";
 	import { theme, background, section } from "$lib/controllers/UiState.svelte";
 	import { sound } from "$lib/controllers/SoundState.svelte";
 	import { shortcuts } from "$lib/controllers/ShortcutState.svelte";
@@ -142,7 +142,7 @@
 
 <SEO />
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">{t.ui.skipToContent}</a>
 
 <DynamicBackground
 	backgroundType={background.type}

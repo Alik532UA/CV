@@ -119,6 +119,10 @@ export const he: Translations = {
         }
     },
     other: {
+        highlights: "הישגים",
+        iqLabel: "מנת משכל",
+        olympicsLabel: "אולימפיאדה",
+        driverLabel: "רישיון",
         title: "מידע נוסף",
         iq: "125 (מעל הממוצע)",
         olympics: "מקום 3 - 2016, אולימפיאדת אוקראינה לאבחון מערכות מחשבים",
@@ -202,6 +206,27 @@ export const he: Translations = {
         ats: "ATS / RMS",
         dark: "ערכת נושא כהה",
         light: "ערכת נושא בהירה"
+    },
+    ui: {
+        skipToContent: "דלג לתוכן הראשי",
+        background: "אפקט רקע",
+        backgroundOff: "כבוי",
+        backgroundParticles: "חלקיקים",
+        backgroundWaves: "גלים",
+        backgroundShapes: "צורות",
+        particleCount: "מספר החלקיקים",
+        waveLayers: "שכבות גלים",
+        lineWidth: "עובי הקו",
+        theme: "ערכת נושא",
+        themeLight: "ערכה בהירה",
+        themeDark: "ערכה כהה",
+        language: "בחירת שפה",
+        languageSearch: "חיפוש שפה…",
+        profilePhoto: "תמונת פרופיל",
+        filterProjects: "סינון פרויקטים",
+        email: "אימייל",
+        languageEmpty: "לא נמצאו שפות",
+        pdfVersion: "גרסת PDF"
     },
     common: {
         close: "סגור",

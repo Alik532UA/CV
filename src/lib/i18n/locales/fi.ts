@@ -116,6 +116,10 @@ export const fi: Translations = {
         }
     },
     other: {
+        highlights: "Saavutukset",
+        iqLabel: "ÄO",
+        olympicsLabel: "Olympialaiset",
+        driverLabel: "Ajokortti",
         title: "Lisätiedot",
         iq: "125 (Keskiarvon yläpuolella)",
         olympics: "3. sija - 2016, Koko Ukrainan tietokonejärjestelmien diagnostiikkaolympialaiset",
@@ -199,6 +203,27 @@ export const fi: Translations = {
         ats: "ATS / RMS",
         dark: "Tumma Teema",
         light: "Vaalea Teema"
+    },
+    ui: {
+        skipToContent: "Siirry pääsisältöön",
+        background: "Taustatehoste",
+        backgroundOff: "Pois",
+        backgroundParticles: "Hiukkaset",
+        backgroundWaves: "Aallot",
+        backgroundShapes: "Muodot",
+        particleCount: "Hiukkasten määrä",
+        waveLayers: "Aaltokerrokset",
+        lineWidth: "Viivan paksuus",
+        theme: "Teema",
+        themeLight: "Vaalea teema",
+        themeDark: "Tumma teema",
+        language: "Valitse kieli",
+        languageSearch: "Hae kieltä…",
+        profilePhoto: "Profiilikuva",
+        filterProjects: "Suodata projekteja",
+        email: "Sähköposti",
+        languageEmpty: "Kieliä ei löytynyt",
+        pdfVersion: "PDF-versio"
     },
     common: {
         close: "Sulje",

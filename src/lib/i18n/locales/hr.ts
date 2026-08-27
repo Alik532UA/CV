@@ -116,6 +116,10 @@ export const hr: Translations = {
         }
     },
     other: {
+        highlights: "Postignuća",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpijada",
+        driverLabel: "Vozačka",
         title: "Dodatne informacije",
         iq: "125 (iznad prosjeka)",
         olympics: "3. mjesto - 2016., Svaukrajinska olimpijada iz dijagnostike računalnih sustava",
@@ -199,6 +203,27 @@ export const hr: Translations = {
         ats: "ATS / RMS",
         dark: "Tamna tema",
         light: "Svijetla tema"
+    },
+    ui: {
+        skipToContent: "Prijeđi na glavni sadržaj",
+        background: "Efekt pozadine",
+        backgroundOff: "Isključeno",
+        backgroundParticles: "Čestice",
+        backgroundWaves: "Valovi",
+        backgroundShapes: "Oblici",
+        particleCount: "Broj čestica",
+        waveLayers: "Slojevi valova",
+        lineWidth: "Debljina linije",
+        theme: "Tema",
+        themeLight: "Svijetla tema",
+        themeDark: "Tamna tema",
+        language: "Odaberi jezik",
+        languageSearch: "Pretraži jezik…",
+        profilePhoto: "Profilna slika",
+        filterProjects: "Filtriraj projekte",
+        email: "E-pošta",
+        languageEmpty: "Nema pronađenih jezika",
+        pdfVersion: "PDF verzija"
     },
     common: {
         close: "Zatvori",

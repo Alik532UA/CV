@@ -116,6 +116,10 @@ export const mk: Translations = {
         }
     },
     other: {
+        highlights: "Постигнувања",
+        iqLabel: "IQ",
+        olympicsLabel: "Олимпијада",
+        driverLabel: "Дозвола",
         title: "Дополнителни информации",
         iq: "125 (над просек)",
         olympics: "3-то место - 2016, Сеукраинска олимпијада по дијагностика на компјутерски системи",
@@ -199,6 +203,27 @@ export const mk: Translations = {
         ats: "ATS / RMS",
         dark: "Темна тема",
         light: "Светла тема"
+    },
+    ui: {
+        skipToContent: "Оди на главната содржина",
+        background: "Ефект на позадината",
+        backgroundOff: "Исклучено",
+        backgroundParticles: "Честички",
+        backgroundWaves: "Бранови",
+        backgroundShapes: "Форми",
+        particleCount: "Број на честички",
+        waveLayers: "Слоеви на бранови",
+        lineWidth: "Дебелина на линијата",
+        theme: "Тема",
+        themeLight: "Светла тема",
+        themeDark: "Темна тема",
+        language: "Избери јазик",
+        languageSearch: "Барај јазик…",
+        profilePhoto: "Профилна слика",
+        filterProjects: "Филтрирај проекти",
+        email: "Е-пошта",
+        languageEmpty: "Не се најдени јазици",
+        pdfVersion: "PDF верзија"
     },
     common: {
         close: "Затвори",

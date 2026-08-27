@@ -116,6 +116,10 @@ export const de: Translations = {
         }
     },
     other: {
+        highlights: "Erfolge",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympiade",
+        driverLabel: "Führerschein",
         title: "Zusätzliche Informationen",
         iq: "125 (Überdurchschnittlich)",
         olympics: "3. Platz - 2016, Gesamtukrainische Olympiade für Computersystemdiagnostik",
@@ -199,6 +203,27 @@ export const de: Translations = {
         ats: "ATS / RMS",
         dark: "Dunkles Design",
         light: "Helles Design"
+    },
+    ui: {
+        skipToContent: "Zum Hauptinhalt springen",
+        background: "Hintergrundeffekt",
+        backgroundOff: "Aus",
+        backgroundParticles: "Partikel",
+        backgroundWaves: "Wellen",
+        backgroundShapes: "Formen",
+        particleCount: "Anzahl der Partikel",
+        waveLayers: "Wellenebenen",
+        lineWidth: "Linienstärke",
+        theme: "Design",
+        themeLight: "Helles Design",
+        themeDark: "Dunkles Design",
+        language: "Sprache wählen",
+        languageSearch: "Sprache suchen…",
+        profilePhoto: "Profilfoto",
+        filterProjects: "Projekte filtern",
+        email: "E-Mail",
+        languageEmpty: "Keine Sprachen gefunden",
+        pdfVersion: "PDF-Version"
     },
     common: {
         close: "Schließen",

@@ -116,6 +116,10 @@ export const lv: Translations = {
         }
     },
     other: {
+        highlights: "Sasniegumi",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiāde",
+        driverLabel: "Apliecība",
         title: "Papildu Informācija",
         iq: "125 (Virs vidējā)",
         olympics: "3. vieta - 2016, Visukrainas datorsistēmu diagnostikas olimpiāde",
@@ -199,6 +203,27 @@ export const lv: Translations = {
         ats: "ATS / RMS",
         dark: "Tumšā Tēma",
         light: "Gaišā Tēma"
+    },
+    ui: {
+        skipToContent: "Pāriet uz galveno saturu",
+        background: "Fona efekts",
+        backgroundOff: "Izslēgts",
+        backgroundParticles: "Daļiņas",
+        backgroundWaves: "Viļņi",
+        backgroundShapes: "Formas",
+        particleCount: "Daļiņu skaits",
+        waveLayers: "Viļņu slāņi",
+        lineWidth: "Līnijas biezums",
+        theme: "Motīvs",
+        themeLight: "Gaišais motīvs",
+        themeDark: "Tumšais motīvs",
+        language: "Izvēlēties valodu",
+        languageSearch: "Meklēt valodu…",
+        profilePhoto: "Profila attēls",
+        filterProjects: "Filtrēt projektus",
+        email: "E-pasts",
+        languageEmpty: "Valodas nav atrastas",
+        pdfVersion: "PDF versija"
     },
     common: {
         close: "Aizvērt",

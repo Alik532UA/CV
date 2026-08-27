@@ -123,6 +123,10 @@ export const yap: Translations = {
         }
     },
     other: {
+        highlights: "Pi N'en Nib Fel'",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympics",
+        driverLabel: "Licence",
         title: "Boch e Thin",
         iq: "125 (Ga'ay ko Averej)",
         olympics: "Bin dalip - 2016, All-Ukrainian Olympiad u Computer System Diagnostics",
@@ -206,6 +210,27 @@ export const yap: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    ui: {
+        skipToContent: "Mmarow ko n'en nib ga'ngin",
+        background: "Background effect",
+        backgroundOff: "Kan siy",
+        backgroundParticles: "Particles",
+        backgroundWaves: "Day",
+        backgroundShapes: "Shapes",
+        particleCount: "Uwaan e particles",
+        waveLayers: "Wave layers",
+        lineWidth: "Dabochen e line",
+        theme: "Theme",
+        themeLight: "Theme nib gel e tamilang",
+        themeDark: "Theme nib lumor",
+        language: "Mu mel'eg e thin",
+        languageSearch: "Gay e thin…",
+        profilePhoto: "Yaan ko profile",
+        filterProjects: "Filter projects",
+        email: "Email",
+        languageEmpty: "Dariy e thin ni kan pirieg",
+        pdfVersion: "PDF version"
     },
     common: {
         close: "Mith",

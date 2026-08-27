@@ -113,6 +113,10 @@ export interface Translations {
 		items: Record<string, string>;
 	};
 	other: {
+		highlights: string;
+		iqLabel: string;
+		olympicsLabel: string;
+		driverLabel: string;
 		title: string;
 		iq: string;
 		olympics: string;
@@ -136,6 +140,49 @@ export interface Translations {
 		ats: string;
 		dark: string;
 		light: string;
+	};
+	/**
+	 * Хром інтерфейсу: перемикачі тла й теми, вибір мови, підписи повзунків,
+	 * посилання «до основного вмісту».
+	 *
+	 * ЧОМУ ОКРЕМА СЕКЦІЯ. Решта словника описує ВМІСТ резюме — досвід, освіту,
+	 * проєкти. Це — керування навколо нього, і воно однакове на кожній сторінці.
+	 *
+	 * ЧОМУ ОДИН КЛЮЧ ОБСЛУГОВУЄ Й `aria-label`, І ВИДИМИЙ ПІДПИС. Кнопки
+	 * перемикача тла існують двічі: значком на десктопі (де назву чути лише
+	 * читалкою) і рядком у мобільному меню (де її видно). Два ключі на одну річ
+	 * розійшлися б першою ж правкою, а розбіжність доступної назви з видимим
+	 * підписом — це ще й окреме порушення (WCAG 2.5.3 Label in Name).
+	 *
+	 * ЦІНА ПРОПУСКУ ТУТ ІНША, НІЖ У РЕШТІ СЛОВНИКА. Забутий рядок вмісту видно
+	 * очима. Забута назва керування не виглядає помилкою НІДЕ: сайт малюється,
+	 * гейти зелені, і лише читалка вимовляє англійське слово посеред японської
+	 * сторінки. Саме так тут і жили 24 літерали до 2026-08-28.
+	 *
+	 * Обовʼязкова, як і решта, — 42 словники звіряє `svelte-check`; крім того
+	 * `src/i18n-canon.test.ts` стежить, щоб такі рядки не поверталися в
+	 * розмітку літералами.
+	 */
+	ui: {
+		skipToContent: string;
+		background: string;
+		backgroundOff: string;
+		backgroundParticles: string;
+		backgroundWaves: string;
+		backgroundShapes: string;
+		particleCount: string;
+		waveLayers: string;
+		lineWidth: string;
+		theme: string;
+		themeLight: string;
+		themeDark: string;
+		language: string;
+		languageSearch: string;
+		profilePhoto: string;
+		filterProjects: string;
+		email: string;
+		languageEmpty: string;
+		pdfVersion: string;
 	};
 	common: {
 		close: string;

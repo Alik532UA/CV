@@ -118,6 +118,10 @@ export const crh: Translations = {
         }
     },
     other: {
+        highlights: "Nailiyetler",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiada",
+        driverLabel: "Vesiqa",
         title: "Qoşumca Malümat",
         iq: "125 (Ortalamadan yuqarı)",
         olympics: "3-nci yer - 2016, Kompyuter Sistemleri Diagnostikası Boyunca Bütün Ukraina Olimpiadası",
@@ -201,6 +205,27 @@ export const crh: Translations = {
         ats: "ATS / RMS",
         dark: "Qaranlıq Tema",
         light: "Aydın Tema"
+    },
+    ui: {
+        skipToContent: "Esas mündericege keç",
+        background: "Arqa-plan effekti",
+        backgroundOff: "Söndürilgen",
+        backgroundParticles: "Zerreçikler",
+        backgroundWaves: "Dalğalar",
+        backgroundShapes: "Şekiller",
+        particleCount: "Zerreçik sayısı",
+        waveLayers: "Dalğa qatları",
+        lineWidth: "Sızıq qalınlığı",
+        theme: "Tema",
+        themeLight: "Aydın tema",
+        themeDark: "Qaranlıq tema",
+        language: "Til saylañız",
+        languageSearch: "Til qıdır…",
+        profilePhoto: "Profil resmi",
+        filterProjects: "Loyihalarnı süz",
+        email: "E-poçta",
+        languageEmpty: "Til tapılmadı",
+        pdfVersion: "PDF versiyası"
     },
     common: {
         close: "Qapatıñız",

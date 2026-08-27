@@ -116,6 +116,10 @@ export const tr: Translations = {
         }
     },
     other: {
+        highlights: "Başarılar",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiyat",
+        driverLabel: "Ehliyet",
         title: "Ek Bilgiler",
         iq: "125 (Ortalamanın Üzerinde)",
         olympics: "3. sıra - 2016, Bilgisayar Sistemleri Tanılama Ukrayna Geneli Olimpiyatı",
@@ -199,6 +203,27 @@ export const tr: Translations = {
         ats: "ATS / RMS",
         dark: "Koyu Tema",
         light: "Açık Tema"
+    },
+    ui: {
+        skipToContent: "Ana içeriğe geç",
+        background: "Arka plan efekti",
+        backgroundOff: "Kapalı",
+        backgroundParticles: "Parçacıklar",
+        backgroundWaves: "Dalgalar",
+        backgroundShapes: "Şekiller",
+        particleCount: "Parçacık sayısı",
+        waveLayers: "Dalga katmanları",
+        lineWidth: "Çizgi kalınlığı",
+        theme: "Tema",
+        themeLight: "Açık tema",
+        themeDark: "Koyu tema",
+        language: "Dil seç",
+        languageSearch: "Dil ara…",
+        profilePhoto: "Profil fotoğrafı",
+        filterProjects: "Projeleri filtrele",
+        email: "E-posta",
+        languageEmpty: "Dil bulunamadı",
+        pdfVersion: "PDF sürümü"
     },
     common: {
         close: "Kapat",

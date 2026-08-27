@@ -116,6 +116,10 @@ export const ja: Translations = {
         }
     },
     other: {
+        highlights: "実績",
+        iqLabel: "IQ",
+        olympicsLabel: "オリンピアード",
+        driverLabel: "運転免許",
         title: "追加情報",
         iq: "125（平均以上）",
         olympics: "全ウクライナ・コンピュータシステム診断オリンピック 3位（2016年）",
@@ -199,6 +203,27 @@ export const ja: Translations = {
         ats: "ATS / RMS",
         dark: "ダークテーマ",
         light: "ライトテーマ"
+    },
+    ui: {
+        skipToContent: "メインコンテンツへスキップ",
+        background: "背景エフェクト",
+        backgroundOff: "オフ",
+        backgroundParticles: "パーティクル",
+        backgroundWaves: "波",
+        backgroundShapes: "図形",
+        particleCount: "パーティクル数",
+        waveLayers: "波のレイヤー数",
+        lineWidth: "線の太さ",
+        theme: "テーマ",
+        themeLight: "ライトテーマ",
+        themeDark: "ダークテーマ",
+        language: "言語を選択",
+        languageSearch: "言語を検索…",
+        profilePhoto: "プロフィール写真",
+        filterProjects: "プロジェクトを絞り込む",
+        email: "メール",
+        languageEmpty: "言語が見つかりません",
+        pdfVersion: "PDF版"
     },
     common: {
         close: "閉じる",

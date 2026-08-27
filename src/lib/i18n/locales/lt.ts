@@ -116,6 +116,10 @@ export const lt: Translations = {
         }
     },
     other: {
+        highlights: "Pasiekimai",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiada",
+        driverLabel: "Pažymėjimas",
         title: "Papildoma Informacija",
         iq: "125 (Virš vidurkio)",
         olympics: "3 vieta - 2016, Visos Ukrainos kompiuterių sistemų diagnostikos olimpiada",
@@ -199,6 +203,27 @@ export const lt: Translations = {
         ats: "ATS / RMS",
         dark: "Tamsi Tema",
         light: "Šviesi Tema"
+    },
+    ui: {
+        skipToContent: "Pereiti prie pagrindinio turinio",
+        background: "Fono efektas",
+        backgroundOff: "Išjungta",
+        backgroundParticles: "Dalelės",
+        backgroundWaves: "Bangos",
+        backgroundShapes: "Figūros",
+        particleCount: "Dalelių skaičius",
+        waveLayers: "Bangų sluoksniai",
+        lineWidth: "Linijos storis",
+        theme: "Tema",
+        themeLight: "Šviesi tema",
+        themeDark: "Tamsi tema",
+        language: "Pasirinkti kalbą",
+        languageSearch: "Ieškoti kalbos…",
+        profilePhoto: "Profilio nuotrauka",
+        filterProjects: "Filtruoti projektus",
+        email: "El. paštas",
+        languageEmpty: "Kalbų nerasta",
+        pdfVersion: "PDF versija"
     },
     common: {
         close: "Uždaryti",

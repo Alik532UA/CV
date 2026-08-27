@@ -116,6 +116,10 @@ export const ka: Translations = {
         }
     },
     other: {
+        highlights: "მიღწევები",
+        iqLabel: "IQ",
+        olympicsLabel: "ოლიმპიადა",
+        driverLabel: "მოწმობა",
         title: "დამატებითი ინფორმაცია",
         iq: "125 (საშუალოზე მაღალი)",
         olympics: "მე-3 ადგილი - 2016, სრულიად უკრაინის კომპიუტერული სისტემების დიაგნოსტიკის ოლიმპიადა",
@@ -199,6 +203,27 @@ export const ka: Translations = {
         ats: "ATS / RMS",
         dark: "მუქი თემა",
         light: "ღია თემა"
+    },
+    ui: {
+        skipToContent: "ძირითად შიგთავსზე გადასვლა",
+        background: "ფონის ეფექტი",
+        backgroundOff: "გამორთული",
+        backgroundParticles: "ნაწილაკები",
+        backgroundWaves: "ტალღები",
+        backgroundShapes: "ფიგურები",
+        particleCount: "ნაწილაკების რაოდენობა",
+        waveLayers: "ტალღების შრეები",
+        lineWidth: "ხაზის სისქე",
+        theme: "თემა",
+        themeLight: "ღია თემა",
+        themeDark: "მუქი თემა",
+        language: "ენის არჩევა",
+        languageSearch: "ენის ძებნა…",
+        profilePhoto: "პროფილის ფოტო",
+        filterProjects: "პროექტების გაფილტვრა",
+        email: "ელფოსტა",
+        languageEmpty: "ენები ვერ მოიძებნა",
+        pdfVersion: "PDF ვერსია"
     },
     common: {
         close: "დახურვა",

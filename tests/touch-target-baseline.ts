@@ -43,7 +43,10 @@
 export const TOUCH_KNOWN: Record<string, readonly string[]> = {
 	home: [
 		'a "Skip to main content"',
-		"Select background effect",
+		// Мобільна кнопка перемикача тла. Ім'я змінилося не тому, що змінилася
+		// кнопка: її `aria-label` переїхав у словник (`t.ui.background`), і
+		// англійський текст тепер приходить звідти.
+		"Background effect",
 		"sound-toggle-btn",
 		"lang-trigger-btn",
 		"theme-light-btn",

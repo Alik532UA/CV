@@ -257,6 +257,9 @@ export const t = {
 	get pdf_modal() {
 		return translations[language.current].pdf_modal;
 	},
+	get ui() {
+		return translations[language.current].ui;
+	},
 	get common() {
 		return translations[language.current].common;
 	},

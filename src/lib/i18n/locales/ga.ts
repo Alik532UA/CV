@@ -116,6 +116,10 @@ export const ga: Translations = {
         }
     },
     other: {
+        highlights: "Buaicphointí",
+        iqLabel: "IQ",
+        olympicsLabel: "Oilimpiad",
+        driverLabel: "Ceadúnas",
         title: "Faisnéis Bhreise",
         iq: "125 (Os cionn an mheáin)",
         olympics: "3ú áit - 2016, Oilimpeacs Uile-Úcránach um Dhiagnóisic Córas Ríomhaireachta",
@@ -199,6 +203,27 @@ export const ga: Translations = {
         ats: "ATS / RMS",
         dark: "Téama Dorcha",
         light: "Téama Geal"
+    },
+    ui: {
+        skipToContent: "Téigh go dtí an príomhábhar",
+        background: "Maisiúchán cúlra",
+        backgroundOff: "As",
+        backgroundParticles: "Cáithníní",
+        backgroundWaves: "Tonnta",
+        backgroundShapes: "Cruthanna",
+        particleCount: "Líon na gcáithníní",
+        waveLayers: "Sraitheanna tonnta",
+        lineWidth: "Tiubhas na líne",
+        theme: "Téama",
+        themeLight: "Téama sorcha",
+        themeDark: "Téama dorcha",
+        language: "Roghnaigh teanga",
+        languageSearch: "Cuardaigh teanga…",
+        profilePhoto: "Grianghraf próifíle",
+        filterProjects: "Scag na tionscadail",
+        email: "Ríomhphost",
+        languageEmpty: "Níor aimsíodh aon teanga",
+        pdfVersion: "Leagan PDF"
     },
     common: {
         close: "Dún",

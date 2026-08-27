@@ -116,6 +116,10 @@ export const et: Translations = {
         }
     },
     other: {
+        highlights: "Saavutused",
+        iqLabel: "IQ",
+        olympicsLabel: "Olümpiaad",
+        driverLabel: "Juhiluba",
         title: "Lisainfo",
         iq: "125 (Üle keskmise)",
         olympics: "3. koht - 2016, Ukraina arvutisüsteemide diagnostika olümpiaad",
@@ -199,6 +203,27 @@ export const et: Translations = {
         ats: "ATS / RMS",
         dark: "Tume Teema",
         light: "Hele Teema"
+    },
+    ui: {
+        skipToContent: "Liigu põhisisu juurde",
+        background: "Taustaefekt",
+        backgroundOff: "Väljas",
+        backgroundParticles: "Osakesed",
+        backgroundWaves: "Lained",
+        backgroundShapes: "Kujundid",
+        particleCount: "Osakeste arv",
+        waveLayers: "Lainekihid",
+        lineWidth: "Joone paksus",
+        theme: "Teema",
+        themeLight: "Hele teema",
+        themeDark: "Tume teema",
+        language: "Vali keel",
+        languageSearch: "Otsi keelt…",
+        profilePhoto: "Profiilifoto",
+        filterProjects: "Filtreeri projekte",
+        email: "E-post",
+        languageEmpty: "Keeli ei leitud",
+        pdfVersion: "PDF-versioon"
     },
     common: {
         close: "Sulge",

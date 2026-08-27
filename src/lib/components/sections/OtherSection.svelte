@@ -14,18 +14,18 @@
 
     <div class="other-grid">
         <div class="success-card glass card">
-            <h3><Trophy size={20} class="inline-icon" /> Highlights</h3>
+            <h3><Trophy size={20} class="inline-icon" /> {t.other.highlights}</h3>
             <ul>
                 <li>
-                    <strong><Lightbulb size={16} class="inline-icon" /> IQ:</strong>
+                    <strong><Lightbulb size={16} class="inline-icon" /> {t.other.iqLabel}:</strong>
                     {t.other.iq}
                 </li>
                 <li>
-                    <strong><Award size={16} class="inline-icon" /> Olympics:</strong>
+                    <strong><Award size={16} class="inline-icon" /> {t.other.olympicsLabel}:</strong>
                     {t.other.olympics}
                 </li>
                 <li>
-                    <strong><Car size={16} class="inline-icon" /> Drive:</strong>
+                    <strong><Car size={16} class="inline-icon" /> {t.other.driverLabel}:</strong>
                     {t.other.driver}
                 </li>
             </ul>

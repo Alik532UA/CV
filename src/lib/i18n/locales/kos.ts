@@ -123,6 +123,10 @@ export const kos: Translations = {
         }
     },
     other: {
+        highlights: "Ma Wo",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympics",
+        driverLabel: "Licence",
         title: "Ma Saya",
         iq: "125 (Yohk Liki Nuku)",
         olympics: "Ma Aktolu - 2016, All-Ukrainian Olympiad ke Computer System Diagnostics",
@@ -206,6 +210,27 @@ export const kos: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    ui: {
+        skipToContent: "Som nu ke ma yohk",
+        background: "Background effect",
+        backgroundOff: "Kunausyukla",
+        backgroundParticles: "Particles",
+        backgroundWaves: "Noa",
+        backgroundShapes: "Shapes",
+        particleCount: "Pisen particles",
+        waveLayers: "Wave layers",
+        lineWidth: "Matoltol ke line",
+        theme: "Theme",
+        themeLight: "Theme kalem",
+        themeDark: "Theme lohsr",
+        language: "Sulela kas",
+        languageSearch: "Suk kas…",
+        profilePhoto: "Mwe akul ke profile",
+        filterProjects: "Filter projects",
+        email: "Email",
+        languageEmpty: "Wangin kas koneyuk",
+        pdfVersion: "PDF version"
     },
     common: {
         close: "Kaeal",

@@ -116,6 +116,10 @@ export const cy: Translations = {
         }
     },
     other: {
+        highlights: "Uchafbwyntiau",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympiad",
+        driverLabel: "Trwydded",
         title: "Gwybodaeth Ychwanegol",
         iq: "125 (Uwchlaw'r cyfartaledd)",
         olympics: "3ydd safle - 2016, Gemau Olympaidd Diagnosteg Systemau Cyfrifiadurol Pan-Wcreinig",
@@ -199,6 +203,27 @@ export const cy: Translations = {
         ats: "ATS / RMS",
         dark: "Thema Dywyll",
         light: "Thema Olau"
+    },
+    ui: {
+        skipToContent: "Neidio i’r prif gynnwys",
+        background: "Effaith cefndir",
+        backgroundOff: "I ffwrdd",
+        backgroundParticles: "Gronynnau",
+        backgroundWaves: "Tonnau",
+        backgroundShapes: "Siapiau",
+        particleCount: "Nifer y gronynnau",
+        waveLayers: "Haenau tonnau",
+        lineWidth: "Trwch y llinell",
+        theme: "Thema",
+        themeLight: "Thema olau",
+        themeDark: "Thema dywyll",
+        language: "Dewis iaith",
+        languageSearch: "Chwilio am iaith…",
+        profilePhoto: "Llun proffil",
+        filterProjects: "Hidlo prosiectau",
+        email: "E-bost",
+        languageEmpty: "Heb ddod o hyd i unrhyw iaith",
+        pdfVersion: "Fersiwn PDF"
     },
     common: {
         close: "Cau",

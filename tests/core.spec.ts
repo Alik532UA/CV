@@ -49,7 +49,15 @@ test.describe('Core Functionality', () => {
 		// список до двох, а не до одної. Американська несе регіон і в адресі, і в
 		// атрибуті lang, де він пишеться канонічно: en-US, не en-us.
 		await openLangPanel();
-		await langSwitcher.getByPlaceholder('Search language...').fill('English');
+		//
+		// ПОЛЕ ПОШУКУ ШУКАЄТЬСЯ ЗА testid, А НЕ ЗА ПІДКАЗКОЮ. Доти тут стояло
+		// `getByPlaceholder('Search language...')`, і працювало воно рівно тому,
+		// що підказка була ЗАХАРДКОДЖЕНА англійською в усіх 42 мовах. На цьому
+		// рядку сторінка вже іспанська — перемкнулися вище, — тож щойно підказка
+		// поїхала у словник, локатор перестав знаходити будь-що. Тобто тест
+		// спирався на той самий дефект, який виправляє цей коміт: локатор не
+		// тримається на перекладному тексті (TESTID-AND-NAMING-v8 § 1).
+		await langSwitcher.getByTestId('lang-search-input').fill('English');
 		await expect(langSwitcher.getByRole('menuitemradio')).toHaveCount(2);
 		await page.getByTestId('lang-en-us-btn').click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en-US');
@@ -57,7 +65,7 @@ test.describe('Core Functionality', () => {
 
 		// The search box filters the list down to a single match
 		await openLangPanel();
-		await langSwitcher.getByPlaceholder('Search language...').fill('English (UK)');
+		await langSwitcher.getByTestId('lang-search-input').fill('English (UK)');
 		const results = langSwitcher.getByRole('menuitemradio');
 		await expect(results).toHaveCount(1);
 		await results.first().click();

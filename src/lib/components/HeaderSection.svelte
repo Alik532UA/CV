@@ -231,14 +231,14 @@
                     class="toggle-group glass"
                     data-testid="bg-toggle-toolbar"
                     role="radiogroup"
-                    aria-label="Background effect"
+                    aria-label={t.ui.background}
                     aria-keyshortcuts="B"
                 >
                     <button
                         onclick={() => background.set(0)}
                         class:active={background.type === 0}
-                        title="Background Off"
-                        aria-label="Disable background effects"
+                        title={t.ui.backgroundOff}
+                        aria-label={t.ui.backgroundOff}
                         aria-checked={background.type === 0}
                         role="radio"
                         data-testid="bg-off-btn"
@@ -249,8 +249,8 @@
                     <button
                         onclick={() => background.set(1)}
                         class:active={background.type === 1}
-                        title="Particles Effect"
-                        aria-label="Enable particles background"
+                        title={t.ui.backgroundParticles}
+                        aria-label={t.ui.backgroundParticles}
                         aria-checked={background.type === 1}
                         role="radio"
                         data-testid="bg-particles-btn"
@@ -261,8 +261,8 @@
                     <button
                         onclick={() => background.set(2)}
                         class:active={background.type === 2}
-                        title="Waves Effect"
-                        aria-label="Enable waves background"
+                        title={t.ui.backgroundWaves}
+                        aria-label={t.ui.backgroundWaves}
                         aria-checked={background.type === 2}
                         role="radio"
                         data-testid="bg-waves-btn"
@@ -273,8 +273,8 @@
                     <button
                         onclick={() => background.set(3)}
                         class:active={background.type === 3}
-                        title="Shapes Effect"
-                        aria-label="Enable shapes background"
+                        title={t.ui.backgroundShapes}
+                        aria-label={t.ui.backgroundShapes}
                         aria-checked={background.type === 3}
                         role="radio"
                         data-testid="bg-shapes-btn"
@@ -288,7 +288,7 @@
                         <div class="bg-slider-panel glass">
                             {#if background.type === 1}
                                 <div class="bg-slider-info">
-                                    <span class="bg-slider-label">Particles</span>
+                                    <span class="bg-slider-label">{t.ui.backgroundParticles}</span>
                                     <span class="bg-slider-value">{background.particlesCount}</span>
                                 </div>
                                 <input
@@ -299,11 +299,11 @@
                                     value={background.particlesCount}
                                     oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                     class="volume-slider"
-                                    aria-label="Particle Count"
+                                    aria-label={t.ui.particleCount}
                                 />
                             {:else if background.type === 2}
                                 <div class="bg-slider-info">
-                                    <span class="bg-slider-label">Waves</span>
+                                    <span class="bg-slider-label">{t.ui.backgroundWaves}</span>
                                     <span class="bg-slider-value">{background.wavesCount}</span>
                                 </div>
                                 <input
@@ -314,11 +314,11 @@
                                     value={background.wavesCount}
                                     oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
                                     class="volume-slider"
-                                    aria-label="Wave Layers"
+                                    aria-label={t.ui.waveLayers}
                                 />
                             {:else if background.type === 3}
                                 <div class="bg-slider-info">
-                                    <span class="bg-slider-label">Line Width</span>
+                                    <span class="bg-slider-label">{t.ui.lineWidth}</span>
                                     <span class="bg-slider-value">{background.shapesLineWidth}px</span>
                                 </div>
                                 <input
@@ -329,7 +329,7 @@
                                     value={background.shapesLineWidth}
                                     oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}
                                     class="volume-slider"
-                                    aria-label="Line Width"
+                                    aria-label={t.ui.lineWidth}
                                 />
                             {/if}
                         </div>
@@ -342,7 +342,7 @@
                 <button
                     class="glass-icon-btn"
                     onclick={(e) => { e.stopPropagation(); toggleBgDropdown(); }}
-                    aria-label="Select background effect"
+                    aria-label={t.ui.background}
                     aria-haspopup="true"
                     aria-expanded={isBgDropdownOpen}
                 >
@@ -357,7 +357,7 @@
                             role="menuitemradio"
                             aria-checked={background.type === 0}
                         >
-                            <CircleOff size={16} /> <span>Off</span>
+                            <CircleOff size={16} /> <span>{t.ui.backgroundOff}</span>
                         </button>
                         <button
                             onclick={() => selectBackground(1)}
@@ -365,7 +365,7 @@
                             role="menuitemradio"
                             aria-checked={background.type === 1}
                         >
-                            <Sparkles size={16} /> <span>Particles</span>
+                            <Sparkles size={16} /> <span>{t.ui.backgroundParticles}</span>
                         </button>
                         <button
                             onclick={() => selectBackground(2)}
@@ -373,7 +373,7 @@
                             role="menuitemradio"
                             aria-checked={background.type === 2}
                         >
-                            <Waves size={16} /> <span>Waves</span>
+                            <Waves size={16} /> <span>{t.ui.backgroundWaves}</span>
                         </button>
                         <button
                             onclick={() => selectBackground(3)}
@@ -381,7 +381,7 @@
                             role="menuitemradio"
                             aria-checked={background.type === 3}
                         >
-                            <Shapes size={16} /> <span>Shapes</span>
+                            <Shapes size={16} /> <span>{t.ui.backgroundShapes}</span>
                         </button>
 
                         {#if background.type !== 0}
@@ -389,7 +389,7 @@
                             <div class="mobile-bg-slider">
                                 {#if background.type === 1}
                                     <div class="bg-slider-info">
-                                        <span class="bg-slider-label">Particles</span>
+                                        <span class="bg-slider-label">{t.ui.backgroundParticles}</span>
                                         <span class="bg-slider-value">{background.particlesCount}</span>
                                     </div>
                                     <input
@@ -400,10 +400,11 @@
                                         value={background.particlesCount}
                                         oninput={(e) => background.setParticlesCount(e.currentTarget.valueAsNumber)}
                                         class="volume-slider"
+                                        aria-label={t.ui.particleCount}
                                     />
                                 {:else if background.type === 2}
                                     <div class="bg-slider-info">
-                                        <span class="bg-slider-label">Waves</span>
+                                        <span class="bg-slider-label">{t.ui.backgroundWaves}</span>
                                         <span class="bg-slider-value">{background.wavesCount}</span>
                                     </div>
                                     <input
@@ -414,10 +415,11 @@
                                         value={background.wavesCount}
                                         oninput={(e) => background.setWavesCount(e.currentTarget.valueAsNumber)}
                                         class="volume-slider"
+                                        aria-label={t.ui.waveLayers}
                                     />
                                 {:else if background.type === 3}
                                     <div class="bg-slider-info">
-                                        <span class="bg-slider-label">Line Width</span>
+                                        <span class="bg-slider-label">{t.ui.lineWidth}</span>
                                         <span class="bg-slider-value">{background.shapesLineWidth}px</span>
                                     </div>
                                     <input
@@ -428,6 +430,7 @@
                                         value={background.shapesLineWidth}
                                         oninput={(e) => background.setShapesLineWidth(e.currentTarget.valueAsNumber)}
                                         class="volume-slider"
+                                        aria-label={t.ui.lineWidth}
                                     />
                                 {/if}
                             </div>
@@ -504,7 +507,7 @@
                 <button
                     class="glass-icon-btn lang-trigger"
                     onclick={(e) => { e.stopPropagation(); toggleLangDropdown(); }}
-                    aria-label="Select language"
+                    aria-label={t.ui.language}
                     aria-haspopup="true"
                     aria-expanded={langMenu.isOpen}
                     aria-keyshortcuts="L"
@@ -538,7 +541,8 @@
                         <input
                             type="text"
                             class="lang-search"
-                            placeholder="Search language..."
+                            data-testid="lang-search-input"
+                            placeholder={t.ui.languageSearch}
                             bind:value={langQuery}
                             onclick={(e) => e.stopPropagation()}
                             autofocus
@@ -563,7 +567,7 @@
                                         {/each}
                                     </div>
                                 {:else}
-                                    <p class="lang-empty">No languages found</p>
+                                    <p class="lang-empty">{t.ui.languageEmpty}</p>
                                 {/each}
                             </div>
                         </div>
@@ -572,12 +576,12 @@
             </div>
 
             <!-- Theme Toggle -->
-            <div class="toggle-group glass" data-testid="theme-toggle-toolbar" role="group" aria-label="Theme selection">
+            <div class="toggle-group glass" data-testid="theme-toggle-toolbar" role="group" aria-label={t.ui.theme}>
                 <button
                     onclick={() => theme.current !== "light" && theme.toggle()}
                     class:active={theme.current === "light"}
-                    title="Light Theme"
-                    aria-label="Enable light theme"
+                    title={t.ui.themeLight}
+                    aria-label={t.ui.themeLight}
                     aria-pressed={theme.current === "light"}
                     aria-keyshortcuts="T"
                     data-testid="theme-light-btn"
@@ -588,8 +592,8 @@
                 <button
                     onclick={() => theme.current !== "dark" && theme.toggle()}
                     class:active={theme.current === "dark"}
-                    title="Dark Theme"
-                    aria-label="Enable dark theme"
+                    title={t.ui.themeDark}
+                    aria-label={t.ui.themeDark}
                     aria-pressed={theme.current === "dark"}
                     aria-keyshortcuts="T"
                     data-testid="theme-dark-btn"

@@ -85,8 +85,8 @@
                     class="btn-secondary icon-only"
                     onclick={handleEmailCopy}
                     data-testid="hero-email-link"
-                    aria-label="Email"
-                    title="Email"
+                    aria-label={t.ui.email}
+                    title={t.ui.email}
                 >
                     <Mail size={20} aria-hidden="true" />
                 </a>
@@ -95,7 +95,7 @@
                     onclick={onOpenPdfModal}
                     data-testid="hero-pdf-btn"
                 >
-                    <span><FileText size={18} aria-hidden="true" /></span> PDF version
+                    <span><FileText size={18} aria-hidden="true" /></span> {t.ui.pdfVersion}
                 </button>
             </div>
 
@@ -112,7 +112,7 @@
             <div class="profile-card glass card">
                 <img
                     src="{base}/images/profile.jpg"
-                    alt="Profile"
+                    alt={t.ui.profilePhoto}
                     class="profile-img"
                     fetchpriority="high"
                     decoding="async"

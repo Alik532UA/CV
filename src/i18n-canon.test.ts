@@ -128,9 +128,10 @@ describe("no user-facing text outside the dictionaries", () => {
  * людей, бо чути її лише читалкою.
  *
  * ФОРМА ПЕРЕВІРКИ — ТА САМА, ЩО ВЖЕ ПРАЦЮЄ В ЦЬОМУ ПРОЄКТІ для axe, розміру
- * файлів і сенсорних цілей: поіменний перелік плюс число. Нуль тут означав би
- * або переклад двадцяти трьох рядків на 42 мови одним комітом наосліп, або
- * вимкнений гейт — а вимкнений гірший за відсутній.
+ * файлів і сенсорних цілей: поіменний перелік, який може лише коротшати. Зараз
+ * він ПОРОЖНІЙ — усі 24 рядки переїхали в секцію `ui` словника, — і саме тому
+ * лишається на місці: нуль, який звіряється, це гейт; нуль, якого немає, це
+ * відсутність гейта.
  */
 describe("інтерфейс не лишається англійським в атрибутах (§ 2)", () => {
 	/**
@@ -148,43 +149,35 @@ describe("інтерфейс не лишається англійським в �
 	 */
 	const BRANDS = new Set(["LinkedIn", "WhatsApp", "Telegram", "Viber"]);
 
-	/** Борг: рядок для людини, застиглий англійською. Може лише коротшати. */
-	const UNTRANSLATED: Record<string, readonly string[]> = {
-		"src/lib/components/HeaderSection.svelte": [
-			"Background Off",
-			"Background effect",
-			"Dark Theme",
-			"Disable background effects",
-			"Enable dark theme",
-			"Enable light theme",
-			"Enable particles background",
-			"Enable shapes background",
-			"Enable waves background",
-			"Light Theme",
-			"Line Width",
-			"Particle Count",
-			"Particles Effect",
-			"Search language...",
-			"Select background effect",
-			"Select language",
-			"Shapes Effect",
-			"Theme selection",
-			"Wave Layers",
-			"Waves Effect"
-		],
-		"src/lib/components/sections/HeroSection.svelte": ["Email", "Profile"],
-		"src/lib/components/sections/ProjectsSection.svelte": ["Filter projects"]
-	};
+	/**
+	 * Борг: рядок для людини, застиглий англійською. Може лише коротшати.
+	 *
+	 * ПОРОЖНІЙ, і це не початковий стан, а результат. Перший прогін цієї
+	 * перевірки знайшов 24 записи в трьох файлах — увесь перемикач тла, увесь
+	 * перемикач теми, вибір мови й пошук у ньому, підпис фото та фільтр
+	 * проєктів. Усі 24 переїхали в секцію `ui` словника (42 мови), тож перелік
+	 * і став порожнім.
+	 *
+	 * Лишається він тут навмисно: нуль, який ЗВІРЯЄТЬСЯ, — це гейт, а нуль,
+	 * якого немає, — це відсутність гейта. Наступний літерал у розмітці впаде
+	 * на першому ж прогоні, і форма для його запису вже готова.
+	 */
+	const UNTRANSLATED: Record<string, readonly string[]> = {};
 
-	/** @returns значення людських атрибутів, що не є ані порожніми, ані брендом. */
-	function literalAttrs(): Record<string, string[]> {
+	/**
+	 * @param keepBrands лишити власні назви в результаті. Потрібне канарці:
+	 *   при порожньому боргу вони — ЄДИНІ літерали, що збереглися в розмітці,
+	 *   тобто єдиний доказ, що сканер справді доходить до неї.
+	 * @returns значення людських атрибутів, записані літералом.
+	 */
+	function literalAttrs(keepBrands = false): Record<string, string[]> {
 		const found: Record<string, string[]> = {};
 		for (const pattern of ["src/lib/components/**/*.svelte", "src/routes/**/*.svelte"]) {
 			for (const file of globSync(pattern, { cwd: ROOT })) {
 				const path = file.replace(/\\/g, "/");
 				for (const m of strippedMarkup(read(path)).matchAll(HUMAN_ATTRS)) {
 					const value = m[2].trim();
-					if (!value || BRANDS.has(value)) continue;
+					if (!value || (!keepBrands && BRANDS.has(value))) continue;
 					(found[path] ??= []).push(value);
 				}
 			}
@@ -193,14 +186,26 @@ describe("інтерфейс не лишається англійським в �
 		return found;
 	}
 
+	/**
+	 * Канарка (CODE-QUALITY-v8 § 3.5), і при НУЛЬОВОМУ боргу вона важливіша,
+	 * ніж була при 24 записах: тепер обидві змістовні перевірки нижче
+	 * порівнюють порожнє з порожнім, тож регулярка, що перестала збігатися,
+	 * звітувала б «боргу немає» до кінця життя проєкту й виглядала б при цьому
+	 * абсолютно так само.
+	 *
+	 * Доказом лишається `BRANDS`: `LinkedIn`, `WhatsApp`, `Telegram` і `Viber`
+	 * СПРАВДІ стоять літералами в `HeroSection.svelte` і стоятимуть далі. Якщо
+	 * сканер їх не бачить — він не бачить нічого.
+	 */
 	it("the check is alive: it sees human-readable attributes at all", () => {
-		// Канарка (CODE-QUALITY-v8 § 3.5): регулярка, що перестала збігатися,
-		// звітувала б «боргу немає» до кінця життя проєкту.
-		const total = Object.values(literalAttrs()).reduce((n, list) => n + list.length, 0);
-		expect(total + Object.keys(UNTRANSLATED).length).toBeGreaterThan(0);
-		expect("aria-label=\"Enable dark theme\"").toMatch(new RegExp(HUMAN_ATTRS.source));
+		const withBrands = Object.values(literalAttrs(true)).flat();
+		expect(
+			withBrands.filter((v) => BRANDS.has(v)).length,
+			"сканер не знайшов навіть назв сервісів у HeroSection — він читає не те"
+		).toBeGreaterThanOrEqual(BRANDS.size);
+		expect('aria-label="Enable dark theme"').toMatch(new RegExp(HUMAN_ATTRS.source));
 		// Значення з виразу — це вже словник, і воно НЕ знахідка.
-		expect('aria-label={t.nav.bottom_nav_label}').not.toMatch(new RegExp(HUMAN_ATTRS.source));
+		expect("aria-label={t.nav.bottom_nav_label}").not.toMatch(new RegExp(HUMAN_ATTRS.source));
 	});
 
 	it("жоден компонент не додає нового англійського рядка в атрибут", () => {

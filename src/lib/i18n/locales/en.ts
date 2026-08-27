@@ -122,6 +122,10 @@ export const en: Translations = {
         }
     },
     other: {
+        highlights: "Highlights",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympics",
+        driverLabel: "Licence",
         title: "Additional Information",
         iq: "125 (Above Average)",
         olympics: "3rd place - 2016, All-Ukrainian Olympiad in Computer System Diagnostics",
@@ -205,6 +209,27 @@ export const en: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    ui: {
+        skipToContent: "Skip to main content",
+        background: "Background effect",
+        backgroundOff: "Off",
+        backgroundParticles: "Particles",
+        backgroundWaves: "Waves",
+        backgroundShapes: "Shapes",
+        particleCount: "Particle count",
+        waveLayers: "Wave layers",
+        lineWidth: "Line width",
+        theme: "Theme",
+        themeLight: "Light theme",
+        themeDark: "Dark theme",
+        language: "Select language",
+        languageSearch: "Search language…",
+        profilePhoto: "Profile photo",
+        filterProjects: "Filter projects",
+        email: "Email",
+        languageEmpty: "No languages found",
+        pdfVersion: "PDF version"
     },
     common: {
         close: "Close",

@@ -116,6 +116,10 @@ export const da: Translations = {
         }
     },
     other: {
+        highlights: "Højdepunkter",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympiade",
+        driverLabel: "Kørekort",
         title: "Yderligere information",
         iq: "125 (over gennemsnittet)",
         olympics: "3. plads - 2016, Alukrainsk olympiade i computersystemdiagnostik",
@@ -199,6 +203,27 @@ export const da: Translations = {
         ats: "ATS / RMS",
         dark: "Mørkt tema",
         light: "Lyst tema"
+    },
+    ui: {
+        skipToContent: "Gå til hovedindholdet",
+        background: "Baggrundseffekt",
+        backgroundOff: "Fra",
+        backgroundParticles: "Partikler",
+        backgroundWaves: "Bølger",
+        backgroundShapes: "Figurer",
+        particleCount: "Antal partikler",
+        waveLayers: "Bølgelag",
+        lineWidth: "Stregtykkelse",
+        theme: "Tema",
+        themeLight: "Lyst tema",
+        themeDark: "Mørkt tema",
+        language: "Vælg sprog",
+        languageSearch: "Søg efter sprog…",
+        profilePhoto: "Profilbillede",
+        filterProjects: "Filtrér projekter",
+        email: "E-mail",
+        languageEmpty: "Ingen sprog fundet",
+        pdfVersion: "PDF-version"
     },
     common: {
         close: "Luk",

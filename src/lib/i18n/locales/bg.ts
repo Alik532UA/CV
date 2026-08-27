@@ -116,6 +116,10 @@ export const bg: Translations = {
         }
     },
     other: {
+        highlights: "Постижения",
+        iqLabel: "IQ",
+        olympicsLabel: "Олимпиада",
+        driverLabel: "Книжка",
         title: "Допълнителна информация",
         iq: "125 (над средното)",
         olympics: "3-то място - 2016, Всеукраинска олимпиада по диагностика на компютърни системи",
@@ -199,6 +203,27 @@ export const bg: Translations = {
         ats: "ATS / RMS",
         dark: "Тъмна тема",
         light: "Светла тема"
+    },
+    ui: {
+        skipToContent: "Към основното съдържание",
+        background: "Ефект на фона",
+        backgroundOff: "Изключено",
+        backgroundParticles: "Частици",
+        backgroundWaves: "Вълни",
+        backgroundShapes: "Фигури",
+        particleCount: "Брой частици",
+        waveLayers: "Слоеве вълни",
+        lineWidth: "Дебелина на линията",
+        theme: "Тема",
+        themeLight: "Светла тема",
+        themeDark: "Тъмна тема",
+        language: "Избор на език",
+        languageSearch: "Търсене на език…",
+        profilePhoto: "Профилна снимка",
+        filterProjects: "Филтриране на проектите",
+        email: "Имейл",
+        languageEmpty: "Няма намерени езици",
+        pdfVersion: "PDF версия"
     },
     common: {
         close: "Затвори",

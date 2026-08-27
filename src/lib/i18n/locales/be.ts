@@ -116,6 +116,10 @@ export const be: Translations = {
         }
     },
     other: {
+        highlights: "Дасягненні",
+        iqLabel: "IQ",
+        olympicsLabel: "Алімпіяда",
+        driverLabel: "Пасведчанне",
         title: "Дадатковая інфармацыя",
         iq: "125 (вышэй за сярэдняе)",
         olympics: "3-е месца - 2016, Усеўкраінская алімпіяда па дыягностыцы камп'ютарных сістэм",
@@ -199,6 +203,27 @@ export const be: Translations = {
         ats: "ATS / RMS",
         dark: "Цёмная тэма",
         light: "Светлая тэма"
+    },
+    ui: {
+        skipToContent: "Перайсці да асноўнага зместу",
+        background: "Эфект фону",
+        backgroundOff: "Выключана",
+        backgroundParticles: "Часціцы",
+        backgroundWaves: "Хвалі",
+        backgroundShapes: "Фігуры",
+        particleCount: "Колькасць часціц",
+        waveLayers: "Слаі хваль",
+        lineWidth: "Таўшчыня лініі",
+        theme: "Тэма",
+        themeLight: "Светлая тэма",
+        themeDark: "Цёмная тэма",
+        language: "Выбраць мову",
+        languageSearch: "Пошук мовы…",
+        profilePhoto: "Фота профілю",
+        filterProjects: "Фільтраваць праекты",
+        email: "Пошта",
+        languageEmpty: "Моў не знойдзена",
+        pdfVersion: "PDF-версія"
     },
     common: {
         close: "Закрыць",

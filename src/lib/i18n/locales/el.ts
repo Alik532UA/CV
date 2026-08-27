@@ -116,6 +116,10 @@ export const el: Translations = {
         }
     },
     other: {
+        highlights: "Διακρίσεις",
+        iqLabel: "IQ",
+        olympicsLabel: "Ολυμπιάδα",
+        driverLabel: "Άδεια",
         title: "Πρόσθετες Πληροφορίες",
         iq: "125 (Πάνω από τον μέσο όρο)",
         olympics: "3η θέση - 2016, Πανουκρανική Ολυμπιάδα Διαγνωστικής Υπολογιστικών Συστημάτων",
@@ -199,6 +203,27 @@ export const el: Translations = {
         ats: "ATS / RMS",
         dark: "Σκούρο Θέμα",
         light: "Ανοιχτό Θέμα"
+    },
+    ui: {
+        skipToContent: "Μετάβαση στο κύριο περιεχόμενο",
+        background: "Εφέ φόντου",
+        backgroundOff: "Ανενεργό",
+        backgroundParticles: "Σωματίδια",
+        backgroundWaves: "Κύματα",
+        backgroundShapes: "Σχήματα",
+        particleCount: "Αριθμός σωματιδίων",
+        waveLayers: "Επίπεδα κυμάτων",
+        lineWidth: "Πάχος γραμμής",
+        theme: "Θέμα",
+        themeLight: "Φωτεινό θέμα",
+        themeDark: "Σκούρο θέμα",
+        language: "Επιλογή γλώσσας",
+        languageSearch: "Αναζήτηση γλώσσας…",
+        profilePhoto: "Φωτογραφία προφίλ",
+        filterProjects: "Φιλτράρισμα έργων",
+        email: "Email",
+        languageEmpty: "Δεν βρέθηκαν γλώσσες",
+        pdfVersion: "Έκδοση PDF"
     },
     common: {
         close: "Κλείσιμο",

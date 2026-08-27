@@ -123,6 +123,10 @@ export const chk: Translations = {
         }
     },
     other: {
+        highlights: "Sokopwas",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympics",
+        driverLabel: "Licence",
         title: "Pwal Ekkoch Kapas",
         iq: "125 (Fokkun Watteoch)",
         olympics: "Wonu 3 - 2016, All-Ukrainian Olympiad lon Computer System Diagnostics",
@@ -206,6 +210,27 @@ export const chk: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    ui: {
+        skipToContent: "Feilong ngeni ewe masowa lapalap",
+        background: "Background effect",
+        backgroundOff: "Turufan",
+        backgroundParticles: "Particles",
+        backgroundWaves: "Waves",
+        backgroundShapes: "Shapes",
+        particleCount: "Chochon particles",
+        waveLayers: "Wave layers",
+        lineWidth: "Watteen ewe line",
+        theme: "Theme",
+        themeLight: "Theme mi saram",
+        themeDark: "Theme mi rochopwak",
+        language: "Filata kapas",
+        languageSearch: "Kutta kapas…",
+        profilePhoto: "Sasingin profile",
+        filterProjects: "Filter projects",
+        email: "Email",
+        languageEmpty: "Ese wor kapas mi kuna",
+        pdfVersion: "PDF version"
     },
     common: {
         close: "Opano",

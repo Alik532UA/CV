@@ -116,6 +116,10 @@ export const ca: Translations = {
         }
     },
     other: {
+        highlights: "Fites",
+        iqLabel: "QI",
+        olympicsLabel: "Olimpíada",
+        driverLabel: "Permís",
         title: "Informació addicional",
         iq: "125 (Per sobre de la mitjana)",
         olympics: "3r lloc - 2016, Olimpíada Ucraïnesa de Diagnòstic de Sistemes Informàtics",
@@ -199,6 +203,27 @@ export const ca: Translations = {
         ats: "ATS / RMS",
         dark: "Tema fosc",
         light: "Tema clar"
+    },
+    ui: {
+        skipToContent: "Ves al contingut principal",
+        background: "Efecte de fons",
+        backgroundOff: "Desactivat",
+        backgroundParticles: "Partícules",
+        backgroundWaves: "Ones",
+        backgroundShapes: "Formes",
+        particleCount: "Nombre de partícules",
+        waveLayers: "Capes d’ones",
+        lineWidth: "Gruix de la línia",
+        theme: "Tema",
+        themeLight: "Tema clar",
+        themeDark: "Tema fosc",
+        language: "Selecciona l’idioma",
+        languageSearch: "Cerca un idioma…",
+        profilePhoto: "Foto de perfil",
+        filterProjects: "Filtra els projectes",
+        email: "Correu electrònic",
+        languageEmpty: "No s’ha trobat cap idioma",
+        pdfVersion: "Versió PDF"
     },
     common: {
         close: "Tanca",

@@ -116,6 +116,10 @@ export const is: Translations = {
         }
     },
     other: {
+        highlights: "Afrek",
+        iqLabel: "Greindarvísitala",
+        olympicsLabel: "Ólympíuleikar",
+        driverLabel: "Ökuskírteini",
         title: "Viðbótarupplýsingar",
         iq: "125 (yfir meðallagi)",
         olympics: "3. sæti - 2016, Allsherjar-úkraínska ólympíumótið í tölvukerfagreiningu",
@@ -199,6 +203,27 @@ export const is: Translations = {
         ats: "ATS / RMS",
         dark: "Dökkt þema",
         light: "Ljóst þema"
+    },
+    ui: {
+        skipToContent: "Fara í meginmál",
+        background: "Bakgrunnsáhrif",
+        backgroundOff: "Slökkt",
+        backgroundParticles: "Agnir",
+        backgroundWaves: "Bylgjur",
+        backgroundShapes: "Form",
+        particleCount: "Fjöldi agna",
+        waveLayers: "Bylgjulög",
+        lineWidth: "Línuþykkt",
+        theme: "Þema",
+        themeLight: "Ljóst þema",
+        themeDark: "Dökkt þema",
+        language: "Velja tungumál",
+        languageSearch: "Leita að tungumáli…",
+        profilePhoto: "Prófílmynd",
+        filterProjects: "Sía verkefni",
+        email: "Netfang",
+        languageEmpty: "Engin tungumál fundust",
+        pdfVersion: "PDF-útgáfa"
     },
     common: {
         close: "Loka",

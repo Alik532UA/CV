@@ -116,6 +116,10 @@ export const ko: Translations = {
         }
     },
     other: {
+        highlights: "주요 성과",
+        iqLabel: "IQ",
+        olympicsLabel: "올림피아드",
+        driverLabel: "운전면허",
         title: "추가 정보",
         iq: "125 (평균 이상)",
         olympics: "3위 - 2016년, 전 우크라이나 컴퓨터 시스템 진단 올림피아드",
@@ -199,6 +203,27 @@ export const ko: Translations = {
         ats: "ATS / RMS",
         dark: "다크 테마",
         light: "라이트 테마"
+    },
+    ui: {
+        skipToContent: "본문으로 건너뛰기",
+        background: "배경 효과",
+        backgroundOff: "끄기",
+        backgroundParticles: "입자",
+        backgroundWaves: "물결",
+        backgroundShapes: "도형",
+        particleCount: "입자 수",
+        waveLayers: "물결 레이어 수",
+        lineWidth: "선 굵기",
+        theme: "테마",
+        themeLight: "밝은 테마",
+        themeDark: "어두운 테마",
+        language: "언어 선택",
+        languageSearch: "언어 검색…",
+        profilePhoto: "프로필 사진",
+        filterProjects: "프로젝트 필터",
+        email: "이메일",
+        languageEmpty: "언어를 찾을 수 없습니다",
+        pdfVersion: "PDF 버전"
     },
     common: {
         close: "닫기",

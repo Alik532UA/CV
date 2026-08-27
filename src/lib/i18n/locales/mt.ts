@@ -116,6 +116,10 @@ export const mt: Translations = {
         }
     },
     other: {
+        highlights: "Kisbiet",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpjadi",
+        driverLabel: "Liċenzja",
         title: "Informazzjoni Addizzjonali",
         iq: "125 ('Il fuq mill-medja)",
         olympics: "It-3 post - 2016, Olimpjadi Ukrajni tad-Dijanjostika tas-Sistemi tal-Kompjuter",
@@ -199,6 +203,27 @@ export const mt: Translations = {
         ats: "ATS / RMS",
         dark: "Tema Skura",
         light: "Tema Ċara"
+    },
+    ui: {
+        skipToContent: "Aqbeż għall-kontenut prinċipali",
+        background: "Effett tal-isfond",
+        backgroundOff: "Mitfi",
+        backgroundParticles: "Partiċelli",
+        backgroundWaves: "Mewġ",
+        backgroundShapes: "Forom",
+        particleCount: "Numru ta’ partiċelli",
+        waveLayers: "Saffi tal-mewġ",
+        lineWidth: "Ħxuna tal-linja",
+        theme: "Tema",
+        themeLight: "Tema ċara",
+        themeDark: "Tema skura",
+        language: "Agħżel il-lingwa",
+        languageSearch: "Fittex lingwa…",
+        profilePhoto: "Ritratt tal-profil",
+        filterProjects: "Iffiltra l-proġetti",
+        email: "Email",
+        languageEmpty: "Ma nstab l-ebda lingwa",
+        pdfVersion: "Verżjoni PDF"
     },
     common: {
         close: "Agħlaq",

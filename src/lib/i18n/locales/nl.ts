@@ -116,6 +116,10 @@ export const nl: Translations = {
         }
     },
     other: {
+        highlights: "Hoogtepunten",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympiade",
+        driverLabel: "Rijbewijs",
         title: "Aanvullende Informatie",
         iq: "125 (Bovengemiddeld)",
         olympics: "3e plaats - 2016, Al-Oekraïense Olympiade Computersysteemdiagnostiek",
@@ -199,6 +203,27 @@ export const nl: Translations = {
         ats: "ATS / RMS",
         dark: "Donker Thema",
         light: "Licht Thema"
+    },
+    ui: {
+        skipToContent: "Ga naar de hoofdinhoud",
+        background: "Achtergrondeffect",
+        backgroundOff: "Uit",
+        backgroundParticles: "Deeltjes",
+        backgroundWaves: "Golven",
+        backgroundShapes: "Vormen",
+        particleCount: "Aantal deeltjes",
+        waveLayers: "Golflagen",
+        lineWidth: "Lijndikte",
+        theme: "Thema",
+        themeLight: "Licht thema",
+        themeDark: "Donker thema",
+        language: "Taal kiezen",
+        languageSearch: "Taal zoeken…",
+        profilePhoto: "Profielfoto",
+        filterProjects: "Projecten filteren",
+        email: "E-mail",
+        languageEmpty: "Geen talen gevonden",
+        pdfVersion: "PDF-versie"
     },
     common: {
         close: "Sluiten",

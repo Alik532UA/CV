@@ -116,6 +116,10 @@ export const sk: Translations = {
         }
     },
     other: {
+        highlights: "Úspechy",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympiáda",
+        driverLabel: "Vodičák",
         title: "Doplnkové informácie",
         iq: "125 (nadpriemer)",
         olympics: "3. miesto - 2016, celoukrajinská olympiáda v diagnostike počítačových systémov",
@@ -199,6 +203,27 @@ export const sk: Translations = {
         ats: "ATS / RMS",
         dark: "Tmavá téma",
         light: "Svetlá téma"
+    },
+    ui: {
+        skipToContent: "Prejsť na hlavný obsah",
+        background: "Efekt pozadia",
+        backgroundOff: "Vypnuté",
+        backgroundParticles: "Častice",
+        backgroundWaves: "Vlny",
+        backgroundShapes: "Tvary",
+        particleCount: "Počet častíc",
+        waveLayers: "Vrstvy vĺn",
+        lineWidth: "Hrúbka čiary",
+        theme: "Motív",
+        themeLight: "Svetlý motív",
+        themeDark: "Tmavý motív",
+        language: "Vybrať jazyk",
+        languageSearch: "Hľadať jazyk…",
+        profilePhoto: "Profilová fotka",
+        filterProjects: "Filtrovať projekty",
+        email: "E-mail",
+        languageEmpty: "Nenašli sa žiadne jazyky",
+        pdfVersion: "Verzia PDF"
     },
     common: {
         close: "Zavrieť",

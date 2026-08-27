@@ -116,6 +116,10 @@ export const sq: Translations = {
         }
     },
     other: {
+        highlights: "Arritje",
+        iqLabel: "IQ",
+        olympicsLabel: "Olimpiadë",
+        driverLabel: "Patentë",
         title: "Informacion Shtesë",
         iq: "125 (Mbi mesataren)",
         olympics: "Vendi 3 - 2016, Olimpiada Gjithë-Ukrainase e Diagnostikimit të Sistemeve Kompjuterike",
@@ -199,6 +203,27 @@ export const sq: Translations = {
         ats: "ATS / RMS",
         dark: "Temë e Errët",
         light: "Temë e Çelët"
+    },
+    ui: {
+        skipToContent: "Kalo te përmbajtja kryesore",
+        background: "Efekti i sfondit",
+        backgroundOff: "Joaktiv",
+        backgroundParticles: "Grimca",
+        backgroundWaves: "Valë",
+        backgroundShapes: "Forma",
+        particleCount: "Numri i grimcave",
+        waveLayers: "Shtresat e valëve",
+        lineWidth: "Trashësia e vijës",
+        theme: "Tema",
+        themeLight: "Temë e çelët",
+        themeDark: "Temë e errët",
+        language: "Zgjidh gjuhën",
+        languageSearch: "Kërko gjuhë…",
+        profilePhoto: "Fotoja e profilit",
+        filterProjects: "Filtro projektet",
+        email: "Email",
+        languageEmpty: "Nuk u gjet asnjë gjuhë",
+        pdfVersion: "Versioni PDF"
     },
     common: {
         close: "Mbyll",

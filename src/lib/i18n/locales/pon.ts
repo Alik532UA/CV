@@ -123,6 +123,10 @@ export const pon: Translations = {
         }
     },
     other: {
+        highlights: "Wiawi Kesempwal",
+        iqLabel: "IQ",
+        olympicsLabel: "Olympics",
+        driverLabel: "Licence",
         title: "Pil Ekei Mahsen",
         iq: "125 (Laudsang Ansou Kan)",
         olympics: "Keriau 3 - 2016, All-Ukrainian Olympiad nan Computer System Diagnostics",
@@ -206,6 +210,27 @@ export const pon: Translations = {
         ats: "ATS / RMS",
         dark: "Dark Theme",
         light: "Light Theme"
+    },
+    ui: {
+        skipToContent: "Kohla ni audepe kesempwal",
+        background: "Background effect",
+        backgroundOff: "Kihdi",
+        backgroundParticles: "Particles",
+        backgroundWaves: "Iloak",
+        backgroundShapes: "Shapes",
+        particleCount: "Uwen tohtohn particles",
+        waveLayers: "Wave layers",
+        lineWidth: "Mosul en line",
+        theme: "Theme",
+        themeLight: "Theme marain",
+        themeDark: "Theme rotorot",
+        language: "Pilada lokaia",
+        languageSearch: "Rapahki lokaia…",
+        profilePhoto: "Kilel en profile",
+        filterProjects: "Filter projects",
+        email: "Email",
+        languageEmpty: "Sohte lokaia diarada",
+        pdfVersion: "PDF version"
     },
     common: {
         close: "Ritidi",
