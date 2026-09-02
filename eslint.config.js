@@ -186,6 +186,7 @@ export default tseslint.config(
       'src/lib/services/storage/**',
       'src/lib/config/storage.ts',
       '**/storageMigration.ts',
+      '**/storageMigration.test.ts',
       '**/storage.test.ts',
       '**/storage.spec.ts',
       'tests/**',
