@@ -82,7 +82,13 @@
 				var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 				var theme = saved || (prefersDark ? 'dark' : 'light');
 				document.documentElement.setAttribute('data-theme', theme);
-				document.documentElement.style.colorScheme = theme;
+				// СХЕМУ ОГОЛОШУЄ CSS, а не цей рядок. Тут стояло
+				// `documentElement.style.colorScheme = theme` — інлайновий стиль
+				// перебиває будь-яку таблицю стилів, тож звуження в `app.css`
+				// ставало недосяжним, і світла тема отримувала голе `light`. Саме
+				// за ним Android Chrome вмикає Auto Dark Theme й перемальовує
+				// сторінку (UI-UX-v9 `UIUX-ONLY-LIGHT`, § 1.5.1). `app.css`
+				// render-blocking, тож звуження діє з першого ж кадру.
 
 				// Hide the native bar before the first frame, or it shows and then
 				// vanishes once the components mount — the same flicker the theme
