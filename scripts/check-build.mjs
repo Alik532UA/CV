@@ -222,6 +222,38 @@ for (const file of files) {
 		}
 	}
 
+	/*
+	 * SEO-HEAD-SINGLE-OWNER (SEO-v9 § 4.4, HIGH) — у мета-тега один власник.
+	 *
+	 * Правило вже було виконане для `canonical` (нижче), і саме тому дірка
+	 * лишалася невидимою: решта тегів `<head>` не перевірялася ЖОДНИМ числом.
+	 * А клас дефекту не про canonical: макет і сторінка пишуть той самий
+	 * `og:image` / `description` / `robots`, у розмітці це два різні
+	 * компоненти, у `<head>` — два теги, і соцмережа бере ПЕРШИЙ, тобто не
+	 * той, який писали останнім. Симптому немає: сторінка валідна, обидва
+	 * теги правильні кожен окремо.
+	 *
+	 * `og:locale:alternate` тут не рахується — він за визначенням множинний.
+	 */
+	if (!isShell) {
+		const SINGLE_OWNER = [
+			['<meta name="description"', /<meta\s+name="description"/g],
+			['<meta name="robots"', /<meta\s+name="robots"/g],
+			['<meta property="og:image"', /<meta\s+property="og:image"/g],
+			['<meta property="og:title"', /<meta\s+property="og:title"/g],
+			['<meta property="og:description"', /<meta\s+property="og:description"/g],
+			['<meta property="og:url"', /<meta\s+property="og:url"/g],
+			['<meta property="og:locale"', /<meta\s+property="og:locale"(?!:)/g],
+			['<title>', /<title[\s>]/g]
+		];
+		for (const [label, pattern] of SINGLE_OWNER) {
+			const count = (html.match(pattern) ?? []).length;
+			if (count > 1) {
+				fail(`${file}: ${label} знайдено ${count} разів — у тега два власники`);
+			}
+		}
+	}
+
 	// § 2.1 — рівно одна canonical
 	if (!isShell && !isHidden) {
 		const canonicals = html.match(/<link[^>]+rel="canonical"[^>]*>/g) ?? [];
