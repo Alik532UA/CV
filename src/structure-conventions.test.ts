@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { globSync, readFileSync } from "node:fs";
-import { basename, resolve } from "node:path";
+import { existsSync, globSync, readFileSync, statSync } from "node:fs";
+import { resolve } from "node:path";
 
 /**
  * Структура й UI-конвенції (PROJECT-STRUCTURE-v8 § 8, SVELTE-UI-v8 § 4).
@@ -46,24 +46,130 @@ describe("PROJECT-STRUCTURE § 4.3 — існування ≠ досяжніст
 	 * написаний повністю й не підключений нікуди.
 	 */
 	/**
-	 * Кожне джерело читається РАЗ, а не заново для кожного компонента.
+	 * ДОСЯЖНІСТЬ ГРАФОМ ІМПОРТІВ, А НЕ ЗГАДКА ІМЕНІ (`PS-REACHABILITY`, HIGH).
 	 *
-	 * Наївна форма — `COMPONENTS.filter(c => SOURCES.some(o => read(o)…))` —
-	 * це N×M звернень до диска: 76 компонентів × 190 джерел. Поки файлів було
-	 * менше, вона вкладалася в типовий ліміт vitest; із двома новими вона стала
-	 * падати ЛИШЕ в повному прогоні, де тести йдуть паралельно, і виглядало це
-	 * як зламаний інваріант, а не як брак часу. Той самий клас, що описаний у
-	 * `src/eslint-baseline.test.ts`: гейт червоніє без порушення.
+	 * Доти тут стояло «імʼя файлу трапляється в якомусь іншому джерелі», і ця
+	 * форма пропускає рівно два випадки, які канон v9 називає окремо:
+	 *
+	 *   • ЗГАДКА В КОМЕНТАРІ. `theme.init()` у прозі JSDoc, `SEO.svelte` у
+	 *     поясненні — і греп «знаходить» модуль, якого ніхто не імпортує.
+	 *     Заміряно в сусідній перевірці цього ж комміт-ряду: закоментований
+	 *     виклик лишав інваріант зеленим саме через таку згадку;
+	 *   • ЛАНЦЮЖОК СИРІТ. `A.svelte` імпортує `B.svelte`, обидва недосяжні з
+	 *     жодної точки входу — але кожен «десь згадується», тобто в іншому.
+	 *
+	 * Тепер будується справжній граф від точок входу SvelteKit: маршрути,
+	 * гачки, матчери параметрів — і `worker/index.ts`, бо чотири модуля
+	 * `src/lib/{config,services}` імпортує і сайт, і воркер (див.
+	 * PROJECT-CONTEXT.md). Специфікатори `$lib/…`, відносні шляхи, `.js` у
+	 * записі імпорту при `.ts` на диску, `index.ts` у теці й динамічний
+	 * `import()` — усі розвʼязуються.
+	 *
+	 * `./$types` не розвʼязується навмисно: це віртуальний модуль, який
+	 * генерує сам SvelteKit, і на диску його немає.
+	 *
+	 * Перший прогін цієї форми знайшов `src/lib/index.ts` — заглушку зі
+	 * скафолда («place files you want to import through the `$lib` alias in
+	 * this folder»), один рядок комментаря, нуль імпортів. Стара форма її не
+	 * бачила, бо перевіряла лише `.svelte`.
 	 */
-	it("кожен компонент десь імпортується", () => {
-		const byFile = new Map(SOURCES.map((p) => [p, read(p)]));
-		const orphans = COMPONENTS.filter((file) => {
-			const name = basename(file);
-			return !SOURCES.some((other) => other !== file && byFile.get(other)!.includes(name));
-		});
-		expect(orphans, `ніде не імпортовані — підключити або видалити:\n${orphans.join("\n")}`).toEqual(
-			[]
+	const ENTRY_POINTS = [
+		...globSync("src/routes/**/+*.{ts,svelte}", { cwd: ROOT }).map(rel),
+		...globSync("src/params/*.ts", { cwd: ROOT }).map(rel),
+		...globSync("worker/*.ts", { cwd: ROOT }).map(rel),
+		"src/hooks.client.ts",
+		"src/hooks.server.ts"
+	].filter((p) => existsSync(resolve(ROOT, p)));
+
+	/** Специфікатор із `from "…"` або `import("…")`. */
+	const SPECIFIER = /(?:from\s*|import\s*\(\s*)["']([^"']+)["']/g;
+
+	/** Модуль, на який указує специфікатор; null — зовнішній або віртуальний. */
+	function resolveSpecifier(spec: string, from: string): string | null {
+		let base: string;
+		if (spec === "$lib") base = "src/lib/index";
+		else if (spec.startsWith("$lib/")) base = `src/lib/${spec.slice(5)}`;
+		else if (spec.startsWith(".")) {
+			const dir = from.slice(0, from.lastIndexOf("/"));
+			const out: string[] = [];
+			for (const part of `${dir}/${spec}`.split("/")) {
+				if (part === "." || part === "") continue;
+				if (part === "..") out.pop();
+				else out.push(part);
+			}
+			base = out.join("/");
+		} else return null;
+
+		for (const candidate of [
+			base,
+			`${base}.ts`,
+			`${base}.svelte`,
+			`${base}.svelte.ts`,
+			`${base}/index.ts`,
+			base.replace(/\.js$/, ".ts")
+		]) {
+			if (GRAPH_FILES.includes(candidate)) return candidate;
+		}
+		return null;
+	}
+
+	/** Усе, що може бути вузлом графа: джерела плюс `.js` у `src/`. */
+	const GRAPH_FILES = [
+		...SOURCES,
+		...globSync("src/**/*.js", { cwd: ROOT })
+			.map(rel)
+			.filter((p) => !/\.(test|spec)\.js$/.test(p)),
+		...globSync("worker/*.ts", { cwd: ROOT }).map(rel)
+	];
+
+	function reachable(): Set<string> {
+		const seen = new Set<string>();
+		const queue = [...ENTRY_POINTS];
+		while (queue.length > 0) {
+			const file = queue.shift() as string;
+			if (seen.has(file)) continue;
+			seen.add(file);
+			if (!existsSync(resolve(ROOT, file))) continue;
+			for (const m of read(file).matchAll(SPECIFIER)) {
+				const target = resolveSpecifier(m[1], file);
+				if (target) queue.push(target);
+			}
+		}
+		return seen;
+	}
+
+	it("точки входу знайдено, і граф із них справді розходиться", () => {
+		expect(ENTRY_POINTS.length, "жодної точки входу — граф будувати нема з чого").toBeGreaterThan(
+			5
 		);
+		const seen = reachable();
+		// Граф мусить дотягтися ЗНАЧНО далі за самі точки входу, інакше
+		// «недосяжних немає» означало б «розбір імпортів зламався».
+		expect(
+			seen.size,
+			`граф дійшов лише до ${seen.size} файлів при ${ENTRY_POINTS.length} точках входу — ` +
+				"розбір специфікаторів зламався"
+		).toBeGreaterThan(ENTRY_POINTS.length * 5);
+		// І доказ, що розвʼязувач розуміє саме ті форми, на які тут спираються.
+		expect(resolveSpecifier("$lib/services/storage", "src/routes/+layout.svelte")).toBe(
+			"src/lib/services/storage.ts"
+		);
+		expect(resolveSpecifier("$lib/config/site.js", "src/lib/i18n/routing.ts")).toBe(
+			"src/lib/config/site.js"
+		);
+		expect(resolveSpecifier("./$types", "src/routes/+layout.ts")).toBeNull();
+	});
+
+	it("кожен модуль досяжний графом імпортів із точки входу", () => {
+		const seen = reachable();
+		const orphans = GRAPH_FILES.filter((f) => !seen.has(f) && !/\.d\.ts$/.test(f)).sort();
+		expect(
+			orphans,
+			"модуль недосяжний із жодної точки входу — його ніхто не виконує. Це читається\n" +
+				"як зроблена робота: файл правлять, на нього посилаються, він не працює.\n" +
+				"Підключити там, де він потрібен, або видалити:\n" +
+				orphans.join("\n")
+		).toEqual([]);
 	});
 
 	/**
@@ -241,5 +347,84 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 			return !m || m.lines <= m.limit;
 		});
 		expect(stale, `прибрати з ALLOWED — вони більше не порушують:\n${stale.join("\n")}`).toEqual([]);
+	});
+});
+
+/**
+ * Сироти у `static/` (`PS-STATIC-ORPHANS`, MEDIUM).
+ *
+ * Усе з `static/` їде на хостинг ЦІЛКОМ і безумовно: adapter копіює теку, а
+ * не те, на що є посилання. Файл, який більше нікому не потрібен, лишається
+ * назавжди — його ніхто не видалить, бо ніхто й не дізнається, що він зайвий.
+ *
+ * Заміряно тут при першому прогоні: `pdf-preview/Alik-Zapolnov-CV-ATS-RMS-EN.jpg`,
+ * 144 КБ, посилань — НУЛЬ. Прев'ю мають лише оформлені версії резюме
+ * (`THEMED_FILES`); ATS/RMS-версії роздаються посиланнями без картинки, і
+ * поля `image` в них немає взагалі.
+ *
+ * Посилання шукається за ІМЕНЕМ файлу, а не за шляхом від `static/`: адреси в
+ * цьому проєкті складаються з частин — `src="{base}/images/{project.image}"`,
+ * `SOUND_DIR` + імʼя файлу. Пошук за повним шляхом дав би шістнадцять хибних
+ * знахідок із двадцяти одного файлу, тобто перевірку, яку вимкнули б першого дня.
+ */
+describe("PROJECT-STRUCTURE § 2.1 — у static/ немає сиріт", () => {
+	/**
+	 * Файли, які запитує сам хостинг або браузер за конвенцією, без жодного
+	 * посилання з коду. Кожен — із причиною; перелік звіряється нижче.
+	 */
+	const BY_CONVENTION: Record<string, string> = {};
+
+	const STATIC = globSync("static/**/*", { cwd: ROOT })
+		.map(rel)
+		.filter((p) => statSync(resolve(ROOT, p)).isFile());
+
+	/** Де взагалі може стояти посилання на статичний файл. */
+	const REFERRERS = [
+		...SOURCES,
+		...globSync("src/**/*.js", { cwd: ROOT }).map(rel),
+		// І `.js`, і `.mjs`: `bump-version.js` — той, хто ГЕНЕРУЄ
+		// `static/app-version.json`, тобто його власник і його посилання.
+		...globSync("scripts/*.{js,mjs}", { cwd: ROOT }).map(rel),
+		...globSync("static/*.{txt,xml}", { cwd: ROOT }).map(rel),
+		"src/app.html",
+		"svelte.config.js"
+	].filter((p) => existsSync(resolve(ROOT, p)));
+
+	function orphans(): string[] {
+		const haystack = REFERRERS.map((f) => ({ file: f, text: read(f) }));
+		return STATIC.filter((path) => {
+			const name = path.slice(path.lastIndexOf("/") + 1);
+			if (name in BY_CONVENTION || path in BY_CONVENTION) return false;
+			return !haystack.some(({ file, text }) => file !== path && text.includes(name));
+		}).sort();
+	}
+
+	it("перевірка жива: статичні файли й місця посилань знайдено", () => {
+		expect(STATIC.length, "у static/ не знайдено файлів").toBeGreaterThan(10);
+		expect(REFERRERS.length, "місць, де може стояти посилання, не видно").toBeGreaterThan(50);
+		// Доказ, що зіставлення за імʼям справді працює: `profile.jpg` стоїть у
+		// розмітці й у `SEO.svelte`, тобто мусить знайтися.
+		expect(STATIC).toContain("static/images/profile.jpg");
+		expect(orphans()).not.toContain("static/images/profile.jpg");
+		// І що воно не приймає за посилання будь-що: вигаданого файлу немає.
+		expect(REFERRERS.some((f) => read(f).includes("ghost-asset-never-referenced.png"))).toBe(false);
+	});
+
+	it("перелік конвенційних файлів не тримає тих, на які вже є посилання", () => {
+		const haystack = REFERRERS.map((f) => read(f));
+		const stale = Object.keys(BY_CONVENTION).filter((name) =>
+			haystack.some((text) => text.includes(name))
+		);
+		expect(stale, `виняток уже не потрібен — посилання є: ${stale.join(", ")}`).toEqual([]);
+	});
+
+	it("на кожен файл у static/ хтось посилається", () => {
+		expect(
+			orphans(),
+			"файл у `static/` не згадує ніхто, а на хостинг він їде: adapter копіює теку\n" +
+				"цілком. Видалити або підключити — або, якщо його запитує сам хостинг,\n" +
+				"записати в BY_CONVENTION з причиною:\n" +
+				orphans().join("\n")
+		).toEqual([]);
 	});
 });
