@@ -35,6 +35,25 @@ const ROOT = resolve(__dirname, "..");
 const DOC = readFileSync(resolve(ROOT, "PROJECT-CONTEXT.md"), "utf8");
 const read = (p: string) => readFileSync(resolve(ROOT, p), "utf8");
 
+/**
+ * Обидва документи для агента, а не лише один (`PIT-DOC-FACTS`,
+ * `PIT-NUMBER-UNDER-GATE`, обидва HIGH).
+ *
+ * Канон називає ДВА файли — `AGENTS.md` і `PROJECT-CONTEXT.md`, — а гейт тут
+ * читав лише другий. Ціна цього видна одразу, як тільки перший потрапив під
+ * перевірку: у таблиці «бази, які рухаються лише вниз» два з трьох рядків
+ * `AGENTS.md` називали числа, яких у гейтах уже не існувало, — «21 замала
+ * ціль» при зміряних 12 і «11 файлів, найбільший 1073» при чотирьох записах
+ * зі стелею 855. Обидва були правдою, коли їх писали.
+ *
+ * Симетрично: `PROJECT-CONTEXT.md` називав ТРИ ключі бази axe при чотирьох —
+ * `betaChecklist` додали й рядок не оновили.
+ */
+const DOCS: Record<string, string> = {
+	"PROJECT-CONTEXT.md": DOC,
+	"AGENTS.md": read("AGENTS.md")
+};
+
 describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 	it("перевірка жива: файл прочитано", () => {
 		expect(DOC.length, "PROJECT-CONTEXT.md порожній — сканер читає не те").toBeGreaterThan(5000);
@@ -50,13 +69,15 @@ describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 	 * від відомого кореня зі справжнім розширенням. Тека без файлу (`src/lib/`)
 	 * і чужі адреси (`/DigitalWorkshop/`) не рахуються навмисно.
 	 */
-	it("кожен згаданий файл проєкту існує", () => {
+	it("кожен згаданий файл проєкту існує — в обох документах", () => {
 		const roots = "(?:src|tests|scripts|worker|static|\\.github|\\.claude)";
 		const path = new RegExp("`(" + roots + "/[\\w./-]+\\.\\w{1,5})`", "g");
 
 		const missing: string[] = [];
-		for (const m of DOC.matchAll(path)) {
-			if (!existsSync(resolve(ROOT, m[1]))) missing.push(m[1]);
+		for (const [doc, text] of Object.entries(DOCS)) {
+			for (const m of text.matchAll(path)) {
+				if (!existsSync(resolve(ROOT, m[1]))) missing.push(`${doc}: ${m[1]}`);
+			}
 		}
 		expect(
 			missing,
@@ -125,6 +146,189 @@ describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 			wrong,
 			`у коді ${count} мов, а документ каже: ${wrong.join(", ")} ` +
 				`(${count - 1} дозволено — це форма «решта ${count - 1}», тобто без поточної)`
+		).toEqual([]);
+	});
+});
+
+/**
+ * Числа баз у документах дорівнюють тому, що міряють гейти
+ * (`PIT-NUMBER-UNDER-GATE`, AI-AGENT-PITFALLS-v9 § 5.5.1, HIGH).
+ *
+ * Правило канону просте: число, записане в `AGENTS.md` чи
+ * `PROJECT-CONTEXT.md`, або стоїть під гейтом, або його там немає. Третій
+ * варіант — «число в прозі, яке ніхто не звіряє» — це не документація, а
+ * пастка: воно виглядає як замір, читається як замір і застаріває тихо.
+ *
+ * ЩО САМЕ ЗВІРЯЄТЬСЯ. Рядок документа, який називає файл бази, не має права
+ * містити цілого числа, якого база не міряє. Дозволені — самі значення бази,
+ * їхня сума, кількість ключів і межі § 7.
+ *
+ * ЩО НЕ ЗВІРЯЄТЬСЯ, І ЧОМУ ЦЕ НЕ ДІРКА. З рядка знімаються ідіоми, у яких
+ * число за побудовою НЕ є поточним заміром і мусить лишатися: дата, посилання
+ * на розділ (`§ 10.1.1`) чи версію пакета (`v9.2`), контраст (`4.5:1`),
+ * розмір цілі (`44×44`, `44px`), журнальний перехід (`484 → 446`, `було 21`)
+ * і число в лапках-«ялинках» — саме так у цьому проєкті цитують ХИБНІ числа,
+ * названі колись із пам'яті.
+ */
+describe("числа баз у документах — під гейтом (PIT-NUMBER-UNDER-GATE)", () => {
+	const AXE_BLOCK = /A11Y_BASELINE: Record<string, number> = \{([\s\S]*?)\};/;
+	const TOUCH_BLOCK = /TOUCH_BASELINE: Record<string, number> = \{([\s\S]*?)\};/;
+
+	/** Цілі числа рядка, які претендують бути поточним заміром. */
+	function claimedNumbers(line: string): number[] {
+		const cleaned = line
+			.replace(/«[^»]*»/g, " ")
+			.replace(/\d{4}-\d{2}-\d{2}/g, " ")
+			.replace(/§\s*[\d.]+/g, " ")
+			.replace(/-?v\d+(?:\.\d+)?/gi, " ")
+			.replace(/\d+[.,]\d+\s*:\s*\d+/g, " ")
+			.replace(/\d+\s*[×x]\s*\d+/g, " ")
+			.replace(/\d+\s*(?:px|КБ|кб|%)/g, " ")
+			.replace(/\d+\s*→\s*\d+/g, " ")
+			/*
+			 * БЕЗ `\b` ПЕРЕД КИРИЛИЦЕЮ, і це не дрібниця. У JavaScript `\b` —
+			 * межа класу `[A-Za-z0-9_]`, тобто перед `б` її НЕ існує: і пробіл,
+			 * і `б` для нього однаково «не слово». `\bбуло` не збігається ніколи,
+			 * тож журнальне «було 21» проходило б як поточний замір. Знайдено
+			 * канаркою нижче, а не читанням.
+			 */
+			.replace(/було\s+\*{0,2}\d+/g, " ");
+		return [...cleaned.matchAll(/\b(\d+)\b/g)].map((m) => Number(m[1])).filter((n) => n >= 2);
+	}
+
+	/** Значення `ALLOWED` і `LIMITS` розбираються з джерела гейта. */
+	function sizeRatchet(): { allowed: Record<string, number>; limits: number[] } {
+		const source = read("src/structure-conventions.test.ts");
+		const allowedBlock = /const ALLOWED: Record<string, number> = \{([\s\S]*?)\};/.exec(source);
+		const limitsBlock = /const LIMITS: Array<\[RegExp, number\]> = \[([\s\S]*?)\];/.exec(source);
+		expect(allowedBlock, "ALLOWED більше не читається — перевірка мертва").toBeTruthy();
+		expect(limitsBlock, "LIMITS більше не читається — перевірка мертва").toBeTruthy();
+		const allowed: Record<string, number> = {};
+		for (const m of allowedBlock![1].matchAll(/"([^"]+)":\s*(\d+)/g)) allowed[m[1]] = Number(m[2]);
+		const limits = [...limitsBlock![1].matchAll(/,\s*(\d+)\]/g)].map((m) => Number(m[1]));
+		return { allowed, limits };
+	}
+
+	/**
+	 * Числа з файла-бази у `tests/`: значення, сума, кількість ключів.
+	 *
+	 * Регулярка приходить літералом, а не збирається з імені: `new RegExp` над
+	 * шаблонним рядком тут уже один раз мовчки зламався — `\s` у шаблонному
+	 * рядку це літера `s`, тобто вираз збігався ні з чим, і перевірка падала
+	 * не з тим, що шукала. Літерал такого класу не має.
+	 */
+	function baselineNumbers(
+		file: string,
+		name: string,
+		block: RegExp
+	): { values: number[]; keys: string[] } {
+		const source = read(file);
+		const found = block.exec(source);
+		expect(found, `${name} у ${file} більше не читається — перевірка мертва`).toBeTruthy();
+		const entries = [...found![1].matchAll(/(\w+):\s*(\d+)/g)];
+		return { values: entries.map((m) => Number(m[2])), keys: entries.map((m) => m[1]) };
+	}
+
+	const rowsWith = (needle: string) =>
+		Object.entries(DOCS).flatMap(([doc, text]) =>
+			text
+				.split("\n")
+				.map((line, i) => ({ doc, line, no: i + 1 }))
+				.filter(({ line }) => line.includes(needle))
+		);
+
+	it("перевірка жива: бази читаються, ідіоми знімаються, рядки знаходяться", () => {
+		const axe = baselineNumbers("tests/a11y-baseline.ts", "A11Y_BASELINE", AXE_BLOCK);
+		const touch = baselineNumbers("tests/touch-target-baseline.ts", "TOUCH_BASELINE", TOUCH_BLOCK);
+		const { allowed, limits } = sizeRatchet();
+		expect(axe.keys.length).toBeGreaterThan(2);
+		expect(touch.keys.length).toBeGreaterThan(2);
+		expect(Object.keys(allowed).length).toBeGreaterThan(0);
+		expect(limits.length).toBeGreaterThan(2);
+
+		// Ідіоми, які мусять зникати, і число, яке мусить лишатися.
+		expect(claimedNumbers("заміряно 2026-08-28, § 10.1.1, канон v9.2")).toEqual([]);
+		expect(claimedNumbers("контраст 4.5:1, ціль 44×44, min-height: 44px")).toEqual([]);
+		expect(claimedNumbers("484 → 446, було 21, «дев'ять / 1057»")).toEqual([]);
+		expect(claimedNumbers("зараз 12 цілей")).toEqual([12]);
+
+		expect(rowsWith("tests/a11y-baseline.ts").length, "жоден документ не називає базу axe").toBeGreaterThan(0);
+		expect(rowsWith("tests/touch-target-baseline.ts").length, "жоден документ не називає базу цілей").toBeGreaterThan(0);
+	});
+
+	it("рядок про базу axe називає ВСІ її ключі, якщо називає хоч один", () => {
+		const { keys } = baselineNumbers("tests/a11y-baseline.ts", "A11Y_BASELINE", AXE_BLOCK);
+		const bad: string[] = [];
+		for (const { doc, line, no } of rowsWith("tests/a11y-baseline.ts")) {
+			const named = keys.filter((k) => line.includes(k));
+			if (named.length === 0) continue;
+			const missing = keys.filter((k) => !line.includes(k));
+			if (missing.length > 0) bad.push(`${doc}:${no}: не названо ${missing.join(", ")}`);
+		}
+		expect(
+			bad,
+			"рядок перелічує ключі бази axe і пропускає частину: читач вирішить, що\n" +
+				"решта сторінок не міряється взагалі:\n" + bad.join("\n")
+		).toEqual([]);
+	});
+
+	it("рядок про базу сенсорних цілей називає ВСІ її ключі, якщо називає хоч один", () => {
+		const { keys } = baselineNumbers("tests/touch-target-baseline.ts", "TOUCH_BASELINE", TOUCH_BLOCK);
+		const bad: string[] = [];
+		for (const { doc, line, no } of rowsWith("tests/touch-target-baseline.ts")) {
+			const named = keys.filter((k) => line.includes(k));
+			if (named.length === 0) continue;
+			const missing = keys.filter((k) => !line.includes(k));
+			if (missing.length > 0) bad.push(`${doc}:${no}: не названо ${missing.join(", ")}`);
+		}
+		expect(bad, `рядок пропускає частину ключів бази цілей:\n${bad.join("\n")}`).toEqual([]);
+	});
+
+	it("жодне число поруч із базою не розходиться з тим, що вона міряє", () => {
+		const axe = baselineNumbers("tests/a11y-baseline.ts", "A11Y_BASELINE", AXE_BLOCK);
+		const touch = baselineNumbers("tests/touch-target-baseline.ts", "TOUCH_BASELINE", TOUCH_BLOCK);
+		const { allowed, limits } = sizeRatchet();
+		const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
+		const allowedValues = Object.values(allowed);
+
+		const cases: Array<[string, Set<number>]> = [
+			[
+				"tests/a11y-baseline.ts",
+				new Set([...axe.values, sum(axe.values), axe.keys.length])
+			],
+			[
+				"tests/touch-target-baseline.ts",
+				new Set([...touch.values, sum(touch.values), touch.keys.length])
+			],
+			[
+				"src/structure-conventions.test.ts",
+				new Set([
+					...allowedValues,
+					Object.keys(allowed).length,
+					Math.max(...allowedValues),
+					...limits
+				])
+			]
+		];
+
+		const wrong: string[] = [];
+		for (const [needle, permitted] of cases) {
+			for (const { doc, line, no } of rowsWith(needle)) {
+				for (const n of claimedNumbers(line)) {
+					if (!permitted.has(n)) {
+						wrong.push(
+							`${doc}:${no}: число ${n} поруч із ${needle} — гейт міряє ` +
+								`{${[...permitted].sort((a, b) => a - b).join(", ")}}`
+						);
+					}
+				}
+			}
+		}
+		expect(
+			[...new Set(wrong)],
+			"число в документі не дорівнює тому, що міряє гейт. Або звірити його з базою,\n" +
+				"або прибрати з прози й лишити посилання на файл — третього не буває:\n" +
+				wrong.join("\n")
 		).toEqual([]);
 	});
 });
