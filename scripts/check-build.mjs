@@ -17,7 +17,7 @@
  */
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { SITE_BASE as BASE, SITE_ORIGIN } from "../src/lib/config/site.js";
 import { checkGeo } from "./check-geo.mjs";
 
@@ -420,6 +420,71 @@ for (const file of textAssets) {
 	}
 }
 
+
+// ---------------------------------------------------------------------------
+/*
+ * OBS-LHCI-REAL-PAGES (OBSERVABILITY-v9 § 2.2.1, MEDIUM) — канарка перед
+ * заміром: сторінка, яку відкриє Lighthouse, приїхала З CSS І JS.
+ *
+ * Другий зі двох способів отримати зелений Lighthouse, нічого не виміривши, і
+ * найтихіший: сервер піднімається без базового шляху, сторінка приходить без
+ * стилів і скриптів — і отримує за це чудовий бал продуктивності. Заміряно в
+ * сусідньому проєкті пакета 2026-08-27 на семи сторінках.
+ *
+ * Тут ризик прямий, а не теоретичний: цей проєкт живе за префіксом `/CV`, і
+ * посилання в пререндері ВІДНОСНІ (`./_app/…`). Вони працюють лише тоді, коли
+ * сторінку віддають із її власної теки; LHCI піднімає власний статичний сервер
+ * і бере зі свого `url` лише ШЛЯХ, тож помилка в цьому шляху дає рівно той
+ * випадок — сторінка без CSS і без JS.
+ *
+ * Перелік адрес звіряє з переліком маршрутів `src/lighthouse-canon.test.ts`;
+ * тут — те, що потребує самого `build/`.
+ */
+{
+	const lhci = readFileSync("lighthouserc.cjs", "utf8");
+	const urls = [...(/url:\s*\[([\s\S]*?)\]/.exec(lhci)?.[1] ?? "").matchAll(/['"`]([^'"`]+)['"`]/g)]
+		.map((m) => m[1].replace(/^https?:\/\/[^/]+/, ""))
+		.map((p) => p.replace(/^\//, ""));
+
+	if (urls.length === 0) {
+		fail("lighthouserc.cjs: жодної адреси в collect.url — LHCI піде шукати HTML сам");
+	}
+
+	for (const url of urls) {
+		const page = join(BUILD, url);
+		if (!existsSync(page)) {
+			fail(`lighthouserc.cjs міряє ${url}, якого немає у ${BUILD}/`);
+			continue;
+		}
+		const html = readFileSync(page, "utf8");
+		const assets = [
+			...html.matchAll(/(?:href|src)="(\.\/_app\/[^"]+\.(?:css|js))"/g)
+		].map((m) => m[1]);
+		const styles = assets.filter((a) => a.endsWith(".css"));
+		const scripts = assets.filter((a) => a.endsWith(".js"));
+
+		if (styles.length === 0) {
+			fail(`${page}: жодного стилю — Lighthouse зміряє сторінку без CSS і дасть їй бал`);
+		}
+		if (scripts.length === 0) {
+			fail(`${page}: жодного скрипта — Lighthouse зміряє сторінку без JS і дасть їй бал`);
+		}
+		/*
+		 * Посилання відносне, тобто розвʼязується від теки САМОЇ сторінки —
+		 * через `dirname`, а не через пошук `/` у рядку: `join` на Windows
+		 * віддає `build\index.html`, і зріз по `/` давав «build\index.htm»,
+		 * тобто всі шість посилань «не існували». Перший прогін цього гейта
+		 * так і сказав — і саме тому канарка про кількість стилів і скриптів
+		 * стоїть ОКРЕМО від перевірки їхнього існування.
+		 */
+		const dir = dirname(page);
+		for (const asset of new Set(assets)) {
+			if (!existsSync(join(dir, asset.slice(2)))) {
+				fail(`${page}: посилається на ${asset}, якого немає — сторінка приїде без нього`);
+			}
+		}
+	}
+}
 
 // ---------------------------------------------------------------------------
 /*
