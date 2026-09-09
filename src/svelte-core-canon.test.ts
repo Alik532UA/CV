@@ -341,3 +341,105 @@ describe("слухач знімається там, де ставиться (SC-
 		).toEqual([]);
 	});
 });
+
+/**
+ * Мережевий виклик у тілі руни скасовується сигналом, а не прапорцем
+ * (SVELTE-CORE-v9 § 2.2.1, `SC-ABORT-SIGNAL`, MEDIUM).
+ *
+ * Повернена з `$effect` функція очищення знімає підписки й таймери, але НЕ
+ * скасовує запит, що вже в дорозі. Класична латка — прапорець `cancelled`,
+ * який cleanup ставить у `true`, а продовження `await` перевіряє. Вона працює
+ * і має два невидимі наслідки: мережу займає відповідь, якої ніхто не
+ * прочитає, а прапорець прикриває ЛИШЕ те присвоєння, яке згадали — будь-яке
+ * інше продовження ланцюжка (запис у сховище, аналітика, тост) виконається на
+ * результаті мертвого ефекту.
+ *
+ * `getAbortSignal()` (svelte 5.36+) віддає сигнал, який обривається разом із
+ * перезапуском або знищенням поточного `$effect`/`$derived` — та сама межа
+ * життя, тільки її розуміє платформа, тож скасовується сам запит.
+ *
+ * ЧОМУ ТУТ ЗАРАЗ ПОРОЖНЬО. Усі три `fetch` проєкту лежать в асинхронних
+ * методах контролерів, які кличе користувач — перевірка здоровʼя проксі,
+ * запит до AI, догрузка звуку. Жодного в тілі руни немає. Найближчий
+ * кандидат очевидний: рядок про ліниві словники в PROJECT-CONTEXT.md — це
+ * `await import` за мовою маршруту, тобто саме мережевий виклик, прив'язаний
+ * до реактивного значення.
+ */
+describe("мережа в тілі руни скасовується сигналом (SC-ABORT-SIGNAL)", () => {
+	const RUNE_SOURCES = ALL.filter((f) => /\.(svelte|svelte\.ts)$/.test(f) && !isTest(f));
+
+	/** Тіла `$effect(...)` і `$derived(...)` — із урахуванням вкладених дужок. */
+	function runeBodies(source: string): string[] {
+		const bodies: string[] = [];
+		for (const m of source.matchAll(/\$(?:effect(?:\.pre)?|derived)(?:\.by)?\s*\(/g)) {
+			const open = m.index + m[0].length - 1;
+			let depth = 0;
+			for (let i = open; i < source.length; i++) {
+				if (source[i] === "(") depth++;
+				else if (source[i] === ")" && --depth === 0) {
+					bodies.push(source.slice(open, i + 1));
+					break;
+				}
+			}
+		}
+		return bodies;
+	}
+
+	/**
+	 * Виклики мережі в тілі руни без сигналу скасування.
+	 *
+	 * ЛИШЕ `fetch`, І ЦЕ ВИПРАВЛЕННЯ, А НЕ СПРОЩЕННЯ. Перша редакція ловила й
+	 * динамічний `import()` — і одразу дала дві хибні знахідки в
+	 * `[[lang=lang]]/+page.svelte`, де в `$effect` ліниво вантажаться чанки
+	 * двох модалок. Це не той клас: модульний імпорт скасувати НЕМОЖЛИВО в
+	 * принципі, `AbortSignal` він не приймає, а від застарілого присвоєння там
+	 * стоїть інший захист — `if (!isOpen || Component) return` плюс `catch`,
+	 * який закриває модалку й показує тост. Перевірка, що вимагає неможливого,
+	 * закінчується списком винятків, а список винятків ніхто не читає.
+	 */
+	function unabortable(files: string[] = RUNE_SOURCES): string[] {
+		const found: string[] = [];
+		for (const file of files) {
+			const source = codeOnly(read(file));
+			for (const body of runeBodies(source)) {
+				if (!/\bfetch\s*\(/.test(body)) continue;
+				if (/getAbortSignal\s*\(|signal\s*:/.test(body)) continue;
+				const line = source.slice(0, source.indexOf(body)).split("\n").length;
+				found.push(`${file}:${line}`);
+			}
+		}
+		return [...new Set(found)].sort();
+	}
+
+	it("перевірка жива: тіла рун знаходяться, і детектор бачить дефект", () => {
+		const withRunes = RUNE_SOURCES.filter((f) => runeBodies(codeOnly(read(f))).length > 0);
+		expect(withRunes.length, "жодного тіла руни — сканер читає не те").toBeGreaterThan(5);
+
+		// Зворотний експеримент інлайном: прапорець замість сигналу — знахідка,
+		// сигнал — ні, а руна без мережі не знахідка взагалі.
+		const probe = (source: string) =>
+			runeBodies(source).filter(
+				(b) => /\bfetch\s*\(/.test(b) && !/getAbortSignal\s*\(|signal\s*:/.test(b)
+			).length;
+		expect(probe("$effect(() => { let c = false; fetch(u).then(() => { if (!c) x = 1; }); });")).toBe(
+			1
+		);
+		expect(probe("$effect(() => { fetch(u, { signal: getAbortSignal() }); });")).toBe(0);
+		expect(probe("$effect(() => { count = items.length; });")).toBe(0);
+		// Вкладені дужки не обривають тіло на середині.
+		expect(probe("$effect(() => { go({ a: (1 + 2) }); fetch(u); });")).toBe(1);
+		// Динамічний імпорт чанка — не цей клас: скасувати його неможливо.
+		expect(probe("$effect(() => { void import('./Modal.svelte').then((m) => (C = m)); });")).toBe(
+			0
+		);
+	});
+
+	it("жоден мережевий виклик у тілі руни не лишається без сигналу", () => {
+		expect(
+			unabortable(),
+			"запит у тілі руни без `getAbortSignal()`: cleanup знімає підписки, але запит\n" +
+				"лишається в дорозі, і на його результаті виконається все, що йде після\n" +
+				"`await`, — не лише те присвоєння, яке згадали:\n" + unabortable().join("\n")
+		).toEqual([]);
+	});
+});
