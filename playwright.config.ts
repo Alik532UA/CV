@@ -53,17 +53,44 @@ export default defineConfig({
 		trace: 'on-first-retry',
 	},
 	projects: [
+		/*
+		 * СЕТАП-ПРОЄКТ ПЕРЕД УСІМ (CI-CD-AND-TOOLS-v9 § 1.11,
+		 * CI-E2E-TARGET-IDENTITY).
+		 *
+		 * `--strictPort` і `reuseExistingServer: false` дивляться на порт ОДИН
+		 * РАЗ — до запуску команди нижче. А та команда починається зі збірки на
+		 * ~25 секунд, тобто вікно відкрите: сусідній проєкт цієї машини встигає
+		 * зайняти 5299, і прогін піде на чужий сайт. Падіння тоді виглядає як
+		 * помилка коду, а не середовища.
+		 *
+		 * Тому перший крок — звірка ідентичності й штампа збірки. Він
+		 * оголошений `dependencies` кожного браузерного проєкту, тож розбіжність
+		 * зупиняє ВЕСЬ прогін одним повідомленням, а не дає 29 падінь про
+		 * ненайдені елементи.
+		 *
+		 * `testMatch` тут потрібен, бо `identity.setup.ts` не збігається з
+		 * типовим шаблоном Playwright (`*.spec.ts` / `*.test.ts`) — саме тому
+		 * браузерні проєкти його й не підхоплюють удруге.
+		 */
+		{
+			name: 'identity',
+			testMatch: /identity\.setup\.ts/,
+			use: { ...devices['Desktop Chrome'] },
+		},
 		{
 			name: 'chromium',
 			use: { ...devices['Desktop Chrome'] },
+			dependencies: ['identity'],
 		},
 		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },
+			dependencies: ['identity'],
 		},
 		{
 			name: 'webkit',
 			use: { ...devices['Desktop Safari'] },
+			dependencies: ['identity'],
 		},
 	],
 	webServer: {

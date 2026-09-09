@@ -151,3 +151,91 @@ describe('файли перевірок', () => {
 		).toEqual([]);
 	});
 });
+
+/**
+ * Сетап-проєкт ідентичності підключений, а не просто існує
+ * (CI-CD-AND-TOOLS-v9 § 1.11, `CI-E2E-TARGET-IDENTITY`, MEDIUM).
+ *
+ * ЧОМУ ЦЕ ОКРЕМИЙ ІНВАРІАНТ, А НЕ ДОВІРА ДО КОНФІГУ. `tests/identity.setup.ts`
+ * не збігається з типовим шаблоном Playwright (`*.spec.ts` / `*.test.ts`) — і
+ * це навмисно, інакше кожен браузерний проєкт запускав би його вдруге. Але та
+ * сама властивість робить його НЕВИДИМИМ для перевірки «файл, якого не
+ * запускає ніхто» вище: прибери `dependencies: ['identity']` з проєктів — і
+ * файл лишиться на диску, зелений і мертвий, а прогін піде без звірки порту.
+ *
+ * Тобто це рівно `PIT-TEST-DISCOVERY-PROCESS` у формі, якої той гейт не ловить:
+ * перевірка є, раннер є, конфіг є — не викликає ніхто.
+ */
+describe('сетап-проєкт E2E підключений (CI-E2E-TARGET-IDENTITY)', () => {
+	const configName = readdirSync(ROOT).find((f) => /^playwright\.config\./.test(f));
+	const config = configName ? readFileSync(join(ROOT, configName), 'utf8') : '';
+
+	/** Блоки проєктів: імʼя, `testMatch` і залежності кожного. */
+	function projects(): { name: string; testMatch: string | null; deps: string[] }[] {
+		const list: { name: string; testMatch: string | null; deps: string[] }[] = [];
+		// Проєкти оголошені як `{ name: 'x', … }` — беремо кожен блок від імені
+		// до наступного імені (або до кінця файлу).
+		const names = [...config.matchAll(/name:\s*['"`]([\w-]+)['"`]/g)];
+		for (const [i, m] of names.entries()) {
+			const from = m.index;
+			const to = i + 1 < names.length ? (names[i + 1].index as number) : config.length;
+			const body = config.slice(from, to);
+			list.push({
+				name: m[1],
+				testMatch: /testMatch:\s*\/([^/]+)\//.exec(body)?.[1] ?? null,
+				deps: [...body.matchAll(/dependencies:\s*\[([^\]]*)\]/g)].flatMap((d) =>
+					[...d[1].matchAll(/['"`]([\w-]+)['"`]/g)].map((x) => x[1])
+				)
+			});
+		}
+		return list;
+	}
+
+	it('перевірка жива: конфіг Playwright прочитано й проєкти розібрано', () => {
+		expect(configName, 'конфігу Playwright у корені немає').toBeTruthy();
+		expect(projects().length, 'у конфізі не знайдено жодного проєкту').toBeGreaterThan(2);
+	});
+
+	it('сетап-проєкт існує, має свій файл і звіряє ідентичність', () => {
+		const setup = projects().find((p) => p.testMatch !== null);
+		expect(setup, 'у конфізі немає проєкту з власним testMatch — сетапу не існує').toBeTruthy();
+		if (!setup) return;
+
+		const dir = playwrightTestDir();
+		const file = join(ROOT, dir ?? 'tests', (setup.testMatch as string).replace(/\\\./g, '.'));
+		expect(
+			existsSync(file),
+			`сетап-проєкт «${setup.name}» вказує на ${file}, якого немає`
+		).toBe(true);
+
+		/*
+		 * Файл мусить справді звіряти те, для чого існує: адресу ЦЬОГО
+		 * репозиторію і штамп збірки. Інакше сетап є, залежність оголошена, а
+		 * перевіряє він нічого — форма без змісту, яку видно лише читанням.
+		 */
+		const source = readFileSync(file, 'utf8');
+		expect(source, 'сетап не звіряє SITE_ORIGIN/SITE_BASE — маркера ідентичності немає').toMatch(
+			/SITE_ORIGIN[\s\S]*SITE_BASE|SITE_BASE[\s\S]*SITE_ORIGIN/
+		);
+		expect(source, 'сетап не читає app-version.json — штампа збірки немає').toContain(
+			'app-version.json'
+		);
+	});
+
+	it('кожен браузерний проєкт залежить від сетапу', () => {
+		const all = projects();
+		const setups = all.filter((p) => p.testMatch !== null).map((p) => p.name);
+		expect(setups.length, 'сетап-проєкту немає').toBeGreaterThan(0);
+
+		const missing = all
+			.filter((p) => !setups.includes(p.name))
+			.filter((p) => !setups.every((s) => p.deps.includes(s)))
+			.map((p) => p.name);
+		expect(
+			missing,
+			'проєкт не оголошує dependencies на сетап — прогін піде без звірки порту,\n' +
+				'а сам сетап лишиться зеленим і мертвим:\n' +
+				missing.join('\n')
+		).toEqual([]);
+	});
+});
