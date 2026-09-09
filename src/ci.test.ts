@@ -319,3 +319,122 @@ describe('версія Node узгоджена в трьох місцях (§ 2.
 		).toBe(enginesMajor);
 	});
 });
+
+/**
+ * Вивантажується та збірка, яку перевіряли (CI-CD-AND-TOOLS-v9 § 1.10,
+ * `CI-DEPLOY-ORDER`, HIGH).
+ *
+ * Дефект живе не в кроці, а в ПОРЯДКУ кроків, і саме тому його не бачить
+ * жоден інший гейт: кожен міряє теку `build/`, яка на момент його погляду
+ * правильна.
+ *
+ * ЗАМІРЯНО В СУСІДНЬОМУ ПРОЄКТІ ПАКЕТА (`adoptananimal`, 2026-08-26).
+ * `playwright.config.ts` піднімав власний сервер командою
+ * `npm run build && npm run preview` — у ту саму теку `build/`, але без
+ * змінних, які має лише крок збірки для деплою. Крок E2E стояв НИЖЧЕ збірки,
+ * тож порядок був: правильна збірка → зелений `check:build` над нею → E2E
+ * перезаписує `build/` збіркою з порожньою базою → `upload-pages-artifact`
+ * вивантажує саме її. Сайт відкривався, бо пререндер робить шляхи до ресурсів
+ * відносними. Але `canonical` кожної з 229 сторінок і кожен `<loc>` у
+ * `sitemap.xml` вказували на корінь СУСІДНЬОГО сайту на спільному домені.
+ *
+ * ЧОМУ ЦЕ РЕАЛЬНИЙ РИЗИК САМЕ ТУТ. `playwright.config.ts` цього проєкту має
+ * рівно таку `webServer.command`, і в `deploy.yml` крок E2E стоїть ВИЩЕ
+ * збірки. Тобто зараз порядок правильний — і тримається він винятково тим, що
+ * хтось про це помʼятає при наступній правці workflow. Ціна помилки:
+ * `alik532ua.github.io/CV/` у canonical поїхало б на корінь origin, який
+ * віддає інший репозиторій.
+ *
+ * Lighthouse між збіркою й upload — НЕ порушення: `staticDistDir: ./build`
+ * читає теку, а не пише в неї, і міряє рівно те, що поїде. Правило про
+ * «власну збірку» стосується команд, які теку ПЕРЕЗАПИСУЮТЬ.
+ */
+describe('вивантажується перевірена збірка (CI-DEPLOY-ORDER)', () => {
+	/** Команди, які створюють `build/` заново. */
+	const REBUILDS = /npm run build\b|npm run preview\b|npm run test:e2e\b|playwright test\b/;
+	/** Прогони, що збирають сайт ДЛЯ СЕБЕ, а не для деплою. */
+	const OWN_BUILD = /playwright|test:e2e|lhci|npm run preview\b/;
+
+	/**
+	 * Збірка для деплою — ПЕРША, що передує вивантаженню, а не остання.
+	 *
+	 * «Остання перед upload» виглядає природніше й саме тому не працює.
+	 * Заміряно тут, на зворотному експерименті: коли між збіркою й
+	 * вивантаженням дописати другий `npm run build`, він сам стає «останнім»,
+	 * між ним і upload уже нічого немає — і перевірка лишається ЗЕЛЕНОЮ на
+	 * рівно тому дефекті, від якого стоїть. Перший варіант цього правила саме
+	 * так і промовчав.
+	 *
+	 * Прогони з власною збіркою (`playwright`, `lhci`, `preview`) на роль
+	 * збірки для деплою не претендують, навіть якщо в їхньому `run:` є
+	 * `npm run build`: там вона побічний ефект.
+	 */
+	const deployBuild = (steps: { name: string; body: string }[]) => {
+		const upload = steps.findIndex((s) => /upload-pages-artifact/.test(s.body));
+		return steps
+			.slice(0, upload)
+			.map((s, i) => ({ s, i }))
+			.find(({ s }) => /npm run build\b/.test(s.body) && !OWN_BUILD.test(s.body));
+	};
+
+	const uploads = files
+		.map((file) => ({ file, steps: stepsOf(readWorkflow(file)) }))
+		.filter(({ steps }) => steps.some((s) => /upload-pages-artifact/.test(s.body)));
+
+	it('розбір живий: крок вивантаження артефакту знайдено', () => {
+		expect(
+			uploads.length,
+			'жоден workflow не вивантажує артефакт Pages — або розбір зламався, ' +
+				'або деплой робиться інакше, і це правило треба переписати'
+		).toBeGreaterThan(0);
+		for (const { file, steps } of uploads) {
+			expect(
+				steps.filter((s) => REBUILDS.test(s.body)).length,
+				`у ${file} не знайдено жодного кроку, що збирає сайт — розбір читає не те`
+			).toBeGreaterThan(0);
+		}
+	});
+
+	it('між збіркою для деплою і вивантаженням немає команди, що пише в build/', () => {
+		const offenders: string[] = [];
+		for (const { file, steps } of uploads) {
+			const build = deployBuild(steps);
+			expect(build, `у ${file} перед вивантаженням немає кроку збірки`).toBeDefined();
+			if (!build) continue;
+			const upload = steps.findIndex((s) => /upload-pages-artifact/.test(s.body));
+
+			for (const step of steps.slice(build.i + 1, upload)) {
+				if (REBUILDS.test(step.body)) offenders.push(`${file}: «${step.name}»`);
+			}
+		}
+		expect(
+			offenders,
+			'крок після збірки для деплою перезаписує `build/`: вивантажиться НЕ те,\n' +
+				'що перевірили гейти. Прогони з власною збіркою (Playwright, Lighthouse\n' +
+				'із власним сервером) стоять ВИЩЕ збірки для деплою:\n' +
+				offenders.join('\n')
+		).toEqual([]);
+	});
+
+	it('кожен крок із власною збіркою стоїть вище збірки для деплою', () => {
+		const offenders: string[] = [];
+		for (const { file, steps } of uploads) {
+			const build = deployBuild(steps);
+			if (!build) continue;
+
+			for (const [i, step] of steps.entries()) {
+				if (i === build.i) continue;
+				if (REBUILDS.test(step.body) && i > build.i) {
+					offenders.push(`${file}: «${step.name}» (крок ${i + 1} проти збірки ${build.i + 1})`);
+				}
+			}
+		}
+		expect(
+			offenders,
+			'прогін із власною збіркою стоїть НИЖЧЕ збірки для деплою — навіть якщо він\n' +
+				'нижче й за вивантаження, він робить сенс порядку кроків залежним від того,\n' +
+				'хто наступний правитиме workflow:\n' +
+				offenders.join('\n')
+		).toEqual([]);
+	});
+});
