@@ -271,7 +271,9 @@
 
     .reset-btn:hover {
         background: var(--surface-hover);
-        color: var(--accent-primary);
+        /* `--accent-on-tint`: на підсвіченій поверхні світлої теми сам акцент
+           дає 4.28:1 — саме той випадок, для якого токен і завели. */
+        color: var(--accent-on-tint);
     }
 
     /* Score card */
@@ -412,9 +414,12 @@
         flex-shrink: 0;
     }
 
+    /* `--on-accent`, а не `white`: у темній темі акцент — яскравий ціан,
+       і білий на ньому дає 1.39:1, тобто літера в кружечку зникає. Токен
+       існує рівно для цього випадку (A11Y-CONTRAST-ALL-PAIRS). */
     .chat-bubble.user .avatar {
         background: var(--accent-primary);
-        color: white;
+        color: var(--on-accent);
     }
 
     .chat-bubble .content {
@@ -470,9 +475,13 @@
         gap: 8px;
         padding: 10px;
         border-radius: 10px;
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        color: #ef4444;
+        /* Токени помилки з `app.css`, а не власні літерали. Доти тут стояла
+           друга копія палітри помилки, і вона була гіршою: `#ef4444` на 10%
+           червоному давав 3.05:1 у світлій темі, тоді як `--error-text` уже
+           затемнений під AA (A11Y-CONTRAST-ALL-PAIRS). */
+        background: var(--error-bg);
+        border: 1px solid var(--error-border);
+        color: var(--error-text);
         font-size: 0.85rem;
     }
 

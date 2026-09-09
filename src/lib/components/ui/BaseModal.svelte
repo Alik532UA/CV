@@ -227,7 +227,9 @@
 
     .close-btn:hover {
         background: var(--surface-hover);
-        color: var(--accent-primary);
+        /* `--accent-on-tint`: сам акцент на підсвіченій поверхні світлої теми
+           дає 4.28:1 (A11Y-CONTRAST-ALL-PAIRS). */
+        color: var(--accent-on-tint);
     }
 
     h3 {

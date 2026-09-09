@@ -252,7 +252,9 @@
 	}
 	.toast-action:hover {
 		border-color: var(--accent-primary);
-		color: var(--accent-primary);
+		/* `--accent-on-tint`: на підсвіченій поверхні світлої теми сам акцент
+		   дає 4.08:1 (A11Y-CONTRAST-ALL-PAIRS). */
+		color: var(--accent-on-tint);
 		background: var(--toast-hover-bg, rgba(255, 255, 255, 0.14));
 	}
 

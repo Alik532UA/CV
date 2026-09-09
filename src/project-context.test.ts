@@ -182,6 +182,9 @@ describe("числа баз у документах — під гейтом (PIT
 			.replace(/§\s*[\d.]+/g, " ")
 			.replace(/-?v\d+(?:\.\d+)?/gi, " ")
 			.replace(/\d+[.,]\d+\s*:\s*\d+/g, " ")
+			// Дробове число в прозі — це співвідношення чи поріг (`3.96`, `4.5`),
+			// а не лічильник. Без цього `\b(\d+)\b` розбирає «1.39» на 1 і 39.
+			.replace(/\d+[.,]\d+/g, " ")
 			.replace(/\d+\s*[×x]\s*\d+/g, " ")
 			.replace(/\d+\s*(?:px|КБ|кб|%)/g, " ")
 			.replace(/\d+\s*→\s*\d+/g, " ")
@@ -237,6 +240,21 @@ describe("числа баз у документах — під гейтом (PIT
 				.filter(({ line }) => line.includes(needle))
 		);
 
+	/** Борг контрасту: кількість пар у `KNOWN` і сума пропусків із причинами. */
+	function contrastBaseline(): { pairs: number; skipped: number } {
+		const source = read("src/contrast-canon.test.ts");
+		const known = /const KNOWN: Record<string, number> = \{([\s\S]*?)\};/.exec(source);
+		const skipped = /const SKIPPED_BY_REASON: Record<string, number> = \{([\s\S]*?)\};/.exec(
+			source
+		);
+		expect(known, "KNOWN у contrast-canon більше не читається — перевірка мертва").toBeTruthy();
+		expect(skipped, "SKIPPED_BY_REASON більше не читається — перевірка мертва").toBeTruthy();
+		return {
+			pairs: [...known![1].matchAll(/^\s*"/gm)].length,
+			skipped: [...skipped![1].matchAll(/:\s*(\d+)/g)].reduce((a, m) => a + Number(m[1]), 0)
+		};
+	}
+
 	it("перевірка жива: бази читаються, ідіоми знімаються, рядки знаходяться", () => {
 		const axe = baselineNumbers("tests/a11y-baseline.ts", "A11Y_BASELINE", AXE_BLOCK);
 		const touch = baselineNumbers("tests/touch-target-baseline.ts", "TOUCH_BASELINE", TOUCH_BLOCK);
@@ -252,7 +270,13 @@ describe("числа баз у документах — під гейтом (PIT
 		expect(claimedNumbers("484 → 446, було 21, «дев'ять / 1057»")).toEqual([]);
 		expect(claimedNumbers("зараз 12 цілей")).toEqual([12]);
 
+		const contrast = contrastBaseline();
+		expect(contrast.pairs).toBeGreaterThan(0);
+		expect(contrast.skipped).toBeGreaterThan(0);
+		expect(claimedNumbers("контраст 1.39 і 3.96 при порозі 4.5")).toEqual([]);
+
 		expect(rowsWith("tests/a11y-baseline.ts").length, "жоден документ не називає базу axe").toBeGreaterThan(0);
+		expect(rowsWith("src/contrast-canon.test.ts").length, "жоден документ не називає базу контрасту").toBeGreaterThan(0);
 		expect(rowsWith("tests/touch-target-baseline.ts").length, "жоден документ не називає базу цілей").toBeGreaterThan(0);
 	});
 
@@ -291,7 +315,9 @@ describe("числа баз у документах — під гейтом (PIT
 		const sum = (xs: number[]) => xs.reduce((a, b) => a + b, 0);
 		const allowedValues = Object.values(allowed);
 
+		const contrast = contrastBaseline();
 		const cases: Array<[string, Set<number>]> = [
+			["src/contrast-canon.test.ts", new Set([contrast.pairs, contrast.skipped])],
 			[
 				"tests/a11y-baseline.ts",
 				new Set([...axe.values, sum(axe.values), axe.keys.length])
