@@ -223,7 +223,9 @@ export const lv: Translations = {
         filterProjects: "Filtrēt projektus",
         email: "E-pasts",
         languageEmpty: "Valodas nav atrastas",
-        pdfVersion: "PDF versija"
+        pdfVersion: "PDF versija",
+        machineTranslated: "Mašīntulkojuma melnraksts — gaida dzimtās valodas runātāja pārbaudi",
+        copyReport: "Kopēt kļūdu atskaiti — versija {version}"
     },
     common: {
         close: "Aizvērt",

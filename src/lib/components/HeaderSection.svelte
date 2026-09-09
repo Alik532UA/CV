@@ -559,7 +559,7 @@
                                                 role="menuitemradio"
                                                 aria-checked={language.current === code}
                                                 data-testid="lang-{code}-btn"
-                                                title={label.endsWith("*") ? "Machine-translated draft — pending native speaker review" : undefined}
+                                                title={label.endsWith("*") ? t.ui.machineTranslated : undefined}
                                             >
                                                 <Flag width="20" height="15" class="flag-icon" />
                                                 <span>{label}</span>

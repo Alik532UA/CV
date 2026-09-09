@@ -223,7 +223,9 @@ export const is: Translations = {
         filterProjects: "Sía verkefni",
         email: "Netfang",
         languageEmpty: "Engin tungumál fundust",
-        pdfVersion: "PDF-útgáfa"
+        pdfVersion: "PDF-útgáfa",
+        machineTranslated: "Uppkast að vélþýðingu — bíður yfirlestrar móðurmálshafa",
+        copyReport: "Afrita villuskýrslu — útgáfa {version}"
     },
     common: {
         close: "Loka",

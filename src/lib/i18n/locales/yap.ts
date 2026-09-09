@@ -230,7 +230,9 @@ export const yap: Translations = {
         filterProjects: "Filter projects",
         email: "Email",
         languageEmpty: "Dariy e thin ni kan pirieg",
-        pdfVersion: "PDF version"
+        pdfVersion: "PDF version",
+        machineTranslated: "Machine translation draft — be athapeg ni nge yaliy be'nir e thin rok",
+        copyReport: "Copy error report — version {version}"
     },
     common: {
         close: "Mith",

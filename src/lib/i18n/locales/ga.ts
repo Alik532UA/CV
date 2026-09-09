@@ -223,7 +223,9 @@ export const ga: Translations = {
         filterProjects: "Scag na tionscadail",
         email: "Ríomhphost",
         languageEmpty: "Níor aimsíodh aon teanga",
-        pdfVersion: "Leagan PDF"
+        pdfVersion: "Leagan PDF",
+        machineTranslated: "Dréacht aistriúcháin uathoibríoch — ag fanacht ar léamh ó chainteoir dúchais",
+        copyReport: "Cóipeáil an tuairisc earráidí — leagan {version}"
     },
     common: {
         close: "Dún",

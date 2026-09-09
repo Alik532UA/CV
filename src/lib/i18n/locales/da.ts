@@ -223,7 +223,9 @@ export const da: Translations = {
         filterProjects: "Filtrér projekter",
         email: "E-mail",
         languageEmpty: "Ingen sprog fundet",
-        pdfVersion: "PDF-version"
+        pdfVersion: "PDF-version",
+        machineTranslated: "Maskinoversat udkast — afventer gennemlæsning af en modersmålstalende",
+        copyReport: "Kopiér fejlrapport — version {version}"
     },
     common: {
         close: "Luk",

@@ -225,7 +225,9 @@ export const crh: Translations = {
         filterProjects: "Loyihalarnı süz",
         email: "E-poçta",
         languageEmpty: "Til tapılmadı",
-        pdfVersion: "PDF versiyası"
+        pdfVersion: "PDF versiyası",
+        machineTranslated: "Maşina tercimesi qaralaması — ana tilli oquyıcı tarafından teşkerilmegen",
+        copyReport: "Hata raporunı kopiyala — versiya {version}"
     },
     common: {
         close: "Qapatıñız",

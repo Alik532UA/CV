@@ -223,7 +223,9 @@ export const mt: Translations = {
         filterProjects: "Iffiltra l-proġetti",
         email: "Email",
         languageEmpty: "Ma nstab l-ebda lingwa",
-        pdfVersion: "Verżjoni PDF"
+        pdfVersion: "Verżjoni PDF",
+        machineTranslated: "Abbozz ta' traduzzjoni awtomatika — jistenna reviżjoni minn kelliem nattiv",
+        copyReport: "Ikkopja r-rapport tal-iżbalji — verżjoni {version}"
     },
     common: {
         close: "Agħlaq",

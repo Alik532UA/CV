@@ -223,7 +223,9 @@ export const ko: Translations = {
         filterProjects: "프로젝트 필터",
         email: "이메일",
         languageEmpty: "언어를 찾을 수 없습니다",
-        pdfVersion: "PDF 버전"
+        pdfVersion: "PDF 버전",
+        machineTranslated: "기계 번역 초안 — 원어민 검수 대기 중",
+        copyReport: "오류 보고서 복사 — 버전 {version}"
     },
     common: {
         close: "닫기",

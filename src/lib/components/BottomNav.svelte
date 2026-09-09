@@ -23,7 +23,7 @@
     ]);
 </script>
 
-<nav class="bottom-nav glass" aria-label={t.nav.bottom_nav_label || "Bottom navigation"}>
+<nav class="bottom-nav glass" aria-label={t.nav.bottom_nav_label}>
     {#each navItems as item (item.id)}
         <a 
             href="#{item.id}" 

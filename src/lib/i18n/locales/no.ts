@@ -223,7 +223,9 @@ export const no: Translations = {
         filterProjects: "Filtrer prosjekter",
         email: "E-post",
         languageEmpty: "Ingen språk funnet",
-        pdfVersion: "PDF-versjon"
+        pdfVersion: "PDF-versjon",
+        machineTranslated: "Maskinoversatt utkast — venter på gjennomlesing av morsmålsbruker",
+        copyReport: "Kopier feilrapporten — versjon {version}"
     },
     common: {
         close: "Lukk",

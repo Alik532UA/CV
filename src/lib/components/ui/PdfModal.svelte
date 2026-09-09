@@ -20,7 +20,7 @@
     let { show = $bindable(), ...restProps }: Props = $props();
 </script>
 
-<BaseModal bind:show title={t.pdf_modal?.title || "Choose PDF Version"} {...restProps}>
+<BaseModal bind:show title={t.pdf_modal.title} {...restProps}>
     <div class="pdf-modal-container">
         <div class="pdf-options">
             <div class="pdf-option pdf-option-group" data-testid="pdf-option-ats">
@@ -48,7 +48,7 @@
                         </a>
                     {/each}
                 </div>
-                <span>{t.pdf_modal?.ats || "ATS / RMS"}</span>
+                <span>{t.pdf_modal.ats}</span>
             </div>
             {#each THEMED_FILES as file (file.id)}
                 <!-- Absolute Google Drive URL, not an app route -->
@@ -76,7 +76,7 @@
                     <!-- Підпис читається В РОЗМІТЦІ, а не збирається в масиві
                          вище: там він застиг би на мові, яка була в момент
                          створення масиву (SVELTE-CORE-v8 § 1.1). -->
-                    <span>{t.pdf_modal?.[file.id] || file.fallback}</span>
+                    <span>{t.pdf_modal[file.id]}</span>
                 </a>
             {/each}
         </div>

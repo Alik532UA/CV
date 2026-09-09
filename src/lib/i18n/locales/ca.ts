@@ -223,7 +223,9 @@ export const ca: Translations = {
         filterProjects: "Filtra els projectes",
         email: "Correu electrònic",
         languageEmpty: "No s’ha trobat cap idioma",
-        pdfVersion: "Versió PDF"
+        pdfVersion: "Versió PDF",
+        machineTranslated: "Esborrany de traducció automàtica — pendent de revisió d'un parlant natiu",
+        copyReport: "Copia l'informe d'errors — versió {version}"
     },
     common: {
         close: "Tanca",

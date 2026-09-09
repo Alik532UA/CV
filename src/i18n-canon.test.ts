@@ -141,6 +141,46 @@ describe("інтерфейс не лишається англійським в �
 	const HUMAN_ATTRS =
 		/\b(aria-label|aria-description|aria-roledescription|aria-placeholder|aria-valuetext|title|placeholder|alt)="([^"{}]*)"/g;
 
+	/** Ті самі атрибути, але зі значенням-ВИРАЗОМ: `aria-label={…}`. */
+	const HUMAN_ATTRS_EXPR =
+		/\b(aria-label|aria-description|aria-roledescription|aria-placeholder|aria-valuetext|title|placeholder|alt)=\{/g;
+
+	/**
+	 * Кінець виразу від `{`, з урахуванням вкладених дужок і лапок.
+	 *
+	 * Потрібен, бо в атрибуті цілком законно стоїть об'єкт, стрілкова функція
+	 * або тернарник — `[^}]*` обірвався б на першій же внутрішній дужці.
+	 */
+	function exprEnd(text: string, open: number): number {
+		let depth = 0;
+		let quote = "";
+		for (let i = open; i < text.length; i++) {
+			const ch = text[i];
+			if (quote) {
+				if (ch === "\\") i++;
+				else if (ch === quote) quote = "";
+				continue;
+			}
+			if (ch === '"' || ch === "'" || ch === "`") quote = ch;
+			else if (ch === "{") depth++;
+			else if (ch === "}" && --depth === 0) return i;
+		}
+		return -1;
+	}
+
+	/**
+	 * Рядкові літерали всередині виразу: звичайні лапки й шаблонні рядки
+	 * (частини поза `${…}`). Порожні й безлітерні відкидаються — `" — "` між
+	 * двома підстановками не текст, а розділювач.
+	 */
+	function literalsInExpression(expr: string): string[] {
+		const plain = [...expr.matchAll(/"([^"\\]*)"|'([^'\\]*)'/g)].map((m) => m[1] ?? m[2]);
+		const template = [...expr.matchAll(/`([^`]*)`/g)].flatMap((m) =>
+			m[1].split(/\$\{[^}]*\}/g)
+		);
+		return [...plain, ...template].map((s) => s.trim()).filter((s) => /\p{L}/u.test(s));
+	}
+
 	/**
 	 * Власні назви, які не перекладаються НІКОЛИ й ні на яку мову.
 	 *
@@ -172,18 +212,45 @@ describe("інтерфейс не лишається англійським в �
 	 */
 	function literalAttrs(keepBrands = false): Record<string, string[]> {
 		const found: Record<string, string[]> = {};
+		const add = (path: string, value: string) => {
+			if (!value || (!keepBrands && BRANDS.has(value))) return;
+			(found[path] ??= []).push(value);
+		};
 		for (const pattern of ["src/lib/components/**/*.svelte", "src/routes/**/*.svelte"]) {
 			for (const file of globSync(pattern, { cwd: ROOT })) {
 				const path = file.replace(/\\/g, "/");
-				for (const m of strippedMarkup(read(path)).matchAll(HUMAN_ATTRS)) {
-					const value = m[2].trim();
-					if (!value || (!keepBrands && BRANDS.has(value))) continue;
-					(found[path] ??= []).push(value);
+				const markup = strippedMarkup(read(path));
+				for (const m of markup.matchAll(HUMAN_ATTRS)) add(path, m[2].trim());
+				for (const m of markup.matchAll(HUMAN_ATTRS_EXPR)) {
+					const open = m.index + m[0].length - 1;
+					const end = exprEnd(markup, open);
+					if (end < 0) continue;
+					for (const value of literalsInExpression(markup.slice(open, end + 1))) {
+						add(path, value);
+					}
 				}
 			}
 		}
 		for (const list of Object.values(found)) list.sort();
 		return found;
+	}
+
+	/**
+	 * Скільки людських атрибутів зі значенням-виразом сканер бачить. Це не
+	 * борг, а доказ живості другої половини сканера: при нульовому боргу
+	 * літералів у виразах не лишається зовсім, тож єдиний спосіб відрізнити
+	 * «нічого немає» від «регулярка перестала збігатися» — порахувати самі
+	 * атрибути.
+	 */
+	function expressionAttrCount(): number {
+		let count = 0;
+		for (const pattern of ["src/lib/components/**/*.svelte", "src/routes/**/*.svelte"]) {
+			for (const file of globSync(pattern, { cwd: ROOT })) {
+				count += [...strippedMarkup(read(file.replace(/\\/g, "/"))).matchAll(HUMAN_ATTRS_EXPR)]
+					.length;
+			}
+		}
+		return count;
 	}
 
 	/**
@@ -206,6 +273,54 @@ describe("інтерфейс не лишається англійським в �
 		expect('aria-label="Enable dark theme"').toMatch(new RegExp(HUMAN_ATTRS.source));
 		// Значення з виразу — це вже словник, і воно НЕ знахідка.
 		expect("aria-label={t.nav.bottom_nav_label}").not.toMatch(new RegExp(HUMAN_ATTRS.source));
+	});
+
+	/**
+	 * ДРУГА ПОЛОВИНА СКАНЕРА, І ВОНА З'ЯВИЛАСЯ ПІЗНІШЕ ЗА ПЕРШУ.
+	 *
+	 * Регулярка вище шукає `attr="літерал"` і навмисно виключає `{}` з
+	 * дозволених символів — тобто значення-ВИРАЗ вона не бачить взагалі. Це
+	 * читалося як «вираз означає словник», і чотири рази це було неправдою:
+	 *
+	 *   BottomNav.svelte      `t.nav.bottom_nav_label || "Bottom navigation"`
+	 *   PdfModal.svelte       `t.pdf_modal?.title || "Choose PDF Version"`
+	 *   HeaderSection.svelte  `умова ? "Machine-translated draft — …" : undefined`
+	 *   LogCopyButton.svelte  шаблонний рядок `Copy error report — version …`
+	 *
+	 * Перші два — мертві фолбеки: обидва ключі ОБОВ'ЯЗКОВІ в `Translations`,
+	 * тобто впасти на них неможливо, а текст у них тим часом розійшовся зі
+	 * словником («Choose» проти «Select»). Другі два справді доїжджали до
+	 * екрана англійською в усіх 42 мовах, і одна з них — попередження про те,
+	 * що переклад машинний, у меню вибору мови.
+	 *
+	 * Тобто дірка була не в дисциплині, а в самій перевірці: доказом «немає
+	 * англійських рядків» був нуль, який ці чотири рядки не могли збільшити.
+	 */
+	it("the check is alive: it sees literals hidden inside expressions", () => {
+		const probe = (markup: string) => {
+			const m = [...markup.matchAll(HUMAN_ATTRS_EXPR)][0];
+			if (!m) return [];
+			const open = m.index + m[0].length - 1;
+			return literalsInExpression(markup.slice(open, exprEnd(markup, open) + 1));
+		};
+
+		expect(probe('aria-label={t.nav.x || "Bottom navigation"}')).toEqual(["Bottom navigation"]);
+		expect(probe("title={cond ? 'Machine-translated draft' : undefined}")).toEqual([
+			"Machine-translated draft"
+		]);
+		expect(probe("aria-label={`Copy error report — version ${v}`}")).toEqual([
+			"Copy error report — version"
+		]);
+		// Словник, підстановка й розділювач між підстановками — не знахідки.
+		expect(probe("aria-label={t.ai.chatSend}")).toEqual([]);
+		expect(probe("aria-label={`${a} — ${b}`}")).toEqual([]);
+		// Вираз із вкладеними дужками не обриває розбір на першій із них.
+		expect(probe('title={fmt({ a: 1 }, "Stale label")}')).toEqual(["Stale label"]);
+
+		expect(
+			expressionAttrCount(),
+			"жодного людського атрибута зі значенням-виразом — сканер читає не те"
+		).toBeGreaterThan(20);
 	});
 
 	it("жоден компонент не додає нового англійського рядка в атрибут", () => {

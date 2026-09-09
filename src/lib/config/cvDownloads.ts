@@ -65,8 +65,6 @@ export interface ThemedCvFile {
 	id: "dark" | "light";
 	image: string;
 	alt: string;
-	/** Підпис, якщо словник мовчить. Сам підпис читається в розмітці. */
-	fallback: string;
 	url: string;
 }
 
@@ -76,14 +74,12 @@ export const THEMED_FILES: readonly ThemedCvFile[] = [
 		id: "dark",
 		image: "Alik-Zapolnov-CV-dark.jpg",
 		alt: "Dark Theme CV Preview",
-		fallback: "Dark Theme",
 		url: "https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
 	},
 	{
 		id: "light",
 		image: "Alik-Zapolnov-CV-light.jpg",
 		alt: "Light Theme CV Preview",
-		fallback: "Light Theme",
 		url: "https://drive.google.com/file/d/1bNX2y5uD99DrQ1-jjjbFyYQJbeWeeCLB/view"
 	}
 ];

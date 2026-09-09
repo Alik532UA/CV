@@ -223,7 +223,9 @@ export const uk: Translations = {
         filterProjects: "Фільтрувати проєкти",
         email: "Пошта",
         languageEmpty: "Мов не знайдено",
-        pdfVersion: "PDF-версія"
+        pdfVersion: "PDF-версія",
+        machineTranslated: "Чернетка машинного перекладу — очікує вичитки носієм мови",
+        copyReport: "Скопіювати звіт про помилки — версія {version}"
     },
     common: {
         close: "Закрити",

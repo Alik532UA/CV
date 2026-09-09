@@ -223,7 +223,9 @@ export const be: Translations = {
         filterProjects: "Фільтраваць праекты",
         email: "Пошта",
         languageEmpty: "Моў не знойдзена",
-        pdfVersion: "PDF-версія"
+        pdfVersion: "PDF-версія",
+        machineTranslated: "Чарнавік машыннага перакладу — чакае вычытку носьбітам мовы",
+        copyReport: "Скапіяваць звесткі пра памылкі — версія {version}"
     },
     common: {
         close: "Закрыць",

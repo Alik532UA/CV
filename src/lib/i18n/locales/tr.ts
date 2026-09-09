@@ -223,7 +223,9 @@ export const tr: Translations = {
         filterProjects: "Projeleri filtrele",
         email: "E-posta",
         languageEmpty: "Dil bulunamadı",
-        pdfVersion: "PDF sürümü"
+        pdfVersion: "PDF sürümü",
+        machineTranslated: "Makine çevirisi taslağı — ana dili konuşan biri tarafından okunmayı bekliyor",
+        copyReport: "Hata raporunu kopyala — sürüm {version}"
     },
     common: {
         close: "Kapat",

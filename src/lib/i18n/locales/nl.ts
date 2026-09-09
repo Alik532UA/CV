@@ -223,7 +223,9 @@ export const nl: Translations = {
         filterProjects: "Projecten filteren",
         email: "E-mail",
         languageEmpty: "Geen talen gevonden",
-        pdfVersion: "PDF-versie"
+        pdfVersion: "PDF-versie",
+        machineTranslated: "Machinevertaalde versie — wacht op controle door een moedertaalspreker",
+        copyReport: "Foutrapport kopiëren — versie {version}"
     },
     common: {
         close: "Sluiten",

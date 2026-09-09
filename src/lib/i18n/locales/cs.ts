@@ -223,7 +223,9 @@ export const cs: Translations = {
         filterProjects: "Filtrovat projekty",
         email: "E-mail",
         languageEmpty: "Žádné jazyky nenalezeny",
-        pdfVersion: "Verze PDF"
+        pdfVersion: "Verze PDF",
+        machineTranslated: "Koncept strojového překladu — čeká na kontrolu rodilým mluvčím",
+        copyReport: "Zkopírovat hlášení chyb — verze {version}"
     },
     common: {
         close: "Zavřít",

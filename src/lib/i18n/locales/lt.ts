@@ -223,7 +223,9 @@ export const lt: Translations = {
         filterProjects: "Filtruoti projektus",
         email: "El. paštas",
         languageEmpty: "Kalbų nerasta",
-        pdfVersion: "PDF versija"
+        pdfVersion: "PDF versija",
+        machineTranslated: "Mašininio vertimo juodraštis — laukiama gimtakalbio patikros",
+        copyReport: "Kopijuoti klaidų ataskaitą — versija {version}"
     },
     common: {
         close: "Uždaryti",

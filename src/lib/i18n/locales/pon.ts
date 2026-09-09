@@ -230,7 +230,9 @@ export const pon: Translations = {
         filterProjects: "Filter projects",
         email: "Email",
         languageEmpty: "Sohte lokaia diarada",
-        pdfVersion: "PDF version"
+        pdfVersion: "PDF version",
+        machineTranslated: "Machine translation draft — awiawih kasawih sang emen me lokaia wet",
+        copyReport: "Copy error report — version {version}"
     },
     common: {
         close: "Ritidi",

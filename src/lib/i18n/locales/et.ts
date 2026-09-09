@@ -223,7 +223,9 @@ export const et: Translations = {
         filterProjects: "Filtreeri projekte",
         email: "E-post",
         languageEmpty: "Keeli ei leitud",
-        pdfVersion: "PDF-versioon"
+        pdfVersion: "PDF-versioon",
+        machineTranslated: "Masintõlke mustand — ootab emakeelekõneleja ülevaatust",
+        copyReport: "Kopeeri veaaruanne — versioon {version}"
     },
     common: {
         close: "Sulge",

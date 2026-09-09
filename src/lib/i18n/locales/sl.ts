@@ -223,7 +223,9 @@ export const sl: Translations = {
         filterProjects: "Filtriraj projekte",
         email: "E-pošta",
         languageEmpty: "Ni najdenih jezikov",
-        pdfVersion: "Različica PDF"
+        pdfVersion: "Različica PDF",
+        machineTranslated: "Osnutek strojnega prevoda — čaka pregled maternega govorca",
+        copyReport: "Kopiraj poročilo o napakah — različica {version}"
     },
     common: {
         close: "Zapri",

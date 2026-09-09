@@ -223,7 +223,9 @@ export const ka: Translations = {
         filterProjects: "პროექტების გაფილტვრა",
         email: "ელფოსტა",
         languageEmpty: "ენები ვერ მოიძებნა",
-        pdfVersion: "PDF ვერსია"
+        pdfVersion: "PDF ვერსია",
+        machineTranslated: "მანქანური თარგმანის მონახაზი — ელოდება მშობლიურენოვანის შემოწმებას",
+        copyReport: "შეცდომების ანგარიშის კოპირება — ვერსია {version}"
     },
     common: {
         close: "დახურვა",

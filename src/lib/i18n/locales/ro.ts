@@ -223,7 +223,9 @@ export const ro: Translations = {
         filterProjects: "Filtrează proiectele",
         email: "E-mail",
         languageEmpty: "Nu s-au găsit limbi",
-        pdfVersion: "Versiune PDF"
+        pdfVersion: "Versiune PDF",
+        machineTranslated: "Ciornă de traducere automată — în așteptarea verificării de un vorbitor nativ",
+        copyReport: "Copiază raportul de erori — versiunea {version}"
     },
     common: {
         close: "Închide",

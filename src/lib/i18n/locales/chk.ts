@@ -230,7 +230,9 @@ export const chk: Translations = {
         filterProjects: "Filter projects",
         email: "Email",
         languageEmpty: "Ese wor kapas mi kuna",
-        pdfVersion: "PDF version"
+        pdfVersion: "PDF version",
+        machineTranslated: "Machine translation draft — esap fen nengeni ren emon mi silei ei kapas",
+        copyReport: "Copy error report — version {version}"
     },
     common: {
         close: "Opano",

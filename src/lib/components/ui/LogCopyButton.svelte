@@ -3,6 +3,8 @@
 	import { page } from "$app/state";
 	import { onDestroy } from "svelte";
 	import { debugState } from "$lib/controllers/DebugState.svelte";
+	import { t } from "$lib/controllers/I18nState.svelte";
+	import { fill } from "$lib/i18n/fill";
 	import { logService } from "$lib/services/logService.svelte";
 	import { Check, Copy } from "lucide-svelte";
 	import { fade, scale } from "svelte/transition";
@@ -84,7 +86,7 @@
 		class:has-errors={logService.errorCount > 0}
 		class:copied
 		onclick={copyReport}
-		aria-label={`Copy error report — version ${appVersion}`}
+		aria-label={fill(t.ui.copyReport, { version: appVersion })}
 		data-testid="app-version-value"
 		in:scale={{ duration: 300, start: 0.5 }}
 		out:fade={{ duration: 200 }}

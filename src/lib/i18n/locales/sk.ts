@@ -223,7 +223,9 @@ export const sk: Translations = {
         filterProjects: "Filtrovať projekty",
         email: "E-mail",
         languageEmpty: "Nenašli sa žiadne jazyky",
-        pdfVersion: "Verzia PDF"
+        pdfVersion: "Verzia PDF",
+        machineTranslated: "Koncept strojového prekladu — čaká na kontrolu rodeným hovorcom",
+        copyReport: "Skopírovať hlásenie chýb — verzia {version}"
     },
     common: {
         close: "Zavrieť",

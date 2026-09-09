@@ -223,7 +223,9 @@ export const fi: Translations = {
         filterProjects: "Suodata projekteja",
         email: "Sähköposti",
         languageEmpty: "Kieliä ei löytynyt",
-        pdfVersion: "PDF-versio"
+        pdfVersion: "PDF-versio",
+        machineTranslated: "Konekäännösluonnos — odottaa äidinkielisen tarkistusta",
+        copyReport: "Kopioi virheraportti — versio {version}"
     },
     common: {
         close: "Sulje",

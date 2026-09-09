@@ -223,7 +223,9 @@ export const sq: Translations = {
         filterProjects: "Filtro projektet",
         email: "Email",
         languageEmpty: "Nuk u gjet asnjë gjuhë",
-        pdfVersion: "Versioni PDF"
+        pdfVersion: "Versioni PDF",
+        machineTranslated: "Draft i përkthimit automatik — pritet rishikimi nga folës amtar",
+        copyReport: "Kopjo raportin e gabimeve — versioni {version}"
     },
     common: {
         close: "Mbyll",

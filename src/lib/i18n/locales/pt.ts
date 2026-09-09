@@ -223,7 +223,9 @@ export const pt: Translations = {
         filterProjects: "Filtrar projetos",
         email: "E-mail",
         languageEmpty: "Nenhum idioma encontrado",
-        pdfVersion: "Versão PDF"
+        pdfVersion: "Versão PDF",
+        machineTranslated: "Rascunho de tradução automática — a aguardar revisão por falante nativo",
+        copyReport: "Copiar o relatório de erros — versão {version}"
     },
     common: {
         close: "Fechar",

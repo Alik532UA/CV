@@ -223,7 +223,9 @@ export const el: Translations = {
         filterProjects: "Φιλτράρισμα έργων",
         email: "Email",
         languageEmpty: "Δεν βρέθηκαν γλώσσες",
-        pdfVersion: "Έκδοση PDF"
+        pdfVersion: "Έκδοση PDF",
+        machineTranslated: "Πρόχειρη αυτόματη μετάφραση — εκκρεμεί έλεγχος από φυσικό ομιλητή",
+        copyReport: "Αντιγραφή αναφοράς σφαλμάτων — έκδοση {version}"
     },
     common: {
         close: "Κλείσιμο",

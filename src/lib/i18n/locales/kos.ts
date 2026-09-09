@@ -230,7 +230,9 @@ export const kos: Translations = {
         filterProjects: "Filter projects",
         email: "Email",
         languageEmpty: "Wangin kas koneyuk",
-        pdfVersion: "PDF version"
+        pdfVersion: "PDF version",
+        machineTranslated: "Machine translation draft — soenoetnoet in liyeyuk sin mwet ma kas se inge kas nutil",
+        copyReport: "Copy error report — version {version}"
     },
     common: {
         close: "Kaeal",

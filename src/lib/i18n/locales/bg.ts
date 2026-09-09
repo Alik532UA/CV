@@ -223,7 +223,9 @@ export const bg: Translations = {
         filterProjects: "Филтриране на проектите",
         email: "Имейл",
         languageEmpty: "Няма намерени езици",
-        pdfVersion: "PDF версия"
+        pdfVersion: "PDF версия",
+        machineTranslated: "Чернова машинен превод — очаква проверка от носител на езика",
+        copyReport: "Копирай отчета за грешки — версия {version}"
     },
     common: {
         close: "Затвори",

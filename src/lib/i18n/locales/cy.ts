@@ -223,7 +223,9 @@ export const cy: Translations = {
         filterProjects: "Hidlo prosiectau",
         email: "E-bost",
         languageEmpty: "Heb ddod o hyd i unrhyw iaith",
-        pdfVersion: "Fersiwn PDF"
+        pdfVersion: "Fersiwn PDF",
+        machineTranslated: "Drafft cyfieithu peirianyddol — yn disgwyl adolygiad gan siaradwr brodorol",
+        copyReport: "Copïo adroddiad gwallau — fersiwn {version}"
     },
     common: {
         close: "Cau",

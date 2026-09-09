@@ -223,7 +223,9 @@ export const ja: Translations = {
         filterProjects: "プロジェクトを絞り込む",
         email: "メール",
         languageEmpty: "言語が見つかりません",
-        pdfVersion: "PDF版"
+        pdfVersion: "PDF版",
+        machineTranslated: "機械翻訳の下書き — ネイティブによる校閲待ち",
+        copyReport: "エラーレポートをコピー — バージョン {version}"
     },
     common: {
         close: "閉じる",

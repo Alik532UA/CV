@@ -226,7 +226,9 @@ export const he: Translations = {
         filterProjects: "סינון פרויקטים",
         email: "אימייל",
         languageEmpty: "לא נמצאו שפות",
-        pdfVersion: "גרסת PDF"
+        pdfVersion: "גרסת PDF",
+        machineTranslated: "טיוטת תרגום מכונה — ממתינה לבדיקה של דובר שפת אם",
+        copyReport: "העתקת דוח השגיאות — גרסה {version}"
     },
     common: {
         close: "סגור",

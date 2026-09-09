@@ -223,7 +223,9 @@ export const hr: Translations = {
         filterProjects: "Filtriraj projekte",
         email: "E-pošta",
         languageEmpty: "Nema pronađenih jezika",
-        pdfVersion: "PDF verzija"
+        pdfVersion: "PDF verzija",
+        machineTranslated: "Nacrt strojnog prijevoda — čeka pregled izvornog govornika",
+        copyReport: "Kopiraj izvještaj o greškama — verzija {version}"
     },
     common: {
         close: "Zatvori",

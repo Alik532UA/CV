@@ -223,7 +223,9 @@ export const mk: Translations = {
         filterProjects: "Филтрирај проекти",
         email: "Е-пошта",
         languageEmpty: "Не се најдени јазици",
-        pdfVersion: "PDF верзија"
+        pdfVersion: "PDF верзија",
+        machineTranslated: "Нацрт од машински превод — чека проверка од native говорител",
+        copyReport: "Копирај го извештајот за грешки — верзија {version}"
     },
     common: {
         close: "Затвори",
