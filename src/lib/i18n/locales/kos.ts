@@ -209,7 +209,8 @@ export const kos: Translations = {
         title: "Sulela PDF Version",
         ats: "ATS / RMS",
         dark: "Dark Theme",
-        light: "Light Theme"
+        light: "Light Theme",
+        previewAlt: "Preview lun resume, {variant}"
     },
     ui: {
         skipToContent: "Som nu ke ma yohk",

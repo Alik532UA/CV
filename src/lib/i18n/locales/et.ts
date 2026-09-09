@@ -202,7 +202,8 @@ export const et: Translations = {
         title: "Vali PDF Versioon",
         ats: "ATS / RMS",
         dark: "Tume Teema",
-        light: "Hele Teema"
+        light: "Hele Teema",
+        previewAlt: "CV eelvaade, {variant}"
     },
     ui: {
         skipToContent: "Liigu põhisisu juurde",

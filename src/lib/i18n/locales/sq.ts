@@ -202,7 +202,8 @@ export const sq: Translations = {
         title: "Zgjidh Versionin PDF",
         ats: "ATS / RMS",
         dark: "Temë e Errët",
-        light: "Temë e Çelët"
+        light: "Temë e Çelët",
+        previewAlt: "Parashikim i CV-së, {variant}"
     },
     ui: {
         skipToContent: "Kalo te përmbajtja kryesore",

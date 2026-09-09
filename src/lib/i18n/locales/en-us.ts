@@ -78,6 +78,11 @@ export const enUS: Translations = {
         genericText: "The page could not be displayed. Reloading usually helps.",
         backHome: "Back to the resume"
     },
+    pdf_modal: {
+        ...en.pdf_modal,
+        // «resume», а не «CV»: те саме розходження, що для `downloadCV` вище.
+        previewAlt: "Resume preview, {variant}"
+    },
     ai: {
         subtitle: "Paste a job ad or a link to one — the AI will compare it with Alik's experience.",
         jobPlaceholder: "Job description, or a link to it...",

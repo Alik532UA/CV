@@ -202,7 +202,8 @@ export const bg: Translations = {
         title: "Избери версия на PDF",
         ats: "ATS / RMS",
         dark: "Тъмна тема",
-        light: "Светла тема"
+        light: "Светла тема",
+        previewAlt: "Преглед на резюмето, {variant}"
     },
     ui: {
         skipToContent: "Към основното съдържание",

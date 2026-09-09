@@ -202,7 +202,8 @@ export const sv: Translations = {
         title: "Välj PDF-version",
         ats: "ATS / RMS",
         dark: "Mörkt tema",
-        light: "Ljust tema"
+        light: "Ljust tema",
+        previewAlt: "Förhandsvisning av CV, {variant}"
     },
     ui: {
         skipToContent: "Hoppa till huvudinnehållet",

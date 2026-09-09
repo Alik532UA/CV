@@ -202,7 +202,8 @@ export const tr: Translations = {
         title: "PDF Sürümünü Seç",
         ats: "ATS / RMS",
         dark: "Koyu Tema",
-        light: "Açık Tema"
+        light: "Açık Tema",
+        previewAlt: "Özgeçmiş ön izlemesi, {variant}"
     },
     ui: {
         skipToContent: "Ana içeriğe geç",

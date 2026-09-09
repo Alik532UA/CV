@@ -202,7 +202,8 @@ export const fr: Translations = {
         title: "Choisir la Version du PDF",
         ats: "ATS / RMS",
         dark: "Thème Sombre",
-        light: "Thème Clair"
+        light: "Thème Clair",
+        previewAlt: "Aperçu du CV, {variant}"
     },
     ui: {
         skipToContent: "Aller au contenu principal",

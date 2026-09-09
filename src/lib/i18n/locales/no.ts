@@ -202,7 +202,8 @@ export const no: Translations = {
         title: "Velg PDF-versjon",
         ats: "ATS / RMS",
         dark: "Mørkt tema",
-        light: "Lyst tema"
+        light: "Lyst tema",
+        previewAlt: "Forhåndsvisning av CV, {variant}"
     },
     ui: {
         skipToContent: "Gå til hovedinnholdet",

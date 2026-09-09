@@ -202,7 +202,8 @@ export const el: Translations = {
         title: "Επιλέξτε Έκδοση PDF",
         ats: "ATS / RMS",
         dark: "Σκούρο Θέμα",
-        light: "Ανοιχτό Θέμα"
+        light: "Ανοιχτό Θέμα",
+        previewAlt: "Προεπισκόπηση βιογραφικού, {variant}"
     },
     ui: {
         skipToContent: "Μετάβαση στο κύριο περιεχόμενο",

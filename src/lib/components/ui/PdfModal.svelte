@@ -3,6 +3,7 @@
     import { base } from "$app/paths";
     import { FileText, FileCode, Sparkles } from "lucide-svelte";
     import { t } from "$lib/controllers/I18nState.svelte";
+    import { fill } from "$lib/i18n/fill";
     import { aiChat } from "$lib/controllers/AiChatState.svelte";
     import { track } from "$lib/services/analytics";
     import type { HTMLAttributes } from "svelte/elements";
@@ -66,7 +67,7 @@
                     <div class="pdf-preview">
                         <img
                             src="{base}/pdf-preview/{file.image}"
-                            alt={file.alt}
+                            alt={fill(t.pdf_modal.previewAlt, { variant: t.pdf_modal[file.id] })}
                             loading="lazy"
                             decoding="async"
                             width={PREVIEW_WIDTH}

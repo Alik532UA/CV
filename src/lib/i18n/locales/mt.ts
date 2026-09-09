@@ -202,7 +202,8 @@ export const mt: Translations = {
         title: "Agħżel il-Verżjoni PDF",
         ats: "ATS / RMS",
         dark: "Tema Skura",
-        light: "Tema Ċara"
+        light: "Tema Ċara",
+        previewAlt: "Previżjoni tas-CV, {variant}"
     },
     ui: {
         skipToContent: "Aqbeż għall-kontenut prinċipali",

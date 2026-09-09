@@ -202,7 +202,8 @@ export const sk: Translations = {
         title: "Vybrať verziu PDF",
         ats: "ATS / RMS",
         dark: "Tmavá téma",
-        light: "Svetlá téma"
+        light: "Svetlá téma",
+        previewAlt: "Náhľad životopisu, {variant}"
     },
     ui: {
         skipToContent: "Prejsť na hlavný obsah",

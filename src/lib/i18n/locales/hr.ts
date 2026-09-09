@@ -202,7 +202,8 @@ export const hr: Translations = {
         title: "Odaberi verziju PDF-a",
         ats: "ATS / RMS",
         dark: "Tamna tema",
-        light: "Svijetla tema"
+        light: "Svijetla tema",
+        previewAlt: "Pregled životopisa, {variant}"
     },
     ui: {
         skipToContent: "Prijeđi na glavni sadržaj",

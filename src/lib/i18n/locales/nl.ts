@@ -202,7 +202,8 @@ export const nl: Translations = {
         title: "Selecteer PDF-versie",
         ats: "ATS / RMS",
         dark: "Donker Thema",
-        light: "Licht Thema"
+        light: "Licht Thema",
+        previewAlt: "Voorbeeld van het cv, {variant}"
     },
     ui: {
         skipToContent: "Ga naar de hoofdinhoud",

@@ -202,7 +202,8 @@ export const ro: Translations = {
         title: "Selectează versiunea PDF",
         ats: "ATS / RMS",
         dark: "Temă întunecată",
-        light: "Temă deschisă"
+        light: "Temă deschisă",
+        previewAlt: "Previzualizare CV, {variant}"
     },
     ui: {
         skipToContent: "Sari la conținutul principal",

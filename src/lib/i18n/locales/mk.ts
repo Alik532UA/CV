@@ -202,7 +202,8 @@ export const mk: Translations = {
         title: "Избери верзија на PDF",
         ats: "ATS / RMS",
         dark: "Темна тема",
-        light: "Светла тема"
+        light: "Светла тема",
+        previewAlt: "Преглед на резимето, {variant}"
     },
     ui: {
         skipToContent: "Оди на главната содржина",

@@ -202,7 +202,8 @@ export const fi: Translations = {
         title: "Valitse PDF-versio",
         ats: "ATS / RMS",
         dark: "Tumma Teema",
-        light: "Vaalea Teema"
+        light: "Vaalea Teema",
+        previewAlt: "CV:n esikatselu, {variant}"
     },
     ui: {
         skipToContent: "Siirry pääsisältöön",

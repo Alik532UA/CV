@@ -202,7 +202,8 @@ export const uk: Translations = {
         title: "Виберіть версію PDF",
         ats: "ATS / RMS",
         dark: "Темна тема",
-        light: "Світла тема"
+        light: "Світла тема",
+        previewAlt: "Прев’ю резюме, {variant}"
     },
     ui: {
         skipToContent: "Перейти до основного вмісту",

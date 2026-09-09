@@ -202,7 +202,8 @@ export const ko: Translations = {
         title: "PDF 버전 선택",
         ats: "ATS / RMS",
         dark: "다크 테마",
-        light: "라이트 테마"
+        light: "라이트 테마",
+        previewAlt: "이력서 미리보기, {variant}"
     },
     ui: {
         skipToContent: "본문으로 건너뛰기",

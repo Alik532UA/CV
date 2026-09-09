@@ -202,7 +202,8 @@ export const ka: Translations = {
         title: "PDF ვერსიის არჩევა",
         ats: "ATS / RMS",
         dark: "მუქი თემა",
-        light: "ღია თემა"
+        light: "ღია თემა",
+        previewAlt: "რეზიუმეს გადახედვა, {variant}"
     },
     ui: {
         skipToContent: "ძირითად შიგთავსზე გადასვლა",

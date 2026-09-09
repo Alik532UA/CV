@@ -204,7 +204,8 @@ export const crh: Translations = {
         title: "PDF Variantını Saylañız",
         ats: "ATS / RMS",
         dark: "Qaranlıq Tema",
-        light: "Aydın Tema"
+        light: "Aydın Tema",
+        previewAlt: "Özgeçmişniñ ög baqışı, {variant}"
     },
     ui: {
         skipToContent: "Esas mündericege keç",

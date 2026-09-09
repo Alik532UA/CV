@@ -202,7 +202,8 @@ export const cy: Translations = {
         title: "Dewis Fersiwn PDF",
         ats: "ATS / RMS",
         dark: "Thema Dywyll",
-        light: "Thema Olau"
+        light: "Thema Olau",
+        previewAlt: "Rhagolwg o’r CV, {variant}"
     },
     ui: {
         skipToContent: "Neidio i’r prif gynnwys",

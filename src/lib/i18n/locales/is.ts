@@ -202,7 +202,8 @@ export const is: Translations = {
         title: "Velja PDF útgáfu",
         ats: "ATS / RMS",
         dark: "Dökkt þema",
-        light: "Ljóst þema"
+        light: "Ljóst þema",
+        previewAlt: "Forskoðun á starfsferilskrá, {variant}"
     },
     ui: {
         skipToContent: "Fara í meginmál",

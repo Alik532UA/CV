@@ -209,7 +209,8 @@ export const chk: Translations = {
         title: "Filatä PDF Version",
         ats: "ATS / RMS",
         dark: "Dark Theme",
-        light: "Light Theme"
+        light: "Light Theme",
+        previewAlt: "Preview an ewe resume, {variant}"
     },
     ui: {
         skipToContent: "Feilong ngeni ewe masowa lapalap",

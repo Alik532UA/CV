@@ -202,7 +202,8 @@ export const ga: Translations = {
         title: "Roghnaigh Leagan PDF",
         ats: "ATS / RMS",
         dark: "Téama Dorcha",
-        light: "Téama Geal"
+        light: "Téama Geal",
+        previewAlt: "Réamhamharc ar an CV, {variant}"
     },
     ui: {
         skipToContent: "Téigh go dtí an príomhábhar",

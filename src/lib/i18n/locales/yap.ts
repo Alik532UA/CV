@@ -209,7 +209,8 @@ export const yap: Translations = {
         title: "Mel'eg e PDF Version",
         ats: "ATS / RMS",
         dark: "Dark Theme",
-        light: "Light Theme"
+        light: "Light Theme",
+        previewAlt: "Preview ko fare resume, {variant}"
     },
     ui: {
         skipToContent: "Mmarow ko n'en nib ga'ngin",

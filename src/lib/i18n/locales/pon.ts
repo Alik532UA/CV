@@ -209,7 +209,8 @@ export const pon: Translations = {
         title: "Pilada PDF Version",
         ats: "ATS / RMS",
         dark: "Dark Theme",
-        light: "Light Theme"
+        light: "Light Theme",
+        previewAlt: "Preview en resume, {variant}"
     },
     ui: {
         skipToContent: "Kohla ni audepe kesempwal",

@@ -202,7 +202,8 @@ export const de: Translations = {
         title: "PDF-Version Auswählen",
         ats: "ATS / RMS",
         dark: "Dunkles Design",
-        light: "Helles Design"
+        light: "Helles Design",
+        previewAlt: "Vorschau des Lebenslaufs, {variant}"
     },
     ui: {
         skipToContent: "Zum Hauptinhalt springen",

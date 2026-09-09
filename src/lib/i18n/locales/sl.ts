@@ -202,7 +202,8 @@ export const sl: Translations = {
         title: "Izberi različico PDF",
         ats: "ATS / RMS",
         dark: "Temna tema",
-        light: "Svetla tema"
+        light: "Svetla tema",
+        previewAlt: "Predogled življenjepisa, {variant}"
     },
     ui: {
         skipToContent: "Skoči na glavno vsebino",

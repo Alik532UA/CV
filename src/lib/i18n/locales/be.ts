@@ -202,7 +202,8 @@ export const be: Translations = {
         title: "Выберыце версію PDF",
         ats: "ATS / RMS",
         dark: "Цёмная тэма",
-        light: "Светлая тэма"
+        light: "Светлая тэма",
+        previewAlt: "Перадпрагляд рэзюмэ, {variant}"
     },
     ui: {
         skipToContent: "Перайсці да асноўнага зместу",

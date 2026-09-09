@@ -202,7 +202,8 @@ export const ja: Translations = {
         title: "PDFバージョンを選択",
         ats: "ATS / RMS",
         dark: "ダークテーマ",
-        light: "ライトテーマ"
+        light: "ライトテーマ",
+        previewAlt: "履歴書のプレビュー、{variant}"
     },
     ui: {
         skipToContent: "メインコンテンツへスキップ",

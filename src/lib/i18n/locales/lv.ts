@@ -202,7 +202,8 @@ export const lv: Translations = {
         title: "Izvēlēties PDF Versiju",
         ats: "ATS / RMS",
         dark: "Tumšā Tēma",
-        light: "Gaišā Tēma"
+        light: "Gaišā Tēma",
+        previewAlt: "CV priekšskatījums, {variant}"
     },
     ui: {
         skipToContent: "Pāriet uz galveno saturu",

@@ -202,7 +202,8 @@ export const lt: Translations = {
         title: "Pasirinkti PDF Versiją",
         ats: "ATS / RMS",
         dark: "Tamsi Tema",
-        light: "Šviesi Tema"
+        light: "Šviesi Tema",
+        previewAlt: "CV peržiūra, {variant}"
     },
     ui: {
         skipToContent: "Pereiti prie pagrindinio turinio",

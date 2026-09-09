@@ -205,7 +205,8 @@ export const he: Translations = {
         title: "בחר גרסת PDF",
         ats: "ATS / RMS",
         dark: "ערכת נושא כהה",
-        light: "ערכת נושא בהירה"
+        light: "ערכת נושא בהירה",
+        previewAlt: "תצוגה מקדימה של קורות החיים, {variant}"
     },
     ui: {
         skipToContent: "דלג לתוכן הראשי",

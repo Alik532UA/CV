@@ -64,7 +64,6 @@ export interface ThemedCvFile {
 	/** Збігається з ключем у `t.pdf_modal`, звідки береться підпис. */
 	id: "dark" | "light";
 	image: string;
-	alt: string;
 	url: string;
 }
 
@@ -73,13 +72,11 @@ export const THEMED_FILES: readonly ThemedCvFile[] = [
 	{
 		id: "dark",
 		image: "Alik-Zapolnov-CV-dark.jpg",
-		alt: "Dark Theme CV Preview",
 		url: "https://drive.google.com/file/d/169jkAHJDjx8P3zJODr-PtytX2HtkVaRv/view"
 	},
 	{
 		id: "light",
 		image: "Alik-Zapolnov-CV-light.jpg",
-		alt: "Light Theme CV Preview",
 		url: "https://drive.google.com/file/d/1bNX2y5uD99DrQ1-jjjbFyYQJbeWeeCLB/view"
 	}
 ];

@@ -202,7 +202,8 @@ export const ca: Translations = {
         title: "Tria la versió PDF",
         ats: "ATS / RMS",
         dark: "Tema fosc",
-        light: "Tema clar"
+        light: "Tema clar",
+        previewAlt: "Vista prèvia del CV, {variant}"
     },
     ui: {
         skipToContent: "Ves al contingut principal",
