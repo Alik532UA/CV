@@ -258,6 +258,7 @@ export const da: Translations = {
         gaps: "Huller og spørgsmål",
         followUpTitle: "Stil et opfølgende spørgsmål om Aliks erfaring:",
         chatPlaceholder: "Dit spørgsmål om Aliks erfaring...",
+        chatSend: "Send spørgsmålet",
         thinking: "AI'en tænker...",
         modelTitle: "AI-model",
         modelAuto: "Auto — bedste tilgængelige",

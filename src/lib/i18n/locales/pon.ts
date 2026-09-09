@@ -265,6 +265,7 @@ export const pon: Translations = {
         gaps: "Me sohte mie oh peidek kan",
         followUpTitle: "Idek pil ehu duwen sapwellimen Alik experience:",
         chatPlaceholder: "Noumw peidek duwen sapwellimen Alik experience...",
+        chatSend: "Kadarala peidek",
         thinking: "AI kin medemedewe...",
         modelTitle: "Model AI",
         modelAuto: "Auto — me keieu mwahu me mie",

@@ -258,6 +258,7 @@ export const hr: Translations = {
         gaps: "Praznine i pitanja",
         followUpTitle: "Postavite dodatno pitanje o Alikovu iskustvu:",
         chatPlaceholder: "Vaše pitanje o Alikovu iskustvu...",
+        chatSend: "Pošalji pitanje",
         thinking: "AI razmišlja...",
         modelTitle: "AI model",
         modelAuto: "Automatski — najbolji dostupni",

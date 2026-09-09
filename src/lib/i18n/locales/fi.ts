@@ -258,6 +258,7 @@ export const fi: Translations = {
         gaps: "Puutteet ja kysymykset",
         followUpTitle: "Kysy lisää Alikin kokemuksesta:",
         chatPlaceholder: "Kysymyksesi Alikin kokemuksesta...",
+        chatSend: "Lähetä kysymys",
         thinking: "Tekoäly miettii...",
         modelTitle: "Tekoälymalli",
         modelAuto: "Automaattinen — paras saatavilla",

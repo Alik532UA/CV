@@ -260,6 +260,7 @@ export const crh: Translations = {
         gaps: "Boşluqlar ve sualler",
         followUpTitle: "Alikniñ tecribesi aqqında qoşma sual beriñiz:",
         chatPlaceholder: "Alikniñ tecribesi aqqında sualiñiz...",
+        chatSend: "Sualnı yiber",
         thinking: "AI tüşüne...",
         modelTitle: "AI modeli",
         modelAuto: "Avto — eñ yahşı mevcut",

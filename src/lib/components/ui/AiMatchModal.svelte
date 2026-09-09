@@ -189,11 +189,17 @@
                             onkeydown={handleKeydown}
                             disabled={aiChat.isLoading}
                         />
+                        <!-- `aria-label` тут — не оздоблення: кнопка складається з
+                             одного значка, тобто без нього читалка вимовляє її як
+                             «button». axe цього не бачив — панель чату з'являється
+                             лише після успішного аналізу, а сценарій axe відкриває
+                             модалку на порожній формі (A11Y-STATIC-ICON-LABEL). -->
                         <button
                             class="send-btn"
                             data-testid="ai-chat-send-btn"
                             onclick={handleSendMessage}
                             disabled={aiChat.isLoading || !chatInput.trim()}
+                            aria-label={t.ai.chatSend}
                         >
                             <Send size={16} />
                         </button>

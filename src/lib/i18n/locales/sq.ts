@@ -258,6 +258,7 @@ export const sq: Translations = {
         gaps: "Mangësi dhe pyetje",
         followUpTitle: "Bëni një pyetje shtesë për përvojën e Alikut:",
         chatPlaceholder: "Pyetja juaj për përvojën e Alikut...",
+        chatSend: "Dërgo pyetjen",
         thinking: "IA po mendon...",
         modelTitle: "Modeli i IA-s",
         modelAuto: "Automatik — më i miri i disponueshëm",

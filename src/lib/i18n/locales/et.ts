@@ -258,6 +258,7 @@ export const et: Translations = {
         gaps: "Lüngad ja küsimused",
         followUpTitle: "Küsi lisaks Aliki kogemuse kohta:",
         chatPlaceholder: "Sinu küsimus Aliki kogemuse kohta...",
+        chatSend: "Saada küsimus",
         thinking: "Tehisintellekt mõtleb...",
         modelTitle: "Tehisintellekti mudel",
         modelAuto: "Automaatne — parim saadaolev",

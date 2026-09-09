@@ -258,6 +258,7 @@ export const ka: Translations = {
         gaps: "ხარვეზები და კითხვები",
         followUpTitle: "დასვით დამატებითი კითხვა ალიკის გამოცდილებაზე:",
         chatPlaceholder: "თქვენი კითხვა ალიკის გამოცდილებაზე...",
+        chatSend: "კითხვის გაგზავნა",
         thinking: "AI ფიქრობს...",
         modelTitle: "AI მოდელი",
         modelAuto: "ავტომატური — საუკეთესო ხელმისაწვდომი",

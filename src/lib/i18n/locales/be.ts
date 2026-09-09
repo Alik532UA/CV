@@ -258,6 +258,7 @@ export const be: Translations = {
         gaps: "Прабелы і ўдакладненні",
         followUpTitle: "Задаць дадатковае пытанне пра досвед Аліка:",
         chatPlaceholder: "Ваша пытанне пра досвед Аліка...",
+        chatSend: "Адправіць пытанне",
         thinking: "AI думае...",
         modelTitle: "Мадэль AI",
         modelAuto: "Аўта — найлепшая даступная",

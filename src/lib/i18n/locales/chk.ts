@@ -265,6 +265,7 @@ export const chk: Translations = {
         gaps: "Ekkewe mi nom me kapas eis",
         followUpTitle: "Kapas eis pwan ussun experience an Alik:",
         chatPlaceholder: "Om kapas eis ussun experience an Alik...",
+        chatSend: "Tinei ewe kapas eis",
         thinking: "AI mi ekiek...",
         modelTitle: "Model AI",
         modelAuto: "Auto — ewe mi murinno seni meinisin",

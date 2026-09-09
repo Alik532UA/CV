@@ -258,6 +258,7 @@ export const sv: Translations = {
         gaps: "Luckor och frågor",
         followUpTitle: "Ställ en följdfråga om Aliks erfarenhet:",
         chatPlaceholder: "Din fråga om Aliks erfarenhet...",
+        chatSend: "Skicka frågan",
         thinking: "AI:n tänker...",
         modelTitle: "AI-modell",
         modelAuto: "Auto — bästa tillgängliga",

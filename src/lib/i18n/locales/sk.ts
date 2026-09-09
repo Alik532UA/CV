@@ -258,6 +258,7 @@ export const sk: Translations = {
         gaps: "Medzery a otázky",
         followUpTitle: "Opýtajte sa doplňujúco na Alikove skúsenosti:",
         chatPlaceholder: "Vaša otázka na Alikove skúsenosti...",
+        chatSend: "Odoslať otázku",
         thinking: "AI premýšľa...",
         modelTitle: "Model AI",
         modelAuto: "Automaticky — najlepší dostupný",

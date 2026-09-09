@@ -258,6 +258,7 @@ export const is: Translations = {
         gaps: "Eyður og spurningar",
         followUpTitle: "Spurðu nánar um reynslu Aliks:",
         chatPlaceholder: "Spurningin þín um reynslu Aliks...",
+        chatSend: "Senda spurninguna",
         thinking: "Gervigreindin hugsar...",
         modelTitle: "Gervigreindarlíkan",
         modelAuto: "Sjálfvirkt — besta í boði",

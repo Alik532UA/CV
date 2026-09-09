@@ -258,6 +258,7 @@ export const ga: Translations = {
         gaps: "Bearnaí agus ceisteanna",
         followUpTitle: "Cuir ceist bhreise faoi thaithí Alik:",
         chatPlaceholder: "Do cheist faoi thaithí Alik...",
+        chatSend: "Seol an cheist",
         thinking: "Tá an IS ag machnamh...",
         modelTitle: "Samhail IS",
         modelAuto: "Uathoibríoch — an ceann is fearr atá ar fáil",

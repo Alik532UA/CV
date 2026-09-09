@@ -258,6 +258,7 @@ export const bg: Translations = {
         gaps: "Пропуски и въпроси",
         followUpTitle: "Задайте допълнителен въпрос за опита на Алик:",
         chatPlaceholder: "Вашият въпрос за опита на Алик...",
+        chatSend: "Изпрати въпроса",
         thinking: "AI мисли...",
         modelTitle: "Модел на AI",
         modelAuto: "Автоматично — най-добрият наличен",

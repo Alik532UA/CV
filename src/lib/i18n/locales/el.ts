@@ -258,6 +258,7 @@ export const el: Translations = {
         gaps: "Κενά και ερωτήσεις",
         followUpTitle: "Κάντε συμπληρωματική ερώτηση για την εμπειρία του Alik:",
         chatPlaceholder: "Η ερώτησή σας για την εμπειρία του Alik...",
+        chatSend: "Αποστολή ερώτησης",
         thinking: "Η ΤΝ σκέφτεται...",
         modelTitle: "Μοντέλο ΤΝ",
         modelAuto: "Αυτόματα — το καλύτερο διαθέσιμο",

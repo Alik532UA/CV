@@ -258,6 +258,7 @@ export const de: Translations = {
         gaps: "Lücken und Rückfragen",
         followUpTitle: "Rückfrage zu Aliks Erfahrung stellen:",
         chatPlaceholder: "Ihre Frage zu Aliks Erfahrung...",
+        chatSend: "Frage senden",
         thinking: "Die KI denkt nach...",
         modelTitle: "KI-Modell",
         modelAuto: "Automatisch — bestes verfügbares",

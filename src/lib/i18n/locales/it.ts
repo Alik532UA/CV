@@ -258,6 +258,7 @@ export const it: Translations = {
         gaps: "Lacune e domande",
         followUpTitle: "Fai una domanda sull'esperienza di Alik:",
         chatPlaceholder: "La tua domanda sull'esperienza di Alik...",
+        chatSend: "Invia la domanda",
         thinking: "L'IA sta pensando...",
         modelTitle: "Modello di IA",
         modelAuto: "Auto — il migliore disponibile",

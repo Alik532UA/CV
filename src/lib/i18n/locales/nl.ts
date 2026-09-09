@@ -258,6 +258,7 @@ export const nl: Translations = {
         gaps: "Hiaten en vragen",
         followUpTitle: "Stel een vervolgvraag over Aliks ervaring:",
         chatPlaceholder: "Uw vraag over Aliks ervaring...",
+        chatSend: "Vraag versturen",
         thinking: "De AI denkt na...",
         modelTitle: "AI-model",
         modelAuto: "Automatisch — beste beschikbare",

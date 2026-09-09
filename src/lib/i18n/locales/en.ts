@@ -264,6 +264,7 @@ export const en: Translations = {
         gaps: "Gaps and questions",
         followUpTitle: "Ask a follow-up about Alik's experience:",
         chatPlaceholder: "Your question about Alik's experience...",
+        chatSend: "Send question",
         thinking: "The AI is thinking...",
         modelTitle: "AI model",
         modelAuto: "Auto — best available",

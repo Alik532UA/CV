@@ -258,6 +258,7 @@ export const cs: Translations = {
         gaps: "Mezery a dotazy",
         followUpTitle: "Zeptejte se doplňkově na Alikovy zkušenosti:",
         chatPlaceholder: "Váš dotaz na Alikovy zkušenosti...",
+        chatSend: "Odeslat dotaz",
         thinking: "AI přemýšlí...",
         modelTitle: "Model AI",
         modelAuto: "Automaticky — nejlepší dostupný",

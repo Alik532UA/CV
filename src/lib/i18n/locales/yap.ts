@@ -265,6 +265,7 @@ export const yap: Translations = {
         gaps: "Tin nib m'ay nge deer",
         followUpTitle: "Mu fith reb e deer u murung'agen e maruwel rok Alik:",
         chatPlaceholder: "Fare deer rom u murung'agen e maruwel rok Alik...",
+        chatSend: "Ngan piiq fare deer",
         thinking: "AI be lemnag...",
         modelTitle: "Model ko AI",
         modelAuto: "Auto — bin nib fel' ni bay",

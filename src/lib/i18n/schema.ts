@@ -228,6 +228,16 @@ export interface Translations {
 		gaps: string;
 		followUpTitle: string;
 		chatPlaceholder: string;
+		/**
+		 * Доступне ім'я кнопки «надіслати» в чаті дозапитів.
+		 *
+		 * Обов'язкове, а не необов'язкове: кнопка складається з одного значка,
+		 * тобто без цього рядка читалка вимовляє її як «button» — і в усіх 42
+		 * мовах. Стежить `src/a11y-static-canon.test.ts`
+		 * (`A11Y-STATIC-ICON-LABEL`); axe цю кнопку не бачив, бо панель чату
+		 * з'являється лише після успішного аналізу вакансії.
+		 */
+		chatSend: string;
 		thinking: string;
 		modelTitle: string;
 		modelAuto: string;

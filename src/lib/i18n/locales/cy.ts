@@ -258,6 +258,7 @@ export const cy: Translations = {
         gaps: "Bylchau a chwestiynau",
         followUpTitle: "Gofynnwch gwestiwn pellach am brofiad Alik:",
         chatPlaceholder: "Eich cwestiwn am brofiad Alik...",
+        chatSend: "Anfon y cwestiwn",
         thinking: "Mae'r DA yn meddwl...",
         modelTitle: "Model DA",
         modelAuto: "Awtomatig — y gorau sydd ar gael",

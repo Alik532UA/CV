@@ -265,6 +265,7 @@ export const kos: Translations = {
         gaps: "Ma wangin ac mwe siyuk",
         followUpTitle: "Siyuk pac ke orekma lal Alik:",
         chatPlaceholder: "Mwe siyuk lom ke orekma lal Alik...",
+        chatSend: "Supwaryauk mwe siyuk",
         thinking: "AI el nunku...",
         modelTitle: "Model AI",
         modelAuto: "Auto — ma wo emeet ma oasr",

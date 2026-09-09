@@ -258,6 +258,7 @@ export const ja: Translations = {
         gaps: "不足点と確認事項",
         followUpTitle: "アリックの経験について追加で質問する:",
         chatPlaceholder: "アリックの経験についての質問...",
+        chatSend: "質問を送信する",
         thinking: "AI が考えています...",
         modelTitle: "AI モデル",
         modelAuto: "自動 — 利用可能な最良のモデル",

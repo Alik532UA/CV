@@ -258,6 +258,7 @@ export const no: Translations = {
         gaps: "Hull og spørsmål",
         followUpTitle: "Still et oppfølgingsspørsmål om Aliks erfaring:",
         chatPlaceholder: "Ditt spørsmål om Aliks erfaring...",
+        chatSend: "Send spørsmålet",
         thinking: "KI-en tenker...",
         modelTitle: "KI-modell",
         modelAuto: "Auto — beste tilgjengelige",

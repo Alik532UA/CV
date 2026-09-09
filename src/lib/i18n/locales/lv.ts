@@ -258,6 +258,7 @@ export const lv: Translations = {
         gaps: "Nepilnības un jautājumi",
         followUpTitle: "Uzdod papildu jautājumu par Alika pieredzi:",
         chatPlaceholder: "Tavs jautājums par Alika pieredzi...",
+        chatSend: "Nosūtīt jautājumu",
         thinking: "MI domā...",
         modelTitle: "MI modelis",
         modelAuto: "Automātiski — labākais pieejamais",

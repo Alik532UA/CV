@@ -258,6 +258,7 @@ export const uk: Translations = {
         gaps: "Прогалини й уточнення",
         followUpTitle: "Поставити додаткове запитання про досвід Аліка:",
         chatPlaceholder: "Ваше запитання про досвід Аліка...",
+        chatSend: "Надіслати запитання",
         thinking: "AI думає...",
         modelTitle: "Модель AI",
         modelAuto: "Авто — найкраща доступна",

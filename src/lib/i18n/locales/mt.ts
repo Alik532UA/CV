@@ -258,6 +258,7 @@ export const mt: Translations = {
         gaps: "Nuqqasijiet u mistoqsijiet",
         followUpTitle: "Staqsi mistoqsija oħra dwar l-esperjenza ta' Alik:",
         chatPlaceholder: "Il-mistoqsija tiegħek dwar l-esperjenza ta' Alik...",
+        chatSend: "Ibgħat il-mistoqsija",
         thinking: "L-IA qed taħseb...",
         modelTitle: "Mudell tal-IA",
         modelAuto: "Awtomatiku — l-aħjar disponibbli",

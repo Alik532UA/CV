@@ -258,6 +258,7 @@ export const sl: Translations = {
         gaps: "Vrzeli in vprašanja",
         followUpTitle: "Postavite dodatno vprašanje o Alikovih izkušnjah:",
         chatPlaceholder: "Vaše vprašanje o Alikovih izkušnjah...",
+        chatSend: "Pošlji vprašanje",
         thinking: "UI razmišlja...",
         modelTitle: "Model UI",
         modelAuto: "Samodejno — najboljši razpoložljivi",

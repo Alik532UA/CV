@@ -258,6 +258,7 @@ export const ko: Translations = {
         gaps: "부족한 점과 확인 사항",
         followUpTitle: "알릭의 경력에 대해 추가로 질문하기:",
         chatPlaceholder: "알릭의 경력에 대한 질문...",
+        chatSend: "질문 보내기",
         thinking: "AI가 생각하는 중...",
         modelTitle: "AI 모델",
         modelAuto: "자동 — 사용 가능한 최적 모델",

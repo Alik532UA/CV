@@ -258,6 +258,7 @@ export const tr: Translations = {
         gaps: "Eksikler ve sorular",
         followUpTitle: "Alik'in deneyimi hakkında ek soru sorun:",
         chatPlaceholder: "Alik'in deneyimi hakkındaki sorunuz...",
+        chatSend: "Soruyu gönder",
         thinking: "Yapay zekâ düşünüyor...",
         modelTitle: "Yapay zekâ modeli",
         modelAuto: "Otomatik — mevcut en iyisi",

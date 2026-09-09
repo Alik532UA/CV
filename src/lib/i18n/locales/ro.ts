@@ -258,6 +258,7 @@ export const ro: Translations = {
         gaps: "Lipsuri și întrebări",
         followUpTitle: "Puneți o întrebare suplimentară despre experiența lui Alik:",
         chatPlaceholder: "Întrebarea dumneavoastră despre experiența lui Alik...",
+        chatSend: "Trimite întrebarea",
         thinking: "IA se gândește...",
         modelTitle: "Model IA",
         modelAuto: "Automat — cel mai bun disponibil",

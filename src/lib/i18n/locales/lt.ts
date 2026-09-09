@@ -258,6 +258,7 @@ export const lt: Translations = {
         gaps: "Spragos ir klausimai",
         followUpTitle: "Užduok papildomą klausimą apie Aliko patirtį:",
         chatPlaceholder: "Tavo klausimas apie Aliko patirtį...",
+        chatSend: "Siųsti klausimą",
         thinking: "DI mąsto...",
         modelTitle: "DI modelis",
         modelAuto: "Automatiškai — geriausias prieinamas",

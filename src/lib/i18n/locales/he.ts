@@ -261,6 +261,7 @@ export const he: Translations = {
         gaps: "פערים ושאלות",
         followUpTitle: "שאלו שאלה נוספת על הניסיון של אליק:",
         chatPlaceholder: "השאלה שלכם על הניסיון של אליק...",
+        chatSend: "שליחת השאלה",
         thinking: "ה-AI חושב...",
         modelTitle: "מודל AI",
         modelAuto: "אוטומטי — הטוב ביותר הזמין",
