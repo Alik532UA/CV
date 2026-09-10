@@ -103,12 +103,31 @@ export class ThemeState {
 		}, 200);
 	}
 
-	/** Показати тему. Нічого не запам'ятовує — це не вибір користувача. */
+	/**
+	 * Показати тему. Нічого не запам'ятовує — це не вибір користувача.
+	 *
+	 * СХЕМУ ОГОЛОШУЄ CSS, а не цей метод. Тут стояв рядок
+	 * `document.documentElement.style.colorScheme = theme` — і він робив рівно
+	 * те, від чого застерігає коментар у `src/app.html`: інлайновий стиль
+	 * перебиває будь-яку таблицю стилів, тож звуження
+	 * `:root[data-theme='light'] { color-scheme: only light }` у `app.css`
+	 * ставало недосяжним, а сторінка оголошувала голе `light`. Саме за ним
+	 * Android Chrome вмикає Auto Dark Theme й перемальовує світлу тему
+	 * (UI-UX-v9 `UIUX-ONLY-LIGHT`, HIGH).
+	 *
+	 * Скрипт першого кадру цей рядок утратив раніше, а контролер — ні, і гейт
+	 * `src/color-scheme-canon.test.ts` цього не бачив, бо читав два джерела з
+	 * трьох. Заміряно в браузері: `getComputedStyle(:root).colorScheme`
+	 * віддавав `light` і після завантаження, і після перемикання теми, тобто
+	 * `only light` не діяв ніколи.
+	 *
+	 * Атрибута `data-theme` тут досить: обидві теми мають свій блок у
+	 * `app.css` (`dark` і `only light`), і саме він тепер визначає схему.
+	 */
 	apply(theme: string) {
 		this.current = theme;
 		if (browser) {
 			document.documentElement.setAttribute("data-theme", theme);
-			document.documentElement.style.colorScheme = theme;
 		}
 	}
 
