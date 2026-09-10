@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { resolve } from "node:path";
 
 /**
@@ -94,6 +94,100 @@ describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 		// Тека без файлу і чужий сайт — не наші шляхи.
 		expect("`src/lib/components/`").not.toMatch(path);
 		expect("`/DigitalWorkshop/`").not.toMatch(path);
+	});
+
+	/**
+	 * ДРУГИЙ БІК РЕЗОЛВЕРА (`PIT-DOC-FACTS`, HIGH).
+	 *
+	 * Перевірка вище однобічна: вона питає «чи існує те, що названо». Канон
+	 * вимагає обох боків — «і кожен файл із переліку, про який документ мусить
+	 * знати (гейти, скрипти в `package.json`), у документі згаданий», бо
+	 * однобічна ловить лише половину дрейфу.
+	 *
+	 * Половина, якої бракувало, — саме та, що мовчить: новий гейт додається
+	 * скриптом у `package.json` і кроком у workflow, а `AGENTS.md` лишається зі
+	 * старим переліком команд. Наступний, хто прийде за списком «чим тут
+	 * перевіряють», отримає неповний — і не дізнається про це ніяк, бо все
+	 * названe в ньому працює.
+	 *
+	 * Гейтами вважаються `check*`, `lint*` і `test*` без watch-варіантів:
+	 * watch існує для людини за клавіатурою й у переліку команд не потрібен.
+	 */
+	it("кожен гейт-скрипт із package.json названий у документах", () => {
+		const scripts = Object.keys(
+			(JSON.parse(read("package.json")) as { scripts?: Record<string, string> }).scripts ?? {}
+		);
+		expect(scripts.length, "у package.json немає скриптів — перевірка мертва").toBeGreaterThan(5);
+
+		const gates = scripts.filter((s) => /^(check|lint|test)(:|$)/.test(s) && !/:watch$/.test(s));
+		expect(gates.length, "жодного гейт-скрипта не розпізнано — маска читає не те").toBeGreaterThan(3);
+
+		const all = Object.values(DOCS).join("\n");
+		const unmentioned = gates.filter((s) => !new RegExp(`npm (run )?${s}(?![\\w:-])`).test(all));
+		expect(
+			unmentioned,
+			"гейт є в package.json і не названий у жодному документі — перелік команд\n" +
+				`для наступного неповний: ${unmentioned.join(", ")}`
+		).toEqual([]);
+	});
+
+	it("кожен `npm run` із документів існує в package.json", () => {
+		const scripts = Object.keys(
+			(JSON.parse(read("package.json")) as { scripts?: Record<string, string> }).scripts ?? {}
+		);
+		// `npm audit`, `npm ci`, `npm install`, `npm test` — команди самого npm,
+		// а не скрипти проєкту.
+		const BUILT_IN = ["audit", "ci", "install", "test"];
+		const named = [...new Set([...Object.values(DOCS).join("\n").matchAll(/npm (?:run )?([\w:-]+)/g)].map((m) => m[1]))];
+		expect(named.length, "у документах немає жодної команди npm — перевірка мертва").toBeGreaterThan(5);
+
+		const missing = named.filter((n) => !scripts.includes(n) && !BUILT_IN.includes(n));
+		expect(
+			missing,
+			`документ називає команду, якої немає в package.json: ${missing.join(", ")}`
+		).toEqual([]);
+	});
+
+	/**
+	 * Дія GitHub, названа в документі, стоїть у workflow (`PIT-DOC-FACTS`).
+	 *
+	 * ЦЕ НЕ ГІПОТЕТИЧНИЙ КЛАС. `PROJECT-CONTEXT.md` називав три дії з версіями:
+	 * `deploy-pages@v4` при `@v5` у workflow, `upload-artifact@v5` при `@v7` і
+	 * `configure-pages@v5`, якої в цьому репозиторії немає взагалі — вона
+	 * приїхала цитатою з канону й читалася як замір на місці. Кожна з трьох
+	 * була правдою, коли її писали або звідки її брали.
+	 *
+	 * Ім'я власника необов'язкове: документ пише і `actions/deploy-pages@v5`, і
+	 * просто `upload-artifact@v7`, тож збіг шукається по суфіксу `uses:`.
+	 */
+	it("кожна дія GitHub, названа в документах, стоїть у workflow", () => {
+		const dir = ".github/workflows";
+		const workflows = existsSync(resolve(ROOT, dir))
+			? readdirSync(resolve(ROOT, dir))
+					.filter((f) => /\.ya?ml$/.test(f))
+					.map((f) => read(`${dir}/${f}`))
+					.join("\n")
+			: "";
+		const used = [...workflows.matchAll(/uses:\s*([\w.-]+\/[\w.-]+)@(v?[\w.-]+)/g)].map(
+			(m) => `${m[1]}@${m[2]}`
+		);
+		expect(used.length, "у workflow не знайдено жодного `uses:` — перевірка мертва").toBeGreaterThan(3);
+
+		const claimed = [
+			...new Set(
+				Object.values(DOCS)
+					.join("\n")
+					.matchAll(/`((?:[\w.-]+\/)?[\w.-]+@v\d+)`/g)
+			)
+		].map((m) => m[1]);
+		expect(claimed.length, "жоден документ не називає дії — перевірка мертва").toBeGreaterThan(0);
+
+		const stale = claimed.filter((name) => !used.some((u) => u === name || u.endsWith(`/${name}`)));
+		expect(
+			stale,
+			"документ називає дію з версією, якої в workflow немає. Або звірити з\n" +
+				`workflow, або описати словами без версії: ${stale.join(", ")}`
+		).toEqual([]);
 	});
 
 	it("префікс сховищ той самий, що в коді", () => {
