@@ -279,6 +279,48 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/*
+ * ПЛАВНА ЗМІНА ТЕМИ — і під курсором, і по-справжньому (THEME-SWITCHER § 5).
+ *
+ * Клас вішає контролер (`controllers/UiState.svelte.ts`): `previewTheme` — поки
+ * курсор на кнопці теми, `apply` — на час самої зміни. Тут лише плавність.
+ *
+ * `body` вище має власний `transition: background-color 0.5s` — але лише тло й
+ * лише в нього. Усе, що на ньому лежить, міняло колір СТРИБКОМ, і на прев'ю це
+ * помітно одразу: тло пливе, картки клацають.
+ *
+ * ## Чому `*`, а не перелік поверхонь
+ *
+ * Тему тримають ТОКЕНИ, і їх читають сотні правил у десятках компонентів.
+ * Перелічити «головні поверхні» означало б плавно міняти тло сторінки й
+ * стрибком — усе інше.
+ *
+ * Ціна обмежена свідомо: правило живе лише поки курсор на кнопці теми або доки
+ * триває зміна (контролер знімає клас таймером), перелічує рівно п'ять
+ * властивостей кольору й виключає `canvas` — його малює скрипт, і CSS-перехід
+ * там нічого не дає, крім роботи композитору.
+ */
+html.theme-shifting,
+html.theme-shifting body,
+html.theme-shifting *:not(canvas) {
+    transition:
+        background-color 0.56s ease,
+        color 0.56s ease,
+        border-color 0.56s ease,
+        fill 0.56s ease,
+        stroke 0.56s ease;
+}
+
+/* Вимикає перехід, але НЕ саму зміну теми: побачити тему — це інформація, а не
+   рух (ACCESSIBILITY-v9 § 7). */
+@media (prefers-reduced-motion: reduce) {
+    html.theme-shifting,
+    html.theme-shifting body,
+    html.theme-shifting *:not(canvas) {
+        transition: none;
+    }
+}
+
 .glass {
     background: var(--card-bg);
     backdrop-filter: var(--glass-blur);

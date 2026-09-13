@@ -1,8 +1,6 @@
 <script lang="ts">
     import { t, type Language } from "$lib/controllers/I18nState.svelte";
     import {
-        Sun,
-        Moon,
         Sparkles,
         Waves,
         CircleOff,
@@ -32,8 +30,9 @@
      * SVELTE-CORE-v8 § 3.3 — and `src/context-conventions.test.ts` now keeps a
      * string-keyed context from coming back.
      */
-    import { langMenu, theme, background } from "$lib/controllers/UiState.svelte";
+    import { langMenu, background } from "$lib/controllers/UiState.svelte";
     import { language } from "$lib/controllers/I18nState.svelte";
+    import ThemeToggle from "$lib/components/ui/ThemeToggle.svelte";
     import { sound } from "$lib/controllers/SoundState.svelte";
 
     let isBgDropdownOpen = $state(false);
@@ -220,6 +219,7 @@
     let ActiveFlag = $derived(
         LANGUAGE_META.find((l) => l.code === language.current)?.flag ?? FlagEN
     );
+
 </script>
 
 <header class="header glass">
@@ -575,32 +575,8 @@
                 {/if}
             </div>
 
-            <!-- Theme Toggle -->
-            <div class="toggle-group glass" data-testid="theme-toggle-toolbar" role="group" aria-label={t.ui.theme}>
-                <button
-                    onclick={() => theme.current !== "light" && theme.toggle()}
-                    class:active={theme.current === "light"}
-                    title={t.ui.themeLight}
-                    aria-label={t.ui.themeLight}
-                    aria-pressed={theme.current === "light"}
-                    aria-keyshortcuts="T"
-                    data-testid="theme-light-btn"
-                >
-                    <Sun size={18} />
-                </button>
-                <div class="divider" role="separator"></div>
-                <button
-                    onclick={() => theme.current !== "dark" && theme.toggle()}
-                    class:active={theme.current === "dark"}
-                    title={t.ui.themeDark}
-                    aria-label={t.ui.themeDark}
-                    aria-pressed={theme.current === "dark"}
-                    aria-keyshortcuts="T"
-                    data-testid="theme-dark-btn"
-                >
-                    <Moon size={18} />
-                </button>
-            </div>
+            <!-- Власна палітра кнопок і прев'ю на наведенні — ThemeToggle.svelte -->
+            <ThemeToggle />
         </div>
     </div>
 </header>
@@ -668,12 +644,18 @@
     }
 
     /* These sit at opacity 0.5 until selected, which left them with no hover
-       state at all — the group border was the only thing that reacted. */
+       state at all — the group border was the only thing that reacted.
+
+       Кнопки тем сюди більше не потрапляють: вони поїхали в `ThemeToggle.svelte`
+       разом із власною палітрою (THEME-SWITCHER § 4) — інакше це правило
+       перефарбовувало б їх акцентом ПОТОЧНОЇ теми. Тут лишилися кнопки фону,
+       яким акцент поточної теми якраз доречний. */
     .toggle-group button:not(.active):hover {
         background: rgba(var(--accent-primary-rgb), 0.12);
         color: var(--accent-primary);
         opacity: 1;
     }
+
 
     :global(.flag-icon) {
         border-radius: 2px;

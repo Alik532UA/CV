@@ -8,6 +8,21 @@ export class ThemeState {
 	current = $state("dark");
 	isChanging = $state(false);
 
+	/**
+	 * Тема, яку показуємо «на пробу» під курсором, або `null`
+	 * (THEME-SWITCHER § 2.1).
+	 *
+	 * ОКРЕМО від `current`, і причин тут дві. Перша спільна для всіх проєктів:
+	 * `current` означає «що обрано», ним світиться `.active`, і якби прев'ю
+	 * писало в нього, підсвітка їхала б за курсором. Друга місцева й гірша —
+	 * `init()` тримає `$effect`, який синхронізує `current` З АДРЕСОЮ: курсор,
+	 * що просто перетнув панель, переписував би `?theme=` у рядку браузера.
+	 */
+	previewed = $state<string | null>(null);
+
+	/** Знімає клас плавного переходу, коли той доїхав (§ 5). */
+	private shiftTimer: ReturnType<typeof setTimeout> | null = null;
+
 	constructor() {}
 
 	/**
@@ -126,6 +141,8 @@ export class ThemeState {
 	 */
 	apply(theme: string) {
 		this.current = theme;
+		this.previewed = null;
+		this.startThemeShift();
 		if (browser) {
 			document.documentElement.setAttribute("data-theme", theme);
 		}
@@ -135,6 +152,44 @@ export class ThemeState {
 	set(theme: string) {
 		this.apply(theme);
 		if (browser) storage.set("theme", theme);
+	}
+
+	/**
+	 * Показує тему «на пробу», поки курсор на її кнопці; `null` — вертає обрану
+	 * (THEME-SWITCHER § 2.2).
+	 *
+	 * Нічого не зберігає і не чіпає `current`: малює документ напряму. Тому й
+	 * `?theme=` в адресі лишається тим, що людина справді обрала.
+	 *
+	 * `isChanging` гасить прев'ю: `toggle()` тримає цей прапорець 550 мс, і за
+	 * цей час курсор зазвичай іде з кнопки — `previewTheme(null)` повернув би
+	 * СТАРУ тему поверх щойно обраної.
+	 */
+	previewTheme = (theme: string | null) => {
+		if (!browser || this.isChanging) return;
+		this.previewed = theme;
+		this.startThemeShift();
+		document.documentElement.setAttribute("data-theme", theme ?? this.current);
+	};
+
+	/**
+	 * Вмикає плавний перехід кольорів на час зміни теми (§ 5).
+	 *
+	 * Тривалість із ЗАПАСОМ над 0,56 с із `app.css`: клас мусить дожити до кінця
+	 * переходу, інакше останні кадри стрибнуть. Запас, а не те саме число, — щоб
+	 * не тримати копію тривалості у двох місцях.
+	 *
+	 * Знімає клас ЛИШЕ таймер. Зняття в самому обробнику обривало б перехід на
+	 * половині: вибір теми ховає панель, її прибирання кличе `previewTheme(null)`.
+	 */
+	private startThemeShift() {
+		if (!browser) return;
+		document.documentElement.classList.add("theme-shifting");
+		if (this.shiftTimer) clearTimeout(this.shiftTimer);
+		this.shiftTimer = setTimeout(() => {
+			document.documentElement.classList.remove("theme-shifting");
+			this.shiftTimer = null;
+		}, 900);
 	}
 }
 
