@@ -284,8 +284,8 @@ describe("hold-scroll canon — автоматичний рух вимикаєт
 		// показала б перемикач там, де наводити нема на що.
 		const MENU = "src/lib/components/ui/ScrollbarContextMenu.svelte";
 		const src = read(MENU);
-		expect(src, "чекбокса в меню немає — вмикати опцію нічим").toMatch(
-			/data-testid="scrollbar-menu-hold-btn"/
+		expect(src, "перемикача в меню немає — вмикати опцію нічим").toMatch(
+			/data-testid="scrollbar-hold-toggle"/
 		);
 		expect(src, "умову показу написано на mode").toMatch(
 			/showHold\s*=\s*\$derived\(\s*scrollbar\.active\s*!==\s*"native"\s*\)/

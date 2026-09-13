@@ -4,8 +4,20 @@
     import { scrollbar, type ScrollbarMode } from "$lib/controllers/ScrollbarState.svelte";
     import { SCROLLBAR_MODES } from "$lib/config/scrollbarModes";
 
-    /** Width and height are needed so the menu does not run off the screen. */
-    const WIDTH = 210;
+    /**
+     * Width and height are needed so the menu does not run off the screen.
+     *
+     * 260, а не 210, і число заміряне по ВСІХ 41 словнику (`measureText` у
+     * 13.6px Outfit, шрифті рядка меню). Найдовша доводка — болгарська
+     * «Превъртане при посочване», 172 px; рядок із тумблером лишає під текст
+     * `WIDTH − 20` падінга панелі `− 44` тумблера `− 12` проміжку, тобто 184 при
+     * 260. Найдовший підпис режиму — грузинський, 161 px, і йому вистачає з
+     * великим запасом. На 210 болгарська переносилася б на два рядки.
+     *
+     * Стільки ж у сусіднього сайта на цьому ж пакеті: те саме показане двічі не
+     * має бути двох різних ширин.
+     */
+    const WIDTH = 260;
     const ITEM_HEIGHT = 34;
     const PADDING = 12;
 
@@ -19,9 +31,16 @@
      */
     const showHold = $derived(scrollbar.active !== "native");
 
-    const height = $derived(
-        SCROLLBAR_MODES.length * ITEM_HEIGHT + PADDING * 2 + 24 + (showHold ? ITEM_HEIGHT + 9 : 0)
-    );
+    /**
+     * Висота ВСЬОГО стека — обох панелей разом із проміжком, — і вона МІРЯЄТЬСЯ.
+     *
+     * Арифметика лишається тільки як значення до першого кадру: рядок — це
+     * падінг плюс лінійний бокс, а лінійний бокс залежить від шрифта, від того,
+     * чи переніс підпис, і від висоти тумблера. Поки панель була одна, похибка
+     * була дрібною; з другою панеллю, її падінгом і проміжком угадувати стало
+     * нічим. Помилка тут видно як меню, що звисає за нижній край екрана.
+     */
+    let height = $state(SCROLLBAR_MODES.length * ITEM_HEIGHT + PADDING * 2 + 24);
 
     /**
      * Opens next to the cursor, but wholly inside the window.
@@ -85,15 +104,23 @@
         }}
     ></div>
 
+    <!-- Стек двох ПАНЕЛЕЙ, а не одна панель із роздільником. Перелік режимів —
+         вибір одного з чотирьох; доводка — незалежна настройка. Окремий
+         контейнер каже це саме собою, без пояснень (SCROLLBAR § 7.4). -->
     <div
-        class="scrollbar-menu"
+        class="scrollbar-menu-stack"
+        bind:offsetHeight={height}
         style="left: {position.left}px; top: {position.top}px; width: {WIDTH}px;"
-        role="menu"
-        tabindex="-1"
-        data-testid="scrollbar-context-menu"
+        role="presentation"
         onkeydown={(e) => {
             if (e.key === "Escape") scrollbar.closeMenu();
         }}
+    >
+    <div
+        class="scrollbar-menu"
+        role="menu"
+        tabindex="-1"
+        data-testid="scrollbar-context-menu"
     >
         <span class="scrollbar-menu__title">{t.scrollbar.title}</span>
         {#each SCROLLBAR_MODES as mode (mode.id)}
@@ -112,31 +139,32 @@
                 {t.scrollbar[mode.label]}
             </button>
         {/each}
+    </div>
 
-        {#if showHold}
-            <span class="scrollbar-menu__separator" role="separator"></span>
-            <!-- menuitemcheckbox, не menuitemradio: опція не належить до групи
-                 режимів і вибору серед них не скидає.
+    {#if showHold}
+        <!-- Тумблер, а не галочка: галочка з фіксованою колонкою лишала порожній
+             відступ у вимкненому стані, і підпис висів без нічого ліворуч.
 
-                 Меню тут НЕ закривається, на відміну від вибору режиму. Вибір —
-                 ухвалене рішення, і дивитися на нього нема чого; це перемикач,
-                 і єдиний зворотний зв'язок про його стан — галочка в цьому ж
-                 рядку. Меню, що закрилося раніше, ніж вона намалювалася, лишає
-                 людину без відповіді на «то ввімкнулося чи ні». -->
-            <button
-                type="button"
-                class="scrollbar-menu__item scrollbar-menu__item--check"
-                role="menuitemcheckbox"
-                aria-checked={scrollbar.holdScroll}
-                onclick={() => scrollbar.setHoldScroll(!scrollbar.holdScroll)}
-                data-testid="scrollbar-menu-hold-btn"
-            >
-                <span class="scrollbar-menu__mark" aria-hidden="true"
-                    >{scrollbar.holdScroll ? "✓" : ""}</span
-                >
-                {t.scrollbar.hold}
-            </button>
-        {/if}
+             Нативний `<input type="checkbox">` під ним, а не кнопка з
+             `aria-checked`: це справжній елемент форми — фокус, пробіл, читалка
+             й `:disabled` дістаються задарма. Панель НЕ закривається на
+             перемиканні: зворотний зв'язок про стан — сам тумблер, і панель, що
+             зникла раніше, ніж він доїхав, лишає без відповіді на «то
+             ввімкнулося чи ні». -->
+        <div class="scrollbar-menu scrollbar-menu--hold">
+            <label class="scrollbar-hold" data-testid="scrollbar-hold-label">
+                <span>{t.scrollbar.hold}</span>
+                <input
+                    type="checkbox"
+                    class="scrollbar-hold__input"
+                    checked={scrollbar.holdScroll}
+                    onchange={() => scrollbar.setHoldScroll(!scrollbar.holdScroll)}
+                    data-testid="scrollbar-hold-toggle"
+                />
+                <span class="scrollbar-hold__slider"></span>
+            </label>
+        </div>
+    {/if}
     </div>
 {/if}
 
@@ -149,9 +177,16 @@
         z-index: 1600;
     }
 
-    .scrollbar-menu {
+    /* Позиціонується стек; панелі всередині — звичайний потік. */
+    .scrollbar-menu-stack {
         position: fixed;
         z-index: 1601;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .scrollbar-menu {
         display: flex;
         flex-direction: column;
         gap: 2px;
@@ -202,24 +237,72 @@
         color: var(--accent-primary);
     }
 
-    .scrollbar-menu__separator {
-        height: 1px;
-        margin: 4px 6px;
+    /* Друга панель: один рядок, тож вертикальний падінг менший за панель
+       переліку — інакше вона виглядала б порожньою коробкою навколо тумблера. */
+    .scrollbar-menu--hold {
+        padding: 8px 10px;
+    }
+
+    /* Підпис ліворуч, тумблер праворуч. */
+    .scrollbar-hold {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        cursor: pointer;
+        user-select: none;
+        font-size: 0.85rem;
+        color: var(--text-primary);
+    }
+
+    /* Поле лишається в потоці подій (фокус, пробіл, читалка), але не видно. */
+    .scrollbar-hold__input {
+        position: absolute;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+    .scrollbar-hold__slider {
+        position: relative;
+        flex: 0 0 44px;
+        height: 24px;
+        border-radius: 24px;
         background: var(--border-color);
+        transition: background 0.3s;
     }
 
-    .scrollbar-menu__item--check {
-        gap: 6px;
+    .scrollbar-hold__slider::before {
+        content: "";
+        position: absolute;
+        left: 3px;
+        bottom: 3px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
     }
 
-    /**
-     * Ширина фіксована й не залежить від того, стоїть галочка чи ні: інакше
-     * підпис стрибав би вбік при кожному натисканні — просто в меню, яке саме
-     * на нього й дивиться.
-     */
-    .scrollbar-menu__mark {
-        flex: 0 0 14px;
-        color: var(--accent-primary);
-        text-align: center;
+    .scrollbar-hold__input:checked + .scrollbar-hold__slider {
+        background: var(--accent-primary);
+    }
+
+    .scrollbar-hold__input:checked + .scrollbar-hold__slider::before {
+        transform: translateX(20px);
+    }
+
+    /* Обведення на тумблері, а не на полі: те 0×0 і не видно, де фокус. */
+    .scrollbar-hold__input:focus-visible + .scrollbar-hold__slider {
+        outline: 2px solid var(--accent-primary);
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .scrollbar-hold__slider,
+        .scrollbar-hold__slider::before {
+            transition: none;
+        }
     }
 </style>
