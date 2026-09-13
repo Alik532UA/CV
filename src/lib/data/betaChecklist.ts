@@ -83,6 +83,16 @@ export const BETA_TABS: readonly BetaTab[] = [
 				coverage: "manual"
 			},
 			{
+				id: "theme_6",
+				category: { uk: "Вибір теми", en: "Picking a theme" },
+				text: {
+					uk: "На комп’ютері наведіть курсор на кнопку теми, якою ЗАРАЗ не користуєтесь, і не натискайте. Сторінка мусить показати цю тему цілком, а щойно курсор піде — повернутися до попередньої. Самі кнопки мусять бути пофарбовані кожна під СВОЮ тему, а не всі під поточну.",
+					en: "On a desktop, hover the button of a theme you are NOT using and do not click. The page must show that theme in full and return to the previous one as soon as the pointer leaves. The buttons themselves must each be coloured in THEIR OWN theme, not all in the current one."
+				},
+				coverage: "manual",
+				testid: "theme-toggle-toolbar"
+			},
+			{
 				id: "theme_2",
 				category: { uk: "Перший кадр", en: "First paint" },
 				text: {
