@@ -237,7 +237,8 @@ export const sl: Translations = {
         standard: "Standardni",
         custom: "Avtorska",
         minimap: "Minimapa minimalna",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Drsenje ob prehodu"
     },
     errorPage: {
         notFoundTitle: "Strani ni mogoče najti",

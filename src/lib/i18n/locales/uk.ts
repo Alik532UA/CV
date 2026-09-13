@@ -237,7 +237,8 @@ export const uk: Translations = {
         standard: "Стандартна",
         custom: "Авторська",
         minimap: "Мінімапа мінімальна",
-        minimapFull: "Мінімапа"
+        minimapFull: "Мінімапа",
+        hold: "Доводка наведенням"
     },
     errorPage: {
         notFoundTitle: "Сторінку не знайдено",

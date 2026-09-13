@@ -237,7 +237,8 @@ export const is: Translations = {
         standard: "Sjálfgefin",
         custom: "Höfundar",
         minimap: "Lágmarks minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Skrun við bendingu"
     },
     errorPage: {
         notFoundTitle: "Síðan fannst ekki",

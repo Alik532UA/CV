@@ -237,7 +237,8 @@ export const sq: Translations = {
         standard: "Standard",
         custom: "E autorit",
         minimap: "Minimapa minimale",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Rrëshqitje me kalim"
     },
     errorPage: {
         notFoundTitle: "Faqja nuk u gjet",

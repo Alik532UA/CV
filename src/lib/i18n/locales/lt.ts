@@ -237,7 +237,8 @@ export const lt: Translations = {
         standard: "Standartinė",
         custom: "Autoriaus",
         minimap: "Minimalus minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Slinkimas užvedus"
     },
     errorPage: {
         notFoundTitle: "Puslapis nerastas",

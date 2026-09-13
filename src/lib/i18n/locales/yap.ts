@@ -244,7 +244,8 @@ export const yap: Translations = {
         standard: "Standard",
         custom: "Author's",
         minimap: "Minimal Minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Scroll on hover"
     },
     errorPage: {
         notFoundTitle: "Dariy fare page ni kan pirieg",

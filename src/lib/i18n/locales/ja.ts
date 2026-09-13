@@ -237,7 +237,8 @@ export const ja: Translations = {
         standard: "標準",
         custom: "オリジナル",
         minimap: "ミニマップ（最小）",
-        minimapFull: "ミニマップ"
+        minimapFull: "ミニマップ",
+        hold: "ホバーでスクロール"
     },
     errorPage: {
         notFoundTitle: "ページが見つかりません",

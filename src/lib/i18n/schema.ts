@@ -223,6 +223,8 @@ export interface Translations {
 		custom: string;
 		minimap: string;
 		minimapFull: string;
+		/** Підпис чекбокса прокрутки від наведення (HOLD-SCROLL § 1.4). */
+		hold: string;
 	};
 	/**
 	 * Texts for +error.svelte and for the per-section boundary fallback.

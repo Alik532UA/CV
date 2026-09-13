@@ -237,7 +237,8 @@ export const bg: Translations = {
         standard: "Стандартен",
         custom: "Авторска",
         minimap: "Минимална минимапа",
-        minimapFull: "Минимапа"
+        minimapFull: "Минимапа",
+        hold: "Превъртане при посочване"
     },
     errorPage: {
         notFoundTitle: "Страницата не е намерена",

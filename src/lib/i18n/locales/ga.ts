@@ -237,7 +237,8 @@ export const ga: Translations = {
         standard: "Caighdeánach",
         custom: "Údair",
         minimap: "Minimap íosta",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Scrollú ar ainliú"
     },
     errorPage: {
         notFoundTitle: "Níorbh fhéidir an leathanach a aimsiú",

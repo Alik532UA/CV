@@ -237,7 +237,8 @@ export const da: Translations = {
         standard: "Standard",
         custom: "Forfatterens",
         minimap: "Minimal minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Rul ved pegning"
     },
     errorPage: {
         notFoundTitle: "Siden blev ikke fundet",

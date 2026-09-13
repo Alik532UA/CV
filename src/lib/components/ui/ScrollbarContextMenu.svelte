@@ -9,7 +9,19 @@
     const ITEM_HEIGHT = 34;
     const PADDING = 12;
 
-    const height = $derived(SCROLLBAR_MODES.length * ITEM_HEIGHT + PADDING * 2 + 24);
+    /**
+     * Чекбокс доводки показується, лише поки малює НАША смуга.
+     *
+     * Умова на `active`, а не на `mode`, і різниця тут не косметична
+     * (HOLD-SCROLL § 1.3): на сенсорному екрані й у вікні, вужчому за 1100 px
+     * під мінімапу, `mode` лишається `custom`/`minimap`, а малює нативна смуга.
+     * Написане на `mode` показало б перемикач там, де наводити нема на що.
+     */
+    const showHold = $derived(scrollbar.active !== "native");
+
+    const height = $derived(
+        SCROLLBAR_MODES.length * ITEM_HEIGHT + PADDING * 2 + 24 + (showHold ? ITEM_HEIGHT + 9 : 0)
+    );
 
     /**
      * Opens next to the cursor, but wholly inside the window.
@@ -100,6 +112,31 @@
                 {t.scrollbar[mode.label]}
             </button>
         {/each}
+
+        {#if showHold}
+            <span class="scrollbar-menu__separator" role="separator"></span>
+            <!-- menuitemcheckbox, не menuitemradio: опція не належить до групи
+                 режимів і вибору серед них не скидає.
+
+                 Меню тут НЕ закривається, на відміну від вибору режиму. Вибір —
+                 ухвалене рішення, і дивитися на нього нема чого; це перемикач,
+                 і єдиний зворотний зв'язок про його стан — галочка в цьому ж
+                 рядку. Меню, що закрилося раніше, ніж вона намалювалася, лишає
+                 людину без відповіді на «то ввімкнулося чи ні». -->
+            <button
+                type="button"
+                class="scrollbar-menu__item scrollbar-menu__item--check"
+                role="menuitemcheckbox"
+                aria-checked={scrollbar.holdScroll}
+                onclick={() => scrollbar.setHoldScroll(!scrollbar.holdScroll)}
+                data-testid="scrollbar-menu-hold-btn"
+            >
+                <span class="scrollbar-menu__mark" aria-hidden="true"
+                    >{scrollbar.holdScroll ? "✓" : ""}</span
+                >
+                {t.scrollbar.hold}
+            </button>
+        {/if}
     </div>
 {/if}
 
@@ -163,5 +200,26 @@
     .scrollbar-menu__item.active {
         background: rgba(var(--accent-primary-rgb), 0.2);
         color: var(--accent-primary);
+    }
+
+    .scrollbar-menu__separator {
+        height: 1px;
+        margin: 4px 6px;
+        background: var(--border-color);
+    }
+
+    .scrollbar-menu__item--check {
+        gap: 6px;
+    }
+
+    /**
+     * Ширина фіксована й не залежить від того, стоїть галочка чи ні: інакше
+     * підпис стрибав би вбік при кожному натисканні — просто в меню, яке саме
+     * на нього й дивиться.
+     */
+    .scrollbar-menu__mark {
+        flex: 0 0 14px;
+        color: var(--accent-primary);
+        text-align: center;
     }
 </style>

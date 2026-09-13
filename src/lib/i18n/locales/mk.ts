@@ -237,7 +237,8 @@ export const mk: Translations = {
         standard: "Стандарден",
         custom: "Авторска",
         minimap: "Минимапа минимална",
-        minimapFull: "Минимапа"
+        minimapFull: "Минимапа",
+        hold: "Лизгање при посочување"
     },
     errorPage: {
         notFoundTitle: "Страницата не е пронајдена",

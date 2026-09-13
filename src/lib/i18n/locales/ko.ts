@@ -237,7 +237,8 @@ export const ko: Translations = {
         standard: "기본",
         custom: "커스텀",
         minimap: "미니맵 (최소)",
-        minimapFull: "미니맵"
+        minimapFull: "미니맵",
+        hold: "마우스 올리면 스크롤"
     },
     errorPage: {
         notFoundTitle: "페이지를 찾을 수 없습니다",

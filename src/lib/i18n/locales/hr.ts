@@ -237,7 +237,8 @@ export const hr: Translations = {
         standard: "Standardni",
         custom: "Autorska",
         minimap: "Minimapa minimalna",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Pomicanje pri prelasku"
     },
     errorPage: {
         notFoundTitle: "Stranica nije pronađena",

@@ -237,7 +237,8 @@ export const sv: Translations = {
         standard: "Standard",
         custom: "Författarens",
         minimap: "Minimal minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Rullning vid pekning"
     },
     errorPage: {
         notFoundTitle: "Sidan hittades inte",

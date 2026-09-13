@@ -237,7 +237,8 @@ export const cs: Translations = {
         standard: "Standardní",
         custom: "Autorská",
         minimap: "Minimapa minimální",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Posun při najetí"
     },
     errorPage: {
         notFoundTitle: "Stránka nenalezena",

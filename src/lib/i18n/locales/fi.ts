@@ -237,7 +237,8 @@ export const fi: Translations = {
         standard: "Vakio",
         custom: "Tekijän",
         minimap: "Minimaalinen minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Vieritys osoittamalla"
     },
     errorPage: {
         notFoundTitle: "Sivua ei löytynyt",

@@ -244,7 +244,8 @@ export const pon: Translations = {
         standard: "Standard",
         custom: "Author's",
         minimap: "Minimal Minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Scroll on hover"
     },
     errorPage: {
         notFoundTitle: "Sohte diarada page-o",

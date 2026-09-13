@@ -237,7 +237,8 @@ export const cy: Translations = {
         standard: "Safonol",
         custom: "Awdur",
         minimap: "Minimap lleiaf",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Sgrolio wrth hofran"
     },
     errorPage: {
         notFoundTitle: "Heb ddod o hyd i'r dudalen",

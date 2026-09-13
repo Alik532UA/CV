@@ -32,12 +32,17 @@ export interface HoldGeometry {
  * after a second, with no press. Shared by all three drawers, since all three
  * work to the same model: a marker of some height travelling a strip of some
  * height, at a fixed ratio to the scroll.
+ *
+ * OFF by default; the visitor turns it on from the bar's own menu
+ * (HOLD-SCROLL § 1). This is the only thing on the bar that moves the page with
+ * no input at all, so it is offered rather than handed out.
  */
 export class HoldScroll {
 	/** Whether auto-scrolling is running, for highlighting in the markup. */
 	holding = $state(false);
 
 	private geometry: () => HoldGeometry;
+	private enabled: () => boolean;
 	private timer: ReturnType<typeof setTimeout> | null = null;
 	private frame = 0;
 	private started = 0;
@@ -46,26 +51,36 @@ export class HoldScroll {
 	/** The zone the pointer was in at the last aim: -1, 0 or 1. */
 	private zone = 0;
 
-	constructor(geometry: () => HoldGeometry) {
+	/**
+	 * `enabled` is a function rather than a value for the same reason the media
+	 * query below is read afresh: the checkbox is flipped mid-session, and a value
+	 * captured here would outlive the change.
+	 */
+	constructor(geometry: () => HoldGeometry, enabled: () => boolean) {
 		this.geometry = geometry;
+		this.enabled = enabled;
 	}
 
 	/**
-	 * Автоматичний рух сторінки — рівно те, від чого захищає
-	 * `prefers-reduced-motion` (HOLD-SCROLL-v8 § — «рух, що не зупиняється при
-	 * prefers-reduced-motion», HIGH). Механіка вимикається ЦІЛКОМ, а не
-	 * сповільнюється: людині, якій від руху паморочиться, повільний рух не
-	 * кращий за швидкий.
+	 * Дві причини не рухатися, обидві читаються на КОЖЕН `aim()`.
 	 *
-	 * Перевірка тут, а не в компонентах: обидва малювальники користувалися
-	 * `reducedMotion` лише для власної пружини появи, тож сама прокрутка
-	 * їхала однаково. Одна перевірка в спільному класі покриває всіх, і
-	 * наступний малювальник отримає її задарма.
+	 * Перша — опція вимкнена. Типовий стан саме такий (HOLD-SCROLL § 1.1):
+	 * сторінка, що їде від самої лише нерухомості курсора, — єдине тут, що
+	 * стається без жодної дії, і людина, яка припаркувала мишу біля правого
+	 * краю, не має підказки, що це було й де це прибрати.
 	 *
-	 * Читається на кожен `aim()`, а не запам'ятовується: настройку міняють
-	 * посеред сесії, і запам'ятоване значення пережило б зміну.
+	 * Друга — `prefers-reduced-motion` (HOLD-SCROLL, HIGH). Автоматичний рух
+	 * сторінки — рівно те, від чого захищає ця настройка. Механіка вимикається
+	 * ЦІЛКОМ, а не сповільнюється: людині, якій від руху паморочиться, повільний
+	 * рух не кращий за швидкий.
+	 *
+	 * Обидві перевірки тут, а не в компонентах: обидва малювальники
+	 * користувалися `reducedMotion` лише для власної пружини появи, тож сама
+	 * прокрутка їхала однаково. Одна перевірка в спільному класі покриває всіх,
+	 * і наступний малювальник отримає її задарма.
 	 */
-	private reducedMotion(): boolean {
+	private blocked(): boolean {
+		if (!this.enabled()) return true;
 		return browser && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 	}
 
@@ -85,7 +100,7 @@ export class HoldScroll {
 	 * the movement never begins.
 	 */
 	aim(localY: number) {
-		if (this.reducedMotion()) {
+		if (this.blocked()) {
 			this.stop();
 			return;
 		}

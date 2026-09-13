@@ -237,7 +237,8 @@ export const et: Translations = {
         standard: "Standardne",
         custom: "Autor",
         minimap: "Minimaalne minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Kerimine osutamisel"
     },
     errorPage: {
         notFoundTitle: "Lehte ei leitud",

@@ -237,7 +237,8 @@ export const el: Translations = {
         standard: "Τυπική",
         custom: "Δημιουργού",
         minimap: "Ελάχιστο minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Κύλιση με δείκτη"
     },
     errorPage: {
         notFoundTitle: "Η σελίδα δεν βρέθηκε",

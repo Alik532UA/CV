@@ -28,6 +28,9 @@ const { HoldScroll } = await import("./holdScroll.svelte");
 /** Геометрія, за якої точка y = 10 гарантовано лежить ВИЩЕ повзунка. */
 const geometry = () => ({ markerTop: 100, markerHeight: 40, pxPerScroll: 0.5 });
 
+/** Опція увімкнена — щоб випадки про reduced-motion міряли саме її. */
+const on = () => true;
+
 /**
  * Ознака «прогін почався» — виклик `requestAnimationFrame`, а не поле `holding`.
  *
@@ -68,7 +71,7 @@ describe("hold-scroll і prefers-reduced-motion", () => {
 		// зламана назовсім: «не поїхало» — це і успіх, і повна відмова.
 		stubReducedMotion(false);
 		const frame = frameSpy();
-		const hold = new HoldScroll(geometry);
+		const hold = new HoldScroll(geometry, on);
 
 		hold.aim(10);
 		expect(frame, "відлік іще не минув — рух не мав початися").not.toHaveBeenCalled();
@@ -81,7 +84,7 @@ describe("hold-scroll і prefers-reduced-motion", () => {
 	it("з prefers-reduced-motion: reduce рух не починається взагалі", () => {
 		stubReducedMotion(true);
 		const frame = frameSpy();
-		const hold = new HoldScroll(geometry);
+		const hold = new HoldScroll(geometry, on);
 
 		hold.aim(10);
 		vi.advanceTimersByTime(5000);
@@ -95,11 +98,70 @@ describe("hold-scroll і prefers-reduced-motion", () => {
 		// Її міняють посеред сесії; запам'ятоване значення пережило б зміну.
 		stubReducedMotion(false);
 		const frame = frameSpy();
-		const hold = new HoldScroll(geometry);
+		const hold = new HoldScroll(geometry, on);
 
 		stubReducedMotion(true);
 		hold.aim(10);
 		vi.advanceTimersByTime(5000);
 		expect(frame).not.toHaveBeenCalled();
+	});
+});
+
+/**
+ * Друга причина не рухатися — опція вимкнена (HOLD-SCROLL § 1.1).
+ *
+ * Ці випадки живуть тут, а не в e2e, з тієї ж причини, що й сусідні: у
+ * браузерній перевірці «не поїхало» однаково зелене і коли опція вимкнена, і
+ * коли механіка зламана. Тут стан задається явно й окремо від геометрії.
+ */
+describe("hold-scroll і перемикач опції", () => {
+	it("вимкнена опція не дає руху", () => {
+		stubReducedMotion(false);
+		const frame = frameSpy();
+		const hold = new HoldScroll(geometry, () => false);
+
+		hold.aim(10);
+		vi.advanceTimersByTime(5000);
+		expect(
+			frame,
+			"сторінка їде, хоча опцію вимкнено — це типовий стан, і в ньому вона мусить стояти"
+		).not.toHaveBeenCalled();
+	});
+
+	it("перемикач читається на кожен рух, а не запам'ятовується при створенні", () => {
+		// Чекбокс перемикають при відкритому меню, не перестворюючи компонент.
+		// Запам'ятоване при створенні значення пережило б перемикання, і
+		// щойно ввімкнена опція не працювала б до перезавантаження сторінки.
+		stubReducedMotion(false);
+		const frame = frameSpy();
+		let enabled = false;
+		const hold = new HoldScroll(geometry, () => enabled);
+
+		hold.aim(10);
+		vi.advanceTimersByTime(5000);
+		expect(frame, "опція ще вимкнена").not.toHaveBeenCalled();
+
+		enabled = true;
+		hold.aim(10);
+		vi.advanceTimersByTime(1100);
+		expect(frame, "опцію ввімкнули — рух мусив початися").toHaveBeenCalled();
+
+		hold.stop();
+	});
+
+	it("вимкнення посеред відліку скасовує рух, що мав початися", () => {
+		// Інакше between-станів вистачало б, щоб сторінка поїхала вже ПІСЛЯ
+		// того, як галочку зняли: таймер на секунду вже висить.
+		stubReducedMotion(false);
+		const frame = frameSpy();
+		let enabled = true;
+		const hold = new HoldScroll(geometry, () => enabled);
+
+		hold.aim(10);
+		vi.advanceTimersByTime(500);
+		enabled = false;
+		hold.aim(10);
+		vi.advanceTimersByTime(5000);
+		expect(frame, "рух почався після зняття галочки").not.toHaveBeenCalled();
 	});
 });

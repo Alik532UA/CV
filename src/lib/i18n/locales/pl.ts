@@ -237,7 +237,8 @@ export const pl: Translations = {
         standard: "Standardowy",
         custom: "Autorski",
         minimap: "Minimalna minimapa",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Przewijanie po najechaniu"
     },
     errorPage: {
         notFoundTitle: "Nie znaleziono strony",

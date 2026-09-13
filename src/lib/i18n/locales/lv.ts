@@ -237,7 +237,8 @@ export const lv: Translations = {
         standard: "Standarta",
         custom: "Autora",
         minimap: "Minimāls minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Ritināšana ar kursoru"
     },
     errorPage: {
         notFoundTitle: "Lapa nav atrasta",

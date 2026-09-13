@@ -237,7 +237,8 @@ export const ka: Translations = {
         standard: "სტანდარტული",
         custom: "ავტორის",
         minimap: "მინიმალური მინირუკა",
-        minimapFull: "მინირუკა"
+        minimapFull: "მინირუკა",
+        hold: "გადახვევა მიტანისას"
     },
     errorPage: {
         notFoundTitle: "გვერდი ვერ მოიძებნა",

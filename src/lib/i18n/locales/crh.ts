@@ -239,7 +239,8 @@ export const crh: Translations = {
         standard: "Standart",
         custom: "Müelliflik",
         minimap: "Asgarıy harita",
-        minimapFull: "Harita"
+        minimapFull: "Harita",
+        hold: "Üstüne kelgende kaydırma"
     },
     errorPage: {
         notFoundTitle: "Sahife tapılmadı",

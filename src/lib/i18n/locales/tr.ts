@@ -237,7 +237,8 @@ export const tr: Translations = {
         standard: "Standart",
         custom: "Özel",
         minimap: "Minimal minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Üzerine gelince kaydır"
     },
     errorPage: {
         notFoundTitle: "Sayfa bulunamadı",

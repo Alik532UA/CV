@@ -237,7 +237,8 @@ export const mt: Translations = {
         standard: "Standard",
         custom: "Tal-awtur",
         minimap: "Minimap minima",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Skrolljar meta tersaq"
     },
     errorPage: {
         notFoundTitle: "Il-paġna ma nstabitx",

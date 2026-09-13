@@ -240,7 +240,8 @@ export const he: Translations = {
         standard: "רגיל",
         custom: "של המחבר",
         minimap: "מינימפה מינימלית",
-        minimapFull: "מינימפה"
+        minimapFull: "מינימפה",
+        hold: "גלילה בריחוף"
     },
     errorPage: {
         notFoundTitle: "הדף לא נמצא",

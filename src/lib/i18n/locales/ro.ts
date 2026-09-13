@@ -237,7 +237,8 @@ export const ro: Translations = {
         standard: "Standard",
         custom: "De autor",
         minimap: "Minimapă minimă",
-        minimapFull: "Minimapă"
+        minimapFull: "Minimapă",
+        hold: "Derulare la trecere"
     },
     errorPage: {
         notFoundTitle: "Pagina nu a fost găsită",

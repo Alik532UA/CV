@@ -237,7 +237,8 @@ export const nl: Translations = {
         standard: "Standaard",
         custom: "Van auteur",
         minimap: "Minimale minimap",
-        minimapFull: "Minimap"
+        minimapFull: "Minimap",
+        hold: "Scrollen bij aanwijzen"
     },
     errorPage: {
         notFoundTitle: "Pagina niet gevonden",

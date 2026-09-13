@@ -237,7 +237,8 @@ export const pt: Translations = {
         standard: "Padrão",
         custom: "De autor",
         minimap: "Minimapa mínimo",
-        minimapFull: "Minimapa"
+        minimapFull: "Minimapa",
+        hold: "Rolagem ao passar o cursor"
     },
     errorPage: {
         notFoundTitle: "Página não encontrada",

@@ -237,7 +237,8 @@ export const be: Translations = {
         standard: "Стандартная",
         custom: "Аўтарская",
         minimap: "Мінімапа мінімальная",
-        minimapFull: "Мінімапа"
+        minimapFull: "Мінімапа",
+        hold: "Пракрутка пры навядзенні"
     },
     errorPage: {
         notFoundTitle: "Старонку не знойдзена",

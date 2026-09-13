@@ -237,7 +237,8 @@ export const fr: Translations = {
         standard: "Standard",
         custom: "D'auteur",
         minimap: "Minicarte minimale",
-        minimapFull: "Minicarte"
+        minimapFull: "Minicarte",
+        hold: "Défilement au survol"
     },
     errorPage: {
         notFoundTitle: "Page introuvable",
