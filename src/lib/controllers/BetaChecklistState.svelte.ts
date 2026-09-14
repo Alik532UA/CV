@@ -66,6 +66,19 @@ class BetaChecklistState {
 	/** Текст звіту, показаний у полі, коли буфер обміну відмовив (§ 6.2). */
 	reportFallback = $state("");
 
+	/**
+	 * Чи зведена кнопка стирання (§ 6.3, `BETA-CLEAR-TWO-STEP`).
+	 *
+	 * «Стерти» — ЄДИНА незворотна дія на сторінці, і стоїть вона в тому самому
+	 * рядку, що й «Скопіювати звіт», до якого тягнуться щоразу. Ціна помилки
+	 * несиметрична: година роботи проти одного зайвого кліка.
+	 *
+	 * Не `confirm()`: нативний діалог блокує потік, не перекладається, виглядає
+	 * чужим у будь-якій темі й у headless вимагає окремого обробника, тобто
+	 * ускладнює e2e § 5.7 на рівному місці.
+	 */
+	clearArmed = $state(false);
+
 	/** Позначено на ЦІЙ версії — саме це й означає «пройдено». */
 	done = $derived(
 		Object.values(this.marks).filter((m) => m.version === __APP_VERSION__).length
@@ -101,9 +114,42 @@ class BetaChecklistState {
 		storage.setJSON(STORAGE_KEY, next);
 	}
 
+	/**
+	 * Поступ ОКРЕМОЇ вкладки (§ 8.1, `BETA-TAB-PROGRESS`).
+	 *
+	 * Загальне «14 / 37» не відповідає на єдине питання, яке тестувальник собі
+	 * ставить: чи закінчена ЦЯ вкладка. Вкладок сім, проходять їх по одній, тож
+	 * без лічильника позицію доводиться тримати в голові.
+	 */
+	progressOf(checks: readonly { id: string }[]): { done: number; total: number } {
+		const done = checks.filter(
+			(check) => this.marks[check.id]?.version === __APP_VERSION__
+		).length;
+		return { done, total: checks.length };
+	}
+
+	/**
+	 * Стирання у два кроки (§ 6.3): перший виклик лише зводить кнопку, другий
+	 * стирає. Повертає `true`, коли позначки справді зникли.
+	 */
+	requestClear(): boolean {
+		if (!this.clearArmed) {
+			this.clearArmed = true;
+			return false;
+		}
+		this.clear();
+		return true;
+	}
+
+	/** Знімає зведення, нічого не стираючи: кнопка не лишається зарядженою. */
+	disarmClear() {
+		this.clearArmed = false;
+	}
+
 	clear() {
 		this.marks = {};
 		this.reportFallback = "";
+		this.clearArmed = false;
 		storage.remove(STORAGE_KEY);
 	}
 

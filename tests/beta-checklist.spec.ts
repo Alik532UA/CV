@@ -97,3 +97,46 @@ test("службова сторінка не показує навігації �
 	await expect(page.getByTestId("ai-matcher-open-btn")).toHaveCount(0);
 	await expect(page.locator('a[href*="#experience"]')).toHaveCount(0);
 });
+
+/**
+ * § 6.3 `BETA-CLEAR-TWO-STEP`. «Стерти позначки» — єдина незворотна дія на
+ * сторінці, і стоїть вона в тому самому рядку, що й кнопка звіту, до якої
+ * тягнуться щоразу. Ціна помилки несиметрична: година роботи проти кліка.
+ */
+test("перше натискання «стерти» нічого не стирає", async ({ page }) => {
+	await page.goto(PATH);
+	await expect(page.getByTestId("beta-progress-value")).toBeVisible();
+	await clickWhenLive(page, `beta-vote-${CHECK}-ok-btn`, "true");
+
+	const marked = await page.getByTestId("beta-progress-value").innerText();
+
+	await page.getByTestId("beta-clear-btn").click();
+	await expect(
+		page.getByTestId("beta-progress-value"),
+		"одне натискання знесло всю роботу тестувальника"
+	).toHaveText(marked);
+	expect(await page.evaluate((key) => localStorage.getItem(key), KEY)).not.toBeNull();
+
+	await page.getByTestId("beta-clear-btn").click();
+	await expect(page.getByTestId("beta-progress-value")).not.toHaveText(marked);
+	expect(await page.evaluate((key) => localStorage.getItem(key), KEY)).toBeNull();
+});
+
+/**
+ * § 8.1 `BETA-TAB-PROGRESS`. Вкладок сім, проходять їх по одній, а загальне
+ * число не каже, чи закінчена ця.
+ */
+test("поступ вкладки росте окремо від загального", async ({ page }) => {
+	await page.goto(PATH);
+	const tabCount = page.getByTestId("beta-tab-theme-progress-text");
+	await expect(tabCount).toBeVisible();
+
+	const before = await tabCount.innerText();
+	await clickWhenLive(page, `beta-vote-${CHECK}-ok-btn`, "true");
+
+	await expect(tabCount, "лічильник вкладки не зрушив").not.toHaveText(before);
+	await expect(
+		page.getByTestId("beta-tab-scrollbar-progress-text"),
+		"позначка потрапила в чужу вкладку"
+	).toHaveText(/^0\//);
+});

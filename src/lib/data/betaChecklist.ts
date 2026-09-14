@@ -479,6 +479,13 @@ export const BETA_UI = {
 	copy: { uk: "Звіт у буфер", en: "Copy report" },
 	copied: { uk: "Скопійовано", en: "Copied" },
 	clear: { uk: "Стерти позначки", en: "Clear marks" },
+	/**
+	 * Другий крок стирання (§ 6.3). Напис каже, що станеться при НАСТУПНОМУ
+	 * натисканні, а не описує стан кнопки: «зведено» читалося б як «уже стерто».
+	 */
+	clearConfirm: { uk: "Точно стерти? Ще раз", en: "Really clear? Press again" },
+	tabProgress: { uk: "позначено у вкладці", en: "marked on this tab" },
+	back: { uk: "На головну", en: "Home" },
 	clipboardFailed: {
 		uk: "Буфер обміну недоступний. Звіт тут — виділіть і скопіюйте вручну.",
 		en: "The clipboard is unavailable. The report is here — select and copy it by hand."

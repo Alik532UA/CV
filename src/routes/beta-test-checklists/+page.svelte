@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onMount } from "svelte";
+	import { onMount, onDestroy } from "svelte";
+	import { resolve } from "$app/paths";
 	import {
 		BETA_TABS,
 		BETA_UI,
@@ -29,6 +30,17 @@
 	let activeTabId = $state(BETA_TABS[0].id);
 	let copied = $state(false);
 
+	/**
+	 * Таймер підпису «скопійовано» — з дескриптором (§ 7.5).
+	 *
+	 * Дві причини, і жодна не теоретична. Натиснути вдруге, не помітивши
+	 * реакції, — звичайна поведінка: перший таймер лишався б живим і гасив
+	 * підпис, який щойно поставив ДРУГИЙ клік. І піти з чеклиста одразу після
+	 * копіювання — теж звичайний шлях, тобто таймер стріляв би в знищену
+	 * сторінку.
+	 */
+	let copiedTimer: ReturnType<typeof setTimeout> | undefined;
+
 	const activeTab = $derived(BETA_TABS.find((t) => t.id === activeTabId) ?? BETA_TABS[0]);
 	const ordered = $derived(sortChecks(activeTab.checks));
 
@@ -38,6 +50,7 @@
 	const slug = (id: string) => id.replace(/_/g, "-");
 
 	onMount(() => betaChecklist.load());
+	onDestroy(() => clearTimeout(copiedTimer));
 
 	async function copyReport() {
 		const text = betaChecklist.report(lang);
@@ -52,7 +65,8 @@
 			await navigator.clipboard.writeText(text);
 			betaChecklist.reportFallback = "";
 			copied = true;
-			setTimeout(() => (copied = false), 2000);
+			clearTimeout(copiedTimer);
+			copiedTimer = setTimeout(() => (copied = false), 2000);
 		} catch {
 			betaChecklist.reportFallback = text;
 		}
@@ -65,6 +79,15 @@
 
 <section class="beta">
 	<header>
+		<!--
+			Вихід зі сторінки (§ 8.4): тестувальник приходить за прямим посиланням, у
+			нього немає ні історії, ні пункта меню — сторінки немає в меню за § 4.
+			`resolve('/')`, а не склеювання з `base`: адресу звіряє компілятор.
+		-->
+		<a class="beta-back" href={resolve("/")} data-testid="beta-back-link">
+			← {BETA_UI.back[lang]}
+		</a>
+
 		<h1>{BETA_UI.title[lang]}</h1>
 		<p class="beta-sub">{BETA_UI.subtitle[lang]}</p>
 
@@ -82,13 +105,18 @@
 			<button type="button" onclick={copyReport} data-testid="beta-report-btn">
 				{copied ? BETA_UI.copied[lang] : BETA_UI.copy[lang]}
 			</button>
+			<!--
+				Стирання у ДВА кроки (§ 6.3): це єдина незворотна дія на сторінці, і вона
+				стоїть у тому самому рядку, що й кнопка звіту, до якої тягнуться щоразу.
+			-->
 			<button
 				type="button"
 				class="danger"
-				onclick={() => betaChecklist.clear()}
+				class:armed={betaChecklist.clearArmed}
+				onclick={() => betaChecklist.requestClear()}
 				data-testid="beta-clear-btn"
 			>
-				{BETA_UI.clear[lang]}
+				{betaChecklist.clearArmed ? BETA_UI.clearConfirm[lang] : BETA_UI.clear[lang]}
 			</button>
 		</div>
 
@@ -104,7 +132,12 @@
 	</header>
 
 	<nav class="beta-tabs" data-testid="beta-tabs-toolbar">
+		<!--
+			Лічильник на КОЖНІЙ вкладці (§ 8.1). Вкладок сім, проходять їх по одній, а
+			загальне «14 / 37» не каже, чи закінчена ця.
+		-->
 		{#each BETA_TABS as tab (tab.id)}
+			{@const tabDone = betaChecklist.progressOf(tab.checks)}
 			<button
 				type="button"
 				class:active={tab.id === activeTabId}
@@ -112,18 +145,32 @@
 				data-testid="beta-tab-{tab.id}-btn"
 			>
 				{tab.title[lang]}
+				<span
+					class="beta-tab-count"
+					aria-label={BETA_UI.tabProgress[lang]}
+					data-testid="beta-tab-{tab.id}-progress-text"
+				>
+					{tabDone.done}/{tabDone.total}
+				</span>
 			</button>
 		{/each}
 	</nav>
 
 	{#each COVERAGE_ORDER as level (level)}
 		{@const checks = ordered.filter((c: { coverage: Coverage }) => c.coverage === level)}
+		<!--
+			Зсув нумерації: номери йдуть наскрізно 1..n по ВКЛАДЦІ (§ 2.2). Лічильник
+			CSS скидався на кожному `<ol>`, тобто кожен із трьох рівнів починався з
+			одиниці — і на екрані було до трьох пунктів «1», а номер потрібен саме
+			тоді, коли людина каже «зламалося на третьому».
+		-->
+		{@const offset = ordered.findIndex((c: { coverage: Coverage }) => c.coverage === level)}
 		{#if checks.length > 0}
 			<section class="beta-level" data-testid="beta-level-{level}-section">
 				<h2>{BETA_UI.level[level].title[lang]}</h2>
 				<p class="beta-level-hint">{BETA_UI.level[level].hint[lang]}</p>
 
-				<ol class="beta-list">
+				<ol class="beta-list" style="counter-reset: beta {offset}">
 					{#each checks as check (check.id)}
 						{@const mark = betaChecklist.markOf(check.id)}
 						<li
@@ -235,6 +282,41 @@
 		color: var(--error-text);
 	}
 
+	/*
+	 * Зведена кнопка стирання (§ 6.3). Стан НЕ лише кольором: рамка товща, напис
+	 * напівжирний, і сам текст кнопки міняється на питання — три незалежні
+	 * ознаки (ACCESSIBILITY-v9).
+	 */
+	button.danger.armed {
+		border-width: 2px;
+		border-color: var(--error-text);
+		color: var(--error-text);
+		font-weight: 700;
+	}
+
+	/* Рівна ширина цифр: лічильники в ряду вкладок не мусять стрибати. */
+	.beta-tab-count {
+		margin-inline-start: 6px;
+		font-size: 0.8rem;
+		font-weight: 400;
+		color: var(--text-secondary);
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* 44px — мінімальна сенсорна зона, і для посилання теж (ACCESSIBILITY-v9). */
+	.beta-back {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		color: var(--text-secondary);
+		text-decoration: none;
+	}
+
+	.beta-back:hover {
+		color: var(--text-primary);
+		text-decoration: underline;
+	}
+
 	.beta-hint {
 		color: var(--error-text);
 		margin: 12px 0 6px;
@@ -266,7 +348,12 @@
 		display: flex;
 		flex-direction: column;
 		gap: 12px;
-		counter-reset: beta;
+		/*
+		 * Скидання лічильника задає СТОРІНКА інлайном: воно різне на кожному рівні,
+		 * бо нумерація наскрізна по вкладці (§ 2.2), а не по рівню. Правило тут
+		 * лишається як запасне значення для списку, намальованого без зсуву.
+		 */
+		counter-reset: beta 0;
 	}
 
 	/* Номер малює сторінка з позиції; вписаний у текст, він розійшовся б із нею
