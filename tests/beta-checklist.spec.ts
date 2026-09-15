@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test, type Page } from "./fixtures";
 
 /**
  * Сторінка чеклиста в браузері (BETA-CHECKLIST-v8 § 3.1, § 6).

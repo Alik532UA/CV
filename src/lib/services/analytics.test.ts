@@ -5,12 +5,12 @@ vi.mock('$app/environment', () => ({
 	dev: true
 }));
 
-describe('CV analytics service (dev guard)', () => {
+describe('CV analytics service (dev & test guards)', () => {
 	beforeEach(() => {
 		vi.resetModules();
 	});
 
-	it('мовчить у dev-режимі (ANALYTICS-v8 § 2.1, § 5)', async () => {
+	it('мовчить у dev-режимі (ANALYTICS-v9 § 2.1, § 5)', async () => {
 		const { track, trackPageView, initAnalytics } = await import('./analytics');
 		const gtag = vi.fn();
 		vi.stubGlobal('gtag', gtag);
@@ -21,10 +21,43 @@ describe('CV analytics service (dev guard)', () => {
 
 		expect(gtag, 'у dev-режимі не повинно надсилатися жодної події').not.toHaveBeenCalled();
 	});
+
+	it('мовчить на localhost навіть при dev: false (preview/локальні тести)', async () => {
+		vi.doMock('$app/environment', () => ({ browser: true, dev: false }));
+		Object.defineProperty(window, 'location', {
+			value: { hostname: 'localhost', origin: 'http://localhost:5299', pathname: '/CV/' },
+			writable: true,
+			configurable: true
+		});
+		const { track, trackPageView, initAnalytics } = await import('./analytics');
+		const gtag = vi.fn();
+		vi.stubGlobal('gtag', gtag);
+		initAnalytics();
+		track('project_click', { project: 'Slovko' });
+		trackPageView();
+		expect(gtag, 'на localhost не повинно надсилатися жодної події').not.toHaveBeenCalled();
+	});
+
+	it('мовчить при navigator.webdriver: true навіть на робочому домені', async () => {
+		vi.doMock('$app/environment', () => ({ browser: true, dev: false }));
+		Object.defineProperty(window, 'location', {
+			value: { hostname: 'alik5.github.io', origin: 'https://alik5.github.io', pathname: '/CV/' },
+			writable: true,
+			configurable: true
+		});
+		vi.stubGlobal('navigator', { ...globalThis.navigator, webdriver: true });
+		const { track, trackPageView, initAnalytics } = await import('./analytics');
+		const gtag = vi.fn();
+		vi.stubGlobal('gtag', gtag);
+		initAnalytics();
+		track('project_click', { project: 'Slovko' });
+		trackPageView();
+		expect(gtag, 'у тестах не повинно надсилатися жодної події').not.toHaveBeenCalled();
+	});
 });
 
 /**
- * ANALYTICS-v8 § 4.2 — мінімум приватності, який не залежить від того, є банер
+ * ANALYTICS-v9 § 4.2 — мінімум приватності, який не залежить від того, є банер
  * згоди чи ні. Тут банера немає свідомо (`PROJECT-CONTEXT.md`), і саме тому
  * сигнал браузера — єдине, чим відвідувач може сказати «ні».
  *
@@ -33,10 +66,16 @@ describe('CV analytics service (dev guard)', () => {
  * вантажиться) обов'язковий — без нього обидві перевірки пройшли б і на коді,
  * який просто ніколи нічого не надсилає.
  */
-describe('сигнал приватності від браузера (ANALYTICS-v8 § 4.2)', () => {
+describe('сигнал приватності від браузера (ANALYTICS-v9 § 4.2)', () => {
 	beforeEach(() => {
 		vi.resetModules();
 		vi.doMock('$app/environment', () => ({ browser: true, dev: false }));
+		Object.defineProperty(window, 'location', {
+			value: { hostname: 'alik5.github.io', origin: 'https://alik5.github.io', pathname: '/CV/' },
+			writable: true,
+			configurable: true
+		});
+		vi.stubGlobal('navigator', { ...globalThis.navigator, webdriver: false });
 	});
 
 	afterEach(() => {
@@ -46,7 +85,7 @@ describe('сигнал приватності від браузера (ANALYTICS
 
 	/** Підміняє `navigator`, лишаючи решту jsdom на місці. */
 	function withNavigator(extra: Record<string, unknown>) {
-		vi.stubGlobal('navigator', { ...globalThis.navigator, ...extra });
+		vi.stubGlobal('navigator', { ...globalThis.navigator, webdriver: false, ...extra });
 	}
 
 	it('контроль: без сигналу скрипт GA таки додається', async () => {

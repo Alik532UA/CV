@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page } from "./fixtures";
 
 /**
  * Адреси тут `/CV/`, а не `/`. `base` у svelte.config.js — `/CV`, і прев'ю

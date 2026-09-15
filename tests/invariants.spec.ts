@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /**
  * Рантайм-доповнення до src/testid-conventions.test.ts (§ 1.9.2 v8).

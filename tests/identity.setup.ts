@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from "./fixtures";
 import { readFileSync } from "node:fs";
 import { SITE_BASE, SITE_ORIGIN } from "../src/lib/config/site.js";
 

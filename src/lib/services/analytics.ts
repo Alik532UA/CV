@@ -1,7 +1,7 @@
 import { browser, dev } from "$app/environment";
 
 /**
- * Google Analytics 4 (ANALYTICS-v8 § 1).
+ * Google Analytics 4 (ANALYTICS-v9 § 1).
  */
 const GA_ID: string = "G-0G0N13KZG6";
 const PLACEHOLDER: string = "G-XXXXXXXXXX";
@@ -9,7 +9,7 @@ const PLACEHOLDER: string = "G-XXXXXXXXXX";
 const isConfigured = GA_ID !== PLACEHOLDER && /^G-[A-Z0-9]{6,}$/.test(GA_ID);
 
 /**
- * Сигнал «не стежити», надісланий самим браузером (ANALYTICS-v8 § 4.2).
+ * Сигнал «не стежити», надісланий самим браузером (ANALYTICS-v9 § 4.2).
  *
  * ЧОМУ ЦЕ ТУТ, ЯКЩО БАНЕРА НЕМАЄ. Пакет дає дві законні позиції — банер згоди
  * або свідома відмова від нього для особистого проєкту, — і § 4.2 називається
@@ -47,8 +47,20 @@ function privacySignalSet(): boolean {
 	return dnt === "1" || dnt === "yes";
 }
 
-// `dev` keeps local work from landing in the same property as real traffic.
-const enabled = browser && !dev && isConfigured && !privacySignalSet();
+/**
+ * Локальне середовище або автоматизований тест (Playwright, Puppeteer тощо).
+ * Запобігає засміченню аналітики під час розробки, локального прев'ю та E2E-тестів.
+ */
+const isTestOrLocal = () => {
+	if (!browser || typeof window === 'undefined') return false;
+	const hostname = window.location?.hostname ?? '';
+	const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '[::1]';
+	const isWebDriver = typeof navigator !== 'undefined' && Boolean(navigator.webdriver);
+	return isLocal || isWebDriver;
+};
+
+// `dev`, `localhost` та автотести відключають аналітику, щоб тестовий трафік не потрапляв у продакшн.
+const enabled = () => browser && !dev && !isTestOrLocal() && isConfigured && !privacySignalSet();
 
 export type AnalyticsEvent =
 	| 'pdf_download'
@@ -73,7 +85,7 @@ declare global {
 let started = false;
 
 export function initAnalytics() {
-	if (!enabled || started) return;
+	if (!enabled() || started) return;
 	started = true;
 
 	const dataLayer = (window.dataLayer = window.dataLayer ?? []);
@@ -97,7 +109,7 @@ export function initAnalytics() {
 }
 
 export function trackPageView() {
-	if (!enabled) return;
+	if (!enabled()) return;
 	// afterNavigate can fire before onMount on the initial load, so neither
 	// caller may assume the other ran first. initAnalytics is idempotent, and
 	// gtag queues into dataLayer until its script arrives.
@@ -107,7 +119,7 @@ export function trackPageView() {
 }
 
 export function track(event: AnalyticsEvent, params: EventParams = {}) {
-	if (!enabled) return;
+	if (!enabled()) return;
 	initAnalytics();
 	window.gtag?.("event", event, params);
 }
