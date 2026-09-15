@@ -41,7 +41,7 @@ describe('CV analytics service (dev & test guards)', () => {
 	it('мовчить при navigator.webdriver: true навіть на робочому домені', async () => {
 		vi.doMock('$app/environment', () => ({ browser: true, dev: false }));
 		Object.defineProperty(window, 'location', {
-			value: { hostname: 'alik5.github.io', origin: 'https://alik5.github.io', pathname: '/CV/' },
+			value: { hostname: 'alik532ua.github.io', origin: 'https://alik532ua.github.io', pathname: '/CV/' },
 			writable: true,
 			configurable: true
 		});
@@ -71,7 +71,7 @@ describe('сигнал приватності від браузера (ANALYTICS
 		vi.resetModules();
 		vi.doMock('$app/environment', () => ({ browser: true, dev: false }));
 		Object.defineProperty(window, 'location', {
-			value: { hostname: 'alik5.github.io', origin: 'https://alik5.github.io', pathname: '/CV/' },
+			value: { hostname: 'alik532ua.github.io', origin: 'https://alik532ua.github.io', pathname: '/CV/' },
 			writable: true,
 			configurable: true
 		});
