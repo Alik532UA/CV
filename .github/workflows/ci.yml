@@ -74,12 +74,14 @@ jobs:
       # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
       # `playwright install` без кешу качає ~130 МБ щоразу.
       - name: Cache Playwright browsers
+        if: ${{ !cancelled() }}
         uses: actions/cache@v6
         with:
           path: ~/.cache/ms-playwright
           key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install Playwright chromium
+        if: ${{ !cancelled() }}
         run: npx playwright install --with-deps chromium
 
       # `webServer` у playwright.config.ts сам збирає сайт і піднімає прев'ю,
