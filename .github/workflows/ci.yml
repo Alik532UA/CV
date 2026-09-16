@@ -26,9 +26,6 @@ on:
   # Кнопка на випадок «перевірити гілку, не відкриваючи PR».
   workflow_dispatch:
 
-# Тільки читання. Цей workflow нічого нікуди не викладає.
-permissions:
-  contents: read
 
 # Новий пуш у ту саму гілку скасовує попередній прогін: черга з п'яти прогонів
 # одного PR не додає інформації, а раннери займає.
@@ -36,9 +33,14 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Тільки читання. Цей workflow нічого нікуди не викладає.
+
 jobs:
   gates:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -67,7 +69,7 @@ jobs:
 
       - name: Audit dependencies
         if: ${{ !cancelled() }}
-        run: npm audit --audit-level=high
+        run: npm run audit:ci
 
       # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
       # `playwright install` без кешу качає ~130 МБ щоразу.
@@ -83,17 +85,20 @@ jobs:
       # `webServer` у playwright.config.ts сам збирає сайт і піднімає прев'ю,
       # тож окремий крок Build перед цим не потрібен.
       - name: E2E (chromium) — сценарії, testid-інваріант, axe
+        if: ${{ !cancelled() }}
         run: npx playwright test --project=chromium
 
       - name: Upload Playwright report
-        if: failure()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: playwright-report/
+          if-no-files-found: ignore
           retention-days: 7
 
       - name: Build
+        id: build
         run: npm run build
 
       # Збірка не має чіпати відстежувані файли. Типовий порушник —
@@ -101,10 +106,13 @@ jobs:
       # робоче дерево стає брудним після кожного локального прогону
       # (VERSIONING-v8 § 1.4, CI-CD-AND-TOOLS-v8 § 1.5).
       - name: Збірка не змінює відстежувані файли
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: git diff --exit-code
 
       - name: Verify build output
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npm run check:build
 
       - name: Check JS budget
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npm run check:bundle

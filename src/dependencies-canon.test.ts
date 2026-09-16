@@ -75,9 +75,15 @@ describe("залежності (DEPENDENCIES-v8 § 6)", () => {
 			.map((f) => readFileSync(`${WORKFLOWS}/${f}`, "utf8"))
 			.join("\n");
 		expect(all.length, "жодного workflow — перевірка мертва").toBeGreaterThan(0);
+		// З ревізії 9.5 канону крок кличе ОБГОРТКУ (CI-CD-AND-TOOLS-v9 § 1.15,
+		// `CI-THIRD-PARTY-OUTAGE`): голий `npm audit` падає й тоді, коли ліг
+		// реєстр npm, і в сусідньому проєкті це вже заблокувало деплой. Поріг
+		// нікуди не подівся — він у скрипті, і перевіряється там.
+		expect(/npm run audit:ci/.test(all), "крок аудиту зник із пайплайна").toBe(true);
+		const wrapper = readFileSync("scripts/check-audit.mjs", "utf8");
 		expect(
-			/npm audit\b[^\n]*--audit-level=(high|critical)/.test(all),
-			"крок `npm audit --audit-level=high` зник із пайплайна"
+			/'high', 'critical'/.test(wrapper),
+			"обгортка втратила поріг high/critical"
 		).toBe(true);
 	});
 });

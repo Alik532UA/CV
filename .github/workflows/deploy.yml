@@ -4,10 +4,6 @@ on:
   push:
     branches: ["main"]
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -16,6 +12,11 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    timeout-minutes: 30
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -50,7 +51,7 @@ jobs:
       # попередженні, а вимкнений гейт гірший за відсутній.
       - name: Audit dependencies
         if: ${{ !cancelled() }}
-        run: npm audit --audit-level=high
+        run: npm run audit:ci
 
       # Кеш браузерів між прогонами: `npm ci` їх не приносить, а
       # `playwright install` без кешу качає ~130 МБ щоразу.
@@ -91,20 +92,23 @@ jobs:
       # збіркою дає падіння, які виглядають як регресії у свіжому коді
       # (CODE-QUALITY-v8 § 5.7).
       - name: E2E (chromium) — сценарії, testid-інваріант, axe
+        if: ${{ !cancelled() }}
         run: npx playwright test --project=chromium
 
       - name: Upload Playwright report
-        if: failure()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
           path: playwright-report/
+          if-no-files-found: ignore
           retention-days: 7
 
       # Ключів AI тут немає свідомо: усе, що потрапляє в збірку статичного сайту,
       # видно у DevTools. Ключі живуть секретами Cloudflare Worker, а сайт знає
       # лише його URL.
       - name: Build
+        id: build
         env:
           PUBLIC_AI_PROXY_URL: ${{ secrets.AI_PROXY_URL }}
         run: npm run build
@@ -115,6 +119,7 @@ jobs:
       # варто дописати туди момент збірки, і робоче дерево стає брудним після
       # кожного локального прогону, а `git status` перестає щось означати.
       - name: Збірка не змінює відстежувані файли
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: git diff --exit-code
 
       # Клас дефектів, якого не видно в коді: зсув мов від модульного
@@ -123,15 +128,18 @@ jobs:
       # читається з build/, тому крок стоїть саме тут — між збіркою і
       # викладанням (SEO-v8 § 6.1).
       - name: Verify build output
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npm run check:build
 
       # Бюджет початкового JS (PERFORMANCE-v8 § 1). Міряє те, що браузер тягне
       # на першу сторінку, а не теку `entry/` з шаблону канону — там лежать два
       # завантажувачі на 2 КБ, і гейт над ними не впав би ніколи.
       - name: Check JS budget
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npm run check:bundle
 
       - name: Lighthouse Audit
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
         run: npx @lhci/cli@0.15.1 autorun --config=./lighthouserc.cjs
 
       - name: Upload Artifacts
@@ -148,6 +156,9 @@ jobs:
   # push — це дешевше й надійніше за фільтр змінених файлів.
   deploy-worker:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    timeout-minutes: 15
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:

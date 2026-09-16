@@ -22,7 +22,8 @@
 		"test:e2e": "playwright test",
 		"worker:dev": "npx -y wrangler dev --config worker/wrangler.toml",
 		"worker:deploy": "npx -y wrangler deploy --config worker/wrangler.toml",
-		"bump": "node scripts/bump-version.js"
+		"bump": "node scripts/bump-version.js",
+		"audit:ci": "node scripts/check-audit.mjs"
 	},
 	"devDependencies": {
 		"@axe-core/playwright": "^4.13.0",
