@@ -190,6 +190,12 @@ export const ga: Translations = {
                 button: "Tabhair Cuairt ar an Suíomh",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Suíomh uchtála ainmhithe do dhídean in Odessa: próifílí cat agus madraí le scagairí, ceanáin agus foirm iarratais.",
+                button: "Tabhair Cuairt ar an Suíomh",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Tionscadal cluichí idirghníomhach ag tacú le tionscnaimh tarrthála ainmhithe agus feasacht cosanta ainmhithe.",

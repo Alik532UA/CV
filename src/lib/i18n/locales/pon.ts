@@ -197,6 +197,12 @@ export const pon: Translations = {
                 button: "Kilang Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Wasahn adoption en mahn akan sang shelter en Odesa: pali en katt oh kidi, filter kan, favorite kan, oh application form.",
+                button: "Kilang Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactive gaming project me sawas ong animal rescue initiative kan oh animal protection awareness.",

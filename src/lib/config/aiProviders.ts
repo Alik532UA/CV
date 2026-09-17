@@ -58,6 +58,39 @@ const GROQ_CHAT = "https://api.groq.com/openai/v1/chat/completions";
  * щоб було видно, який ключ що обслуговує.
  */
 export const AI_PROVIDERS: readonly AiProviderEntry[] = [
+	/*
+	 * Голова ланцюжка оновлена 2026-09-17 за офіційним переліком моделей
+	 * (ai.google.dev/gemini-api/docs/models): стабільними Flash там значаться
+	 * `3.8`, `3.7`, `3.6`, `3.5`, і найсвіжішою — `gemini-3.8-flash`. Доти голова
+	 * стояла на `3.6`, тобто на два покоління позаду.
+	 *
+	 * Score у двох нових записів ВИСТАВЛЕНИЙ, а не заміряний, і це видно за
+	 * рівними числами: сусідні значення (78, 82, 85) прийшли з реальних замірів,
+	 * а тут узято просто «новіший Flash не гірший за попередній». Якщо котрась із
+	 * нових моделей поводитиметься гірше, її досить опустити нижче 90 — решта
+	 * ланцюжка від цього не змінюється.
+	 *
+	 * Перелік моделей, доступних САМЕ цьому ключу, документація не показує: вона
+	 * називає все, що є в API загалом. Це дає лише `GET /v1beta/models?key=…`.
+	 */
+	{
+		id: "gemini-38-flash",
+		provider: "Gemini",
+		model: "gemini-3.8-flash",
+		wire: "gemini",
+		keyName: "GEMINI_API_KEY",
+		baseUrl: GEMINI_BASE,
+		score: 94
+	},
+	{
+		id: "gemini-37-flash",
+		provider: "Gemini",
+		model: "gemini-3.7-flash",
+		wire: "gemini",
+		keyName: "GEMINI_API_KEY",
+		baseUrl: GEMINI_BASE,
+		score: 92
+	},
 	{
 		id: "gemini-36-flash",
 		provider: "Gemini",

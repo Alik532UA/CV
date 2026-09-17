@@ -197,6 +197,12 @@ export const kos: Translations = {
                 button: "Liye Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Nien website nu adoption lun kosro Odesa: kaat lun cat ac dog wi filter, ma saok, ac form in siyuk.",
+                button: "Liye Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactive gaming project ma kasru animal rescue initiative ac animal protection awareness.",

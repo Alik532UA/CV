@@ -190,6 +190,12 @@ export const lv: Translations = {
                 button: "Apmeklēt Vietni",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Odesas patversmes dzīvnieku adopcijas vietne: kaķu un suņu kartītes ar filtriem, izlase un pieteikuma forma.",
+                button: "Apmeklēt Vietni",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interaktīvs spēļu projekts, kas atbalsta dzīvnieku glābšanas iniciatīvas un dzīvnieku aizsardzības apziņu.",

@@ -190,6 +190,12 @@ export const cy: Translations = {
                 button: "Ymweld â'r Wefan",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Gwefan mabwysiadu anifeiliaid ar gyfer lloches yn Odesa: proffiliau cathod a chŵn gyda hidlyddion, ffefrynnau a ffurflen gais.",
+                button: "Ymweld â'r Wefan",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Prosiect gemau rhyngweithiol sy'n cefnogi mentrau achub anifeiliaid ac ymwybyddiaeth diogelu anifeiliaid.",

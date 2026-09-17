@@ -190,6 +190,12 @@ export const it: Translations = {
                 button: "Visita il Sito",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Sito per l’adozione di animali di un rifugio di Odessa: schede di gatti e cani con filtri, preferiti e modulo di richiesta.",
+                button: "Visita il Sito",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Progetto di giochi interattivi a sostegno di iniziative di salvataggio animale e sensibilizzazione sulla protezione degli animali.",

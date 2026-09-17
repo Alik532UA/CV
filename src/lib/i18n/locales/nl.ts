@@ -190,6 +190,12 @@ export const nl: Translations = {
                 button: "Bezoek Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Adoptiesite voor dieren van een asiel in Odessa: profielen van katten en honden met filters, favorieten en een aanvraagformulier.",
+                button: "Bezoek Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactief gameproject ter ondersteuning van dierenreddingsinitiatieven en bewustwording rond dierenbescherming.",

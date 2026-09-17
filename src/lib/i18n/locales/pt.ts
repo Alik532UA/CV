@@ -190,6 +190,12 @@ export const pt: Translations = {
                 button: "Visitar Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Site de adoção de animais de um abrigo de Odessa: fichas de gatos e cães com filtros, favoritos e formulário de pedido.",
+                button: "Visitar Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Projeto de jogos interativos de apoio a iniciativas de resgate animal e sensibilização para a proteção dos animais.",

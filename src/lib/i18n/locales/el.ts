@@ -190,6 +190,12 @@ export const el: Translations = {
                 button: "Επισκεφθείτε τον Ιστότοπο",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Ιστότοπος υιοθεσίας ζώων για καταφύγιο της Οδησσού: καρτέλες γατών και σκύλων με φίλτρα, αγαπημένα και φόρμα αίτησης.",
+                button: "Επισκεφθείτε τον Ιστότοπο",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Διαδραστικό παιχνιδιακό έργο που υποστηρίζει πρωτοβουλίες διάσωσης ζώων και ευαισθητοποίησης για την προστασία των ζώων.",

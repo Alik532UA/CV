@@ -1,5 +1,17 @@
 import { test, expect, type Page, type Route } from './fixtures';
 import { en } from '../src/lib/i18n/locales/en';
+import { AI_PROVIDERS } from '../src/lib/config/aiProviders';
+
+/**
+ * Голова ланцюжка ВИВОДИТЬСЯ з реєстру, а не вписується рядком.
+ *
+ * Тут стояло `gemini-3.6-flash` літералом, і 2026-09-17 воно впало: у реєстр
+ * додали свіжіші `3.8` і `3.7`, голова змінилася, а тест і далі вимагав
+ * старої назви. Це два імені однієї речі — рівно те, від чого застерігає
+ * коментар над самим реєстром: вони розходяться мовчки, і ловити таке нема
+ * чим. `AiChatState` рахує голову цим самим сортуванням.
+ */
+const CHAIN_HEAD = [...AI_PROVIDERS].sort((a, b) => b.score - a.score)[0];
 
 /**
  * Тексти інтерфейсу беруться зі словника, а не з літералів у тесті.
@@ -160,7 +172,7 @@ test.describe('AI Job Matcher', () => {
 
 		const badge = page.getByTestId('ai-model-badge-btn');
 		// До першої відповіді — голова ланцюжка: те, що буде спробовано першим.
-		await expect(badge).toContainText('gemini-3.6-flash');
+		await expect(badge).toContainText(CHAIN_HEAD.model);
 
 		await analyze(page);
 

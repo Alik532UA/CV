@@ -197,6 +197,12 @@ export const chk: Translations = {
                 button: "Nengeni Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Neni website fan animal adoption seni Odesa shelter: kaan cats me dogs, filters, favorites, me eu application form.",
+                button: "Nengeni Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactive gaming project mi support animal rescue initiative kewe me animal protection awareness.",

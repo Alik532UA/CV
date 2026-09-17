@@ -190,6 +190,12 @@ export const tr: Translations = {
                 button: "Siteyi Ziyaret Et",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Odessa barınağı için hayvan sahiplendirme sitesi: filtrelerle kedi ve köpek kartları, favoriler ve başvuru formu.",
+                button: "Siteyi Ziyaret Et",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Hayvan kurtarma girişimlerini ve hayvan koruma bilincini destekleyen interaktif oyun projesi.",

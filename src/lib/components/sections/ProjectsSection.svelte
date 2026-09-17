@@ -66,6 +66,7 @@
         cv_web: { site: "cv", category: "websites", image: "cv_web.jpg" },
         teatralo4ka: { site: "teatralo4ka", category: "websites", image: "teatralo4ka.jpg" },
         as5: { site: "as5", category: "websites", image: "as5_odesa_ua.jpg" },
+        adoptananimal: { site: "adoptananimal", category: "websites", image: "adoptananimal.jpg" },
         vetcrew: { site: "vetcrewgames", category: "games", image: "VetCrewGames.jpg" }
     };
 
@@ -152,8 +153,8 @@
                         alt={project.title}
                         loading="lazy"
                         decoding="async"
-                        width="400"
-                        height="220"
+                        width="1600"
+                        height="1000"
                     />
                 </div>
 
@@ -284,7 +285,31 @@
     /* Shows only in the moment before an image paints, so it follows the theme
        rather than flashing a dark band on a light page. */
     .project-img {
-        height: 200px;
+        /*
+         * FIXED 16:10, not a fixed height.
+         *
+         * `height: 200px` fixed the wrong side of the box. The grid is
+         * `auto-fit, minmax(320px, 1fr)`, so a card is 320 px wide on a phone and
+         * ~600 px on a wide screen — and with the height pinned that made the crop
+         * ratio slide from 1.6:1 to 3:1. Every screenshot in this section is a
+         * landscape browser window, so at 3:1 the middle band was all a visitor
+         * saw of it: on MindStep the board survived and the title bar did not.
+         *
+         * `aspect-ratio` pins the SHAPE and lets the height follow the width, so
+         * the same crop reaches everyone regardless of screen size.
+         *
+         * 16:10, а не 16:9: самі знімки зроблені у вікні браузера, і воно ближче
+         * до 1.6:1 (наприклад, 1918×1198). За 16:9 з кожного зрізало б смужку
+         * зверху й знизу; 16:10 лишає кадр майже цілим.
+         */
+        aspect-ratio: 16 / 10;
+        /*
+         * Власний радіус, бо радіус картки сюди не дістає: `.card` дає 30 px
+         * паддінгу, тож зображення лежить усередині й обрізається по СВОЇХ кутах,
+         * а не по кутах картки. Доти їх не було — картинка з гострими кутами
+         * посеред заокругленого інтерфейсу.
+         */
+        border-radius: 12px;
         overflow: hidden;
         background: var(--surface-subtle);
     }

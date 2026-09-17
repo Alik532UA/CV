@@ -196,6 +196,12 @@ export const en: Translations = {
                 button: "Visit Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Animal adoption site for an Odesa shelter: cat and dog profiles with filters, favourites, and an adoption application form.",
+                button: "Visit Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactive gaming project supporting animal rescue initiatives and animal protection awareness.",

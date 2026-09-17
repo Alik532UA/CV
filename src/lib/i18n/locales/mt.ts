@@ -190,6 +190,12 @@ export const mt: Translations = {
                 button: "Żur is-Sit",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Sit għall-adozzjoni ta' annimali minn kenn f'Odessa: profili ta' qtates u klieb b'filtri, favoriti u formola ta' applikazzjoni.",
+                button: "Żur is-Sit",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Proġett ta' logħob interattiv li jappoġġa inizjattivi ta' salvataġġ tal-annimali u sensibilizzazzjoni dwar il-protezzjoni tagħhom.",

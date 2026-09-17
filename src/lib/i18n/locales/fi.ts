@@ -190,6 +190,12 @@ export const fi: Translations = {
                 button: "Vieraile Sivustolla",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Odessalaisen eläinsuojan adoptiosivusto: kissojen ja koirien kortit suodattimineen, suosikit ja hakemuslomake.",
+                button: "Vieraile Sivustolla",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interaktiivinen pelihanke, joka tukee eläinten pelastusaloitteita ja eläinsuojelutietoisuutta.",

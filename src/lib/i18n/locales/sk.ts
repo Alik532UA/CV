@@ -190,6 +190,12 @@ export const sk: Translations = {
                 button: "Navštíviť web",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Web na adopciu zvierat z odeského útulku: profily mačiek a psov s filtrami, obľúbené a formulár žiadosti.",
+                button: "Navštíviť web",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interaktívny herný projekt na podporu iniciatív na záchranu zvierat a zvyšovanie povedomia o ich ochrane.",

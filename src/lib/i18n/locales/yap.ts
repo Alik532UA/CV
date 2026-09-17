@@ -197,6 +197,12 @@ export const yap: Translations = {
                 button: "Guy e Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Website ko adoption ko gamanman u Odesa shelter: card ko cat nge dog, filter, favorite, nge application form.",
+                button: "Guy e Website",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interactive gaming project ni be ayuw ko animal rescue initiative kan nge animal protection awareness.",

@@ -190,6 +190,12 @@ export const ro: Translations = {
                 button: "Vizitează site-ul",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Site de adopție a animalelor dintr-un adăpost din Odesa: fișe de pisici și câini cu filtre, favorite și formular de cerere.",
+                button: "Vizitează site-ul",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Proiect de jocuri interactive care susține inițiativele de salvare a animalelor și conștientizarea protecției animalelor.",

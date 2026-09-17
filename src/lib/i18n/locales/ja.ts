@@ -190,6 +190,12 @@ export const ja: Translations = {
                 button: "ウェブサイトを見る",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "オデーサの保護施設の動物里親サイト。猫と犬のカードを絞り込みで探し、お気に入りに登録し、申込フォームから応募できます。",
+                button: "ウェブサイトを見る",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "動物保護の取り組みと動物福祉への関心を支援するインタラクティブなゲームプロジェクト。",

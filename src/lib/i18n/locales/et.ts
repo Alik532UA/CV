@@ -190,6 +190,12 @@ export const et: Translations = {
                 button: "Külasta Veebisaiti",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Odessa varjupaiga loomade kodu otsimise sait: kasside ja koerte kaardid filtritega, lemmikud ja taotlusvorm.",
+                button: "Külasta Veebisaiti",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interaktiivne mänguprojekt, mis toetab loomade päästmise algatusi ja loomakaitse teadlikkust.",

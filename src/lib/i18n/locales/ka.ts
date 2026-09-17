@@ -190,6 +190,12 @@ export const ka: Translations = {
                 button: "საიტის მონახულება",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "ოდესის თავშესაფრის ცხოველთა აყვანის საიტი: კატებისა და ძაღლების ბარათები ფილტრებით, რჩეულები და განაცხადის ფორმა.",
+                button: "საიტის მონახულება",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "ინტერაქტიული სათამაშო პროექტი, რომელიც მხარს უჭერს ცხოველების გადარჩენის ინიციატივებსა და ცხოველთა დაცვის შესახებ ცნობიერების ამაღლებას.",

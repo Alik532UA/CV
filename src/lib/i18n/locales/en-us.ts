@@ -68,6 +68,10 @@ export const enUS: Translations = {
             teatralo4ka: {
                 ...en.projects.items.teatralo4ka,
                 description: "Official website and admin portal for Odesa Theater School featuring interactive widgets, dark ocean theme, and photo galleries."
+            },
+            adoptananimal: {
+                ...en.projects.items.adoptananimal,
+                description: "Animal adoption site for an Odesa shelter: cat and dog profiles with filters, favorites, and an adoption application form."
             }
         }
     },

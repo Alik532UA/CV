@@ -190,6 +190,12 @@ export const ko: Translations = {
                 button: "웹사이트 방문",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "오데사 보호소의 동물 입양 사이트. 필터로 고양이와 강아지를 찾고 즐겨찾기에 담아 입양 신청서를 보낼 수 있습니다.",
+                button: "웹사이트 방문",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "동물 구조 활동과 동물 보호 인식을 지원하는 인터랙티브 게임 프로젝트입니다.",

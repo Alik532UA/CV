@@ -192,6 +192,12 @@ export const crh: Translations = {
                 button: "Saytqa Bakıñız",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Odessa sıgınağınıñ ayvanlarnı asrav saytı: mışıq ve köpek kartaları, süzgüçler, sevimliler ve müracaat forması.",
+                button: "Saytqa Bakıñız",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Hayvanlarnı qurtarma inisiativalarını ve hayvanları qoruma bilgisini desteklegen interaktiv oyun loyihası.",

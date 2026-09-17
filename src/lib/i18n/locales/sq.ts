@@ -190,6 +190,12 @@ export const sq: Translations = {
                 button: "Vizito Faqen",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "Faqe për adoptimin e kafshëve nga një strehë në Odesa: skeda macesh dhe qensh me filtra, të preferuarat dhe formular aplikimi.",
+                button: "Vizito Faqen",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Projekt lojërash interaktive që mbështet iniciativa shpëtimi kafshësh dhe ndërgjegjësim për mbrojtjen e kafshëve.",

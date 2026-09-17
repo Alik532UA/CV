@@ -193,6 +193,12 @@ export const he: Translations = {
                 button: "בקר באתר",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            adoptananimal: {
+                title: "Adopt an Animal",
+                description: "אתר אימוץ בעלי חיים של מקלט באודסה: כרטיסי חתולים וכלבים עם מסננים, מועדפים וטופס בקשה.",
+                button: "בקר באתר",
+                tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "פרויקט משחקים אינטראקטיבי התומך ביוזמות הצלת בעלי חיים ובמודעות להגנה על בעלי חיים.",
