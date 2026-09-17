@@ -284,10 +284,21 @@ describe('гейти не ховають один одного (CI-CD-AND-TOOLS-
 		).toEqual([]);
 	});
 
+	/**
+	 * Крок, що біжить ЛИШЕ при падінні, гейтом не є за визначенням: його вердикт
+	 * нічого не каже про продукт, він реагує на чужий вердикт. Три класи § 1.8
+	 * такого кроку не описують — це четвертий рід, і впізнається він за умовою.
+	 *
+	 * Без цього рядка перевірка ловила сповіщення в `budgets.yml`: у тілі Issue
+	 * згадано `npm run check:bundle`, і класифікація за ЗГАДКОЮ зарахувала крок
+	 * у післязбіркові гейти. Тобто перевірка падала на тексті повідомлення.
+	 */
+	const isFailureHandler = (body: string) => /if:[^\n]*failure\(\)/.test(body);
+
 	it('післязбірковий гейт несе умову на результат збірки', () => {
 		const afterBuild = files.flatMap((file) =>
 			stepsOf(readWorkflow(file))
-				.filter((s) => BUILD_DEPENDENT.test(s.body))
+				.filter((s) => BUILD_DEPENDENT.test(s.body) && !isFailureHandler(s.body))
 				.map((s) => ({ ...s, file }))
 		);
 		const seenBuild = new Set<string>();
@@ -574,7 +585,11 @@ const ACTION_RUNTIME: Record<string, string> = {
 	'actions/cache@v6': 'не заміряно',
 	'actions/upload-artifact@v7': 'не заміряно',
 	'actions/upload-pages-artifact@v5': 'не заміряно',
-	'actions/deploy-pages@v5': 'не заміряно'
+	'actions/deploy-pages@v5': 'не заміряно',
+	// Заміряно 2026-09-17 тією самою командою, яку радить повідомлення нижче:
+	// `gh api repos/actions/github-script/contents/action.yml?ref=v8` → node24.
+	// Звірено й із v9 — там теж node24, тобто підйом мажора рантайму не змінить.
+	'actions/github-script@v8': 'node24'
 };
 
 describe('рантайм дій CI звіряється при підйомі (CI-ACTION-RUNTIME)', () => {
