@@ -27,28 +27,28 @@ export const ATS_FILES: readonly AtsFile[] = [
 		label: "EN · PDF",
 		format: "pdf",
 		name: "AlikZapolnov-ATS-RMS-EN.pdf",
-		url: "https://drive.google.com/file/d/1xieP4ItkVvk6_ly1r9sayGYGRZ9MRf06/view?usp=drive_link"
+		url: "https://drive.google.com/file/d/1t5S61DGwLtSL3EgR6NgVx3_tzKNetwws/view?usp=sharing"
 	},
 	{
 		id: "en-md",
 		label: "EN · MD",
 		format: "md",
 		name: "AlikZapolnov-ATS-RMS-EN.md",
-		url: "https://drive.google.com/file/d/1SQdR3vb2JNlVTiRH-vI-Hn2R-0E2MT_k/view?usp=drive_link"
+		url: "https://drive.google.com/file/d/1Nm_qygC3PtIjpKQ0CfsWY15bzcaU0amn/view?usp=sharing"
 	},
 	{
 		id: "ua-pdf",
 		label: "UA · PDF",
 		format: "pdf",
 		name: "AlikZapolnov-ATS-RMS-UA.pdf",
-		url: "https://drive.google.com/file/d/1vOJysOCzkn_bxVEugr3c2w5HPVfsT1nf/view?usp=drive_link"
+		url: "https://drive.google.com/file/d/1C9iHAacWD4xcI2yQS9xpc7nlyXQ0RFUg/view?usp=sharing"
 	},
 	{
 		id: "ua-md",
 		label: "UA · MD",
 		format: "md",
 		name: "AlikZapolnov-ATS-RMS-UA.md",
-		url: "https://drive.google.com/file/d/1HF6J92xqrLjAdFPHwJTBthzF1Te8B-zA/view?usp=drive_link"
+		url: "https://drive.google.com/file/d/1zjkqUyBHPZuWvExiu0dQym9JGPDgq7M3/view?usp=sharing"
 	}
 ];
 
