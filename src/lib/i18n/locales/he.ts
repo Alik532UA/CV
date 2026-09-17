@@ -4,7 +4,7 @@ import type { Translations } from "../schema";
 // (כיוון הממשק, יישור, מיקום סמלים) — הטקסט העברי יוצג נכון,
 // אך הרכיבים סביבו יישארו מיושרים ל-LTR.
 export const he: Translations = {
-    lastUpdate: "עדכון אחרון: 8 באוגוסט 2026",
+    lastUpdate: "עדכון אחרון: 17 בספטמבר 2026",
     title: ["מהנדס AQA", "חוקר AI", "יוצר משחקים"],
     title_mobile: "מהנדס AQA\nחוקר AI\nיוצר משחקים",
     nav: {

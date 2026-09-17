@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const bg: Translations = {
-    lastUpdate: "Последна актуализация: 8 август 2026",
+    lastUpdate: "Последна актуализация: 17 септември 2026",
     title: ["AQA Инженер", "AI Изследовател", "Създател на Игри"],
     title_mobile: "AQA Инженер\nAI Изследовател\nСъздател на Игри",
     nav: {

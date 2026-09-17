@@ -8,7 +8,7 @@ import type { Translations } from "../schema";
 // nonsense, with English retained for technical terms (as in every other
 // locale in this set).
 export const pon: Translations = {
-    lastUpdate: "Kawewe ehu: Aukus 8, 2026",
+    lastUpdate: "Kawewe ehu: Septempa 17, 2026",
     title: ["AQA Engineer", "AI Explorer", "Sounwia Game"],
     title_mobile: "AQA Engineer\nAI Explorer\nSounwia Game",
     nav: {

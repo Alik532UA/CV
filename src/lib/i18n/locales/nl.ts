@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const nl: Translations = {
-    lastUpdate: "Laatste update: 8 augustus 2026",
+    lastUpdate: "Laatste update: 17 september 2026",
     title: ["AQA Engineer", "AI-Ontdekker", "Gamemaker"],
     title_mobile: "AQA Engineer\nAI-Ontdekker\nGamemaker",
     nav: {

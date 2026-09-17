@@ -8,7 +8,7 @@ import type { Translations } from "../schema";
 // nonsense, with English retained for technical terms (as in every other
 // locale in this set).
 export const chk: Translations = {
-    lastUpdate: "Alolo äppirü: Ökosun 8, 2026",
+    lastUpdate: "Alolo äppirü: Septemper 17, 2026",
     title: ["AQA Engineer", "AI Explorer", "Chon Föri Game"],
     title_mobile: "AQA Engineer\nAI Explorer\nChon Föri Game",
     nav: {

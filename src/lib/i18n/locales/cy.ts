@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const cy: Translations = {
-    lastUpdate: "Diweddariad diwethaf: 8 Awst 2026",
+    lastUpdate: "Diweddariad diwethaf: 17 Medi 2026",
     title: ["Peiriannydd AQA", "Archwiliwr AI", "Crëwr Gemau"],
     title_mobile: "Peiriannydd AQA\nArchwiliwr AI\nCrëwr Gemau",
     nav: {

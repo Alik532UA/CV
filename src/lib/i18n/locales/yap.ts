@@ -8,7 +8,7 @@ import type { Translations } from "../schema";
 // nonsense, with English retained for technical terms (as in every other
 // locale in this set).
 export const yap: Translations = {
-    lastUpdate: "N'en nib bee ni beech: Aug 8, 2026",
+    lastUpdate: "N'en nib bee ni beech: Sep 17, 2026",
     title: ["AQA Engineer", "AI Explorer", "Chon Rin'e Game"],
     title_mobile: "AQA Engineer\nAI Explorer\nChon Rin'e Game",
     nav: {

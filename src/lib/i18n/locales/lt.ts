@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const lt: Translations = {
-    lastUpdate: "Paskutinį kartą atnaujinta: 2026 m. rugpjūčio 8 d.",
+    lastUpdate: "Paskutinį kartą atnaujinta: 2026 m. rugsėjo 17 d.",
     title: ["AQA Inžinierius", "AI Tyrinėtojas", "Žaidimų Kūrėjas"],
     title_mobile: "AQA Inžinierius\nAI Tyrinėtojas\nŽaidimų Kūrėjas",
     nav: {

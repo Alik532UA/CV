@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const ko: Translations = {
-    lastUpdate: "마지막 업데이트: 2026년 8월 8일",
+    lastUpdate: "마지막 업데이트: 2026년 9월 17일",
     title: ["AQA 엔지니어", "AI 탐험가", "게임 제작자"],
     title_mobile: "AQA 엔지니어\nAI 탐험가\n게임 제작자",
     nav: {

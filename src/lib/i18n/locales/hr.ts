@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const hr: Translations = {
-    lastUpdate: "Zadnje ažuriranje: 8. kolovoza 2026.",
+    lastUpdate: "Zadnje ažuriranje: 17. rujna 2026.",
     title: ["AQA Inženjer", "AI Istraživač", "Kreator Igara"],
     title_mobile: "AQA Inženjer\nAI Istraživač\nKreator Igara",
     nav: {

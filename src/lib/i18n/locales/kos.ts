@@ -8,7 +8,7 @@ import type { Translations } from "../schema";
 // nonsense, with English retained for technical terms (as in every other
 // locale in this set).
 export const kos: Translations = {
-    lastUpdate: "Sasla akmuta: Aug 8, 2026",
+    lastUpdate: "Sasla akmuta: Sep 17, 2026",
     title: ["AQA Engineer", "AI Explorer", "Mwet Orek Game"],
     title_mobile: "AQA Engineer\nAI Explorer\nMwet Orek Game",
     nav: {

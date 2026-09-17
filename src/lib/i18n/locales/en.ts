@@ -7,7 +7,7 @@ import type { Translations } from "../schema";
  * differ, so the two can never drift apart in content.
  */
 export const en: Translations = {
-    lastUpdate: "Last update: 8 August 2026",
+    lastUpdate: "Last update: 17 September 2026",
     title: ["AQA Engineer", "AI Explorer", "Game Maker"],
     title_mobile: "AQA Engineer\nAI Explorer\nGame Maker",
     nav: {

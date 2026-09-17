@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const ja: Translations = {
-    lastUpdate: "最終更新日: 2026年8月8日",
+    lastUpdate: "最終更新日: 2026年9月17日",
     title: ["AQAエンジニア", "AIエクスプローラー", "ゲームクリエイター"],
     title_mobile: "AQAエンジニア\nAIエクスプローラー\nゲームクリエイター",
     nav: {

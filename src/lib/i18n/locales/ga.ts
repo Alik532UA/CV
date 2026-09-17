@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const ga: Translations = {
-    lastUpdate: "Nuashonrú deireanach: 8 Lúnasa 2026",
+    lastUpdate: "Nuashonrú deireanach: 17 Meán Fómhair 2026",
     title: ["Innealtóir AQA", "Taiscéalaí AI", "Cruthaitheoir Cluichí"],
     title_mobile: "Innealtóir AQA\nTaiscéalaí AI\nCruthaitheoir Cluichí",
     nav: {

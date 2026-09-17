@@ -3,7 +3,7 @@ import type { Translations } from "../schema";
 // Qırımtatar tili (latin yazı). Bu til içün material az olğanı sebebinden,
 // tercime ana tili sahibi tarafından tekrar teşkil etilmege muhtac.
 export const crh: Translations = {
-    lastUpdate: "Soñki yañalama: 8 Ağustos 2026",
+    lastUpdate: "Soñki yañalama: 17 Sentâbr 2026",
     title: ["AQA Mühendisi", "AI Kâşifi", "Oyun Yaratıcısı"],
     title_mobile: "AQA Mühendisi\nAI Kâşifi\nOyun Yaratıcısı",
     nav: {
