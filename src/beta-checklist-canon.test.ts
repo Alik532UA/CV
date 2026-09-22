@@ -14,6 +14,27 @@ import { ALL_CHECKS, BETA_TABS, COVERAGE_ORDER, sortChecks } from "$lib/data/bet
  * тому чеклист тут — дані в репозиторії, а не сторінка в Notion.
  */
 
+/**
+ * Джерело САМОЇ сторінки — окремо від решти проєкту.
+ *
+ * Правила § 8 говорять про те, що є на ЦІЙ сторінці: локатор, знайдений у
+ * чужому компоненті, нічого не довів би.
+ */
+const PAGE_SOURCE = readFileSync("src/routes/beta-test-checklists/+page.svelte", "utf8");
+
+/**
+ * Перелік прихованих маршрутів читається з ТЕКСТУ модуля політики адрес.
+ *
+ * Імпортувати його не можна: `routing.ts` тягне за собою клієнтський рантайм
+ * SvelteKit, і під `node` файл падає ще до першого `it`. Текст тут не гірший за
+ * імпорт — він із того самого єдиного джерела, а не з другого списку.
+ */
+const HIDDEN_ROUTES: string[] = [
+	...readFileSync("src/lib/i18n/routing.ts", "utf8")
+		.match(/HIDDEN_ROUTES[^=]*=\s*\[([^\]]*)\]/)?.[1]
+		.matchAll(/"([^"]+)"/g) ?? []
+].map((m) => m[1]);
+
 const walk = (dir: string, out: string[] = []): string[] => {
 	for (const entry of readdirSync(dir)) {
 		const full = join(dir, entry);
@@ -220,5 +241,73 @@ describe("§ 5.4 — решта інваріантів", () => {
 				expect(shown, `${tab.id}/${level}: порядок оголошення не збережено`).toEqual(declared);
 			}
 		}
+	});
+
+	/**
+	 * § 8.5.1 `BETA-VERSION-VISIBLE`, § 8.4 `BETA-SCREEN-LINKS`, § 6.2.1
+	 * `BETA-REPORT-HINT-SPLIT`.
+	 *
+	 * Підказка «позначено на іншій версії» на пункті стояла з самого початку, а
+	 * якої версії ЦЯ сторінка — не було написано ніде. `beta-report-hint` висів
+	 * на ВІДМОВІ буфера, тож сценарій «підказка видима» доводив протилежне тому,
+	 * що мав. Поле звалося `beta-report-textarea` — другим іменем канонічного
+	 * `beta-report-input`.
+	 */
+	it("на сторінці є версія, вихід і дві різні підказки звіту", () => {
+		expect(PAGE_SOURCE).toContain('data-testid="beta-version-text"');
+		expect(PAGE_SOURCE).toContain('data-testid="beta-home-link"');
+		expect(PAGE_SOURCE).toContain('data-testid="beta-report-hint"');
+		expect(PAGE_SOURCE).toContain('data-testid="beta-report-failed-hint"');
+		expect(PAGE_SOURCE).toContain('data-testid="beta-report-input"');
+	});
+
+	/**
+	 * § 8.4 `BETA-SCREEN-LINKS` — умова, а не безумовна вимога.
+	 *
+	 * Правило знімає крок «прочитав пункт — шукаю, де це на сайті». Тут шукати
+	 * ніде: резюме — ОДНА сторінка, і шість тематичних вкладок називають той
+	 * самий маршрут. Перелік посилань вийшов би з шести однакових рядків «на
+	 * головну» плюс посилання на себе.
+	 *
+	 * Тому інваріант перевіряє УМОВУ: щойно вкладки почнуть називати більш ніж
+	 * один змістовий маршрут, посилання стають обов'язковими — і цей тест
+	 * почервоніє першим.
+	 */
+	it("посилання на екрани обов'язкові, щойно маршрут не один (§ 8.4)", () => {
+		expect(HIDDEN_ROUTES.length, "перелік прихованих не прочитано — перевірка мертва").toBeGreaterThan(0);
+
+		const meaningful = new Set(
+			BETA_TABS.flatMap((tab) => tab.routes).filter((route) => !HIDDEN_ROUTES.includes(route))
+		);
+
+		if (meaningful.size <= 1) {
+			expect(
+				PAGE_SOURCE.includes('data-testid="beta-home-link"'),
+				"єдиний змістовий маршрут — вихід на головну і є посиланням на екран"
+			).toBe(true);
+			return;
+		}
+
+		expect(PAGE_SOURCE, "маршрутів уже кілька — перелік екранів обов'язковий").toContain(
+			'data-testid="beta-screen-'
+		);
+	});
+
+	/**
+	 * § 4.0 `BETA-NOINDEX-OVER-DISALLOW` — перевірка ПРОТИЛЕЖНОГО.
+	 *
+	 * `Disallow` забороняє ЗАВАНТАЖЕННЯ: краулер, який його виконав, сторінку не
+	 * читає — отже й `noindex` у ній не читає ніколи, а адреса, на яку хтось
+	 * послався ззовні, лягає в індекс голим URL. Прибрати його потім нічим:
+	 * прибирає рівно той тег, до якого краулер не дійшов.
+	 */
+	it("сторінка чеклиста НЕ закрита Disallow у robots.txt (§ 4.0)", () => {
+		const robots = readFileSync("static/robots.txt", "utf8");
+		const disallowed = [...robots.matchAll(/^Disallow:\s*(\S+)/gm)].map((m) => m[1]);
+
+		expect(
+			disallowed.filter((rule) => rule.includes("beta-test-checklists")),
+			"Disallow забирає в краулера саме той запит, у відповіді на який лежить noindex"
+		).toEqual([]);
 	});
 });

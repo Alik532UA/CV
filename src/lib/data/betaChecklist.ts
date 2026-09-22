@@ -486,6 +486,7 @@ export const BETA_UI = {
 	clearConfirm: { uk: "Точно стерти? Ще раз", en: "Really clear? Press again" },
 	tabProgress: { uk: "позначено у вкладці", en: "marked on this tab" },
 	back: { uk: "На головну", en: "Home" },
+	screens: { uk: "Де це дивитися:", en: "Where to look:" },
 	clipboardFailed: {
 		uk: "Буфер обміну недоступний. Звіт тут — виділіть і скопіюйте вручну.",
 		en: "The clipboard is unavailable. The report is here — select and copy it by hand."

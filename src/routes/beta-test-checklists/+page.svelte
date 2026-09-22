@@ -84,7 +84,16 @@
 			нього немає ні історії, ні пункта меню — сторінки немає в меню за § 4.
 			`resolve('/')`, а не склеювання з `base`: адресу звіряє компілятор.
 		-->
-		<a class="beta-back" href={resolve("/")} data-testid="beta-back-link">
+<!--
+			ВИХІД ЗІ СТОРІНКИ ПІД КАНОНІЧНИМ ІМЕНЕМ (§ 8.4, `BETA-SCREEN-LINKS`).
+
+			Посилання було й доти, під власною назвою `beta-back-link`. Канон 9.15
+			дав цьому елементу ім'я `beta-home-link`, і два імені на той самий
+			елемент у десяти реалізаціях коштують дорожче, ніж одне
+			перейменування: воно не чіпає `id` пункта й тому нікому не стирає
+			прогрес (§ 2.2).
+		-->
+		<a class="beta-back" href={resolve("/")} data-testid="beta-home-link">
 			← {BETA_UI.back[lang]}
 		</a>
 
@@ -94,6 +103,18 @@
 		<div class="beta-toolbar" data-testid="beta-actions-toolbar">
 			<span class="beta-progress" data-testid="beta-progress-value">
 				{betaChecklist.done}/{betaChecklist.total}
+			</span>
+
+			<!--
+				ВЕРСІЯ ЗБІРКИ ВИДИМА (§ 8.5.1, `BETA-VERSION-VISIBLE`).
+
+				Підказка «позначено на іншій версії» на пункті стояла з самого
+				початку, а якої версії ЦЯ сторінка, не було написано ніде. Тобто
+				підказка була докором без інструкції: людина не могла вирішити,
+				перепоставити позначку чи вона вже на поточній збірці.
+			-->
+			<span class="beta-version" data-testid="beta-version-text">
+				{__APP_VERSION__}
 			</span>
 			<button
 				type="button"
@@ -120,13 +141,33 @@
 			</button>
 		</div>
 
+		<!--
+			ДВІ ПІДКАЗКИ, А НЕ ОДНА (§ 6.2.1, `BETA-REPORT-HINT-SPLIT`).
+
+			`beta-report-hint` стояв на ВІДМОВІ буфера, а успіх показувався лише
+			підписом на самій кнопці. Сценарій «підказка видима» через це доводив
+			протилежне тому, що мав: він зеленів саме тоді, коли копіювання НЕ
+			спрацювало.
+
+			Поле теж перейменоване: канон називає його `beta-report-input`, і
+			власна назва `beta-report-textarea` тут була другим іменем того
+			самого елемента.
+		-->
+		{#if copied}
+			<p class="beta-hint" role="status" data-testid="beta-report-hint">
+				{BETA_UI.copied[lang]}
+			</p>
+		{/if}
+
 		{#if betaChecklist.reportFallback}
-			<p class="beta-hint" data-testid="beta-report-hint">{BETA_UI.clipboardFailed[lang]}</p>
+			<p class="beta-hint" role="alert" data-testid="beta-report-failed-hint">
+				{BETA_UI.clipboardFailed[lang]}
+			</p>
 			<textarea
 				class="beta-fallback"
 				readonly
 				value={betaChecklist.reportFallback}
-				data-testid="beta-report-textarea"
+				data-testid="beta-report-input"
 			></textarea>
 		{/if}
 	</header>
@@ -156,6 +197,20 @@
 		{/each}
 	</nav>
 
+	<!--
+		ЕКРАНІВ ВКЛАДКИ ТУТ НЕМАЄ, і це вибір за правилом (§ 8.4,
+		`BETA-SCREEN-LINKS`), а не пропуск.
+
+		Правило знімає найдовший крок у роботі тестувальника: прочитав пункт —
+		шукає, де це на сайті. Тут шукати ніде. Резюме — ОДНА сторінка: шість
+		тематичних вкладок називають той самий маршрут `/[[lang=lang]]`, а сьома
+		— саму цю сторінку. Перелік посилань вийшов би з шести однакових рядків
+		«на головну» плюс посилання на себе, тобто рівно те, що вже стоїть у
+		шапці як `beta-home-link`.
+
+		Інваріант у `src/beta-checklist-canon.test.ts` тримає саме цю умову: де
+		вкладки називають більш ніж один змістовий маршрут, посилання обов'язкові.
+	-->
 	{#each COVERAGE_ORDER as level (level)}
 		{@const checks = ordered.filter((c: { coverage: Coverage }) => c.coverage === level)}
 		<!--

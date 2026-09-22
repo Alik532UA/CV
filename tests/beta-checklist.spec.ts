@@ -80,12 +80,15 @@ test("відмова буфера обміну не з'їдає звіт", async
 
 	await expect(async () => {
 		await page.getByTestId("beta-report-btn").click();
-		await expect(page.getByTestId("beta-report-textarea")).toBeVisible({ timeout: 2000 });
+		await expect(page.getByTestId("beta-report-input")).toBeVisible({ timeout: 2000 });
 	}).toPass({ timeout: 20_000 });
 
-	await expect(page.getByTestId("beta-report-hint")).toBeVisible();
-	await expect(page.getByTestId("beta-report-textarea")).toHaveValue(/BETA CHECKLIST REPORT/);
-	await expect(page.getByTestId("beta-report-textarea")).toHaveValue(/VERSION: \d+\.\d+\.\d+/);
+	// Саме локатор ВІДМОВИ (§ 6.2.1, `BETA-REPORT-HINT-SPLIT`): доти
+	// `beta-report-hint` висів на відмові й ні на чому більше, тож цей рядок
+	// нічого не розрізняв. Тепер успіх має свою назву, відмова — свою.
+	await expect(page.getByTestId("beta-report-failed-hint")).toBeVisible();
+	await expect(page.getByTestId("beta-report-input")).toHaveValue(/BETA CHECKLIST REPORT/);
+	await expect(page.getByTestId("beta-report-input")).toHaveValue(/VERSION: \d+\.\d+\.\d+/);
 });
 
 test("службова сторінка не показує навігації резюме", async ({ page }) => {
@@ -139,4 +142,18 @@ test("поступ вкладки росте окремо від загальн�
 		page.getByTestId("beta-tab-scrollbar-progress-text"),
 		"позначка потрапила в чужу вкладку"
 	).toHaveText(/^0\//);
+});
+
+/**
+ * § 8.5.1 `BETA-VERSION-VISIBLE`: підказка «позначено на іншій версії» на
+ * пункті стояла з самого початку, а якої версії ЦЯ сторінка — не було написано
+ * ніде. Тобто підказка називала стан, з яким нема чого порівняти.
+ */
+test("версія збірки видима поруч із поступом", async ({ page }) => {
+	await page.goto(PATH);
+	await expect(page.getByTestId("beta-version-text")).toHaveText(/\d+\.\d+\.\d+/);
+	await expect(
+		page.getByTestId("beta-home-link"),
+		"зі службової сторінки нема куди піти"
+	).toHaveAttribute("href", /.+/);
 });
