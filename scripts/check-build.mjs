@@ -217,8 +217,8 @@ for (const file of files) {
 			fail("sitemap.xml: службова сторінка в sitemap");
 		}
 		const robots = readFileSync(join(BUILD, "robots.txt"), "utf8");
-		if (!robots.includes("Disallow: /CV/beta-test-checklists/")) {
-			fail("robots.txt: немає Disallow для службової сторінки");
+		if (robots.includes("Disallow: /CV/beta-test-checklists/")) {
+			fail("robots.txt: Disallow для службової сторінки заборонено (§ 4.0, BETA-NOINDEX-OVER-DISALLOW)");
 		}
 	}
 
