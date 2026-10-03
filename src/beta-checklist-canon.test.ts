@@ -74,7 +74,7 @@ for (const check of ALL_CHECKS) {
 	LITERAL_TESTIDS.add(`beta-check-${slug(check.id)}-item`);
 	LITERAL_TESTIDS.add(`beta-check-${slug(check.id)}-text`);
 	LITERAL_TESTIDS.add(`beta-check-${slug(check.id)}-category-text`);
-	for (const vote of ["fail", "weird", "ok"]) {
+	for (const vote of ["ok", "fail", "unclear", "skip"]) {
 		LITERAL_TESTIDS.add(`beta-vote-${slug(check.id)}-${vote}-btn`);
 	}
 }

@@ -519,9 +519,10 @@ export const BETA_UI = {
 		}
 	},
 	vote: {
+		ok: { uk: "Працює", en: "Works" },
 		fail: { uk: "Не працює", en: "Broken" },
-		weird: { uk: "Працює, але дивно", en: "Works, but odd" },
-		ok: { uk: "Працює", en: "Works" }
+		unclear: { uk: "Не зрозуміло", en: "Unclear" },
+		skip: { uk: "Пропустити", en: "Skip" }
 	}
 } as const;
 

@@ -44,7 +44,25 @@
 	const activeTab = $derived(BETA_TABS.find((t) => t.id === activeTabId) ?? BETA_TABS[0]);
 	const ordered = $derived(sortChecks(activeTab.checks));
 
-	const VOTES: readonly Vote[] = ["fail", "weird", "ok"];
+	const VOTES: readonly Vote[] = ["ok", "fail", "unclear", "skip"];
+
+	function selectTab(id: string) {
+		activeTabId = id;
+		if (typeof window !== "undefined") {
+			const url = new URL(window.location.href);
+			url.searchParams.set("tab", id);
+			window.history.replaceState(window.history.state, "", url.href);
+		}
+	}
+
+	$effect(() => {
+		if (typeof window !== "undefined") {
+			const param = new URL(window.location.href).searchParams.get("tab");
+			if (param && BETA_TABS.some((t) => t.id === param)) {
+				activeTabId = param;
+			}
+		}
+	});
 
 	/** `theme_1` → `theme-1`: локатори лише kebab-case ASCII (TESTID § 1.2). */
 	const slug = (id: string) => id.replace(/_/g, "-");
@@ -182,7 +200,7 @@
 			<button
 				type="button"
 				class:active={tab.id === activeTabId}
-				onclick={() => (activeTabId = tab.id)}
+				onclick={() => selectTab(tab.id)}
 				data-testid="beta-tab-{tab.id}-btn"
 			>
 				{tab.title[lang]}
@@ -231,6 +249,11 @@
 						<li
 							class="beta-item"
 							class:negative={check.negative}
+							class:beta-item--marked={mark !== undefined}
+							class:beta-item--ok={mark?.vote === "ok"}
+							class:beta-item--fail={mark?.vote === "fail"}
+							class:beta-item--unclear={mark?.vote === "unclear"}
+							class:beta-item--skip={mark?.vote === "skip"}
 							data-testid="beta-check-{slug(check.id)}-item"
 						>
 							<p class="beta-category" data-testid="beta-check-{slug(check.id)}-category-text">
@@ -270,6 +293,10 @@
 
 <style>
 	.beta {
+		--vote-ok: light-dark(#15803d, #22c55e);
+		--vote-fail: light-dark(#dc2626, #ef4444);
+		--vote-unclear: light-dark(#b45309, #fbbf24);
+		--vote-skip: light-dark(#0284c7, #38bdf8);
 		max-width: 900px;
 		margin: 0 auto;
 		display: flex;
@@ -421,6 +448,11 @@
 		border-radius: 14px;
 		background: var(--panel-bg);
 	}
+	.beta-item--marked { border-width: 2px; }
+	.beta-item--ok { border-color: var(--vote-ok); }
+	.beta-item--fail { border-color: var(--vote-fail); }
+	.beta-item--unclear { border-color: var(--vote-unclear); }
+	.beta-item--skip { border-color: var(--vote-skip); }
 
 	.beta-item::before {
 		content: counter(beta);
@@ -451,25 +483,64 @@
 		line-height: 1.5;
 	}
 
-	/* Стан позначено рамкою й насиченістю, а не самим лише кольором. */
+	.vote {
+		min-height: 44px;
+		padding: 8px 14px;
+		border-radius: 10px;
+		border: 1px solid var(--border-color);
+		background: var(--panel-bg);
+		color: var(--text-primary);
+		font-family: inherit;
+		font-size: 0.9rem;
+		cursor: pointer;
+	}
+	.vote-ok {
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-ok) 8%);
+		border-color: color-mix(in srgb, var(--border-color), var(--vote-ok) 35%);
+	}
+	.vote-fail {
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-fail) 8%);
+		border-color: color-mix(in srgb, var(--border-color), var(--vote-fail) 35%);
+	}
+	.vote-unclear {
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-unclear) 8%);
+		border-color: color-mix(in srgb, var(--border-color), var(--vote-unclear) 35%);
+	}
+	.vote-skip {
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-skip) 8%);
+		border-color: color-mix(in srgb, var(--border-color), var(--vote-skip) 35%);
+	}
 	.vote.chosen {
-		border-width: 2px;
+		border-width: 4px;
 		font-weight: 700;
 	}
-
-	.vote-fail.chosen {
-		border-color: var(--error-text);
-		color: var(--error-text);
-	}
-
-	.vote-weird.chosen {
-		border-color: var(--score-low);
-		color: var(--score-low);
-	}
-
 	.vote-ok.chosen {
-		border-color: var(--score-high);
-		color: var(--score-high);
+		border-color: var(--vote-ok);
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-ok) 18%);
+	}
+	.vote-fail.chosen {
+		border-color: var(--vote-fail);
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-fail) 18%);
+	}
+	.vote-unclear.chosen {
+		border-color: var(--vote-unclear);
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-unclear) 18%);
+	}
+	.vote-skip.chosen {
+		border-color: var(--vote-skip);
+		background: color-mix(in srgb, var(--panel-bg), var(--vote-skip) 18%);
+	}
+	.vote.chosen.vote-ok {
+		color: var(--vote-ok);
+	}
+	.vote.chosen.vote-fail {
+		color: var(--vote-fail);
+	}
+	.vote.chosen.vote-unclear {
+		color: var(--vote-unclear);
+	}
+	.vote.chosen.vote-skip {
+		color: var(--vote-skip);
 	}
 
 	.beta-stale {
