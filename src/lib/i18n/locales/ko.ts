@@ -196,6 +196,12 @@ export const ko: Translations = {
                 button: "웹사이트 방문",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",
+                button: "웹사이트 방문",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "동물 구조 활동과 동물 보호 인식을 지원하는 인터랙티브 게임 프로젝트입니다.",

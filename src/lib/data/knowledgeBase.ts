@@ -71,15 +71,16 @@ export const KNOWLEDGE_BASE_UA = `# Алік Заполнов
    - Video Recorder (Hardware): Embedded, Hardware testing з нуля.
 
 ## 🚀 Проєкти та Портфоліо
-1. MindStep — Стратегічна вебгра (Svelte) з 23 E2E автотестами на Playwright.
-2. Slovko — Кросплатформовий додаток для вивчення слів (7 мов, статистика, лідерборди).
-3. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI-мод (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, автономні професії NPC).
-4. DigitalWorkshop — Морський веб-портал/шоукейс усіх додатків.
-5. Alik CV 3D — 3D-резюме на рушії Godot.
-6. Alik CV Web — Веб-портфоліо на Svelte (i18n, Toast notification system).
-7. Teatralo4ka — Сайт та адмін-портал Театральної школи (SvelteKit, Firebase).
-8. Мистецька школа №5 — Офіційний сайт мистецької школи (SvelteKit).
-9. VetCrewGames — Ігровий проєкт на підтримку порятунку тварин.
+1. DeviantBlaze — Офіційний інтерактивний веб-портал рок-гурту: медіаплеєр, концертний VJ аудіовізуалізатор (Web Audio API, Canvas), студійне фортепіано, Svelte 5 Runes.
+2. MindStep — Стратегічна вебгра (Svelte) з 23 E2E автотестами на Playwright.
+3. Slovko — Кросплатформовий додаток для вивчення слів (7 мов, статистика, лідерборди).
+4. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI-мод (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, автономні професії NPC).
+5. DigitalWorkshop — Морський веб-портал/шоукейс усіх додатків.
+6. Alik CV 3D — 3D-резюме на рушії Godot.
+7. Alik CV Web — Веб-портфоліо на Svelte (i18n, Toast notification system).
+8. Teatralo4ka — Сайт та адмін-портал Театральної школи (SvelteKit, Firebase).
+9. Мистецька школа №5 — Офіційний сайт мистецької школи (SvelteKit).
+10. VetCrewGames — Ігровий проєкт на підтримку порятунку тварин.
 
 ## 🎓 Освіта
 - Магістр "Комп'ютерні системи та мережі" (Одеський національний політехнічний університет, 2017).
@@ -118,15 +119,16 @@ Actively utilizes AI tools (Claude Code, Gemini CLI, Antigravity IDE/CLI, Cursor
    - Video Recorder (Hardware): Embedded, Hardware testing from scratch.
 
 ## 🚀 Projects & Portfolio
-1. MindStep — Strategic web game (Svelte) with 23 E2E Playwright autotests.
-2. Slovko — Cross-platform word app (7 languages, stats, leaderboards).
-3. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI mod (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, autonomous NPC professions).
-4. DigitalWorkshop — Sea-themed portfolio showcase hub.
-5. Alik CV 3D — Interactive 3D resume game in Godot.
-6. Alik CV Web — Svelte web portfolio (i18n, Toast notification system).
-7. Teatralo4ka — Odesa Theatre School website & portal (SvelteKit, Firebase).
-8. Art School №5 — Official Art School website (SvelteKit).
-9. VetCrewGames — Interactive game project supporting animal rescue.
+1. DeviantBlaze — Official interactive rock band web portal: media player, concert-grade VJ audio visualizer (Web Audio API, Canvas), studio piano, Svelte 5 Runes.
+2. MindStep — Strategic web game (Svelte) with 23 E2E Playwright autotests.
+3. Slovko — Cross-platform word app (7 languages, stats, leaderboards).
+4. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI mod (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, autonomous NPC professions).
+5. DigitalWorkshop — Sea-themed portfolio showcase hub.
+6. Alik CV 3D — Interactive 3D resume game in Godot.
+7. Alik CV Web — Svelte web portfolio (i18n, Toast notification system).
+8. Teatralo4ka — Odesa Theatre School website & portal (SvelteKit, Firebase).
+9. Art School №5 — Official Art School website (SvelteKit).
+10. VetCrewGames — Interactive game project supporting animal rescue.
 
 ## 🎓 Education
 - Master's Degree in "Computer Systems and Networks" (Odesa National Polytechnic University, 2017).
@@ -178,6 +180,11 @@ export const STRUCTURED_PROFILE: KnowledgeProfile = {
         }
     ],
     portfolioProjects: [
+        {
+            title: "DeviantBlaze",
+            link: "https://alik532ua.github.io/DeviantBlaze/",
+            description: "Interactive rock band portal with Web Audio API visualizer and piano (Svelte 5 Runes)"
+        },
         {
             title: "MindStep",
             link: "https://alik532ua.github.io/MindStep/",

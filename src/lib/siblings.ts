@@ -39,7 +39,8 @@ export type SiblingId =
 	| 'mindstep'
 	| 'slovko'
 	| 'as5'
-	| 'teatralo4ka';
+	| 'teatralo4ka'
+	| 'deviantblaze';
 
 export interface Sibling {
 	/** Scheme and host, no trailing slash. */
@@ -217,6 +218,14 @@ export const SIBLINGS = {
 		defaultLocale: 'uk',
 		transport: 'query',
 		trailingSlash: false
+	},
+	deviantblaze: {
+		origin: 'https://alik532ua.github.io',
+		base: '/DeviantBlaze',
+		locales: ['uk', 'en'],
+		defaultLocale: 'uk',
+		transport: 'query',
+		trailingSlash: true
 	}
 } as const satisfies Record<SiblingId, Sibling>;
 

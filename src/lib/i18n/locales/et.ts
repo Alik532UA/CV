@@ -196,6 +196,12 @@ export const et: Translations = {
                 button: "Külasta Veebisaiti",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",
+                button: "Külasta Veebisaiti",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Interaktiivne mänguprojekt, mis toetab loomade päästmise algatusi ja loomakaitse teadlikkust.",

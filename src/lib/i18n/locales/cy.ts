@@ -201,7 +201,13 @@ export const cy: Translations = {
                 description: "Prosiect gemau rhyngweithiol sy'n cefnogi mentrau achub anifeiliaid ac ymwybyddiaeth diogelu anifeiliaid.",
                 button: "Agor y Prosiect",
                 tech: "Svelte 5, Web Games, CSS"
-            }
+            },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",
+                button: "Ymweld â'r Wefan",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
         }
     },
     pdf_modal: {

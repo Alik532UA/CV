@@ -196,6 +196,12 @@ export const mt: Translations = {
                 button: "Żur is-Sit",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",
+                button: "Żur is-Sit",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Proġett ta' logħob interattiv li jappoġġa inizjattivi ta' salvataġġ tal-annimali u sensibilizzazzjoni dwar il-protezzjoni tagħhom.",

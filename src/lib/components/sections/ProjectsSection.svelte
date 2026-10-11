@@ -58,6 +58,7 @@
         mindstep: { site: "mindstep", category: "games", image: "mindstep.jpg" },
         slovko: { site: "slovko", category: "apps", image: "slovko.jpg" },
         digitalworkshop: { site: "digitalworkshop", category: "websites", image: "DigitalWorkshop.jpg" },
+        deviantblaze: { site: "deviantblaze", category: "websites", image: "DeviantBlaze.webp" },
         cv3d: {
             link: "https://alik532ua.itch.io/alik-cv-interactive-3d-experience",
             category: "games",

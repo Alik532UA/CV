@@ -196,6 +196,12 @@ export const sq: Translations = {
                 button: "Vizito Faqen",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",
+                button: "Vizito Faqen",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Projekt lojërash interaktive që mbështet iniciativa shpëtimi kafshësh dhe ndërgjegjësim për mbrojtjen e kafshëve.",

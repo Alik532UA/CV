@@ -198,6 +198,12 @@ export const crh: Translations = {
                 button: "Saytqa Bakıñız",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            deviantblaze: {
+                title: "Deviant Blaze",
+                description: "Studiya piyanosı, kontsert VJ audio vizualizatorı ve media pleyeri olğan rok taqımınıñ resmiy interaktiv veb-portalı.",
+                button: "Saytqa Bakıñız",
+                tech: "Svelte 5 (Runes), Web Audio API, Canvas"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Hayvanlarnı qurtarma inisiativalarını ve hayvanları qoruma bilgisini desteklegen interaktiv oyun loyihası.",
