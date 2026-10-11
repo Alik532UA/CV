@@ -71,16 +71,17 @@ export const KNOWLEDGE_BASE_UA = `# Алік Заполнов
    - Video Recorder (Hardware): Embedded, Hardware testing з нуля.
 
 ## 🚀 Проєкти та Портфоліо
-1. DeviantBlaze — Офіційний інтерактивний веб-портал рок-гурту: медіаплеєр, концертний VJ аудіовізуалізатор (Web Audio API, Canvas), студійне фортепіано, Svelte 5 Runes.
-2. MindStep — Стратегічна вебгра (Svelte) з 23 E2E автотестами на Playwright.
-3. Slovko — Кросплатформовий додаток для вивчення слів (7 мов, статистика, лідерборди).
-4. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI-мод (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, автономні професії NPC).
-5. DigitalWorkshop — Морський веб-портал/шоукейс усіх додатків.
-6. Alik CV 3D — 3D-резюме на рушії Godot.
-7. Alik CV Web — Веб-портфоліо на Svelte (i18n, Toast notification system).
-8. Teatralo4ka — Сайт та адмін-портал Театральної школи (SvelteKit, Firebase).
-9. Мистецька школа №5 — Офіційний сайт мистецької школи (SvelteKit).
-10. VetCrewGames — Ігровий проєкт на підтримку порятунку тварин.
+1. AudioRemote — Дистанційна аудіодошка та пульт керування звуком у реальному часі (SvelteKit, Firebase RTDB, Tauri, Web Audio API).
+2. DeviantBlaze — Офіційний інтерактивний веб-портал рок-гурту: медіаплеєр, концертний VJ аудіовізуалізатор (Web Audio API, Canvas), студійне фортепіано, Svelte 5 Runes.
+3. MindStep — Стратегічна вебгра (Svelte) з 23 E2E автотестами на Playwright.
+4. Slovko — Кросплатформовий додаток для вивчення слів (7 мов, статистика, лідерборди).
+5. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI-мод (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, автономні професії NPC).
+6. DigitalWorkshop — Морський веб-портал/шоукейс усіх додатків.
+7. Alik CV 3D — 3D-резюме на рушії Godot.
+8. Alik CV Web — Веб-портфоліо на Svelte (i18n, Toast notification system).
+9. Teatralo4ka — Сайт та адмін-портал Театральної школи (SvelteKit, Firebase).
+10. Мистецька школа №5 — Офіційний сайт мистецької школи (SvelteKit).
+11. VetCrewGames — Ігровий проєкт на підтримку порятунку тварин.
 
 ## 🎓 Освіта
 - Магістр "Комп'ютерні системи та мережі" (Одеський національний політехнічний університет, 2017).
@@ -119,16 +120,17 @@ Actively utilizes AI tools (Claude Code, Gemini CLI, Antigravity IDE/CLI, Cursor
    - Video Recorder (Hardware): Embedded, Hardware testing from scratch.
 
 ## 🚀 Projects & Portfolio
-1. DeviantBlaze — Official interactive rock band web portal: media player, concert-grade VJ audio visualizer (Web Audio API, Canvas), studio piano, Svelte 5 Runes.
-2. MindStep — Strategic web game (Svelte) with 23 E2E Playwright autotests.
-3. Slovko — Cross-platform word app (7 languages, stats, leaderboards).
-4. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI mod (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, autonomous NPC professions).
-5. DigitalWorkshop — Sea-themed portfolio showcase hub.
-6. Alik CV 3D — Interactive 3D resume game in Godot.
-7. Alik CV Web — Svelte web portfolio (i18n, Toast notification system).
-8. Teatralo4ka — Odesa Theatre School website & portal (SvelteKit, Firebase).
-9. Art School №5 — Official Art School website (SvelteKit).
-10. VetCrewGames — Interactive game project supporting animal rescue.
+1. AudioRemote — Remote audio soundboard and real-time control system (SvelteKit, Firebase RTDB, Tauri, Web Audio API).
+2. DeviantBlaze — Official interactive rock band web portal: media player, concert-grade VJ audio visualizer (Web Audio API, Canvas), studio piano, Svelte 5 Runes.
+3. MindStep — Strategic web game (Svelte) with 23 E2E Playwright autotests.
+4. Slovko — Cross-platform word app (7 languages, stats, leaderboards).
+5. AndDvergrShallSpeakAI (Valheim AI Mod) — C# AI mod (Gemini, Groq, OpenAI, Ollama, Whisper STT, Edge TTS, autonomous NPC professions).
+6. DigitalWorkshop — Sea-themed portfolio showcase hub.
+7. Alik CV 3D — Interactive 3D resume game in Godot.
+8. Alik CV Web — Svelte web portfolio (i18n, Toast notification system).
+9. Teatralo4ka — Odesa Theatre School website & portal (SvelteKit, Firebase).
+10. Art School №5 — Official Art School website (SvelteKit).
+11. VetCrewGames — Interactive game project supporting animal rescue.
 
 ## 🎓 Education
 - Master's Degree in "Computer Systems and Networks" (Odesa National Polytechnic University, 2017).
@@ -180,6 +182,11 @@ export const STRUCTURED_PROFILE: KnowledgeProfile = {
         }
     ],
     portfolioProjects: [
+        {
+            title: "AudioRemote",
+            link: "https://alik532ua.github.io/AudioRemote/",
+            description: "Remote soundboard and real-time control system for live events (SvelteKit, Firebase RTDB, Tauri)"
+        },
         {
             title: "DeviantBlaze",
             link: "https://alik532ua.github.io/DeviantBlaze/",

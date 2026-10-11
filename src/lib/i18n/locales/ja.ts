@@ -196,6 +196,12 @@ export const ja: Translations = {
                 button: "ウェブサイトを見る",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            audioremote: {
+                title: "AudioRemote",
+                description: "学校やイベント向けのリモートサウンドボードおよびリアルタイム制御システム。",
+                button: "ウェブサイトを見る",
+                tech: "SvelteKit 2, Svelte 5, Firebase, Tauri, Web Audio"
+            },
             deviantblaze: {
                 title: "Deviant Blaze",
                 description: "スタジオピアノ、コンサートグレードのVJビジュアライザー、メディアプレーヤーを備えたロックバンドのインタラクティブWebポータル。",

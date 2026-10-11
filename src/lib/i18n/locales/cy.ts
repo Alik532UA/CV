@@ -196,6 +196,12 @@ export const cy: Translations = {
                 button: "Ymweld â'r Wefan",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            audioremote: {
+                title: "AudioRemote",
+                description: "Remote audio soundboard and real-time control system for schools and live events.",
+                button: "Open app",
+                tech: "SvelteKit 2, Svelte 5, Firebase, Tauri, Web Audio"
+            },
             vetcrew: {
                 title: "VetCrewGames",
                 description: "Prosiect gemau rhyngweithiol sy'n cefnogi mentrau achub anifeiliaid ac ymwybyddiaeth diogelu anifeiliaid.",

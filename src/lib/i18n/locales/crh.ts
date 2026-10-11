@@ -198,6 +198,12 @@ export const crh: Translations = {
                 button: "Saytqa Bakıñız",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            audioremote: {
+                title: "AudioRemote",
+                description: "Yaratıcı mektepler ve tedbirler içün uzaqtan audio tahtası ve kerçek vaqıtta ses idare etüv pultı.",
+                button: "Saytqa Bakıñız",
+                tech: "SvelteKit 2, Svelte 5, Firebase, Tauri, Web Audio"
+            },
             deviantblaze: {
                 title: "Deviant Blaze",
                 description: "Studiya piyanosı, kontsert VJ audio vizualizatorı ve media pleyeri olğan rok taqımınıñ resmiy interaktiv veb-portalı.",

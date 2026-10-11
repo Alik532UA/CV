@@ -203,6 +203,12 @@ export const chk: Translations = {
                 button: "Nengeni Website",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            audioremote: {
+                title: "AudioRemote",
+                description: "Remote audio soundboard and real-time control system for schools and live events.",
+                button: "Open app",
+                tech: "SvelteKit 2, Svelte 5, Firebase, Tauri, Web Audio"
+            },
             deviantblaze: {
                 title: "Deviant Blaze",
                 description: "Official interactive rock band web portal with in-browser studio piano, concert-grade VJ audio visualizer, and media player.",

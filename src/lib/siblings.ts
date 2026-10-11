@@ -40,7 +40,8 @@ export type SiblingId =
 	| 'slovko'
 	| 'as5'
 	| 'teatralo4ka'
-	| 'deviantblaze';
+	| 'deviantblaze'
+	| 'audioremote';
 
 export interface Sibling {
 	/** Scheme and host, no trailing slash. */
@@ -222,6 +223,14 @@ export const SIBLINGS = {
 	deviantblaze: {
 		origin: 'https://alik532ua.github.io',
 		base: '/DeviantBlaze',
+		locales: ['uk', 'en'],
+		defaultLocale: 'uk',
+		transport: 'query',
+		trailingSlash: true
+	},
+	audioremote: {
+		origin: 'https://alik532ua.github.io',
+		base: '/AudioRemote',
 		locales: ['uk', 'en'],
 		defaultLocale: 'uk',
 		transport: 'query',

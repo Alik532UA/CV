@@ -57,6 +57,7 @@
         },
         mindstep: { site: "mindstep", category: "games", image: "mindstep.jpg" },
         slovko: { site: "slovko", category: "apps", image: "slovko.jpg" },
+        audioremote: { site: "audioremote", category: "apps", image: "AudioRemote.webp" },
         digitalworkshop: { site: "digitalworkshop", category: "websites", image: "DigitalWorkshop.jpg" },
         deviantblaze: { site: "deviantblaze", category: "websites", image: "DeviantBlaze.webp" },
         cv3d: {

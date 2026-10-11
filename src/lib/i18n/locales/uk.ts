@@ -196,6 +196,12 @@ export const uk: Translations = {
                 button: "Відвідати сайт",
                 tech: "SvelteKit 2, Svelte 5, i18n, Static Adapter"
             },
+            audioremote: {
+                title: "AudioRemote",
+                description: "Дистанційна аудіодошка та пульт керування звуком у реальному часі для творчих шкіл та заходів.",
+                button: "Відкрити пульт",
+                tech: "SvelteKit 2, Svelte 5, Firebase, Tauri, Web Audio"
+            },
             deviantblaze: {
                 title: "Deviant Blaze",
                 description: "Офіційний інтерактивний веб-портал рок-гурту зі студійним фортепіано, концертним VJ-аудіовізуалізатором та медіаплеєром.",
