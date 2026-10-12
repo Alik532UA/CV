@@ -48,26 +48,22 @@ origin, реєстр нижче.
 
 ## Реєстр префіксів на спільному origin
 
-`alik532ua.github.io` віддає **шість** застосунків з одного origin, тобто з
-одного `localStorage`. Це і є причина, чому фасад `src/lib/services/storage.ts`
-не має права викликати `localStorage.clear()`: він стер би дані сусідів.
+Реєстр префіксів браузерного сховища (`localStorage` / `sessionStorage`) на спільному origin (`alik532ua.github.io`). Жоден префікс не є початком іншого (STORAGE-NAMESPACE-v10).
 
-| Застосунок | Адреса | Префікс |
-|------------|--------|---------|
-| CV | `/CV/` | `cv-svelte_` |
-| DigitalWorkshop | `/DigitalWorkshop/` | `digitalworkshop_` |
-| VetCrewGames | `/VetCrewGames/` | `vetcrewgames_` |
-| MindStep | `/MindStep/` | `mindstep_` |
-| Slovko | `/Slovko/` | `slovko_` |
-| as5.odesa.ua | `/as5.odesa.ua/` | `as5.odesa.ua_` |
-
-teatralo4ka.odesa.ua тут не значиться: у нього `base: ''`, тобто власний origin,
-і колізії з ним неможливі.
-
-> **Відома пастка сусіда.** MindStep, крім `mindstep_`, пише ключі з префіксом
-> `best_score_` — без назви проєкту взагалі. На спільному origin це заявка на
-> колізію з будь-ким, хто вигадає таку саму назву. CV від цього не залежить, але
-> реєстр — єдине місце, де таке взагалі видно, тому записано тут.
+| Проєкт | Префікс (prod) | Префікс (dev) | Призначення |
+|---|---|---|---|
+| adoptananimal | `adoptananimal_` | `adoptananimal-dev_` | Притулок для тварин |
+| VetCrewEmergency | `vetcrewemergency_` | `vetcrewemergency-dev_` | Невідкладна ветеринарна допомога |
+| VetCrewGames | `vetcrewgames_` | `vetcrewgames-dev_` | Навчальні ветеринарні ігри |
+| DigitalWorkshop | `digitalworkshop_` | `digitalworkshop-dev_` | Цифрова майстерня |
+| MindStep | `mindstep_` | `mindstep-dev_` | Психологічний супровід |
+| Slovko | `slovko_` | `slovko-dev_` | Гра в слова |
+| CV | `cv-svelte_` | `cv-svelte-dev_` | Резюме та портфоліо |
+| as5.odesa.ua | `as5.odesa.ua_` | `as5.odesa.ua-dev_` | Автостанція Одеса 5 |
+| teatralo4ka.odesa.ua | `teatralo4ka_` | `teatralo4ka-dev_` | Театралочка Одеса |
+| HotPaste | `hotpaste_` | `hotpaste-dev_` | Швидка вставка та нотатки |
+| AudioRemote | `audioremote_` | `audioremote-dev_` | Аудіодошка та пульт керування |
+| DeviantBlaze | `deviantblaze_` | `deviantblaze-dev_` | Медіа та графіка |
 
 ## Прийняті рішення
 
