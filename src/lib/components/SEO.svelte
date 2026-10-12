@@ -7,6 +7,7 @@
     // prerender the first is a host that does not resolve, and the second is
     // relative, which glued onto an origin gives "https://host./images/...".
     import { SITE_BASE, SITE_ORIGIN } from "$lib/config/site.js";
+    import { jsonLdScript } from "$lib/security/jsonLd";
 
     let t = $derived(translations[language.current]);
     let title = $derived(t.hero.greeting);
@@ -36,43 +37,41 @@
     // Structured data: lets search engines read this as a person rather than
     // guessing from prose, which is what drives the knowledge-panel style
     // result for a name query.
-    let personLd = $derived(
-        JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Alik Zapolnov",
-            jobTitle: "Automation QA Engineer",
-            description,
-            url: canonical,
-            image: imageUrl,
-            email: "mailto:alikzapolnov@gmail.com",
-            address: {
-                "@type": "PostalAddress",
-                addressLocality: "Odesa",
-                addressCountry: "UA"
-            },
-            alumniOf: {
-                "@type": "CollegeOrUniversity",
-                name: "Odesa Polytechnic National University"
-            },
-            knowsAbout: [
-                "Test Automation",
-                "Quality Assurance",
-                "Playwright",
-                "Selenium",
-                "C#",
-                "Java",
-                "Svelte",
-                "AI Integration",
-                "Large Language Models"
-            ],
-            sameAs: [
-                "https://linkedin.com/in/alik-qa-engineer",
-                "https://t.me/alik532",
-                "https://alik532ua.github.io/DigitalWorkshop/"
-            ]
-        })
-    );
+    let personData = $derived({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Alik Zapolnov",
+        jobTitle: "Automation QA Engineer",
+        description,
+        url: canonical,
+        image: imageUrl,
+        email: "mailto:alikzapolnov@gmail.com",
+        address: {
+            "@type": "PostalAddress",
+            addressLocality: "Odesa",
+            addressCountry: "UA"
+        },
+        alumniOf: {
+            "@type": "CollegeOrUniversity",
+            name: "Odesa Polytechnic National University"
+        },
+        knowsAbout: [
+            "Test Automation",
+            "Quality Assurance",
+            "Playwright",
+            "Selenium",
+            "C#",
+            "Java",
+            "Svelte",
+            "AI Integration",
+            "Large Language Models"
+        ],
+        sameAs: [
+            "https://linkedin.com/in/alik-qa-engineer",
+            "https://t.me/alik532",
+            "https://alik532ua.github.io/DigitalWorkshop/"
+        ]
+    });
 </script>
 
 <svelte:head>
@@ -138,5 +137,5 @@
     <meta property="twitter:image" content={imageUrl} />
 
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
-    {@html `<script type="application/ld+json">${personLd}<\/script>`}
+    {@html jsonLdScript(personData)}
 </svelte:head>
