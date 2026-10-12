@@ -89,7 +89,7 @@
 		class="log-fallback"
 		readonly
 		value={fallbackReport}
-		aria-label="Debug report fallback"
+		aria-label={fill(t.ui.copyReport, { version: appVersion })}
 		data-testid="debug-log-fallback-input"
 	></textarea>
 {/if}

@@ -23,6 +23,7 @@
 		"worker:dev": "npx -y wrangler dev --config worker/wrangler.toml",
 		"worker:deploy": "npx -y wrangler deploy --config worker/wrangler.toml",
 		"bump": "node scripts/bump-version.js",
+		"version": "node scripts/bump-version.js",
 		"audit:ci": "node scripts/check-audit.mjs"
 	},
 	"devDependencies": {

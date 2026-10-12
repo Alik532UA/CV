@@ -113,7 +113,7 @@ const config = {
 			// (CUSTOM-DOMAIN-v8: origin і base міняються ОДНИМ комітом, інакше
 			// адреси або подвоюються, або втрачають префікс). Літерал тут був
 			// четвертою копією рядка `/CV`.
-			base: process.env.BASE_PATH ?? SITE_BASE, relative: false },
+			base: /** @type {'' | `/${string}`} */ (process.env.BASE_PATH ?? SITE_BASE), relative: false },
 		csp: {
 			mode: 'hash',
 			directives: {

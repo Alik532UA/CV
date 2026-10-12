@@ -135,9 +135,9 @@ describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 		const scripts = Object.keys(
 			(JSON.parse(read("package.json")) as { scripts?: Record<string, string> }).scripts ?? {}
 		);
-		// `npm audit`, `npm ci`, `npm install`, `npm test` — команди самого npm,
+		// `npm audit`, `npm ci`, `npm install`, `npm test`, `npm version` — команди самого npm,
 		// а не скрипти проєкту.
-		const BUILT_IN = ["audit", "ci", "install", "test"];
+		const BUILT_IN = ["audit", "ci", "install", "test", "version"];
 		const named = [...new Set([...Object.values(DOCS).join("\n").matchAll(/npm (?:run )?([\w:-]+)/g)].map((m) => m[1]))];
 		expect(named.length, "у документах немає жодної команди npm — перевірка мертва").toBeGreaterThan(5);
 

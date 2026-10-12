@@ -101,10 +101,11 @@ class LogService {
 	}
 
 	getReport(): string {
-		const appVersion = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "unknown";
+		const __APP_VERSION__ =
+			(globalThis as Record<string, unknown>).__APP_VERSION__ ?? "unknown";
 		const header = [
 			"--- LOG REPORT ---",
-			`VERSION: ${appVersion}`,
+			`VERSION: ${__APP_VERSION__}`,
 			// ISO rather than toLocaleString(): the report is read by whoever
 			// debugs it, not by the visitor who copied it, and a bare
 			// toLocaleString() renders in the visitor's locale — 03.08 or 08.03
