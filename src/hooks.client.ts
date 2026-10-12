@@ -1,5 +1,6 @@
 import type { HandleClientError } from '@sveltejs/kit';
 import { logService } from '$lib/services/logService.svelte';
+import { errorToMessageKey } from '$lib/errors';
 
 /**
  * Неперехоплені помилки клієнта (ERROR-HANDLING-v8 § 2.4).
@@ -31,9 +32,10 @@ export const handleError: HandleClientError = ({ error, event, status }) => {
 	if (status === 404) return;
 
 	const normalized = error instanceof Error ? error : new Error(String(error));
+	const key = errorToMessageKey(error);
 	logService.error(
 		'app',
-		`Unhandled client error at ${event?.url?.pathname ?? 'unknown route'}: ${normalized.message}`
+		`Unhandled client error at ${event?.url?.pathname ?? 'unknown route'} (${key}): ${normalized.message}`
 	);
 
 	/*

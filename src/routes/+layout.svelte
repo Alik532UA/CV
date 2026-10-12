@@ -25,6 +25,7 @@
 	import LogCopyButton from "$lib/components/ui/LogCopyButton.svelte";
 	import FloatingAiButton from "$lib/components/ui/FloatingAiButton.svelte";
 	import Toast from "$lib/components/ui/Toast.svelte";
+	import { logService } from "$lib/services/logService.svelte";
 
 	let { children } = $props();
 
@@ -108,6 +109,13 @@
 	});
 
 	onMount(() => {
+		const onRejection = (e: PromiseRejectionEvent) =>
+			logService.error("app", `Unhandled rejection: ${String(e.reason)}`);
+		const onWindowError = (e: ErrorEvent) =>
+			logService.error("app", `${e.message} at ${e.filename}:${e.lineno}`);
+		window.addEventListener("unhandledrejection", onRejection);
+		window.addEventListener("error", onWindowError);
+
 		// Migrate storage keys before initialization
 		migrateStorageKeys();
 
@@ -132,6 +140,8 @@
 		const teardownSections = observeSections();
 
 		return () => {
+			window.removeEventListener("unhandledrejection", onRejection);
+			window.removeEventListener("error", onWindowError);
 			teardownSections();
 			teardownTheme?.();
 			teardownSound?.();
