@@ -98,6 +98,7 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
+		version: { pollInterval: 60000 },
 		// Типове `handleMissingId: 'fail'` повернуто навмисно. Стояло `'ignore'`,
 		// і саме воно глушило найдорожчий дефект проєкту: бокове меню веде на
 		// `#experience`, `#skills`, `#projects`, `#education`, `#other`, а секції
@@ -108,13 +109,11 @@ const config = {
 		adapter: adapter({
 			fallback: '404.html'
 		}),
-		paths: {
-			// Звідти ж, звідки canonical, hreflang і гейт над `build/`
+		paths: { // Звідти ж, звідки canonical, hreflang і гейт над `build/`
 			// (CUSTOM-DOMAIN-v8: origin і base міняються ОДНИМ комітом, інакше
 			// адреси або подвоюються, або втрачають префікс). Літерал тут був
 			// четвертою копією рядка `/CV`.
-			base: SITE_BASE
-		},
+			base: process.env.BASE_PATH ?? SITE_BASE, relative: false },
 		csp: {
 			mode: 'hash',
 			directives: {
