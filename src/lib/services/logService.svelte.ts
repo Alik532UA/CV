@@ -22,6 +22,26 @@ const LOG_CONFIG: Record<string, boolean> = {
 	app: true
 };
 
+const REDACTED = '[REDACTED]';
+const EMAIL_REGEX = /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+/g;
+const SENSITIVE_PARAM = /^(token|access_token|code|state|key|api_?key|password|email)$/i;
+
+function maskText(str: string): string {
+	return str.replace(EMAIL_REGEX, '***@***.***');
+}
+
+function scrubUrl(raw: string): string {
+	try {
+		const url = new URL(raw);
+		for (const name of [...url.searchParams.keys()]) {
+			if (SENSITIVE_PARAM.test(name)) url.searchParams.set(name, REDACTED);
+		}
+		return url.toString();
+	} catch {
+		return maskText(raw);
+	}
+}
+
 class LogService {
 	logs = $state<LogEntry[]>([]);
 	errorCount = $derived(this.logs.filter((l) => l.level === "error").length);
@@ -35,7 +55,8 @@ class LogService {
 		if (Array.isArray(saved)) this.logs = saved;
 	}
 
-	private add(level: LogLevel, category: string, message: string) {
+	private add(level: LogLevel, category: string, rawMessage: string) {
+		const message = maskText(rawMessage);
 		const entry: LogEntry = {
 			timestamp: new Date().toISOString(),
 			level,
@@ -80,15 +101,16 @@ class LogService {
 	}
 
 	getReport(): string {
+		const appVersion = typeof __APP_VERSION__ !== "undefined" ? __APP_VERSION__ : "unknown";
 		const header = [
 			"--- LOG REPORT ---",
-			`VERSION: ${__APP_VERSION__}`,
+			`VERSION: ${appVersion}`,
 			// ISO rather than toLocaleString(): the report is read by whoever
 			// debugs it, not by the visitor who copied it, and a bare
 			// toLocaleString() renders in the visitor's locale — 03.08 or 08.03
 			// depending on where they live, with no way to tell which.
 			`DATE: ${new Date().toISOString()}`,
-			`URL: ${browser ? window.location.href : "SSR"}`,
+			`URL: ${browser ? scrubUrl(window.location.href) : "SSR"}`,
 			`USER_AGENT: ${browser ? navigator.userAgent : "SSR"}`,
 			// Half of all "nothing works" reports are explained by this one line
 			// (DEBUGGING-v8 § 2.3): the visitor was offline, and every request in
