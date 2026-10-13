@@ -308,9 +308,7 @@
         const observer = new ResizeObserver(() => {
             // Silent mid-drag: every small height change would otherwise re-measure
             // every block and rebuild the clone in the middle of a mouse move.
-            if (dragging) return;
-            measure();
-            measureBlocks();
+            if (!dragging && typeof window !== 'undefined') requestAnimationFrame(() => !dragging && (measure(), measureBlocks()));
         });
         observer.observe(document.documentElement);
 

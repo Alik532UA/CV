@@ -145,7 +145,7 @@ describe("dangerous constructs", () => {
 		for (const file of sourceFiles().filter((f) => f.endsWith(".svelte"))) {
 			for (const m of read(file).matchAll(/\{@html\s+([^}]+)\}/g)) {
 				const expr = m[1];
-				if (!/sanitize|JSON\.stringify|ld\+json/.test(expr)) {
+				if (!/jsonLd|sanitize|JSON\.stringify|ld\+json/.test(expr)) {
 					bad.push(`${file}: {@html ${expr.trim().slice(0, 48)}}`);
 				}
 			}

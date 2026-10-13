@@ -150,7 +150,7 @@
 
         // The page height changes for more reasons than resize: images arrive,
         // the non-IT experience and extra skills blocks open.
-        const observer = new ResizeObserver(measure);
+        const observer = new ResizeObserver(() => requestAnimationFrame(measure));
         observer.observe(document.documentElement);
 
         return () => {

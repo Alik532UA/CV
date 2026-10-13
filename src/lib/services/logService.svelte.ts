@@ -56,6 +56,7 @@ class LogService {
 	}
 
 	private add(level: LogLevel, category: string, rawMessage: string) {
+		if (rawMessage && rawMessage.includes('ResizeObserver loop')) return;
 		const message = maskText(rawMessage);
 		const entry: LogEntry = {
 			timestamp: new Date().toISOString(),
