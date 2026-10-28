@@ -1,15 +1,15 @@
 import { writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 
+import { SITE_BASE, SITE_ORIGIN } from '../src/lib/config/site.js';
+
 /**
  * Генератор карти сайту sitemap.xml для CV (SEO-v8 § 5).
  *
  * У sitemap потрапляють лише рецензовані носіями мови (INDEXED_LANGUAGES).
  * Машинні переклади мають noindex і в sitemap не включаються (SEO-v8 § 2.4).
- * Типова англійська версія веде на голий шлях /CV/.
+ * Типова англійська версія веде на голий шлях.
  */
-const SITE_ORIGIN = 'https://alik532ua.github.io';
-const SITE_BASE = '/CV';
 
 const INDEXED_LANGUAGES = ['en', 'en-us', 'uk', 'ja'];
 

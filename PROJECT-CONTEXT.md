@@ -36,8 +36,8 @@ origin, реєстр нижче.
 | Профіль (див. README пакета) | **static** |
 | Adapter | `@sveltejs/adapter-static` з `fallback: '404.html'` |
 | Хостинг | GitHub Pages, деплой через OIDC (`actions/deploy-pages@v5`) |
-| Origin | https://alik532ua.github.io |
-| base path | `/CV` |
+| Origin | https://alikcv.pp.ua |
+| base path | `` |
 | Порт dev-сервера | **5199**, `--strictPort` (конфігурація `cv-dev`) |
 | Порт для Playwright | **5299**, `--strictPort` |
 | Порт прев'ю зібраного сайту | **5399**, `--strictPort` (конфігурація `cv-preview`) |

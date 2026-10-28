@@ -52,8 +52,9 @@ describe("рядок цього сайту в таблиці сусідів", ()
 	it("несе той самий origin і базу, що й конфіг сайту", () => {
 		const site = readFileSync("src/lib/config/site.js", "utf8");
 		const origin = /SITE_ORIGIN = "([^"]+)"/.exec(site)?.[1];
-		const base = /SITE_BASE = "([^"]+)"/.exec(site)?.[1];
+		const base = /SITE_BASE = "([^"]*)"/.exec(site)?.[1];
 		expect(origin, "site.js більше не оголошує SITE_ORIGIN").toBeTruthy();
+		expect(base !== undefined, "site.js більше не оголошує SITE_BASE").toBe(true);
 		expect(ROW.origin).toBe(origin);
 		expect(ROW.base).toBe(base);
 	});

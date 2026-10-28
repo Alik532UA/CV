@@ -32,7 +32,7 @@
  * prerendered HTML, а під час prerender SvelteKit віддає `page.url.origin` як
  * неіснуючий `http://sveltekit-prerender`.
  */
-export const SITE_ORIGIN = "https://alik532ua.github.io";
+export const SITE_ORIGIN = "https://alikcv.pp.ua";
 
 /**
  * Префікс шляху, з якого віддається сайт, без завершальної скісної.
@@ -41,7 +41,7 @@ export const SITE_ORIGIN = "https://alik532ua.github.io";
  * і приклеєне до абсолютного origin давало `https://alik532ua.github.io./…`.
  * Порожній рядок означав би кореневий домен — форма, готова до переїзду.
  */
-export const SITE_BASE = "/CV";
+export const SITE_BASE = "";
 
-/** Повна база сайту без завершальної скісної: `https://host/CV`. */
+/** Повна база сайту без завершальної скісної: `https://alikcv.pp.ua`. */
 export const SITE_URL = `${SITE_ORIGIN}${SITE_BASE}`;

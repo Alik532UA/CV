@@ -138,8 +138,8 @@ export const SIBLINGS = {
 		trailingSlash: true
 	},
 	cv: {
-		origin: 'https://alik532ua.github.io',
-		base: '/CV',
+		origin: 'https://alikcv.pp.ua',
+		base: '',
 		locales: [
 			'en',
 			'en-us',

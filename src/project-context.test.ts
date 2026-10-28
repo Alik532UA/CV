@@ -216,8 +216,8 @@ describe("PROJECT-CONTEXT.md звірений із кодом", () => {
 	});
 
 	it("base path той самий, що в конфігу сайту", () => {
-		const base = /export const SITE_BASE = "([^"]+)"/.exec(read("src/lib/config/site.js"))?.[1];
-		expect(base, "site.js більше не оголошує SITE_BASE").toBeTruthy();
+		const base = /export const SITE_BASE = "([^"]*)"/.exec(read("src/lib/config/site.js"))?.[1];
+		expect(base !== undefined, "site.js більше не оголошує SITE_BASE").toBe(true);
 		expect(DOC).toContain(`\`${base}\``);
 	});
 

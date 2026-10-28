@@ -44,4 +44,4 @@ Allow: /
 User-agent: GPTBot
 Allow: /
 
-Sitemap: https://alik532ua.github.io/CV/sitemap.xml
+Sitemap: https://alikcv.pp.ua/sitemap.xml

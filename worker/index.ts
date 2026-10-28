@@ -62,6 +62,7 @@ interface Env {
 }
 
 const DEFAULT_ORIGINS = [
+	"https://alikcv.pp.ua",
 	"https://alik532ua.github.io",
 	"http://localhost:5173",
 	"http://localhost:4173"
