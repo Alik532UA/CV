@@ -1,8 +1,8 @@
-import { test, expect } from './fixtures';
+import { test, expect, SITE_BASE } from './fixtures';
 
 test.describe('Core Functionality', () => {
 	test.beforeEach(async ({ page }) => {
-		await page.goto('/CV/');
+		await page.goto(`${SITE_BASE}/`);
 	});
 
 	test('has correct title', async ({ page }) => {
@@ -34,7 +34,7 @@ test.describe('Core Functionality', () => {
 		await openLangPanel();
 		await page.getByTestId('lang-uk-btn').click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'uk');
-		await expect(page).toHaveURL(/\/CV\/uk\//);
+		await expect(page).toHaveURL(new RegExp(`${SITE_BASE}/uk/`));
 
 		// Verify some UK text if possible, e.g., Hero greeting
 		// await expect(page.locator('h1')).toHaveText(/Привіт/);
@@ -43,7 +43,7 @@ test.describe('Core Functionality', () => {
 		await openLangPanel();
 		await page.getByTestId('lang-es-btn').click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'es');
-		await expect(page).toHaveURL(/\/CV\/es\//);
+		await expect(page).toHaveURL(new RegExp(`${SITE_BASE}/es/`));
 
 		// Англійська тут дві — британська й американська, тому "English" звужує
 		// список до двох, а не до одної. Американська несе регіон і в адресі, і в
@@ -61,7 +61,7 @@ test.describe('Core Functionality', () => {
 		await expect(langSwitcher.getByRole('menuitemradio')).toHaveCount(2);
 		await page.getByTestId('lang-en-us-btn').click();
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en-US');
-		await expect(page).toHaveURL(/\/CV\/en-us\//);
+		await expect(page).toHaveURL(new RegExp(`${SITE_BASE}/en-us/`));
 
 		// The search box filters the list down to a single match
 		await openLangPanel();
@@ -72,7 +72,7 @@ test.describe('Core Functionality', () => {
 		await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 		// Англійська — типова мова, тому живе на голому шляху без сегмента.
 		// Хеш лишається від якоря секції, тому кінець шляху може бути і `#about`.
-		await expect(page).toHaveURL(/\/CV\/([?#]|$)/);
+		await expect(page).toHaveURL(new RegExp(`${SITE_BASE}/([?#]|$)`));
 	});
 
 	test('theme toggling works', async ({ page }) => {

@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "./fixtures";
+import { expect, test, SITE_BASE, type Page } from "./fixtures";
 
 /**
  * Reflow: 320 CSS px без горизонтальної прокрутки
@@ -80,7 +80,7 @@ async function assertNoReflow(page: Page, key: string) {
  * СТВОРЮЄТЬСЯ і має бути назване поіменно.
  */
 test("детектор бачить переповнення, коли воно є", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 
 	await page.evaluate(() => {
@@ -95,13 +95,13 @@ test("детектор бачить переповнення, коли воно 
 });
 
 test("головна сторінка читається на 320 px без прокрутки вбік", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 	await assertNoReflow(page, "home");
 });
 
 test("сторінка чеклиста читається на 320 px без прокрутки вбік", async ({ page }) => {
-	await page.goto("/CV/beta-test-checklists/");
+	await page.goto(`${SITE_BASE}/beta-test-checklists/`);
 	await expect(page.getByTestId("beta-tabs-toolbar")).toBeVisible();
 	await assertNoReflow(page, "betaChecklist");
 });
@@ -109,7 +109,7 @@ test("сторінка чеклиста читається на 320 px без п
 test("модалка AI не додає горизонтальної прокрутки на 320 px", async ({ page }) => {
 	test.setTimeout(90_000);
 
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	const textarea = page.getByTestId("ai-job-input-textarea");
 	// Клік до гідрації нічого не робить — див. пастку в PROJECT-CONTEXT.md.
 	await expect(async () => {

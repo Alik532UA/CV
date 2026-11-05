@@ -1,4 +1,4 @@
-import { expect, test, type Page } from "./fixtures";
+import { expect, test, SITE_BASE, type Page } from "./fixtures";
 
 /**
  * Сторінка чеклиста в браузері (BETA-CHECKLIST-v8 § 3.1, § 6).
@@ -10,7 +10,7 @@ import { expect, test, type Page } from "./fixtures";
  * видно в джерелах: усе це поведінка сховища й буфера в рантаймі.
  */
 
-const PATH = "/CV/beta-test-checklists/";
+const PATH = `${SITE_BASE}/beta-test-checklists/`;
 const KEY = "cv-svelte_betaChecklist";
 
 /** Перший пункт першої вкладки — id стабільний назавжди (§ 2.2). */

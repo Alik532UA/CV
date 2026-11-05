@@ -1,4 +1,4 @@
-import { test, expect, type Page } from "./fixtures";
+import { test, expect, SITE_BASE, type Page } from "./fixtures";
 
 /**
  * Адреси тут `/CV/`, а не `/`. `base` у svelte.config.js — `/CV`, і прев'ю
@@ -55,7 +55,7 @@ test.describe("Email toast", () => {
 
 	test.describe("clipboard available", () => {
 		test.beforeEach(async ({ page }) => {
-			await page.goto("/CV/");
+			await page.goto(`${SITE_BASE}/`);
 			await waitForHydration(page);
 			await emailLink(page).waitFor({ state: "visible" });
 			await primeClipboard(page);
@@ -143,7 +143,7 @@ test.describe("Email toast", () => {
 
 	test("on a narrow screen the email toast falls back to the global stack", async ({ page }) => {
 		await page.setViewportSize({ width: 375, height: 812 });
-		await page.goto("/CV/");
+		await page.goto(`${SITE_BASE}/`);
 		await waitForHydration(page);
 		await emailLink(page).waitFor({ state: "visible" });
 		await primeClipboard(page);
@@ -157,7 +157,7 @@ test.describe("Email toast", () => {
 	});
 
 	test("falls back to a mailto link when clipboard is unavailable", async ({ page }) => {
-		await page.goto("/CV/");
+		await page.goto(`${SITE_BASE}/`);
 		await waitForHydration(page);
 		await emailLink(page).waitFor({ state: "visible" });
 		await page.evaluate(() => {

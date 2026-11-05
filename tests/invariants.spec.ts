@@ -1,4 +1,4 @@
-import { expect, test } from "./fixtures";
+import { expect, test, SITE_BASE } from "./fixtures";
 
 /**
  * Рантайм-доповнення до src/testid-conventions.test.ts (§ 1.9.2 v8).
@@ -13,7 +13,7 @@ import { expect, test } from "./fixtures";
  * воно й лишалося.
  */
 
-const PAGES = ["/CV/", "/CV/uk/", "/CV/ja/"];
+const PAGES = [`${SITE_BASE}/`, `${SITE_BASE}/uk/`, `${SITE_BASE}/ja/`];
 
 /**
  * Кожна перевірка починається з того, що їй є що перевіряти. Без цього
@@ -69,13 +69,13 @@ async function clickUntilVisible(
 }
 
 test("unique data-testid with the PDF modal open", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await clickUntilVisible(page, "sidebar-pdf-btn", "pdf-option-ats");
 	expectUnique(await collectIds(page, "PDF modal"), "PDF modal");
 });
 
 test("unique data-testid with the language menu open", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await clickUntilVisible(page, "lang-trigger-btn", "lang-en-btn");
 	expectUnique(await collectIds(page, "language menu"), "language menu");
 });

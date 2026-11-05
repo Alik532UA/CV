@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test, type Page } from "./fixtures";
+import { expect, test, SITE_BASE, type Page } from "./fixtures";
 import { A11Y_BASELINE, A11Y_KNOWN } from "./a11y-baseline";
 
 /**
@@ -43,7 +43,7 @@ async function audit(page: Page, key: string) {
 }
 
 test("головна сторінка не має машинно-виявних порушень WCAG", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 	await audit(page, "home");
 });
@@ -66,7 +66,7 @@ test.describe("темна тема", () => {
 	test.use({ colorScheme: "dark" });
 
 	test("головна сторінка не має машинно-виявних порушень WCAG", async ({ page }) => {
-		await page.goto("/CV/");
+		await page.goto(`${SITE_BASE}/`);
 		await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 		await expect(
 			page.locator("html"),
@@ -85,7 +85,7 @@ test.describe("темна тема", () => {
  * перевірка незручна.
  */
 test("сторінка чеклиста не має машинно-виявних порушень WCAG", async ({ page }) => {
-	await page.goto("/CV/beta-test-checklists/");
+	await page.goto(`${SITE_BASE}/beta-test-checklists/`);
 	await expect(page.getByTestId("beta-tabs-toolbar")).toBeVisible();
 	await audit(page, "betaChecklist");
 });
@@ -97,7 +97,7 @@ test("модалка AI Matcher доступна у ВІДКРИТОМУ ста�
 	// вистачило часу» — і виглядає вона як падіння коду.
 	test.setTimeout(90_000);
 
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	const textarea = page.getByTestId("ai-job-input-textarea");
 	// Клік до гідрації нічого не робить — див. пастку в PROJECT-CONTEXT.md.
 	await expect(async () => {
@@ -125,7 +125,7 @@ test("модалка AI Matcher доступна у ВІДКРИТОМУ ста�
  */
 test("поле вводу у фокусі має видиму обводку", async ({ page }) => {
 	test.setTimeout(90_000);
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 
 	const textarea = page.getByTestId("ai-job-input-textarea");
 	await expect(async () => {

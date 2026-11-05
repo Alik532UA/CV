@@ -1,4 +1,4 @@
-import { expect, test, type Locator, type Page } from "./fixtures";
+import { expect, test, SITE_BASE, type Locator, type Page } from "./fixtures";
 import { TOUCH_BASELINE, TOUCH_KNOWN, TOUCH_OVERLAP_KNOWN } from "./touch-target-baseline";
 
 /**
@@ -83,7 +83,7 @@ function assertAgainstBaseline(found: string[], key: string) {
 }
 
 test("на телефоні жодна ціль не стала меншою за 44×44 понад базу", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 
 	assertAgainstBaseline(await tooSmall(page), "home");
@@ -95,7 +95,7 @@ test("на телефоні жодна ціль не стала меншою з�
  * Ключ у базі окремий — щоб борг головної сторінки не ховав регресію тут.
  */
 test("на сторінці чеклиста всі цілі не менші за 44×44", async ({ page }) => {
-	await page.goto("/CV/beta-test-checklists/");
+	await page.goto(`${SITE_BASE}/beta-test-checklists/`);
 	await expect(page.getByTestId("beta-tabs-toolbar")).toBeVisible();
 
 	assertAgainstBaseline(await tooSmall(page.locator("main")), "betaChecklist");
@@ -106,7 +106,7 @@ test("цілі всередині відкритої модалки міряют
 	// перевіряється ніколи, а кнопка закриття — найчастіший порушник правила.
 	test.setTimeout(90_000);
 
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	const textarea = page.getByTestId("ai-job-input-textarea");
 	// Клік до гідрації нічого не робить — див. пастку в PROJECT-CONTEXT.md.
 	await expect(async () => {
@@ -224,7 +224,7 @@ function assertOverlapBaseline(found: Overlap[], key: string) {
 }
 
 test("на головній не з'явилося нового наїзду цілей", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	await expect(page.getByTestId("ai-matcher-open-btn")).toBeVisible();
 
 	const found = await targets(page);
@@ -237,7 +237,7 @@ test("на головній не з'явилося нового наїзду ц�
 test("цілі у відкритій модалці не наїжджають одна на одну", async ({ page }) => {
 	test.setTimeout(90_000);
 
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	const textarea = page.getByTestId("ai-job-input-textarea");
 	// Клік до гідрації нічого не робить — див. пастку в PROJECT-CONTEXT.md.
 	await expect(async () => {
@@ -261,7 +261,7 @@ test("цілі у відкритій модалці не наїжджають о
  * помилялася знаком. Тут наїзд СТВОРЮЄТЬСЯ і має бути названий.
  */
 test("детектор бачить наїзд, коли він є", async ({ page }) => {
-	await page.goto("/CV/");
+	await page.goto(`${SITE_BASE}/`);
 	const anchor = page.getByTestId("ai-matcher-open-btn");
 	await expect(anchor).toBeVisible();
 

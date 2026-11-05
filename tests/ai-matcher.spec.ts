@@ -1,4 +1,4 @@
-import { test, expect, type Page, type Route } from './fixtures';
+import { test, expect, SITE_BASE, type Page, type Route } from './fixtures';
 import { en } from '../src/lib/i18n/locales/en';
 import { AI_PROVIDERS } from '../src/lib/config/aiProviders';
 
@@ -147,7 +147,7 @@ async function stubProxy(
  * причини, лише знайденої раніше.
  */
 async function openMatcher(page: Page) {
-	await page.goto('/CV/');
+	await page.goto(`${SITE_BASE}/`);
 	const textarea = page.getByTestId('ai-job-input-textarea');
 	await expect(async () => {
 		await page.getByTestId('ai-matcher-open-btn').click();

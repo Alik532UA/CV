@@ -77,6 +77,7 @@ export const test = base.extend({
 });
 
 export { devices, expect } from '@playwright/test';
+export { SITE_BASE, SITE_ORIGIN } from '../src/lib/config/site.js';
 export type {
 	BrowserContext,
 	Locator,
