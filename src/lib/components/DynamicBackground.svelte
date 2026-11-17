@@ -19,7 +19,7 @@
         shapesLineWidth?: number;
     }>();
 
-    let fixedHeight = $state("100vh");
+    let fixedHeight = $state("100dvh");
     let lastWidth = 0;
 
     onMount(() => {

@@ -317,7 +317,7 @@
         position: fixed;
         top: 0;
         right: 0;
-        height: 100vh;
+        height: 100dvh;
         /* Above the header and its dropdowns (1000/1001), below the modal backdrop
            (2000). Being under a full-screen overlay is one of the two reasons this
            component exists, so the modal must win. */

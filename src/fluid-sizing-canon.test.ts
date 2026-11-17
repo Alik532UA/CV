@@ -224,3 +224,23 @@ describe("FS-CONTAINER § 7A — межа боргу медіазапитів у
 		).toEqual([]);
 	});
 });
+
+describe("fluid sizing canon § 3 & § 2.1 — viewport units and font-size clamps", () => {
+	const BARE_VH = /(?<![a-zA-Z0-9_\-])(?<![dls])vh\b/;
+
+	it("prefers dvh over vh for dynamic screen dimensions in CSS", () => {
+		const files = styleSources();
+		const violations: string[] = [];
+		for (const file of files) {
+			if (file.endsWith("fluid-sizing-canon.test.ts")) continue;
+			const text = withoutComments(read(file));
+			text.split("\n").forEach((line, idx) => {
+				// Ignore JS variables or non-CSS occurrences
+				if (BARE_VH.test(line) && (line.includes(":") || line.includes("calc("))) {
+					violations.push(`${file}:${idx + 1} ${line.trim()}`);
+				}
+			});
+		}
+		expect(violations, "CSS should use dvh instead of bare vh").toEqual([]);
+	});
+});

@@ -73,7 +73,7 @@
 	}
 
 	.status {
-		font-size: clamp(56px, 12vw, 96px);
+		font-size: clamp(3.5rem, 2.5rem + 4vw, 6rem);
 		font-weight: 700;
 		line-height: 1;
 		margin: 0;
@@ -85,7 +85,7 @@
 
 	h1 {
 		margin: 0;
-		font-size: clamp(22px, 4vw, 30px);
+		font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem);
 		color: var(--text-primary);
 	}
 
