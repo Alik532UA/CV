@@ -661,10 +661,7 @@
         border-radius: 2px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35), 0 0 1px rgba(0, 0, 0, 0.2);
     }
-
-    :global(.flag-icon svg) {
-        border-radius: 2px;
-    }
+    :global(.flag-icon svg) { border-radius: 2px; }
 
     .divider {
         width: 1px;
@@ -673,13 +670,8 @@
         margin: 0 2px;
     }
 
-    .mobile-only {
-        display: none;
-    }
-
-    .desktop-only {
-        display: flex;
-    }
+    .mobile-only { display: none; }
+    .desktop-only { display: flex; }
 
     .glass-icon-btn {
         background: var(--card-bg);
@@ -767,16 +759,9 @@
         font-weight: 600;
     }
 
-    .bg-slider-value {
-        color: var(--accent-primary);
-        font-weight: 700;
-    }
+    .bg-slider-value { color: var(--accent-primary); font-weight: 700; }
 
-    .dropdown-divider {
-        height: 1px;
-        background: var(--border-color);
-        margin: 4px 0;
-    }
+    .dropdown-divider { height: 1px; background: var(--border-color); margin: 4px 0; }
 
     .mobile-bg-slider {
         padding: 4px 8px;
@@ -871,17 +856,10 @@
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
 
-    .lang-code {
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-    }
+    .lang-code { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.02em; }
 
     .bg-dropdown,
     .lang-dropdown {
-        position: absolute;
-        top: 60px;
-        right: 0;
         background: var(--panel-bg);
         border: 1px solid var(--border-color);
         border-radius: 12px;
@@ -895,9 +873,24 @@
         z-index: 1001;
     }
 
+    .bg-dropdown {
+        position: absolute;
+        top: 60px;
+        right: 0;
+    }
+
     .lang-dropdown {
-        width: min(92vw, 820px);
-        max-height: 78vh;
+        position: fixed;
+        top: 74px;
+        right: 40px;
+        width: min(calc(100vw - 80px), 820px);
+        max-height: calc(100vh - 90px);
+        max-height: calc(100dvh - 90px);
+    }
+
+    :global([dir="rtl"]) .lang-dropdown {
+        right: auto;
+        left: clamp(-240px, calc(100vw - 1140px), 0px);
     }
 
     .lang-search {
@@ -1044,6 +1037,7 @@
            about 94px wide — so a panel this wide anchored to the button's right
            edge is pushed off the left side of the screen. Same fix as the sea
            page switcher in DigitalWorkshop. */
+        :global([dir="rtl"]) .lang-dropdown,
         .lang-dropdown {
             position: fixed;
             top: 66px;

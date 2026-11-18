@@ -75,6 +75,31 @@ test.describe('Core Functionality', () => {
 		await expect(page).toHaveURL(new RegExp(`${SITE_BASE}/([?#]|$)`));
 	});
 
+	test('language dropdown stays within viewport in RTL (Hebrew)', async ({ page }) => {
+		for (const width of [952, 1280, 768]) {
+			await page.setViewportSize({ width, height: 900 });
+			await page.goto(`${SITE_BASE}/he/`);
+			await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+
+			const langSwitcher = page.getByTestId('lang-select');
+			await expect(langSwitcher).toBeVisible();
+			const trigger = langSwitcher.getByRole('button').first();
+
+			await expect(async () => {
+				if ((await trigger.getAttribute('aria-expanded')) !== 'true') await trigger.click();
+				await expect(langSwitcher.getByRole('menu')).toBeVisible({ timeout: 1000 });
+			}).toPass({ timeout: 15000 });
+
+			const menu = langSwitcher.getByRole('menu');
+			const box = await menu.boundingBox();
+			expect(box).not.toBeNull();
+			if (box) {
+				expect(box.x).toBeGreaterThanOrEqual(0);
+				expect(box.x + box.width).toBeLessThanOrEqual(width);
+			}
+		}
+	});
+
 	test('theme toggling works', async ({ page }) => {
 		const themeSwitcher = page.getByTestId('theme-toggle-toolbar');
 		await expect(themeSwitcher).toBeVisible();

@@ -290,10 +290,8 @@ describe("PROJECT-STRUCTURE § 7 — межа розміру файлу", () => 
 	 * без коментарів і порожніх рядків. Вони лише спадають.
 	 */
 	const ALLOWED: Record<string, number> = {
-		// 855 → 830 (2026-09-13): перемикач тем поїхав у `ui/ThemeToggle.svelte`
-		// разом із власною палітрою кнопок. Число підтягнуте одразу — запас,
-		// лишений у списку, це тихий дозвіл відрости назад.
-		"src/lib/components/HeaderSection.svelte": 830,
+		// 830 → 824 (2026-11-18): позиціонування меню мов адаптовано під RTL / viewport.
+		"src/lib/components/HeaderSection.svelte": 824,
 		"src/lib/components/ui/AiMatchModal.svelte": 445,
 		"src/lib/components/ui/Minimap.svelte": 378,
 		"src/lib/components/ui/PdfModal.svelte": 325
