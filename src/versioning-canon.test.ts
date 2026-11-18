@@ -2,6 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
+import { STRUCTURED_PROFILE } from "./lib/data/knowledgeBase";
 
 /**
  * VERSIONING-v8 § 6 — інваріантів не було, а `static/app-version.json` тим
@@ -66,5 +67,79 @@ describe("версіонування (VERSIONING-v8 § 6)", () => {
 	it("звіт логів несе версію — інакше баг-репорт не прив'язати до збірки", () => {
 		const log = readFileSync("src/lib/services/logService.svelte.ts", "utf8");
 		expect(log).toMatch(/VERSION:\s*\$\{__APP_VERSION__\}/);
+	});
+});
+
+/**
+ * Відлік професійного стажу від зафіксованої дати.
+ * Дозволяє контролювати актуальність резюме й не заявляти більше років,
+ * ніж минуло насправді.
+ */
+const AQA_START = "2022-11";
+const QA_TOTAL_START = "2021-06";
+
+function elapsedFullYears(startIso: string, now: Date = new Date()): number {
+	const start = new Date(startIso.length === 7 ? `${startIso}-01T00:00:00Z` : `${startIso}T00:00:00Z`);
+	if (Number.isNaN(start.getTime())) return 0;
+
+	let years = now.getUTCFullYear() - start.getUTCFullYear();
+	const monthDiff = now.getUTCMonth() - start.getUTCMonth();
+	if (monthDiff < 0 || (monthDiff === 0 && now.getUTCDate() < start.getUTCDate())) {
+		years--;
+	}
+	return Math.max(0, years);
+}
+
+describe("досвід та стаж (календарні інваріанти та нагадування)", () => {
+	it("роки AQA в резюме не перевищують фактично минулий календарний час", () => {
+		const elapsedAqa = elapsedFullYears(AQA_START);
+		const currentAqa = STRUCTURED_PROFILE.experienceYearsAutomation;
+
+		// Інваріант правдивості: не можна стверджувати більше років, ніж минуло
+		expect(currentAqa).toBeGreaterThanOrEqual(1);
+		expect(currentAqa).toBeLessThanOrEqual(elapsedAqa);
+
+		// М'яке нагадування, якщо минув ще один календарний рік і планку можна підняти
+		if (currentAqa < elapsedAqa) {
+			// eslint-disable-next-line no-console
+			console.info(
+				`\n[CV Experience Reminder] Минув ще один календарний рік: з дати старту AQA (${AQA_START}) пройшло вже ${elapsedAqa} р., а в резюме вказано ${currentAqa}+ р. Можна розглянути підвищення планки.\n`
+			);
+		}
+	});
+
+	it("загальні роки QA в резюме не перевищують фактично минулий час", () => {
+		const elapsedTotal = elapsedFullYears(QA_TOTAL_START);
+		const currentTotal = STRUCTURED_PROFILE.experienceYearsTotal;
+
+		expect(currentTotal).toBeGreaterThanOrEqual(1);
+		expect(currentTotal).toBeLessThanOrEqual(elapsedTotal);
+
+		if (currentTotal < elapsedTotal) {
+			// eslint-disable-next-line no-console
+			console.info(
+				`\n[CV Experience Reminder] З дати старту QA (${QA_TOTAL_START}) пройшло вже ${elapsedTotal} р., а в резюме вказано ${currentTotal}+ р. Можна розглянути підвищення планки.\n`
+			);
+		}
+	});
+
+	it("усі 42 мовні файли синхронізовані за числом років AQA з knowledgeBase", () => {
+		const localesDir = "src/lib/i18n/locales";
+		const files = readdirSync(localesDir).filter((f) => f.endsWith(".ts") && f !== "en-us.ts");
+		const expectedDigit = String(STRUCTURED_PROFILE.experienceYearsAutomation);
+		const mismatches: string[] = [];
+
+		for (const file of files) {
+			const content = readFileSync(join(localesDir, file), "utf8");
+			const match = content.match(/\([^)]*AQA[^)]*\)/i) || content.match(/（[^）]*AQA[^）]*）/);
+			if (!match || !match[0].includes(expectedDigit)) {
+				mismatches.push(`${file}: очікувалось число ${expectedDigit}, знайдено ${match ? match[0] : "нічого"}`);
+			}
+		}
+
+		expect(
+			mismatches,
+			`Незбіг років AQA між knowledgeBase (${expectedDigit}) та локалями:\n${mismatches.join("\n")}`
+		).toEqual([]);
 	});
 });
