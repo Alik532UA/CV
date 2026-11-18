@@ -122,12 +122,16 @@ if (!report) {
 }
 
 /**
- * Свідомо дозволені консультативні сповіщення (наприклад, DoS обробки форм на суто статичних сайтах без сервера).
+ * Свідомо дозволені консультативні сповіщення (наприклад, DoS обробки форм на суто статичних сайтах без сервера
+ * або dev-інструменти, де немає патча і які не потрапляють у клієнтський бандл).
  * GHSA-3r8g-jcqq-3p5j: SvelteKit DoS while parsing form data from remote functions (статичний експорт не парсить форми).
+ * GHSA-fc5q-39xc-vjpf: picomatch ReDoS через extglob (dev-залежність у vite/vitest/fdir, не потрапляє в клієнтський бандл, версії >4.0.7 ще немає).
  */
 const ALLOWED_ADVISORIES = new Set([
 	'GHSA-3r8g-jcqq-3p5j',
-	'https://github.com/advisories/GHSA-3r8g-jcqq-3p5j'
+	'https://github.com/advisories/GHSA-3r8g-jcqq-3p5j',
+	'GHSA-fc5q-39xc-vjpf',
+	'https://github.com/advisories/GHSA-fc5q-39xc-vjpf'
 ]);
 
 function isVulnerabilityBlocking(pkg, info, vulnerabilities, visited = new Set()) {
