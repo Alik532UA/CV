@@ -32,7 +32,7 @@ export const kos: Translations = {
     about: {
         title: "Ke Nga",
         location: "Odesa, Ukraine",
-        content: "QA Automation Engineer su oasr yohk sun 5+ yac ke QA (2+ yac ke AQA). Nga automate Web, Desktop (C#/WinAppDriver), ac Mobile (Java/Appium/Playwright). Oana sie developer, nga tuh musaela sie ecosystem ke 9 product, weang MindStep (ke 23 Playwright E2E test) ac sie AI mod yohk nu ke Valheim. Nga orekmakin AI tool agentic (Claude Code, Gemini CLI, Antigravity IDE) in akmui orekma ac orela test.",
+        content: "QA Automation Engineer su oasr yohk sun 5+ yac ke QA (3+ yac ke AQA). Nga automate Web, Desktop (C#/WinAppDriver), ac Mobile (Java/Appium/Playwright). Oana sie developer, nga tuh musaela sie ecosystem ke 9 product, weang MindStep (ke 23 Playwright E2E test) ac sie AI mod yohk nu ke Valheim. Nga orekmakin AI tool agentic (Claude Code, Gemini CLI, Antigravity IDE) in akmui orekma ac orela test.",
         hobbiesTitle: "Ma Nga Lungse Oru",
         philosophyTitle: "Ma Yohk Ke Engineering",
         philosophyItems: {

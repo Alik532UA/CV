@@ -25,7 +25,7 @@ export const sq: Translations = {
     about: {
         title: "Rreth Meje",
         location: "Odesa, Ukrainë",
-        content: "Inxhinier QA Automation me mbi 5 vjet përvojë totale në QA (nga të cilat mbi 2 vjet në AQA). Automatizoj Web, Desktop (C#/WinAppDriver) dhe Mobile (Java/Appium/Playwright). Si zhvillues, kam ndërtuar një ekosistem prej 9 produktesh, duke përfshirë MindStep (me 23 teste E2E në Playwright) dhe një mod AI të gjerë për Valheim. Përdor në mënyrë aktive mjete AI agjentiale (Claude Code, Gemini CLI, Antigravity IDE) për të përshpejtuar zhvillimin dhe krijimin e autotesteve.",
+        content: "Inxhinier QA Automation me mbi 5 vjet përvojë totale në QA (nga të cilat mbi 3 vjet në AQA). Automatizoj Web, Desktop (C#/WinAppDriver) dhe Mobile (Java/Appium/Playwright). Si zhvillues, kam ndërtuar një ekosistem prej 9 produktesh, duke përfshirë MindStep (me 23 teste E2E në Playwright) dhe një mod AI të gjerë për Valheim. Përdor në mënyrë aktive mjete AI agjentiale (Claude Code, Gemini CLI, Antigravity IDE) për të përshpejtuar zhvillimin dhe krijimin e autotesteve.",
         hobbiesTitle: "Hobi",
         philosophyTitle: "Parimet Kryesore të Inxhinierisë",
         philosophyItems: {

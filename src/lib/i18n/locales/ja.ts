@@ -25,7 +25,7 @@ export const ja: Translations = {
     about: {
         title: "私について",
         location: "ウクライナ・オデーサ",
-        content: "QA歴5年以上（うちAQAは2年以上）のQA自動化エンジニアです。Web、Desktop (C#/WinAppDriver)、Mobile (Java/Appium/Playwright) の自動化を手がけています。開発者としては、MindStep（23件のPlaywright E2Eテストで担保）やValheim向けの大規模AI MODなど、9つの製品からなるエコシステムを構築しました。開発と自動テスト作成を加速させるため、エージェント型AIツール（Claude Code、Gemini CLI、Antigravity IDE）を積極的に活用しています。",
+        content: "QA歴5年以上（うちAQAは3年以上）のQA自動化エンジニアです。Web、Desktop (C#/WinAppDriver)、Mobile (Java/Appium/Playwright) の自動化を手がけています。開発者としては、MindStep（23件のPlaywright E2Eテストで担保）やValheim向けの大規模AI MODなど、9つの製品からなるエコシステムを構築しました。開発と自動テスト作成を加速させるため、エージェント型AIツール（Claude Code、Gemini CLI、Antigravity IDE）を積極的に活用しています。",
         hobbiesTitle: "趣味",
         philosophyTitle: "エンジニアリングの基本原則",
         philosophyItems: {

@@ -25,7 +25,7 @@ export const ro: Translations = {
     about: {
         title: "Despre mine",
         location: "Odesa, Ucraina",
-        content: "Inginer QA Automation cu peste 5 ani de experiență totală în QA (dintre care peste 2 ani în AQA). Automatizez Web, Desktop (C#/WinAppDriver) și Mobile (Java/Appium/Playwright). Ca dezvoltator, am construit un ecosistem de 9 produse, inclusiv MindStep (cu 23 de teste E2E în Playwright) și un mod AI amplu pentru Valheim. Folosesc activ instrumente AI agentice (Claude Code, Gemini CLI, Antigravity IDE) pentru a accelera dezvoltarea și crearea de autoteste.",
+        content: "Inginer QA Automation cu peste 5 ani de experiență totală în QA (dintre care peste 3 ani în AQA). Automatizez Web, Desktop (C#/WinAppDriver) și Mobile (Java/Appium/Playwright). Ca dezvoltator, am construit un ecosistem de 9 produse, inclusiv MindStep (cu 23 de teste E2E în Playwright) și un mod AI amplu pentru Valheim. Folosesc activ instrumente AI agentice (Claude Code, Gemini CLI, Antigravity IDE) pentru a accelera dezvoltarea și crearea de autoteste.",
         hobbiesTitle: "Hobby-uri",
         philosophyTitle: "Principii inginerești fundamentale",
         philosophyItems: {

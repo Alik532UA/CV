@@ -27,7 +27,7 @@ export const crh: Translations = {
     about: {
         title: "Men aqqında",
         location: "Odesa, Ukraina",
-        content: "5 yıldan fazla umumiy QA tejribesi olğan (bunıñ 2 yılından fazlası AQA'da) QA Automation Mühendisi. Men Web, Desktop (C#/WinAppDriver) ve Mobile (Java/Appium/Playwright) avtomatlaştırıyım. Bir işleyici olaraq, MindStep (23 Playwright E2E sınavı ile) ve Valheim içün büyük bir AI modu dahil 9 mahsuldan ibaret bir ekosistem qurdım. Sınav yaratuvını ve inkişafnı tezleştirmek içün agent-esaslı AI aletlerini (Claude Code, Gemini CLI, Antigravity IDE) faal qullanam.",
+        content: "5 yıldan fazla umumiy QA tejribesi olğan (bunıñ 3 yılından fazlası AQA'da) QA Automation Mühendisi. Men Web, Desktop (C#/WinAppDriver) ve Mobile (Java/Appium/Playwright) avtomatlaştırıyım. Bir işleyici olaraq, MindStep (23 Playwright E2E sınavı ile) ve Valheim içün büyük bir AI modu dahil 9 mahsuldan ibaret bir ekosistem qurdım. Sınav yaratuvını ve inkişafnı tezleştirmek içün agent-esaslı AI aletlerini (Claude Code, Gemini CLI, Antigravity IDE) faal qullanam.",
         hobbiesTitle: "Hobiler",
         philosophyTitle: "Esas Mühendislik Prensipleri",
         philosophyItems: {

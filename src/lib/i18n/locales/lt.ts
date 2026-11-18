@@ -25,7 +25,7 @@ export const lt: Translations = {
     about: {
         title: "Apie Mane",
         location: "Odesa, Ukraina",
-        content: "QA Automation inžinierius, turintis daugiau nei 5 metų bendros QA patirties (iš jų daugiau nei 2 metai AQA srityje). Automatizuoju Web, Desktop (C#/WinAppDriver) ir Mobile (Java/Appium/Playwright) sistemas. Kaip kūrėjas, sukūriau 9 produktų ekosistemą, įskaitant MindStep (su 23 E2E testais Playwright) ir platų AI modą Valheim žaidimui. Aktyviai naudoju agentinius AI įrankius (Claude Code, Gemini CLI, Antigravity IDE), kad pagreitinčiau kūrimą ir autotestų kūrimą.",
+        content: "QA Automation inžinierius, turintis daugiau nei 5 metų bendros QA patirties (iš jų daugiau nei 3 metai AQA srityje). Automatizuoju Web, Desktop (C#/WinAppDriver) ir Mobile (Java/Appium/Playwright) sistemas. Kaip kūrėjas, sukūriau 9 produktų ekosistemą, įskaitant MindStep (su 23 E2E testais Playwright) ir platų AI modą Valheim žaidimui. Aktyviai naudoju agentinius AI įrankius (Claude Code, Gemini CLI, Antigravity IDE), kad pagreitinčiau kūrimą ir autotestų kūrimą.",
         hobbiesTitle: "Pomėgiai",
         philosophyTitle: "Pagrindiniai Inžinerijos Principai",
         philosophyItems: {

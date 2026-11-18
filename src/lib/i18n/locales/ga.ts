@@ -25,7 +25,7 @@ export const ga: Translations = {
     about: {
         title: "Fúmsa",
         location: "Odesa, an Úcráin",
-        content: "Innealtóir QA Uathoibrithe le breis is 5 bliana taithí iomlán i QA (breis is 2 bhliain in AQA orthu sin). Uathoibrím Gréasán, Deasc (C#/WinAppDriver) agus Móibíleach (Java/Appium/Playwright). Mar fhorbróir, thóg mé éiceachóras de 9 dtáirge, lena n-áirítear MindStep (le 23 tástáil E2E Playwright) agus mod AI mór le haghaidh Valheim. Bainim úsáid ghníomhach as uirlisí AI gníomhaireachta (Claude Code, Gemini CLI, Antigravity IDE) chun forbairt agus cruthú uathtástálacha a luathú.",
+        content: "Innealtóir QA Uathoibrithe le breis is 5 bliana taithí iomlán i QA (breis is 3 bliana in AQA orthu sin). Uathoibrím Gréasán, Deasc (C#/WinAppDriver) agus Móibíleach (Java/Appium/Playwright). Mar fhorbróir, thóg mé éiceachóras de 9 dtáirge, lena n-áirítear MindStep (le 23 tástáil E2E Playwright) agus mod AI mór le haghaidh Valheim. Bainim úsáid ghníomhach as uirlisí AI gníomhaireachta (Claude Code, Gemini CLI, Antigravity IDE) chun forbairt agus cruthú uathtástálacha a luathú.",
         hobbiesTitle: "Caitheamh Aimsire",
         philosophyTitle: "Bunphrionsabail Innealtóireachta",
         philosophyItems: {

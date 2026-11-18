@@ -25,7 +25,7 @@ export const mt: Translations = {
     about: {
         title: "Dwari",
         location: "Odesa, l-Ukrajna",
-        content: "Inġinier QA Automation b'aktar minn 5 snin esperjenza fil-QA (minnhom aktar minn sentejn fl-AQA). Nawtomatizza Web, Desktop (C#/WinAppDriver) u Mobile (Java/Appium/Playwright). Bħala żviluppatur, bnejt ekosistema ta' 9 prodotti, inkluż MindStep (b'23 test E2E f'Playwright) u mod tal-AI estensiv għal Valheim. Nuża b'mod attiv għodod tal-AI aġentiċi (Claude Code, Gemini CLI, Antigravity IDE) biex inħaffef l-iżvilupp u l-kitba tal-awtotestijiet.",
+        content: "Inġinier QA Automation b'aktar minn 5 snin esperjenza fil-QA (minnhom aktar minn 3 snin fl-AQA). Nawtomatizza Web, Desktop (C#/WinAppDriver) u Mobile (Java/Appium/Playwright). Bħala żviluppatur, bnejt ekosistema ta' 9 prodotti, inkluż MindStep (b'23 test E2E f'Playwright) u mod tal-AI estensiv għal Valheim. Nuża b'mod attiv għodod tal-AI aġentiċi (Claude Code, Gemini CLI, Antigravity IDE) biex inħaffef l-iżvilupp u l-kitba tal-awtotestijiet.",
         hobbiesTitle: "Passatempi",
         philosophyTitle: "Prinċipji Ewlenin tal-Inġinerija",
         philosophyItems: {

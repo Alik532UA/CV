@@ -25,7 +25,7 @@ export const ca: Translations = {
     about: {
         title: "Sobre mi",
         location: "Odesa, Ucraïna",
-        content: "Enginyer de QA Automation amb més de 5 anys d'experiència en QA (dels quals més de 2 en AQA). Automatitzo Web, Desktop (C#/WinAppDriver) i Mobile (Java/Appium/Playwright). Com a desenvolupador, he construït un ecosistema de 9 productes, incloent-hi MindStep (amb 23 proves E2E en Playwright) i un mod d'IA extens per a Valheim. Faig servir activament eines d'IA agèntiques (Claude Code, Gemini CLI, Antigravity IDE) per accelerar el desenvolupament i l'escriptura d'autotests.",
+        content: "Enginyer de QA Automation amb més de 5 anys d'experiència en QA (dels quals més de 3 en AQA). Automatitzo Web, Desktop (C#/WinAppDriver) i Mobile (Java/Appium/Playwright). Com a desenvolupador, he construït un ecosistema de 9 productes, incloent-hi MindStep (amb 23 proves E2E en Playwright) i un mod d'IA extens per a Valheim. Faig servir activament eines d'IA agèntiques (Claude Code, Gemini CLI, Antigravity IDE) per accelerar el desenvolupament i l'escriptura d'autotests.",
         hobbiesTitle: "Aficions",
         philosophyTitle: "Principis clau d'enginyeria",
         philosophyItems: {

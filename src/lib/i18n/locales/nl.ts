@@ -25,7 +25,7 @@ export const nl: Translations = {
     about: {
         title: "Over Mij",
         location: "Odesa, Oekraïne",
-        content: "QA Automation Engineer met meer dan 5 jaar totale QA-ervaring (waarvan meer dan 2 jaar in AQA). Ik automatiseer Web, Desktop (C#/WinAppDriver) en Mobile (Java/Appium/Playwright). Als developer heb ik een ecosysteem van 9 producten gebouwd, waaronder MindStep (met 23 Playwright E2E-tests) en een grote AI-mod voor Valheim. Ik gebruik actief agentische AI-tools (Claude Code, Gemini CLI, Antigravity IDE) om ontwikkeling en het maken van autotests te versnellen.",
+        content: "QA Automation Engineer met meer dan 5 jaar totale QA-ervaring (waarvan meer dan 3 jaar in AQA). Ik automatiseer Web, Desktop (C#/WinAppDriver) en Mobile (Java/Appium/Playwright). Als developer heb ik een ecosysteem van 9 producten gebouwd, waaronder MindStep (met 23 Playwright E2E-tests) en een grote AI-mod voor Valheim. Ik gebruik actief agentische AI-tools (Claude Code, Gemini CLI, Antigravity IDE) om ontwikkeling en het maken van autotests te versnellen.",
         hobbiesTitle: "Hobby's",
         philosophyTitle: "Kernprincipes van Engineering",
         philosophyItems: {

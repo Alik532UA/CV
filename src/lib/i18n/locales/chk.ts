@@ -32,7 +32,7 @@ export const chk: Translations = {
     about: {
         title: "Usur",
         location: "Odesa, Ukraine",
-        content: "QA Automation Engineer mi 5+ ier experience lon QA (2+ ier lon AQA). Üa automate Web, Desktop (C#/WinAppDriver), me Mobile (Java/Appium/Playwright). Üa föri 9 product kewe usun ekkewe developer, MindStep (mi 23 Playwright E2E test) me AI mod watteoch fän Valheim. Üa nonnom ngeni AI tool kewe mi agentic (Claude Code, Gemini CLI, Antigravity IDE) ren an epwe möch feffer me föri test kewe.",
+        content: "QA Automation Engineer mi 5+ ier experience lon QA (3+ ier lon AQA). Üa automate Web, Desktop (C#/WinAppDriver), me Mobile (Java/Appium/Playwright). Üa föri 9 product kewe usun ekkewe developer, MindStep (mi 23 Playwright E2E test) me AI mod watteoch fän Valheim. Üa nonnom ngeni AI tool kewe mi agentic (Claude Code, Gemini CLI, Antigravity IDE) ren an epwe möch feffer me föri test kewe.",
         hobbiesTitle: "Hobby Kewe",
         philosophyTitle: "Engineering Principle Kewe",
         philosophyItems: {

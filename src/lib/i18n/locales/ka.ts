@@ -25,7 +25,7 @@ export const ka: Translations = {
     about: {
         title: "ჩემ შესახებ",
         location: "ოდესა, უკრაინა",
-        content: "QA Automation ინჟინერი 5+ წლიანი საერთო QA გამოცდილებით (მათ შორის 2+ წელი AQA-ში). ვახორციელებ Web, Desktop (C#/WinAppDriver) და Mobile (Java/Appium/Playwright) ავტომატიზაციას. როგორც დეველოპერმა, შევქმენი 9 პროდუქტისგან შემდგარი ეკოსისტემა, მათ შორის MindStep (23 Playwright E2E ტესტით) და მასშტაბური AI მოდი Valheim-ისთვის. აქტიურად ვიყენებ აგენტურ AI ინსტრუმენტებს (Claude Code, Gemini CLI, Antigravity IDE) განვითარებისა და ავტოტესტების შექმნის დასაჩქარებლად.",
+        content: "QA Automation ინჟინერი 5+ წლიანი საერთო QA გამოცდილებით (მათ შორის 3+ წელი AQA-ში). ვახორციელებ Web, Desktop (C#/WinAppDriver) და Mobile (Java/Appium/Playwright) ავტომატიზაციას. როგორც დეველოპერმა, შევქმენი 9 პროდუქტისგან შემდგარი ეკოსისტემა, მათ შორის MindStep (23 Playwright E2E ტესტით) და მასშტაბური AI მოდი Valheim-ისთვის. აქტიურად ვიყენებ აგენტურ AI ინსტრუმენტებს (Claude Code, Gemini CLI, Antigravity IDE) განვითარებისა და ავტოტესტების შექმნის დასაჩქარებლად.",
         hobbiesTitle: "ჰობი",
         philosophyTitle: "ინჟინერიის ძირითადი პრინციპები",
         philosophyItems: {

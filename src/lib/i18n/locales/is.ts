@@ -25,7 +25,7 @@ export const is: Translations = {
     about: {
         title: "Um mig",
         location: "Ódessa, Úkraína",
-        content: "QA Automation verkfræðingur með yfir 5 ára heildarreynslu í gæðaprófunum (þar af yfir 2 ár í AQA). Ég sjálfvirknivæði Web, Desktop (C#/WinAppDriver) og Mobile (Java/Appium/Playwright). Sem forritari hef ég byggt vistkerfi 9 vara, þar á meðal MindStep (með 23 E2E prófunum í Playwright) og umfangsmikla AI-viðbót fyrir Valheim. Ég nota virkan hátt umboðsmiðuð AI verkfæri (Claude Code, Gemini CLI, Antigravity IDE) til að flýta þróun og gerð sjálfvirkra prófa.",
+        content: "QA Automation verkfræðingur með yfir 5 ára heildarreynslu í gæðaprófunum (þar af yfir 3 ár í AQA). Ég sjálfvirknivæði Web, Desktop (C#/WinAppDriver) og Mobile (Java/Appium/Playwright). Sem forritari hef ég byggt vistkerfi 9 vara, þar á meðal MindStep (með 23 E2E prófunum í Playwright) og umfangsmikla AI-viðbót fyrir Valheim. Ég nota virkan hátt umboðsmiðuð AI verkfæri (Claude Code, Gemini CLI, Antigravity IDE) til að flýta þróun og gerð sjálfvirkra prófa.",
         hobbiesTitle: "Áhugamál",
         philosophyTitle: "Grundvallarreglur verkfræði",
         philosophyItems: {

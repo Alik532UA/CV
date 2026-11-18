@@ -25,7 +25,7 @@ export const cy: Translations = {
     about: {
         title: "Amdanaf",
         location: "Odesa, Wcráin",
-        content: "Peiriannydd Awtomeiddio QA gyda dros 5 mlynedd o brofiad QA cyfan (dros 2 flynedd mewn AQA). Rwy'n awtomeiddio Gwe, Bwrdd Gwaith (C#/WinAppDriver) a Symudol (Java/Appium/Playwright). Fel datblygwr, rwyf wedi adeiladu ecosystem o 9 cynnyrch, gan gynnwys MindStep (gyda 23 prawf E2E Playwright) a mod AI helaeth ar gyfer Valheim. Rwy'n defnyddio offer AI asiantol yn weithredol (Claude Code, Gemini CLI, Antigravity IDE) i gyflymu datblygu a chreu awtoprofion.",
+        content: "Peiriannydd Awtomeiddio QA gyda dros 5 mlynedd o brofiad QA cyfan (dros 3 blynedd mewn AQA). Rwy'n awtomeiddio Gwe, Bwrdd Gwaith (C#/WinAppDriver) a Symudol (Java/Appium/Playwright). Fel datblygwr, rwyf wedi adeiladu ecosystem o 9 cynnyrch, gan gynnwys MindStep (gyda 23 prawf E2E Playwright) a mod AI helaeth ar gyfer Valheim. Rwy'n defnyddio offer AI asiantol yn weithredol (Claude Code, Gemini CLI, Antigravity IDE) i gyflymu datblygu a chreu awtoprofion.",
         hobbiesTitle: "Hobïau",
         philosophyTitle: "Egwyddorion Peirianneg Craidd",
         philosophyItems: {

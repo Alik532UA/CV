@@ -45,13 +45,13 @@ export const KNOWLEDGE_BASE_UA = `# Алік Заполнов
 * Game & Product Developer
 
 ## 🌟 Професійне Резюме
-Інженер з автоматизації тестування (AQA) з 5+ роками загального досвіду у QA, з яких 2+ роки спеціалізації в Automation QA (Web, Desktop Windows, Mobile). 
+Інженер з автоматизації тестування (AQA) з 5+ роками загального досвіду у QA, з яких 3+ роки спеціалізації в Automation QA (Web, Desktop Windows, Mobile). 
 Розробник та AI Integrator, творець AndDvergrShallSpeakAI (масштабної AI-модифікації для Valheim з автономними LLM/STT/TTS NPC).
 Активно використовує сучасні AI-інструменти (Claude Code, Gemini CLI, Antigravity IDE/CLI, Cursor IDE) для прискорення розробки автотестів, розслідування race conditions та витоків пам'яті.
 
 ## 👤 Основні Дані
 - Локація: Одеса, Україна (100% Remote / Віддалено)
-- Досвід: 5+ років у QA загалом, 2+ роки в Automation QA
+- Досвід: 5+ років у QA загалом, 3+ роки в Automation QA
 - Мови: Українська (Рідна), Англійська (Технічна B1-B2 / General A2)
 - Контакти: alikzapolnov@gmail.com | Telegram: @alik532 | LinkedIn: linkedin.com/in/alik-qa-engineer
 
@@ -94,13 +94,13 @@ export const KNOWLEDGE_BASE_EN = `# Alik Zapolnov
 * Game & Product Developer
 
 ## 🌟 Professional Summary
-Quality Assurance Engineer with over 5 years of comprehensive QA experience, including 2+ years specializing in Automation QA (Web, Desktop Windows, Mobile). 
+Quality Assurance Engineer with over 5 years of comprehensive QA experience, including 3+ years specializing in Automation QA (Web, Desktop Windows, Mobile). 
 Developer and AI Integrator, creator of AndDvergrShallSpeakAI (a massive Valheim AI modification featuring autonomous LLM/STT/TTS NPCs).
 Actively utilizes AI tools (Claude Code, Gemini CLI, Antigravity IDE/CLI, Cursor IDE) to accelerate test automation, investigate race conditions, and memory leaks.
 
 ## 👤 Basic Info
 - Location: Odesa, Ukraine (100% Remote)
-- Experience: 5+ years in QA total, 2+ years in Automation QA
+- Experience: 5+ years in QA total, 3+ years in Automation QA
 - Languages: Ukrainian (Native), English (Technical B1-B2 / General A2)
 - Contacts: alikzapolnov@gmail.com | Telegram: @alik532 | LinkedIn: linkedin.com/in/alik-qa-engineer
 
@@ -146,9 +146,9 @@ export const STRUCTURED_PROFILE: KnowledgeProfile = {
         linkedin: "https://www.linkedin.com/in/alik-qa-engineer/",
         telegram: "https://t.me/alik532"
     },
-    summary: "Automation QA Engineer and AI Integrator with over 5 years of QA experience (2+ years in AQA). Expertise in Web, Desktop (.NET/WinAppDriver), and Mobile (Java/Appium/Selenium) automation.",
+    summary: "Automation QA Engineer and AI Integrator with over 5 years of QA experience (3+ years in AQA). Expertise in Web, Desktop (.NET/WinAppDriver), and Mobile (Java/Appium/Selenium) automation.",
     experienceYearsTotal: 5,
-    experienceYearsAutomation: 2,
+    experienceYearsAutomation: 3,
     skills: {
         aiTools: ["Claude Code", "Gemini CLI", "Antigravity IDE", "Cursor IDE", "GitHub Copilot", "Midjourney"],
         frameworks: ["Selenium", "WinAppDriver", "Appium", "Playwright"],

@@ -28,7 +28,7 @@ export const he: Translations = {
     about: {
         title: "עליי",
         location: "אודסה, אוקראינה",
-        content: "מהנדס QA Automation עם למעלה מ-5 שנות ניסיון כולל ב-QA (מתוכן למעלה משנתיים ב-AQA). אני מבצע אוטומציה ל-Web, Desktop (C#/WinAppDriver) ו-Mobile (Java/Appium/Playwright). כמפתח, בניתי מערכת אקולוגית של 9 מוצרים, כולל MindStep (עם 23 בדיקות E2E ב-Playwright) ו-mod AI נרחב ל-Valheim. אני משתמש באופן פעיל בכלי AI מבוססי סוכנים (Claude Code, Gemini CLI, Antigravity IDE) כדי להאיץ פיתוח ויצירת בדיקות אוטומטיות.",
+        content: "מהנדס QA Automation עם למעלה מ-5 שנות ניסיון כולל ב-QA (מתוכן למעלה מ-3 שנים ב-AQA). אני מבצע אוטומציה ל-Web, Desktop (C#/WinAppDriver) ו-Mobile (Java/Appium/Playwright). כמפתח, בניתי מערכת אקולוגית של 9 מוצרים, כולל MindStep (עם 23 בדיקות E2E ב-Playwright) ו-mod AI נרחב ל-Valheim. אני משתמש באופן פעיל בכלי AI מבוססי סוכנים (Claude Code, Gemini CLI, Antigravity IDE) כדי להאיץ פיתוח ויצירת בדיקות אוטומטיות.",
         hobbiesTitle: "תחביבים",
         philosophyTitle: "עקרונות הנדסה מרכזיים",
         philosophyItems: {

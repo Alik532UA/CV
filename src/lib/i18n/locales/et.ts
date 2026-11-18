@@ -25,7 +25,7 @@ export const et: Translations = {
     about: {
         title: "Minust",
         location: "Odesa, Ukraina",
-        content: "QA Automation insener, kellel on üle 5 aasta kogemust QA valdkonnas (sh üle 2 aasta AQA-s). Automatiseerin Web-, Desktop- (C#/WinAppDriver) ja Mobile-rakendusi (Java/Appium/Playwright). Arendajana olen loonud 9 toote ökosüsteemi, sealhulgas MindStep (23 Playwright E2E testiga) ja mahuka AI modi Valheimile. Kasutan aktiivselt agentseid AI-tööriistu (Claude Code, Gemini CLI, Antigravity IDE), et kiirendada arendust ja autotestide loomist.",
+        content: "QA Automation insener, kellel on üle 5 aasta kogemust QA valdkonnas (sh üle 3 aasta AQA-s). Automatiseerin Web-, Desktop- (C#/WinAppDriver) ja Mobile-rakendusi (Java/Appium/Playwright). Arendajana olen loonud 9 toote ökosüsteemi, sealhulgas MindStep (23 Playwright E2E testiga) ja mahuka AI modi Valheimile. Kasutan aktiivselt agentseid AI-tööriistu (Claude Code, Gemini CLI, Antigravity IDE), et kiirendada arendust ja autotestide loomist.",
         hobbiesTitle: "Hobid",
         philosophyTitle: "Peamised Inseneriprintsiibid",
         philosophyItems: {

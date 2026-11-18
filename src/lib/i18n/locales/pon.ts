@@ -32,7 +32,7 @@ export const pon: Translations = {
     about: {
         title: "Duwen Ngehi",
         location: "Odesa, Ukraine",
-        content: "QA Automation Engineer me mie sounpar 5+ ah doadoahk nan QA (2+ sounpar nan AQA). I kin automate Web, Desktop (C#/WinAppDriver), oh Mobile (Java/Appium/Playwright). Nin duwen sounwia, i wiadahr ehu ekosystem me 9 product, iangahki MindStep (me mie 23 Playwright E2E test) oh AI mod kalaimwahu ehu ong Valheim. I kin doadoahngki AI tool agentic kan (Claude Code, Gemini CLI, Antigravity IDE) pwehn kakekekehla wiepen test.",
+        content: "QA Automation Engineer me mie sounpar 5+ ah doadoahk nan QA (3+ sounpar nan AQA). I kin automate Web, Desktop (C#/WinAppDriver), oh Mobile (Java/Appium/Playwright). Nin duwen sounwia, i wiadahr ehu ekosystem me 9 product, iangahki MindStep (me mie 23 Playwright E2E test) oh AI mod kalaimwahu ehu ong Valheim. I kin doadoahngki AI tool agentic kan (Claude Code, Gemini CLI, Antigravity IDE) pwehn kakekekehla wiepen test.",
         hobbiesTitle: "Kapehlpehl kan",
         philosophyTitle: "Kaweid en Engineering",
         philosophyItems: {

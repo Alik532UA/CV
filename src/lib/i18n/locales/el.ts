@@ -25,7 +25,7 @@ export const el: Translations = {
     about: {
         title: "Σχετικά με Εμένα",
         location: "Οδησσός, Ουκρανία",
-        content: "Μηχανικός Αυτοματισμού QA με πάνω από 5 χρόνια συνολικής εμπειρίας σε QA (εκ των οποίων πάνω από 2 χρόνια σε AQA). Αυτοματοποιώ Web, Desktop (C#/WinAppDriver) και Mobile (Java/Appium/Playwright). Ως προγραμματιστής, έχω δημιουργήσει ένα οικοσύστημα 9 προϊόντων, συμπεριλαμβανομένου του MindStep (με 23 δοκιμές E2E σε Playwright) και ενός εκτεταμένου AI mod για το Valheim. Χρησιμοποιώ ενεργά εργαλεία AI με πράκτορες (Claude Code, Gemini CLI, Antigravity IDE) για την επιτάχυνση της ανάπτυξης και της δημιουργίας autotests.",
+        content: "Μηχανικός Αυτοματισμού QA με πάνω από 5 χρόνια συνολικής εμπειρίας σε QA (εκ των οποίων πάνω από 3 χρόνια σε AQA). Αυτοματοποιώ Web, Desktop (C#/WinAppDriver) και Mobile (Java/Appium/Playwright). Ως προγραμματιστής, έχω δημιουργήσει ένα οικοσύστημα 9 προϊόντων, συμπεριλαμβανομένου του MindStep (με 23 δοκιμές E2E σε Playwright) και ενός εκτεταμένου AI mod για το Valheim. Χρησιμοποιώ ενεργά εργαλεία AI με πράκτορες (Claude Code, Gemini CLI, Antigravity IDE) για την επιτάχυνση της ανάπτυξης και της δημιουργίας autotests.",
         hobbiesTitle: "Χόμπι",
         philosophyTitle: "Βασικές Αρχές Μηχανικής",
         philosophyItems: {

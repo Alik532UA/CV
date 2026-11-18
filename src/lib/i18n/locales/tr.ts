@@ -25,7 +25,7 @@ export const tr: Translations = {
     about: {
         title: "Hakkımda",
         location: "Odesa, Ukrayna",
-        content: "5 yıldan fazla toplam QA deneyimine sahip (bunun 2 yıldan fazlası AQA'da) QA Automation Mühendisi. Web, Desktop (C#/WinAppDriver) ve Mobile (Java/Appium/Playwright) otomasyonu yapıyorum. Bir geliştirici olarak, MindStep (23 Playwright E2E testiyle) ve Valheim için kapsamlı bir AI modu dahil olmak üzere 9 ürünlük bir ekosistem kurdum. Geliştirmeyi ve otomatik test oluşturmayı hızlandırmak için agent tabanlı AI araçlarını (Claude Code, Gemini CLI, Antigravity IDE) aktif olarak kullanıyorum.",
+        content: "5 yıldan fazla toplam QA deneyimine sahip (bunun 3 yıldan fazlası AQA'da) QA Automation Mühendisi. Web, Desktop (C#/WinAppDriver) ve Mobile (Java/Appium/Playwright) otomasyonu yapıyorum. Bir geliştirici olarak, MindStep (23 Playwright E2E testiyle) ve Valheim için kapsamlı bir AI modu dahil olmak üzere 9 ürünlük bir ekosistem kurdum. Geliştirmeyi ve otomatik test oluşturmayı hızlandırmak için agent tabanlı AI araçlarını (Claude Code, Gemini CLI, Antigravity IDE) aktif olarak kullanıyorum.",
         hobbiesTitle: "Hobiler",
         philosophyTitle: "Temel Mühendislik İlkeleri",
         philosophyItems: {

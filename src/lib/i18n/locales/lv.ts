@@ -25,7 +25,7 @@ export const lv: Translations = {
     about: {
         title: "Par Mani",
         location: "Odesa, Ukraina",
-        content: "QA Automation inženieris ar vairāk nekā 5 gadu kopējo pieredzi QA jomā (no tiem vairāk nekā 2 gadi AQA). Es automatizēju Web, Desktop (C#/WinAppDriver) un Mobile (Java/Appium/Playwright). Kā izstrādātājs esmu izveidojis 9 produktu ekosistēmu, tostarp MindStep (ar 23 E2E testiem Playwright) un plašu AI modifikāciju Valheim. Aktīvi izmantoju aģentiskus AI rīkus (Claude Code, Gemini CLI, Antigravity IDE), lai paātrinātu izstrādi un autotestu izveidi.",
+        content: "QA Automation inženieris ar vairāk nekā 5 gadu kopējo pieredzi QA jomā (no tiem vairāk nekā 3 gadi AQA). Es automatizēju Web, Desktop (C#/WinAppDriver) un Mobile (Java/Appium/Playwright). Kā izstrādātājs esmu izveidojis 9 produktu ekosistēmu, tostarp MindStep (ar 23 E2E testiem Playwright) un plašu AI modifikāciju Valheim. Aktīvi izmantoju aģentiskus AI rīkus (Claude Code, Gemini CLI, Antigravity IDE), lai paātrinātu izstrādi un autotestu izveidi.",
         hobbiesTitle: "Vaļasprieki",
         philosophyTitle: "Galvenie Inženierijas Principi",
         philosophyItems: {

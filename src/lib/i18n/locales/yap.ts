@@ -32,7 +32,7 @@ export const yap: Translations = {
     about: {
         title: "Murung'agen Gag",
         location: "Odesa, Ukraine",
-        content: "QA Automation Engineer ni bay 5+ e duw rok u QA (2+ duw u AQA). Gu be automate Web, Desktop (C#/WinAppDriver), nge Mobile (Java/Appium/Playwright). Bod be'ni developer, ku rin'ag reb e ecosystem nib 9 product, ni including MindStep (nib 23 Playwright E2E test) nge reb e AI mod nib ga'ay ngak Valheim. Gu be fanay AI tool kan ni agentic (Claude Code, Gemini CLI, Antigravity IDE) ni fan ko ngan gel e maruwel nge rin'e test.",
+        content: "QA Automation Engineer ni bay 5+ e duw rok u QA (3+ duw u AQA). Gu be automate Web, Desktop (C#/WinAppDriver), nge Mobile (Java/Appium/Playwright). Bod be'ni developer, ku rin'ag reb e ecosystem nib 9 product, ni including MindStep (nib 23 Playwright E2E test) nge reb e AI mod nib ga'ay ngak Valheim. Gu be fanay AI tool kan ni agentic (Claude Code, Gemini CLI, Antigravity IDE) ni fan ko ngan gel e maruwel nge rin'e test.",
         hobbiesTitle: "N'en Nib Fel' Ngog",
         philosophyTitle: "Yalen ni Ga'ay u Engineering",
         philosophyItems: {
