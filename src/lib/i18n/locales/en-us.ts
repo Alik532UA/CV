@@ -21,7 +21,7 @@ import { en } from "./en";
  */
 export const enUS: Translations = {
     ...en,
-    lastUpdate: "Last update: September 17, 2026",
+    lastUpdate: "Last update: November 18, 2026",
     hero: {
         ...en.hero,
         downloadCV: "Download Resume"

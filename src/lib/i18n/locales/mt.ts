@@ -1,7 +1,7 @@
 import type { Translations } from "../schema";
 
 export const mt: Translations = {
-    lastUpdate: "L-aħħar aġġornament: 17 ta' Settembru 2026",
+    lastUpdate: "L-aħħar aġġornament: 18 ta' Novembru 2026",
     title: ["Inġinier AQA", "Esploratur tal-AI", "Ħallieq tal-Logħob"],
     title_mobile: "Inġinier AQA\nEsploratur tal-AI\nĦallieq tal-Logħob",
     nav: {
