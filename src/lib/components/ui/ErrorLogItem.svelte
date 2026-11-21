@@ -17,14 +17,14 @@
 </div>
 
 <style>
-	.log-entry { font-family: monospace; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04); border-left: 3px solid rgba(255, 255, 255, 0.3); }
-	.log-entry--error { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
-	.log-entry--warn { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
+	.log-entry { font-family: monospace; font-size: 0.75rem; padding: 6px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04); border-inline-start: 3px solid rgba(255, 255, 255, 0.3); }
+	.log-entry--error { border-inline-start-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+	.log-entry--warn { border-inline-start-color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
 	.entry-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 2px; }
 	.badge { font-size: 0.625rem; font-weight: 700; padding: 1px 4px; border-radius: 3px; }
 	.badge--error { background: #dc2626; color: #ffffff; }
 	.badge--warn { background: #d97706; color: #000000; }
 	.category { font-weight: 600; color: #94a3b8; }
-	.timestamp { color: #64748b; font-size: 0.6875rem; margin-left: auto; }
+	.timestamp { color: #64748b; font-size: 0.6875rem; margin-inline-start: auto; }
 	.message { white-space: pre-wrap; word-break: break-word; color: #e2e8f0; line-height: 1.35; }
 </style>

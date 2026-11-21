@@ -97,10 +97,10 @@
 				</div>
 
 				<div class="actions">
-					<button type="button" class="btn-action" class:btn-action--copied={copied} onclick={handleCopy} data-testid="error-log-modal-copy-btn" aria-label="Copy report">
+					<button type="button" class="btn-action" class:btn-action--copied={copied} onclick={handleCopy} data-testid="error-log-modal-copy-btn">
 						{#if copied}<Check size={14} /><span>Copied</span>{:else}<Copy size={14} /><span>Copy report</span>{/if}
 					</button>
-					<button type="button" class="btn-action btn-action--danger" onclick={() => logService.clear()} disabled={allLogs.length === 0} data-testid="error-log-modal-clear-btn" aria-label="Clear log">
+					<button type="button" class="btn-action btn-action--danger" onclick={() => logService.clear()} disabled={allLogs.length === 0} data-testid="error-log-modal-clear-btn">
 						<Trash2 size={14} /><span>Clear</span>
 					</button>
 				</div>
